@@ -76,8 +76,16 @@ public class PlayerController : MonoBehaviour
 
     private void AnimatePlayer()
     {
-        anim.SetBool("IsWalking", GetInput());
-        anim.SetBool("IsRunning", isRunning);
+        if (xMovement != 0)
+        {
+            anim.SetBool("IsWalking", GetInput());
+            anim.SetBool("IsRunning", isRunning);
+        }
+        else
+        {
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsRunning", false);
+        }
     }
     #endregion Self-defined Methods
 }
