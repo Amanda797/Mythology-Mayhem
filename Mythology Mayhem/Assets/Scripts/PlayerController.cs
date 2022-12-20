@@ -34,18 +34,6 @@ public class PlayerController : MonoBehaviour
         AnimatePlayer();
     }
 
-    private void FlipPlayerSpriteWithMoveDirection()
-    {
-        if (xMovement > 0)
-        {
-            sr.flipX = false;
-        }
-        else if (xMovement < 0)
-        {
-            sr.flipX = true;
-        }
-    }
-
     private void FixedUpdate()
     {
         if (!isRunning)
@@ -67,6 +55,18 @@ public class PlayerController : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
         return xMovement != 0;
+    }
+
+    private void FlipPlayerSpriteWithMoveDirection()
+    {
+        if (xMovement < 0)
+        {
+            sr.flipX = true;
+        }
+        else if (xMovement > 0)
+        {
+            sr.flipX = false;
+        }
     }
 
     private void MovePlayer(float speed)
