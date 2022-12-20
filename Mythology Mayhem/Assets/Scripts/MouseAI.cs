@@ -24,9 +24,22 @@ public class MouseAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveMouse();
+        FlipMouseSpriteToWalkDirection();
         AttackPlayer();
     }
 
+    void MoveMouse()
+    {
+        // TODO: Random mouse patrolling
+        return;
+    }
+
+    void FlipMouseSpriteToWalkDirection()
+    {
+        //TODO: Flip the mouse sprite in the direction it is walking
+        return;
+    }
     void AttackPlayer()
     {
         bool attackTrigger = soundTrigger.IsTouching(attackTarget.GetComponent<Collider2D>());
