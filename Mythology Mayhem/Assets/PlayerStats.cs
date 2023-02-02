@@ -23,9 +23,30 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            
+            Attack();
         }
-    }     
+        /*if (damageCollider.IsTouching(test.GetComponent<Collider2D>()))
+        {
+            Debug.Log("hit");
+        }
+        foreach (GameObject enemy in enemies)
+        {
+            if (damageCollider.IsTouching(enemy.GetComponent<Collider2D>())) {
+                if (canHit) {
+                    enemy.GetComponent<MouseAI>().TakeDamage(atkDamage);
+                    Debug.Log(enemy.GetComponent<MouseAI>().health);
+                    canHit = false;
+                }
+                
+            }
+        }*/
+    }    
+
+    void Attack()
+    {
+        
+    }
+
     private void CanAttack() 
     {
         damageCollider.gameObject.tag = "CanDamage";
