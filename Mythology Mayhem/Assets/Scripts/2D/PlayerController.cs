@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         FlipPlayerSpriteWithMoveDirection();
-        PlayerAttack();
         AnimatePlayer();
     }
 
@@ -75,11 +74,6 @@ public class PlayerController : MonoBehaviour
         rb2d.velocity = new Vector2((xMovement * speed) * Time.deltaTime, rb2d.velocity.y);
     }
 
-    private bool PlayerAttack()
-    {
-        return Input.GetKeyDown(KeyCode.Mouse0);
-    }
-
     private void AnimatePlayer()
     {
         if (xMovement != 0)
@@ -93,7 +87,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsRunning", false);
         }
 
-        anim.SetBool("IsAttacking", PlayerAttack());
+        
     }
     #endregion Self-defined Methods
 }

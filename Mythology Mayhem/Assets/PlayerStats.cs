@@ -9,46 +9,65 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private LayerMask enemyLayers;
 
     [Header("Player Stats")]
-    [SerializeField] private float atkDamage = 1f;
-    [SerializeField] private float health = 10f;
+    [SerializeField] private int atkDamage = 2;
+    [SerializeField] private int maxHealth = 10;
+    private int currHealth;
+    [SerializeField] private float attackRate = 2f;
+    private float nextAttackTime = 0f;
 
-    [SerializeField] private bool canHit = false;
-    public GameObject[] enemies;
+    [Header("Player Animation")]
+    [SerializeField] private Animator anim;
+
+    private SpriteRenderer sr;
+    private bool flipped = false;    
+
     // Start is called before the first frame update
     void Start()
     {
+        currHealth = maxHealth;
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Time.time >= nextAttackTime) 
         {
-            Attack();
-        }
-        /*if (damageCollider.IsTouching(test.GetComponent<Collider2D>()))
-        {
-            Debug.Log("hit");
-        }
-        foreach (GameObject enemy in enemies)
-        {
-            if (damageCollider.IsTouching(enemy.GetComponent<Collider2D>())) {
-                if (canHit) {
-                    enemy.GetComponent<MouseAI>().TakeDamage(atkDamage);
-                    Debug.Log(enemy.GetComponent<MouseAI>().health);
-                    canHit = false;
-                }
-                
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f/attackRate;
             }
-        }*/
+        }
+        //The Code below is to flip the attackPoint of the player so that if the player is flipped they can still attack behind the enemy
+        if (sr.flipX)
+        {
+            if (!flipped) 
+            {
+                attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
+                Debug.Log("Flipped backwards");
+                flipped = !flipped;
+            }
+        } 
+        else 
+        {
+            if (flipped)
+            {
+                attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
+                Debug.Log("Flipped forwards");
+                flipped = !flipped;
+            }
+        }
     }    
 
-    void Attack()
+    private void Attack()
     {
+        anim.SetTrigger("Attack");
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Hit " + enemy.name);
+            enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
         }
     }
 
@@ -59,12 +78,5 @@ public class PlayerStats : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    /*private void CanAttack() 
-    {
-        damageCollider.gameObject.tag = "CanDamage";
-    }
-    private void CannotAttack() 
-    {
-        damageCollider.gameObject.tag = "Untagged";
-    }*/
+
 }

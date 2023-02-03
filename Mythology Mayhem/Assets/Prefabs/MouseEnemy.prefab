@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6016699679932317129}
   - component: {fileID: 6016699679932317128}
   - component: {fileID: 4028057835607607699}
+  - component: {fileID: 9203140561010064584}
   m_Layer: 6
   m_Name: MouseEnemy
   m_TagString: Enemy
@@ -125,9 +126,6 @@ MonoBehaviour:
   soundTrigger: {fileID: 6016699680130956781}
   attackTarget: {fileID: 0}
   mouseAnim: {fileID: 6016699679932317129}
-  atkDamage: 1
-  health: 10
-  enemyAttack: {fileID: 0}
 --- !u!61 &4028057835607607699
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154,6 +152,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.8, y: 2.8}
   m_EdgeRadius: 0
+--- !u!114 &9203140561010064584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016699679932317132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6016699679932317129}
+  atkDamage: 1
+  maxHealth: 10
 --- !u!1 &6016699680130956783
 GameObject:
   m_ObjectHideFlags: 0
