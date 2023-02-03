@@ -29,7 +29,7 @@ public class MouseAI : MonoBehaviour
         {
             attackTarget = GameObject.FindWithTag("Player");
         }
-        enemyAttack = attackTarget.transform.Find("Damage Collider").GetComponent<BoxCollider2D>();
+        //enemyAttack = attackTarget.transform.Find("Damage Collider").GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
