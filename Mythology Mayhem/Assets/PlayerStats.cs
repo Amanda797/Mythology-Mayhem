@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private BoxCollider2D damageCollider;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 1f;
+    [SerializeField] private LayerMask enemyLayers;
 
     [Header("Player Stats")]
     [SerializeField] private float atkDamage = 1f;
@@ -12,7 +14,6 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private bool canHit = false;
     public GameObject[] enemies;
-    public GameObject test;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,15 +45,26 @@ public class PlayerStats : MonoBehaviour
 
     void Attack()
     {
-        
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("Hit " + enemy.name);
+        }
     }
 
-    private void CanAttack() 
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    /*private void CanAttack() 
     {
         damageCollider.gameObject.tag = "CanDamage";
     }
     private void CannotAttack() 
     {
         damageCollider.gameObject.tag = "Untagged";
-    }
+    }*/
 }
