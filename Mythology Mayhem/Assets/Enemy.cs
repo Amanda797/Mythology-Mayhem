@@ -8,6 +8,11 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float atkDamage = 1f;
     [SerializeField] private int maxHealth = 10;
+    [Header("KnockBack")]
+    [SerializeField] private float knockback;
+    [SerializeField] private float knockbackLength;
+    [SerializeField] private float knockbackCount;
+    [SerializeField] private float knockbackFromRight;
 
     private int currHealth;
 
