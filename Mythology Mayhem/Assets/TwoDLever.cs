@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TwoDLever : MonoBehaviour
 {
     [SerializeField] private Animator anim;
+    [SerializeField] private string nextLevel = "Library 3D";
 
     public bool entered = false;
     // Start is called before the first frame update
@@ -21,6 +23,7 @@ public class TwoDLever : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)) 
             {
                 anim.SetTrigger("Pulled");
+                SceneManager.LoadScene(nextLevel);
             }
         }
     }
