@@ -23,7 +23,6 @@ public class TwoDLever : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)) 
             {
                 anim.SetTrigger("Pulled");
-                SceneManager.LoadScene(nextLevel);
             }
         }
     }
@@ -31,5 +30,9 @@ public class TwoDLever : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) 
     {
         entered = true;
+    }
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(nextLevel);
     }
 }
