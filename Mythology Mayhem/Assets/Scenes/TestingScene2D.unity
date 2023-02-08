@@ -224,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589249598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12, y: 15, z: 0}
+  m_LocalPosition: {x: 12, y: 3, z: -1}
   m_LocalScale: {x: 30, y: 30, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -553,7 +553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477405683}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -595, y: 0, z: 0}
+  m_LocalPosition: {x: -551, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -669,6 +669,8 @@ GameObject:
   - component: {fileID: 1614317340}
   - component: {fileID: 1614317339}
   - component: {fileID: 1614317342}
+  - component: {fileID: 1614317344}
+  - component: {fileID: 1614317343}
   m_Layer: 6
   m_Name: Bird2D
   m_TagString: Enemy
@@ -780,6 +782,53 @@ MonoBehaviour:
   components:
   - {fileID: 1514547407}
   - {fileID: 1614317339}
+--- !u!114 &1614317343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614317338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c596eba777755db479c357c7e26ff682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTimer: 0
+  attackCooldown: 5
+  damage: 3
+  boxCollider: {fileID: 1614317344}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  range: 1.45
+  colliderDistance: 2.89
+--- !u!61 &1614317344
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614317338}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.17085767, y: -0.102514744}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.2, y: 3.6}
+    newSize: {x: 4.2, y: 3.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.4482265, y: 2.1647944}
+  m_EdgeRadius: 0
 --- !u!1 &1617970902
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886099667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 570, y: 0, z: 0}
+  m_LocalPosition: {x: 539, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

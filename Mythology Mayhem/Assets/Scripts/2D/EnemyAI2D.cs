@@ -20,6 +20,8 @@ public class EnemyAI2D : MonoBehaviour
     [SerializeField] float range; //adjust to extend the collider's area
     [SerializeField] float colliderDistance; //adjust to control the collider's distance from the game object
 
+    bool hitPlayer = false;
+
 
     void Awake() {
         anim = GetComponent<Animator>();
@@ -48,12 +50,14 @@ public class EnemyAI2D : MonoBehaviour
         cooldownTimer += Time.deltaTime;
 
         if(PlayerDetected()) {
-            if(cooldownTimer >= attackCooldown) {
+            if(cooldownTimer >= attackCooldown && !hitPlayer) {
                 cooldownTimer = 0;
                 anim.SetBool("pursuing", true);
                 DamagePlayer();
             }
-        }//end if player detected
+        } else {
+            anim.SetBool("pursuing", false);
+        }
     }
 
     bool PlayerDetected() {
@@ -62,7 +66,8 @@ public class EnemyAI2D : MonoBehaviour
 
         if(hit.collider != null) {
             playerHealth = hit.transform.GetComponent<Health>();
-            print("Player Hit Triggered");
+        } else {
+            hitPlayer = false;
         }
         return hit.collider != null;
     }
@@ -74,8 +79,9 @@ public class EnemyAI2D : MonoBehaviour
 
     void DamagePlayer() {
         print("Damage Player Triggered");
-        if(PlayerDetected()) {
+        if(PlayerDetected() && !hitPlayer) {
             playerHealth.TakeDamage(damage);
+            hitPlayer = true;
         }
     }
 
