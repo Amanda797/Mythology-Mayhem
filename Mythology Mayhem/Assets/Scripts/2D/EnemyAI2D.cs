@@ -45,7 +45,6 @@ public class EnemyAI2D : MonoBehaviour
         }
 
         //Timers
-
         cooldownTimer += Time.deltaTime;
 
         if(PlayerDetected()) {
