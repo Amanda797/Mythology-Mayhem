@@ -68,6 +68,7 @@ public class PlayerStats : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+            enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
         }
     }
 
