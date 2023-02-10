@@ -12,13 +12,23 @@ public class MouseAI : MonoBehaviour
 
     [Header("Mouse Animations")]
     [SerializeField] private Animator mouseAnim;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] float idleDuration = 5f;
+    private float idleTimer = 0f;
+    private bool movingLeft;
 
     [Header("Mouse Waypoints")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private int waypointIndex = 0;
 
     private Transform[] savedWaypoints;
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
+    public bool dead = false;
+    private bool isLeft = true;
+    private bool attacking = false;
+    private bool idle = false;
+    private Vector2 currentPosition;
+    private Vector2 previousPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -30,23 +40,41 @@ public class MouseAI : MonoBehaviour
             attackTarget = GameObject.FindWithTag("Player");
         }
         transform.position = waypoints[waypointIndex].transform.position;
+        sr = GetComponent<SpriteRenderer>();
+        movingLeft = sr.flipX;
+        currentPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveMouse();
-        FlipMouseSpriteToWalkDirection();
-        AttackPlayer();
+        if (!dead)
+        {
+            previousPosition = currentPosition;
+            currentPosition = transform.position;
+            if (!attacking && !idle)
+            {
+                MoveMouse();
+            }
+            if (!attacking && idle)
+            {
+                Idle();
+            }
+            AttackPlayer();
+            Flip();
+        }
     }
 
     void MoveMouse()
     {
         mouseAnim.SetBool("IsPatrolling", true);
         transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
-        if (transform.position == waypoints[waypointIndex].transform.position)
+        if (transform.position.x == waypoints[waypointIndex].transform.position.x)
         {
             waypointIndex += 1;
+            idle = true;
+            mouseAnim.SetBool("IsPatrolling", false);
+            idleTimer = Time.time + idleDuration;
         }
         if (waypointIndex >= waypoints.Length)
         {
@@ -54,18 +82,34 @@ public class MouseAI : MonoBehaviour
         }
     }
 
-    void FlipMouseSpriteToWalkDirection()
+    void Flip()
     {
-        //TODO: Flip the mouse sprite in the direction it is walking
-        return;
+        Vector2 currentDirection = (currentPosition-previousPosition).normalized;
+        if (currentDirection.x < 0)
+        {
+            sr.flipX = true;
+        }
+        else if (currentDirection.x > 0)
+        {
+            sr.flipX = false;
+        }
     }
+
     void AttackPlayer()
     {
-        bool attackTrigger = soundTrigger.IsTouching(attackTarget.GetComponent<Collider2D>());
-        if (attackTrigger)
+        attacking = soundTrigger.IsTouching(attackTarget.GetComponent<Collider2D>());
+        if (attacking)
         {
-            //Debug.Log("ATTACK GREEK BOY!");
+            Debug.Log("Attacking");
+            transform.position = Vector2.MoveTowards(transform.position, attackTarget.transform.position, runSpeed * Time.deltaTime);
         }
-        mouseAnim.SetBool("IsAttacking", attackTrigger);
+        mouseAnim.SetBool("IsAttacking", attacking);
+    }
+    void Idle()
+    {
+        if (Time.time >= idleTimer)
+        {
+            idle = false;
+        }
     }
 }
