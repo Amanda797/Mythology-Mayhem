@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
         public int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings)     
         public GameObject optionsPanel;   
         bool optionsPanelActive;
+        public GameObject creditsPanel;
+        bool creditsPanelActive;
 
     // Retain this game object across scenes.
     private void Awake() {
@@ -22,6 +24,9 @@ public class MenuManager : MonoBehaviour
 
         optionsPanelActive = false;
         optionsPanel.SetActive(optionsPanelActive);
+
+        creditsPanelActive = false;
+        creditsPanel.SetActive(creditsPanelActive);
     }
 
     // Starts the game, triggered by Start Game Button's OnClick function
@@ -37,5 +42,10 @@ public class MenuManager : MonoBehaviour
     public void ToggleOptions() {
         optionsPanelActive = !optionsPanelActive;
         optionsPanel.SetActive(optionsPanelActive);
+    }
+
+    public void ToggleCredits() {
+        creditsPanelActive = !creditsPanelActive;
+        creditsPanel.SetActive(creditsPanelActive);
     }
 }
