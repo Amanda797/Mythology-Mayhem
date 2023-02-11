@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [Header("Stats")]
-    [SerializeField] private float atkDamage = 1f;
+    [SerializeField] private int atkDamage = 1;
     [SerializeField] private int maxHealth = 10;
+    [SerializeField] private LayerMask playerLayers;
 
     private int currHealth;
 
@@ -41,5 +42,14 @@ public class Enemy : MonoBehaviour
         GetComponent<MouseAI>().enabled = false;
         GetComponent<MouseAI>().dead = true;
         this.enabled = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.layer == 3)
+        {
+            other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
+            other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+        }
     }
 }
