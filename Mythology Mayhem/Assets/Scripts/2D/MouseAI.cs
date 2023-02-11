@@ -4,7 +4,7 @@ public class MouseAI : MonoBehaviour
 {
     [Header("Mouse Movement")]
     [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float runSpeed = 10f;
+    //[SerializeField] private float runSpeed = 10f;
 
     [Header("Attack Activation")]
     [SerializeField] private BoxCollider2D soundTrigger;
