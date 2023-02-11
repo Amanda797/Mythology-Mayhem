@@ -242,6 +242,9 @@ MonoBehaviour:
   animator: {fileID: 8389002920890670442}
   atkDamage: 1
   maxHealth: 10
+  playerLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &3047567049538542250
 Rigidbody2D:
   serializedVersion: 4
@@ -276,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 3047567049538542250}
-  strength: 16
+  strength: 30
   delay: 0.15
   OnBegin:
     m_PersistentCalls:
@@ -293,10 +296,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6389546133798722667}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDone:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8389002920890670443}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6389546133798722667}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
