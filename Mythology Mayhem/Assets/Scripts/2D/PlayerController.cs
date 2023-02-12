@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private float xMovement;
     private float yMovement;
     private bool isRunning = false;
+    public bool climbing = false;
+    public bool ladderEntered = false;
     #endregion Variables
 
 
@@ -30,6 +32,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetInput();
+        if (ladderEntered)
+        {
+            if(Input.GetKey(KeyCode.E))
+            {
+                anim.SetBool("IsClimb", true);
+                climbing = true;
+            }
+        }
         FlipPlayerSpriteWithMoveDirection();
         AnimatePlayer();
     }
@@ -45,6 +55,25 @@ public class PlayerController : MonoBehaviour
             MovePlayer(runSpeed);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.tag == "Ladder")
+        {
+            ladderEntered = true;
+        }    
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Ladder")
+        {
+            anim.SetBool("IsClimb", false);
+            ladderEntered = false;
+            if (climbing)
+            climbing = false;
+        }
+    }
     #endregion Unity Methods
 
 
@@ -52,6 +81,7 @@ public class PlayerController : MonoBehaviour
     private bool GetInput()
     {
         xMovement = Input.GetAxis("Horizontal");
+        yMovement = Input.GetAxis("Vertical");
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
         return xMovement != 0;
@@ -71,7 +101,15 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer(float speed)
     {
-        rb2d.velocity = new Vector2((xMovement * speed) * Time.deltaTime, rb2d.velocity.y);
+        if (climbing) 
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x , (yMovement * speed) * Time.deltaTime);
+        } 
+        else
+        {
+            rb2d.velocity = new Vector2((xMovement * speed) * Time.deltaTime, rb2d.velocity.y);
+        }
+        
     }
 
     private void AnimatePlayer()
@@ -86,8 +124,6 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsWalking", false);
             anim.SetBool("IsRunning", false);
         }
-
-        
     }
     #endregion Self-defined Methods
 }
