@@ -24,7 +24,6 @@ public class MouseAI : MonoBehaviour
     private Transform[] savedWaypoints;
     public Rigidbody2D rb2d;
     public bool dead = false;
-    private bool isLeft = true;
     private bool attacking = false;
     private bool idle = false;
     private Vector2 currentPosition;
