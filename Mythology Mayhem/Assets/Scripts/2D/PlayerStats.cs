@@ -68,7 +68,30 @@ public class PlayerStats : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+            enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
         }
+    }
+
+    public void TakeDamage(int damage) 
+    {
+        currHealth -= damage;
+
+        anim.SetTrigger("Hurt");
+
+        if(currHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        anim.SetBool("IsDead", true);
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().simulated = false;
+        GetComponent<KnockBackFeedback>().enabled = false;
+        GetComponent<PlayerController>().enabled = false;
+        this.enabled = false;
     }
 
     void OnDrawGizmosSelected()
