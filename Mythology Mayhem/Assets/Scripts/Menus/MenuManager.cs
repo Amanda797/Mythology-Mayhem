@@ -14,6 +14,10 @@ public class MenuManager : MonoBehaviour
         bool helpPanelActive;
         public GameObject pausePanel;
         bool pausePanelActive;
+        public GameObject pauseBackground;
+        bool pauseBackgroundActive;
+        public UILevelIcon levelIcon;
+        string website = "https://www.google.com/search?q=mythology-mayhem";
 
     // Retain this game object across scenes.
     private void Awake() {
@@ -37,6 +41,15 @@ public class MenuManager : MonoBehaviour
 
         pausePanelActive = false;
         pausePanel.SetActive(pausePanelActive);
+
+        pauseBackgroundActive = false;
+        pauseBackground.SetActive(pauseBackgroundActive);
+
+        print(SceneManager.GetActiveScene().buildIndex);
+        levelIcon.ChangeIcon(SceneManager.GetActiveScene().buildIndex);
+
+        VolumeSaveSlider vss = GetComponent<VolumeSaveSlider>();
+        vss.LoadVolume();
     }
 
     // Starts the game, triggered by Start Game Button's OnClick function
@@ -52,23 +65,54 @@ public class MenuManager : MonoBehaviour
     public void ToggleOptions() {
         optionsPanelActive = !optionsPanelActive;
         optionsPanel.SetActive(optionsPanelActive);
+
+        if(optionsPanelActive) {
+            pausePanelActive = false;
+            pausePanel.SetActive(pausePanelActive);
+        } else {
+            pausePanelActive = true;
+            pausePanel.SetActive(pausePanelActive);
+        }
     }
 
     public void ToggleCredits() {
         creditsPanelActive = !creditsPanelActive;
         creditsPanel.SetActive(creditsPanelActive);
+
+        if(creditsPanelActive) {
+            pausePanelActive = false;
+            pausePanel.SetActive(pausePanelActive);
+        } else {
+            pausePanelActive = true;
+            pausePanel.SetActive(pausePanelActive);
+        }
     }
 
     public void ToggleHelp() {
         helpPanelActive = !helpPanelActive;
         helpPanel.SetActive(helpPanelActive);
+
+        if(helpPanelActive) {
+            pausePanelActive = false;
+            pausePanel.SetActive(pausePanelActive);
+        } else {
+            pausePanelActive = true;
+            pausePanel.SetActive(pausePanelActive);
+        }
     }
 
     public void TogglePause() {
-        if(pausePanelActive) {
-            pausePanelActive = !pausePanelActive;
-            pausePanel.SetActive(pausePanelActive);
+        
+        // Toggle the background
+        pauseBackgroundActive = !pauseBackgroundActive;
+        pauseBackground.SetActive(pauseBackgroundActive);
 
+        // Toggle the pause panel
+        pausePanelActive = !pausePanelActive;
+        pausePanel.SetActive(pausePanelActive);
+
+        // If the pause panel is active and is going to be inactive, set the other panels to inactive as well
+        if(pausePanelActive) {
             helpPanelActive = false;
             helpPanel.SetActive(helpPanelActive);
 
@@ -77,11 +121,15 @@ public class MenuManager : MonoBehaviour
 
             optionsPanelActive = false;
             optionsPanel.SetActive(optionsPanelActive);
-        } else {
-            pausePanelActive = !pausePanelActive;
-            pausePanel.SetActive(pausePanelActive);
         }
-
         
+    }
+
+    public void OpenWebsite() {
+        print(website);
+    }
+
+    public void MainMenu() {
+        SceneManager.LoadScene(0);
     }
 }
