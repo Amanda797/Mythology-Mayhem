@@ -10,23 +10,33 @@ public class MenuManager : MonoBehaviour
         bool optionsPanelActive;
         public GameObject creditsPanel;
         bool creditsPanelActive;
+        public GameObject helpPanel;
+        bool helpPanelActive;
+        public GameObject pausePanel;
+        bool pausePanelActive;
 
     // Retain this game object across scenes.
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("MenuManager");
 
-        if(objs.Length > 1) {
-            // Destroy new menu managers if they exist in new scenes
-            Destroy(this.gameObject);
-        } 
-        
-        DontDestroyOnLoad(this.gameObject);        
+        if(objs.Length > 1)
+        {
+            for(int i = 0; i < objs.Length - 1; i++) {
+                Destroy(objs[i].gameObject);
+            }
+        }      
 
         optionsPanelActive = false;
         optionsPanel.SetActive(optionsPanelActive);
 
         creditsPanelActive = false;
         creditsPanel.SetActive(creditsPanelActive);
+
+        helpPanelActive = false;
+        helpPanel.SetActive(helpPanelActive);
+
+        pausePanelActive = false;
+        pausePanel.SetActive(pausePanelActive);
     }
 
     // Starts the game, triggered by Start Game Button's OnClick function
@@ -47,5 +57,31 @@ public class MenuManager : MonoBehaviour
     public void ToggleCredits() {
         creditsPanelActive = !creditsPanelActive;
         creditsPanel.SetActive(creditsPanelActive);
+    }
+
+    public void ToggleHelp() {
+        helpPanelActive = !helpPanelActive;
+        helpPanel.SetActive(helpPanelActive);
+    }
+
+    public void TogglePause() {
+        if(pausePanelActive) {
+            pausePanelActive = !pausePanelActive;
+            pausePanel.SetActive(pausePanelActive);
+
+            helpPanelActive = false;
+            helpPanel.SetActive(helpPanelActive);
+
+            creditsPanelActive = false;
+            creditsPanel.SetActive(creditsPanelActive);
+
+            optionsPanelActive = false;
+            optionsPanel.SetActive(optionsPanelActive);
+        } else {
+            pausePanelActive = !pausePanelActive;
+            pausePanel.SetActive(pausePanelActive);
+        }
+
+        
     }
 }
