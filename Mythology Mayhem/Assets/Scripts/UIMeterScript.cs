@@ -91,4 +91,7 @@ public class UIMeterScript : MonoBehaviour
         // newLevel = {ex.3452} - ((amount * maxMeter) / 100);
     }
 
+    public void GetHealth() {
+        
+    }
 }

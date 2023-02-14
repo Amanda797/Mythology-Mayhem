@@ -11,9 +11,9 @@ public class PlayerStats : MonoBehaviour
     [Header("Player Stats")]
     [SerializeField] private int atkDamage = 2;
     [SerializeField] private int maxHealth = 10;
-    private int currHealth;
+    public int CurrHealth { get; set; }
     [SerializeField] private float attackRate = 2f;
-    private float nextAttackTime = 0f;
+    public float NextAttackTime { get; set; }
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
@@ -24,19 +24,20 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currHealth = maxHealth;
+        CurrHealth = maxHealth;
         sr = GetComponent<SpriteRenderer>();
+        NextAttackTime = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextAttackTime) 
+        if (Time.time >= NextAttackTime) 
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Attack();
-                nextAttackTime = Time.time + 1f/attackRate;
+                NextAttackTime = Time.time + 1f/attackRate;
             }
         }
         //The Code below is to flip the attackPoint of the player so that if the player is flipped they can still attack behind the enemy
