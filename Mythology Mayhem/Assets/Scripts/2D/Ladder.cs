@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class TwoDLever : MonoBehaviour
+public class Ladder : MonoBehaviour
 {
-    [SerializeField] private Animator anim;
-    [SerializeField] private string nextLevel = "Library 3D";
 
+    [SerializeField] private GameObject floor;
     public bool entered = false;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +20,11 @@ public class TwoDLever : MonoBehaviour
     {
         if (entered)
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                anim.SetTrigger("Pulled");
-            }
+            floor.GetComponent<Collider2D>().enabled = false;
+        }
+        else 
+        {
+            floor.GetComponent<Collider2D>().enabled = true;
         }
     }
 
@@ -33,10 +34,12 @@ public class TwoDLever : MonoBehaviour
         {
             entered = true;
         }
-        
     }
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(nextLevel);
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.layer == 3)
+        {
+            entered = false;
+        }
     }
 }
