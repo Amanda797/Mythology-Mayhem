@@ -10,10 +10,12 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Player Stats")]
     [SerializeField] private int atkDamage = 2;
-    [SerializeField] private int maxHealth = 10;
-    public int CurrHealth { get; set; }
+    [SerializeField] public int MaxHealth { get; private set; }
+    [SerializeField] public int CurrHealth { get; private set; }
+    [SerializeField] public int MaxMana { get; private set; }
+    [SerializeField] public int CurrMana { get; private set; }
     [SerializeField] private float attackRate = 2f;
-    public float NextAttackTime { get; set; }
+    public float NextAttackTime { get; private set; }
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
@@ -24,7 +26,12 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CurrHealth = maxHealth;
+        MaxHealth = 10;
+        MaxMana = 10;
+
+        CurrHealth = MaxHealth;
+        CurrMana = MaxMana;
+
         sr = GetComponent<SpriteRenderer>();
         NextAttackTime = 0f;
     }
@@ -59,6 +66,8 @@ public class PlayerStats : MonoBehaviour
                 flipped = !flipped;
             }
         }
+    
+
     }    
 
     private void Attack()
@@ -75,13 +84,31 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
-        currHealth -= damage;
+        if(CurrHealth > 0)
+        {
+            CurrHealth -= Mathf.Abs(damage);
+        }
 
         anim.SetTrigger("Hurt");
 
-        if(currHealth <= 0)
+        if(CurrHealth <= 0)
         {
             Die();
+        }
+    }
+
+    public void Heal(int heal) 
+    {
+        if(CurrHealth < MaxHealth)
+        {
+            CurrHealth += Mathf.Abs(heal);
+        }
+
+        anim.SetTrigger("Hurt");
+
+        if(CurrHealth >= MaxHealth)
+        {
+            CurrHealth = MaxHealth;
         }
     }
 
