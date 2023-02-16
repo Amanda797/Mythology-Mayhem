@@ -27,7 +27,12 @@ public class MenuManager : MonoBehaviour
         }     
 
         print(SceneManager.GetActiveScene().buildIndex);
-        levelIcon.ChangeIcon(SceneManager.GetActiveScene().buildIndex);
+
+        switch(SceneManager.GetActiveScene().buildIndex) {
+            case 0: break;
+            default: levelIcon.ChangeIcon(SceneManager.GetActiveScene().buildIndex); break;
+        }
+        
 
         VolumeSaveSlider vss = GetComponent<VolumeSaveSlider>();
         vss.LoadVolume();
@@ -46,15 +51,18 @@ public class MenuManager : MonoBehaviour
     public void ToggleOptions(int options) {
         
         // Make sure there is a background present (needs to be active to display children)
-        menuPanels[pauseBackgroundElement].SetActive(true);
+        if(pauseBackgroundElement != -1)
+            menuPanels[pauseBackgroundElement].SetActive(true);
 
         //toggle between options and pause view
         if(menuPanels[options].activeInHierarchy) {            
             menuPanels[options].SetActive(false);
-            menuPanels[pausePanelElement].SetActive(true);
+            if(pausePanelElement != -1)
+                menuPanels[pausePanelElement].SetActive(true);
         } else {
             menuPanels[options].SetActive(true);
-            menuPanels[pausePanelElement].SetActive(false);
+            if(pausePanelElement != -1)
+                menuPanels[pausePanelElement].SetActive(false);
         }
 
         // Deprecated Version, keeping for reference...
@@ -75,41 +83,55 @@ public class MenuManager : MonoBehaviour
 
     public void ToggleCredits(int credits) {
         // Make sure there is a background present (needs to be active to display children)
-        menuPanels[pauseBackgroundElement].SetActive(true);
+        if(pauseBackgroundElement != -1)
+            menuPanels[pauseBackgroundElement].SetActive(true);
 
         //toggle between credits and pause view
         if(menuPanels[credits].activeInHierarchy) {            
             menuPanels[credits].SetActive(false);
-            menuPanels[pausePanelElement].SetActive(true);
+            if(pausePanelElement != -1)
+                menuPanels[pausePanelElement].SetActive(true);
         } else {
             menuPanels[credits].SetActive(true);
-            menuPanels[pausePanelElement].SetActive(false);
+            if(pausePanelElement != -1)
+                menuPanels[pausePanelElement].SetActive(false);
         }
     }
 
     public void ToggleHelp(int help) {
         // Make sure there is a background present (needs to be active to display children)
-        menuPanels[pauseBackgroundElement].SetActive(true);
+        if(pauseBackgroundElement != -1)
+            menuPanels[pauseBackgroundElement].SetActive(true);
 
         //toggle between help and pause view
         if(menuPanels[help].activeInHierarchy) {            
             menuPanels[help].SetActive(false);
-            menuPanels[pausePanelElement].SetActive(true);
+            if(pausePanelElement != -1)
+                menuPanels[pausePanelElement].SetActive(true);
         } else {
             menuPanels[help].SetActive(true);
-            menuPanels[pausePanelElement].SetActive(false);
+            if(pausePanelElement != -1)
+                menuPanels[pausePanelElement].SetActive(false);
         }
     }
 
     public void TogglePause() {
-        // Toggle the background and pause panels
-        if(menuPanels[pauseBackgroundElement].activeInHierarchy) {
-            menuPanels[pauseBackgroundElement].SetActive(false);
-            menuPanels[pausePanelElement].SetActive(false);
-        } else {            
-            menuPanels[pauseBackgroundElement].SetActive(true);
-            menuPanels[pausePanelElement].SetActive(true);
+        if(pausePanelElement != -1 && pauseBackgroundElement != -1)
+        {
+            // Toggle the background and pause panels
+            if(menuPanels[pauseBackgroundElement].activeInHierarchy) 
+            {
+                menuPanels[pauseBackgroundElement].SetActive(false);
+                menuPanels[pausePanelElement].SetActive(false);
+            } else {            
+                menuPanels[pauseBackgroundElement].SetActive(true);
+                menuPanels[pausePanelElement].SetActive(true);
+            } 
         }
+        else {
+            print("Pause Panel Element: " + pausePanelElement + ", Pause Background Element: " + pauseBackgroundElement + ". Resolve.");
+        }
+        
     } // end toggle pause
 
     public void OpenWebsite() {
