@@ -5,19 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-        public int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings)     
-        public GameObject optionsPanel;   
-        bool optionsPanelActive;
-        public GameObject creditsPanel;
-        bool creditsPanelActive;
-        public GameObject helpPanel;
-        bool helpPanelActive;
-        public GameObject pausePanel;
-        bool pausePanelActive;
-        public GameObject pauseBackground;
-        bool pauseBackgroundActive;
-        public UILevelIcon levelIcon;
+        [SerializeField] int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings)     
+        [SerializeField] UILevelIcon levelIcon;
         string website = "https://www.google.com/search?q=mythology-mayhem";
+
+        [SerializeField] GameObject[] menuPanels;
+        [SerializeField] int pauseBackgroundElement = -1;
+        [SerializeField] int pausePanelElement = -1;
+        //[SerializeField] GameObject[] testingPanels;
+
 
     // Retain this game object across scenes.
     private void Awake() {
@@ -28,22 +24,7 @@ public class MenuManager : MonoBehaviour
             for(int i = 0; i < objs.Length - 1; i++) {
                 Destroy(objs[i].gameObject);
             }
-        }      
-
-        optionsPanelActive = false;
-        optionsPanel.SetActive(optionsPanelActive);
-
-        creditsPanelActive = false;
-        creditsPanel.SetActive(creditsPanelActive);
-
-        helpPanelActive = false;
-        helpPanel.SetActive(helpPanelActive);
-
-        pausePanelActive = false;
-        pausePanel.SetActive(pausePanelActive);
-
-        pauseBackgroundActive = false;
-        pauseBackground.SetActive(pauseBackgroundActive);
+        }     
 
         print(SceneManager.GetActiveScene().buildIndex);
         levelIcon.ChangeIcon(SceneManager.GetActiveScene().buildIndex);
@@ -62,7 +43,22 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void ToggleOptions() {
+    public void ToggleOptions(int options) {
+        
+        // Make sure there is a background present (needs to be active to display children)
+        menuPanels[pauseBackgroundElement].SetActive(true);
+
+        //toggle between options and pause view
+        if(menuPanels[options].activeInHierarchy) {            
+            menuPanels[options].SetActive(false);
+            menuPanels[pausePanelElement].SetActive(true);
+        } else {
+            menuPanels[options].SetActive(true);
+            menuPanels[pausePanelElement].SetActive(false);
+        }
+
+        // Deprecated Version, keeping for reference...
+        /*
         optionsPanelActive = !optionsPanelActive;
         optionsPanel.SetActive(optionsPanelActive);
 
@@ -73,57 +69,48 @@ public class MenuManager : MonoBehaviour
             pausePanelActive = true;
             pausePanel.SetActive(pausePanelActive);
         }
-    }
+        */
 
-    public void ToggleCredits() {
-        creditsPanelActive = !creditsPanelActive;
-        creditsPanel.SetActive(creditsPanelActive);
+    }// end toggle options
 
-        if(creditsPanelActive) {
-            pausePanelActive = false;
-            pausePanel.SetActive(pausePanelActive);
+    public void ToggleCredits(int credits) {
+        // Make sure there is a background present (needs to be active to display children)
+        menuPanels[pauseBackgroundElement].SetActive(true);
+
+        //toggle between credits and pause view
+        if(menuPanels[credits].activeInHierarchy) {            
+            menuPanels[credits].SetActive(false);
+            menuPanels[pausePanelElement].SetActive(true);
         } else {
-            pausePanelActive = true;
-            pausePanel.SetActive(pausePanelActive);
+            menuPanels[credits].SetActive(true);
+            menuPanels[pausePanelElement].SetActive(false);
         }
     }
 
-    public void ToggleHelp() {
-        helpPanelActive = !helpPanelActive;
-        helpPanel.SetActive(helpPanelActive);
+    public void ToggleHelp(int help) {
+        // Make sure there is a background present (needs to be active to display children)
+        menuPanels[pauseBackgroundElement].SetActive(true);
 
-        if(helpPanelActive) {
-            pausePanelActive = false;
-            pausePanel.SetActive(pausePanelActive);
+        //toggle between help and pause view
+        if(menuPanels[help].activeInHierarchy) {            
+            menuPanels[help].SetActive(false);
+            menuPanels[pausePanelElement].SetActive(true);
         } else {
-            pausePanelActive = true;
-            pausePanel.SetActive(pausePanelActive);
+            menuPanels[help].SetActive(true);
+            menuPanels[pausePanelElement].SetActive(false);
         }
     }
 
     public void TogglePause() {
-        
-        // Toggle the background
-        pauseBackgroundActive = !pauseBackgroundActive;
-        pauseBackground.SetActive(pauseBackgroundActive);
-
-        // Toggle the pause panel
-        pausePanelActive = !pausePanelActive;
-        pausePanel.SetActive(pausePanelActive);
-
-        // If the pause panel is active and is going to be inactive, set the other panels to inactive as well
-        if(pausePanelActive) {
-            helpPanelActive = false;
-            helpPanel.SetActive(helpPanelActive);
-
-            creditsPanelActive = false;
-            creditsPanel.SetActive(creditsPanelActive);
-
-            optionsPanelActive = false;
-            optionsPanel.SetActive(optionsPanelActive);
+        // Toggle the background and pause panels
+        if(menuPanels[pauseBackgroundElement].activeInHierarchy) {
+            menuPanels[pauseBackgroundElement].SetActive(false);
+            menuPanels[pausePanelElement].SetActive(false);
+        } else {            
+            menuPanels[pauseBackgroundElement].SetActive(true);
+            menuPanels[pausePanelElement].SetActive(true);
         }
-        
-    }
+    } // end toggle pause
 
     public void OpenWebsite() {
         print(website);
