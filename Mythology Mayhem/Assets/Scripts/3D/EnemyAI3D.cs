@@ -10,9 +10,11 @@ public class EnemyAI3D : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] Animator anim;
+    [SerializeField] string locomotionFloat;
+    [SerializeField] string movingBool;
     [SerializeField] string walkingAnim;
     [SerializeField] string attackingAnim;
-    [SerializeField] string attackAnim;
+    [SerializeField] string attackTrigger;
 
     [Header("Movement")]
     [SerializeField] int patrolSpeed = 20;
@@ -34,6 +36,10 @@ public class EnemyAI3D : MonoBehaviour
     void Awake() {
         this.fixedDeltaTime = Time.fixedDeltaTime;
         Time.timeScale = 1.0f;
+
+        anim.applyRootMotion = true;
+        agent.updatePosition = false;
+        agent.updateRotation = true;
     }
 
     // Start is called before the first frame update
@@ -43,12 +49,21 @@ public class EnemyAI3D : MonoBehaviour
         UpdateDestination();
     }
 
+    private void OnAnimatorMove() {
+        Vector3 rootPosition = anim.rootPosition;
+        rootPosition.y = agent.nextPosition.y;
+        transform.position = rootPosition;
+        agent.nextPosition = rootPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(!isAttacking) {
             anim.SetBool(walkingAnim, true);
             anim.SetBool(attackingAnim, false);
+            anim.SetBool(movingBool, agent.velocity.magnitude > 0.5f);
+            anim.SetFloat(locomotionFloat, agent.velocity.magnitude);
             agent.speed = patrolSpeed;
             if (Vector3.Distance(transform.position, target) < 2) {
                 Idle();              
@@ -57,6 +72,8 @@ public class EnemyAI3D : MonoBehaviour
         else {
             anim.SetBool(attackingAnim, true);
             anim.SetBool(walkingAnim, false);
+            anim.SetBool(movingBool, agent.velocity.magnitude > 0.5f);
+            anim.SetFloat(locomotionFloat, agent.velocity.magnitude);
             agent.speed = attackSpeed;
             agent.SetDestination(target);
             if(player != null && player.GetComponent<PlayerController3D>().GetHealth() > 0) {
@@ -67,6 +84,7 @@ public class EnemyAI3D : MonoBehaviour
 
     void Idle() {
         anim.SetBool(walkingAnim, false);
+        anim.SetBool(movingBool, false);
         agent.speed = 0f;
         idleTimer += Time.deltaTime;
         if(idleTimer >= idleDuration) {
@@ -110,7 +128,7 @@ public class EnemyAI3D : MonoBehaviour
 
     IEnumerator Attack(Collider col) {
         col.gameObject.GetComponent<PlayerController3D>().DamageHealth(attackDamage); 
-        anim.SetTrigger(attackAnim);
+        anim.SetTrigger(attackTrigger);
         yield return new WaitForSeconds(5.0f);  
     }
 
