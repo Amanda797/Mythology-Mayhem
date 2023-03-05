@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     public bool climbing = false;
     public bool ladderEntered = false;
+    [SerializeField] private GameObject pushBlock;
     public bool pushing = false;
+    public bool canPush = false;
     #endregion Variables
 
 
@@ -51,6 +53,28 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Stop Climbing");
             }
         }
+        if(canPush || pushing)
+        {
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                Debug.Log("Test");
+                if (!pushing)
+                {
+                    pushing = true;
+                    pushBlock.transform.SetParent(gameObject.transform);
+                    walkSpeed = 100;
+                    anim.SetBool("IsPush", true);
+                }
+                else
+                {
+                    pushBlock.transform.parent = null;
+                    walkSpeed = 200;
+                    anim.SetBool("IsPush", false);
+                    pushing = false;
+                }
+            }
+        }
+
         FlipPlayerSpriteWithMoveDirection();
         AnimatePlayer();
     }
@@ -63,7 +87,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            MovePlayer(runSpeed);
+            if(!pushing && !climbing) 
+            {
+                MovePlayer(runSpeed);
+            }
+            else
+            {
+                MovePlayer(walkSpeed);
+            }
         }
     }
 
@@ -87,22 +118,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D other) {
-        if (other.collider.tag == "PushBlock" )
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.collider.tag == "PushBlock")
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                Debug.Log("Test");
-                if (!pushing)
-                {
-                    other.gameObject.transform.SetParent(gameObject.transform);
-                }
-                else
-                {
+            canPush = true;
+            if(!pushing)
+            pushBlock = other.gameObject;
+        }
+    }
 
-                }
-            }
-            
+    private void OnCollisionExit2D(Collision2D other) 
+    {
+        if (other.collider.tag == "PushBlock")
+        {
+            canPush = false;
+            if (!pushing) 
+                pushBlock = null;
         }
     }
 
@@ -121,13 +153,16 @@ public class PlayerController : MonoBehaviour
 
     private void FlipPlayerSpriteWithMoveDirection()
     {
-        if (xMovement < 0)
+        if(!pushing) 
         {
-            sr.flipX = true;
-        }
-        else if (xMovement > 0)
-        {
-            sr.flipX = false;
+            if (xMovement < 0)
+            {
+                sr.flipX = true;
+            }
+            else if (xMovement > 0)
+            {
+                sr.flipX = false;
+            }
         }
     }
 
