@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TwoDLever : MonoBehaviour
+public class ThreeDLever : MonoBehaviour
 {
-    [SerializeField] private Animator anim;
     [SerializeField] private string nextLevel = "Library 3D";
-
+    [SerializeField] private BoxCollider trigger;
     public bool entered = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,27 +22,25 @@ public class TwoDLever : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                anim.SetTrigger("Pulled");
+                LoadNextScene();
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.layer == 3) 
+        if (other.tag == "Player")
         {
             entered = true;
-        }
-        
+        }    
     }
 
-    private void OnTriggerExit2D(Collider2D other) 
+    private void OnTriggerExit(Collider other) 
     {
-        if (other.gameObject.layer == 3) 
+        if (other.tag == "Player")
         {
             entered = false;
-        }
-        
+        }    
     }
     public void LoadNextScene()
     {
