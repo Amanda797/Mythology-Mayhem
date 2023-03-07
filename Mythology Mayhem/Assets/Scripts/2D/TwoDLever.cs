@@ -35,6 +35,15 @@ public class TwoDLever : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        if (other.gameObject.layer == 3) 
+        {
+            entered = false;
+        }
+        
+    }
     public void LoadNextScene()
     {
         SceneManager.LoadScene(nextLevel);
