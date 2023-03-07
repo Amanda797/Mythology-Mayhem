@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 2.2
+    agentRadius: 2
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.73333335
+    cellSize: 0.6666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2004179}
   m_Layer: 0
   m_Name: Bull Warrior 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ Transform:
   - {fileID: 1571943756}
   - {fileID: 926002229}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &42458420
 GameObject:
@@ -215,41 +215,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 778947942}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &342760674
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 342760675}
-  m_Layer: 0
-  m_Name: Wild Boar 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &342760675
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342760674}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.525649, y: 0.23764586, z: -10.427314}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1301763933}
-  - {fileID: 778947942}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &347424825
 GameObject:
@@ -314,7 +281,7 @@ Transform:
   - {fileID: 1251569731}
   - {fileID: 505718723}
   m_Father: {fileID: 1252959436}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452387113
 GameObject:
@@ -1122,7 +1089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4891263934099114, guid: aa5d111d4a352c945aa478f570ff5fe8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4891263934099114, guid: aa5d111d4a352c945aa478f570ff5fe8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1185,12 +1152,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 826955982}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 10
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1211,17 +1178,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 826955987}
-  walkingAnim: 
-  attackingAnim: 
-  attackAnim: 
+  walkingBool: Walk Forward
+  runningBool: Run Forward
+  attackTrigger: Bite Attack
   patrolSpeed: 20
   attackSpeed: 40
+  isIdle: 0
   idleTimer: 0
   idleDuration: 5
+  currAIState: 0
   agent: {fileID: 826955983}
-  waypoints: []
-  attackDamage: 2
+  waypoints:
+  - {fileID: 695651814}
+  - {fileID: 1251569731}
+  - {fileID: 505718723}
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  attackDamage: 2
+  attackTimer: 0
+  attackDuration: 5
 --- !u!114 &826955985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,14 +1210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
+  MaxHealth: 20
   health: 0
   components: []
   mainObject: {fileID: 1252959435}
   anim: {fileID: 826955987}
-  hurtAnim: 
-  deathAnim: 
-  healAnim: 
+  hurtTrigger: 
+  deathTrigger: 
+  healTrigger: 
 --- !u!54 &826955986
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1292,7 +1268,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &872873984
 MeshFilter:
@@ -55315,7 +55291,7 @@ Transform:
   - {fileID: 875789498}
   - {fileID: 1378580823}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &875774894
 Transform:
@@ -79318,10 +79294,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 10
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -79342,22 +79318,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 926002228}
-  locomotionFloat: 
-  movingBool: 
-  walkingAnim: Walk
-  attackingAnim: Run
-  attackTrigger: 
+  walkingBool: Walk
+  runningBool: Run
+  attackTrigger: Attack 01
   patrolSpeed: 20
   attackSpeed: 40
+  isIdle: 0
   idleTimer: 0
   idleDuration: 5
+  currAIState: 0
   agent: {fileID: 926002230}
   waypoints:
   - {fileID: 42458421}
   - {fileID: 1839216750}
   - {fileID: 347424826}
-  attackDamage: 2
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  attackDamage: 2
+  attackTimer: 0
+  attackDuration: 5
 --- !u!54 &926002232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79393,9 +79373,9 @@ MonoBehaviour:
   - {fileID: 926002230}
   mainObject: {fileID: 2004178}
   anim: {fileID: 926002228}
-  hurtAnim: Hit
-  deathAnim: Die
-  healAnim: Defend
+  hurtTrigger: 
+  deathTrigger: 
+  healTrigger: 
 --- !u!1001 &1021492706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79935,9 +79915,9 @@ MonoBehaviour:
   - {fileID: 1021492712}
   mainObject: {fileID: 1443910382}
   anim: {fileID: 1021492709}
-  hurtAnim: Hit
-  deathAnim: Die
-  healAnim: Defend
+  hurtTrigger: 
+  deathTrigger: 
+  healTrigger: 
 --- !u!114 &1021492711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79951,22 +79931,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1021492709}
-  locomotionFloat: 
-  movingBool: 
-  walkingAnim: Walk
-  attackingAnim: Run
-  attackTrigger: 
+  walkingBool: Walk
+  runningBool: Run
+  attackTrigger: Attack 01
   patrolSpeed: 20
   attackSpeed: 40
+  isIdle: 0
   idleTimer: 0
   idleDuration: 5
+  currAIState: 0
   agent: {fileID: 1021492712}
   waypoints:
   - {fileID: 2063182423}
   - {fileID: 1517512163}
   - {fileID: 529699023}
-  attackDamage: 2
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  attackDamage: 2
+  attackTimer: 0
+  attackDuration: 5
 --- !u!195 &1021492712
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -79978,10 +79962,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 10
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -80033,8 +80017,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 778947942}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1059257271
 GameObject:
@@ -80065,7 +80049,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097605337
 GameObject:
@@ -80111,7 +80095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b36fa2180a162cf48adc4b1f65b535f0, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b36fa2180a162cf48adc4b1f65b535f0, type: 3}
       propertyPath: m_LocalScale.x
@@ -80227,7 +80211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1251569730
 GameObject:
@@ -80288,10 +80272,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 826955981}
   - {fileID: 373406973}
+  - {fileID: 826955981}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1368716737
 GameObject:
@@ -80678,7 +80662,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1378580822
 GameObject:
@@ -80886,7 +80870,7 @@ GameObject:
   - component: {fileID: 1443910383}
   m_Layer: 0
   m_Name: Bull Warrior 2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80906,7 +80890,7 @@ Transform:
   - {fileID: 774504646}
   - {fileID: 1021492707}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1463298054
 GameObject:
@@ -80919,7 +80903,7 @@ GameObject:
   - component: {fileID: 1463298055}
   m_Layer: 0
   m_Name: Bull Warrior 3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80939,7 +80923,7 @@ Transform:
   - {fileID: 1994055173}
   - {fileID: 1581959123}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517512162
 GameObject:
@@ -81530,16 +81514,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
+  MaxHealth: 40
   health: 0
   components:
   - {fileID: 1581959127}
   - {fileID: 1581959128}
   mainObject: {fileID: 1463298054}
   anim: {fileID: 1581959125}
-  hurtAnim: Hit
-  deathAnim: Die
-  healAnim: Defend
+  hurtTrigger: 
+  deathTrigger: 
+  healTrigger: 
 --- !u!114 &1581959127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81553,22 +81537,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1581959125}
-  locomotionFloat: 
-  movingBool: 
-  walkingAnim: Walk
-  attackingAnim: Run
-  attackTrigger: 
+  walkingBool: Walk
+  runningBool: Run
+  attackTrigger: Attack 01
   patrolSpeed: 20
   attackSpeed: 40
+  isIdle: 0
   idleTimer: 0
   idleDuration: 5
+  currAIState: 0
   agent: {fileID: 1581959128}
   waypoints:
   - {fileID: 1622454797}
   - {fileID: 1234180978}
   - {fileID: 1097605338}
-  attackDamage: 2
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  attackDamage: 2
+  attackTimer: 0
+  attackDuration: 5
 --- !u!195 &1581959128
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -81580,16 +81568,16 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 24
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
 --- !u!54 &1581959129
 Rigidbody:
@@ -81599,14 +81587,27 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581959124}
   serializedVersion: 2
-  m_Mass: 3
-  m_Drag: 0
+  m_Mass: 20
+  m_Drag: 6
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1581959130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581959124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 3}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1586351799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81616,11 +81617,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.44
+      value: -21.83
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -81628,23 +81629,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.48
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.99989235
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0.014675461
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -81652,7 +81653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 1.682
       objectReference: {fileID: 0}
     - target: {fileID: 289352684015478264, guid: b7196914d7be02248b264656e8613db0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -81662,8 +81663,82 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPerson Player
       objectReference: {fileID: 0}
+    - target: {fileID: 289352684015478270, guid: b7196914d7be02248b264656e8613db0, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7196914d7be02248b264656e8613db0, type: 3}
+--- !u!1 &1586351800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 289352684015478270, guid: b7196914d7be02248b264656e8613db0, type: 3}
+  m_PrefabInstance: {fileID: 1586351799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1586351801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 289352684015478265, guid: b7196914d7be02248b264656e8613db0, type: 3}
+  m_PrefabInstance: {fileID: 1586351799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586351800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af333f57ce580034291ab1744fd53801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1586351802
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586351800}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0525684dee9ec9847b1cf93f3b7b636c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1586351803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586351800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10
+  health: 0
+  components:
+  - {fileID: 1586351801}
+  mainObject: {fileID: 1586351800}
+  anim: {fileID: 1586351802}
+  hurtTrigger: Hurt
+  deathTrigger: Death
+  healTrigger: Heal
+--- !u!65 &1586351806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586351800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 4, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1622454796
 GameObject:
   m_ObjectHideFlags: 0
@@ -81688,7 +81763,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622454796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.62, y: 0.42, z: 12.14}
+  m_LocalPosition: {x: 4.62, y: 0.42, z: 11.804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81708,7 +81783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d26492eaea3a5e043b2abb44f5966586, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d26492eaea3a5e043b2abb44f5966586, type: 3}
       propertyPath: m_LocalScale.x
