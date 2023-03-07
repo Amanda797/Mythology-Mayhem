@@ -53,7 +53,6 @@ public class PlayerStats : MonoBehaviour
             if (!flipped) 
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
-                Debug.Log("Flipped backwards");
                 flipped = !flipped;
             }
         } 
@@ -62,7 +61,6 @@ public class PlayerStats : MonoBehaviour
             if (flipped)
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
-                Debug.Log("Flipped forwards");
                 flipped = !flipped;
             }
         }

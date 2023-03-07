@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     public bool climbing = false;
     public bool ladderEntered = false;
+    [SerializeField] private GameObject pushBlock;
+    public bool pushing = false;
+    public bool canPush = false;
     #endregion Variables
 
 
@@ -34,12 +37,44 @@ public class PlayerController : MonoBehaviour
         GetInput();
         if (ladderEntered)
         {
-            if(Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !climbing)
             {
                 anim.SetBool("IsClimb", true);
                 climbing = true;
+                rb2d.gravityScale = 0;
+                rb2d.velocity = new Vector2(0,0);
+                Debug.Log("Start Climbing");
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && climbing)
+            {
+                anim.SetBool("IsClimb", false);
+                climbing = false;
+                rb2d.gravityScale = 1;
+                Debug.Log("Stop Climbing");
             }
         }
+        if(canPush || pushing)
+        {
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                Debug.Log("Test");
+                if (!pushing)
+                {
+                    pushing = true;
+                    pushBlock.transform.SetParent(gameObject.transform);
+                    walkSpeed = 100;
+                    anim.SetBool("IsPush", true);
+                }
+                else
+                {
+                    pushBlock.transform.parent = null;
+                    walkSpeed = 200;
+                    anim.SetBool("IsPush", false);
+                    pushing = false;
+                }
+            }
+        }
+
         FlipPlayerSpriteWithMoveDirection();
         AnimatePlayer();
     }
@@ -52,7 +87,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            MovePlayer(runSpeed);
+            if(!pushing && !climbing) 
+            {
+                MovePlayer(runSpeed);
+            }
+            else
+            {
+                MovePlayer(walkSpeed);
+            }
         }
     }
 
@@ -70,10 +112,32 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("IsClimb", false);
             ladderEntered = false;
+            rb2d.gravityScale = 1;
             if (climbing)
             climbing = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.collider.tag == "PushBlock")
+        {
+            canPush = true;
+            if(!pushing)
+            pushBlock = other.gameObject;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) 
+    {
+        if (other.collider.tag == "PushBlock")
+        {
+            canPush = false;
+            if (!pushing) 
+                pushBlock = null;
+        }
+    }
+
     #endregion Unity Methods
 
 
@@ -89,13 +153,16 @@ public class PlayerController : MonoBehaviour
 
     private void FlipPlayerSpriteWithMoveDirection()
     {
-        if (xMovement < 0)
+        if(!pushing) 
         {
-            sr.flipX = true;
-        }
-        else if (xMovement > 0)
-        {
-            sr.flipX = false;
+            if (xMovement < 0)
+            {
+                sr.flipX = true;
+            }
+            else if (xMovement > 0)
+            {
+                sr.flipX = false;
+            }
         }
     }
 
