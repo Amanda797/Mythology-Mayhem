@@ -18,4 +18,5 @@ public class VolumeSaveSlider : MonoBehaviour
         volumeSlider.value = volumeValue;
         AudioListener.volume = volumeValue;
     }
+    
 }
