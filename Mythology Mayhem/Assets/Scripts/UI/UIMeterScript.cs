@@ -5,6 +5,16 @@ using TMPro;
 
 public class UIMeterScript : MonoBehaviour
 {
+    // --------------------------
+    // ***SECTIONS***
+    // - PROPERTIES
+    // - METHODS
+    // - TESTS
+    // --------------------------
+
+    // --------------------------
+    // ***PROPERTIES***
+    // --------------------------
     // The meter's background transform
     [SerializeField] RectTransform background;
     // The meter's foreground transform (the image that should be scalable)
@@ -18,11 +28,10 @@ public class UIMeterScript : MonoBehaviour
     // The width in terms of maxBase
     float currentMeterWeighted;
     [SerializeField] TextMeshProUGUI currentMeterNumber;
-    
-    // Testing variables
-    //int testStep = 1;
-    //float timer = 0f;
-    //float duration = 3f;
+
+    // --------------------------
+    // ***METHODS***
+    // --------------------------
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +54,50 @@ public class UIMeterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Tests
+        TestUpdateMeter();
+
+        // Constrain the meter to the mins and max's of the transforms
+        if(currentMeter <= 0) {
+            currentMeter = 0;
+        } else if (currentMeter >= maxMeter) {
+            currentMeter = maxMeter;
+        }
+
+        // Reset the foreground size according to the updated value of currentMeter
+        foreground.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, currentMeter);
+        foreground.ForceUpdateRectTransforms();
+
+        // Set the text panel's number
+        currentMeterWeighted = (currentMeter * maxBase) / maxMeter;
+        currentMeterNumber.text = currentMeterWeighted + "";
+    }
+    
+    // Update Meter updates the meter's current level to a new amount (that is weighted).
+    public void UpdateMeter(float amount) {
+        currentMeter = ((Mathf.Abs(amount) * maxMeter) / maxBase);
+    }
+
+    // Set Meter updates the meter's scale based on the maximum value possible and the current amount of that possibility used.
+    // setMax - maximum limit
+    // setCurr - current amount
+    public void SetMeter(float setMax, float setCurr) {
+        maxBase = setMax;
+        currentMeter = ((Mathf.Abs(setCurr) * maxMeter) / maxBase);
+    }
+
+    // --------------------------
+    // ***TESTS***
+    // --------------------------
+
+    // Testing variables for TestUpdateMeter
+    int testStep = 1;
+    float timer = 0f;
+    float duration = 3f;
+
+    private void TestUpdateMeter() {
         //Testing functionality. Unhide: testStep, timer, and duration.
-        /*
+        
         timer += Time.deltaTime;
         
         if(timer > duration) {
@@ -66,36 +117,7 @@ public class UIMeterScript : MonoBehaviour
             testStep++; 
             timer = 0f;
         }
-        */
         
-        // Constrain the meter to the mins and max's of the transforms
-        if(currentMeter <= 0) {
-            currentMeter = 0;
-        } else if (currentMeter >= maxMeter) {
-            currentMeter = maxMeter;
-        }
+    }//end test update meter
 
-        // Reset the foreground size according to the updated value of currentMeter
-        foreground.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, currentMeter);
-        foreground.ForceUpdateRectTransforms();
-
-        // Set the text panel's number
-        currentMeterWeighted = (currentMeter * maxBase) / maxMeter;
-        currentMeterNumber.text = currentMeterWeighted + "";
-    }
-
-    
-
-    // Update Meter updates the meter's current level to a new amount (that is weighted).
-    public void UpdateMeter(float amount) {
-        currentMeter = ((Mathf.Abs(amount) * maxMeter) / maxBase);
-    }
-
-    // Set Meter updates the meter's scale based on the maximum value possible and the current amount of that possibility used.
-    // setMax - maximum limit
-    // setCurr - current amount
-    public void SetMeter(float setMax, float setCurr) {
-        maxBase = setMax;
-        currentMeter = ((Mathf.Abs(setCurr) * maxMeter) / maxBase);
-    }
 }
