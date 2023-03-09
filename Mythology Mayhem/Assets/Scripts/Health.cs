@@ -70,4 +70,16 @@ public class Health : MonoBehaviour
         }//check that health is really less than 0 when called        
     }//end death
 
+    public void Death(float time) {
+        if(GetHealth() <= 0) {
+            anim.SetTrigger(deathTrigger);       
+            //this? 
+            //foreach (Behaviour component in components) {
+            //    component.enabled = false;
+            //}
+            //or this??
+            Destroy(mainObject, time);
+        }//check that health is really less than 0 when called        
+    }//end death
+
 }//end health class
