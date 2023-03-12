@@ -77,6 +77,17 @@ public class PlayerController : MonoBehaviour
 
         FlipPlayerSpriteWithMoveDirection();
         AnimatePlayer();
+        if (rb2d.velocity == new Vector2(0,0))
+        {
+            if (climbing || pushing)
+            {
+                anim.speed = 0;
+            }
+        }
+        else
+        {
+            anim.speed = 1;
+        }
     }
 
     private void FixedUpdate()
