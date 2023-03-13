@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TwoDLever : MonoBehaviour
+public class DoorCode : MonoBehaviour
 {
-    [SerializeField] private Animator leverAnim;
-    [SerializeField] private Animator doorAnim;
-
+    [SerializeField] private string nextLevel = "Library 3D 2";
     public bool entered = false;
+    public bool blocked = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +15,13 @@ public class TwoDLever : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   void Update()
     {
-        if (entered)
+        if (entered && !blocked)
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                leverAnim.SetTrigger("Pulled");
+                LoadNextScene();
             }
         }
     }
@@ -33,7 +32,6 @@ public class TwoDLever : MonoBehaviour
         {
             entered = true;
         }
-        
     }
 
     private void OnTriggerExit2D(Collider2D other) 
@@ -42,10 +40,13 @@ public class TwoDLever : MonoBehaviour
         {
             entered = false;
         }
-        
+        if (other.tag == "PushBlock")
+        {
+            blocked = false;
+        }
     }
-    private void Opendoor()
+    public void LoadNextScene()
     {
-        doorAnim.SetTrigger("Open");
+        SceneManager.LoadScene(nextLevel);
     }
 }
