@@ -38,7 +38,6 @@ public class UIMeterScript : MonoBehaviour
     {
         // set maxMeter equal to the background's rect transform width
         maxMeter = background.rect.width;
-        print(maxMeter);
 
         // set the size (width) of the foreground's rect transform on the horizontal axis using the starting width, maxMeter
         foreground.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, maxMeter);

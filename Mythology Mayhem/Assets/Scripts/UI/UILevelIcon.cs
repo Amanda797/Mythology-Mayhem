@@ -20,8 +20,6 @@ public class UILevelIcon : MonoBehaviour
     }
 
     public void ChangeIcon(int sceneIndex) {
-        print("change icon: " + sceneIndex);
-
         switch(sceneIndex) {
             // All Level 1 Scenes
             /*
@@ -40,7 +38,12 @@ public class UILevelIcon : MonoBehaviour
             // All Level 2 Scenes
             // All Level 3 Scenes
             // All Level 4 Scenes
-            default: iconSprite.sprite = Resources.Load<Sprite>("Background"); iconSprite.color = Color.blue; break;
+            default: 
+            {
+                iconSprite.sprite = Resources.Load<Sprite>("Background"); 
+                iconSprite.color = Color.blue; 
+                break;
+            }
         }
     }
 }

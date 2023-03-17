@@ -41,7 +41,7 @@ public class EnemyAI2D : MonoBehaviour
         if(alive) {
             if(health.GetHealth() <= 0) {
                 alive = false;
-                anim.SetTrigger("dying");
+                anim.SetTrigger("IsDead");
                 health.Death();
             }
         }
@@ -52,11 +52,11 @@ public class EnemyAI2D : MonoBehaviour
         if(PlayerDetected()) {
             if(cooldownTimer >= attackCooldown && !hitPlayer) {
                 cooldownTimer = 0;
-                anim.SetBool("pursuing", true);
+                anim.SetBool("moving", true);
                 DamagePlayer();
             }
         } else {
-            anim.SetBool("pursuing", false);
+            anim.SetBool("moving", false);
         }
     }
 
