@@ -9,13 +9,13 @@ public class superliminal : MonoBehaviour
     [Header("Parameters")]
     public LayerMask targetMask;        // The layer mask used to hit only potential targets with a raycast
     public LayerMask ignoreTargetMask;  // The layer mask used to ignore the player and target objects while raycasting
+    public LayerMask ignorePlayerMask;  // The layer mask used to ignore the player and target objects while raycasting
     public float offsetFactor;          // The offset amount for positioning the object so it doesn't clip into walls
  
     float originalDistance;             // The original distance between the player camera and the target
     float originalScale;                // The original scale of the target objects prior to being resized
     Vector3 targetScale;
-    public Vector3 scale;      
-    public float MaxDistance;      // The scale we want our object to be set to each frame
+    public Vector3 scale;          // The scale we want our object to be set to each frame
  
     void Start()
     {
@@ -136,7 +136,7 @@ public class superliminal : MonoBehaviour
             //use overlap Box to check if there is any object in the way
             //if there is, move the target towards the player
             
-            Collider[] hitColliders = Physics.OverlapBox(target.position, new Vector3(target.localScale.x/scale.x, target.localScale.y/scale.y, target.localScale.z/scale.z));
+            Collider[] hitColliders = Physics.OverlapBox(target.position, new Vector3(target.localScale.x/scale.x, target.localScale.y/scale.y, target.localScale.z/scale.z), Quaternion.identity, ignorePlayerMask);
             if(hitColliders.Length > 1)
             {
                 //Debug.Log("hit");
@@ -162,9 +162,9 @@ public class superliminal : MonoBehaviour
             targetScale.x = targetScale.y = targetScale.z = s;
             
             Vector3 tarScale = targetScale * originalScale;
-            if(targetScale.x * originalScale > 45f)
+            if(targetScale.x * originalScale > 60f)
             {
-                tarScale = new Vector3(45f, 45f, 45f);
+                tarScale = new Vector3(60f, 60f, 60f);
             }
  
             // Set the scale for the target objectm, multiplied by the original scale
