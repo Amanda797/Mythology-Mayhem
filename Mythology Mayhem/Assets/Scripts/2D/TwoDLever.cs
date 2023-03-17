@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TwoDLever : MonoBehaviour
 {
-    [SerializeField] private Animator anim;
-    [SerializeField] private string nextLevel = "Library 3D";
+    [SerializeField] private Animator leverAnim;
+    [SerializeField] private Animator doorAnim;
 
     public bool entered = false;
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class TwoDLever : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                anim.SetTrigger("Pulled");
+                leverAnim.SetTrigger("Pulled");
             }
         }
     }
@@ -44,8 +44,8 @@ public class TwoDLever : MonoBehaviour
         }
         
     }
-    public void LoadNextScene()
+    private void Opendoor()
     {
-        SceneManager.LoadScene(nextLevel);
+        doorAnim.SetTrigger("Open");
     }
 }
