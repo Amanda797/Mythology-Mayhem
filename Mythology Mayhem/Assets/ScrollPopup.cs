@@ -23,8 +23,10 @@ public class ScrollPopup : MonoBehaviour
     
     void Update()
     {
+        //check if the player looking in the direction of the scroll
 
-        if(Vector3.Distance(player.transform.position, transform.position) < activeDistance)
+
+        if(Vector3.Distance(player.transform.position, transform.position) < activeDistance && Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < 45f)
         {
             if(!isPopupActive)
             {
