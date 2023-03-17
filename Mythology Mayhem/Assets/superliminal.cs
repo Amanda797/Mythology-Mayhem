@@ -16,7 +16,8 @@ public class superliminal : MonoBehaviour
     float originalScale;                // The original scale of the target objects prior to being resized
     Vector3 targetScale;
     public Vector3 scale;          // The scale we want our object to be set to each frame
- 
+    public KeyCode key;
+
     void Start()
     {
         Cursor.visible = false;
@@ -32,7 +33,7 @@ public class superliminal : MonoBehaviour
     void HandleInput()
     {
         // Check for left mouse click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(key))
         {
             // If we do not currently have a target
             if (target == null)
