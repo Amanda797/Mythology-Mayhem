@@ -36,7 +36,14 @@ public class MenuManager : MonoBehaviour
 
         VolumeSaveSlider vss = GetComponent<VolumeSaveSlider>();
         vss.LoadVolume();
-    }
+    }//end awake
+
+    void Update() {
+        //Open/Close Pause Menu
+        if(Input.GetKeyDown(KeyCode.P)) {
+            TogglePause();
+        }
+    }//end update
 
     // Starts the game, triggered by Start Game Button's OnClick function
     public void StartGame()

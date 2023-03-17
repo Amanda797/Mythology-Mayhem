@@ -7,6 +7,9 @@ public class VolumeSaveSlider : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider;
 
+    void Start() {
+        LoadVolume();
+    }
     public void SaveVolume() {
         float volumeValue = volumeSlider.value;
         PlayerPrefs.SetFloat("Volume", volumeValue);
