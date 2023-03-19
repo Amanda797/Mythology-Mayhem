@@ -172,6 +172,18 @@ public class superliminal : MonoBehaviour
             target.localScale = tarScale;
         }
     }
+    public void Reset()
+    {
+        // Reactivate physics for the target object
+               
+                //targetObject.layer = 10;
+                targetObject = null;
+                offsetFactor = 0f;
+                //target.GetComponent<Rigidbody>().useGravity = true;
+ 
+                // Set our target variable to null
+                target = null;
+    }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
