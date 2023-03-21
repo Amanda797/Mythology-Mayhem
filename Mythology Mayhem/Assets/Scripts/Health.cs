@@ -51,6 +51,9 @@ public class Health : MonoBehaviour
     public void TakeDamage(float d) {
         anim.SetTrigger(hurtTrigger);
         health -= d;
+        if(GetHealth() <= 0) {
+            Death();
+        }
     }//end take damage
 
     public void Heal(float h) {

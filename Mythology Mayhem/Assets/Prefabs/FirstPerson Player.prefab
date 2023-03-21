@@ -154,13 +154,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 289352684015478271}
   speed: 12
-  jumpHeight: 3
+  jumpHeight: 8
   gravity: -19.62
   groundCheck: {fileID: 289352684733399164}
   groundDist: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
 --- !u!95 &2678473431274999517
 Animator:
   serializedVersion: 4
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a6122b90a659b47a105d1631ef11ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
+  mouseSensitivity: 500
   playerBody: {fileID: 289352684015478264}
 --- !u!114 &9074964230819901009
 MonoBehaviour:
@@ -364,7 +364,12 @@ MonoBehaviour:
   ignoreTargetMask:
     serializedVersion: 2
     m_Bits: 1015
+  ignorePlayerMask:
+    serializedVersion: 2
+    m_Bits: 2039
   offsetFactor: 0
+  scale: {x: 7, y: 15, z: 7}
+  key: 101
 --- !u!1 &2806696775519229835
 GameObject:
   m_ObjectHideFlags: 0

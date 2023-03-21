@@ -60,14 +60,17 @@ public class Attack3D : MonoBehaviour
                     {
                         print("We hit " + enemy.name);
                         Health health = enemy.GetComponent<Health>();
+                        enemySimpleAI enemyAI = enemy.GetComponent<enemySimpleAI>();
                         if(health != null)
                         {
+                            health.TakeDamage(damage);
                             if(health.GetHealth() > 0)
-                            {
-                                health.TakeDamage(damage);
+                            {  
+                                enemyAI.Hurt();
                             }
                             else
                             {
+                                //enemyAI.Die();
                                 health.Death();
                             }
                             isAttacking = false;
