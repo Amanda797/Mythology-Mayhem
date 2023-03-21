@@ -48,7 +48,8 @@ public class ScrollPopup : MonoBehaviour
                     ShowPopup();
                     //StopCoroutine(Hover());
                     isPopupActive = true;
-                    supriseObject.SetActive(true);
+                    if(supriseObject != null)
+                        supriseObject.SetActive(true);
                 }
             }
         }

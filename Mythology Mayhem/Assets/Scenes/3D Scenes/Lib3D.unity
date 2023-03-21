@@ -1197,6 +1197,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7196914d7be02248b264656e8613db0, type: 3}
+--- !u!1 &87501259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 289352684015478270, guid: b7196914d7be02248b264656e8613db0, type: 3}
+  m_PrefabInstance: {fileID: 87501258}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &87501260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87501259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc2f6dfe173051418c22e66e2c0c098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  health: 0
+  mainObject: {fileID: 0}
 --- !u!1001 &96108115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16543,36 +16563,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 528059659217594486, guid: 62d8d210e18aeaf4a8c17cc2b4aef496, type: 3}
   m_PrefabInstance: {fileID: 2003191406}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1599677163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599677158}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ff7823ca0b1a84d97cd2af6671854d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 2003191407}
-  walkingBool: 
-  runningBool: 
-  attackTrigger: 
-  patrolSpeed: 10
-  attackSpeed: 20
-  isIdle: 0
-  idleTimer: 0
-  idleDuration: 5
-  currAIState: 0
-  agent: {fileID: 0}
-  waypoints: []
-  waypointIndex: 0
-  target: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
-  attackDamage: 2
-  attackTimer: 0
-  attackDuration: 5
 --- !u!1001 &1605575786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21035,6 +21025,35 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 433305614770297106, guid: 62d8d210e18aeaf4a8c17cc2b4aef496, type: 3}
   m_PrefabInstance: {fileID: 2003191406}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2003191408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599677158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d1f3f5c683f8bf4eb0d1a3a532b3ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  attackRange: 10
+  attackDelay: 1
+  animator: {fileID: 2003191407}
+  hurtDelay: 0.3
+  health: {fileID: 2003191409}
+--- !u!114 &2003191409 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 527290172820061807, guid: 62d8d210e18aeaf4a8c17cc2b4aef496, type: 3}
+  m_PrefabInstance: {fileID: 2003191406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599677158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2029668398
 PrefabInstance:
   m_ObjectHideFlags: 0
