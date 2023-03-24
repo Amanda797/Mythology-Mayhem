@@ -92,6 +92,11 @@ public class Attack3D : MonoBehaviour
         isAttacking = false;
     }
 
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
+    }
+
     //use gizmos to draw a sphere to show the range of the attack
     void OnDrawGizmos()
     {
