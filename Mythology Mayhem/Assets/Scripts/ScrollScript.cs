@@ -37,9 +37,35 @@ public class ScrollScript : MonoBehaviour
         LoadText();
     }
 
+    void Update()
+    {
+        // if any player objects are in the overlap sphere of the scroll, open the scroll
+        // if any player objects are not in the overlap sphere of the scroll, close the scroll
+
+        Collider2D player = Physics2D.OverlapCircle(transform.position, 1f);
+        if(player != null) {
+            if(player.transform.tag == "Player") {
+                if(Vector2.Distance(player.transform.position, transform.position) < 1f) {
+                    OpenScroll();
+                }
+                else {
+                    CloseScroll();
+                }
+            }
+        }
+        else {
+            CloseScroll();
+        }
+        
+    }
+
     public void OpenScroll() {
         ScrollPanel.SetActive(true);
     }//end open scroll
+
+    public void CloseScroll() {
+        ScrollPanel.SetActive(false);
+    }//end close scroll
 
     void LoadText() {
         string txt = "";
@@ -54,16 +80,28 @@ public class ScrollScript : MonoBehaviour
         textLines = Regex.Split(textFile.text, "\n");
     }//end parse text
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.transform.tag == "Player") {
-            OpenScroll();
-        }
-    }//end on collision enter 2d
+    // private void OnTriggerEnter2D(Collision2D other) {
+    //     if(other.transform.tag == "Player") {
+    //         OpenScroll();
+    //     }
+    // }//end on collision enter 2d
 
-    private void OnCollisionEnter(Collision other) {
-        if(other.transform.tag == "Player") {
-            OpenScroll();
-        }
-    }//end on collision enter
+    // private void OnTriggerEnter(Collision other) {
+    //     if(other.transform.tag == "Player") {
+    //         OpenScroll();
+    //     }
+    // }//end on collision enter
+
+    // private void OnTriggerExit2D(Collision2D other) {
+    //     if(other.transform.tag == "Player") {
+    //         CloseScroll();
+    //     }
+    // }//end on collision exit 2d
+
+    // private void OnTriggerExit(Collision other) {
+    //     if(other.transform.tag == "Player") {
+    //         CloseScroll();
+    //     }
+    // }//end on collision exit
 
 }
