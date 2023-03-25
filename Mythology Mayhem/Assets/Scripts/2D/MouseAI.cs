@@ -47,6 +47,10 @@ public class MouseAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (attackTarget == null) 
+        {
+            attackTarget = GameObject.FindWithTag("Player");
+        }
         if (!dead)
         {
             previousPosition = currentPosition;
