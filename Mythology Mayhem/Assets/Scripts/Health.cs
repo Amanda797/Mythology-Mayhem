@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -9,6 +11,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private Behaviour[] components;
     [SerializeField] private GameObject mainObject; // Parent Self
+    public GameObject rewardObject; // Reward Object
 
     [Header("Animation")]
     [SerializeField] private Animator anim;
@@ -69,7 +72,8 @@ public class Health : MonoBehaviour
             //    component.enabled = false;
             //}
             //or this??
-            Destroy(mainObject, 3f);
+
+            StartCoroutine(DeathTimer(3f));
         }//check that health is really less than 0 when called        
     }//end death
 
@@ -81,8 +85,22 @@ public class Health : MonoBehaviour
             //    component.enabled = false;
             //}
             //or this??
-            Destroy(mainObject, time);
+            StartCoroutine(DeathTimer(time));
         }//check that health is really less than 0 when called        
     }//end death
+
+
+    public IEnumerator DeathTimer(float time) {
+        yield return new WaitForSeconds(time);
+        if(rewardObject != null)
+        {
+
+            GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);
+            reward.name = rewardObject.name;
+        }
+
+        Destroy(mainObject);
+    }//end death timer
+    
 
 }//end health class
