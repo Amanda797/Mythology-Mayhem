@@ -10,13 +10,17 @@ public class GemDoor : MonoBehaviour
     public float distance;
     superliminal superliminal;
     public Transform gemPlacement;
+    Collider col;
 
     GameObject gem;
+
+    bool doorOpen = false;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         superliminal = Camera.main.GetComponent<superliminal>();
+        col = GetComponent<Collider>();
     }
 
     bool ObjClose(GameObject obj, float distance)
@@ -58,7 +62,8 @@ public class GemDoor : MonoBehaviour
             {
                 //print("Gem is close enough");
                 //gem.transform.localScale = new Vector3(gemScale, gemScale, gemScale);
-                OpenDoor(gem.name, gem.transform);
+                if(!doorOpen)
+                    OpenDoor(gem.name, gem.transform);
             }
         }
         
@@ -73,6 +78,8 @@ public class GemDoor : MonoBehaviour
             this.gem = gemT.gameObject;
             gemT.gameObject.layer = 0;
             gemT.GetComponent<Rigidbody>().isKinematic = true;
+            col.enabled = false;
+            doorOpen = true;
         }
     }
 }
