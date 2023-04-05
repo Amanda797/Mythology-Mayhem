@@ -7,6 +7,9 @@ public class TwoDLever : MonoBehaviour
 {
     [SerializeField] private Animator leverAnim;
     [SerializeField] private Animator doorAnim;
+    [SerializeField] private DoorCode door;
+
+    private bool canOpen = false;
 
     public bool entered = false;
     // Start is called before the first frame update
@@ -18,7 +21,7 @@ public class TwoDLever : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (entered)
+        if (entered && canOpen)
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
@@ -47,5 +50,11 @@ public class TwoDLever : MonoBehaviour
     private void Opendoor()
     {
         doorAnim.SetTrigger("Open");
+        door.OpenDoor();
+    }
+    public void SetCanOpen(bool open) {
+        {
+            canOpen = open;
+        }
     }
 }
