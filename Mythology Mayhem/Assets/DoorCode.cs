@@ -6,10 +6,8 @@ using UnityEngine.SceneManagement;
 public class DoorCode : MonoBehaviour
 {
     [SerializeField] private string nextLevel = "Library 3D 2";
-    [SerializeField] private TwoDLever lever;
     public bool entered = false;
     public bool blocked = true;
-    private bool doorOpen = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +17,7 @@ public class DoorCode : MonoBehaviour
     // Update is called once per frame
    void Update()
     {
-        if (entered && !blocked && doorOpen)
+        if (entered && !blocked)
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
@@ -34,11 +32,6 @@ public class DoorCode : MonoBehaviour
         {
             entered = true;
         }
-        if (other.tag == "PushBlock")
-        {
-            blocked = true;
-            lever.SetCanOpen(false);
-        }
     }
 
     private void OnTriggerExit2D(Collider2D other) 
@@ -50,15 +43,10 @@ public class DoorCode : MonoBehaviour
         if (other.tag == "PushBlock")
         {
             blocked = false;
-            lever.SetCanOpen(true);
         }
     }
     public void LoadNextScene()
     {
         SceneManager.LoadScene(nextLevel);
-    }
-    public void OpenDoor()
-    {
-        doorOpen = true;
     }
 }
