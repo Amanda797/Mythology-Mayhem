@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -126,6 +127,8 @@ public class PlayerStats : MonoBehaviour
         GetComponent<KnockBackFeedback>().enabled = false;
         GetComponent<PlayerController>().enabled = false;
         this.enabled = false;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnDrawGizmosSelected()
