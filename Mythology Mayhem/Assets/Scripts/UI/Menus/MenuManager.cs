@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
         [SerializeField] int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings)     
-        [SerializeField] UILevelIcon levelIcon;
+        //[SerializeField] UILevelIcon levelIcon;
         string website = "https://www.google.com/search?q=mythology-mayhem";
 
         [SerializeField] GameObject[] menuPanels;
@@ -26,12 +26,13 @@ public class MenuManager : MonoBehaviour
             }
         }     
 
-        print(SceneManager.GetActiveScene().buildIndex);
+        //print(SceneManager.GetActiveScene().buildIndex);
 
-        switch(SceneManager.GetActiveScene().buildIndex) {
+        // Level Icon
+        /* switch(SceneManager.GetActiveScene().buildIndex) {
             case 0: break;
             default: levelIcon.ChangeIcon(SceneManager.GetActiveScene().buildIndex); break;
-        }
+        } */
         
 
         VolumeSaveSlider vss = GetComponent<VolumeSaveSlider>();
