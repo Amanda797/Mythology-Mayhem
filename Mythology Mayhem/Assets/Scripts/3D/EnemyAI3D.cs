@@ -208,5 +208,6 @@ public class EnemyAI3D : MonoBehaviour
             UpdateDestination();
         }
     }//end on trigger exit
+    
 
 }
