@@ -177,12 +177,13 @@ public class superliminal : MonoBehaviour
         // Reactivate physics for the target object
                
                 //targetObject.layer = 10;
+                target = null;
                 targetObject = null;
                 offsetFactor = 0f;
                 //target.GetComponent<Rigidbody>().useGravity = true;
  
                 // Set our target variable to null
-                target = null;
+                
     }
     void OnDrawGizmos()
     {
