@@ -47,6 +47,9 @@ public class PlayerHeartState : MonoBehaviour
     //Methods
 
     void Awake() {
+        //ps = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        ps = FindObjectOfType<PlayerStats>();
+
         PlayerCurrHealth = PlayerMaxHealth;
         PlayerMaxHealth = PlayerMaxHealth;
     }//end awake

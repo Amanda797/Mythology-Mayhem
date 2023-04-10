@@ -37,6 +37,8 @@ public class PlayerStats : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         NextAttackTime = 0f;
 
+        phs = FindObjectOfType<PlayerHeartState>();
+
         phs.PlayerCurrHealth = CurrHealth;
         phs.PlayerMaxHealth = MaxHealth;
     }
