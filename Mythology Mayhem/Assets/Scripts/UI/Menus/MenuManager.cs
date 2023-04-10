@@ -26,15 +26,6 @@ public class MenuManager : MonoBehaviour
             }
         }     
 
-        //print(SceneManager.GetActiveScene().buildIndex);
-
-        // Level Icon
-        /* switch(SceneManager.GetActiveScene().buildIndex) {
-            case 0: break;
-            default: levelIcon.ChangeIcon(SceneManager.GetActiveScene().buildIndex); break;
-        } */
-        
-
         VolumeSaveSlider vss = GetComponent<VolumeSaveSlider>();
         vss.LoadVolume();
     }//end awake
@@ -72,20 +63,6 @@ public class MenuManager : MonoBehaviour
             if(pausePanelElement != -1)
                 menuPanels[pausePanelElement].SetActive(false);
         }
-
-        // Deprecated Version, keeping for reference...
-        /*
-        optionsPanelActive = !optionsPanelActive;
-        optionsPanel.SetActive(optionsPanelActive);
-
-        if(optionsPanelActive) {
-            pausePanelActive = false;
-            pausePanel.SetActive(pausePanelActive);
-        } else {
-            pausePanelActive = true;
-            pausePanel.SetActive(pausePanelActive);
-        }
-        */
 
     }// end toggle options
 
