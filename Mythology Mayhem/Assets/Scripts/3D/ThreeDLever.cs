@@ -8,11 +8,13 @@ public class ThreeDLever : MonoBehaviour
     [SerializeField] private string nextLevel = "Library 3D";
     [SerializeField] private BoxCollider trigger;
     public bool entered = false;
+
+    ChangeNextSpawn CNS;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        CNS = GetComponent<ChangeNextSpawn>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class ThreeDLever : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
+                CNS.NextSpawn(2);
                 LoadNextScene();
             }
         }
