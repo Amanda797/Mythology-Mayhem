@@ -29,6 +29,9 @@ public class MouseAI : MonoBehaviour
     private Vector2 currentPosition;
     private Vector2 previousPosition;
 
+    private AudioSource aud;
+    [SerializeField] private AudioClip mouseHurt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,7 @@ public class MouseAI : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         movingLeft = sr.flipX;
         currentPosition = transform.position;
+        aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -114,5 +118,9 @@ public class MouseAI : MonoBehaviour
         {
             idle = false;
         }
+    }
+    public void PlayMouseHurt()
+    {
+        aud.Play();
     }
 }
