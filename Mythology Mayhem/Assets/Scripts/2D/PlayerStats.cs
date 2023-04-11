@@ -42,6 +42,7 @@ public class PlayerStats : MonoBehaviour
 
         phs.PlayerCurrHealth = CurrHealth;
         phs.PlayerMaxHealth = MaxHealth;
+        aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
