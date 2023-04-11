@@ -23,7 +23,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Animator anim;
 
     private SpriteRenderer sr;
-    private bool flipped = false;    
+    private bool flipped = false;
+    private AudioSource aud;    
 
     // Start is called before the first frame update
     void Awake()
@@ -41,6 +42,7 @@ public class PlayerStats : MonoBehaviour
 
         phs.PlayerCurrHealth = CurrHealth;
         phs.PlayerMaxHealth = MaxHealth;
+        aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -140,5 +142,8 @@ public class PlayerStats : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
+    public void PlaySwordSwing()
+    {
+        aud.Play();
+    }
 }
