@@ -114,7 +114,7 @@ public class PlayerStats : MonoBehaviour
             phs.PlayerCurrHealth = CurrHealth;
         }
 
-        anim.SetTrigger("Hurt");
+        
 
         if(CurrHealth >= MaxHealth)
         {
