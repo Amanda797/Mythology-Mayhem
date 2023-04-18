@@ -20,9 +20,7 @@ public class ScrollScript : MonoBehaviour
     [SerializeField] GameObject ScrollPanel;
     [SerializeField] TextMeshProUGUI textUI;
     [SerializeField] string text;
-    //to parse sections of scrolls
-    //[SerializeField] int[] sections;
-    //[SerializeField] int section;
+    bool scrollOpen;
 
     // --------------------------
     // ***METHODS***
@@ -33,37 +31,31 @@ public class ScrollScript : MonoBehaviour
     {
         textUI.text = "";
         LoadText();
+        scrollOpen = false;
     }
 
     void Update()
     {
-        // if any player objects are in the overlap sphere of the scroll, open the scroll
-        // if any player objects are not in the overlap sphere of the scroll, close the scroll
+        Collider2D player = Physics2D.OverlapCircle(transform.position, 5f, 3);         
+    }//end update
 
-        Collider2D player = Physics2D.OverlapCircle(transform.position, 1f);
-        if(player != null) {
-            if(player.transform.tag == "Player") {
-                if(Vector2.Distance(player.transform.position, transform.position) < 1f) {
-                    OpenScroll();
-                }
-                else {
-                    CloseScroll();
-                }
+    void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.tag == "Player") {
+            if(Input.GetKeyDown(KeyCode.E)) {
+                ToggleScroll();
+                print("Scroll Toggled");
             }
-        }
-        else {
-            CloseScroll();
-        }
-        
-    }
+        }       
+    }//end on trigger 2d
 
-    public void OpenScroll() {
-        ScrollPanel.SetActive(true);
-    }//end open scroll
-
-    public void CloseScroll() {
-        ScrollPanel.SetActive(false);
-    }//end close scroll
+    public void ToggleScroll() {
+        scrollOpen = !scrollOpen;
+        if(scrollOpen) {
+            ScrollPanel.SetActive(true);
+        } else {
+            ScrollPanel.SetActive(false);
+        }
+    }//end toggle scroll
 
     void LoadText() {
         textUI.text = text;
