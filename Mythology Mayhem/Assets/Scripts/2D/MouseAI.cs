@@ -29,8 +29,9 @@ public class MouseAI : MonoBehaviour
     private Vector2 currentPosition;
     private Vector2 previousPosition;
 
+    [SerializeField] private bool isFlying = false;
+
     private AudioSource aud;
-    [SerializeField] private AudioClip mouseHurt;
 
     // Start is called before the first frame update
     void Start()
@@ -119,8 +120,12 @@ public class MouseAI : MonoBehaviour
             idle = false;
         }
     }
-    public void PlayMouseHurt()
+    public void PlayHurt()
     {
         aud.Play();
+    }
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
     }
 }
