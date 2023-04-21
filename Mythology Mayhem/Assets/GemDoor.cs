@@ -19,7 +19,7 @@ public class GemDoor : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        superliminal = Camera.main.GetComponent<superliminal>();
+        //superliminal = Camera.main.GetComponent<superliminal>();
         col = GetComponent<Collider>();
     }
 
@@ -47,6 +47,8 @@ public class GemDoor : MonoBehaviour
 
     void Update()
     {
+        if(superliminal == null)
+            superliminal = Camera.main.GetComponent<superliminal>();
         if(gem != null)
         {
             gem.transform.position = gemPlacement.position;

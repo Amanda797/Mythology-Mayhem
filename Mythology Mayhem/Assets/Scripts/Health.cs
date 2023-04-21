@@ -99,7 +99,7 @@ public class Health : MonoBehaviour
             reward.name = rewardObject.name;
         }
 
-        Destroy(mainObject);
+        mainObject.SetActive(false);
     }//end death timer
     
 
