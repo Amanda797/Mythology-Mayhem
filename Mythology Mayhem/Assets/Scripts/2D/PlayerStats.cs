@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange = 1f;
+    [SerializeField] private float attackHeight = 3f;
     [SerializeField] private LayerMask enemyLayers;
 
     [Header("Player Stats")]
@@ -81,7 +82,7 @@ public class PlayerStats : MonoBehaviour
     {
         anim.SetTrigger("Attack");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(attackRange, attackRange+attackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
@@ -140,7 +141,11 @@ public class PlayerStats : MonoBehaviour
         if (attackPoint == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange/2);
+        Vector3 heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y + attackHeight/2, attackPoint.position.z);
+        Gizmos.DrawWireSphere(heightPoint, attackRange/2);
+        heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y - attackHeight/2, attackPoint.position.z);
+        Gizmos.DrawWireSphere(heightPoint, attackRange/2);
     }
     public void PlaySwordSwing()
     {
