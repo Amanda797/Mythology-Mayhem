@@ -8,6 +8,8 @@ public class VisionControl : MonoBehaviour
     public KeyCode key;
     public GameObject vision;
     public float time;
+
+    public GameObject gem;
     float timer;
     GameObject[] objs;
     List<GameObject> gems = new List<GameObject>();
@@ -19,6 +21,7 @@ public class VisionControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gem.SetActive(false);
         vision.SetActive(false);
         instance = this;
         objs = GameObject.FindGameObjectsWithTag("Outline");
@@ -86,8 +89,10 @@ public class VisionControl : MonoBehaviour
         {
             sl.isReady = true;
             vision.SetActive(true);
+            gem.SetActive(true);
+            LeanTween.moveLocalY(gem, gem.transform.localPosition.y, gem.transform.localPosition.y + 0.5f).setEasePunch();
         }
-        if(Input.GetKey(sl.key))
+        if(Input.GetKey(sl.key) && sl.isReady)
         {
             timer += Time.deltaTime;
             if(timer >= time)
@@ -97,6 +102,7 @@ public class VisionControl : MonoBehaviour
                 //sl.Reset();
                 sl.CheckForObjects();
                 vision.SetActive(false);
+                gem.SetActive(false);
             }
         }
         if(Input.GetKeyUp(sl.key))
