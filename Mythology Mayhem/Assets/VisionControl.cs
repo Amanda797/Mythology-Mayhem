@@ -90,7 +90,7 @@ public class VisionControl : MonoBehaviour
             sl.isReady = true;
             vision.SetActive(true);
             gem.SetActive(true);
-            LeanTween.moveLocalY(gem, gem.transform.localPosition.y, gem.transform.localPosition.y + 0.5f).setEasePunch();
+            LeanTween.moveLocalY(gem, gem.transform.localPosition.y, gem.transform.localPosition.y + 5f).setEasePunch();
         }
         if(Input.GetKey(sl.key) && sl.isReady)
         {
