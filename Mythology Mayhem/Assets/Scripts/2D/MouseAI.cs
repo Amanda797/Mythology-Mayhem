@@ -77,7 +77,8 @@ public class MouseAI : MonoBehaviour
     {
         mouseAnim.SetBool("IsPatrolling", true);
         transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
-        if (transform.position.x == waypoints[waypointIndex].transform.position.x)
+        Vector3 distance = new Vector3(transform.position.x - waypoints[waypointIndex].transform.position.x, transform.position.y - waypoints[waypointIndex].transform.position.y, transform.position.z - waypoints[waypointIndex].transform.position.z);
+        if (Mathf.Abs(distance.x) < .3)
         {
             waypointIndex += 1;
             idle = true;
