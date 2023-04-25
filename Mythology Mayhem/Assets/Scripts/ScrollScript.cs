@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.IO;
 using System.Text.RegularExpressions;
+using UnityEngine.UI;
 
 public class ScrollScript : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class ScrollScript : MonoBehaviour
     [SerializeField] GameObject ScrollPanel;
     [SerializeField] TextMeshProUGUI textUI;
     [SerializeField] string text;
+    [SerializeField] Image pressEText;
     bool keyTriggered;
     float keyCooldown;
 
@@ -31,7 +33,7 @@ public class ScrollScript : MonoBehaviour
     void Start()
     {
         textUI.text = "";
-        LoadText();
+        print(gameObject.name + ": " + text);
         keyTriggered = false;
         keyCooldown = 1f;
     }//end start
@@ -56,10 +58,17 @@ public class ScrollScript : MonoBehaviour
     }//end update
 
     void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag == "Player") {
-            if(keyTriggered) {
+        if(other.gameObject.tag == "Player") {        
+            //enable tooltip for scroll interaction
+            if(pressEText != null) {
+                pressEText.transform.gameObject.SetActive(true);
+            }
+
+            if(keyTriggered && !ScrollPanel.activeSelf) {
                 OpenScroll();
-                print("Scroll Opened");
+                keyTriggered = false;
+            } else if(keyTriggered && ScrollPanel.activeSelf) {
+                CloseScroll();
                 keyTriggered = false;
             }
         }       
@@ -69,9 +78,15 @@ public class ScrollScript : MonoBehaviour
         if(other.gameObject.tag == "Player") {
             CloseScroll();
         }   
+        
+        // Destroy "Press E" tooltip
+        if(GameObject.Find("PressE_Text") is var result && result != null) {
+            Destroy(result);
+        }
     }//end on collision exit 2d
 
-    public void OpenScroll() {
+    public void OpenScroll() {        
+        LoadText();
         ScrollPanel.SetActive(true);
     }//end open scroll
 
@@ -80,7 +95,7 @@ public class ScrollScript : MonoBehaviour
     }//end close scroll
 
     void LoadText() {
-        textUI.text = text;
+        textUI.text = this.text;
     }//end load text
 
 }
