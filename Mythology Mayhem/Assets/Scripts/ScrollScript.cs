@@ -20,7 +20,8 @@ public class ScrollScript : MonoBehaviour
     [SerializeField] GameObject ScrollPanel;
     [SerializeField] TextMeshProUGUI textUI;
     [SerializeField] string text;
-    bool scrollOpen;
+    bool keyTriggered;
+    float keyCooldown;
 
     // --------------------------
     // ***METHODS***
@@ -31,31 +32,52 @@ public class ScrollScript : MonoBehaviour
     {
         textUI.text = "";
         LoadText();
-        scrollOpen = false;
-    }
+        keyTriggered = false;
+        keyCooldown = 1f;
+    }//end start
 
     void Update()
     {
-        Collider2D player = Physics2D.OverlapCircle(transform.position, 5f, 3);         
+        Collider2D player = Physics2D.OverlapCircle(transform.position, 5f, 3);   
+
+        // Listen for key press and mark as received
+        if(Input.GetKeyDown(KeyCode.E)) {
+            keyTriggered = true;
+        }
+        // Begin countdown for key activation period
+        if(keyTriggered) {
+            keyCooldown -= 1 * Time.deltaTime;
+        }
+        // Reset key activation and cooldown
+        if(keyCooldown <= 0) {
+            keyTriggered = false;
+            keyCooldown = 1f;
+        }
     }//end update
 
     void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == "Player") {
-            if(Input.GetKeyDown(KeyCode.E)) {
-                ToggleScroll();
-                print("Scroll Toggled");
+            if(keyTriggered) {
+                OpenScroll();
+                print("Scroll Opened");
+                keyTriggered = false;
             }
         }       
-    }//end on trigger 2d
+    }//end on collision stay 2d
 
-    public void ToggleScroll() {
-        scrollOpen = !scrollOpen;
-        if(scrollOpen) {
-            ScrollPanel.SetActive(true);
-        } else {
-            ScrollPanel.SetActive(false);
-        }
-    }//end toggle scroll
+    void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.tag == "Player") {
+            CloseScroll();
+        }   
+    }//end on collision exit 2d
+
+    public void OpenScroll() {
+        ScrollPanel.SetActive(true);
+    }//end open scroll
+
+    public void CloseScroll() {
+        ScrollPanel.SetActive(false);
+    }//end close scroll
 
     void LoadText() {
         textUI.text = text;
