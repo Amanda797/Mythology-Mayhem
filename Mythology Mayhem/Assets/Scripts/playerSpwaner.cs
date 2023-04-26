@@ -33,7 +33,13 @@ public class playerSpwaner : MonoBehaviour
             playerIndex = PlayerPrefs.GetInt("playerIndex");
         }
 
-        Instantiate(PlayerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,Quaternion.identity);
+        if(spwanPointIndex >= spwanPoints.Count)
+        {
+            spwanPointIndex = 0;
+            PlayerPrefs.SetInt("spwanPointIndex", spwanPointIndex);
+        }
+
+        Instantiate(PlayerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
 
 
     }
@@ -42,6 +48,28 @@ public class playerSpwaner : MonoBehaviour
     void Update()
     {
         
+    }
+}
+
+//Make custom button to reset spwan point index
+[CustomEditor(typeof(playerSpwaner))]
+public class playerSpwanerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        playerSpwaner myScript = (playerSpwaner)target;
+        if(GUILayout.Button("Reset Spwan Point Index"))
+        {
+            PlayerPrefs.SetInt("spwanPointIndex", 0);
+        }
+
+        //Make custom button to reset player prefs
+        if(GUILayout.Button("Reset PlayerPrefs"))
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 }
 
