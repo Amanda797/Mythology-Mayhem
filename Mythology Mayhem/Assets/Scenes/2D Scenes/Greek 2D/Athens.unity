@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099982, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 99.5158
+      value: 56.2
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099982, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1695,6 +1695,7 @@ GameObject:
   - component: {fileID: 272016246}
   - component: {fileID: 272016245}
   - component: {fileID: 272016248}
+  - component: {fileID: 272016249}
   m_Layer: 0
   m_Name: Fountain
   m_TagString: Untagged
@@ -1764,7 +1765,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 40
   m_Sprite: {fileID: 21300000, guid: a6eaaeaee2502c149b9469c54a8b7d73, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7783019, g: 1, b: 0.82274806, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1801,6 +1802,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e27d5aa1270e945b0df3d6be1889c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &272016249
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272016244}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.31, y: 4.3}
+    newSize: {x: 4.31, y: 4.3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4}
+  m_EdgeRadius: 0
 --- !u!1 &298352416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2477,7 +2504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 537872657098742640, guid: f8fe99a957387cb47b58cb67bb5b77d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1e-45
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 537872657098742640, guid: f8fe99a957387cb47b58cb67bb5b77d1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2493,7 +2520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 537872657209584496, guid: f8fe99a957387cb47b58cb67bb5b77d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 537872657209584496, guid: f8fe99a957387cb47b58cb67bb5b77d1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3254,7 +3281,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollPanel: {fileID: 1743067960}
   textUI: {fileID: 334807558}
-  text: 
+  text: Dolon,<br><br>  The yields of our farms have taken a hit this year. The priests
+    tell us that we must have somehow angered Demeter in some way. I do not believe
+    that our normal sacrifice will not do for this year.<br> Tell Hylas to fetch
+    some men together and go search for a boar. It must be alive. If the fool kills
+    the boar, tell him to find another and bring it back in one piece.
   pressEText: {fileID: 0}
 --- !u!1 &498045675
 GameObject:
