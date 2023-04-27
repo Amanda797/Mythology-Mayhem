@@ -9,7 +9,7 @@ public class DoorCode : MonoBehaviour
     [SerializeField] private TwoDLever lever;
     public bool entered = false;
     public bool blocked = true;
-    private bool doorOpen = false;
+    public bool doorOpen = false;
     // Start is called before the first frame update
     void Start()
     {

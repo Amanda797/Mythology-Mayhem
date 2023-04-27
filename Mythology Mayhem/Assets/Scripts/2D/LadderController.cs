@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LadderController : MonoBehaviour
 {
-    [SerializeField] private GameObject floor;
+    [SerializeField] private GameObject floor1;
+    [SerializeField] private GameObject floor2;
     [SerializeField] private GameObject ladder1;
     [SerializeField] private GameObject ladder2;
 
@@ -13,11 +14,13 @@ public class LadderController : MonoBehaviour
     {
         if (ladder1.GetComponent<Ladder>().entered || ladder2.GetComponent<Ladder>().entered)
         {
-            floor.GetComponent<Collider2D>().enabled = false;
+            floor1.GetComponent<Collider2D>().enabled = false;
+            floor2.GetComponent<Collider2D>().enabled = false;
         }
         else
         {
-            floor.GetComponent<Collider2D>().enabled = true;
+            floor1.GetComponent<Collider2D>().enabled = true;
+            floor2.GetComponent<Collider2D>().enabled = true;
         }
     }
 }
