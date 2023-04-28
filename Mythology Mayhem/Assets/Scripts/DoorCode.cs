@@ -55,7 +55,7 @@ public class DoorCode : MonoBehaviour
     }
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
     }
     public void OpenDoor()
     {

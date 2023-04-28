@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     ChangeNextSpawn changeNextSpawnPoint;
+    public SaveScene SaveScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class DoorTrigger : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             changeNextSpawnPoint.NextSpawn(1);
+            SaveScene.Save();
         }
     }
     void OnTriggerStay2D(Collider2D other)
@@ -23,6 +25,7 @@ public class DoorTrigger : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             changeNextSpawnPoint.NextSpawn(1);
+            //SaveScene.Save();
         }
     }
 }
