@@ -6,6 +6,7 @@ public class enemyDeath : MonoBehaviour
 {
     void OnDisable()
     {
+        if(VisionControl.instance != null)
         VisionControl.RemoveEnemy(gameObject);
     }
 }
