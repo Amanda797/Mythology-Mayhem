@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement")]
     [SerializeField] private float walkSpeed = 200f;
     [SerializeField] private float runSpeed = 300f;
+    [SerializeField] private float jumpAmount = 9f;
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     public bool climbing = false;
     public bool ladderEntered = false;
+    public bool grounded = false;
+    
     [SerializeField] private GameObject pushBlock;
     public bool pushing = false;
     public bool canPush = false;
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetBool("IsGrounded", grounded);
         GetInput();
         if (ladderEntered)
         {
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
         if(canPush || pushing)
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
+            if (Input.GetKeyDown(KeyCode.E) && grounded) 
             {
                 Debug.Log("Test");
                 if (!pushing)
@@ -87,6 +91,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             anim.speed = 1;
+        }
+        // Jump code
+        if (!ladderEntered && !pushing && grounded) 
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb2d.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+                anim.SetTrigger("Jump");
+            }
         }
     }
 
@@ -137,6 +150,10 @@ public class PlayerController : MonoBehaviour
             if(!pushing)
             pushBlock = other.gameObject;
         }
+        if (other.collider.tag == "Ground")
+        {
+            grounded = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other) 
@@ -146,6 +163,10 @@ public class PlayerController : MonoBehaviour
             canPush = false;
             if (!pushing) 
                 pushBlock = null;
+        }
+        if (other.collider.tag == "Ground")
+        {
+            grounded = false;
         }
     }
 

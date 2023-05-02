@@ -35,9 +35,7 @@ public class TwoDLever : MonoBehaviour
         if (other.gameObject.layer == 3) 
         {
             entered = true;
-            door.OpenDoor();
         }
-        
     }
 
     private void OnTriggerExit2D(Collider2D other) 
@@ -50,6 +48,7 @@ public class TwoDLever : MonoBehaviour
     }
     private void Opendoor()
     {
+        //This method is called from the Lever's Animation so don't put door.OpenDoor() anywhere else or it breaks
         doorAnim.SetTrigger("Open");
         door.OpenDoor();
     }
