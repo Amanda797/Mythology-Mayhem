@@ -8,12 +8,14 @@ public class PuzzlePiece : MonoBehaviour
     public PuzzlePed ped;
     Rigidbody2D rb;
     Collider2D col;
+    SaveScene saveScene;
     // Start is called before the first frame update
     void Start()
     {
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         PuzzlePed[] peds = FindObjectsOfType<PuzzlePed>();
+        saveScene = FindObjectOfType<SaveScene>();
         foreach (PuzzlePed p in peds)
         {
             if (p.key == piece.key)
@@ -42,10 +44,11 @@ public class PuzzlePiece : MonoBehaviour
         if(ped != null)
         {
             //print(Vector3.Distance(transform.position, ped.target.position));
-            if (Vector3.Distance(transform.position, ped.target.position) < ped.snapDistance)
+            if (Vector3.Distance(transform.position, ped.target.position) < ped.snapDistance && !piece.inPlace)
             {
                 transform.position = ped.target.position;
                 piece.inPlace = true;
+                saveScene.Save();
             }
         }
     }

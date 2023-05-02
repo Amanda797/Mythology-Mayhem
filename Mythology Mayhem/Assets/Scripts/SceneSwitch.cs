@@ -41,7 +41,6 @@ public class SceneSwitch : MonoBehaviour
 
                     PlayerPrefs.SetString("TranstionItem", itemSlot.item.name);
                     //print(PlayerPrefs.GetString("TranstionItem"));
-                    saveScene.Save();
 
                     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);  
                 }

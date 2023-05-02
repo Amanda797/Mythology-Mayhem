@@ -108,7 +108,7 @@ public class SaveScene : MonoBehaviour
     void OnDestroy()
     {
         saving = false;
-        //this.SaveNow();
+        this.SaveNow();
     }
 
     public void Save()

@@ -43,7 +43,7 @@ public class ItemSpawn : MonoBehaviour
                     {
                         
                         spawnedItems.Add(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity));
-                        //SaveScene.AddObject(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity),item.item);
+                        SaveScene.AddObject(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity),item.item);
                         PlayerPrefs.DeleteKey("TranstionItem");
                         
 
