@@ -28,7 +28,10 @@ public class itemSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Save();
+        }
 
         if(Input.GetKeyDown(key))
         {

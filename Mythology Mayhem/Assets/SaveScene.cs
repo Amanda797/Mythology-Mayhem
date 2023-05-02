@@ -14,7 +14,9 @@ public class SaveScene : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if(LoadScene) Load();
         //Save();
+        //if(LoadScene) Load();
         
         if(instance == null)
         {
@@ -30,15 +32,16 @@ public class SaveScene : MonoBehaviour
             item.gameObject = Instantiate(item.prefab, item.position, Quaternion.identity);
                 
         }
-        if(LoadScene) Load();
+        
         saving = true;
 
-        print("Loaded Game");
+        //print("Loaded Game");
 
         
     }
     void Start()
     {
+        
         // foreach (var item in sceneObjects.spawnedObjs)
         // {
         //     // instantiate the object and set the position and the active state
@@ -52,14 +55,18 @@ public class SaveScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if(Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.LeftBracket))
         {
             Load();
+        }
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            Save();
         }
         if(saving)
         {
@@ -67,6 +74,7 @@ public class SaveScene : MonoBehaviour
         {
             if(item.gameObject != null)
             {
+                item.name = item.gameObject.name;
                 item.position = item.gameObject.transform.position;
                 item.scale = item.gameObject.transform.localScale;
                 item.isEnabled = item.gameObject.activeSelf;
@@ -82,6 +90,7 @@ public class SaveScene : MonoBehaviour
         {
             if(item.gameObject != null)
             {
+                item.name = item.gameObject.name;
                 item.position = item.gameObject.transform.position;
                 item.scale = item.gameObject.transform.localScale;
                 item.isEnabled = item.gameObject.activeSelf;
@@ -110,6 +119,7 @@ public class SaveScene : MonoBehaviour
 
     void SaveNow()
     {
+        
         //Save the scene name by writing it in a string variable
         //write each object in the list if it null or not and the position of the object
         
@@ -125,7 +135,7 @@ public class SaveScene : MonoBehaviour
         UnityEditor.AssetDatabase.Refresh();
 
     }
-    void Load()
+    public void Load()
     {
         //Load the scene name by reading it from a string variable
         //read each object in the list if it null or not and the position of the object
@@ -154,6 +164,15 @@ public class SaveScene : MonoBehaviour
             else
             {
                 //Destroy(item.gameObject);
+                // find gameobject by name
+                GameObject obj = GameObject.Find(item.name);
+                if(obj != null)
+                {
+                    item.gameObject = obj;
+                    obj.transform.position = item.position;
+                    obj.transform.localScale = item.scale;
+                    obj.SetActive(item.isEnabled);
+                }
             }
             
         }
@@ -168,6 +187,14 @@ public class SaveScene : MonoBehaviour
             else
             {
                 //Destroy(item.gameObject);
+                GameObject obj = GameObject.Find(item.name);
+                if(obj != null)
+                {
+                    item.gameObject = obj;
+                    obj.transform.position = item.position;
+                    obj.transform.localScale = item.scale;
+                    obj.SetActive(item.isEnabled);
+                }
             }
             
         }
@@ -191,16 +218,18 @@ public class SceneObjects
 [System.Serializable]
 public class SceneObject
 {
+    [HideInInspector]
+    public string name;
     public GameObject gameObject;
     [HideInInspector]
     public GameObject prefab;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 position;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 scale;
     [HideInInspector]
     public bool isNull;
-    [HideInInspector]
+    //[HideInInspector]
     public bool isEnabled;
     public SceneObject(GameObject gameObject, Vector3 position, GameObject prefab = null)
     {
