@@ -30,6 +30,8 @@ public class SaveScene : MonoBehaviour
         {
             // instantiate the object and set the position and the active state
             item.gameObject = Instantiate(item.prefab, item.position, Quaternion.identity);
+            item.gameObject.name = item.prefab.name;
+            item.gameObject.transform.localScale = item.scale;
                 
         }
         
@@ -125,7 +127,7 @@ public class SaveScene : MonoBehaviour
         
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         
-        string sceneObjectsString = JsonUtility.ToJson(sceneObjects);
+        string sceneObjectsString = JsonUtility.ToJson(sceneObjects, true);
         print(sceneObjectsString);
         //PlayerPrefs.SetString(sceneName, sceneObjectsString);
 
