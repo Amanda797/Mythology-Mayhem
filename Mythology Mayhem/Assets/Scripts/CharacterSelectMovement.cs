@@ -33,7 +33,7 @@ public class CharacterSelectMovement : MonoBehaviour
     }//end update
 
     void ChangeAnimation() {
-        if(animIndex < animations.Length - 1) {
+        if(animIndex < animations.Length) {
             animIndex++;
         } else {
             animIndex = 0;
