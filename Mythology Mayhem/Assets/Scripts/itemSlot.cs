@@ -10,15 +10,17 @@ public class itemSlot : MonoBehaviour
     public Image icon;
     public Transform player;
     bool SaveItem = true;
+    public bool LoadItem;
     // Start is called before the first frame update
     void Start()
     {
-        if(PlayerPrefs.HasKey("itemSlot"))
+        if(PlayerPrefs.HasKey("itemSlot") && LoadItem)
         {
             Load();
         }
         else
         {
+            PlayerPrefs.DeleteKey("itemSlot");
             Save();
         }
     }
@@ -26,7 +28,10 @@ public class itemSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Save();
+        }
 
         if(Input.GetKeyDown(key))
         {
@@ -83,6 +88,8 @@ public class itemSlot : MonoBehaviour
     }
     public void Load()
     {
+        if(!PlayerPrefs.HasKey("itemSlot")) return;
+        
         item = JsonUtility.FromJson<Item>(PlayerPrefs.GetString("itemSlot"));
         icon.sprite = item.icon;
     }

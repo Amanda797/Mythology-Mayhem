@@ -7,6 +7,7 @@ public class SceneSwitch : MonoBehaviour
 {
     public string sceneName;
     public float distance;
+    public SaveScene saveScene;
     Transform player;
     itemSlot itemSlot;
     //SaveScene saveScene;
@@ -39,9 +40,9 @@ public class SceneSwitch : MonoBehaviour
                     // itemSlot.NotSave();
 
                     PlayerPrefs.SetString("TranstionItem", itemSlot.item.name);
-                    print(PlayerPrefs.GetString("TranstionItem"));
+                    //print(PlayerPrefs.GetString("TranstionItem"));
 
-                    SceneManager.LoadScene(sceneName);  
+                    SceneManager.LoadScene(sceneName, LoadSceneMode.Single);  
                 }
             }
             
