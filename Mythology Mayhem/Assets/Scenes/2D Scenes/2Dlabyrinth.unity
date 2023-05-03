@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 30157073}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6708,6 +6708,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
+      propertyPath: doorOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: nextLevel
       value: Labyrinth 3D
       objectReference: {fileID: 0}
@@ -10654,7 +10658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b16713260ef1044685cca530e9261cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadScene: 0
+  LoadScene: 1
   sceneObjects:
     objects: []
     spawnedObjs: []
@@ -11041,8 +11045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spwanPoints:
   - {fileID: 1613129544}
-  PlayerPrefabs:
-  - {fileID: 537872656705047756, guid: f8fe99a957387cb47b58cb67bb5b77d1, type: 3}
+  PlayerPrefabs: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
 --- !u!4 &708189250
 Transform:
   m_ObjectHideFlags: 0
