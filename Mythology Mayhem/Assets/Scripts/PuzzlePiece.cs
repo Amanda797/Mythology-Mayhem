@@ -44,11 +44,12 @@ public class PuzzlePiece : MonoBehaviour
         if(ped != null)
         {
             //print(Vector3.Distance(transform.position, ped.target.position));
-            if (Vector3.Distance(transform.position, ped.target.position) < ped.snapDistance && !piece.inPlace)
+            if (Vector3.Distance(transform.position, ped.target.position) < ped.snapDistance)
             {
                 transform.position = ped.target.position;
+                if(!piece.inPlace) saveScene.Save();
                 piece.inPlace = true;
-                saveScene.Save();
+                //saveScene.Save();
             }
         }
     }
