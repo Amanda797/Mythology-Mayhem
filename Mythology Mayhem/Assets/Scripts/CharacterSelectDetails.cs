@@ -12,7 +12,7 @@ public class CharacterSelectDetails : MonoBehaviour
     [SerializeField] GameObject BackButton;
     [SerializeField] GameObject ConfirmButton;
     [SerializeField] GameObject [] characters;
-    GameObject selectedCharacter;
+    [SerializeField] GameObject selectedCharacter;
 
 
     // Start is called before the first frame update

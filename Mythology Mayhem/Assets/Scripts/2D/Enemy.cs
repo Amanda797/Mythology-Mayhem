@@ -42,6 +42,9 @@ public class Enemy : MonoBehaviour
         GetComponent<MouseAI>().enabled = false;
         GetComponent<MouseAI>().dead = true;
         this.enabled = false;
+        if(GetComponent<DropScrolls>() != null) {
+            GetComponent<DropScrolls>().enabled = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
