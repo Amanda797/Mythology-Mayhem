@@ -8,7 +8,7 @@ public class playerSpwaner : MonoBehaviour
     int spwanPointIndex;
     int playerIndex;
     public List<Transform> spwanPoints = new List<Transform>();
-    public List<GameObject> PlayerPrefabs = new List<GameObject>();
+    public playerSelectable PlayerPrefabs;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +39,7 @@ public class playerSpwaner : MonoBehaviour
             PlayerPrefs.SetInt("spwanPointIndex", spwanPointIndex);
         }
 
-        Instantiate(PlayerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
+        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
 
 
     }
