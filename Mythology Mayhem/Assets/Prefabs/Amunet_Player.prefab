@@ -324,9 +324,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 200
   runSpeed: 300
+  jumpAmount: 9
   anim: {fileID: 722826889152064210}
   climbing: 0
   ladderEntered: 0
+  grounded: 0
   pushBlock: {fileID: 0}
   pushing: 0
   canPush: 0
@@ -344,10 +346,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5012615252830545429}
   attackRange: 1.35
+  attackHeight: 3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
   atkDamage: 4
+  phs: {fileID: 0}
   attackRate: 2
   anim: {fileID: 722826889152064210}
 --- !u!114 &1181495106509225004

@@ -16,6 +16,8 @@ public class CharacterSelectMovement : MonoBehaviour
         moveCounter = 10f;
         animIndex = 0;
 
+        controller.SetBool("IsGrounded", true);
+
         controller.Play(animations[animIndex]);
     }//end start
 
@@ -28,16 +30,16 @@ public class CharacterSelectMovement : MonoBehaviour
             ChangeAnimation();
             moveCounter = 10f;
         }
-
-        controller.Play(animations[animIndex]); 
     }//end update
 
     void ChangeAnimation() {
-        if(animIndex < animations.Length) {
+        if(animIndex < animations.Length - 1) {
             animIndex++;
         } else {
             animIndex = 0;
-        }       
+        }
+
+        controller.Play(animations[animIndex]);        
     }//end Change Animation
 
 }// end CharacterSelectMovement
