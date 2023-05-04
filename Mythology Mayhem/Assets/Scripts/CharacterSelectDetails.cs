@@ -37,6 +37,8 @@ public class CharacterSelectDetails : MonoBehaviour
                 selectedCharacter = characters[ch-1];
                 leftXScale = 400f;
                 rightXScale = 2680f;
+                BackButton.SetActive(true);
+                ConfirmButton.SetActive(true);
                 break;
             }
             case 2: {
@@ -48,6 +50,8 @@ public class CharacterSelectDetails : MonoBehaviour
                 selectedCharacter = characters[ch-1];
                 leftXScale = 1100f;
                 rightXScale = 1860f;
+                BackButton.SetActive(true);
+                ConfirmButton.SetActive(true);
                 break;
             }
             case 3: {
@@ -59,6 +63,8 @@ public class CharacterSelectDetails : MonoBehaviour
                 selectedCharacter = characters[ch-1];
                 leftXScale = 1860f;
                 rightXScale = 1100f;
+                BackButton.SetActive(true);
+                ConfirmButton.SetActive(true);
                 break;
             }
             case 4: {
@@ -70,6 +76,8 @@ public class CharacterSelectDetails : MonoBehaviour
                 selectedCharacter = characters[ch-1];
                 leftXScale = 2680f;
                 rightXScale = 400f;
+                BackButton.SetActive(true);
+                ConfirmButton.SetActive(true);
                 break;
             }
             case 5: {
@@ -77,6 +85,8 @@ public class CharacterSelectDetails : MonoBehaviour
                 // Save selectedCharacter
                 if(selectedCharacter != null) {
                     print("Selected Character is: " + selectedCharacter.name);
+                    //save prefab in playerprefs
+                    //go to new scene
                 }
                 break;
             }
@@ -89,6 +99,8 @@ public class CharacterSelectDetails : MonoBehaviour
                 selectedCharacter = null;
                 leftXScale = 1f;
                 rightXScale = 1f;
+                BackButton.SetActive(false);
+                ConfirmButton.SetActive(false);
                 break;
             }
         }
