@@ -97,7 +97,7 @@ public class Health : MonoBehaviour
 
             GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);
             reward.name = rewardObject.name;
-            SaveScene.AddObject(reward);
+            SaveScene.AddObject(reward, rewardObject);
         }
 
         mainObject.SetActive(false);
