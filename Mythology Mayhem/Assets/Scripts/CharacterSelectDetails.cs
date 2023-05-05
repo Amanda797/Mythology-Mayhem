@@ -22,6 +22,8 @@ public class CharacterSelectDetails : MonoBehaviour
         rightXScale = 1f;
         LeftBorder.GetComponent<RectTransform>().localScale = new Vector3(leftXScale,850f,0);
         RightBorder.GetComponent<RectTransform>().localScale = new Vector3(rightXScale,850f,0);
+        BackButton.SetActive(false);
+        ConfirmButton.SetActive(false);
     }//end start
 
     
@@ -86,7 +88,7 @@ public class CharacterSelectDetails : MonoBehaviour
                 if(selectedCharacter != null) {
                     print("Selected Character is: " + selectedCharacter.name);
                     //save prefab in playerprefs
-                    //go to new scene
+                    //go to next scene
                 }
                 break;
             }
