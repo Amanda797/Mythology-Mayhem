@@ -152,8 +152,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8930851644749842695}
-  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8181819, z: -9.090909}
+  m_LocalRotation: {x: -1e-45, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: -12.5}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -270,8 +270,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8930851644910631177}
-  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -3e-45, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5454545, z: -3.409091}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -490,9 +490,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 200
   runSpeed: 300
+  jumpAmount: 9
   anim: {fileID: 8930851645321162423}
   climbing: 0
   ladderEntered: 0
+  grounded: 0
   pushBlock: {fileID: 0}
   pushing: 0
   canPush: 0
@@ -510,6 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 846726695501278697}
   attackRange: 1.15
+  attackHeight: 3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64

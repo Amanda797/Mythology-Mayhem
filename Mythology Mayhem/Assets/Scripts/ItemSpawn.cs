@@ -16,8 +16,10 @@ public class ItemSpawn : MonoBehaviour
         {
             if(PlayerPrefs.HasKey(items[i].name))
             {
-                spawnedItems.Add(Instantiate(items[i].item,JsonUtility.FromJson<Vector3>(PlayerPrefs.GetString(items[i].name)),Quaternion.identity));
-                SaveScene.AddObject(Instantiate(items[i].item,JsonUtility.FromJson<Vector3>(PlayerPrefs.GetString(items[i].name)),Quaternion.identity),items[i].item);
+                GameObject obj = Instantiate(items[i].item,JsonUtility.FromJson<Vector3>(PlayerPrefs.GetString(items[i].name)),Quaternion.identity);
+                spawnedItems.Add(obj);
+                SaveScene.AddObject(obj,items[i].item);
+                PlayerPrefs.DeleteAll();
             }
         }
     }
@@ -42,9 +44,9 @@ public class ItemSpawn : MonoBehaviour
                     if(item.name == name)
                     {
                         
-                        spawnedItems.Add(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity));
+                        //spawnedItems.Add(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity));
                         SaveScene.AddObject(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity),item.item);
-                        PlayerPrefs.DeleteKey("TranstionItem");
+                        PlayerPrefs.DeleteAll();
                         
 
                     }
