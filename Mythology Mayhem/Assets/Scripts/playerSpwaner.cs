@@ -39,7 +39,7 @@ public class playerSpwaner : MonoBehaviour
             PlayerPrefs.SetInt("spwanPointIndex", spwanPointIndex);
         }
 
-        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
+        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation).SetActive(true);
 
 
     }
