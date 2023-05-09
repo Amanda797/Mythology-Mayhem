@@ -14,7 +14,7 @@ public class CharacterSelectDetails : MonoBehaviour
     [SerializeField] GameObject BackButton;
     [SerializeField] GameObject ConfirmButton;
     [SerializeField] GameObject [] characters;
-    [SerializeField] GameObject selectedCharacter;
+    int selectedCharacter;
     int playerIndex;
     [SerializeField] GameObject [] characterButtons;
     [SerializeField] GameObject CharacterDescriptionPanel;
@@ -41,14 +41,13 @@ public class CharacterSelectDetails : MonoBehaviour
     public void SelectCharacter(int ch) {
 
         switch(ch) {
-            case 1: {
+            case 0: {
                 print("Selected Character 1");
                 // Deactivate character buttons
                 foreach(GameObject go in characters) {
                     go.SetActive(false);
                 }
-                selectedCharacter = characters[ch-1];
-                playerIndex = 1;
+                selectedCharacter = ch;
                 leftXScale = 400f;
                 rightXScale = 2680f;
                 BackButton.SetActive(true);
@@ -62,14 +61,13 @@ public class CharacterSelectDetails : MonoBehaviour
                 cdpText.text = "Tobias hails from Greece. He is a scribe in the Library of Alexandria. His special ability is more force behind his sword attacks.";
                 break;
             }
-            case 2: {
+            case 1: {
                 print("Selected Character 2");
                 // Deactivate character buttons
                 foreach(GameObject go in characters) {
                     go.SetActive(false);
                 }
-                selectedCharacter = characters[ch-1];
-                playerIndex = 2;
+                selectedCharacter = ch;
                 leftXScale = 1100f;
                 rightXScale = 1860f;
                 BackButton.SetActive(true);
@@ -83,14 +81,13 @@ public class CharacterSelectDetails : MonoBehaviour
                 cdpText.text = "Gorm comes from the icy north, in a Viking village. He was meant to be a great warrior and yields an axe, but his ability to protect himself and friends gives him a better defense a player.";
                 break;
             }
-            case 3: {
+            case 2: {
                 print("Selected Character 3");
                 // Deactivate character buttons
                 foreach(GameObject go in characters) {
                     go.SetActive(false);
                 }
-                selectedCharacter = characters[ch-1];
-                playerIndex = 3;
+                selectedCharacter = ch;
                 leftXScale = 1860f;
                 rightXScale = 1100f;
                 BackButton.SetActive(true);
@@ -104,14 +101,13 @@ public class CharacterSelectDetails : MonoBehaviour
                 cdpText.text = "Amunet resides in Egypt and grew up in the palace. She has more powerful magical attacks and can glide past enemies.";
                 break;
             }
-            case 4: {
+            case 3: {
                 print("Selected Character 4");
                 // Deactivate character buttons
                 foreach(GameObject go in characters) {
                     go.SetActive(false);
                 }
-                selectedCharacter = characters[ch-1];
-                playerIndex = 4;
+                selectedCharacter = ch;
                 leftXScale = 2680f;
                 rightXScale = 400f;
                 BackButton.SetActive(true);
@@ -128,9 +124,9 @@ public class CharacterSelectDetails : MonoBehaviour
             case 5: {
                 // Confirm Selection
                 // Save selectedCharacter
-                if(selectedCharacter != null) {
-                    print("Selected Character is: " + selectedCharacter.name);
-                    PlayerPrefs.SetInt("playerIndex", playerIndex);
+                if(selectedCharacter != -1) {
+                    print("Selected Character is: " + characters[selectedCharacter].name);
+                    PlayerPrefs.SetInt("playerIndex", selectedCharacter);
                     foreach(GameObject go in Object.FindObjectsOfType<GameObject>()) {
                         if(go != this) {
                             Destroy(go);
@@ -146,7 +142,7 @@ public class CharacterSelectDetails : MonoBehaviour
                 foreach(GameObject go in characters) {
                     go.SetActive(true);
                 }
-                selectedCharacter = null;
+                selectedCharacter = -1;
                 playerIndex = -1;
                 leftXScale = 1f;
                 rightXScale = 1f;
