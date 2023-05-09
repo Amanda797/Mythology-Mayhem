@@ -5,15 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-        [SerializeField] int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings)     
-        //[SerializeField] UILevelIcon levelIcon;
+        [SerializeField] int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings) 
         string website = "https://www.google.com/search?q=mythology-mayhem";
 
         [SerializeField] GameObject[] menuPanels;
         [SerializeField] int pauseBackgroundElement = -1;
         [SerializeField] int pausePanelElement = -1;
-        //[SerializeField] GameObject[] testingPanels;
-
 
     // Retain this game object across scenes.
     private void Awake() {
@@ -40,7 +37,12 @@ public class MenuManager : MonoBehaviour
     // Starts the game, triggered by Start Game Button's OnClick function
     public void StartGame()
     {
-        SceneManager.LoadScene(startingSceneIndex);
+        SceneManager.LoadScene("Library of Alexandria");
+    }
+
+    public void CharacerSelect()
+    {
+        SceneManager.LoadScene("CharacterSelection");
     }
 
     public void QuitGame() {
