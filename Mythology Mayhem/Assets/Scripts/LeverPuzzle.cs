@@ -1,28 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LeverPuzzle : MonoBehaviour
 {
-    [SerializeField] private Animator leverAnim;
+    public Animator anim;
 
     public bool inRange = false;
-    public bool playAnim = false;
+    public bool switchOn = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (inRange == true && Input.GetKey(KeyCode.E))
+        if (inRange == true && Input.GetKeyDown("1"))
         {
-            playAnim = true;
+            anim.Play("LeverAnim");
+            switchOn = true;
+        }
+        else if (inRange == true && switchOn == true && Input.GetKeyDown("2"))
+        {
+            anim.Play("LeverOff");
+            switchOn = false;
         }
     }
 
