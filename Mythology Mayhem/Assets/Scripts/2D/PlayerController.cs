@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.speed = 1;
         }
+        
         // Jump code
         if (!ladderEntered && !pushing && grounded) 
         {
