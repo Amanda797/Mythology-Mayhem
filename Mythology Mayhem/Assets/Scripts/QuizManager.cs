@@ -40,10 +40,8 @@ public class QuizManager : MonoBehaviour
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
             currentQuestion++;
             DisplayQuestion();
-        } else if(currentQuestion == allQuestions.Length-1) {
+        } else if(currentQuestion == allQuestions.Length) {
             question.text = "Final Score: " + score;
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
             if(score >= 2) {                
                 answer1.text = "You won a boost!";
             } else {
@@ -77,8 +75,14 @@ public class QuizManager : MonoBehaviour
     }//end answer questions
 
     void DelayMovement() {
-        currentQuestion++;
-        DisplayQuestion();
+        if(currentQuestion < allQuestions.Length - 1) {
+            currentQuestion++;
+            DisplayQuestion(); 
+        } else {
+            currentQuestion++;
+            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
+        }
     }//end delay movement
     
 }
