@@ -18,6 +18,8 @@ public class QuizManager : MonoBehaviour
     int score;
     bool answered;
 
+    [SerializeField] GameObject enemy_go;
+
     void Start() {
         chosenQuestions = new Questions[3];
 
@@ -30,6 +32,8 @@ public class QuizManager : MonoBehaviour
         answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
         answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
         answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+
+        RandomQuestions();
     }//end start
 
     void DisplayQuestion() {
@@ -63,6 +67,7 @@ public class QuizManager : MonoBehaviour
                 answer1.text = "You won a boost!";
             } else {
                 answer1.text = "You lost and bear a curse!";
+                enemy_go.GetComponent<Animator>().SetBool("AttackMode", true);
             }
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
@@ -86,7 +91,7 @@ public class QuizManager : MonoBehaviour
                 } else {
                     question.text = "Wrong Answer...";
                 }
-                
+
                 answer1.text = "Continue";
                 answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
                 answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
