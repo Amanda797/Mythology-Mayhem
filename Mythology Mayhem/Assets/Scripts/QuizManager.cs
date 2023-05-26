@@ -11,7 +11,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI answer3;
     [SerializeField] TextMeshProUGUI answer4;
     [SerializeField] Questions[] _AllQuestions;
-    Questions[] allQuestions;
+    Questions[] chosenQuestions;
     [TextArea(3,7)]
     [SerializeField] string introduction;
     int currentQuestion;
@@ -19,7 +19,7 @@ public class QuizManager : MonoBehaviour
     bool answered;
 
     void Start() {
-        allQuestions = new Questions[3];
+        chosenQuestions = new Questions[3];
 
         currentQuestion = -1;
         score = 0;
@@ -33,12 +33,12 @@ public class QuizManager : MonoBehaviour
     }//end start
 
     void DisplayQuestion() {
-        if(currentQuestion < allQuestions.Length) {
-            question.text = allQuestions[currentQuestion].questionText;
-            answer1.text = allQuestions[currentQuestion].answers[0];
-            answer2.text = allQuestions[currentQuestion].answers[1];
-            answer3.text = allQuestions[currentQuestion].answers[2];
-            answer4.text = allQuestions[currentQuestion].answers[3];
+        if(currentQuestion < chosenQuestions.Length) {
+            question.text = chosenQuestions[currentQuestion].questionText;
+            answer1.text = chosenQuestions[currentQuestion].answers[0];
+            answer2.text = chosenQuestions[currentQuestion].answers[1];
+            answer3.text = chosenQuestions[currentQuestion].answers[2];
+            answer4.text = chosenQuestions[currentQuestion].answers[3];
 
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
@@ -57,7 +57,7 @@ public class QuizManager : MonoBehaviour
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);
             currentQuestion++;
             DisplayQuestion();
-        } else if(currentQuestion == allQuestions.Length - 1 & answered) {
+        } else if(currentQuestion == chosenQuestions.Length - 1 & answered) {
             question.text = "Final Score: " + score;
             if(score >= 2) {                
                 answer1.text = "You won a boost!";
@@ -68,17 +68,25 @@ public class QuizManager : MonoBehaviour
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
             currentQuestion++;
-        } else if(currentQuestion > allQuestions.Length) {
+        } else if(currentQuestion > chosenQuestions.Length) {
             Destroy(this.gameObject);
         }
         else {
             if(!answered) {
-                if(x == allQuestions[currentQuestion].correctAnswer) {
+                bool solution = false;
+                foreach(int a in chosenQuestions[currentQuestion].correctAnswers) {
+                    if(x == a) {
+                        solution = true;
+                    }
+                }
+
+                if(solution) {
                     score++;
                     question.text = "Correct Answer!!";
                 } else {
                     question.text = "Wrong Answer...";
                 }
+                
                 answer1.text = "Continue";
                 answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
                 answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
@@ -91,14 +99,14 @@ public class QuizManager : MonoBehaviour
             }            
         }        
 
-        if(currentQuestion == allQuestions.Length) {
+        if(currentQuestion == chosenQuestions.Length) {
             currentQuestion++;
         }
         
     }//end answer questions
 
     void DelayMovement() {
-        if(currentQuestion < allQuestions.Length) {
+        if(currentQuestion < chosenQuestions.Length) {
             currentQuestion++;
             DisplayQuestion(); 
         } else {
@@ -112,11 +120,16 @@ public class QuizManager : MonoBehaviour
         List<int> usedQuestions = new List<int>();
 
         for(int i = 0; i < 3; i++) {
-            int rand = Random.Range(0,_AllQuestions.Length);
-            if(!usedQuestions.Contains(rand)) {
-                allQuestions[i] = allQuestions[rand];
-                usedQuestions.Add(rand);
+            bool satisfied = false;
+            do {
+                int rand = Random.Range(0,_AllQuestions.Length);
+                if(!usedQuestions.Contains(rand)) {
+                    chosenQuestions[i] = _AllQuestions[rand];
+                    usedQuestions.Add(rand);
+                    satisfied = true;
+                }
             }
+            while(!satisfied);
         }
     }//end random questions
     
