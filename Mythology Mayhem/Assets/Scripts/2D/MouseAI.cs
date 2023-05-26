@@ -29,7 +29,7 @@ public class MouseAI : MonoBehaviour
     private Vector2 currentPosition;
     private Vector2 previousPosition;
 
-    [SerializeField] private bool isFlying = false;
+    // [SerializeField] private bool isFlying = false;
 
     private AudioSource aud;
 
