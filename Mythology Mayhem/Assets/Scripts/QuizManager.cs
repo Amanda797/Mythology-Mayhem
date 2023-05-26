@@ -10,7 +10,8 @@ public class QuizManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI answer2;
     [SerializeField] TextMeshProUGUI answer3;
     [SerializeField] TextMeshProUGUI answer4;
-    [SerializeField] Questions[] allQuestions;
+    [SerializeField] Questions[] _AllQuestions;
+    Questions[] allQuestions;
     [TextArea(3,7)]
     [SerializeField] string introduction;
     int currentQuestion;
@@ -18,6 +19,8 @@ public class QuizManager : MonoBehaviour
     bool answered;
 
     void Start() {
+        allQuestions = new Questions[3];
+
         currentQuestion = -1;
         score = 0;
         answered = false;
@@ -104,6 +107,18 @@ public class QuizManager : MonoBehaviour
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
         }
     }//end delay movement
+
+    void RandomQuestions() {
+        List<int> usedQuestions = new List<int>();
+
+        for(int i = 0; i < 3; i++) {
+            int rand = Random.Range(0,_AllQuestions.Length);
+            if(!usedQuestions.Contains(rand)) {
+                allQuestions[i] = allQuestions[rand];
+                usedQuestions.Add(rand);
+            }
+        }
+    }//end random questions
     
 }
 
