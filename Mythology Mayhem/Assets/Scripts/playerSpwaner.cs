@@ -51,8 +51,10 @@ public class playerSpwaner : MonoBehaviour
     }
 }
 
+
+/*
 //Make custom button to reset spwan point index
-[CustomEditor(typeof(playerSpwaner))]
+[CustomEditor (typeof(playerSpwaner))]
 public class playerSpwanerEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -60,17 +62,17 @@ public class playerSpwanerEditor : Editor
         DrawDefaultInspector();
 
         playerSpwaner myScript = (playerSpwaner)target;
-        if(GUILayout.Button("Reset Spwan Point Index"))
+        if (GUILayout.Button("Reset Spwan Point Index"))
         {
             PlayerPrefs.SetInt("spwanPointIndex", 0);
         }
 
         //Make custom button to reset player prefs
-        if(GUILayout.Button("Reset PlayerPrefs"))
+        if (GUILayout.Button("Reset PlayerPrefs"))
         {
             PlayerPrefs.DeleteAll();
         }
     }
 }
-
+*/
 
