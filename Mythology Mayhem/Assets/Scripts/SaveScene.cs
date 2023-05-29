@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
+
 
 public class SaveScene : MonoBehaviour
 {
@@ -134,7 +138,10 @@ public class SaveScene : MonoBehaviour
         //write the string in a file
         System.IO.File.WriteAllText(Application.dataPath + "/_SceneData/" + sceneName + ".json", sceneObjectsString);
         //refresh the project to see the file
-        UnityEditor.AssetDatabase.Refresh();
+       #if UNITY_EDITOR
+          UnityEditor.AssetDatabase.Refresh();
+       #endif
+
 
     }
     public void Load()
