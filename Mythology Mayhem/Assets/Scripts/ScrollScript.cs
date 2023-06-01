@@ -20,6 +20,7 @@ public class ScrollScript : MonoBehaviour
     // --------------------------
     [SerializeField] GameObject ScrollPanel;
     [SerializeField] TextMeshProUGUI textUI;
+    [TextArea(7,10)]
     [SerializeField] string text;
     [SerializeField] Image pressEText;
     bool keyTriggered;
