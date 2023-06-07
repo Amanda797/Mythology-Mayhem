@@ -26,6 +26,8 @@ public class CharacterSelectDetails : MonoBehaviour
     void Start()
     {
         playerIndex = -1;
+        //error fix
+        print(playerIndex);
         leftXScale = 1f;
         rightXScale = 1f;
         descripPosX = 1f;

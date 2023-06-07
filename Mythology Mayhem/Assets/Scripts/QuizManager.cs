@@ -9,14 +9,20 @@ public class QuizManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI answer1;
     [SerializeField] TextMeshProUGUI answer2;
     [SerializeField] TextMeshProUGUI answer3;
-    [SerializeField] Questions[] allQuestions;
+    [SerializeField] TextMeshProUGUI answer4;
+    [SerializeField] Questions[] _AllQuestions;
+    Questions[] chosenQuestions;
     [TextArea(3,7)]
     [SerializeField] string introduction;
     int currentQuestion;
     int score;
     bool answered;
 
+    [SerializeField] GameObject enemy_go;
+
     void Start() {
+        chosenQuestions = new Questions[3];
+
         currentQuestion = -1;
         score = 0;
         answered = false;
@@ -25,65 +31,112 @@ public class QuizManager : MonoBehaviour
         answer1.text = "Begin";
         answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
         answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
+        answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+
+        RandomQuestions();
     }//end start
 
     void DisplayQuestion() {
-        question.text = allQuestions[currentQuestion].questionText;
-        answer1.text = allQuestions[currentQuestion].answers[0];
-        answer2.text = allQuestions[currentQuestion].answers[1];
-        answer3.text = allQuestions[currentQuestion].answers[2];        
+        if(currentQuestion < chosenQuestions.Length) {
+            question.text = chosenQuestions[currentQuestion].questionText;
+            answer1.text = chosenQuestions[currentQuestion].answers[0];
+            answer2.text = chosenQuestions[currentQuestion].answers[1];
+            answer3.text = chosenQuestions[currentQuestion].answers[2];
+            answer4.text = chosenQuestions[currentQuestion].answers[3];
+
+            answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
+            answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
+            answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);  
+        } else {
+            answered = true;
+        }
+                
     }//end display question
 
     public void AnswerQuestion(int x) {
+
         if(currentQuestion == -1) {
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
+            answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);
             currentQuestion++;
             DisplayQuestion();
-        } else if(currentQuestion == allQuestions.Length) {
+        } else if(currentQuestion == chosenQuestions.Length - 1 & answered) {
             question.text = "Final Score: " + score;
             if(score >= 2) {                
                 answer1.text = "You won a boost!";
             } else {
                 answer1.text = "You lost and bear a curse!";
+                enemy_go.GetComponent<Animator>().SetBool("AttackMode", true);
             }
+            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
             currentQuestion++;
-        } else if(currentQuestion >= allQuestions.Length) {
+        } else if(currentQuestion > chosenQuestions.Length) {
             Destroy(this.gameObject);
         }
         else {
             if(!answered) {
-                if(x == allQuestions[currentQuestion].correctAnswer) {
+                bool solution = false;
+                foreach(int a in chosenQuestions[currentQuestion].correctAnswers) {
+                    if(x == a) {
+                        solution = true;
+                    }
+                }
+
+                if(solution) {
                     score++;
                     question.text = "Correct Answer!!";
                 } else {
                     question.text = "Wrong Answer...";
                 }
+
                 answer1.text = "Continue";
                 answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
                 answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
+                answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
                 answered = true;
             }
             else {
                 DelayMovement();
                 answered = false;
-                answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
-                answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
             }            
         }        
+
+        if(currentQuestion == chosenQuestions.Length) {
+            currentQuestion++;
+        }
         
     }//end answer questions
 
     void DelayMovement() {
-        if(currentQuestion < allQuestions.Length - 1) {
+        if(currentQuestion < chosenQuestions.Length) {
             currentQuestion++;
             DisplayQuestion(); 
         } else {
-            currentQuestion++;
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
         }
     }//end delay movement
+
+    void RandomQuestions() {
+        List<int> usedQuestions = new List<int>();
+
+        for(int i = 0; i < 3; i++) {
+            bool satisfied = false;
+            do {
+                int rand = Random.Range(0,_AllQuestions.Length);
+                if(!usedQuestions.Contains(rand)) {
+                    chosenQuestions[i] = _AllQuestions[rand];
+                    usedQuestions.Add(rand);
+                    satisfied = true;
+                }
+            }
+            while(!satisfied);
+        }
+    }//end random questions
     
 }
 
