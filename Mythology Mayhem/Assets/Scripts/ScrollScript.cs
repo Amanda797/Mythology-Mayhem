@@ -34,7 +34,7 @@ public class ScrollScript : MonoBehaviour
     void Start()
     {
         textUI.text = "";
-        print(gameObject.name + ": " + text);
+        //print(gameObject.name + ": " + text);
         keyTriggered = false;
         keyCooldown = 1f;
     }//end start
