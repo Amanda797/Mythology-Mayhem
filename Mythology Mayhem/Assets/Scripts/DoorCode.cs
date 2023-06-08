@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class DoorCode : MonoBehaviour
 {
     [SerializeField] private string nextLevel = "Library 3D 2";
-    [SerializeField] private TwoDLever lever;
+    [SerializeField] private GameObject lever;
     public bool entered = false;
     public bool blocked = true;
     public bool doorOpen = false;
@@ -37,7 +37,7 @@ public class DoorCode : MonoBehaviour
         if (other.tag == "PushBlock")
         {
             blocked = true;
-            lever.SetCanOpen(false);
+            lever.GetComponent<TwoDLever>().SetCanOpen(false);
         }
     }
 
@@ -50,7 +50,7 @@ public class DoorCode : MonoBehaviour
         if (other.tag == "PushBlock")
         {
             blocked = false;
-            lever.SetCanOpen(true);
+            lever.GetComponent<TwoDLever>().SetCanOpen(true);
         }
     }
     public void LoadNextScene()
