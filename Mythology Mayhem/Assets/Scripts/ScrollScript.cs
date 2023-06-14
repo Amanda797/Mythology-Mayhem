@@ -22,7 +22,7 @@ public class ScrollScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI textUI;
     [TextArea(7,10)]
     [SerializeField] string text;
-    [SerializeField] Image pressEText;
+    [SerializeField] GameObject pressEText;
     bool keyTriggered;
     float keyCooldown;
 
@@ -62,7 +62,7 @@ public class ScrollScript : MonoBehaviour
         if(other.gameObject.tag == "Player") {        
             //enable tooltip for scroll interaction
             if(pressEText != null) {
-                pressEText.transform.gameObject.SetActive(true);
+                pressEText.SetActive(true);
             }
 
             if(keyTriggered && !ScrollPanel.activeSelf) {
@@ -83,7 +83,7 @@ public class ScrollScript : MonoBehaviour
         }   
         
         // Destroy "Press E" tooltip
-        if(GameObject.Find("PressE_Text") is var result && result != null) {
+        if(pressEText is var result && result != null) {
             Destroy(result);
         }
     }//end on collision exit 2d
