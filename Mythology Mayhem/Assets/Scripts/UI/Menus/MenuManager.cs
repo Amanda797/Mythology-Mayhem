@@ -47,12 +47,10 @@ public class MenuManager : MonoBehaviour
 
         PlayerPrefs.SetInt("playerIndex", 0);
         playerIndex = PlayerPrefs.GetInt("playerIndex");
-
-        PlayerPrefs.SetInt("sceneIndex", 2);
-
+        
         //Load First Scene
 
-        PlayerPrefs.SetInt("sceneIndex", SceneManager.GetSceneByPath("Assets/Scenes/2D Scenes/Greek 2D/Library of Alexandria.unity").buildIndex);
+        PlayerPrefs.SetInt("sceneIndex", 2);
         sceneIndex = PlayerPrefs.GetInt("sceneIndex");
         SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
 
@@ -66,7 +64,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("sceneIndex", SceneManager.GetSceneByName("Library of Alexandria").buildIndex);
+            PlayerPrefs.SetInt("sceneIndex", 2);
             sceneIndex = PlayerPrefs.GetInt("sceneIndex");
         }
 
