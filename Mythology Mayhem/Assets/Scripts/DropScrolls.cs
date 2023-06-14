@@ -9,7 +9,7 @@ public class DropScrolls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        countdown = 6f;
+        countdown = 4f;
     }//end start
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class DropScrolls : MonoBehaviour
         if(countdown <= 0) {
             //spawn fallingscroll prefab
             Instantiate(fallingScroll, transform.position, Quaternion.identity);
-            countdown = 6f;
+            countdown = Random.Range(2.5f,5f);
         } else {
             countdown -= 1 * Time.deltaTime;
         }

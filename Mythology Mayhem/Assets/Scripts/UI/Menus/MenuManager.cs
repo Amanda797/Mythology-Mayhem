@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
         [SerializeField] GameObject[] menuPanels;
         [SerializeField] int pauseBackgroundElement = -1;
         [SerializeField] int pausePanelElement = -1;
+        int sceneIndex;
 
     // Retain this game object across scenes.
     private void Awake() {
@@ -37,12 +38,44 @@ public class MenuManager : MonoBehaviour
     // Starts the game, triggered by Start Game Button's OnClick function
     public void StartGame()
     {
-        SceneManager.LoadScene("Library of Alexandria");
+        //Reset Player Prefs
+        int spwanPointIndex = 0;
+        int playerIndex = 0;
+
+        PlayerPrefs.SetInt("spwanPointIndex", 0);
+        spwanPointIndex = PlayerPrefs.GetInt("spwanPointIndex");
+
+        PlayerPrefs.SetInt("playerIndex", 0);
+        playerIndex = PlayerPrefs.GetInt("playerIndex");
+
+        PlayerPrefs.SetInt("sceneIndex", 2);
+
+        //Load First Scene
+
+        PlayerPrefs.SetInt("sceneIndex", SceneManager.GetSceneByPath("Assets/Scenes/2D Scenes/Greek 2D/Library of Alexandria.unity").buildIndex);
+        sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+        SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
+
     }
+
+    public void ContinueGame() {
+        if(PlayerPrefs.HasKey("sceneIndex"))
+        {
+            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+            SceneManager.LoadScene(sceneIndex);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("sceneIndex", SceneManager.GetSceneByName("Library of Alexandria").buildIndex);
+            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+        }
+
+        SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
+    }//end continue game
 
     public void CharacerSelect()
     {
-        SceneManager.LoadScene("CharacterSelection");
+        SceneManager.LoadScene("CharacterSelection", LoadSceneMode.Single);
     }
 
     public void QuitGame() {
@@ -107,6 +140,8 @@ public class MenuManager : MonoBehaviour
     public void TogglePause() {
         if(pausePanelElement != -1 && pauseBackgroundElement != -1)
         {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().ToggleAttack();
+
             this.gameObject.GetComponent<AudioSource>().Play();
             // Toggle the background and pause panels
             if(menuPanels[pauseBackgroundElement].activeInHierarchy) 
