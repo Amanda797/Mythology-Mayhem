@@ -25,6 +25,8 @@ public class DoorCode : MonoBehaviour
             {
                 LoadNextScene();
             }
+        } else if(entered && !blocked && lever == null) {
+            doorOpen = true;
         }
     }
 
