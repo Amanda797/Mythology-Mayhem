@@ -19,7 +19,7 @@ public class Shoot3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((Time.time >= m_timeStamp) && (Input.GetKeyDown(KeyCode.Mouse1)))
+        if((Time.time >= m_timeStamp) && (Input.GetKeyDown(KeyCode.Mouse0)))
         {
             Shoot();
             m_timeStamp = Time.time + TBS;
