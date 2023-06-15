@@ -11,12 +11,13 @@ public class Shoot2D : MonoBehaviour
     public AudioSource source;
     public float AS = 0f;
     public float AL = 0f;
-    
+    public GameObject player;
+
 
     // Update is called once per frame
     void Update()
     {
-        if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse1)))
+        if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse1)) && player.GetComponent<PlayerController>().pushing == false)
         {
             Shoot();
             m_timestamp = Time.time + TBS;
