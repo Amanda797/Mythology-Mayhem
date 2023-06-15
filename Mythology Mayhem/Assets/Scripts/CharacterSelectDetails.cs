@@ -21,6 +21,7 @@ public class CharacterSelectDetails : MonoBehaviour
     [SerializeField] TextMeshProUGUI cdpText;
     [SerializeField] TextMeshProUGUI cdpHead;
     float descripPosX;
+    int sceneIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -134,7 +135,18 @@ public class CharacterSelectDetails : MonoBehaviour
                             Destroy(go);
                         }
                     }
-                    SceneManager.LoadScene(2);
+
+                    if(PlayerPrefs.HasKey("sceneIndex"))
+                    {
+                        sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetInt("sceneIndex", 2);
+                        sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+                    }
+                    
+                    SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
                 }
                 break;
             }

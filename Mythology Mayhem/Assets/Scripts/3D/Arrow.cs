@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Arrow : MonoBehaviour
+{
+    public float damage;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.collider.tag == "Enemy")
+        {
+            col.gameObject.GetComponent<Health>().TakeDamage(damage);
+        }
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
