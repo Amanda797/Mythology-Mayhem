@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Animator anim;
 
     private SpriteRenderer sr;
-    private bool flipped = false;
+    public bool flipped = false;
     private AudioSource aud;    
 
     // Start is called before the first frame update
