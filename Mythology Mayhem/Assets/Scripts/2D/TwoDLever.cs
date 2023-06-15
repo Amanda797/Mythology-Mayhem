@@ -11,7 +11,7 @@ public class TwoDLever : MonoBehaviour
 
     private bool canOpen = false;
 
-    public bool entered = false;
+    private bool entered = false;
     // Start is called before the first frame update
     void Start()
     {

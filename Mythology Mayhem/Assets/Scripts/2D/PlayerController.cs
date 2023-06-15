@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
                 {
                     pushing = true;
                     pushBlock.transform.SetParent(gameObject.transform);
+                    pushBlock.transform.localPosition = new Vector3(4,-.2f,0); //offset new position
                     walkSpeed = 100;
                     anim.SetBool("IsPush", true);
                 }
