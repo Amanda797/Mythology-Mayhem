@@ -10,6 +10,7 @@ public class Shoot3D : MonoBehaviour
     private float m_timeStamp = 0f;
     public AudioSource source;
     public float AS = 0f;
+    public float AL = 0f;
 
     void OnAwake()
     {
@@ -33,6 +34,6 @@ public class Shoot3D : MonoBehaviour
 
         arrow.GetComponent<Rigidbody>().velocity = arrow.transform.forward * AS;
 
-        Destroy(arrow, 2.0f);
+        Destroy(arrow, AL);
     }
 }
