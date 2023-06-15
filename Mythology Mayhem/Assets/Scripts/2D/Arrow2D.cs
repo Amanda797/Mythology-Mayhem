@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class Arrow2D : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         if(col.collider.tag == "Enemy")
         {
-            col.gameObject.GetComponent<Health>().TakeDamage(damage);
+            col.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }
+
     // Update is called once per frame
     void Update()
     {
