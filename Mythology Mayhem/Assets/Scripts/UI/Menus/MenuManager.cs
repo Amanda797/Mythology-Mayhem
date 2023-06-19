@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-        [SerializeField] int startingSceneIndex; // The index of the scene to open with this button (found in Build Settings) 
         string website = "https://www.google.com/search?q=mythology-mayhem";
 
         [SerializeField] GameObject[] menuPanels;
@@ -50,7 +49,7 @@ public class MenuManager : MonoBehaviour
         
         //Load First Scene
 
-        PlayerPrefs.SetInt("sceneIndex", 2);
+        PlayerPrefs.SetInt("sceneIndex", 1);
         sceneIndex = PlayerPrefs.GetInt("sceneIndex");
         SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
 
@@ -64,16 +63,15 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("sceneIndex", 2);
-            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+            StartGame();
         }
 
         SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
     }//end continue game
 
-    public void CharacerSelect()
+    public void CharacterSelect()
     {
-        SceneManager.LoadScene("CharacterSelection", LoadSceneMode.Single);
+        SceneManager.LoadScene(2);
     }
 
     public void QuitGame() {
