@@ -17,10 +17,10 @@ public class Shoot2D : MonoBehaviour
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "2Dlabyrinth_Levers 1" || SceneManager.GetActiveScene().name == "2Dlabyrinth_Pedastals")
+        /*if(SceneManager.GetActiveScene().name == "2Dlabyrinth_Levers 1" || SceneManager.GetActiveScene().name == "2Dlabyrinth_Pedastals")
         {
             CS = false;
-        }
+        }*/
         if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse1)) && player.GetComponent<PlayerController>().pushing == false && CS == true)
         {
             Shoot();
