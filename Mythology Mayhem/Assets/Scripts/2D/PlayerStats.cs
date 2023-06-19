@@ -19,12 +19,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int CurrMana { get; private set; }
     [SerializeField] private float attackRate = 2f;
     public float NextAttackTime { get; private set; }
+    bool canAttack;
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
 
     private SpriteRenderer sr;
-    private bool flipped = false;
+    public bool flipped = false;
     private AudioSource aud;    
 
     // Start is called before the first frame update
@@ -44,12 +45,14 @@ public class PlayerStats : MonoBehaviour
         phs.PlayerCurrHealth = CurrHealth;
         phs.PlayerMaxHealth = MaxHealth;
         aud = GetComponent<AudioSource>();
+
+        canAttack = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= NextAttackTime) 
+        if (Time.time >= NextAttackTime && canAttack) 
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -57,6 +60,7 @@ public class PlayerStats : MonoBehaviour
                 NextAttackTime = Time.time + 1f/attackRate;
             }
         }
+
         //The Code below is to flip the attackPoint of the player so that if the player is flipped they can still attack behind the enemy
         if (sr.flipX)
         {
@@ -77,6 +81,10 @@ public class PlayerStats : MonoBehaviour
     
 
     }    
+
+    public void ToggleAttack() {
+        canAttack = !canAttack;
+    }//end toggle can attack
 
     private void Attack()
     {

@@ -2,16 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class playerSpwaner : MonoBehaviour
 {
     int spwanPointIndex;
     int playerIndex;
+    int sceneIndex;
     public List<Transform> spwanPoints = new List<Transform>();
     public playerSelectable PlayerPrefabs;
     // Start is called before the first frame update
     void Start()
-    {
+    {       
+        //Load Last Scene
+
+        if(PlayerPrefs.HasKey("sceneIndex"))
+        {
+            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+            SceneManager.LoadScene(sceneIndex);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("sceneIndex", SceneManager.GetSceneByName("Library of Alexandria").buildIndex);
+            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+        }
+
         //PlayerPrefs.SetInt("spwanPointIndex", 0);
         if(PlayerPrefs.HasKey("spwanPointIndex"))
         {
@@ -40,7 +55,6 @@ public class playerSpwaner : MonoBehaviour
         }
 
         Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation).SetActive(true);
-
 
     }
 
