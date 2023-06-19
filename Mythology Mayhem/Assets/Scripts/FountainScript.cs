@@ -8,14 +8,8 @@ public class FountainScript : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
-            float waitTime = 1;
-            while(other.gameObject.GetComponent<PlayerStats>().CurrHealth < 100) {
-                if(waitTime < 0) {
-                    other.gameObject.GetComponent<PlayerStats>().Heal(5);
-                    waitTime = 1;
-                } else {
-                    waitTime -= 1 * Time.deltaTime;
-                }
+            if(other.gameObject.GetComponent<PlayerStats>().CurrHealth < 100) {
+                other.gameObject.GetComponent<PlayerStats>().Heal(100);
             }
         }
     }//end on trigger enter 2d

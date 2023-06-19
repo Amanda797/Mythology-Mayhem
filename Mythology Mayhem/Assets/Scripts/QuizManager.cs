@@ -18,9 +18,13 @@ public class QuizManager : MonoBehaviour
     int score;
     bool answered;
 
-    [SerializeField] GameObject enemy_go;
+    [SerializeField] GameObject[] enemy_go;
 
     void Start() {
+        Object[] al = GameObject.FindObjectsOfType<AudioListener>();
+        foreach(Object _al in al) {
+            print("Location: " + _al.ToString());
+        }
         chosenQuestions = new Questions[3];
 
         currentQuestion = -1;
@@ -67,7 +71,10 @@ public class QuizManager : MonoBehaviour
                 answer1.text = "You won a boost!";
             } else {
                 answer1.text = "You lost and bear a curse!";
-                enemy_go.GetComponent<Animator>().SetBool("AttackMode", true);
+                foreach(GameObject enemy in enemy_go) {
+                    enemy.GetComponent<Enemy>().CanAttack = true;
+                    enemy.GetComponent<Animator>().SetBool("AttackMode", true);
+                }
             }
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
