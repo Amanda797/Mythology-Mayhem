@@ -93,8 +93,10 @@ public class PlayerStats : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(attackRange, attackRange+attackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
-            enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+            if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>()) {
+                enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+                enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+            }
         }
     }
 

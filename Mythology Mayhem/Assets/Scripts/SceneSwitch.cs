@@ -5,26 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
-    public string sceneName;
+    [SerializeField] public string sceneName;
     public float distance;
-    public SaveScene saveScene;
-    Transform player;
+    //public SaveScene saveScene;
+    [SerializeField] Transform player;
     itemSlot itemSlot;
     //SaveScene saveScene;
     
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         itemSlot = FindObjectOfType<itemSlot>();
         //saveScene = GameObject.FindGameObjectWithTag("SaveScene").GetComponent<SaveScene>();
     }
 
     void Update()
     {
+        if(player == null) {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+        if(Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.position, transform.position) < distance) {
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single); 
+        }
+
         if(Vector3.Distance(player.position, transform.position) < distance)
         {
-            print("Right Disatnce: " + itemSlot.gameObject.activeSelf);
-            if(itemSlot.item != null)
+            //print("Right Distance: " + itemSlot.gameObject.activeSelf);
+            if(itemSlot != null && itemSlot.item != null)
             {
                 if(itemSlot.gameObject != null)
                 {

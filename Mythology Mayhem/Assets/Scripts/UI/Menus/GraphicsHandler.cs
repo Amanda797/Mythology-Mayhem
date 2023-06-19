@@ -14,6 +14,8 @@ public class GraphicsHandler : MonoBehaviour
     private float currentRefreshRate;
     private int currentResolutionIndex = 0;
 
+    FullScreenMode fsm = FullScreenMode.FullScreenWindow;
+
     // Start is called before the first frame update
     void Start() {
         resolutions = Screen.resolutions;
@@ -61,29 +63,21 @@ public class GraphicsHandler : MonoBehaviour
     }
 
     public void FullScreenToggle() {
-         Screen.fullScreen = !Screen.fullScreen;
+        if(Screen.fullScreenMode == FullScreenMode.Windowed) {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            fsm = FullScreenMode.FullScreenWindow;  
+        } else {
+            Screen.fullScreenMode = FullScreenMode.Windowed;            
+            fsm = FullScreenMode.Windowed;
+        }
     }
 
     public void ResolutionDropdown() {
-        /*  Resolution Options:
-            Very Low    0
-            Low         1
-            Medium      2
-            High        3
-            Very High   4
-            Ultra       5
-        */
-        switch(resolutionDropdown.value)
-        {
-            case 0: QualitySettings.SetQualityLevel(1); break; //Low
-            case 1: QualitySettings.SetQualityLevel(2); break; //Medium
-            case 2: QualitySettings.SetQualityLevel(3); break; //High
-            default: break;
-        }
+        SetResolution(resolutionDropdown.value);
     }
 
     public void SetResolution(int resolutionIndex) {
         Resolution resolution = filteredResolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, true);
+        Screen.SetResolution(resolution.width, resolution.height, fsm);
     }
 }

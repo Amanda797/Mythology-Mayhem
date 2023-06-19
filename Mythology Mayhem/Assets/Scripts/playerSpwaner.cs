@@ -14,19 +14,6 @@ public class playerSpwaner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {       
-        //Load Last Scene
-
-        if(PlayerPrefs.HasKey("sceneIndex"))
-        {
-            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
-            SceneManager.LoadScene(sceneIndex);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("sceneIndex", SceneManager.GetSceneByName("Library of Alexandria").buildIndex);
-            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
-        }
-
         //PlayerPrefs.SetInt("spwanPointIndex", 0);
         if(PlayerPrefs.HasKey("spwanPointIndex"))
         {
@@ -53,6 +40,9 @@ public class playerSpwaner : MonoBehaviour
             spwanPointIndex = 0;
             PlayerPrefs.SetInt("spwanPointIndex", spwanPointIndex);
         }
+
+        // Save Scene Status
+        PlayerPrefs.SetInt("sceneIndex", SceneManager.GetActiveScene().buildIndex);
 
         Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation).SetActive(true);
 
