@@ -29,6 +29,7 @@ public class LeverPuzzleManager : MonoBehaviour
         if(Lever1.GetComponent<LeverPuzzle>().switchOn == true && Lever2.GetComponent<LeverPuzzle>().switchOn == false && Lever3.GetComponent<LeverPuzzle>().switchOn == true && Lever4.GetComponent<LeverPuzzle>().switchOn == false && Lever5.GetComponent<LeverPuzzle>().switchOn == true && Lever6.GetComponent<LeverPuzzle>().switchOn == false && Lever7.GetComponent<LeverPuzzle>().switchOn == true && Lever8.GetComponent<LeverPuzzle>().switchOn == false && Lever9.GetComponent<LeverPuzzle>().switchOn == true && Lever10.GetComponent<LeverPuzzle>().switchOn == false)
         {
             Door.GetComponent<DoorCode>().doorOpen = true;
+            Door.GetComponent<DoorCode>().blocked = false;
             item.SetActive(true);
         }
     }
