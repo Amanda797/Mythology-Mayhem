@@ -38,8 +38,7 @@ public class CharacterSelectDetails : MonoBehaviour
         BackButton.SetActive(false);
         ConfirmButton.SetActive(false);
         CharacterDescriptionPanel.SetActive(false);
-    }//end start
-
+    }//end start    
     
     public void SelectCharacter(int ch) {
 
@@ -142,7 +141,7 @@ public class CharacterSelectDetails : MonoBehaviour
                     }
                     else
                     {
-                        PlayerPrefs.SetInt("sceneIndex", 2);
+                        PlayerPrefs.SetInt("sceneIndex", 1);
                         sceneIndex = PlayerPrefs.GetInt("sceneIndex");
                     }
                     
