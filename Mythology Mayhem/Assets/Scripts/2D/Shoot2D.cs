@@ -13,15 +13,35 @@ public class Shoot2D : MonoBehaviour
     public float AS = 0f;
     public float AL = 0f;
     public GameObject player;
-    public bool CS = true;
+    private bool CS = false;
 
+    [SerializeField] private Animator anim;
+
+    void OnStart()
+    {
+        CS = false;
+    }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.X) && CS == true || Input.GetKeyDown(KeyCode.X) && CS == false)
+        {
+            CS = !CS;
+        }
+        if(CS == true)
+        {
+            anim.SetBool("CanShoot", true);
+            anim.SetBool("UseSword", false);
+        }
+        if(CS == false)
+        {
+            anim.SetBool("CanShoot", false);
+            anim.SetBool("UseSword", true);
+        }
         /*if(SceneManager.GetActiveScene().name == "2Dlabyrinth_Levers 1" || SceneManager.GetActiveScene().name == "2Dlabyrinth_Pedastals")
         {
             CS = false;
         }*/
-        if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse1)) && player.GetComponent<PlayerController>().pushing == false && CS == true)
+        if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse0)) && player.GetComponent<PlayerController>().pushing == false && CS == true)
         {
             Shoot();
             m_timestamp = Time.time + TBS;
@@ -31,6 +51,7 @@ public class Shoot2D : MonoBehaviour
 
     public void Shoot()
     {
+        anim.SetTrigger("Shoot");
         var arrow = (GameObject)Instantiate(ArrowPrefab, ArrowSpawn.position, ArrowSpawn.rotation);
         if(gameObject.GetComponent<PlayerStats>().flipped == false)
         {
