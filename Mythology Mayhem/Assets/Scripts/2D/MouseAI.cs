@@ -29,6 +29,8 @@ public class MouseAI : MonoBehaviour
     private Vector2 currentPosition;
     private Vector2 previousPosition;
 
+    [SerializeField] string patrolBool = "isPatrolling";
+
     // [SerializeField] private bool isFlying = false;
 
     private AudioSource aud;
@@ -68,27 +70,32 @@ public class MouseAI : MonoBehaviour
             {
                 Idle();
             }
-            AttackPlayer();
+            if (attacking) {
+                AttackPlayer();
+            }
             Flip();
         }
     }
 
     void MoveMouse()
     {
-        mouseAnim.SetBool("IsPatrolling", true);
-        transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
-        Vector3 distance = new Vector3(transform.position.x - waypoints[waypointIndex].transform.position.x, transform.position.y - waypoints[waypointIndex].transform.position.y, transform.position.z - waypoints[waypointIndex].transform.position.z);
-        if (Mathf.Abs(distance.x) < .3)
-        {
-            waypointIndex += 1;
-            idle = true;
-            mouseAnim.SetBool("IsPatrolling", false);
-            idleTimer = Time.time + idleDuration;
+        if(patrolBool == "isPatrolling") {
+            mouseAnim.SetBool(patrolBool, true);
+            transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
+            Vector3 distance = new Vector3(transform.position.x - waypoints[waypointIndex].transform.position.x, transform.position.y - waypoints[waypointIndex].transform.position.y, transform.position.z - waypoints[waypointIndex].transform.position.z);
+            if (Mathf.Abs(distance.x) < .3)
+            {
+                waypointIndex += 1;
+                idle = true;
+                mouseAnim.SetBool(patrolBool, false);
+                idleTimer = Time.time + idleDuration;
+            }
+            if (waypointIndex >= waypoints.Length)
+            {
+                waypointIndex = 0;
+            }
         }
-        if (waypointIndex >= waypoints.Length)
-        {
-            waypointIndex = 0;
-        }
+        
     }
 
     void Flip()

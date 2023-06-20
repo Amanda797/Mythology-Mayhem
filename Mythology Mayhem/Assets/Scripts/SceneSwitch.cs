@@ -56,6 +56,10 @@ public class SceneSwitch : MonoBehaviour
         }
     }
 
+    public void LoadScene() {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single); 
+    }
+
     public int IndexOfScene(GameObject gameObject)
     {
         int index = 0;
