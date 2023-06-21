@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727306410387425482}
   m_LocalRotation: {x: -1e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -12.5}
+  m_LocalPosition: {x: 32.627007, y: 8.564753, z: -12.5}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -167,13 +167,14 @@ GameObject:
   - component: {fileID: 3649131358524516739}
   - component: {fileID: 5646528766139287580}
   - component: {fileID: 1181495106509225004}
+  - component: {fileID: 7128106915852893343}
   m_Layer: 3
   m_Name: Amunet_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5460776031590403725
 Transform:
   m_ObjectHideFlags: 0
@@ -300,7 +301,7 @@ Animator:
   m_GameObject: {fileID: 4123923920588763958}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 469e509bba8ddf443826cfc405098be2, type: 2}
+  m_Controller: {fileID: 9100000, guid: da972fe0e2fd2ad45b17cc1df9c5d795, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -354,6 +355,7 @@ MonoBehaviour:
   phs: {fileID: 0}
   attackRate: 2
   anim: {fileID: 722826889152064210}
+  flipped: 0
 --- !u!114 &1181495106509225004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +401,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &7128106915852893343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123923920588763958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e238e4a0c821bf4e861b3bea4acb057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 5372321048262100931, guid: 8fbb30cfbe27c3a4281e2376859cfcd9, type: 3}
+  ArrowSpawn: {fileID: 5012615252830545429}
+  TBS: 1
+  source: {fileID: 0}
+  AS: 50
+  AL: 1
+  player: {fileID: 4123923920588763958}
+  anim: {fileID: 722826889152064210}
 --- !u!1 &4584127395358621198
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,8 +445,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4584127395358621198}
-  m_LocalRotation: {x: -3e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -26.101606, y: -4.8518023, z: -1.7e-44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
