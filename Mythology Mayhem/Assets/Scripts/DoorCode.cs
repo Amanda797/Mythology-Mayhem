@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorCode : MonoBehaviour
 {
-    [SerializeField] private string nextLevel = "Library 3D 2";
+    [SerializeField] private string nextLevel;
     [SerializeField] private GameObject lever;
     public bool entered = false;
     public bool blocked = true;
