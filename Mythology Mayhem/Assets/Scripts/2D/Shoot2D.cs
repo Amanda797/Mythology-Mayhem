@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Shoot2D : MonoBehaviour
 {
     public GameObject ArrowPrefab;
+    public GameObject ArrowPrefab2;
     public Transform ArrowSpawn;
     public float TBS = 0f;
     private float m_timestamp = 0f;
@@ -14,6 +15,10 @@ public class Shoot2D : MonoBehaviour
     public float AL = 0f;
     public GameObject player;
     private bool CS = false;
+    private float up = 0f;
+    [SerializeField] private Transform Upward;
+    public bool CSU = false;
+    private bool CSN = false;
 
     [SerializeField] private Animator anim;
 
@@ -23,6 +28,7 @@ public class Shoot2D : MonoBehaviour
     }
     void Update()
     {
+        up = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(KeyCode.X) && CS == true || Input.GetKeyDown(KeyCode.X) && CS == false)
         {
             CS = !CS;
@@ -41,9 +47,33 @@ public class Shoot2D : MonoBehaviour
         {
             CS = false;
         }*/
-        if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse0)) && player.GetComponent<PlayerController>().pushing == false && CS == true)
+        if((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse0)) && player.GetComponent<PlayerController>().pushing == false && CS == true && CSN == true)
         {
             Shoot();
+            m_timestamp = Time.time + TBS;
+            source.Play();
+        }
+        if(up == 1f)
+        {
+            CSU = true;
+            anim.SetBool("CanShootUpward", true);
+        }
+        else if(up < 1f)
+        {
+            CSU = false;
+            anim.SetBool("CanShootUpward", false);
+        }
+        if (CSU == true)
+        {
+            CSN = false;
+        }
+        else if(CSU == false)
+        {
+            CSN = true;
+        }
+        if ((Time.time >= m_timestamp) && (Input.GetKeyDown(KeyCode.Mouse0)) && player.GetComponent<PlayerController>().pushing == false && CS == true && CSU == true && CSN == false)
+        {
+            ShootUp();
             m_timestamp = Time.time + TBS;
             source.Play();
         }
@@ -61,7 +91,16 @@ public class Shoot2D : MonoBehaviour
         {
             arrow.GetComponent<Rigidbody2D>().velocity = new Vector2(-AS, 0.0f);
         }
-
         Destroy(arrow, AL);
+    }
+    public void ShootUp()
+    {
+        anim.SetTrigger("ShootUpward");
+        var arrow2 = (GameObject)Instantiate(ArrowPrefab2, Upward.position, Upward.rotation);
+        if(up > 0.01f && CSU == true)
+        {
+            arrow2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, AS);
+        }
+        Destroy(arrow2, AL);
     }
 }
