@@ -29,7 +29,7 @@ public class MouseAI : MonoBehaviour
     private Vector2 currentPosition;
     private Vector2 previousPosition;
 
-    [SerializeField] string patrolBool = "isPatrolling";
+    [SerializeField] string patrolBool = "IsPatrolling";
 
     // [SerializeField] private bool isFlying = false;
 
@@ -70,32 +70,28 @@ public class MouseAI : MonoBehaviour
             {
                 Idle();
             }
-            if (attacking) {
-                AttackPlayer();
-            }
+            AttackPlayer();
             Flip();
         }
     }
 
     void MoveMouse()
-    {
-        if(patrolBool == "isPatrolling") {
-            mouseAnim.SetBool(patrolBool, true);
-            transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
-            Vector3 distance = new Vector3(transform.position.x - waypoints[waypointIndex].transform.position.x, transform.position.y - waypoints[waypointIndex].transform.position.y, transform.position.z - waypoints[waypointIndex].transform.position.z);
-            if (Mathf.Abs(distance.x) < .3)
-            {
-                waypointIndex += 1;
-                idle = true;
-                mouseAnim.SetBool(patrolBool, false);
-                idleTimer = Time.time + idleDuration;
-            }
-            if (waypointIndex >= waypoints.Length)
-            {
-                waypointIndex = 0;
-            }
+    {        
+        mouseAnim.SetBool(patrolBool, true);
+        transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
+        Vector3 distance = new Vector3(transform.position.x - waypoints[waypointIndex].transform.position.x, transform.position.y - waypoints[waypointIndex].transform.position.y, transform.position.z - waypoints[waypointIndex].transform.position.z);
+        if (Mathf.Abs(distance.x) < .3)
+        {
+            waypointIndex += 1;
+            idle = true;
+            mouseAnim.SetBool(patrolBool, false);
+            idleTimer = Time.time + idleDuration;
         }
-        
+        if (waypointIndex >= waypoints.Length)
+        {
+            waypointIndex = 0;
+        }
+                
     }
 
     void Flip()
@@ -116,7 +112,6 @@ public class MouseAI : MonoBehaviour
         attacking = soundTrigger.IsTouching(attackTarget.GetComponent<Collider2D>());
         if (attacking)
         {
-            Debug.Log("Attacking");
             transform.position = Vector2.MoveTowards(transform.position, attackTarget.transform.position, runSpeed * Time.deltaTime);
         }
         mouseAnim.SetBool("IsAttacking", attacking);
