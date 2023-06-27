@@ -12,7 +12,7 @@ public class playerSpwaner : MonoBehaviour
     public List<Transform> spwanPoints = new List<Transform>();
     public playerSelectable PlayerPrefabs;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {       
         //PlayerPrefs.SetInt("spwanPointIndex", 0);
         if(PlayerPrefs.HasKey("spwanPointIndex"))
