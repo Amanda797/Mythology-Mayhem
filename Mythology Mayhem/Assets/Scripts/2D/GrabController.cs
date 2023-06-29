@@ -8,6 +8,7 @@ public class GrabController : MonoBehaviour
     public Transform boxHolder;
     public float rayDist;
     
+    
     // Update is called once per frame
     void Update()
     {
@@ -20,11 +21,13 @@ public class GrabController : MonoBehaviour
                 grabCheck.collider.gameObject.transform.parent = boxHolder;
                 grabCheck.collider.gameObject.transform.position = boxHolder.position;
                 grabCheck.collider.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+                //grabCheck.collider.gameObject.GetComponent<Rigidbody2D>().simulated = false;
             }
             else
             {
                 grabCheck.collider.gameObject.transform.parent = null;
                 grabCheck.collider.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                //grabCheck.collider.gameObject.GetComponent<Rigidbody2D>().simulated = true;
             }
         }
     }
