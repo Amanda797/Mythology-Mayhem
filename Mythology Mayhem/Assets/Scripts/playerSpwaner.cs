@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class playerSpwaner : MonoBehaviour
 {
     int spwanPointIndex;
     int playerIndex;
+    int sceneIndex;
     public List<Transform> spwanPoints = new List<Transform>();
     public playerSelectable PlayerPrefabs;
     // Start is called before the first frame update
     void Start()
-    {
+    {       
         //PlayerPrefs.SetInt("spwanPointIndex", 0);
         if(PlayerPrefs.HasKey("spwanPointIndex"))
         {
@@ -39,8 +41,10 @@ public class playerSpwaner : MonoBehaviour
             PlayerPrefs.SetInt("spwanPointIndex", spwanPointIndex);
         }
 
-        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation).SetActive(true);
+        // Save Scene Status
+        PlayerPrefs.SetInt("sceneIndex", SceneManager.GetActiveScene().buildIndex);
 
+        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation).SetActive(true);
 
     }
 
