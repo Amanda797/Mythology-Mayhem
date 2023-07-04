@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1716879139954546018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1780573316532542067}
+  m_Layer: 0
+  m_Name: ShootUpward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1780573316532542067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716879139954546018}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1.234568, y: 1.234568, z: 1.234568}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2690908299114563106}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2690908298555009330
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,6 +142,7 @@ GameObject:
   - component: {fileID: 2690908299114563107}
   - component: {fileID: 7592384986120319355}
   - component: {fileID: 8263194154478064594}
+  - component: {fileID: 8836033174210752746}
   m_Layer: 3
   m_Name: Mico-Inca
   m_TagString: Player
@@ -132,6 +164,7 @@ Transform:
   m_Children:
   - {fileID: 2690908299683717521}
   - {fileID: 6154426065893377392}
+  - {fileID: 1780573316532542067}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05920005, y: -0.15513039}
+  m_Offset: {x: -0.04857391, y: -0.21889186}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -232,7 +265,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.8080382, y: 5.350219}
+  m_Size: {x: 3.3404517, y: 4.882631}
   m_EdgeRadius: 0
 --- !u!95 &2690908299114563118
 Animator:
@@ -298,6 +331,7 @@ MonoBehaviour:
   phs: {fileID: 0}
   attackRate: 2
   anim: {fileID: 2690908299114563118}
+  flipped: 0
 --- !u!114 &8263194154478064594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +377,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8836033174210752746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2690908299114563117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e238e4a0c821bf4e861b3bea4acb057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 5372321048262100931, guid: 8fbb30cfbe27c3a4281e2376859cfcd9, type: 3}
+  ArrowSpawn: {fileID: 6154426065893377392}
+  TBS: 1
+  source: {fileID: 0}
+  AS: 50
+  AL: 1
+  AL2: 2
+  player: {fileID: 2690908299114563117}
+  up: 0
+  CSU: 0
+  ASx: 50
+  ASy: 6.25
+  AD: 12.5
+  ADi: 347.5
+  CSD: 0
+  anim: {fileID: 2690908299114563118}
 --- !u!1 &2690908299491479952
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2690908299491479952}
   m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.143405, y: -0.07351341, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -441,7 +503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2690908299683717534}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9292562, y: 2.5610278, z: -12.34568}
+  m_LocalPosition: {x: 0, y: 2.469136, z: -12.34568}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

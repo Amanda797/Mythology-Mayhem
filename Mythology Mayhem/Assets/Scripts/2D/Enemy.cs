@@ -9,8 +9,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int atkDamage = 1;
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private LayerMask playerLayers;
+    [SerializeField] private bool canAttack = true;
 
     private int currHealth;
+
+    public bool CanAttack {
+        get {return canAttack;} 
+        set {canAttack = value;}
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +57,11 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
-            other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
-            other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+            if(canAttack) {
+                other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
+                other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+            }
+            
         }
     }
 }
