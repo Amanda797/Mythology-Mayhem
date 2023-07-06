@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         anim.SetBool("IsGrounded", true);
+
     }
 
     // Update is called once per frame
