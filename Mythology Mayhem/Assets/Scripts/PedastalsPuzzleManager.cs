@@ -10,8 +10,20 @@ public class PedastalsPuzzleManager : MonoBehaviour
     public GameObject Pedastal3;
     public GameObject Pedastal4;
 
+    public  bool fish;
+    public  bool apple;
+    public  bool torch;
+    public  bool air;
+
     //public GameObject SpawnLocation;
-    public GameObject item;
+    public GameObject earth;
+    public GameObject water;
+    public GameObject fire;
+    
+    //public PlayerInventory elementalCheck;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +32,18 @@ public class PedastalsPuzzleManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
-        
-    }
+        PlayerInventory elementalCheck = GetComponent<earthCollected>();
+
+
+        if (EarthCollect == true)
+        {
+            earth.SetActive(true);
+        }
+        else
+        {
+            earth.SetActive(false);
+        }
+    }*/
 }
