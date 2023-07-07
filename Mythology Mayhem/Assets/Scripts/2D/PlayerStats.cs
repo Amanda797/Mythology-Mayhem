@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int CurrMana { get; private set; }
     [SerializeField] private float attackRate = 2f;
     public float NextAttackTime { get; private set; }
-    bool canAttack;
+    [SerializeField] private bool canAttack;
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
@@ -40,11 +40,11 @@ public class PlayerStats : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         NextAttackTime = 0f;
 
-        phs = FindObjectOfType<PlayerHeartState>();
+        //phs = FindObjectOfType<PlayerHeartState>();
 
-        phs.PlayerCurrHealth = CurrHealth;
-        phs.PlayerMaxHealth = MaxHealth;
-        aud = GetComponent<AudioSource>();
+        //phs.PlayerCurrHealth = CurrHealth;
+        //phs.PlayerMaxHealth = MaxHealth;
+        //aud = GetComponent<AudioSource>();
 
         canAttack = true;
     }
@@ -157,8 +157,8 @@ public class PlayerStats : MonoBehaviour
         heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y - attackHeight/2, attackPoint.position.z);
         Gizmos.DrawWireSphere(heightPoint, attackRange/2);
     }
-    public void PlaySwordSwing()
+    /*public void PlaySwordSwing()
     {
         aud.Play();
-    }
+    }*/
 }
