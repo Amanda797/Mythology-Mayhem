@@ -3,8 +3,8 @@ using UnityEngine;
 public class MouseAI : MonoBehaviour
 {
     [Header("Mouse Movement")]
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float runSpeed = 10f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
 
     [Header("Attack Activation")]
     [SerializeField] private BoxCollider2D soundTrigger;
@@ -21,6 +21,9 @@ public class MouseAI : MonoBehaviour
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private int waypointIndex = 0;
 
+    [Header("MirrorActivatePlayerIsInRange")]
+    public BoxCollider2D mirrorInRange;
+
     private Transform[] savedWaypoints;
     public Rigidbody2D rb2d;
     public bool dead = false;
@@ -28,6 +31,7 @@ public class MouseAI : MonoBehaviour
     private bool idle = false;
     private Vector2 currentPosition;
     private Vector2 previousPosition;
+    private TwoDMirror twoDMirror;
 
     [SerializeField] string patrolBool = "IsPatrolling";
 
@@ -73,6 +77,7 @@ public class MouseAI : MonoBehaviour
             AttackPlayer();
             Flip();
         }
+
     }
 
     void MoveMouse()
