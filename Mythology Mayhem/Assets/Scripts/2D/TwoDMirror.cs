@@ -5,10 +5,19 @@ using UnityEngine;
 public class TwoDMirror : MonoBehaviour
 {
     public bool pickUpAllowed = false;
+    public bool pickedUp = false;
+
+    public bool isEquipped;
+    public bool isInRangeOfEnemy;
+
+    public MouseAI mouseAI;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        Debug.Log(mouseAI.walkSpeed); 
+        Debug.Log(mouseAI.runSpeed);
         
     }
 
@@ -18,7 +27,11 @@ public class TwoDMirror : MonoBehaviour
         if(pickUpAllowed == true && Input.GetKeyDown(KeyCode.E))
         {
             PickUp();
+
+            Debug.Log(mouseAI.walkSpeed);
+            Debug.Log(mouseAI.runSpeed);
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -37,8 +50,15 @@ public class TwoDMirror : MonoBehaviour
         }
     }
 
+
+
     private void PickUp()
     {
-        Destroy(gameObject);
+        pickedUp = true;
+        gameObject.SetActive(false);
+
+        mouseAI.walkSpeed = 2f;
+        mouseAI.runSpeed = 4f;
     }
+
 }
