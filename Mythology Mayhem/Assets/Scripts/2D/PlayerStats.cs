@@ -104,19 +104,15 @@ public class PlayerStats : MonoBehaviour
     {
         if(CurrHealth > 0)
         {
-            
             CurrHealth -= Mathf.Abs(damage);
-            
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            phs.PlayerCurrHealth = CurrHealth;
         }
 
         anim.SetTrigger("Hurt");
 
         if(CurrHealth <= 0)
         {
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            phs.PlayerCurrHealth = CurrHealth;
             Die();
         }
     }
@@ -126,8 +122,7 @@ public class PlayerStats : MonoBehaviour
         if(CurrHealth < MaxHealth)
         {
             CurrHealth += Mathf.Abs(heal);
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            phs.PlayerCurrHealth = CurrHealth;
         }
 
         
@@ -135,8 +130,7 @@ public class PlayerStats : MonoBehaviour
         if(CurrHealth >= MaxHealth)
         {
             CurrHealth = MaxHealth;
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            phs.PlayerCurrHealth = CurrHealth;
         }
     }
 

@@ -57,8 +57,8 @@ public class TwoDMirror : MonoBehaviour
         pickedUp = true;
         gameObject.SetActive(false);
 
-        mouseAI.walkSpeed = 1f;
-        mouseAI.runSpeed = 3f;
+        mouseAI.walkSpeed = 2f;
+        mouseAI.runSpeed = 4f;
     }
 
 }
