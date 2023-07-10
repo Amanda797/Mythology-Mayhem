@@ -38,6 +38,8 @@ public class QuizManager : MonoBehaviour
         answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
 
         RandomQuestions();
+
+        GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
     }//end start
 
     void DisplayQuestion() {
@@ -81,6 +83,7 @@ public class QuizManager : MonoBehaviour
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
             currentQuestion++;
         } else if(currentQuestion > chosenQuestions.Length) {
+            GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = true;
             Destroy(this.gameObject);
         }
         else {

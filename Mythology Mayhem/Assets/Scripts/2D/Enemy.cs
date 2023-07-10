@@ -47,10 +47,17 @@ public class Enemy : MonoBehaviour
         GetComponent<KnockBackFeedback>().enabled = false;
         GetComponent<MouseAI>().enabled = false;
         GetComponent<MouseAI>().dead = true;
-        this.enabled = false;
         if(GetComponent<DropScrolls>() != null) {
             GetComponent<DropScrolls>().enabled = false;
         }
+
+        StartCoroutine(Disappear());
+    }
+
+    IEnumerator Disappear() {
+        yield return new WaitForSeconds(4);
+
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
