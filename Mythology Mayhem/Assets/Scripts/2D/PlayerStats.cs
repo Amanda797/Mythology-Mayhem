@@ -130,8 +130,6 @@ public class PlayerStats : MonoBehaviour
                 phs.PlayerCurrHealth = CurrHealth;
         }
 
-        
-
         if(CurrHealth >= MaxHealth)
         {
             CurrHealth = MaxHealth;
