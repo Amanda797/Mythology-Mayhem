@@ -104,7 +104,9 @@ public class PlayerStats : MonoBehaviour
     {
         if(CurrHealth > 0)
         {
+            
             CurrHealth -= Mathf.Abs(damage);
+            
             if(phs != null)
                 phs.PlayerCurrHealth = CurrHealth;
         }
