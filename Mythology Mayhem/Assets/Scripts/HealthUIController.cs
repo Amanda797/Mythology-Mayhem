@@ -9,9 +9,10 @@ public class HealthUIController : MonoBehaviour
     [Header("UI Components")]
     private UIDocument _doc;
     private VisualElement _heartPanel;
-    [SerializeField] private UIDocument _heartPrefab;
-    [SerializeField] private List<UIDocument> _hearts;
+    [SerializeField] private VisualTreeAsset _heartUXML;
+    [SerializeField] private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
+    [SerializeField] private List<VisualElement> _hearts;
 
     //External Components
     [Header("External Components")]
@@ -38,38 +39,39 @@ public class HealthUIController : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
+    void OnEnable() {
         _doc = GetComponent<UIDocument>();
-        _heartPanel = _doc.rootVisualElement.Q<VisualElement>("PlayerHealth");
-    }
+        _heartPanel = _doc.rootVisualElement.Q("PlayerHealth");
+        _heartUXML = UnityEditor.AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI Toolkit/Heart-UIBP.uxml");
+        _heartPrefab = _heartUXML.CloneTree("Heart");
 
-    void OnValidate() {
-        PlayerCurrHealth = PlayerCurrHealth;
-        PlayerMaxHealth = PlayerMaxHealth;
+        UpdateHealthBarCount(PlayerMaxHealth);
+        SetHealthBar(PlayerCurrHealth);
+
+        _heartPanel.Add(_heartPrefab);
     }
 
     private void SetHealthBar(int health) {
-        for (int i = 0; i < _hearts.Count; i++)
+        for (int i = 0; i < _heartPanel.childCount; i++)
         {
             int remainderHealth = Mathf.Clamp(health - (i * 4), 0, 4);
     
             switch (remainderHealth)
             {
                 case 0:
-                    _hearts[i].rootVisualElement.Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[4]);
+                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[4]);
                     break;
                 case 1:
-                    _hearts[i].rootVisualElement.Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[3]);
+                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[3]);
                     break;
                 case 2:
-                    _hearts[i].rootVisualElement.Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[2]);
+                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[2]);
                     break;
                 case 3:
-                    _hearts[i].rootVisualElement.Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[1]);
+                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[1]);
                     break;
                 case 4:
-                    _hearts[i].rootVisualElement.Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[0]);
+                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[0]);
                     break;
             };
         }
@@ -78,11 +80,11 @@ public class HealthUIController : MonoBehaviour
     //Used to update the amount of Heart sprites in the Health Bar automatically.
     public void UpdateHealthBarCount(int maxHealth)
     {
-        //Convert maxHealth "quater hearts" value into whole hearts value.
+        //Convert maxHealth "quarter hearts" value into whole hearts value.
         //Ceil to ensure less than a whole heart still spawns heart object
         maxHealth = Mathf.CeilToInt(maxHealth / 4.0f);
         
-        int heartCount = _hearts.Count;
+        int heartCount = _heartPanel.childCount;
     
         if(maxHealth > heartCount)
         {
@@ -90,7 +92,8 @@ public class HealthUIController : MonoBehaviour
     
             for(int i = 0; i < heartsToAdd; i++)
             {
-                _heartPanel.Add(_heartPrefab.rootVisualElement.Q<VisualElement>("Heart"));
+                var newHeart = _heartPrefab;
+                _heartPanel.Add(newHeart);
             }
             SetHealthBar(PlayerMaxHealth); //Since we added hearts, update heart graphics so the new hearts respect current health value.
         }
@@ -103,6 +106,8 @@ public class HealthUIController : MonoBehaviour
                 _heartPanel.Remove(_heartPanel.ElementAt(lastHeartIndex));
             }
         }
+
+        _hearts = _heartPanel.Query<VisualElement>("Heart").ToList();
     }// end update health bar count
 
 }
