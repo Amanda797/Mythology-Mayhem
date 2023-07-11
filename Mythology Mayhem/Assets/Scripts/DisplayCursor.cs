@@ -18,4 +18,5 @@ public class DisplayCursor : MonoBehaviour
         // Pass 'null' to the texture parameter to use the default system cursor.
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
+    
 }
