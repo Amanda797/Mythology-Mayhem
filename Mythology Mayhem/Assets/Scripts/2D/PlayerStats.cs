@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float attackHeight = 3f;
     [SerializeField] private LayerMask enemyLayers;
 
+    [SerializeField] private Transform owlPoint;
+
     [Header("Player Stats")]
     [SerializeField] private int atkDamage = 2;
     [SerializeField] public PlayerHeartState phs;
@@ -67,6 +69,7 @@ public class PlayerStats : MonoBehaviour
             if (!flipped) 
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
+                owlPoint.localPosition = owlPoint.localPosition * new Vector2(-1, 1);
                 flipped = !flipped;
             }
         } 
@@ -75,6 +78,7 @@ public class PlayerStats : MonoBehaviour
             if (flipped)
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
+                owlPoint.localPosition = owlPoint.localPosition * new Vector2(-1, 1);
                 flipped = !flipped;
             }
         }
