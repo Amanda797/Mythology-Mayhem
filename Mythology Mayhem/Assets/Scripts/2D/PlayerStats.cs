@@ -6,20 +6,11 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 1f;
-    [SerializeField] private float attackHeight = 3f;
     [SerializeField] private LayerMask enemyLayers;
 
     [Header("Player Stats")]
-    [SerializeField] private int atkDamage = 2;
-    [SerializeField] public PlayerHeartState phs;
-    [SerializeField] public int MaxHealth { get; private set; }
-    [SerializeField] public int CurrHealth { get; private set; }
-    [SerializeField] public int MaxMana { get; private set; }
-    [SerializeField] public int CurrMana { get; private set; }
-    [SerializeField] private float attackRate = 2f;
-    public float NextAttackTime { get; private set; }
-    [SerializeField] private bool canAttack;
+    [SerializeField] HealthUIController huic;
+    [SerializeField] public PlayerStats_SO ps;
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
@@ -30,41 +21,34 @@ public class PlayerStats : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake()
-    {
-        MaxHealth = 16;
-        MaxMana = 10;
-
-        CurrHealth = MaxHealth;
-        CurrMana = MaxMana;
-
+    {        
         sr = GetComponent<SpriteRenderer>();
-        NextAttackTime = 0f;
+        aud = GetComponent<AudioSource>();
+        huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
 
-        //phs = FindObjectOfType<PlayerHeartState>();
-
-        //phs.PlayerCurrHealth = CurrHealth;
-        //phs.PlayerMaxHealth = MaxHealth;
-        //aud = GetComponent<AudioSource>();
-
-        canAttack = true;
-    }
+        if(huic != null)
+            ps = huic.ps;
+        else{
+            print("Can't find huic's player stats so");
+        }
+    }//end on awake
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= NextAttackTime && canAttack) 
+        if (Time.time >= ps.NextAttackTime && ps.CanAttack) 
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Attack();
-                NextAttackTime = Time.time + 1f/attackRate;
+                ps.NextAttackTime = Time.time + 1f/ps.AttackRate;
             }
         }
 
         //The Code below is to flip the attackPoint of the player so that if the player is flipped they can still attack behind the enemy
         if (sr.flipX)
         {
-            if (!flipped) 
+            if (!flipped)
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
                 flipped = !flipped;
@@ -78,23 +62,22 @@ public class PlayerStats : MonoBehaviour
                 flipped = !flipped;
             }
         }
-    
 
     }    
 
     public void ToggleAttack() {
-        canAttack = !canAttack;
+        ps.CanAttack = !ps.CanAttack;
     }//end toggle can attack
 
     private void Attack()
     {
         anim.SetTrigger("Attack");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(attackRange, attackRange+attackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(ps.AttackRange, ps.AttackRange+ps.AttackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
             if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>()) {
-                enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+                enemy.GetComponent<Enemy>().TakeDamage(ps.AttackDamage);
                 enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
         }
@@ -102,41 +85,34 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
-        if(CurrHealth > 0)
+        if(ps.CurrHealth >= 0)
         {
-            
-            CurrHealth -= Mathf.Abs(damage);
-            
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            ps.CurrHealth -= Mathf.Abs(damage);
+            anim.SetTrigger("Hurt");
+            if(huic != null)
+                huic.PlayerCurrHealth = ps.CurrHealth;
+            if(ps.CurrHealth <= 0)
+            {
+                Die();
+            }
         }
-
-        anim.SetTrigger("Hurt");
-
-        if(CurrHealth <= 0)
-        {
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
-            Die();
-        }
-    }
+    }//end take damage
 
     public void Heal(int heal) 
     {
-        if(CurrHealth < MaxHealth)
+        if(ps.CurrHealth < ps.MaxHealth)
         {
-            CurrHealth += Mathf.Abs(heal);
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            ps.CurrHealth += Mathf.Abs(heal);
+            if(huic != null)
+                huic.PlayerCurrHealth = ps.CurrHealth;
         }
-
-        if(CurrHealth >= MaxHealth)
+        else if(ps.CurrHealth >= ps.MaxHealth)
         {
-            CurrHealth = MaxHealth;
-            if(phs != null)
-                phs.PlayerCurrHealth = CurrHealth;
+            ps.CurrHealth = ps.MaxHealth;
+            if(huic != null)
+                huic.PlayerCurrHealth = ps.CurrHealth;
         }
-    }
+    }//end heal
 
     private void Die()
     {
@@ -147,6 +123,8 @@ public class PlayerStats : MonoBehaviour
         GetComponent<PlayerController>().enabled = false;
         this.enabled = false;
 
+        ps.CurrHealth = ps.MaxHealth;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -155,14 +133,16 @@ public class PlayerStats : MonoBehaviour
         if (attackPoint == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange/2);
-        Vector3 heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y + attackHeight/2, attackPoint.position.z);
-        Gizmos.DrawWireSphere(heightPoint, attackRange/2);
-        heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y - attackHeight/2, attackPoint.position.z);
-        Gizmos.DrawWireSphere(heightPoint, attackRange/2);
+        Gizmos.DrawWireSphere(attackPoint.position, ps.AttackRange/2);
+        Vector3 heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y + ps.AttackHeight/2, attackPoint.position.z);
+        Gizmos.DrawWireSphere(heightPoint, ps.AttackRange/2);
+        heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y - ps.AttackHeight/2, attackPoint.position.z);
+        Gizmos.DrawWireSphere(heightPoint, ps.AttackRange/2);
     }
-    /*public void PlaySwordSwing()
+
+    public void PlaySwordSwing()
     {
         aud.Play();
-    }*/
+    }
+    
 }
