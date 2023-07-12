@@ -12,11 +12,10 @@ public class HealthUIController : MonoBehaviour
     [SerializeField] private VisualTreeAsset _heartUXML;
     [SerializeField] private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
-    [SerializeField] private List<VisualElement> _hearts;
 
     //External Components
     [Header("External Components")]
-    [SerializeField] private PlayerStats_SO ps;
+    [SerializeField] public PlayerStats_SO ps;
 
     //Properties
     public int PlayerCurrHealth{
@@ -45,10 +44,10 @@ public class HealthUIController : MonoBehaviour
         _heartUXML = UnityEditor.AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI Toolkit/Heart-UIBP.uxml");
         _heartPrefab = _heartUXML.CloneTree("Heart");
 
+        _heartPanel.Add(_heartPrefab);
+
         UpdateHealthBarCount(PlayerMaxHealth);
         SetHealthBar(PlayerCurrHealth);
-
-        _heartPanel.Add(_heartPrefab);
     }
 
     private void SetHealthBar(int health) {
@@ -59,19 +58,19 @@ public class HealthUIController : MonoBehaviour
             switch (remainderHealth)
             {
                 case 0:
-                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[4]);
+                    _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[4]);
                     break;
                 case 1:
-                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[3]);
+                    _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[3]);
                     break;
                 case 2:
-                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[2]);
+                    _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[2]);
                     break;
                 case 3:
-                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[1]);
+                    _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[1]);
                     break;
                 case 4:
-                    _heartPanel.contentContainer[i].Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[0]);
+                    _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[0]);
                     break;
             };
         }
@@ -92,8 +91,8 @@ public class HealthUIController : MonoBehaviour
     
             for(int i = 0; i < heartsToAdd; i++)
             {
-                var newHeart = _heartPrefab;
-                _heartPanel.Add(newHeart);
+                _heartPrefab = _heartUXML.CloneTree("Heart");
+                _heartPanel.Add(_heartPrefab);
             }
             SetHealthBar(PlayerMaxHealth); //Since we added hearts, update heart graphics so the new hearts respect current health value.
         }
@@ -105,9 +104,7 @@ public class HealthUIController : MonoBehaviour
                 int lastHeartIndex = _heartPanel.childCount - 1;
                 _heartPanel.Remove(_heartPanel.ElementAt(lastHeartIndex));
             }
-        }
-
-        _hearts = _heartPanel.Query<VisualElement>("Heart").ToList();
+        } 
     }// end update health bar count
 
 }
