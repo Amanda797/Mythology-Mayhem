@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayers;
 
+    [SerializeField] private Transform owlPoint;
+
     [Header("Player Stats")]
     [SerializeField] HealthUIController huic;
     [SerializeField] public PlayerStats_SO ps;
@@ -51,6 +53,7 @@ public class PlayerStats : MonoBehaviour
             if (!flipped)
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
+                owlPoint.localPosition = owlPoint.localPosition * new Vector2(-1, 1);
                 flipped = !flipped;
             }
         } 
@@ -59,6 +62,7 @@ public class PlayerStats : MonoBehaviour
             if (flipped)
             {
                 attackPoint.localPosition = attackPoint.localPosition * new Vector2(-1,1);
+                owlPoint.localPosition = owlPoint.localPosition * new Vector2(-1, 1);
                 flipped = !flipped;
             }
         }
