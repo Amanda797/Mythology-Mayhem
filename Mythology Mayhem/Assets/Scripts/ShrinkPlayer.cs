@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ShrinkPlayer : MonoBehaviour
 {
-    [SerializeField] Transform original;
-    [SerializeField] Vector3 shrunk;
-    float shrinkage = .95f;
+    Vector3 shrunk;
+    Vector3 originalScale = Vector3.zero;
+    [SerializeField] float shrinkage = .85f;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player") {
             //Save Player's original Transform information
-            if(original == null) {
-                original = other.gameObject.transform;
+            if(originalScale == Vector3.zero) {
+                originalScale = other.gameObject.transform.localScale;
             }
             //Make a new Vector3 that is a reduced version of the original Transform
-            shrunk = new Vector3(original.transform.localScale.x * shrinkage, original.transform.localScale.y * shrinkage, original.transform.localScale.z * shrinkage);
+            shrunk = new Vector3(other.gameObject.transform.localScale.x * shrinkage, other.gameObject.transform.localScale.y * shrinkage, other.gameObject.transform.localScale.z * shrinkage);
             //Change the Player's local scale to the shrunken local scale
             other.gameObject.transform.localScale = shrunk;
         }
@@ -23,8 +23,9 @@ public class ShrinkPlayer : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if(other.tag == "Player") {
             //Reset the Player's local scale back to its original form
-            other.gameObject.transform.localScale = original.localScale;
-            original = null;
+            print("Exit Ladder Shrink");
+            other.gameObject.transform.localScale = originalScale;
+            originalScale = Vector3.zero;
         }
     }//on trigger enter 2d
 }
