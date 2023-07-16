@@ -242,15 +242,28 @@ public class MedusaControlScript : MonoBehaviour
     {
         //Set Forward Speed for Blend Tree to variable forwardSpeed, unless it is out of Range
         if (forwardSpeed <= 1 && forwardSpeed >= 0)
+        {
             anim.SetFloat("ForwardSpeed", forwardSpeed);
+        }
         else
-            anim.SetFloat("ForwardSpeed", 0);
-
+        {
+            if (forwardSpeed < 0)
+                anim.SetFloat("ForwardSpeed", 0);
+            if (forwardSpeed > 1)
+                anim.SetFloat("ForwardSpeed", 1);
+        }
         //Set Side Speed for Blend Tree to variable sideSpeed, unless it is out of Range
-        if (sideSpeed <= 1 && sideSpeed >= -1)
+        if (sideSpeed <= 1 && sideSpeed >= -10)
+        {
             anim.SetFloat("SideSpeed", sideSpeed);
+        }
         else
-            anim.SetFloat("SideSpeed", 0);
+        {
+            if (sideSpeed < -1)
+                anim.SetFloat("SideSpeed", -1);
+            if (sideSpeed > 1)
+                anim.SetFloat("SideSpeed", 1);
+        }
     }
 
     void CastSpell() 
