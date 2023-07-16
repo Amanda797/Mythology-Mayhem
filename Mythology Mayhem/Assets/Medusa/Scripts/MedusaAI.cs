@@ -20,7 +20,7 @@ public class MedusaAI : MonoBehaviour
     [SerializeField] Vector3 target;
 
     void Awake() {
-        medusaAgent.updatePosition = false;
+        
     }
     
     // Start is called before the first frame update
@@ -49,6 +49,8 @@ public class MedusaAI : MonoBehaviour
         mcs.forwardSpeed = forwardSpeed;
         mcs.sideSpeed = sideSpeed;
 
+        SetDestination(playerHealth);
+        /*
         if(timer >= 5) {
             waypointIndex = (int) Random.Range(0, waypoints.Count);
             SetDestination(waypoints[waypointIndex]); 
@@ -56,14 +58,9 @@ public class MedusaAI : MonoBehaviour
         } else {
             timer += 1 * Time.deltaTime;
         }
+        */
 
-        this.transform.position = Vector3.SmoothDamp(this.transform.position, medusaAgent.nextPosition, ref medusaVelocity, 1f, medusaAgent.speed);
-        
     }//end update
-
-    IEnumerator UpdateDestination() {
-        yield return new WaitForSeconds(5f);
-    }
 
     public void SetDestination(Transform point) {
         medusaAgent.SetDestination(point.position);
