@@ -40,7 +40,6 @@ public class MedusaAI : MonoBehaviour
 
         //print("MV Before: " + medusaAgent.velocity);
         medusaVelocity = (medusaAgent.transform.position - lastPosition) /  Time.deltaTime;
-        print("MV After: " + medusaVelocity);
         lastPosition = medusaAgent.transform.position;
 
         forwardSpeed = medusaAgent.transform.InverseTransformDirection(medusaVelocity).z / medusaAgent.speed;
@@ -49,7 +48,8 @@ public class MedusaAI : MonoBehaviour
         mcs.forwardSpeed = forwardSpeed;
         mcs.sideSpeed = sideSpeed;
 
-        SetDestination(playerHealth);
+        //SetDestination(playerHealth);
+        
         /*
         if(timer >= 5) {
             waypointIndex = (int) Random.Range(0, waypoints.Count);
