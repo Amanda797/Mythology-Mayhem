@@ -24,8 +24,8 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
         string path = "/player.mms";
         FileStream stream = new FileStream(savePath + path, FileMode.Create);
-        PlayerData data = new PlayerData(player);
-        formatter.Serialize(stream, data);
+        //PlayerData data = new PlayerData(player);
+        //formatter.Serialize(stream, data);
         stream.Close();
     }//end Save Player
 

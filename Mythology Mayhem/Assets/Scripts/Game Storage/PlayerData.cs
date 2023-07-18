@@ -24,8 +24,8 @@ public class PlayerData
     //Optional: Achievement Stats
     
     public PlayerData(PlayerStats player) {
-        CurrentHealth = player.CurrHealth;
-        NextAttackTime = player.NextAttackTime;
+        //CurrentHealth = player.CurrHealth;
+        //NextAttackTime = player.NextAttackTime;
     }
 
     
