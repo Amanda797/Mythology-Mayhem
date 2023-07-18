@@ -36,7 +36,9 @@ public class HealingPotion : MonoBehaviour
                 other.gameObject.GetComponent<PlayerStats>().Heal(2);
             else
                 other.gameObject.GetComponent<PlayerStats>().Heal(4);
-            gameObject.GetComponent<AudioSource>().Play();
+            
+            if(gameObject.GetComponent<AudioSource>())
+                gameObject.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }  
     }
