@@ -8,7 +8,7 @@ public class FountainScript : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
-            if(other.gameObject.GetComponent<PlayerStats>().CurrHealth < 100) {
+            if(other.gameObject.GetComponent<PlayerStats>().ps.CurrHealth < 100) {
                 other.gameObject.GetComponent<PlayerStats>().Heal(100);
             }
         }

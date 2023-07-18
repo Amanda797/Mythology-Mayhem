@@ -65,8 +65,10 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             if(canAttack) {
-                other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
-                other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+                if(other.gameObject.GetComponent<PlayerStats>())
+                    other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
+                if(other.gameObject.GetComponent<KnockBackFeedback>())
+                    other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
             
         }

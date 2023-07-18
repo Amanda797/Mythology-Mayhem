@@ -21,7 +21,7 @@ public class WeaponSwitcher : MonoBehaviour
     #endregion
     private bool sword = true;
     private bool switched = false;
-    private float TO = 1f;
+    [SerializeField] private float TO = 1f;
     private float m_timeStamp = 0f;
 
     // Update is called once per frame
