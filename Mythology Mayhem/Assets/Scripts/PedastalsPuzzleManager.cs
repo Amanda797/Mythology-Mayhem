@@ -26,9 +26,25 @@ public class PedastalsPuzzleManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if(PlayerPrefs.GetInt("fishBool") == 1)
+        {
+            fish = true;
+        }
+        if(PlayerPrefs.GetInt("appleBool") == 1)
+        {
+            apple = true;
+        }
+        if(PlayerPrefs.GetInt("torchBool") == 1)
+        {
+            torch = true;
+        }
+        if(PlayerPrefs.GetInt("airBool") == 1)
+        {
+            air = true;
+        }
+
     }
 
     // Update is called once per frame
