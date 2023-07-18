@@ -851,7 +851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &185372254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10381,6 +10381,7 @@ MonoBehaviour:
   playerLayers:
     serializedVersion: 2
     m_Bits: 64
+  canAttack: 1
 --- !u!1 &4049945841559936311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829069110527518486, guid: 23394d6d58aa1044c8456e36440135a1, type: 3}
@@ -11423,35 +11424,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7179005885677499900, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885677499900, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885677499900, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.0142
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885677499900, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -45.05696
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885754969499, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885754969499, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885754969499, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.0142
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885754969499, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -315.39874
       objectReference: {fileID: 0}
     - target: {fileID: 7179005885807186916, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_Pivot.x
@@ -11547,35 +11548,35 @@ PrefabInstance:
       objectReference: {fileID: 6564074549086664390}
     - target: {fileID: 7179005886531261782, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886531261782, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886531261782, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.0142
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886531261782, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -225.2848
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886907749194, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886907749194, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886907749194, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.0142
       objectReference: {fileID: 0}
     - target: {fileID: 7179005886907749194, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -135.17088
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af90ac57a02a45146ac915596d8df82a, type: 3}
@@ -11644,5 +11645,7 @@ MonoBehaviour:
   idleDuration: 5
   waypoints: []
   waypointIndex: 0
+  mirrorInRange: {fileID: 0}
   rb2d: {fileID: 1041329465178042424}
   dead: 0
+  patrolBool: IsPatrolling

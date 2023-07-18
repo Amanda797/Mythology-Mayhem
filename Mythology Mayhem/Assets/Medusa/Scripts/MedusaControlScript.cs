@@ -46,6 +46,8 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] List<AttackType> rangedAttacks;
     int currentRanged = 0;
     private bool activatedRange = false;
+    [SerializeField] float rangedAttackDist = 20f;
+    [SerializeField] float meleeAttackDist = 5f;
 
     public enum AttackType
     {
@@ -115,19 +117,25 @@ public class MedusaControlScript : MonoBehaviour
                     float angle = Vector3.SignedAngle(playerPos, medusaForward, Vector3.up);
                     int angleOfAccuracy = 10;
 
+                    //If Medusa's cone of vision is within [-angleOfAccuracy 0 angleOfAccuracy]... 
                     if(angle <= angleOfAccuracy && angle >= -angleOfAccuracy) {
+                        Vector3 distance = medusaAgent.gameObject.transform.position - playerPos;
 
-                        if(!activatedRange)
+                        //...Check if she's within range to attack the player, and if within range, attack once
+                        if(distance.x <= rangedAttackDist && distance.z <= rangedAttackDist)
                         {
                             //Activate Ranged Attacks
                             MedusaAttack(rangedAttacks[currentRanged]);
+                            //Increment Next Attack in Sequence
                             currentRanged++;
                             if(currentRanged > rangedAttacks.Count) {
                                 currentRanged = 0;
                             }
-                        }
-                        activatedRange = true;                        
-                    }
+                        }//end distance check
+
+                        //Q: Should she back up some or stay within range, leaving setting distance up to the player?
+                                               
+                    }//end angle check
                 }//if path complete
                 break;
             }
