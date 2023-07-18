@@ -1542,8 +1542,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.3984514, g: 0.66916114, b: 0.6981132, a: 1}
-      key1: {r: 0.4, g: 0.67058825, b: 0.69803923, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0.03836772, b: 0, a: 1}
       key2: {r: 0.09019608, g: 0.15294118, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1575,7 +1575,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!1 &1042264112794594859
 GameObject:
@@ -5662,6 +5662,8 @@ MonoBehaviour:
   waypoints: []
   meleeAttacks: 
   rangedAttacks: 
+  rangedAttackDist: 20
+  meleeAttackDist: 5
 --- !u!1 &5321088661470644889
 GameObject:
   m_ObjectHideFlags: 0
