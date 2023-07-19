@@ -10,6 +10,7 @@ public class VolumeSaveSlider : MonoBehaviour
     void Start() {
         LoadVolume();
     }
+
     public void SaveVolume() {
         float volumeValue = volumeSlider.value;
         PlayerPrefs.SetFloat("Volume", volumeValue);
@@ -20,6 +21,15 @@ public class VolumeSaveSlider : MonoBehaviour
         float volumeValue = PlayerPrefs.GetFloat("Volume");
         volumeSlider.value = volumeValue;
         AudioListener.volume = volumeValue;
+    }
+
+    public void SaveVolume(float volume) {
+        PlayerPrefs.SetFloat("Volume", volume/10);
+        LoadVolume(volume);
+    }
+
+    public void LoadVolume(float volume) {
+        AudioListener.volume = volume;
     }
     
 }
