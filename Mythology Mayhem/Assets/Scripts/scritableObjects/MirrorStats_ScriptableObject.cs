@@ -6,9 +6,6 @@ using UnityEngine;
 public class MirrorStats_ScriptableObject : ScriptableObject
 
 {
-    public bool isEquipped;
-    public float enemySpeed;
-    public float enemySetSpeed;
 
-    
+
 }
