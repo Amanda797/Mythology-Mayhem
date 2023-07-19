@@ -12,8 +12,10 @@ public class PedastalsPuzzle : MonoBehaviour
     public SpriteRenderer elementalIcon;
     [SerializeField] private bool isPlayerInRange = false;
     public bool isFishDone, isEarthDone, isFireDone, isAirDone;
+
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
         isFish = puzzleManager.fish;
@@ -55,8 +57,9 @@ public class PedastalsPuzzle : MonoBehaviour
             }
 
         }
-
+        
     }
+
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
