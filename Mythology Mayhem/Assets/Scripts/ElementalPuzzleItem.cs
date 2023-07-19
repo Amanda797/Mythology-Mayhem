@@ -7,7 +7,7 @@ public class ElementalPuzzleItem : MonoBehaviour
 
     public enum Item
     {
-        Apple, Fish, Torch, Air
+        Apple, Torch, Fish, Air
     }
     public ItemTransfer itemTransfer;
 
@@ -30,18 +30,18 @@ public class ElementalPuzzleItem : MonoBehaviour
                 PlayerPrefs.SetInt("appleBool", itemTransfer.apple ? 1 :0);
                 
                 break;
-             case Item.Fish:
-
-                
-                    itemTransfer.fish = true;
-                    PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
-                
-                break;
              case Item.Torch:
-                
+
                 
                     itemTransfer.torch = true;
                     PlayerPrefs.SetInt("torchBool", itemTransfer.torch ? 1 :0);
+                
+                break;
+             case Item.Fish:
+                
+                
+                    itemTransfer.fish = true;
+                    PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
                 
                 break;
              case Item.Air:
@@ -57,7 +57,7 @@ public class ElementalPuzzleItem : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
                 switch(item)
         {
@@ -68,18 +68,18 @@ public class ElementalPuzzleItem : MonoBehaviour
                     PlayerPrefs.SetInt("appleBool", itemTransfer.apple ? 1 :0);
                 }
                 break;
-             case Item.Fish:
-                if(GameObject.Find("Fish"))
-                {
-                    itemTransfer.fish = false;
-                    PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
-                }
-                break;
              case Item.Torch:
                 if(GameObject.Find("Torch"))
                 {
                     itemTransfer.torch = false;
                     PlayerPrefs.SetInt("torchBool", itemTransfer.torch ? 1 :0);
+                }
+                break;
+             case Item.Fish:
+                if(GameObject.Find("Fish"))
+                {
+                    itemTransfer.fish = false;
+                    PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
                 }
                 break;
              case Item.Air:
@@ -90,7 +90,7 @@ public class ElementalPuzzleItem : MonoBehaviour
                 }
                 break;
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update()

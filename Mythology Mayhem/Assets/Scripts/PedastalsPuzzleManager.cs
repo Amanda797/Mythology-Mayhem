@@ -15,13 +15,14 @@ public class PedastalsPuzzleManager : MonoBehaviour
     public  bool torch;
     public  bool air;
 
-    //public GameObject SpawnLocation;
+    
     public GameObject earth;
     public GameObject water;
     public GameObject fire;
     
-    //public PlayerInventory elementalCheck;
-
+    //public GameObject SpawnLocation
+    public GameObject itemBow;
+    public bool bowCollected = false;
 
 
 
@@ -48,18 +49,17 @@ public class PedastalsPuzzleManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
-        PlayerInventory elementalCheck = GetComponent<earthCollected>();
-
-
-        if (EarthCollect == true)
+        if(Pedastal1.GetComponent<PedastalsPuzzle>().isFishDone && Pedastal2.GetComponent<PedastalsPuzzle>().isFishDone && Pedastal3.GetComponent<PedastalsPuzzle>().isFishDone && Pedastal4.GetComponent<PedastalsPuzzle>().isFishDone)
         {
-            earth.SetActive(true);
+            if(!bowCollected)
+            {
+                bowCollected = true;
+                itemBow.SetActive(true);
+            }
         }
-        else
-        {
-            earth.SetActive(false);
-        }
-    }*/
+    }
+
+    
 }
