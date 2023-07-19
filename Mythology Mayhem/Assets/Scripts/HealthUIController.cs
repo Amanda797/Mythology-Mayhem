@@ -45,7 +45,9 @@ public class HealthUIController : MonoBehaviour
         _heartPrefab = _heartUXML.CloneTree("Heart");
 
         _heartPanel.Add(_heartPrefab);
+    }
 
+    void Start() {
         UpdateHealthBarCount(PlayerMaxHealth);
         SetHealthBar(PlayerCurrHealth);
     }
