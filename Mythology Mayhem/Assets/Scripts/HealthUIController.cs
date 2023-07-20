@@ -41,7 +41,10 @@ public class HealthUIController : MonoBehaviour
     void OnEnable() {
         _doc = GetComponent<UIDocument>();
         _heartPanel = _doc.rootVisualElement.Q("PlayerHealth");
-        _heartUXML = UnityEditor.AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI Toolkit/Heart-UIBP.uxml");
+        //Works in Build with a Resource Folder in Assets
+        _heartUXML = Resources.Load<VisualTreeAsset>("UI Toolkit/Heart-UIBP.uxml");
+        //Works in Editor
+        //_heartUXML = UnityEditor.AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Resources/UI Toolkit/Heart-UIBP.uxml");
         _heartPrefab = _heartUXML.CloneTree("Heart");
 
         _heartPanel.Add(_heartPrefab);

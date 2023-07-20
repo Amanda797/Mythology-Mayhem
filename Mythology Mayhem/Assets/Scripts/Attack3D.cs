@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Attack3D : MonoBehaviour
 {
     public enum ObjectType
@@ -15,6 +14,7 @@ public class Attack3D : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, 0);
     bool isAttacking = false;
     public GameObject attackPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,15 +34,16 @@ public class Attack3D : MonoBehaviour
             // Collider[] hitEnemies = Physics.OverlapSphere(transform.position + offset, range);
             foreach (Collider enemy in hitEnemies)
             {
-                if(objectType == ObjectType.Player)
+                print(enemy.gameObject.name);
+                if (objectType == ObjectType.Player)
                 {
-                    if(enemy.gameObject.tag == "Enemy")
+                    if (enemy.gameObject.tag == "Enemy")
                     {
                         print("We hit " + enemy.name);
                         Health health = enemy.GetComponent<Health>();
-                        if(health != null)
+                        if (health != null)
                         {
-                            if(health.GetHealth() > 0)
+                            if (health.GetHealth() > 0)
                             {
                                 health.TakeDamage(damage);
                             }
@@ -53,19 +54,29 @@ public class Attack3D : MonoBehaviour
                             isAttacking = false;
                         }
                     }
+                    else if (enemy.gameObject.tag == "Medusa")
+                    {
+                        MedusaControlScript mcs = enemy.gameObject.GetComponent<MedusaControlScript>();
+                        if (mcs != null)
+                        {
+                            mcs.MedusaDamage(damage);
+                            isAttacking = false;
+                        }
+                    }
                 }
-                else if(objectType == ObjectType.Enemy)
+                else if (objectType == ObjectType.Enemy)
                 {
-                    if(enemy.gameObject.tag == "Player")
+                    print(enemy.gameObject.name);
+                    if (enemy.gameObject.tag == "Player")
                     {
                         print("We hit " + enemy.name);
                         Health health = enemy.GetComponent<Health>();
                         enemySimpleAI enemyAI = enemy.GetComponent<enemySimpleAI>();
-                        if(health != null)
+                        if (health != null)
                         {
                             health.TakeDamage(damage);
-                            if(health.GetHealth() > 0)
-                            {  
+                            if (health.GetHealth() > 0)
+                            {
                                 enemyAI.Hurt();
                             }
                             else
