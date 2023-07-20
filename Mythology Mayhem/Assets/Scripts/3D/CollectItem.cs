@@ -14,10 +14,10 @@ public class CollectItem : MonoBehaviour
             playerInventory.EarthCollect();
             gameObject.SetActive(false);
 
-            //PedPuzzleItems elements = GetComponent<earth1>();
-            //earth1 = true;
-            //PedastalsPuzzleManager earth = GetComponent<apple>();
-            //apple = true;
+            /*PedPuzzleItems elements = GetComponent<earth1>();
+            earth1 = true;
+            PedastalsPuzzleManager earth = GetComponent<apple>();
+            apple = true;*/
         }
     }
 }

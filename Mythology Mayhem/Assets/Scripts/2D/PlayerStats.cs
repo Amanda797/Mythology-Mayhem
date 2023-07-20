@@ -28,8 +28,12 @@ public class PlayerStats : MonoBehaviour
         aud = GetComponent<AudioSource>();
         huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
 
-        if(huic != null)
+        if(huic != null) { 
             ps = huic.ps;
+            ps.CanAttack = true;
+            ps.NextAttackTime = 0;
+            ps.CurrHealth = ps.MaxHealth;
+        }
         else{
             print("Can't find huic's player stats so");
         }
@@ -134,7 +138,7 @@ public class PlayerStats : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void OnDrawGizmosSelected()
+   /*  void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
@@ -144,7 +148,7 @@ public class PlayerStats : MonoBehaviour
         Gizmos.DrawWireSphere(heightPoint, ps.AttackRange/2);
         heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y - ps.AttackHeight/2, attackPoint.position.z);
         Gizmos.DrawWireSphere(heightPoint, ps.AttackRange/2);
-    }
+    } */
 
     public void PlaySwordSwing()
     {

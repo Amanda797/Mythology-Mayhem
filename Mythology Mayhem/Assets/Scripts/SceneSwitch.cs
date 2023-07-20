@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class SceneSwitch : MonoBehaviour
 {
     [SerializeField] public string sceneName;
+    [Tooltip("Location (Index) in next scene")]
+    [SerializeField] public int spawnPointIndex;
     public float distance;
     //public SaveScene saveScene;
     [SerializeField] Transform player;
@@ -25,6 +27,8 @@ public class SceneSwitch : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.position, transform.position) < distance) {
+            PlayerPrefs.SetInt("spwanPointIndex", spawnPointIndex);
+
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single); 
         }
 

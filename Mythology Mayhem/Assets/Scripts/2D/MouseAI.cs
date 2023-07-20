@@ -6,6 +6,9 @@ public class MouseAI : MonoBehaviour
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
 
+    private float ogWalkSpeed;
+    private float ogRunSpeed;
+
     [Header("Attack Activation")]
     [SerializeField] private BoxCollider2D soundTrigger;
     [SerializeField] private GameObject attackTarget;
@@ -53,6 +56,10 @@ public class MouseAI : MonoBehaviour
         movingLeft = sr.flipX;
         currentPosition = transform.position;
         aud = GetComponent<AudioSource>();
+
+        ogWalkSpeed = walkSpeed;
+        ogRunSpeed = runSpeed;
+
     }
 
     // Update is called once per frame
@@ -135,5 +142,17 @@ public class MouseAI : MonoBehaviour
     public void DestroyGameObject()
     {
         Destroy(gameObject);
+    }
+
+    public void SetMovementSpeed(float dividerValue)
+    {
+        walkSpeed /= dividerValue;
+        runSpeed /= dividerValue;
+    }
+
+    public void ResetMovementSpeed()
+    {
+        walkSpeed = ogWalkSpeed;
+        runSpeed = ogRunSpeed;
     }
 }
