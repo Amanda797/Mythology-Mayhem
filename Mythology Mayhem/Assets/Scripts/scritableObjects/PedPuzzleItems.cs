@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PedPuzzleItems : ScriptableObject
 {
-    public bool earth;
+    public bool earth1;
     public bool water;
     public bool fire;
     public bool air;

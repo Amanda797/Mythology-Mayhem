@@ -25,10 +25,12 @@ public class Shoot2D : MonoBehaviour
     private bool CSD = false;
 
     [SerializeField] private Animator anim;
+    [SerializeField] public PlayerStats_SO ps;
 
-    void OnStart()
+    void Start()
     {
         CS = false;
+        source = gameObject.GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -41,11 +43,15 @@ public class Shoot2D : MonoBehaviour
         {
             anim.SetBool("CanShoot", true);
             anim.SetBool("UseSword", false);
+
+            ps.CanAttack = false;
         }
         if (CS == false)
         {
             anim.SetBool("CanShoot", false);
             anim.SetBool("UseSword", true);
+
+            ps.CanAttack = true;
         }
         /*if(SceneManager.GetActiveScene().name == "2Dlabyrinth_Levers 1" || SceneManager.GetActiveScene().name == "2Dlabyrinth_Pedastals")
         {

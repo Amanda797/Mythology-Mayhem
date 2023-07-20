@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,26 +10,33 @@ public class TwoDMirror : MonoBehaviour
     public bool isEquipped;
     public bool isInRangeOfEnemy;
 
-    public MouseAI mouseAI;
+    public float slowingValue;
+
+    public bool deBugMirrorReset;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Debug.Log(mouseAI.walkSpeed); 
-        Debug.Log(mouseAI.runSpeed);
-        
+        if(deBugMirrorReset == true)
+        {
+            PlayerPrefs.SetInt("mirrorBool", 0);
+        }
     }
-
+                                        
     // Update is called once per frame
     void Update()
     {
         if(pickUpAllowed == true && Input.GetKeyDown(KeyCode.E))
         {
+            //Destroy(gameObject);
             PickUp();
+        }
 
-            Debug.Log(mouseAI.walkSpeed);
-            Debug.Log(mouseAI.runSpeed);
+        if(PlayerPrefs.GetInt("mirrorBool") == 1)
+        {
+            //Destroy(gameObject);
         }
 
     }
@@ -55,10 +62,20 @@ public class TwoDMirror : MonoBehaviour
     private void PickUp()
     {
         pickedUp = true;
+        //SetMinotaurSpeed();
+        PlayerPrefs.SetInt("mirrorBool", 1);
         gameObject.SetActive(false);
+    }
 
-        mouseAI.walkSpeed = 1f;
-        mouseAI.runSpeed = 3f;
+    private void SetMinotaurSpeed()
+    {
+        MouseAI[] enemies = FindObjectsOfType<MouseAI>();
+
+        foreach(MouseAI enemy in enemies)
+        {
+            enemy.SetMovementSpeed(slowingValue);
+
+        }
     }
 
 }
