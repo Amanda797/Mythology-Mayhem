@@ -8,9 +8,14 @@ public class MedusaSpellAttackScript : MonoBehaviour
     public float speed;
 
     public GameObject damageSphere;
+    public Light lightSource;
 
     public float startScale;
     public float endScale;
+
+    public float startLightRange;
+    public float endLightRange;
+
     public float timeWhenHit;
     public float timeToScale;
     public float timeReachedFullScale;
@@ -46,8 +51,11 @@ public class MedusaSpellAttackScript : MonoBehaviour
                 timeReachedFullScale = Time.time;
             }
 
-            float finalAmount = Mathf.Lerp(startScale, endScale, scaleAmount);
-            damageSphere.transform.localScale = new Vector3(finalAmount, finalAmount, finalAmount);
+            float finalScaleAmount = Mathf.Lerp(startScale, endScale, scaleAmount);
+            damageSphere.transform.localScale = new Vector3(finalScaleAmount, finalScaleAmount, finalScaleAmount);
+            float finalLightRangeAmount = Mathf.Lerp(startLightRange, endLightRange, scaleAmount);
+            lightSource.range = finalLightRangeAmount;
+
             if (Time.time - timeReachedFullScale >= timeAtFullScale && fullScale)
             {
                 Destroy(gameObject);
