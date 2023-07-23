@@ -122,7 +122,6 @@ public class SaveScene : MonoBehaviour
         this.SaveNow();
     }
     
-
     void SaveNow()
     {
         
@@ -163,7 +162,7 @@ public class SaveScene : MonoBehaviour
         // print(sceneObjects.objects[1].position);
 
         foreach (var item in sceneObjects.objects)
-        {
+        {            
             if(item.gameObject != null)
             {
                 item.gameObject.transform.position = item.position;
