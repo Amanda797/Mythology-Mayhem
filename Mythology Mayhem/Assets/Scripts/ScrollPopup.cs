@@ -13,6 +13,7 @@ public class ScrollPopup : MonoBehaviour
     public GameObject supriseObject;
     bool isPopupActive = false;
     GameObject player;
+    bool surpriseSpawned = false;
 
     void Start()
     {
@@ -48,8 +49,9 @@ public class ScrollPopup : MonoBehaviour
                     ShowPopup();
                     //StopCoroutine(Hover());
                     isPopupActive = true;
-                    if(supriseObject != null)
+                    if(supriseObject != null && !surpriseSpawned)
                         supriseObject.SetActive(true);
+                        surpriseSpawned = true;
                 }
             }
         }

@@ -7,28 +7,31 @@ public class FPSHealth : MonoBehaviour
 { // --------------------------
     // ***PROPERTIES***
     // --------------------------
-    [SerializeField] private float MaxHealth;
-    [SerializeField] private float health;
-    [SerializeField] private GameObject mainObject; // Parent Self
+
+    [Header("Player Stats")]
+    [SerializeField] HealthUIController huic;
+    [SerializeField] public PlayerStats_SO ps;
 
     // --------------------------
     // ***METHODS***
     // --------------------------
-    void Start()
-    {
-        health = MaxHealth;
-    }// end start
+    
+    void Awake()
+    {        
+        huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
+
+        if(huic != null) { 
+            ps = huic.ps;
+            ps.CanAttack = true;
+            ps.NextAttackTime = 0;
+            ps.CurrHealth = ps.MaxHealth;
+        }
+        else{
+            print("Can't find huic's player stats so");
+        }
+    }//end on awake
 
     void FixedUpdate() {
-        // Test
-        float f = 0f;
-        if(f >= 1f) {
-            TakeDamage(1);
-            print(GetHealth());
-        } else {
-            f += Time.deltaTime;
-        }        
-
         //Death Check
         if(GetHealth() <= 0) {
             SetHealth(0);
@@ -36,22 +39,22 @@ public class FPSHealth : MonoBehaviour
     }//end fixed update
 
     public void SetHealth(float h) {
-        health = h;
+        huic.PlayerCurrHealth  = (int) h;
     }// end set health
 
     public float GetHealth() {
-        return health;
+        return huic.PlayerCurrHealth;
     }//end get health
 
     public void TakeDamage(float d) {
-        health -= d;
+        huic.PlayerCurrHealth -= (int) d;
         if(GetHealth() <= 0) {
             Death();
         }
     }//end take damage
 
     public void Heal(float h) {
-        health += h;
+        huic.PlayerCurrHealth += (int) h;
     }//end heal
 
     public void Death() {
