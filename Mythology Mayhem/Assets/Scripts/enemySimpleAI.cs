@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class enemySimpleAI : MonoBehaviour
 {
+    public float attackDamage = 2f;
     public float speed = 3f;   // Movement speed of the enemy
     public float attackRange = 2f;   // Distance from which the enemy can attack the player
     public float attackDelay = 1f;   // Delay between enemy attacks
@@ -88,7 +89,7 @@ public class enemySimpleAI : MonoBehaviour
     {
         // Play attack animation or perform attack action
         Debug.Log("Attacking player");
-        player.GetComponent<FPSHealth>().TakeDamage(10);
+        player.GetComponent<FPSHealth>().TakeDamage(attackDamage);
         animator.SetTrigger("Attack");
     }
     public void Hurt()
