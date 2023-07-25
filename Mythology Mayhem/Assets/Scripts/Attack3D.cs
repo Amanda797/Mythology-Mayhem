@@ -34,12 +34,10 @@ public class Attack3D : MonoBehaviour
             // Collider[] hitEnemies = Physics.OverlapSphere(transform.position + offset, range);
             foreach (Collider enemy in hitEnemies)
             {
-                print(enemy.gameObject.name);
                 if (objectType == ObjectType.Player)
                 {
                     if (enemy.gameObject.tag == "Enemy")
                     {
-                        print("We hit " + enemy.name);
                         Health health = enemy.GetComponent<Health>();
                         if (health != null)
                         {
