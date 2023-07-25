@@ -136,17 +136,19 @@ public class MenuManager : MonoBehaviour
     public void TogglePause() {
         if(pausePanelElement != -1 && pauseBackgroundElement != -1)
         {
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().ToggleAttack();
-
             this.gameObject.GetComponent<AudioSource>().Play();
             // Toggle the background and pause panels
             if(menuPanels[pauseBackgroundElement].activeInHierarchy) 
             {
                 menuPanels[pauseBackgroundElement].SetActive(false);
                 menuPanels[pausePanelElement].SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             } else {            
                 menuPanels[pauseBackgroundElement].SetActive(true);
                 menuPanels[pausePanelElement].SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             } 
         }
         else {
