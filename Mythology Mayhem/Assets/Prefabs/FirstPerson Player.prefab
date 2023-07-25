@@ -113,7 +113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 48.700012, y: 42.699997}
+  m_AnchoredPosition: {x: 48.69995, y: 42.69995}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &824209631
@@ -272,7 +272,6 @@ GameObject:
   - component: {fileID: 1586351806}
   - component: {fileID: 1586351803}
   - component: {fileID: 8099485773210619689}
-  - component: {fileID: 5107571716828879203}
   m_Layer: 3
   m_Name: FirstPerson Player
   m_TagString: Player
@@ -352,9 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc2f6dfe173051418c22e66e2c0c098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  health: 0
-  mainObject: {fileID: 0}
+  huic: {fileID: 0}
+  ps: {fileID: 0}
 --- !u!65 &1586351806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -375,7 +373,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289352684015478270}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
@@ -407,10 +405,7 @@ MonoBehaviour:
   Bow2: {fileID: 4362222162249411712}
   Bow3: {fileID: 975618400002418231}
   Bow4: {fileID: 1859781639417409562}
-  Bow1: {fileID: 2273727940181210528}
-  Bow2: {fileID: 4362222162249411712}
-  Bow3: {fileID: 975618400002418231}
-  Bow4: {fileID: 1859781639417409562}
+  TO: 1
 --- !u!1 &289352684733399155
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +941,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
