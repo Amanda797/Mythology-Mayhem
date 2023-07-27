@@ -35,7 +35,7 @@ public class KnockBackFeedback : MonoBehaviour
 
     private IEnumerator ResetY()
     {
-        yield return new WaitForSeconds(delay/8);
+        yield return new WaitForSeconds(delay/4);
         rb2d.velocity = new Vector3(rb2d.velocity.x, 0f, 0f);
     
     }
