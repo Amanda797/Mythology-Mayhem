@@ -1622,6 +1622,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &226082501
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323,6 +3324,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &385342334
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4820,6 +4822,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &718551490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5402,6 +5405,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 0
+  attackRate: 1.5
 --- !u!61 &758470684
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6887,6 +6891,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &964210994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8773,6 +8778,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 0
+  attackRate: 1.5
 --- !u!61 &1179680952
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9118,6 +9124,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &1186924093
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10616,6 +10623,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &1429672736
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12084,6 +12092,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!61 &1538280544
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13076,7 +13085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6487610aa1710054fbff284366c5d70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 2D_Cavern_Lever
+  sceneName: Athens
+  spawnPointIndex: 0
   distance: 5
   player: {fileID: 0}
 --- !u!61 &1682757955
@@ -15368,7 +15378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6487610aa1710054fbff284366c5d70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: StatuePuzzle
+  sceneName: Athens
+  spawnPointIndex: 0
   distance: 5
   player: {fileID: 0}
 --- !u!61 &2022512307
@@ -16400,6 +16411,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 0
+  attackRate: 1.5
 --- !u!114 &798735037196010213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17606,6 +17618,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!114 &6713872018377462153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17659,6 +17672,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canAttack: 1
+  attackRate: 1.5
 --- !u!114 &7551073811084980324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17752,6 +17766,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1226731725133408970}
     m_Modifications:
+    - target: {fileID: 584107617595705696, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617595705696, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617595705696, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617595705696, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 584107617610143517, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
       propertyPath: enemy_go.Array.data[0]
       value: 
@@ -17764,6 +17794,58 @@ PrefabInstance:
       propertyPath: enemy_go.Array.data[2]
       value: 
       objectReference: {fileID: 758470678}
+    - target: {fileID: 584107617610143518, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617665134855, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617665134855, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617665134855, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107617665134855, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107618581764017, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107618581764017, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107618581764017, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107618581764017, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107619025359277, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107619025359277, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107619025359277, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584107619025359277, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8284651563429711106, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
       propertyPath: m_RootOrder
       value: 0
