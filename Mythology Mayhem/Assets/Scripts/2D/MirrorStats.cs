@@ -49,6 +49,7 @@ public class MirrorStats : MonoBehaviour
             if(Vector3.Distance(player.transform.position, enemy.transform.position) < slowingRadius)
             {
                 enemy.SetMovementSpeed(slowingValue);
+                Debug.Log("Slowing Enemy");
             }
         }
 
