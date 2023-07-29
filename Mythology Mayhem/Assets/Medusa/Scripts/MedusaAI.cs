@@ -11,7 +11,7 @@ public class MedusaAI : MonoBehaviour
     [SerializeField] MedusaControlScript mcs;
     [SerializeField] List<Transform> t;
     [SerializeField] List<Transform> waypoints;
-    [SerializeField] Health playerHealth;
+    [SerializeField] FPSHealth playerHealth;
     float timer = 0f;
 
     Vector3 lastPosition;
@@ -27,7 +27,7 @@ public class MedusaAI : MonoBehaviour
     void Start()
     {        
         medusaAgent = gameObject.GetComponent<NavMeshAgent>();
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSHealth>();
     }
 
     // Update is called once per frame
