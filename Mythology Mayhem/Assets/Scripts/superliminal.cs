@@ -29,8 +29,8 @@ public class superliminal : MonoBehaviour
     {
         HandleInput();
         ResizeTarget();
-        
     }
+    
     void HandleInput()
     {
         // Check for left mouse click
