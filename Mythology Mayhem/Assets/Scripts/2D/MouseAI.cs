@@ -45,6 +45,7 @@ public class MouseAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mirrorInRange = GetComponent<BoxCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         savedWaypoints = waypoints;
         if (attackTarget == null) 
