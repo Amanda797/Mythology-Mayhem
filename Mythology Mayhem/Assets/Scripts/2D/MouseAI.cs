@@ -45,6 +45,7 @@ public class MouseAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mirrorInRange = GetComponent<BoxCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         savedWaypoints = waypoints;
         if (attackTarget == null) 
@@ -108,21 +109,33 @@ public class MouseAI : MonoBehaviour
 
     void Flip()
     {
-        Vector2 currentDirection = (currentPosition-previousPosition).normalized;
-        if (currentDirection.x < 0)
-        {
-            sr.flipX = true;
-        }
-        else if (currentDirection.x > 0)
-        {
-            sr.flipX = false;
+        if(!attacking) {
+            Vector2 currentDirection = (currentPosition-previousPosition).normalized;
+            if (currentDirection.x < 0)
+            {
+                sr.flipX = true;
+            }
+            else if (currentDirection.x > 0)
+            {
+                sr.flipX = false;
+            }
+        } else {
+            Vector2 playerDirection = (attackTarget.transform.position-gameObject.transform.position).normalized;
+            if (playerDirection.x < 0)
+            {
+                sr.flipX = true;
+            }
+            else if (playerDirection.x > 0)
+            {
+                sr.flipX = false;
+            }
         }
     }
 
     void AttackPlayer()
     {
         attacking = soundTrigger.IsTouching(attackTarget.GetComponent<Collider2D>());
-        if (attacking)
+        if (attacking && gameObject.GetComponent<Enemy>().CanAttack)
         {
             transform.position = Vector2.MoveTowards(transform.position, attackTarget.transform.position, runSpeed * Time.deltaTime);
         }

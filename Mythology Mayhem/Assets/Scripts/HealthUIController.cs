@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,6 +25,7 @@ public class HealthUIController : MonoBehaviour
         set {
             ps.CurrHealth = Mathf.Clamp(value, 0, PlayerMaxHealth);
             SetHealthBar(PlayerCurrHealth);
+            UpdateHealthBarCount(PlayerMaxHealth);
         }
     }
 
@@ -43,10 +43,9 @@ public class HealthUIController : MonoBehaviour
         _doc = GetComponent<UIDocument>();
         _heartPanel = _doc.rootVisualElement.Q("PlayerHealth");
         //Works in Build with a Resource Folder in Assets
-        //_heartUXML = Resources.Load<VisualTreeAsset>("Heart-UIBP.uxml");
-        //Works in Editor
-        //_heartUXML = UnityEditor.AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Resources/UI Toolkit/Heart-UIBP.uxml");
+        _heartUXML = Resources.Load<VisualTreeAsset>("UI Toolkit/Heart-UIBP");
         _heartPrefab = _heartUXML.CloneTree("Heart");
+
         _heartPanel.Add(_heartPrefab);
     }
 
@@ -54,13 +53,7 @@ public class HealthUIController : MonoBehaviour
         UpdateHealthBarCount(PlayerMaxHealth);
         SetHealthBar(PlayerCurrHealth);
     }
-    private void Update()
-    {
-        if(_heartUXML != null) 
-        {
-            print("Loaded");
-        }
-    }
+
     private void SetHealthBar(int health) {
         for (int i = 0; i < _heartPanel.childCount; i++)
         {

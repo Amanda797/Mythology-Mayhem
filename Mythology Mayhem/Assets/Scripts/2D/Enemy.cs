@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private LayerMask playerLayers;
     [SerializeField] private bool canAttack = true;
+    [SerializeField] private float attackRate = 1.5f;
 
     private int currHealth;
 
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    private void OnCollisionStay2D(Collision2D other) 
     {
         if (other.gameObject.layer == 3)
         {
@@ -69,8 +70,16 @@ public class Enemy : MonoBehaviour
                     other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
                 if(other.gameObject.GetComponent<KnockBackFeedback>())
                     other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+                canAttack = false;
+                StartCoroutine(AttackRate());
+                //TODO: Add dust cloud animation/particles
             }
             
         }
+    }//end on collision enter 2d
+
+    IEnumerator AttackRate() {
+        yield return new WaitForSeconds(attackRate);
+        canAttack = true;
     }
 }

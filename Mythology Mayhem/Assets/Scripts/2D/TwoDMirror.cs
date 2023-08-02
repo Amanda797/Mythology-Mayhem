@@ -30,13 +30,13 @@ public class TwoDMirror : MonoBehaviour
     {
         if(pickUpAllowed == true && Input.GetKeyDown(KeyCode.E))
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
             PickUp();
         }
 
         if(PlayerPrefs.GetInt("mirrorBool") == 1)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
 
     }

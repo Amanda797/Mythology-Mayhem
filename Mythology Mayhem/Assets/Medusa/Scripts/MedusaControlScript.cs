@@ -613,7 +613,7 @@ public class MedusaControlScript : MonoBehaviour
             }
         }
     }
-    void SetAggroState(AggroStates state)
+    public void SetAggroState(AggroStates state)
     {
         if (state == AggroStates.Normal)
         {
