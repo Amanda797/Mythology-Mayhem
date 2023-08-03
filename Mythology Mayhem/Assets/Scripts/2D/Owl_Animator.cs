@@ -19,14 +19,22 @@ public class Owl_Animator : MonoBehaviour
     [SerializeField] private int atkDamage;
     [SerializeField] private Transform Peck;
     [SerializeField] private float atkRange;
+    private PlayerStats ps;
 
     private float xMovement;
 
     [SerializeField] private float playerRange = 1f;
 
+    public float moveAttackSpeed = 5f;
+    public float hitDelay = 0.5f;
+    public int attackInterval = 7;
+
     void Start()
     {
         awake = true;
+        thePlayer = FindObjectOfType<PlayerController>().gameObject;
+        playa = FindObjectOfType<PlayerStats>().gameObject;
+        ps = FindObjectOfType<PlayerStats>();
     }
 
     void OnAwake()
@@ -35,15 +43,21 @@ public class Owl_Animator : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         //playa = FindObjectOfType<PlayerStats>();
     }
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
-        if (col.tag == "Enemy")
+        if (col.tag == "Enemy" && ps.hitCount >= attackInterval && attacking == false )
         {
-            Attack();
+            ps.hitCount = 0;
+            StartCoroutine(Attack(col.transform));
         }
     }
-    void Update()
+    void FixedUpdate()
     {
+        if (attacking)
+        {
+            return;
+        }
+
         if (awake == true)
         {
             idle = true;
@@ -59,20 +73,28 @@ public class Owl_Animator : MonoBehaviour
             freshDelay = Time.time + timing;
         }*/
         playerInRange = Physics2D.OverlapCircle(transform.position, playerRange, playerLayer);
-        if (playerInRange && awake == true && idle == true)
+
+        if (playerInRange && Vector3.Distance(transform.position, thePlayer.transform.position) > 5 && awake == true && idle == true)
         {
             transform.position = Vector3.MoveTowards(transform.position, thePlayer.transform.position, _Speed * Time.deltaTime);
+            
         }
 
 
-        if (transform.position == thePlayer.transform.position && playa.GetComponent<PlayerStats>().flipped == true && awake == true && idle == true)
+       /* if (transform.position == thePlayer.transform.position && playa.GetComponent<PlayerStats>().flipped == true && awake == true && idle == true)
         {
             sr.flipX = true;
         }
         if (transform.position == thePlayer.transform.position && playa.GetComponent<PlayerStats>().flipped == false && awake == true && idle == true)
         {
             sr.flipX = false;
+        }*/
+
+        if (awake && idle)
+        {
+            sr.flipX = transform.position.x > thePlayer.transform.position.x;
         }
+
     }
 
     void OnDrawGizmosSelected()
@@ -80,16 +102,44 @@ public class Owl_Animator : MonoBehaviour
         Gizmos.DrawSphere(transform.position, playerRange);
     }
 
-    void Attack()
+    IEnumerator Attack(Transform target)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(Peck.position, atkRange, enemyLayer);
-        foreach(Collider2D enemy in hitEnemies)
+        Debug.Log("Owl IS Attacking");
+        attacking = true;
+        bool attackComplete = false;
+
+        while (!attackComplete)
         {
-            if (enemy.GetComponent<Enemy>())
+            transform.position = Vector3.MoveTowards(transform.position, target.position, _Speed * Time.deltaTime * moveAttackSpeed);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(Peck.position, atkRange, enemyLayer);
+
+            if (target == null)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+                attackComplete = true;
+                Debug.Log("Owl did not do Damage");
             }
+
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                if (enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+                    enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+                    attackComplete = true;
+                    Debug.Log("Owl did Damage");
+                }
+            }
+
+            yield return new WaitForFixedUpdate();
         }
+
+        yield return new WaitForSeconds(hitDelay);
+
+        Debug.Log("Owl IS Done Attacking");
+        attacking = false;
+        yield return null;
+
+
     }
     #region wastedtears
     //#region variables

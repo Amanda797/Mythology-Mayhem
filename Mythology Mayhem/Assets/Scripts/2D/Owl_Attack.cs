@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class Owl_Attack : MonoBehaviour
 {
-    [SerializeField] private Transform attackPoint;
+    
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
