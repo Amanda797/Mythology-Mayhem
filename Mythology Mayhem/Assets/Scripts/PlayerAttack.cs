@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour
     public Animator anim;
     public AnimationClip attackAnim;
     public Attack3D attack3D;
+
+    public SwordEffectScript effectsScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && attack3D.GetIsAttacking() == false)
         {
             anim.Play(attackAnim.name);
+            effectsScript.vfxAnimator.SetTrigger("StartEffect");
         }
 
         
