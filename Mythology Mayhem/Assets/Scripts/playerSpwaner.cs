@@ -11,6 +11,9 @@ public class playerSpwaner : MonoBehaviour
     int sceneIndex;
     public List<Transform> spwanPoints = new List<Transform>();
     public playerSelectable PlayerPrefabs;
+
+    public GameObject owlPrefab;
+
     // Start is called before the first frame update
     void Awake()
     {       
@@ -44,7 +47,13 @@ public class playerSpwaner : MonoBehaviour
         // Save Scene Status
         PlayerPrefs.SetInt("sceneIndex", SceneManager.GetActiveScene().buildIndex);
 
-        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation).SetActive(true);
+        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
+
+        if (PlayerPrefs.GetInt("owl") == 1)
+        {
+            Debug.Log("Owl is active");
+            Instantiate(owlPrefab, spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation).SetActive(true);
+        } 
 
     }
 

@@ -9,12 +9,25 @@ public class StatueBody3D : MonoBehaviour
     private Transform player;
     public float interactDistance;
     public int statueElement;
+    private StatueBody2D statueBody2D;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        StatueBody2D[] allstatueBodies2D = FindObjectsOfType<StatueBody2D>();
+
+        foreach (StatueBody2D statueBody in allstatueBodies2D)
+        {
+            if(statueBody.statueElement == statueElement)
+            {
+                this.statueBody2D = statueBody;
+                break;
+            }
+        }
+
         ChangeHeads();
+
     }
 
     // Update is called once per frame
@@ -71,6 +84,7 @@ public class StatueBody3D : MonoBehaviour
         }
 
         statueManager.CheckHeadPuzzleStatus();
+        statueBody2D.ChangeHeads();
     }
 
     string StatueWeaponCheck()
