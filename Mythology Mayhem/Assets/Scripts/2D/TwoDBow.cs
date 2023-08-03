@@ -12,7 +12,7 @@ public class TwoDBow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,12 +22,6 @@ public class TwoDBow : MonoBehaviour
         {
             PickUp();
         }
-
-        if(PlayerPrefs.GetInt("bowBool") == 1)
-        {
-            Destroy(gameObject);
-        }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other) 

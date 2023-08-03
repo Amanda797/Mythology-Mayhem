@@ -19,16 +19,16 @@ public class PedastalsPuzzleManager : MonoBehaviour
     public GameObject earth;
     public GameObject water;
     public GameObject fire;
+
+    public GameObject door;
     
     //public GameObject SpawnLocation
     public GameObject itemBow;
-    public bool bowCollected = false;
-
-
 
     // Start is called before the first frame update
     void Awake()
     {
+        door.GetComponent<DoorCode>().blocked = true;
         if(PlayerPrefs.GetInt("fishBool") == 1)
         {
             fish = true;
@@ -39,7 +39,7 @@ public class PedastalsPuzzleManager : MonoBehaviour
         }
         if(PlayerPrefs.GetInt("torchBool") == 1)
         {
-            torch = true;
+             torch = true;
         }
         if(PlayerPrefs.GetInt("airBool") == 1)
         {
@@ -53,13 +53,13 @@ public class PedastalsPuzzleManager : MonoBehaviour
     {
         if(Pedastal1.GetComponent<PedastalsPuzzle>().isFishDone && Pedastal2.GetComponent<PedastalsPuzzle>().isFishDone && Pedastal3.GetComponent<PedastalsPuzzle>().isFishDone && Pedastal4.GetComponent<PedastalsPuzzle>().isFishDone)
         {
-            if(!bowCollected)
+            door.GetComponent<DoorCode>().doorOpen = true;
+            door.GetComponent<DoorCode>().blocked = false;
+            
+            if(itemBow.GetComponent<TwoDBow>().pickedUp == false)
             {
-                bowCollected = true;
                 itemBow.SetActive(true);
             }
         }
     }
-
-    
 }

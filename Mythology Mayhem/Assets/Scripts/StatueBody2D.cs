@@ -57,7 +57,7 @@ public class StatueBody2D : MonoBehaviour
         }
     }
 
-    void ChangeHeads()
+    public void ChangeHeads()
     {
         if(PlayerPrefs.GetInt(StatueBodyCheck()) != statueManager.statues[statueElement].currentHead)
         {

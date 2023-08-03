@@ -22,6 +22,7 @@ public class StatuePuzzle3D : MonoBehaviour
 
     public GameObject healthPickUp;
     public Transform healthSpawnPos;
+
     
     // Start is called before the first frame update
     void Awake()

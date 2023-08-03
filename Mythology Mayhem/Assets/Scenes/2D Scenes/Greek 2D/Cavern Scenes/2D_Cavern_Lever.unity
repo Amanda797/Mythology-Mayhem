@@ -1053,6 +1053,7 @@ MonoBehaviour:
   spwanPoints:
   - {fileID: 1613129544}
   PlayerPrefabs: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
+  owlPrefab: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
 --- !u!4 &708189250
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,7 +1085,7 @@ MonoBehaviour:
   items:
   - name: Urn
     item: {fileID: 5263410413950716904, guid: 70d2eef0506087c44bab88e88e57568e, type: 3}
-  itemSpawnPoint: {fileID: 904904429}
+  itemSpawnPoint: {fileID: 6478159597610387670, guid: a12d6a78a50660148b663febb14441ae, type: 3}
   ResstPref: 0
 --- !u!1 &719968869 stripped
 GameObject:
@@ -1111,6 +1112,37 @@ MonoBehaviour:
   anim: {fileID: 719968872}
   inRange: 0
   switchOn: 0
+--- !u!1 &838166613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838166614}
+  m_Layer: 0
+  m_Name: Owl Spawn Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838166614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838166613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 403.8, y: 1.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &894277773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7692487075164556626, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2365,5 +2397,7 @@ MonoBehaviour:
   Lever9: {fileID: 1254682746}
   Lever10: {fileID: 19941324}
   Door: {fileID: 1208276689}
-  item: {fileID: 0}
-  mirrorCollected: 0
+  owl: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
+  owlSpawnPos: {fileID: 838166614}
+  owlSpawned: 0
+  resetOwl: 1
