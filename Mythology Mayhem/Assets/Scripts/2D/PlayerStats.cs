@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Transform owlPoint;
 
     [Header("Player Stats")]
-    [SerializeField] HealthUIController huic;
+    [SerializeField] public HealthUIController huic;
     [SerializeField] public PlayerStats_SO ps;
 
     [Header("Player Animation")]
