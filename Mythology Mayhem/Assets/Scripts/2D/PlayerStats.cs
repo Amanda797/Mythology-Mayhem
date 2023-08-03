@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
 
 
     [Header("Player Stats")]
-    [SerializeField] HealthUIController huic;
+    [SerializeField] public HealthUIController huic;
     [SerializeField] public PlayerStats_SO ps;
 
     [Header("Player Animation")]
