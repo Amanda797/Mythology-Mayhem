@@ -492,7 +492,7 @@ public class MedusaControlScript : MonoBehaviour
                     health = 500;
                     SetAggroState(AggroStates.Enraged);
                     medusaAgent.stoppingDistance = 3;
-                    medusaAgent.SetDestination(waypoints[2].position);
+                    medusaAgent.SetDestination(waypoints[1].position);
                     CurrentState = AttackStates.MoveToRemainingPlatform;
                 }
                 return;
