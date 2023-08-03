@@ -59,12 +59,12 @@ public class StatueHead : MonoBehaviour
         if(pickedUp)
         {
             transform.GetComponent<MeshRenderer>().enabled = false;
-            transform.GetComponent<Collider>().enabled = false;
+           // transform.GetComponent<Collider>().enabled = false;
         }
         else
         {
             transform.GetComponent<MeshRenderer>().enabled = true;
-            transform.GetComponent<Collider>().enabled = true;
+           // transform.GetComponent<Collider>().enabled = true;
         }
     }
 }

@@ -9,6 +9,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private LayerMask enemyLayers;
 
     [SerializeField] private Transform owlPoint;
+    [SerializeField] private GameObject owlPrefab;
+
 
     [Header("Player Stats")]
     [SerializeField] HealthUIController huic;
@@ -20,6 +22,9 @@ public class PlayerStats : MonoBehaviour
     private SpriteRenderer sr;
     public bool flipped = false;
     private AudioSource aud;    
+
+    private GameObject owl;
+    [HideInInspector]public int hitCount;
 
     // Start is called before the first frame update
     void Awake()
@@ -73,7 +78,15 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-    }    
+    }   
+
+    public void SpawnOwl() 
+    {
+        if(owl == null)
+        {
+            Instantiate(owlPrefab, owlPoint.position, Quaternion.identity);
+        }
+    } 
 
     public void ToggleAttack() {
         ps.CanAttack = !ps.CanAttack;
@@ -86,7 +99,9 @@ public class PlayerStats : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(ps.AttackRange, ps.AttackRange+ps.AttackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>()) {
+            if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
+            {
+                hitCount++;
                 enemy.GetComponent<Enemy>().TakeDamage(ps.AttackDamage);
                 enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
