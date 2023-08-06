@@ -13,7 +13,7 @@ public class LocalGameManagerEditor : Editor
 
         LocalGameManager myScript = (LocalGameManager)target;
 
-        if (myScript.inScene == "")
+        if (myScript.inScene == MythologyMayhem.Level.None)
         {
             EditorGUILayout.HelpBox("You need to assign 'inScene' to equal current Level", MessageType.Error);
         }

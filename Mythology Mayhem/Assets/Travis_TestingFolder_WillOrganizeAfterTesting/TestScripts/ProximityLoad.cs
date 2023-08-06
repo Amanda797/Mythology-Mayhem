@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ProximityLoad
+public class ProximityLoad : MythologyMayhem
 {
-    public string sceneToLoad;
+    public Level sceneToLoad;
     public SceneTransitionPoint transitionPoint;
     public float proximityDistance;
     public bool loaded;
 
-    public ProximityLoad(string _scene, SceneTransitionPoint _transitionPoint, float _dist) 
+    public ProximityLoad(Level _scene, SceneTransitionPoint _transitionPoint, float _dist) 
     {
         sceneToLoad = _scene;
         transitionPoint = _transitionPoint;
