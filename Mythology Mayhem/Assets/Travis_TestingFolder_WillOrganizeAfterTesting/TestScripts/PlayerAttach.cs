@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttach : MonoBehaviour
+public class PlayerAttach : MythologyMayhem
 {
     public ScenePlayerObject.PlayerType type;
-    public string inScene;
+    public Level inScene;
 
     private void Start()
     {

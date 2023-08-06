@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MythologyMayhem
 {
-
+    [Header("Game Data")]
+    public GameData gameData;
 
     [Header("Load Scene System")]
-    public string currentScene;
+    public Level currentScene;
     public List<LocalGameManager> loadedLocalManagers;
     public LocalGameManager currentLocalManager;
     public List<ScenePlayerObject> playerControllers;
@@ -16,8 +17,6 @@ public class GameManager : MonoBehaviour
 
     public bool startSceneLoaded;
     public bool currentSceneLoaded;
-
-    public string startScene;
 
     public bool checkStart;
     public bool checkProx;
@@ -37,8 +36,10 @@ public class GameManager : MonoBehaviour
 
     void LoadSystemsStart() 
     {
+        gameData.SetStartScene();
+
         playerControllers = new List<ScenePlayerObject>();
-        LoadScene(startScene);
+        LoadScene(gameData.startScene);
         DontDestroyOnLoad(this.gameObject);
         playerControllers = new List<ScenePlayerObject>();
         startSceneLoaded = false;
@@ -51,10 +52,10 @@ public class GameManager : MonoBehaviour
     {
         if (!startSceneLoaded)
         {
-            if (SceneManager.GetSceneByName(startScene).isLoaded)
+            if (SceneManager.GetSceneByName(gameData.startScene.ToString()).isLoaded)
             {
                 startSceneLoaded = true;
-                currentScene = startScene;
+                currentScene = gameData.startScene;
                 for (int i = 0; i < loadedLocalManagers.Count; i++)
                 {
                     if (loadedLocalManagers[i].inScene == currentScene)
@@ -67,7 +68,7 @@ public class GameManager : MonoBehaviour
         }
         if (!currentSceneLoaded && startSceneLoaded)
         {
-            if (SceneManager.GetSceneByName(currentScene).isLoaded)
+            if (SceneManager.GetSceneByName(currentScene.ToString()).isLoaded)
             {
                 currentSceneLoaded = true;
             }
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddLoadedPlayer(PlayerAttach player, string sceneName) 
+    public void AddLoadedPlayer(PlayerAttach player) 
     {
         playerControllers.Add(new ScenePlayerObject(player, player.type, player.inScene));
     }
@@ -139,7 +140,7 @@ public class GameManager : MonoBehaviour
             bool found = false;
             for (int j = 0; j < currentLocalManager.scenesNeeded.Count; j++)
             {
-                if (currentLocalManager.scenesNeeded[j] == tempSceneName)
+                if (currentLocalManager.scenesNeeded[j].ToString() == tempSceneName)
                 {
                     found = true;
                     break;
@@ -155,31 +156,31 @@ public class GameManager : MonoBehaviour
         return check;
     }
 
-    public void LoadScene(string name) 
+    public void LoadScene(Level scene) 
     {
-        SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
     }
 
-    public void UnloadScene(string name) 
+    public void UnloadScene(string scene) 
     {
         for (int i = loadedLocalManagers.Count - 1; i >= 0; i--) 
         {
-            if (loadedLocalManagers[i].inScene == name) 
+            if (loadedLocalManagers[i].inScene.ToString() == scene) 
             {
                 loadedLocalManagers.RemoveAt(i);
             }
         }
         for (int i = playerControllers.Count - 1; i >= 0; i--)
         {
-            if (playerControllers[i].inScene == name)
+            if (playerControllers[i].inScene.ToString() == scene)
             {
                 playerControllers.RemoveAt(i);
             }
         }
-        SceneManager.UnloadSceneAsync(name);
+        SceneManager.UnloadSceneAsync(scene);
     }
 
-    void SetCurrentLocalGameManager(string scene) 
+    void SetCurrentLocalGameManager(Level scene) 
     {
         for (int i = 0; i < loadedLocalManagers.Count; i++)
         {
@@ -191,7 +192,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SetCurrentPlayerCharacter(string scene)
+    void SetCurrentPlayerCharacter(Level scene)
     {
         for (int i = 0; i < playerControllers.Count; i++)
         {
@@ -207,11 +208,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AlignCurrentPlayerCharacter(string scene)
+    void AlignCurrentPlayerCharacter(Level scene)
     {
         for (int i = 0; i < currentLocalManager.activePlayerSpawner.spwanPoints.Count; i++)
         {
-            if (currentLocalManager.activePlayerSpawner.spwanPoints[i].name == scene)
+            if (currentLocalManager.activePlayerSpawner.spwanPoints[i].name == scene.ToString())
             {
                 currentPlayer.gameObject.SetActive(false);
                 currentPlayer.transform.position = currentLocalManager.activePlayerSpawner.spwanPoints[i].position;
@@ -220,12 +221,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TransitionScene(string scene) 
+    public void TransitionScene(Level scene) 
     {
-        string previousScene = currentScene;
+        Level previousScene = currentScene;
         currentScene = scene;
 
-        if (currentScene != "")
+        if (currentScene != Level.None)
         {
             SetCurrentLocalGameManager(currentScene);
             SetCurrentPlayerCharacter(currentScene);

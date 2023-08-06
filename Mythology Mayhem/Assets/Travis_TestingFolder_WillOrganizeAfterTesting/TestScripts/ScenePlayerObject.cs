@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ScenePlayerObject
+public class ScenePlayerObject : MythologyMayhem
 {
-    public string name;
+    public string _name;
     public PlayerType type;
-    public string inScene;
+    public Level inScene;
 
     public PlayerAttach player;
 
@@ -18,12 +18,12 @@ public class ScenePlayerObject
         TwoD
     }
 
-    public ScenePlayerObject(PlayerAttach _player, PlayerType _type, string sceneName)
+    public ScenePlayerObject(PlayerAttach _player, PlayerType _type, Level scene)
     {
         player = _player;
         type = _type;
-        inScene = sceneName;
+        inScene = scene;
 
-        name = (type.ToString() + " Character in " + inScene);
+        _name = type.ToString() + " Character in " + inScene.ToString();
     }
 }

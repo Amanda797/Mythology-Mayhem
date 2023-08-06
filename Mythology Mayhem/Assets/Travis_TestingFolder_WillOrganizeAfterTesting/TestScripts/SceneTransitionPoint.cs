@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneTransitionPoint : MonoBehaviour
+public class SceneTransitionPoint : MythologyMayhem
 {
     public LocalGameManager localGameManager;
-    public string sceneToTransition;
+    public Level sceneToTransition;
     public bool keyPress;
     public bool isActive;
     // Start is called before the first frame update

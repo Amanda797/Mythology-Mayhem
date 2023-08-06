@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
-public class LocalGameManager : MonoBehaviour
+public class LocalGameManager : MythologyMayhem
 {
     public GameManager mainGameManager;
     public ScenePlayerObject.PlayerType sceneType;
@@ -13,9 +13,9 @@ public class LocalGameManager : MonoBehaviour
 
     public PlayerAttach player;
 
-    public string inScene;
-    [SerializeField] public List<string> scenesNeeded;
-    [SerializeField] public List<string> scenesLoadedOnStart;
+    public Level inScene;
+    [SerializeField] public List<Level> scenesNeeded;
+    [SerializeField] public List<Level> scenesLoadedOnStart;
     [SerializeField] public List<ProximityLoad> scenesLoadedOnProximity;
     [SerializeField] public List<SceneTransitionPoint> transitionPoints;
     public bool loadNextOnStart;
@@ -28,7 +28,7 @@ public class LocalGameManager : MonoBehaviour
 
     public Transform spawnPointCreator;
 
-    public string sceneToConnect;
+    public Level sceneToConnect;
     public bool canTransition;
     public bool activeByDefault;
 
@@ -58,15 +58,15 @@ public class LocalGameManager : MonoBehaviour
     public void AddPlayerLocalAndGlobal(PlayerAttach _player)
     {
         player = _player;
-        mainGameManager.AddLoadedPlayer(player, inScene);
+        mainGameManager.AddLoadedPlayer(player);
     }
 
-    public void AddScene(string scene)
+    public void AddScene(Level scene)
     {
         mainGameManager.LoadScene(scene);
     }
 
-    public void SceneTransition(string scene)
+    public void SceneTransition(Level scene)
     {
         if (mainGameManager.checkStart && mainGameManager.checkProx)
         {
@@ -82,10 +82,10 @@ public class LocalGameManager : MonoBehaviour
 
             for (int i = 0; i < scenesLoadedOnProximity.Count; i++)
             {
-                Scene sceneCheck = SceneManager.GetSceneByName(scenesLoadedOnProximity[i].sceneToLoad);
-                if (sceneCheck.name == scenesLoadedOnProximity[i].sceneToLoad)
+                Scene sceneCheck = SceneManager.GetSceneByName(scenesLoadedOnProximity[i].sceneToLoad.ToString());
+                if (sceneCheck.name == scenesLoadedOnProximity[i].sceneToLoad.ToString())
                 {
-                    if (!SceneManager.GetSceneByName(scenesLoadedOnProximity[i].sceneToLoad).isLoaded)
+                    if (!SceneManager.GetSceneByName(scenesLoadedOnProximity[i].sceneToLoad.ToString()).isLoaded)
                     {
                         check = false;
                     }
@@ -118,10 +118,10 @@ public class LocalGameManager : MonoBehaviour
 
         for (int i = 0; i < scenesLoadedOnStart.Count; i++)
         {
-            Scene sceneCheck = SceneManager.GetSceneByName(scenesLoadedOnStart[i]);
-            if (sceneCheck.name == scenesLoadedOnStart[i])
+            Scene sceneCheck = SceneManager.GetSceneByName(scenesLoadedOnStart[i].ToString());
+            if (sceneCheck.name == scenesLoadedOnStart[i].ToString())
             {
-                if (!SceneManager.GetSceneByName(scenesLoadedOnStart[i]).isLoaded)
+                if (!SceneManager.GetSceneByName(scenesLoadedOnStart[i].ToString()).isLoaded)
                 {
                     check = false;
                 }
@@ -137,14 +137,14 @@ public class LocalGameManager : MonoBehaviour
         return check;
     }
 
-    public void AddStartScene(string scene) 
+    public void AddStartScene(Level scene) 
     {
         scenesLoadedOnStart.Add(scene);
         mainGameManager.checkStart = false;
         mainGameManager.checkUnneeded = false;
     }
 
-    public void AddProxScene(string scene, SceneTransitionPoint transitionPoint, float distance)
+    public void AddProxScene(Level scene, SceneTransitionPoint transitionPoint, float distance)
     {
         scenesLoadedOnProximity.Add(new ProximityLoad(scene,transitionPoint, distance));
         mainGameManager.checkProx = false;
@@ -180,11 +180,11 @@ public class LocalGameManager : MonoBehaviour
                         transitionScript.localGameManager = this;
                         transitionScript.sceneToTransition = sceneToConnect;
                         transitionScript.isActive = activeByDefault;
-                        transitionScript.gameObject.name = (sceneToConnect);
+                        transitionScript.gameObject.name = (sceneToConnect.ToString());
                         transitionPoints.Add(transitionScript);
                     }
                     GameObject spawnPointObj = Instantiate(spawnPointPrefab, transitionScript.transform.position, transitionScript.transform.rotation, transitionObj.transform);
-                    spawnPointObj.name = sceneToConnect;
+                    spawnPointObj.name = sceneToConnect.ToString();
                     AddSceneToNeeded(sceneToConnect);
                     AddSceneToStart(sceneToConnect);
                     activePlayerSpawner.spwanPoints.Add(spawnPointObj.transform);
@@ -199,11 +199,11 @@ public class LocalGameManager : MonoBehaviour
                         transitionScript.localGameManager = this;
                         transitionScript.sceneToTransition = sceneToConnect;
                         transitionScript.isActive = activeByDefault;
-                        transitionScript.gameObject.name = (sceneToConnect);
+                        transitionScript.gameObject.name = (sceneToConnect.ToString());
                         transitionPoints.Add(transitionScript);
                     }
                     GameObject spawnPointObj = Instantiate(spawnPointPrefab, transitionScript.transform.position, transitionScript.transform.rotation, transitionObj.transform);
-                    spawnPointObj.name = sceneToConnect;
+                    spawnPointObj.name = sceneToConnect.ToString();
                     AddSceneToNeeded(sceneToConnect);
                     AddSceneToStart(sceneToConnect);
                     activePlayerSpawner.spwanPoints.Add(spawnPointObj.transform);
@@ -213,13 +213,13 @@ public class LocalGameManager : MonoBehaviour
             else
             {
                 GameObject obj = Instantiate(spawnPointPrefab, spawnPointCreator.transform.position, spawnPointCreator.transform.rotation, activePlayerSpawner.transform);
-                obj.name = sceneToConnect;
+                obj.name = sceneToConnect.ToString();
                 activePlayerSpawner.spwanPoints.Add(obj.transform);
             }
         }
     }
 
-    void AddSceneToNeeded(string scene) 
+    void AddSceneToNeeded(Level scene) 
     {
         bool sceneCheck = false;
         for (int i = 0; i < scenesNeeded.Count; i++)
@@ -235,7 +235,7 @@ public class LocalGameManager : MonoBehaviour
         }
     }
 
-    void AddSceneToStart(string scene)
+    void AddSceneToStart(Level scene)
     {
         bool sceneCheck = false;
         for (int i = 0; i < scenesLoadedOnStart.Count; i++)
