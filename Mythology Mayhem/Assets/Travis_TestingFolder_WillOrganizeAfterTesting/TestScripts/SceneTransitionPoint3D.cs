@@ -15,6 +15,7 @@ public class SceneTransitionPoint3D : SceneTransitionPoint
     void Update()
     {
         CheckInput();
+        isActive = CheckConditionsMeet();
     }
 
     private void OnTriggerStay(Collider other)

@@ -39,7 +39,14 @@ public class GameManager : MythologyMayhem
         gameData.SetStartScene();
 
         playerControllers = new List<ScenePlayerObject>();
-        LoadScene(gameData.startScene);
+        if (gameData.overrideLoad) 
+        {
+            LoadScene(gameData.overrideStartScene);
+        }
+        else
+        {
+            LoadScene(gameData.startScene);
+        }
         DontDestroyOnLoad(this.gameObject);
         playerControllers = new List<ScenePlayerObject>();
         startSceneLoaded = false;
@@ -159,6 +166,10 @@ public class GameManager : MythologyMayhem
     public void LoadScene(Level scene) 
     {
         SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
+    }
+    public void LoadScene(string scene) 
+    {
+        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 
     public void UnloadScene(string scene) 

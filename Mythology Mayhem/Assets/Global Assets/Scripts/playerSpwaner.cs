@@ -23,6 +23,7 @@ public class playerSpwaner : MonoBehaviour
 
     public int overrideIndex;
     public bool overrideBool;
+    public int overrideCharacterIndex;
 
     // Start is called before the first frame update
     void Awake()
@@ -66,13 +67,29 @@ public class playerSpwaner : MonoBehaviour
             }
         }
         GameObject obj = null;
-        if (type == ScenePlayerObject.PlayerType.TwoD)
+
+        if (localGameManager != null)
         {
-            obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            if (type == ScenePlayerObject.PlayerType.TwoD)
+            {
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
+            else
+            {
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
         }
-        else 
+        else
         {
-            obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+
+            if (type == ScenePlayerObject.PlayerType.TwoD)
+            {
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
+            else
+            {
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
         }
 
         if (obj != null)

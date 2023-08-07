@@ -8,11 +8,9 @@ public class GameData : MythologyMayhem
 
     public Level highestLevelCompleted;
 
-    [Header("VikingVillage_3D")]
-    public VikingVillageSteps lastCompletedVV3DStep;
-
     [Header("Load Data")]
     public bool overrideLoad;
+    public string overrideStartScene;
     public Level startScene;
     public Level spawnerToUse;
     public Character selectedCharacter;
