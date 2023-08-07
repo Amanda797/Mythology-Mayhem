@@ -6,13 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class playerSpwaner : MonoBehaviour
 {
+    public ScenePlayerObject.PlayerType type;
+
     int spwanPointIndex;
     int playerIndex;
     int sceneIndex;
     public List<Transform> spwanPoints = new List<Transform>();
-    public playerSelectable PlayerPrefabs;
+    public playerSelectable PlayerPrefabs2D;
+    public playerSelectable PlayerPrefabs3D;
 
     public GameObject owlPrefab;
+
+    public LocalGameManager localGameManager;
+    public PlayerAttach playerAttach;
+    public bool playerLoadComplete;
+
+    public int overrideIndex;
+    public bool overrideBool;
+    public int overrideCharacterIndex;
 
     // Start is called before the first frame update
     void Awake()
@@ -47,7 +58,54 @@ public class playerSpwaner : MonoBehaviour
         // Save Scene Status
         PlayerPrefs.SetInt("sceneIndex", SceneManager.GetActiveScene().buildIndex);
 
-        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
+        if (overrideBool) 
+        {
+            spwanPointIndex = overrideIndex;
+            for (int i = 0; i < spwanPoints.Count; i++) 
+            { 
+                
+            }
+        }
+        GameObject obj = null;
+
+        if (localGameManager != null)
+        {
+            if (type == ScenePlayerObject.PlayerType.TwoD)
+            {
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
+            else
+            {
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
+        }
+        else
+        {
+
+            if (type == ScenePlayerObject.PlayerType.TwoD)
+            {
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
+            else
+            {
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            }
+        }
+
+        if (obj != null)
+        {
+            if (localGameManager != null)
+            {
+                playerAttach = obj.GetComponent<PlayerAttach>();
+                if (playerAttach != null)
+                {
+                    playerAttach.inScene = localGameManager.inScene;
+                    playerAttach.type = localGameManager.sceneType;
+                    obj.name = (localGameManager.sceneType.ToString() + " Character " + localGameManager.inScene);
+                    obj.SetActive(false);
+                }
+            }
+        }
 
         if (PlayerPrefs.GetInt("owl") == 1)
         {
@@ -60,7 +118,27 @@ public class playerSpwaner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (localGameManager != null)
+        {
+            if (!playerLoadComplete)
+            {
+                AddPlayerLocal();
+            }
+        }
+    }
+
+    void AddPlayerLocal()
+    {
+
+        if (localGameManager.player == null)
+        {
+            localGameManager.AddPlayerLocalAndGlobal(playerAttach);
+        }
+        else 
+        {
+            playerLoadComplete = true;
+        }
+
     }
 }
 
