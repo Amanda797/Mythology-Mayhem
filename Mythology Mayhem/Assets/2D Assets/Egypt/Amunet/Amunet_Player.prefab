@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727306410387425482}
-  m_LocalRotation: {x: 1e-45, y: -1e-45, z: -0, w: 1}
-  m_LocalPosition: {x: 37.097668, y: 8.960678, z: -12.5}
+  m_LocalRotation: {x: 3e-45, y: -1e-45, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: -12.5}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -66,7 +66,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2047
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 5646528766139287580}
   - component: {fileID: 1181495106509225004}
   - component: {fileID: 7128106915852893343}
+  - component: {fileID: 928348964997823794}
   m_Layer: 3
   m_Name: Amunet_Player
   m_TagString: Player
@@ -410,17 +411,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5012615252830545429}
-  attackRange: 1.35
-  attackHeight: 3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
-  atkDamage: 4
-  phs: {fileID: 0}
-  attackRate: 2
-  canAttack: 0
+  owlPoint: {fileID: 0}
+  owlPrefab: {fileID: 0}
+  huic: {fileID: 0}
+  ps: {fileID: 0}
   anim: {fileID: 722826889152064210}
   flipped: 0
+  hitCount: 0
 --- !u!114 &1181495106509225004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,6 +491,19 @@ MonoBehaviour:
   AD: 12.5
   ADi: 347.5
   anim: {fileID: 722826889152064210}
+  ps: {fileID: 0}
+--- !u!114 &928348964997823794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123923920588763958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832875bdfa5fb274e850added54f3f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4584127395358621198
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,8 +528,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4584127395358621198}
-  m_LocalRotation: {x: -3e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.678135, y: -5.1685424, z: 1.22e-43}
+  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
