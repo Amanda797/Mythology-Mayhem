@@ -183,7 +183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8930851644749842695}
-  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.5, z: -12.5}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
@@ -223,7 +223,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2047
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 3171668671021235019}
   - component: {fileID: -5245099162496609930}
   - component: {fileID: 3158028321089354963}
+  - component: {fileID: 4490829348935470542}
   m_Layer: 3
   m_Name: Gorm-Norse
   m_TagString: Player
@@ -545,16 +546,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 846726695501278697}
-  attackRange: 1.15
-  attackHeight: 3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
-  atkDamage: 4
-  phs: {fileID: 0}
-  attackRate: 2
+  owlPoint: {fileID: 0}
+  owlPrefab: {fileID: 0}
+  huic: {fileID: 0}
+  ps: {fileID: 0}
   anim: {fileID: 8930851645321162423}
   flipped: 0
+  hitCount: 0
 --- !u!114 &3171668671021235019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,14 +621,12 @@ MonoBehaviour:
   AL: 1
   AL2: 2
   player: {fileID: 8930851645321162420}
-  up: 0
-  CSU: 0
   ASx: 50
   ASy: 6.25
   AD: 12.5
   ADi: 347.5
-  CSD: 0
   anim: {fileID: 8930851645321162423}
+  ps: {fileID: 0}
 --- !u!82 &3158028321089354963
 AudioSource:
   m_ObjectHideFlags: 0
@@ -724,3 +723,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4490829348935470542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930851645321162420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832875bdfa5fb274e850added54f3f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

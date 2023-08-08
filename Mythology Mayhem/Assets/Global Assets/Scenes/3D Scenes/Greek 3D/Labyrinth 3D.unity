@@ -473,7 +473,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264948965
 GameObject:
@@ -1583,7 +1583,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &744697532
 GameObject:
@@ -1983,7 +1983,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &839177842
 PrefabInstance:
@@ -87034,10 +87034,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe70b4b9c1a27f40813b77c2a5ec4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   spwanPoints:
   - {fileID: 943137901}
   - {fileID: 1232745767}
-  PlayerPrefabs: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
+  PlayerPrefabs2D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
+  PlayerPrefabs3D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
+  owlPrefab: {fileID: 0}
+  localGameManager: {fileID: 0}
+  playerAttach: {fileID: 0}
+  playerLoadComplete: 0
+  overrideIndex: 0
+  overrideBool: 0
 --- !u!4 &1155708409
 Transform:
   m_ObjectHideFlags: 0
@@ -87053,7 +87061,7 @@ Transform:
   - {fileID: 1232745767}
   - {fileID: 943137901}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1189527171
 GameObject:
@@ -87090,8 +87098,6 @@ Transform:
   - {fileID: 2107117668}
   m_Father: {fileID: 1236878129}
   m_RootOrder: 1
-  m_Father: {fileID: 0}
-  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1189527173
 MonoBehaviour:
@@ -88250,8 +88256,6 @@ Transform:
   - {fileID: 895089138}
   m_Father: {fileID: 1236878129}
   m_RootOrder: 2
-  m_Father: {fileID: 0}
-  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517512162
 GameObject:
@@ -95251,7 +95255,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1847177954
 PrefabInstance:
@@ -95356,6 +95360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 2Dlabyrinth_Pedastals
+  spawnPointIndex: 0
   distance: 5
   player: {fileID: 0}
 --- !u!65 &1854629086
@@ -95482,6 +95487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 2Dlabyrinth_Levers 1
+  spawnPointIndex: 0
   distance: 5
   player: {fileID: 0}
 --- !u!65 &1872431738
@@ -95560,7 +95566,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1892113459
 MeshFilter:
@@ -101975,7 +101981,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1994055172
 GameObject:
