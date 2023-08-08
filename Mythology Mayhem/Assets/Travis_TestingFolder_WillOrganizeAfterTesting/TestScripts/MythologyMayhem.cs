@@ -17,7 +17,6 @@ public class MythologyMayhem : MonoBehaviour
     public enum Level 
     { 
         Lib3D,
-
         VikingVillage_2D,
         VikingVillage_3D,
         VikingShip_3D,
@@ -43,6 +42,11 @@ public class MythologyMayhem : MonoBehaviour
         Gorm,
         Amunet,
         Micos
+    }
+
+    public enum Enemies 
+    { 
+        
     }
 
 }

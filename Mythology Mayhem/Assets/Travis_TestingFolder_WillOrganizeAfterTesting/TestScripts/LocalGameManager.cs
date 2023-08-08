@@ -13,6 +13,9 @@ public class LocalGameManager : MythologyMayhem
 
     public PlayerAttach player;
 
+    public Transform sceneOrigin;
+    public Vector3 sceneOriginOnLoad;
+
     public Level inScene;
     [SerializeField] public List<Level> scenesNeeded;
     [SerializeField] public List<Level> scenesLoadedOnStart;
@@ -31,6 +34,13 @@ public class LocalGameManager : MythologyMayhem
     public Level sceneToConnect;
     public bool canTransition;
     public bool activeByDefault;
+
+    [Header("Level Offset System")]
+    public bool useOffset;
+    public Vector3 levelOffset;
+    public Vector3 moveLevel;
+
+    public List<Level> levelsToDrag;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +62,40 @@ public class LocalGameManager : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
+        if (useOffset && mainGameManager.currentScene == inScene)
+        {
+            levelOffset += UpdateOffsets();
+        }
+    }
 
+    Vector3 UpdateOffsets()
+    {
+        sceneOrigin.position += moveLevel * Time.deltaTime;
+    
+        Vector3 currentOffset = sceneOrigin.position - sceneOriginOnLoad;
+        sceneOrigin.position = sceneOriginOnLoad;
+
+        for (int i = 0; i < mainGameManager.loadedLocalManagers.Count; i++)
+        {
+            if (mainGameManager.loadedLocalManagers[i] != this)
+            {
+                bool checkLevel = false;
+                for (int j = 0; j < levelsToDrag.Count; j++) 
+                {
+                    if (mainGameManager.loadedLocalManagers[i].inScene == levelsToDrag[j]) 
+                    {
+                        mainGameManager.loadedLocalManagers[i].sceneOrigin.position = mainGameManager.loadedLocalManagers[i].sceneOriginOnLoad;
+                        mainGameManager.loadedLocalManagers[i].levelOffset = currentOffset + levelOffset;
+                        checkLevel = true;
+                    }
+                }
+                if (!checkLevel)
+                {
+                    mainGameManager.loadedLocalManagers[i].sceneOrigin.position = (mainGameManager.loadedLocalManagers[i].sceneOriginOnLoad + levelOffset);
+                }
+            }
+        }
+        return currentOffset;
     }
 
     public void AddPlayerLocalAndGlobal(PlayerAttach _player)

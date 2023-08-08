@@ -72,11 +72,11 @@ public class playerSpwaner : MonoBehaviour
         {
             if (type == ScenePlayerObject.PlayerType.TwoD)
             {
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
             }
             else
             {
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
             }
         }
         else
