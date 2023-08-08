@@ -47,12 +47,14 @@ public class playerSpwaner : MonoBehaviour
         // Save Scene Status
         PlayerPrefs.SetInt("sceneIndex", SceneManager.GetActiveScene().buildIndex);
 
-        Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
+        GameObject player = Instantiate(PlayerPrefabs.playerPrefabs[playerIndex],spwanPoints[spwanPointIndex].position,spwanPoints[spwanPointIndex].rotation);
+        player.transform.parent = this.transform;
 
         if (PlayerPrefs.GetInt("owl") == 1)
         {
             Debug.Log("Owl is active");
-            Instantiate(owlPrefab, spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation).SetActive(true);
+            GameObject owl = Instantiate(owlPrefab, spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            owl.transform.parent = this.transform;
         } 
 
     }
