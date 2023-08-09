@@ -17,9 +17,12 @@ public class CameraSwitcher : MonoBehaviour
 
   void Toggle2D3D() 
   {
+    bool twoDScene = twoDPlayer.activeSelf;
+    bool threeDScene = threeDPlayer.activeSelf;
+
     //Toggle Players
-    twoDPlayer.SetActive(!twoDPlayer.activeSelf);
-    threeDPlayer.SetActive(!threeDPlayer.activeSelf); 
+    twoDPlayer.SetActive(!twoDScene);
+    threeDPlayer.SetActive(!threeDScene); 
   }
 
 }

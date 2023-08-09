@@ -31,6 +31,17 @@ public class Shoot2D : MonoBehaviour
     {
         CS = false;
         source = gameObject.GetComponent<AudioSource>();
+
+        HealthUIController huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
+        if(huic != null) { 
+            ps = huic.ps;
+            ps.CanAttack = true;
+            ps.NextAttackTime = 0;
+            ps.CurrHealth = ps.MaxHealth;
+        }
+        else{
+            print("Can't find huic's player stats so");
+        }
     }
     void Update()
     {

@@ -14,6 +14,7 @@ public class Attack3D : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, 0);
     bool isAttacking = false;
     public GameObject attackPoint;
+    [HideInInspector] public int hitCount;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class Attack3D : MonoBehaviour
                                 health.Death();
                             }
                             isAttacking = false;
+                            hitCount++;
                         }
                     }
                     else if (enemy.gameObject.tag == "Medusa")
@@ -59,6 +61,7 @@ public class Attack3D : MonoBehaviour
                         {
                             mcs.MedusaDamage(damage);
                             isAttacking = false;
+                            hitCount++;
                         }
                     }
                 }
@@ -83,6 +86,7 @@ public class Attack3D : MonoBehaviour
                                 health.Death();
                             }
                             isAttacking = false;
+                            hitCount++;
                         }
                     }
                 }
