@@ -52,7 +52,10 @@ public class Health : MonoBehaviour
     }//end get health
 
     public void TakeDamage(float d) {
-        anim.SetTrigger(hurtTrigger);
+        if(gameObject.tag == "Enemy") 
+        {
+            anim.SetTrigger(hurtTrigger);
+        }
         health -= d;
         if(GetHealth() <= 0) {
             Death();
@@ -66,7 +69,10 @@ public class Health : MonoBehaviour
 
     public void Death() {
         if(GetHealth() <= 0) {
-            anim.SetTrigger(deathTrigger);       
+            if(gameObject.tag == "Enemy") 
+            {
+                anim.SetTrigger(deathTrigger);
+            }     
             //this? 
             //foreach (Behaviour component in components) {
             //    component.enabled = false;
@@ -79,7 +85,11 @@ public class Health : MonoBehaviour
 
     public void Death(float time) {
         if(GetHealth() <= 0) {
-            anim.SetTrigger(deathTrigger);       
+            if(gameObject.tag == "Enemy") 
+            {
+                anim.SetTrigger(deathTrigger);
+            }
+                  
             //this? 
             //foreach (Behaviour component in components) {
             //    component.enabled = false;

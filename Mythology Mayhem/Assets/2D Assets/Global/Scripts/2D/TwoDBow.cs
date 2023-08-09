@@ -9,10 +9,23 @@ public class TwoDBow : MonoBehaviour
     public bool pickedUp = false;
 
     public bool deBugBowReset;
+
+    public PedastalsPuzzleManager puzzleManager;
     // Start is called before the first frame update
     void Start()
     {
-        //gameObject.SetActive(false);
+        puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
+        puzzleManager.itemBow = this.gameObject;
+
+        if (puzzleManager.fishDone && puzzleManager.appleDone && puzzleManager.torchDone && puzzleManager.airDone && !puzzleManager.bowCollected)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
@@ -43,7 +56,11 @@ public class TwoDBow : MonoBehaviour
     private void PickUp()
     {
         pickedUp = true;
-        PlayerPrefs.SetInt("bowBool", 1);
+
+        if(puzzleManager != null)
+        {
+            puzzleManager.bowCollected = true;
+        }
         gameObject.SetActive(false);
     }
 
