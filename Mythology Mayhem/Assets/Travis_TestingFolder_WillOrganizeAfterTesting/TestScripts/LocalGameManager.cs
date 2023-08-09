@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class LocalGameManager : MythologyMayhem
 {
     public GameManager mainGameManager;
-    public ScenePlayerObject.PlayerType sceneType;
+    public Dimension sceneType;
     public PlayerMovement3D player3D;
     public PlayerController player2D;
 
@@ -214,7 +214,7 @@ public class LocalGameManager : MythologyMayhem
         {
             if (canTransition)
             {
-                if (sceneType == ScenePlayerObject.PlayerType.TwoD)
+                if (sceneType == Dimension.TwoD)
                 {
                     GameObject transitionObj = Instantiate(sceneTransitionPoint2D, spawnPointCreator.transform.position, spawnPointCreator.transform.rotation, activePlayerSpawner.transform);
                     SceneTransitionPoint2D transitionScript = transitionObj.GetComponentInChildren<SceneTransitionPoint2D>();

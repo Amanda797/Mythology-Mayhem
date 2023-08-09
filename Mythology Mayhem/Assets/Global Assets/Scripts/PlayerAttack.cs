@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : MythologyMayhem
 {
-    PlayerMovement3D playerMovement;
+    public PlayerMovement3D playerMovement;
     public Animator anim;
     public AnimationClip attackAnim;
     public Attack3D attack3D;
@@ -19,10 +19,29 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Run Tobias Cooldown
+        TobiasDamageCooldown();
+
         if(Input.GetMouseButtonDown(0) && attack3D.GetIsAttacking() == false)
         {
             anim.Play(attackAnim.name);
-            effectsScript.vfxAnimator.SetTrigger("StartEffect");
+
+            //Store Original Damage
+            float baseDamage = attack3D.damage;
+
+            //Tobias and cooldown complete
+            if (playerMovement.character == Character.Tobias && playerMovement.tobiasCurrentCooldown <= 0)
+            {
+                //Add extra damage, start vfxs, and set cooldown to max
+                attack3D.damage += playerMovement.extraDamage;
+                effectsScript.vfxAnimator.SetTrigger("StartEffect");
+                playerMovement.tobiasCurrentCooldown = playerMovement.tobiasCooldown;
+            }
+            //Run Attack()
+            Attack();
+
+            //Restore Original in case Changed (Outside if in case other damage changes are added later
+            attack3D.damage = baseDamage;
         }
 
         
@@ -54,5 +73,21 @@ public class PlayerAttack : MonoBehaviour
     public void SetSpeed(float speed)
     {
         anim.SetFloat("Speed", speed);
+    }
+
+    void TobiasDamageCooldown() 
+    {
+        //If cooldown still remaining
+        if (playerMovement.tobiasCooldown > 0)
+        {
+            //Sub time
+            playerMovement.tobiasCurrentCooldown -= Time.deltaTime;
+            //If understeps zero
+            if (playerMovement.tobiasCurrentCooldown <= 0)
+            {
+                //Clamp
+                playerMovement.tobiasCurrentCooldown = 0;              
+            }
+        }
     }
 }
