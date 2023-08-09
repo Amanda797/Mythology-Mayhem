@@ -155,7 +155,7 @@ public class EnemyAI3D : MonoBehaviour
             if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 2) {
                 if(attackTimer >= attackDuration) {
                     anim.SetTrigger(attackTrigger);
-                    player.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+                    player.gameObject.GetComponent<FPSHealth>().TakeDamage(attackDamage);
                     attackTimer = 0f;
                 }
                 //Wait to attack again
