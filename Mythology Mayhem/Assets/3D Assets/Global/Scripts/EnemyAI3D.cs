@@ -38,9 +38,9 @@ public class EnemyAI3D : MonoBehaviour
     [SerializeField] private Vector3 target;
 
     [Header("Combat")]
-    [SerializeField] private Collider player;
+    public Collider player;
     [SerializeField] private int attackDamage = 2;
-    [SerializeField] private float attackTimer = 0f;
+    [SerializeField] private float attackTimer = 5f;
     [SerializeField] private float attackDuration = 5f;
     private bool isAttacking = false;
     
@@ -146,13 +146,14 @@ public class EnemyAI3D : MonoBehaviour
 
     void Attack() {
         //Is there a detected player? If so, attack routine
-        if(player != null) {
-            anim.SetBool(runningBool, true);
-            agent.speed = attackSpeed;
-            //Go to target
-            agent.SetDestination(player.gameObject.transform.position);
+        if(player != null)
+        {
             //Attack target once near
-            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 2) {
+            Debug.Log(Vector3.Distance(transform.position, player.transform.position).ToString());
+            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 5f) {
+                Debug.Log("Attacking Player!");
+                anim.SetBool(runningBool, false);
+                anim.SetBool(walkingBool, false);
                 if(attackTimer >= attackDuration) {
                     anim.SetTrigger(attackTrigger);
                     player.gameObject.GetComponent<FPSHealth>().TakeDamage(attackDamage);
@@ -164,8 +165,19 @@ public class EnemyAI3D : MonoBehaviour
                     agent.speed = 0f;
                     attackTimer += Time.deltaTime;
                 }//end timer check            
-            }//end proximity check
-        } else { //If not, disable running animation
+            }
+            else
+            {
+                anim.SetBool(runningBool, true);
+                anim.SetBool(walkingBool, false);
+                agent.speed = attackSpeed;
+                //Go to target
+                agent.SetDestination(player.gameObject.transform.position);
+            }  
+            //end proximity check
+        } 
+        else 
+        { //If not, disable running animation
             anim.SetBool(runningBool, false);
         }      
     }//end attack
@@ -196,7 +208,7 @@ public class EnemyAI3D : MonoBehaviour
             Debug.Log("Hit Player!");
             isAttacking = true;
             target = col.gameObject.transform.position;
-            player = col;        
+            //player = col;        
         }
     }//end on trigger enter
 
@@ -204,7 +216,7 @@ public class EnemyAI3D : MonoBehaviour
         if(col.gameObject.tag == "Player" && isAttacking) {
             Debug.Log("No Player!");
             isAttacking = false;
-            player = null;
+            //player = null;
             UpdateDestination();
         }
     }//end on trigger exit
