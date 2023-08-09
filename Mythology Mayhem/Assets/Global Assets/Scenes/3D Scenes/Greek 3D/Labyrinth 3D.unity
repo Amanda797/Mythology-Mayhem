@@ -209,8 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleManager: {fileID: 0}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
-  item: 1
+  item: 2
 --- !u!114 &90544477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +779,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 706fc220006b55f4ab5e1175a6bf13e1, type: 3}
+--- !u!1001 &390860008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964526, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: m_Name
+      value: PedstalPuzzleManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
 --- !u!1 &452387113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,11 +2173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.11
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -80186,6 +80244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleManager: {fileID: 0}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 0
 --- !u!1001 &895089137
@@ -80310,9 +80369,9 @@ MonoBehaviour:
   waypointIndex: 0
   target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  attackDamage: 2
-  attackTimer: 0
-  attackDuration: 5
+  attackDamage: 4
+  attackTimer: 2
+  attackDuration: 2
 --- !u!54 &926002232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80401,7 +80460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943137900}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -20.79, y: 4.11, z: -24.8}
+  m_LocalPosition: {x: 93.295, y: 4.11, z: -52.719}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80664,9 +80723,9 @@ MonoBehaviour:
   waypointIndex: 0
   target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  attackDamage: 2
-  attackTimer: 0
-  attackDuration: 5
+  attackDamage: 4
+  attackTimer: 2
+  attackDuration: 2
 --- !u!195 &1021492712
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -80922,6 +80981,7 @@ GameObject:
   - component: {fileID: 1021492711}
   - component: {fileID: 1021492712}
   - component: {fileID: 1021492715}
+  - component: {fileID: 1021617991}
   m_Layer: 0
   m_Name: Bull Warrior-Brown
   m_TagString: Enemy
@@ -81578,6 +81638,19 @@ Transform:
   m_Father: {fileID: 1443910383}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1021617991
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021524774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1021617992
 Transform:
   m_ObjectHideFlags: 0
@@ -87037,15 +87110,15 @@ MonoBehaviour:
   type: 0
   spwanPoints:
   - {fileID: 943137901}
-  - {fileID: 1232745767}
-  PlayerPrefabs2D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
+  PlayerPrefabs2D: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
   PlayerPrefabs3D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
-  owlPrefab: {fileID: 0}
+  owlPrefab: {fileID: 1970649705876168535, guid: b7a401bfe9ca7cd4bb9d081ebbf5faca, type: 3}
   localGameManager: {fileID: 0}
   playerAttach: {fileID: 0}
   playerLoadComplete: 0
   overrideIndex: 0
   overrideBool: 0
+  overrideCharacterIndex: 0
 --- !u!4 &1155708409
 Transform:
   m_ObjectHideFlags: 0
@@ -87088,7 +87161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189527171}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.673256, y: 16.339813, z: -78.311005}
+  m_LocalPosition: {x: -5.39, y: 16.339813, z: -92.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -88375,9 +88448,9 @@ MonoBehaviour:
   waypointIndex: 0
   target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  attackDamage: 2
-  attackTimer: 0
-  attackDuration: 5
+  attackDamage: 4
+  attackTimer: 2
+  attackDuration: 2
 --- !u!195 &1581959128
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -88389,9 +88462,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 3.5
-  m_Acceleration: 24
+  m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 2
+  m_AngularSpeed: 10
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -88424,7 +88497,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581990166}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 3}
@@ -88633,6 +88706,7 @@ GameObject:
   - component: {fileID: 1581959127}
   - component: {fileID: 1581959128}
   - component: {fileID: 1581959131}
+  - component: {fileID: 1591358131}
   m_Layer: 0
   m_Name: Bull Warrior-Blue
   m_TagString: Enemy
@@ -89937,6 +90011,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &1591358131
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581990166}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1597218308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95117,8 +95204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleManager: {fileID: 0}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
-  item: 2
+  item: 1
 --- !u!114 &1833541097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95255,7 +95343,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1847177954
 PrefabInstance:
@@ -95383,7 +95471,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854629083}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -95434,7 +95522,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854629083}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 112.86, y: 6.75, z: -52.49}
+  m_LocalPosition: {x: 106.4, y: 6.75, z: -52.49}
   m_LocalScale: {x: 6.764878, y: 12.192149, z: 0.7180769}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101623,6 +101711,7 @@ GameObject:
   - component: {fileID: 926002231}
   - component: {fileID: 926002233}
   - component: {fileID: 926002235}
+  - component: {fileID: 1979059408}
   m_Layer: 0
   m_Name: Bull Warrior-Grey
   m_TagString: Enemy
@@ -101630,6 +101719,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!135 &1979059408
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979059407}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1979059409
 GameObject:
   m_ObjectHideFlags: 0
@@ -102402,6 +102504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleManager: {fileID: 0}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 3
 --- !u!1 &1024736172655300
