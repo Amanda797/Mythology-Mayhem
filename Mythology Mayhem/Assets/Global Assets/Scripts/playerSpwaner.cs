@@ -89,6 +89,14 @@ public class playerSpwaner : MonoBehaviour
             else
             {
                 obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+
+                EnemyAI3D[] tempEnemies = FindObjectsOfType<EnemyAI3D>();
+
+                foreach (EnemyAI3D enemy in tempEnemies)
+                {
+                    enemy.player = obj.GetComponent<Collider>();
+                }
+                Debug.Log("PLAYER");
             }
         }
 
@@ -110,7 +118,8 @@ public class playerSpwaner : MonoBehaviour
         if (PlayerPrefs.GetInt("owl") == 1)
         {
             Debug.Log("Owl is active");
-            Instantiate(owlPrefab, spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation).SetActive(true);
+            GameObject owl = Instantiate(owlPrefab, spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            owl.transform.parent = this.transform;
         } 
 
     }
