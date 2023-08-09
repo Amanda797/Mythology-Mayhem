@@ -8,7 +8,10 @@ public class VolumeSaveSlider : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
 
     void Start() {
-        LoadVolume();
+        if(volumeSlider != null)
+        {
+            LoadVolume();
+        }
     }
 
     public void SaveVolume() {

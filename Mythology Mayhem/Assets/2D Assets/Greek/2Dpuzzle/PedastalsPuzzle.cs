@@ -6,20 +6,47 @@ using UnityEngine.UI;
 public class PedastalsPuzzle : MonoBehaviour
 {
     private PedastalsPuzzleManager puzzleManager;
+    public ElementalPuzzleItem.Item item;
 
-    public bool isFish, isEarth, isFire, isAir;
 
     public SpriteRenderer elementalIcon;
     [SerializeField] private bool isPlayerInRange = false;
-    public bool isFishDone, isEarthDone, isFireDone, isAirDone;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
-        isFish = puzzleManager.fish;
-
+        if (puzzleManager != null)
+        {
+            switch (item)
+            {
+                case ElementalPuzzleItem.Item.Fish:
+                    if (puzzleManager.fishDone)
+                    {
+                        elementalIcon.color = new Color(1, 1, 1);
+                    }
+                    break;
+                case ElementalPuzzleItem.Item.Apple:
+                    if (puzzleManager.appleDone)
+                    {
+                        elementalIcon.color = new Color(1, 1, 1);
+                    }
+                    break;
+                case ElementalPuzzleItem.Item.Torch:
+                    if (puzzleManager.torchDone)
+                    {
+                        elementalIcon.color = new Color(1, 1, 1);
+                    }
+                    break;
+                case ElementalPuzzleItem.Item.Air:
+                    if (puzzleManager.airDone)
+                    {
+                        elementalIcon.color = new Color(1, 1, 1);
+                    }
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -27,35 +54,33 @@ public class PedastalsPuzzle : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            if(isFish && isPlayerInRange)
+            Debug.Log("E key is pressed!");
+            if (isPlayerInRange)
             {
-                elementalIcon.color = new Color(1, 1, 1);
-                isFish = false;
-                isPlayerInRange = false;
-                isFishDone = true;
+                if(item == ElementalPuzzleItem.Item.Fish && puzzleManager.fish && !puzzleManager.fishDone)
+                {
+                    Debug.Log("Fish is true!");
+                    elementalIcon.color = new Color(1, 1, 1);
+                    puzzleManager.fishDone = true;
+                    
+                }
+                else if(item == ElementalPuzzleItem.Item.Apple && puzzleManager.apple && !puzzleManager.appleDone )
+                {
+                    elementalIcon.color = new Color(1, 1, 1);
+                    puzzleManager.appleDone = true;
+                }
+                else if(item == ElementalPuzzleItem.Item.Torch && puzzleManager.torch && !puzzleManager.torchDone)
+                {
+                    elementalIcon.color = new Color(1, 1, 1);
+                    puzzleManager.torchDone = true;
+                }
+                else if(item == ElementalPuzzleItem.Item.Air && puzzleManager.air && !puzzleManager.airDone)
+                {
+                    elementalIcon.color = new Color(1, 1, 1);
+                    puzzleManager.airDone = true;
+                }
+                puzzleManager.UpdateDoor();
             }
-            else if(isEarth && isPlayerInRange )
-            {
-                elementalIcon.color = new Color(1, 1, 1);
-                isEarth = false;
-                isPlayerInRange = false;
-                isEarthDone = true;
-            }
-            else if(isFire && isPlayerInRange)
-            {
-                elementalIcon.color = new Color(1, 1, 1);
-                isFire = false;
-                isPlayerInRange = false;
-                isFireDone = true;
-            }
-            else if(isAir && isPlayerInRange)
-            {
-                elementalIcon.color = new Color(1, 1, 1);
-                isAir = false;
-                isPlayerInRange = false;
-                isAirDone = true;
-            }
-
         }
         
     }

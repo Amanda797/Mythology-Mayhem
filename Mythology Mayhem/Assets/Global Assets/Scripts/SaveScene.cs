@@ -135,7 +135,7 @@ public class SaveScene : MonoBehaviour
         //PlayerPrefs.SetString(sceneName, sceneObjectsString);
 
         //write the string in a file
-        System.IO.File.WriteAllText(Application.dataPath + "/_SceneData/" + sceneName + ".json", sceneObjectsString);
+        System.IO.File.WriteAllText(Application.dataPath + "/Global Assets/Resources/_SceneData/" + sceneName + ".json", sceneObjectsString);
         //refresh the project to see the file
        #if UNITY_EDITOR
           UnityEditor.AssetDatabase.Refresh();
@@ -149,13 +149,13 @@ public class SaveScene : MonoBehaviour
         //read each object in the list if it null or not and the position of the object
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         //string sceneObjectsString = PlayerPrefs.GetString(sceneName);
-        if(!System.IO.File.Exists(Application.dataPath + "/_SceneData/" + sceneName + ".json"))
+        if(!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/_SceneData/" + sceneName + ".json"))
         {
             print("No save data");
             this.SaveNow();
             return;
         }
-        string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/_SceneData/" + sceneName + ".json");
+        string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/_SceneData/" + sceneName + ".json");
 
         sceneObjects = JsonUtility.FromJson<SceneObjects>(sceneObjectsString);
         //print(sceneObjects.objects[1].transform.position);

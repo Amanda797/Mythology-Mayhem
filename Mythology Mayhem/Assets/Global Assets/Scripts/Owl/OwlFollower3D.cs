@@ -14,6 +14,7 @@ public class OwlFollower3D : MonoBehaviour
     private bool attacking = false;
     [SerializeField] private float attackDistance = 10f;
     [SerializeField] private float moveAttackSpeedMulitiplier = 5f;
+    [SerializeField] private Attack3D playerAttack;
 
     public enum ObjectType
     {
@@ -35,11 +36,14 @@ public class OwlFollower3D : MonoBehaviour
         originalSpeed = agent.speed;  
         orginalAcceleration = agent.acceleration;  
         originalAngularSpeed = agent.angularSpeed;
+        playerAttack = player.transform.GetChild(1).GetComponent<Attack3D>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        // owl attack with button press
+
+        /*if(Input.GetKeyDown(KeyCode.P))
         {
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
             Transform closestTarget = targets[0].transform;
@@ -53,7 +57,7 @@ public class OwlFollower3D : MonoBehaviour
             }
 
             StartCoroutine(Attack(closestTarget));
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -81,6 +85,36 @@ public class OwlFollower3D : MonoBehaviour
       
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        Debug.Log(other.transform.tag);
+
+        if (attacking)
+        {
+            return;
+        }
+
+        if (other.transform.tag == "Player" && playerAttack.hitCount >= 7 )
+        {
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+            Transform closestTarget = targets[0].transform;
+
+            foreach (GameObject target in targets)
+            {
+                if(Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, closestTarget.position))
+                {
+                    closestTarget = target.transform;
+                }
+            }
+
+            if (closestTarget == null && Vector3.Distance(transform.position, closestTarget.position) < attackDistance)
+            {
+                return;
+            }
+            StartCoroutine(Attack(closestTarget));
+        }
+    }
+
     IEnumerator Attack(Transform target)
     {
         attacking = true;
@@ -98,7 +132,7 @@ public class OwlFollower3D : MonoBehaviour
             agent.acceleration = orginalAcceleration * moveAttackSpeedMulitiplier;
             agent.angularSpeed = originalAngularSpeed * moveAttackSpeedMulitiplier;
 
-            if (target == null)
+            if (target == null || agent.remainingDistance > attackDistance * 1.5f)
             {
                 attackComplete = true;
             }
@@ -176,6 +210,7 @@ public class OwlFollower3D : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         attacking = false;
         Debug.Log("End Attacking");
+        playerAttack.hitCount = 0;
         yield return null;
     }
 
