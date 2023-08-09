@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 200f;
     [SerializeField] private float runSpeed = 300f;
     [SerializeField] private float jumpAmount = 9f;
+    [SerializeField] private AudioSource footstepsSFX;
 
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
@@ -24,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject pushBlock;
     public bool pushing = false;
     public bool canPush = false;
+
+    public float XMovement { get => xMovement; set => xMovement = value; }
+    public AudioSource FootstepsSFX { get => footstepsSFX; set => footstepsSFX = value; }
     #endregion Variables
 
 
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
         FlipPlayerSpriteWithMoveDirection();
         AnimatePlayer();
+        
         if (rb2d.velocity == new Vector2(0,0))
         {
             if (climbing || pushing)
@@ -181,22 +186,22 @@ public class PlayerController : MonoBehaviour
     #region Self-defined Methods
     private bool GetInput()
     {
-        xMovement = Input.GetAxis("Horizontal");
+        XMovement = Input.GetAxis("Horizontal");
         yMovement = Input.GetAxis("Vertical");
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        return xMovement != 0;
+        return XMovement != 0;
     }
 
     private void FlipPlayerSpriteWithMoveDirection()
     {
         if(!pushing) 
         {
-            if (xMovement < 0)
+            if (XMovement < 0)
             {
                 sr.flipX = true;
             }
-            else if (xMovement > 0)
+            else if (XMovement > 0)
             {
                 sr.flipX = false;
             }
@@ -211,14 +216,14 @@ public class PlayerController : MonoBehaviour
         } 
         else
         {
-            rb2d.velocity = new Vector2((xMovement * speed) * Time.deltaTime, rb2d.velocity.y);
+            rb2d.velocity = new Vector2((XMovement * speed) * Time.deltaTime, rb2d.velocity.y);
         }
         
     }
 
     private void AnimatePlayer()
     {
-        if (xMovement != 0)
+        if (XMovement != 0)
         {
             anim.SetBool("IsWalking", GetInput());
             anim.SetBool("IsRunning", isRunning);
