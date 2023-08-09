@@ -137,16 +137,19 @@ public class CharacterSelectDetails : MonoBehaviour
 
                     if(PlayerPrefs.HasKey("sceneIndex"))
                     {
-                        sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+                        sceneIndex = PlayerPrefs.GetInt("sceneIndex");                    
+                        SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
                     }
                     else
                     {
-                        PlayerPrefs.SetInt("sceneIndex", 1);
-                        sceneIndex = PlayerPrefs.GetInt("sceneIndex");
+                        SceneManager.LoadScene("Cutscene1", LoadSceneMode.Single);
                     }
-                    
-                    SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
                 }
+                break;
+            }
+            case 6: {
+                // Go Back to the Main Menu
+                SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
                 break;
             }
             default: { 

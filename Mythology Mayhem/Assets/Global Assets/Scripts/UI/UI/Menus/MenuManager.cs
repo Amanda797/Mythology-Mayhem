@@ -71,7 +71,7 @@ public class MenuManager : MonoBehaviour
 
     public void CharacterSelect()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("CharacterSelection");
     }
 
     public void QuitGame() {
