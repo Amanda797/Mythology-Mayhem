@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElementalPuzzleItem : MonoBehaviour
 {
-
+    public PedastalsPuzzleManager puzzleManager;
     public enum Item
     {
         Apple, Torch, Fish, Air
@@ -12,6 +12,53 @@ public class ElementalPuzzleItem : MonoBehaviour
     public ItemTransfer itemTransfer;
 
     public Item item;
+
+    void Update()
+    {
+        if(puzzleManager == null)
+        {
+            FindPuzzleManager();
+        }
+    }
+
+    void FindPuzzleManager()
+    {
+        PedastalsPuzzleManager[] puzzleManagers = FindObjectsOfType<PedastalsPuzzleManager>();
+        foreach (var tempManager in puzzleManagers)
+        {
+            if(tempManager.gameObject.scene.buildIndex == -1)
+            {
+                puzzleManager = tempManager;
+                switch (item)
+                {
+                    case Item.Apple:
+                        if(puzzleManager.apple)
+                        {
+                            Destroy(gameObject);
+                        }
+                        break;
+                    case Item.Torch:
+                        if(puzzleManager.torch)
+                        {
+                            Destroy(gameObject);
+                        }
+                        break;
+                    case Item.Fish:
+                        if(puzzleManager.fish)
+                        {
+                            Destroy(gameObject);
+                        }
+                        break;
+                    case Item.Air:
+                        if(puzzleManager.air)
+                        {
+                            Destroy(gameObject);
+                        }
+                        break;
+                }
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other) 
     {
@@ -27,74 +74,36 @@ public class ElementalPuzzleItem : MonoBehaviour
             
                 
                 itemTransfer.apple = true;
-                PlayerPrefs.SetInt("appleBool", itemTransfer.apple ? 1 :0);
+                //PlayerPrefs.SetInt("appleBool", itemTransfer.apple ? 1 :0);
+                puzzleManager.apple = true;
                 
                 break;
              case Item.Torch:
 
                 
                     itemTransfer.torch = true;
-                    PlayerPrefs.SetInt("torchBool", itemTransfer.torch ? 1 :0);
+                    //PlayerPrefs.SetInt("torchBool", itemTransfer.torch ? 1 :0);
+                    puzzleManager.torch = true;
                 
                 break;
              case Item.Fish:
                 
                 
                     itemTransfer.fish = true;
-                    PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
+                    //PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
+                    puzzleManager.fish = true;
                 
                 break;
              case Item.Air:
                
                 
                     itemTransfer.air = true;
-                    PlayerPrefs.SetInt("airBool", itemTransfer.air ? 1 :0);
+                    //PlayerPrefs.SetInt("airBool", itemTransfer.air ? 1 :0);
+                    puzzleManager.air = true;
                 
                 break;
         }
 
         Destroy(gameObject);
-    }
-
-    // Start is called before the first frame update
-    /*void Start()
-    {
-                switch(item)
-        {
-            case Item.Apple:
-                if(GameObject.Find("Apple"))
-                {
-                    itemTransfer.apple = false;
-                    PlayerPrefs.SetInt("appleBool", itemTransfer.apple ? 1 :0);
-                }
-                break;
-             case Item.Torch:
-                if(GameObject.Find("Torch"))
-                {
-                    itemTransfer.torch = false;
-                    PlayerPrefs.SetInt("torchBool", itemTransfer.torch ? 1 :0);
-                }
-                break;
-             case Item.Fish:
-                if(GameObject.Find("Fish"))
-                {
-                    itemTransfer.fish = false;
-                    PlayerPrefs.SetInt("fishBool", itemTransfer.fish ? 1 :0);
-                }
-                break;
-             case Item.Air:
-                if(GameObject.Find("Air"))
-                {
-                    itemTransfer.air = false;
-                    PlayerPrefs.SetInt("airBool", itemTransfer.air ? 1 :0);
-                }
-                break;
-        }
-    }*/
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
