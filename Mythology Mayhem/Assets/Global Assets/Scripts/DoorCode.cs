@@ -13,7 +13,22 @@ public class DoorCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(nextLevel == "Athens")
+        {
+            PedastalsPuzzleManager puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
+            puzzleManager.door = this.gameObject;
+            
+            if (puzzleManager.fishDone && puzzleManager.appleDone && puzzleManager.torchDone && puzzleManager.airDone)
+            {
+                doorOpen = true;
+                blocked = false;
+            }
+            else
+            {
+                doorOpen = false;
+                blocked = true;
+            }
+        }
     }
 
     // Update is called once per frame
