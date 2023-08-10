@@ -154,6 +154,7 @@ MonoBehaviour:
   enemies: []
   Dis: 10
   player: {fileID: 5160632204028115867}
+  weaponSwitcher: {fileID: 3745557260391780682}
 --- !u!1 &3619776686847345740
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +659,8 @@ MonoBehaviour:
   glideStaminaUsage: 1
   Amunet3dCloud: {fileID: 0}
   doubleJumped: 0
+  frozen: 0
+  frozenTimer: 0
 --- !u!114 &4872264905856792495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +833,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2047
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -864,6 +867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 500
   playerBody: {fileID: 5160632204028115867}
+  playerMovement3D: {fileID: 5160632204028115866}
 --- !u!114 &4498389028602671154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +910,7 @@ MonoBehaviour:
     m_Bits: 2039
   offsetFactor: 0
   scale: {x: 7, y: 15, z: 7}
-  key: 101
+  mousebutton: 1
   isReady: 0
 --- !u!1 &7308956021174290920
 GameObject:
@@ -1163,6 +1167,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5160632204844205020}
     m_Modifications:
+    - target: {fileID: 540866448, guid: 81e01337a7a3b774199a11c17a1e7f33, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 5160632204844205023}
+    - target: {fileID: 540866448, guid: 81e01337a7a3b774199a11c17a1e7f33, type: 3}
+      propertyPath: weaponSwitcher
+      value: 
+      objectReference: {fileID: 3745557260391780682}
     - target: {fileID: 1513060137413971418, guid: 81e01337a7a3b774199a11c17a1e7f33, type: 3}
       propertyPath: m_Name
       value: GreekMirror3D
