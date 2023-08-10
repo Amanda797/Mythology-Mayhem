@@ -108,13 +108,16 @@ public class LocalGameManager : MythologyMayhem
     public void AddPlayerLocalAndGlobal(PlayerAttach _player)
     {
         player = _player;
-        if (!aimAtTarget)
+        if (useCustom)
         {
-            player.vCam.LookAt = null;
+            if (!aimAtTarget)
+            {
+                player.vCam.LookAt = null;
+            }
+            player.vCam.m_Lens.OrthographicSize = orthoSize;
+            CinemachineTransposer cTrans = player.vCam.GetCinemachineComponent<CinemachineTransposer>();
+            cTrans.m_FollowOffset = followOffset;
         }
-        player.vCam.m_Lens.OrthographicSize = orthoSize;
-        CinemachineTransposer cTrans = player.vCam.GetCinemachineComponent<CinemachineTransposer>();
-        cTrans.m_FollowOffset = followOffset;
         mainGameManager.AddLoadedPlayer(player);
     }
 
