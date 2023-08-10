@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +42,12 @@ public class LocalGameManager : MythologyMayhem
     public Vector3 moveLevel;
 
     public List<Level> levelsToDrag;
+
+    [Header("CustomCameraSettings")]
+    public bool useCustom;
+    public bool aimAtTarget;
+    public Vector3 followOffset;
+    public float orthoSize;
 
     // Start is called before the first frame update
     void Start()
@@ -101,6 +108,13 @@ public class LocalGameManager : MythologyMayhem
     public void AddPlayerLocalAndGlobal(PlayerAttach _player)
     {
         player = _player;
+        if (!aimAtTarget)
+        {
+            player.vCam.LookAt = null;
+        }
+        player.vCam.m_Lens.OrthographicSize = orthoSize;
+        CinemachineTransposer cTrans = player.vCam.GetCinemachineComponent<CinemachineTransposer>();
+        cTrans.m_FollowOffset = followOffset;
         mainGameManager.AddLoadedPlayer(player);
     }
 
