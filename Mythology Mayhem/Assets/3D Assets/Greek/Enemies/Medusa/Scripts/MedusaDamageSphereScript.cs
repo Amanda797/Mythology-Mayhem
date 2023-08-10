@@ -8,6 +8,8 @@ public class MedusaDamageSphereScript : MonoBehaviour
 
     public bool damageOverTime;
 
+    public float damageTimer;
+
     bool damageLock;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,17 @@ public class MedusaDamageSphereScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (damageTimer > 0)
+        {
+            damageTimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (damageTimer < 0)
+            {
+                damageTimer = 0;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,14 +51,15 @@ public class MedusaDamageSphereScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (damageOverTime)
+        if (damageOverTime && damageTimer <= 0)
         {
             if (other.tag == "Player")
             {
-                Health playerHealth = other.gameObject.GetComponent<Health>();
+                FPSHealth playerHealth = other.gameObject.GetComponent<FPSHealth>();
                 if (playerHealth != null)
                 {
-                    //playerHealth.TakeDamage(1);
+                    playerHealth.TakeDamage(1);
+                    damageTimer = 1;
                 }
             }
         }

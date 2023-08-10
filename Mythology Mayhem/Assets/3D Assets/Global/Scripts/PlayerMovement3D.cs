@@ -35,10 +35,17 @@ public class PlayerMovement3D : MythologyMayhem
     [Header("Micos")]
     [SerializeField] private bool doubleJumped;
 
+    [Header("Medusa")]
+    public bool frozen;
+    public float frozenTimer;
+
     void Start()
     {
         //Disable Cloud at Start
-        Amunet3dCloud.SetActive(false);
+        if (character == Character.Amunet)
+        {
+            Amunet3dCloud.SetActive(false);
+        }
     }
     // Update is called once per frame
     void Update()
@@ -54,49 +61,61 @@ public class PlayerMovement3D : MythologyMayhem
         {
             velocity.y = -2f;
         }
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector2 input = new Vector2(x, z);
-        if(playerAttack != null)
-        playerAttack.SetSpeed(input.magnitude/1.414f);
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!frozen)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector2 input = new Vector2(x, z);
             if (playerAttack != null)
+                playerAttack.SetSpeed(input.magnitude / 1.414f);
+
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            controller.Move(move * speed * Time.deltaTime);
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
             {
-                playerAttack.Jump();
-                playerAttack.LandedEnd();
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                if (playerAttack != null)
+                {
+                    playerAttack.Jump();
+                    playerAttack.LandedEnd();
+                }
+
             }
 
-        }
+            switch (character)
+            {
+                case Character.Tobias:
+                    velocity.y += gravity * Time.deltaTime;
+                    break;
 
-        switch (character) 
+                case Character.Gorm:
+                    velocity.y += gravity * Time.deltaTime;
+                    break;
+
+                case Character.Amunet:
+                    AmunetGlideAbility();
+                    break;
+
+                case Character.Micos:
+                    MicosDoubleJumpAbility();
+                    //Continue to add gravity, ability will hard set velocity on double jump
+                    velocity.y += gravity * Time.deltaTime;
+                    break;
+            }
+        }
+        else 
         {
-            case Character.Tobias:
-                velocity.y += gravity * Time.deltaTime;
-                break;
-
-            case Character.Gorm:
-                velocity.y += gravity * Time.deltaTime;
-                break;
-
-            case Character.Amunet:
-                AmunetGlideAbility();
-                break;
-
-            case Character.Micos:
-                MicosDoubleJumpAbility();
-                //Continue to add gravity, ability will hard set velocity on double jump
-                velocity.y += gravity * Time.deltaTime;
-                break;
+            //Apply gravity, even if frozen
+            velocity.y += gravity * Time.deltaTime;
+            frozenTimer -= Time.deltaTime;
+            if (frozenTimer <= 0) 
+            {
+                frozen = false;
+            }
         }
-
         controller.Move(velocity * Time.deltaTime);
     }
     void LateUpdate()

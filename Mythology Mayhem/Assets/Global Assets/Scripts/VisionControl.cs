@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisionControl : MonoBehaviour
+public class VisionControl : MythologyMayhem
 {
     public superliminal sl;
     public KeyCode key;
@@ -18,6 +18,8 @@ public class VisionControl : MonoBehaviour
     public Transform player;
 
     public static VisionControl instance;
+
+    public WeaponSwitcher weaponSwitcher;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,49 +87,52 @@ public class VisionControl : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if(Input.GetKeyDown(sl.key) && !sl.isReady)
+        if (weaponSwitcher.currentOffHand == OffHand.Crystal)
         {
-            sl.isReady = true;
-            vision.SetActive(true);
-            gem.SetActive(true);
-            LeanTween.moveLocalY(gem, gem.transform.localPosition.y, gem.transform.localPosition.y + 5f).setEasePunch();
-        }
-        if(Input.GetKey(sl.key) && sl.isReady)
-        {
-            timer += Time.deltaTime;
-            if(timer >= time)
+            if (Input.GetMouseButtonDown(sl.mousebutton) && !sl.isReady)
+            {
+                sl.isReady = true;
+                vision.SetActive(true);
+                gem.SetActive(true);
+                LeanTween.moveLocalY(gem, gem.transform.localPosition.y, gem.transform.localPosition.y + 5f).setEasePunch();
+            }
+            if (Input.GetMouseButton(sl.mousebutton) && sl.isReady)
+            {
+                timer += Time.deltaTime;
+                if (timer >= time)
+                {
+                    timer = 0;
+                    sl.isReady = false;
+                    //sl.Reset();
+                    sl.CheckForObjects();
+                    vision.SetActive(false);
+                    gem.SetActive(false);
+                }
+            }
+            if (Input.GetMouseButtonDown(sl.mousebutton))
+            {
+                timer = 0;
+            }
+
+            if (Input.GetMouseButtonUp(sl.mousebutton))
             {
                 timer = 0;
                 sl.isReady = false;
                 //sl.Reset();
                 sl.CheckForObjects();
                 vision.SetActive(false);
-                gem.SetActive(false);
             }
-        }
-        if(Input.GetKeyUp(sl.key))
-        {
-            timer = 0;
-        }
 
-        if(Input.GetKeyDown(key))
-        {
-            timer = 0;
-            sl.isReady = false;
-            //sl.Reset();
-            sl.CheckForObjects();
-            vision.SetActive(false);
-        }
-
-        if(enemies.Count > 0)
-        {
-            foreach(GameObject enemy in enemies)
+            if (enemies.Count > 0)
             {
-                if(enemy == null)
-                    continue;
-                if(Vector3.Distance(enemy.transform.position, player.position) <= Dis)
+                foreach (GameObject enemy in enemies)
                 {
-                    Reset();
+                    if (enemy == null)
+                        continue;
+                    if (Vector3.Distance(enemy.transform.position, player.position) <= Dis)
+                    {
+                        Reset();
+                    }
                 }
             }
         }

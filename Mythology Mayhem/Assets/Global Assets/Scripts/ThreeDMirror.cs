@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThreeDMirror : MonoBehaviour
+public class ThreeDMirror : MythologyMayhem
 {
     [SerializeField] bool testingBool;
     [SerializeField] bool canUseMirror;
@@ -15,6 +15,10 @@ public class ThreeDMirror : MonoBehaviour
     [SerializeField] Material normal;
     [SerializeField] Material stone;
 
+    //reference to player camera to cast ray forward from (Allows crosshairs or centered enemy to what gets hit)
+    public GameObject playerCamera;
+    public WeaponSwitcher weaponSwitcher;
+
     void Update()
     {
         if(testingBool) {
@@ -23,18 +27,20 @@ public class ThreeDMirror : MonoBehaviour
             testingBool = false;
         }
 
-        if(Input.GetKeyDown(KeyCode.R)) {
+        if(Input.GetMouseButtonDown(1) && weaponSwitcher.currentOffHand == OffHand.Mirror) {
             ActivateMirror();
         }
     }
 
     public void ActivateMirror() {
         if(canUseMirror && !mirrorCoolDown){
-            Vector3 mirrorPos = gameObject.transform.position;
+            Vector3 startPos = playerCamera.transform.position;
 
-            Ray mirrorRay = new Ray(mirrorPos, gameObject.transform.forward * -1); //-1 bc the forward is backwards
+            Ray mirrorRay = new Ray(startPos, playerCamera.transform.forward);
+            Debug.DrawRay(startPos, playerCamera.transform.forward * 100, Color.green, 0.1f);
 
             if(Physics.Raycast(mirrorRay, out RaycastHit hit)) {
+                print(hit.transform.gameObject.name);
                 if(hit.transform.gameObject.tag.Equals("Medusa")) {
                     print("Hit: " + hit.transform.name);
                     FreezeMedusa(hit.transform.gameObject);
@@ -47,11 +53,24 @@ public class ThreeDMirror : MonoBehaviour
 
     void FreezeMedusa(GameObject medusa) {
         //Freeze Medusa's Movements
-
-        //medusa.GetComponent<MedusaControlScript>().SetAggroState(MedusaControlScript.AggroStates.Stone);
-        medusa.GetComponent<MeshRenderer>().material = stone;
+        MedusaControlScript medusaControlScript = medusa.GetComponent<MedusaControlScript>();
+        if (medusaControlScript.CurrentState == MedusaControlScript.AttackStates.AttemptToFreeze1)
+        {
+            medusaControlScript.playerSuccessFreeze1 = true;
+            medusaControlScript.mirror = this.gameObject;
+        }
+        if (medusaControlScript.CurrentState == MedusaControlScript.AttackStates.AttemptToFreeze2)
+        {
+            medusaControlScript.playerSuccessFreeze2 = true;
+            medusaControlScript.mirror = this.gameObject;
+        }
+        if (medusaControlScript.CurrentState == MedusaControlScript.AttackStates.AttemptToFreeze3)
+        {
+            medusaControlScript.playerSuccessFreeze3 = true;
+            medusaControlScript.mirror = this.gameObject;
+        }
         StartCoroutine(MirrorCooldown());
-        StartCoroutine(MedusaCooldown(medusa));
+        //StartCoroutine(MedusaCooldown(medusa));
     }//end FreezeMedusa
 
     IEnumerator MirrorCooldown() {
@@ -62,7 +81,7 @@ public class ThreeDMirror : MonoBehaviour
 
     IEnumerator MedusaCooldown(GameObject medusa) {
         yield return new WaitForSeconds(enemySlowDuration);
-        //medusa.GetComponent<MedusaControlScript>().SetAggroState(MedusaControlScript.AggroStates.Normal);
-        medusa.GetComponent<MeshRenderer>().material = normal;
+       // medusa.GetComponent<MedusaControlScript>().SetAggroState(MedusaControlScript.AggroStates.Normal);
+        //medusa.GetComponent<MeshRenderer>().material = normal;
     }//end cooldown coroutine
 }
