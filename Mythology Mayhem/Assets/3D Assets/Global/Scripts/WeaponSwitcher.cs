@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSwitcher : MonoBehaviour
+public class WeaponSwitcher : MythologyMayhem
 {
-    public GameObject Sword;
-    #region bow
-    public GameObject Bow1;
-    public GameObject Bow2;
-    public GameObject Bow3;
-    public GameObject Bow4;
+
+    public MainHand currentMain;
+    public OffHand currentOffHand;
+
+    [Header("Right Hand")]
+    public GameObject Main;
+    public GameObject Bow;
+
+    [Header("Left Hand")]
+    public GameObject Crystal;
+    public GameObject Mirror;
+    public GameObject Compass;
+    /*
     private bool bow = false;
     private bool funny = false;
     private bool funny2 = false;
@@ -23,10 +30,57 @@ public class WeaponSwitcher : MonoBehaviour
     private bool switched = false;
     [SerializeField] private float TO = 1f;
     private float m_timeStamp = 0f;
-
+    */
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            print("1 Pressed");
+            switch (currentMain) 
+            {
+                case MainHand.MainWeapon:
+                    currentMain = MainHand.Bow;
+                    Main.SetActive(false);
+                    Bow.SetActive(true);
+                    break;
+
+                case MainHand.Bow:
+                    currentMain = MainHand.MainWeapon;
+                    Main.SetActive(true);
+                    Bow.SetActive(false);
+                    break;
+
+            }
+        }
+        //Currently Cycles, need key assignment for each switch due to number of items later on
+        if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            switch (currentOffHand) 
+            {
+                case OffHand.Crystal:
+                    currentOffHand = OffHand.Mirror;
+                    Crystal.SetActive(false);
+                    Mirror.SetActive(true);
+                    Compass.SetActive(false);
+                    break;
+
+                case OffHand.Mirror:
+                    currentOffHand = OffHand.Compass;
+                    Crystal.SetActive(false);
+                    Mirror.SetActive(false);
+                    Compass.SetActive(true);
+                    break;
+
+                case OffHand.Compass:
+                    currentOffHand = OffHand.Crystal;
+                    Crystal.SetActive(true);
+                    Mirror.SetActive(false);
+                    Compass.SetActive(false);
+                    break;
+            }
+        }
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha6) && funny == false)
         {
             funny = true;
@@ -117,7 +171,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = true;
             sword = false;
-            Sword.SetActive(false);
+            Main.SetActive(false);
             Bow1.SetActive(true);
             switched = true;
             m_timeStamp = Time.time + TO;
@@ -126,7 +180,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = false;
             sword = true;
-            Sword.SetActive(true);
+            Main.SetActive(true);
             Bow1.SetActive(false);
             switched = false;
             m_timeStamp = Time.time + TO;
@@ -135,7 +189,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = true;
             sword = false;
-            Sword.SetActive(false);
+            Main.SetActive(false);
             Bow2.SetActive(true);
             switched = true;
             m_timeStamp = Time.time + TO;
@@ -144,7 +198,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = false;
             sword = true;
-            Sword.SetActive(true);
+            Main.SetActive(true);
             Bow2.SetActive(false);
             switched = false;
             m_timeStamp = Time.time + TO;
@@ -153,7 +207,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = true;
             sword = false;
-            Sword.SetActive(false);
+            Main.SetActive(false);
             Bow3.SetActive(true);
             switched = true;
             m_timeStamp = Time.time + TO;
@@ -162,7 +216,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = false;
             sword = true;
-            Sword.SetActive(true);
+            Main.SetActive(true);
             Bow3.SetActive(false);
             switched = false;
             m_timeStamp = Time.time + TO;
@@ -171,7 +225,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = true;
             sword = false;
-            Sword.SetActive(false);
+            Main.SetActive(false);
             Bow4.SetActive(true);
             switched = true;
             m_timeStamp = Time.time + TO;
@@ -180,10 +234,11 @@ public class WeaponSwitcher : MonoBehaviour
         {
             bow = false;
             sword = true;
-            Sword.SetActive(true);
+            Main.SetActive(true);
             Bow4.SetActive(false);
             switched = false;
             m_timeStamp = Time.time + TO;
         }
+        */
     }
 }

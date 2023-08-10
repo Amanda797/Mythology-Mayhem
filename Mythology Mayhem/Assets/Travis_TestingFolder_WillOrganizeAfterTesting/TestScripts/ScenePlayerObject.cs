@@ -6,19 +6,12 @@ using UnityEngine;
 public class ScenePlayerObject : MythologyMayhem
 {
     public string _name;
-    public PlayerType type;
+    public Dimension type;
     public Level inScene;
 
     public PlayerAttach player;
 
-
-    public enum PlayerType
-    {
-        ThreeD,
-        TwoD
-    }
-
-    public ScenePlayerObject(PlayerAttach _player, PlayerType _type, Level scene)
+    public ScenePlayerObject(PlayerAttach _player, Dimension _type, Level scene)
     {
         player = _player;
         type = _type;

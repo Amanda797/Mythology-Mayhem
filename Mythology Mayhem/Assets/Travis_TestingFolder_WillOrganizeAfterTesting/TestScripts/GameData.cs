@@ -10,7 +10,7 @@ public class GameData : MythologyMayhem
 
     [Header("Load Data")]
     public bool overrideLoad;
-    public string overrideStartScene;
+    public Level overrideStartScene;
     public Level startScene;
     public Level spawnerToUse;
     public Character selectedCharacter;
