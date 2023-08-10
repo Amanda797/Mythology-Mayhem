@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class MythologyMayhem : MonoBehaviour
 {
-    public enum Chapter 
-    { 
+    public enum Dimension
+    {
+        TwoD,
+        ThreeD
+    }
+    public enum Chapter
+    {
         Greek,
         Norse,
         Egyptian,
@@ -14,10 +19,9 @@ public class MythologyMayhem : MonoBehaviour
         None
     }
 
-    public enum Level 
-    { 
+    public enum Level
+    {
         Lib3D,
-
         VikingVillage_2D,
         VikingVillage_3D,
         VikingShip_3D,
@@ -28,8 +32,8 @@ public class MythologyMayhem : MonoBehaviour
         None
     }
 
-    public enum VikingVillageSteps 
-    { 
+    public enum VikingVillageSteps
+    {
         ObtainKey1,
         ObtainKey2,
         ObtainKey3,
@@ -37,12 +41,31 @@ public class MythologyMayhem : MonoBehaviour
         None
     }
 
-    public enum Character 
-    { 
+    public enum Character
+    {
         Tobias,
         Gorm,
         Amunet,
         Micos
+    }
+
+    public enum MainHand 
+    { 
+        MainWeapon,
+        Bow,
+        None
+    }
+
+    public enum OffHand 
+    { 
+        Crystal,
+        Mirror,
+        Compass,
+        None
+    }
+    public enum Enemies 
+    { 
+        
     }
 
 }
