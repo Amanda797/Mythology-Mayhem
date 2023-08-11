@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
-public class playerSpwaner : MonoBehaviour
+public class playerSpwaner : MythologyMayhem
 {
-    public ScenePlayerObject.PlayerType type;
+    public Dimension type;
 
     int spwanPointIndex;
     int playerIndex;
@@ -70,19 +70,19 @@ public class playerSpwaner : MonoBehaviour
 
         if (localGameManager != null)
         {
-            if (type == ScenePlayerObject.PlayerType.TwoD)
+            if (type == Dimension.TwoD)
             {
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
             }
             else
             {
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[overrideCharacterIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
             }
         }
         else
         {
 
-            if (type == ScenePlayerObject.PlayerType.TwoD)
+            if (type == Dimension.TwoD)
             {
                 obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
             }

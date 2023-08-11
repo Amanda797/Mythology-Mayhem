@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Attack3D : MonoBehaviour
+public class Attack3D : MythologyMayhem
 {
     public enum ObjectType
     {
         Player,
         Enemy
     }
+
     public ObjectType objectType;
     public float damage = 10f;
     public float range = 100f;
@@ -15,6 +16,7 @@ public class Attack3D : MonoBehaviour
     bool isAttacking = false;
     public GameObject attackPoint;
     [HideInInspector] public int hitCount;
+
 
     // Start is called before the first frame update
     void Start()
