@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MedusaControlScript : MonoBehaviour
 {
-    [SerializeField] AttackStates CurrentState;
+    public AttackStates CurrentState;
 
     //Public for testing, revert later
     public float health;
@@ -32,6 +32,14 @@ public class MedusaControlScript : MonoBehaviour
 
     public bool navStopped;
 
+    public bool playerSuccessFreeze1;
+    public bool playerSuccessFreeze2;
+    public bool playerSuccessFreeze3;
+
+    public GameObject mirror;
+
+    public GameObject damageSphere;
+
     [Header("Timers")]
     [SerializeField] float introTime = 5f;
     float cooldown;
@@ -48,6 +56,10 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] int totalRangedAttacks3;
     [SerializeField] float freezeAttemptStart;
     [SerializeField] float freezeAttemptTotal;
+    [SerializeField] float freezeReflectTimer;
+    [SerializeField] float freezeReflectTime;
+    [SerializeField] float freezePlayerTime;
+    [SerializeField] float healthIncreaseFromFreezingPlayer;
     private int timesAttacked;
     private int maxAttacks;
 
@@ -102,18 +114,21 @@ public class MedusaControlScript : MonoBehaviour
         MoveToRandomPlatform,
         RangedAttack1,
         AttemptToFreeze1,
+        ReflectBeam1,
         FrozenSelf1,
         EndStage1,
         PlayerChase2,
         MoveToRemainingPlatform,
         RangedAttack2,
         AttemptToFreeze2,
+        ReflectBeam2,
         FrozenSelf2,
         EndStage2,
         PlayerChase3,
         MoveToHomeAltar,
         RangedAttack3,
         AttemptToFreeze3,
+        ReflectBeam3,
         FrozenSelf3,
         EndStage3,
         Final
@@ -133,6 +148,8 @@ public class MedusaControlScript : MonoBehaviour
 
         leftEyeLine.enabled = false;
         rightEyeLine.enabled = false;
+
+        freezeReflectTimer = freezeReflectTime;
 
         medusaAgent.speed = baseSpeed;
         mainMaterial.SetTexture("_MainTex", normalTex);
@@ -187,7 +204,12 @@ public class MedusaControlScript : MonoBehaviour
                 }
             case AttackStates.AttemptToFreeze1:
                 {
-                    RunAttemptToFreeze(AttackStates.FrozenSelf1);
+                    RunAttemptToFreeze(AttackStates.PlayerChase1, AttackStates.ReflectBeam1, playerSuccessFreeze1);
+                    break;
+                }
+            case AttackStates.ReflectBeam1:
+                {
+                    RunReflectBeam(AttackStates.FrozenSelf1, mirror.transform.position);
                     break;
                 }
             case AttackStates.FrozenSelf1:
@@ -215,7 +237,12 @@ public class MedusaControlScript : MonoBehaviour
                 }
             case AttackStates.AttemptToFreeze2:
                 {
-                    RunAttemptToFreeze(AttackStates.FrozenSelf2);
+                    RunAttemptToFreeze(AttackStates.PlayerChase2, AttackStates.ReflectBeam2, playerSuccessFreeze2);
+                    break;
+                }
+            case AttackStates.ReflectBeam2:
+                {
+                    RunReflectBeam(AttackStates.FrozenSelf2, mirror.transform.position);
                     break;
                 }
             case AttackStates.FrozenSelf2:
@@ -243,7 +270,12 @@ public class MedusaControlScript : MonoBehaviour
                 }
             case AttackStates.AttemptToFreeze3:
                 {
-                    RunAttemptToFreeze(AttackStates.FrozenSelf3);
+                    RunAttemptToFreeze(AttackStates.PlayerChase3, AttackStates.ReflectBeam3, playerSuccessFreeze3);
+                    break;
+                }
+            case AttackStates.ReflectBeam3:
+                {
+                    RunReflectBeam(AttackStates.FrozenSelf3, mirror.transform.position);
                     break;
                 }
             case AttackStates.FrozenSelf3:
@@ -336,10 +368,10 @@ public class MedusaControlScript : MonoBehaviour
             CurrentState = nextState;
         }
     }
-    public void RunAttemptToFreeze(AttackStates nextState) 
+    public void RunAttemptToFreeze(AttackStates failState, AttackStates successState, bool playerSuccess) 
     {
         float timeSinceFreezeStart = Time.time - freezeAttemptStart;
-        if (timeSinceFreezeStart < freezeAttemptTotal /*&& !playerSuccessFreeze1*/)
+        if (timeSinceFreezeStart < freezeAttemptTotal && !playerSuccess)
         {
             //Automatically Look directly toward player
             Vector3 direction = (playerHealth.transform.position - transform.position).normalized;
@@ -355,30 +387,58 @@ public class MedusaControlScript : MonoBehaviour
         }
         else
         {
-            /*
-            if (!playerSuccessFreeze1)
+            if (!playerSuccess)
             {
                 leftEyeLine.enabled = false;
                 rightEyeLine.enabled = false;
-
-                CurrentState = AttackStates.PlayerChase1;
+                PlayerMovement3D playerMovement = playerHealth.gameObject.GetComponent<PlayerMovement3D>();
+                if (playerMovement != null) 
+                {
+                    playerMovement.frozenTimer = freezePlayerTime;
+                    playerMovement.frozen = true;
+                }
+                SetAggroState(AggroStates.Normal);
+                health += healthIncreaseFromFreezingPlayer;
+                CurrentState = failState;
             }
             else
             {
-                leftEyeLine.enabled = false;
-                rightEyeLine.enabled = false;
-                SetAggroState(AggroStates.Stone);
-                CurrentState = AttackStates.FrozenSelf1;
+                //leftEyeLine.enabled = false;
+                //rightEyeLine.enabled = false;
+                //SetAggroState(AggroStates.Stone);
+                freezeReflectTimer = freezeReflectTime;
+                CurrentState = successState;
             }
-            */
-            //testing direct change
+        }
+    }
+
+    public void RunReflectBeam(AttackStates nextState, Vector3 mirrorPos)
+    {
+        freezeReflectTimer -= Time.deltaTime;
+        if (freezeReflectTimer > 0)
+        {
+            freezeReflectTimer -= Time.deltaTime;
+            //Automatically Look directly toward player
+            Vector3 direction = (playerHealth.transform.position - transform.position).normalized;
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = lookRotation;
+            print(leftEyeLine.transform.position + " " + playerHealth.transform.position);
+            leftEyeLine.SetPosition(0, leftEyeLine.transform.position);
+            rightEyeLine.SetPosition(0, rightEyeLine.transform.position);
+            eyeTargetPoints[0].position = mirrorPos;
+            leftEyeLine.SetPosition(1, eyeTargetPoints[1].position);
+            rightEyeLine.SetPosition(1, eyeTargetPoints[2].position);
+        }
+        else
+        {
             leftEyeLine.enabled = false;
             rightEyeLine.enabled = false;
             SetAggroState(AggroStates.Stone);
             CurrentState = nextState;
         }
     }
-    public int ChooseDestination()
+        public int ChooseDestination()
     {
         return (int)Random.Range(0, waypoints.Count);
     }//end ChooseDestination
@@ -594,6 +654,7 @@ public class MedusaControlScript : MonoBehaviour
     void HairShake()
     {
         //Code for Spell Mechanics
+        damageSphere.SetActive(true);
     }
     void Projectile()
     {
@@ -602,6 +663,7 @@ public class MedusaControlScript : MonoBehaviour
     void Stab()
     {
         //Code for Spell Mechanics
+        damageSphere.SetActive(true);
     }
     void PointCanvasTowardPlayer(Transform target)
     {

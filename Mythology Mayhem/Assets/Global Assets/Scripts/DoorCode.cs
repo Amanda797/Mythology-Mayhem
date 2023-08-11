@@ -13,7 +13,7 @@ public class DoorCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(nextLevel == "Athens")
+        if(nextLevel == "Athens" && gameObject.scene.ToString() == "2Dlabyrinth_Pedastals")
         {
             PedastalsPuzzleManager puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
             puzzleManager.door = this.gameObject;

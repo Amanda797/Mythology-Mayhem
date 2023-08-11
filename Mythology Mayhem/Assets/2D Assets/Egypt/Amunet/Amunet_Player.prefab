@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7508186446892880969}
   m_Father: {fileID: 5460776031590403725}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2830844439119102399
 Camera:
@@ -149,7 +149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5460776031590403725}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3999724066504618696
 GameObject:
@@ -180,7 +180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5460776031590403725}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4119812883088224117
 GameObject:
@@ -211,7 +211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5460776031590403725}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4123923920588763958
 GameObject:
@@ -250,6 +250,7 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 4219913831426114779}
   - {fileID: 9001541848478728247}
   - {fileID: 5012615252830545429}
   - {fileID: 450204698640995285}
@@ -391,6 +392,7 @@ MonoBehaviour:
   walkSpeed: 200
   runSpeed: 300
   jumpAmount: 9
+  footstepsSFX: {fileID: 7845718475326671561}
   anim: {fileID: 722826889152064210}
   climbing: 0
   ladderEntered: 0
@@ -417,7 +419,7 @@ MonoBehaviour:
   owlPoint: {fileID: 0}
   owlPrefab: {fileID: 0}
   huic: {fileID: 0}
-  ps: {fileID: 0}
+  ps: {fileID: 11400000, guid: 3ce03f4a16bd351458bc7c47b3a5ebf1, type: 2}
   anim: {fileID: 722826889152064210}
   flipped: 0
   hitCount: 0
@@ -504,6 +506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832875bdfa5fb274e850added54f3f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  inScene: 0
+  vCam: {fileID: 6133412468090341959}
 --- !u!1 &4584127395358621198
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +533,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4584127395358621198}
-  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 6e-45, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -670,3 +675,70 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
+--- !u!1001 &5315061079072044239
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5460776031590403725}
+    m_Modifications:
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901052677822846708, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+      propertyPath: m_Name
+      value: FootstepSound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+--- !u!4 &4219913831426114779 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8309922659685019668, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+  m_PrefabInstance: {fileID: 5315061079072044239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7845718475326671561 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2676110724879040006, guid: 37133736755eb9b47a15d4ef76e053fb, type: 3}
+  m_PrefabInstance: {fileID: 5315061079072044239}
+  m_PrefabAsset: {fileID: 0}
