@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class AudioRandomizer_SO : ScriptableObject
 {
-    public List<AudioClipGroup> audioClips = new();
+    public List<AudioClip> audioClips = new();
 
     public AudioClip PlaySiblings() {
         int randomClip = Random.Range(0, audioClips.Count);
-        return audioClips[randomClip].mainAudioClip;
+        return audioClips[randomClip];
     }
 }
-
-[System.Serializable]
-public class AudioClipGroup {
-    public AudioClip mainAudioClip;
-    public AudioClipGroup parentAudioClip;
-    public List<AudioClipGroup> childrenAudioClips;
-}
+/* 
+//[System.Serializable]
+//public class AudioClipGroup
+//{
+ //   public AudioClip mainAudioClip;
+  //  public AudioClipGroup parentAudioClip;
+   // public List<AudioClipGroup> childrenAudioClips;
+} */
