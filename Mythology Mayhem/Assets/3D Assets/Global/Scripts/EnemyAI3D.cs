@@ -150,7 +150,7 @@ public class EnemyAI3D : MonoBehaviour
         {
             //Attack target once near
             Debug.Log(Vector3.Distance(transform.position, player.transform.position).ToString());
-            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 5f) {
+            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 3f) {
                 Debug.Log("Attacking Player!");
                 anim.SetBool(runningBool, false);
                 anim.SetBool(walkingBool, false);
@@ -208,7 +208,7 @@ public class EnemyAI3D : MonoBehaviour
             Debug.Log("Hit Player!");
             isAttacking = true;
             target = col.gameObject.transform.position;
-            //player = col;        
+            player = col;        
         }
     }//end on trigger enter
 
@@ -216,8 +216,7 @@ public class EnemyAI3D : MonoBehaviour
         if(col.gameObject.tag == "Player" && isAttacking) {
             Debug.Log("No Player!");
             isAttacking = false;
-            //player = null;
-            UpdateDestination();
+            player = null;
         }
     }//end on trigger exit
     
