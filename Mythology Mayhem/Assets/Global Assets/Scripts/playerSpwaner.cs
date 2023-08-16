@@ -82,7 +82,7 @@ public class playerSpwaner : MythologyMayhem
         else
         {
 
-            if (type == Dimension.TwoD)
+            if (localGameManager.sceneType == Dimension.TwoD)
             {
                 obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
             }
