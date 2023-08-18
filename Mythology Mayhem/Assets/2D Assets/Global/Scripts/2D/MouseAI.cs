@@ -52,7 +52,8 @@ public class MouseAI : MonoBehaviour
         {
             attackTarget = GameObject.FindWithTag("Player");
         }
-        transform.position = waypoints[waypointIndex].transform.position;
+        if(waypoints.Length != 0)
+            transform.position = waypoints[waypointIndex].transform.position;
         sr = GetComponent<SpriteRenderer>();
         movingLeft = sr.flipX;
         currentPosition = transform.position;
@@ -76,7 +77,8 @@ public class MouseAI : MonoBehaviour
             currentPosition = transform.position;
             if (!attacking && !idle)
             {
-                MoveMouse();
+                if(waypoints.Length != 0)
+                    MoveMouse();
             }
             if (!attacking && idle)
             {
