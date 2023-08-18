@@ -15,7 +15,7 @@ public class SceneTransitionPoint2D : SceneTransitionPoint
     void Update()
     {
         CheckInput();
-        
+        isActive = CheckConditionsMeet();
     }
 
     private void OnTriggerStay2D(Collider2D other)

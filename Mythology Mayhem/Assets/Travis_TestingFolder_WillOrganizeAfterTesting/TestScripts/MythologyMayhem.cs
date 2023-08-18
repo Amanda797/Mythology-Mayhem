@@ -24,10 +24,12 @@ public class MythologyMayhem : MonoBehaviour
         Lib3D,
         VikingVillage_2D,
         VikingVillage_3D,
+        VikingMine_2D,
+        VikingMine_3D,
+        VikingIceCave_2D,
+        VikingIceCave_3D,
         VikingShip_3D,
         VikingShip_2D_CrossOver,
-        VikingCave_3D,
-        VikingCave_2D,
         VikingBoss_3D,
         None
     }

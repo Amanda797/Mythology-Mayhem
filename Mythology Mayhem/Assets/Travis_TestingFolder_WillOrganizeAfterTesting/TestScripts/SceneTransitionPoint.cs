@@ -41,7 +41,6 @@ public class SceneTransitionPoint : MythologyMayhem
 
     public bool CheckConditionsMeet() 
     {
-        print("Calling Condition Check" + conditions.Count.ToString());
         bool isComplete = true;
         for (int i = 0; i < conditions.Count; i++) 
         {
@@ -50,12 +49,10 @@ public class SceneTransitionPoint : MythologyMayhem
                 if (conditions[i].currentToggle == conditions[i].toggle)
                 {
                     conditions[i].completed = true;
-                    print("Toggle is Completed");
                 }
                 else 
                 {
                     conditions[i].completed = false;
-                    print("Toggle is Not Complete");
                     isComplete = false;
                 }
             }
