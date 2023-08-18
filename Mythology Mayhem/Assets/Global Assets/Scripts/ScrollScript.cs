@@ -26,6 +26,8 @@ public class ScrollScript : MonoBehaviour
     bool keyTriggered;
     float keyCooldown;
 
+    [SerializeField] bool requirements;
+
     // --------------------------
     // ***METHODS***
     // --------------------------
