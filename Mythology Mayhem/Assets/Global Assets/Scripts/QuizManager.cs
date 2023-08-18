@@ -17,8 +17,11 @@ public class QuizManager : MonoBehaviour
     int currentQuestion;
     int score;
     bool answered;
+    bool won;
 
     [SerializeField] GameObject[] enemy_go;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject quizTrigger;
 
     void Start() {
         Object[] al = GameObject.FindObjectsOfType<AudioListener>();
@@ -37,9 +40,12 @@ public class QuizManager : MonoBehaviour
         answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
         answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
 
+        won = false;
+
         RandomQuestions();
 
-        GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
+        player = GameObject.FindWithTag("Player");
+        player.GetComponent<PlayerController>().enabled = false;
     }//end start
 
     void DisplayQuestion() {
@@ -70,20 +76,30 @@ public class QuizManager : MonoBehaviour
         } else if(currentQuestion == chosenQuestions.Length - 1 & answered) {
             question.text = "Final Score: " + score;
             if(score >= 2) {                
-                answer1.text = "You won a boost!";
+                answer1.text = "You won! You may pass...";
             } else {
                 answer1.text = "You lost and bear a curse!";
-                foreach(GameObject enemy in enemy_go) {
-                    enemy.GetComponent<Enemy>().CanAttack = true;
-                    enemy.GetComponent<Animator>().SetBool("AttackMode", true);
-                }
             }
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
             currentQuestion++;
         } else if(currentQuestion > chosenQuestions.Length) {
-            GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<PlayerController>().enabled = true;
+
+            if(won) {
+                foreach(GameObject enemy in enemy_go) {
+                    enemy.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            } else {
+                foreach(GameObject enemy in enemy_go) {
+                    enemy.GetComponent<Enemy>().CanAttack = true;
+                    enemy.GetComponent<Animator>().SetBool("AttackMode", true);
+                }
+            }
+
+            quizTrigger.GetComponent<QuizTrigger>().shrinking = true;
+
             Destroy(this.gameObject);
         }
         else {

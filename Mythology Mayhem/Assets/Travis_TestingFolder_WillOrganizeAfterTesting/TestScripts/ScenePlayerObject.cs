@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ScenePlayerObject : MythologyMayhem
+public class ScenePlayerObject
 {
     public string _name;
-    public Dimension type;
-    public Level inScene;
+    public MythologyMayhem.Dimension type;
+    public MythologyMayhem.Level inScene;
 
     public PlayerAttach player;
 
-    public ScenePlayerObject(PlayerAttach _player, Dimension _type, Level scene)
+    public ScenePlayerObject(PlayerAttach _player, MythologyMayhem.Dimension _type, MythologyMayhem.Level scene)
     {
         player = _player;
         type = _type;
