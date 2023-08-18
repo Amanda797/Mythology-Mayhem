@@ -30,7 +30,6 @@ public class Shoot2D : MonoBehaviour
     void Start()
     {
         CS = false;
-        source = gameObject.GetComponent<AudioSource>();
 
         HealthUIController huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
         if(huic != null) { 
