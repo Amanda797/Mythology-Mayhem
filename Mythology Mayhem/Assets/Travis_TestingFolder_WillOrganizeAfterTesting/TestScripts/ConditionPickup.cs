@@ -29,9 +29,12 @@ public class ConditionPickup : MonoBehaviour
         {
             if (other.gameObject.tag == tag)
             {
-                for (int i = 0; i < localGameManager.transitionPoints.Count; i++)
+                for (int i = 0; i < localGameManager.mainGameManager.loadedLocalManagers.Count; i++)
                 {
-                    conditional.SetConditionValue(localGameManager.transitionPoints[i].conditions);
+                    for (int j = 0; j < localGameManager.mainGameManager.loadedLocalManagers[i].transitionPoints.Count; j++)
+                    {
+                        conditional.SetConditionValue(localGameManager.mainGameManager.loadedLocalManagers[i].transitionPoints[j].conditions);
+                    }
                 }
 
                 pickedUp = true;
