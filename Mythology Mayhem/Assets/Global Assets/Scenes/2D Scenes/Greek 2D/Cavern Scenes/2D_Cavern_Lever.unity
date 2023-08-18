@@ -1050,10 +1050,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe70b4b9c1a27f40813b77c2a5ec4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   spwanPoints:
   - {fileID: 1613129544}
-  PlayerPrefabs: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
+  PlayerPrefabs2D: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
+  PlayerPrefabs3D: {fileID: 0}
   owlPrefab: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
+  localGameManager: {fileID: 0}
+  playerAttach: {fileID: 0}
+  playerLoadComplete: 0
+  overrideIndex: 0
+  overrideBool: 0
+  overrideCharacterIndex: 0
 --- !u!4 &708189250
 Transform:
   m_ObjectHideFlags: 0
@@ -1874,6 +1882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1775680826}
   - component: {fileID: 1775680825}
+  - component: {fileID: 1775680827}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1958,6 +1967,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1775680827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775680824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1813352528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,4 +2429,4 @@ MonoBehaviour:
   owl: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
   owlSpawnPos: {fileID: 838166614}
   owlSpawned: 0
-  resetOwl: 1
+  resetOwl: 0

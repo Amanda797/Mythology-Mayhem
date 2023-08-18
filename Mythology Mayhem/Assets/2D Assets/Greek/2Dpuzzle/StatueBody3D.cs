@@ -9,13 +9,22 @@ public class StatueBody3D : MonoBehaviour
     private Transform player;
     public float interactDistance;
     public int statueElement;
-    private StatueBody2D statueBody2D;
+    public StatueBody2D statueBody2D;
+
+    public enum ChangeHeadMethod
+    {
+        MeshFilter, SetActive
+
+    }
+
+    public ChangeHeadMethod changeHeadMethod;
+    public List <GameObject> heads = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        StatueBody2D[] allstatueBodies2D = FindObjectsOfType<StatueBody2D>();
+        /*StatueBody2D[] allstatueBodies2D = FindObjectsOfType<StatueBody2D>();
 
         foreach (StatueBody2D statueBody in allstatueBodies2D)
         {
@@ -24,7 +33,7 @@ public class StatueBody3D : MonoBehaviour
                 this.statueBody2D = statueBody;
                 break;
             }
-        }
+        }*/
 
         ChangeHeads();
 
@@ -69,6 +78,21 @@ public class StatueBody3D : MonoBehaviour
     public void ChangeHeads()
     {
         
+        if(changeHeadMethod == ChangeHeadMethod.MeshFilter)
+        {
+            ChangeHeadsMeshFilter();
+        }
+        else if(changeHeadMethod == ChangeHeadMethod.SetActive)
+        {
+            ChangeHeadsSetActive();
+        }
+
+        statueManager.CheckHeadPuzzleStatus();
+        statueBody2D.ChangeHeads();
+    }
+
+    void ChangeHeadsMeshFilter()
+    {
         if(PlayerPrefs.GetInt(StatueBodyCheck()) != statueManager.statues[statueElement].currentHead)
         {
             statueManager.statues[statueElement].currentHead = PlayerPrefs.GetInt(StatueBodyCheck());
@@ -82,9 +106,29 @@ public class StatueBody3D : MonoBehaviour
         {
             headMeshFilter.mesh = statueManager.heads[statueManager.statues[statueElement].currentHead - 1];
         }
+    }
 
-        statueManager.CheckHeadPuzzleStatus();
-        statueBody2D.ChangeHeads();
+    void ChangeHeadsSetActive()
+    {
+        foreach(GameObject head in heads)
+        {
+            head.SetActive(false);
+        }
+
+        if(PlayerPrefs.GetInt(StatueBodyCheck()) != statueManager.statues[statueElement].currentHead)
+        {
+            statueManager.statues[statueElement].currentHead = PlayerPrefs.GetInt(StatueBodyCheck());
+        }
+
+        if(statueManager.statues[statueElement].currentHead <= 0 || statueManager.statues[statueElement].currentHead > heads.Count)
+        {
+            return;
+        }
+        else
+        {
+            heads[statueManager.statues[statueElement].currentHead - 1].SetActive(true);
+        }
+    
     }
 
     string StatueWeaponCheck()

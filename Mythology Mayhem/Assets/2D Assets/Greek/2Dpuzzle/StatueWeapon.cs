@@ -16,7 +16,7 @@ public class StatueWeapon : MonoBehaviour
     public bool deBugStatueWeaponReset = false;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         weaponSprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -31,6 +31,7 @@ public class StatueWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(player.transform.name + ": Distance = " + Vector3.Distance(transform.position, player.position));
         if(Vector3.Distance(transform.position, player.position) < interactDistance && !pickedUp)
         {
             Debug.Log("Player in Range");
