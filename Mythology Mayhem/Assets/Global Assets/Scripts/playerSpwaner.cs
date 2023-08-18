@@ -68,7 +68,7 @@ public class playerSpwaner : MythologyMayhem
         }
         GameObject obj = null;
 
-        if (localGameManager != null)
+        if (localGameManager == null)
         {
             if (type == Dimension.TwoD)
             {
@@ -85,10 +85,12 @@ public class playerSpwaner : MythologyMayhem
             if (localGameManager.sceneType == Dimension.TwoD)
             {
                 obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj.transform.parent = this.transform;
             }
             else
             {
                 obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj.transform.parent = this.transform;
 
                 EnemyAI3D[] tempEnemies = FindObjectsOfType<EnemyAI3D>();
 
