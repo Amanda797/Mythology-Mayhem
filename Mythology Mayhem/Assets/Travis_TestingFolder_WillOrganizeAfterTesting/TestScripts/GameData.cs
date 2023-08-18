@@ -66,34 +66,39 @@ public class GameData : MythologyMayhem
                             startScene = Level.Lib3D;
                             return;
 
-                        case Level.VikingCave_2D:
-                            print("Start outside Ice Cave ready to head to boss.");
-                            startScene = Level.VikingCave_3D;
-                            spawnerToUse = Level.VikingCave_2D;
+                        case Level.VikingShip_3D:
+                            print("Start on Ship, start of Boss fight");
+                            startScene = Level.VikingBoss_3D;
+                            spawnerToUse = Level.VikingShip_3D;
                             return;
-
-                        case Level.VikingCave_3D:
-                            print("Start off Boat, after Ice Giant, ready to head into Ice Cave.");
-                            startScene = Level.VikingCave_3D;
+                        case Level.VikingIceCave_3D:
+                            print("Start outside Ice Cave ready to head to boss.");
+                            startScene = Level.VikingIceCave_3D;
                             spawnerToUse = Level.VikingShip_3D;
                             return;
 
-                        case Level.VikingShip_2D_CrossOver:
-                            print("Start as Cavern Loads in, with shipping heading in its direction.");
-                            startScene = Level.VikingShip_3D;
-                            spawnerToUse = Level.VikingVillage_3D;
+                        case Level.VikingIceCave_2D:
+                            print("Start in 3D Ice Cave, before fighting to ship");
+                            startScene = Level.VikingIceCave_3D;
+                            spawnerToUse = Level.VikingIceCave_2D;
                             return;
 
-                        case Level.VikingShip_3D:
-                            print("Start at beginning of ship battle sequence");
-                            startScene = Level.VikingShip_3D;
-                            spawnerToUse = Level.VikingVillage_3D;
+                        case Level.VikingMine_3D:
+                            print("Start at end of 2D Mine, ready to enter Ice Cave");
+                            startScene = Level.VikingMine_3D;
+                            spawnerToUse = Level.VikingIceCave_2D;
+                            return;
+
+                        case Level.VikingMine_2D:
+                            print("Start at beginning of 3D Mine Sequence");
+                            startScene = Level.VikingMine_2D;
+                            spawnerToUse = Level.VikingMine_3D;
                             return;
 
                         case Level.VikingVillage_3D:
-                            print("Start at entrance to ship, ready to board");
+                            print("Start at return to 2D Village, ready to move to Mine");
                             startScene = Level.VikingVillage_3D;
-                            spawnerToUse = Level.VikingShip_3D;
+                            spawnerToUse = Level.VikingVillage_2D;
                             return;
 
 
@@ -106,7 +111,7 @@ public class GameData : MythologyMayhem
                         case Level.None:
                             print("Start at entrance to 2D Village");
                             startScene = Level.VikingVillage_2D;
-                            spawnerToUse = Level.None;
+                            spawnerToUse = Level.VikingVillage_2D;
                             return;
                     }
                     startScene = Level.Lib3D;
