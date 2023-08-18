@@ -15,7 +15,7 @@ public class StatueBody2D : MonoBehaviour
     public List<Sprite> weaponBodySprite;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         ChangeHeads();
@@ -53,6 +53,8 @@ public class StatueBody2D : MonoBehaviour
                     ChangeWeapons();
                 }
             }
+
+            statueManager.CheckWeaponPuzzleStatus();
 
         }
     }
