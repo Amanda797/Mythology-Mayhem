@@ -32,4 +32,12 @@ public class NewHeartPickup : MonoBehaviour
             gameObject.SetActive(false);
        }
     }//end on trigger enter 2d
+
+    private void OnTriggerEnter(Collider other) {
+       if(!collected && other.tag == "Player") {
+            other.GetComponent<PlayerStats>().huic.PlayerMaxHealth = other.GetComponent<PlayerStats>().huic.PlayerCurrHealth + 4;
+            collected = true;
+            gameObject.SetActive(false);
+       }
+    }//end on trigger enter 3d
 }
