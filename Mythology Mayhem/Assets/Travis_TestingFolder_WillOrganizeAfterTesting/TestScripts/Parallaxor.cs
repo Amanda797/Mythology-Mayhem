@@ -42,7 +42,6 @@ public class Parallaxor : MythologyMayhem
             for (int i = 0; i < layerSpeeds.Length; i++) 
             {
                 modifierX[i] = diffX * layerSpeeds[i];
-                print(modifierX[i] + ":" + diffX + ":" + layerSpeeds[i]);
             }
 
             LayerPositionSet(Layer0Holders, modifierX[0]);

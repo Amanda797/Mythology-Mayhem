@@ -55,6 +55,7 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] int totalRangedAttacks2;
     [SerializeField] int totalRangedAttacks3;
     [SerializeField] float freezeAttemptStart;
+    [SerializeField] float freezeAttempStartBeam;
     [SerializeField] float freezeAttemptTotal;
     [SerializeField] float freezeReflectTimer;
     [SerializeField] float freezeReflectTime;
@@ -85,6 +86,11 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] LineRenderer leftEyeLine;
     [SerializeField] LineRenderer rightEyeLine;
     [SerializeField] Transform[] eyeTargetPoints;
+    [SerializeField] ParticleSystem vfxGlare;
+    [SerializeField] bool vfxGlareCheck;
+    [SerializeField] GameObject leftEyeBeam;
+    [SerializeField] GameObject rightEyeBeam;
+    [SerializeField] GameObject eyeBeamLight;
 
     [SerializeField] Material mainMaterial;
     [SerializeField] Texture normalTex;
@@ -359,11 +365,14 @@ public class MedusaControlScript : MonoBehaviour
         {
             Vector3 target = playerHealth.transform.position;
             //Activate Ranged Attacks, using , and start cooldown timer;
-            MedusaRangedAttack(AttackType.Projectile, target);
             currentRangedAttackCount = 0;
             lastRangedTime = Time.time;
+            /* Moving to start after delay for vfx
             leftEyeLine.enabled = true;
             rightEyeLine.enabled = true;
+            */
+            vfxGlare.Play();
+            vfxGlareCheck = false;
             freezeAttemptStart = Time.time;
             CurrentState = nextState;
         }
@@ -378,12 +387,26 @@ public class MedusaControlScript : MonoBehaviour
             direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = lookRotation;
-            print(leftEyeLine.transform.position + " " + playerHealth.transform.position);
-            leftEyeLine.SetPosition(0, leftEyeLine.transform.position);
-            rightEyeLine.SetPosition(0, rightEyeLine.transform.position);
-            eyeTargetPoints[0].position = playerHealth.transform.position;
-            leftEyeLine.SetPosition(1, eyeTargetPoints[1].position);
-            rightEyeLine.SetPosition(1, eyeTargetPoints[2].position);
+            if (timeSinceFreezeStart >= freezeAttempStartBeam)
+            {
+                if (!vfxGlareCheck) 
+                {
+                    MedusaRangedAttack(AttackType.Projectile, Vector3.zero);
+                    leftEyeLine.enabled = true;
+                    rightEyeLine.enabled = true;
+                    eyeBeamLight.SetActive(true);
+                    vfxGlareCheck = true;
+                }
+                print(leftEyeLine.transform.position + " " + playerHealth.transform.position);
+                leftEyeLine.SetPosition(0, leftEyeLine.transform.position);
+                rightEyeLine.SetPosition(0, rightEyeLine.transform.position);
+                eyeTargetPoints[0].position = playerHealth.transform.position;
+                leftEyeLine.SetPosition(1, eyeTargetPoints[1].position);
+                rightEyeLine.SetPosition(1, eyeTargetPoints[2].position);
+
+                leftEyeBeam.GetComponent<LineRenderer>().material.SetTextureOffset("_BaseMap", new Vector2(1 - Time.time, 0));
+                rightEyeBeam.GetComponent<LineRenderer>().material.SetTextureOffset("_BaseMap", new Vector2(1 - Time.time, 0));
+            }
         }
         else
         {
@@ -391,6 +414,7 @@ public class MedusaControlScript : MonoBehaviour
             {
                 leftEyeLine.enabled = false;
                 rightEyeLine.enabled = false;
+                eyeBeamLight.SetActive(false);
                 PlayerMovement3D playerMovement = playerHealth.gameObject.GetComponent<PlayerMovement3D>();
                 if (playerMovement != null) 
                 {
@@ -434,6 +458,7 @@ public class MedusaControlScript : MonoBehaviour
         {
             leftEyeLine.enabled = false;
             rightEyeLine.enabled = false;
+            eyeBeamLight.SetActive(false);
             SetAggroState(AggroStates.Stone);
             CurrentState = nextState;
         }
@@ -682,7 +707,7 @@ public class MedusaControlScript : MonoBehaviour
             anim.enabled = true;
             medusaAgent.speed = baseSpeed;
             invunerable = false;
-            mainMaterial.SetTexture("_MainTex", normalTex);
+            mainMaterial.SetTexture("_BaseMap", normalTex);
             healthBar.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.green;
             totalHealthDisplay.color = Color.green;
         }
@@ -693,7 +718,7 @@ public class MedusaControlScript : MonoBehaviour
             anim.enabled = true;
             medusaAgent.speed *= enragedMultiplier;
             invunerable = true;
-            mainMaterial.SetTexture("_MainTex", enragedTex);
+            mainMaterial.SetTexture("_BaseMap", enragedTex);
             healthBar.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = new Color32(143, 0, 254, 255);
             totalHealthDisplay.color = new Color32(143, 0, 254, 255);
         }
@@ -701,7 +726,7 @@ public class MedusaControlScript : MonoBehaviour
         {
             anim.enabled = false;
             invunerable = false;
-            mainMaterial.SetTexture("_MainTex", stoneTex);
+            mainMaterial.SetTexture("_BaseMap", stoneTex);
             healthBar.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.grey;
             totalHealthDisplay.color = Color.grey;
         }
@@ -710,7 +735,7 @@ public class MedusaControlScript : MonoBehaviour
             anim.enabled = true;
             medusaAgent.speed = fastSpeed;
             invunerable = false;
-            mainMaterial.SetTexture("_MainTex", normalTex);
+            mainMaterial.SetTexture("_BaseMap", normalTex);
             healthBar.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.red;
             totalHealthDisplay.color = Color.red;
         }

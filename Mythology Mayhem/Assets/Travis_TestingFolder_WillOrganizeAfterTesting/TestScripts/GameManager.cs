@@ -50,7 +50,6 @@ public class GameManager : MythologyMayhem
             LoadScene(gameData.startScene);
         }
         DontDestroyOnLoad(this.gameObject);
-        playerControllers = new List<ScenePlayerObject>();
         startSceneLoaded = false;
         checkStart = false;
         checkProx = false;
@@ -125,7 +124,8 @@ public class GameManager : MythologyMayhem
 
     public void AddLoadedPlayer(PlayerAttach player) 
     {
-        playerControllers.Add(new ScenePlayerObject(player, player.type, player.inScene));
+        ScenePlayerObject spo = new ScenePlayerObject(player, player.type, player.inScene);
+        playerControllers.Add(spo);
     }
 
     bool CheckLocalGameManagerProximityLoad() 
