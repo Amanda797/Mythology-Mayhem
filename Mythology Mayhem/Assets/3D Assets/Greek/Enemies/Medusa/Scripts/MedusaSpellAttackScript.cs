@@ -9,6 +9,8 @@ public class MedusaSpellAttackScript : MonoBehaviour
 
     public GameObject damageSphere;
     public Light lightSource;
+    public ParticleSystem vfx;
+    public ParticleSystem gasVFX;
 
     public float startScale;
     public float endScale;
@@ -24,6 +26,7 @@ public class MedusaSpellAttackScript : MonoBehaviour
 
 
     public bool stopMovement;
+    public bool damageStopped;
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -32,6 +35,7 @@ public class MedusaSpellAttackScript : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         damageSphere.SetActive(false);
         fullScale = false;
+        damageStopped = false;
     }
 
     // Update is called once per frame
@@ -41,7 +45,7 @@ public class MedusaSpellAttackScript : MonoBehaviour
         {
             rb.velocity = transform.forward * speed * Time.deltaTime;
         }
-        if (stopMovement)
+        if (stopMovement && !damageStopped)
         {
             float scaleAmount = (Time.time - timeWhenHit) / timeToScale;
             if (scaleAmount >= 1 && !fullScale)
@@ -52,15 +56,28 @@ public class MedusaSpellAttackScript : MonoBehaviour
             }
 
             float finalScaleAmount = Mathf.Lerp(startScale, endScale, scaleAmount);
-            damageSphere.transform.localScale = new Vector3(finalScaleAmount, finalScaleAmount, finalScaleAmount);
+            if (damageSphere != null)
+            {
+                damageSphere.transform.localScale = new Vector3(finalScaleAmount, finalScaleAmount, finalScaleAmount);
+            }
+            ParticleSystem.ShapeModule vfxShape = gasVFX.shape;
+            vfxShape.radius = finalScaleAmount * 0.5f;
             float finalLightRangeAmount = Mathf.Lerp(startLightRange, endLightRange, scaleAmount);
-            lightSource.range = finalLightRangeAmount;
+            lightSource.intensity = finalLightRangeAmount;
 
             if (Time.time - timeReachedFullScale >= timeAtFullScale && fullScale)
             {
-                Destroy(gameObject);
+                damageSphere.gameObject.GetComponent<Collider>().enabled = false;
+                gasVFX.Stop();
+                Destroy(this.gameObject, 10.0f);
+                damageStopped = true;
             }
 
+        }
+
+        if (damageStopped) 
+        {
+            lightSource.intensity -= Time.deltaTime * 25;
         }
     }
 
@@ -72,6 +89,8 @@ public class MedusaSpellAttackScript : MonoBehaviour
             {
                 rb.velocity = Vector3.zero;
                 stopMovement = true;
+                vfx.Stop();
+                vfx.gameObject.SetActive(false);
                 damageSphere.transform.localScale = new Vector3(startScale, startScale, startScale);
                 damageSphere.SetActive(true);
                 timeWhenHit = Time.time;
