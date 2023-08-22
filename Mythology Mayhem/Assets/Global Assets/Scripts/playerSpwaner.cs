@@ -112,7 +112,7 @@ public class playerSpwaner : MythologyMayhem
                     playerAttach.inScene = localGameManager.inScene;
                     playerAttach.type = localGameManager.sceneType;
                     obj.name = (localGameManager.sceneType.ToString() + " Character " + localGameManager.inScene);
-                    obj.SetActive(false);
+                    obj.SetActive(true);
                 }
             }
         }
