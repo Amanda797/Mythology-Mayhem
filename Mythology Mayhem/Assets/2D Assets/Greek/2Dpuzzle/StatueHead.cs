@@ -7,7 +7,7 @@ public class StatueHead : MonoBehaviour
 
     public StatuePuzzle3D statueManager;
     public int headElement;
-    private MeshFilter meshFilter;
+    //private MeshFilter meshFilter;
 
     private Transform player;
 
@@ -15,12 +15,13 @@ public class StatueHead : MonoBehaviour
     private bool pickedUp = false; 
 
     public bool deBugStatueHeadReset = false;
+    public GameObject model;
 
     // Start is called before the first frame update
     void Start()
     {
-        meshFilter = GetComponent<MeshFilter>();
-        meshFilter.mesh = statueManager.heads[headElement];
+        //meshFilter = GetComponent<MeshFilter>();
+        //meshFilter.mesh = statueManager.heads[headElement];
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         if(deBugStatueHeadReset)
@@ -58,13 +59,15 @@ public class StatueHead : MonoBehaviour
 
         if(pickedUp)
         {
-            transform.GetComponent<MeshRenderer>().enabled = false;
-           // transform.GetComponent<Collider>().enabled = false;
+            model.SetActive(false);
+            //transform.GetComponent<MeshRenderer>().enabled = false;
+            transform.GetComponent<Collider>().enabled = false;
         }
         else
         {
-            transform.GetComponent<MeshRenderer>().enabled = true;
-           // transform.GetComponent<Collider>().enabled = true;
+            model.SetActive(true);
+            //transform.GetComponent<MeshRenderer>().enabled = true;
+            transform.GetComponent<Collider>().enabled = true;
         }
     }
 }
