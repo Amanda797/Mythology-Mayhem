@@ -67,7 +67,11 @@ public class MythologyMayhem : MonoBehaviour
     }
     public enum Enemies 
     { 
-        
+        Default,
+        Viking1,
+        Viking2,
+        Viking3,
+        None
     }
 
 }
