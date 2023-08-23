@@ -266,7 +266,7 @@ Light:
   serializedVersion: 10
   m_Type: 3
   m_Shape: 0
-  m_Color: {r: 0.035777844, g: 0.11320752, b: 0.07707367, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 112
@@ -793,7 +793,7 @@ PrefabInstance:
     - target: {fileID: 5132384942034983207, guid: 23a4a3660e931534a9735d011f47ce9f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8c4fb57a2a44f1f429e9a07932019e4d, type: 2}
+      objectReference: {fileID: -8998662091617045576, guid: 1a0627bb4905dea4ab8f007ab59dfbb9, type: 3}
     - target: {fileID: 8347874019106700038, guid: 23a4a3660e931534a9735d011f47ce9f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -813,6 +813,7 @@ GameObject:
   - component: {fileID: 409791999}
   - component: {fileID: 409791998}
   - component: {fileID: 409791997}
+  - component: {fileID: 409792001}
   m_Layer: 0
   m_Name: Cave-in to Medusa Cavern
   m_TagString: Untagged
@@ -914,6 +915,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409791995}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &409792001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409791995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d77282dc506b0441b541c45dddcef22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevel: 
+  lever: {fileID: 0}
+  entered: 0
+  blocked: 1
+  doorOpen: 0
 --- !u!1 &447073859
 GameObject:
   m_ObjectHideFlags: 0
