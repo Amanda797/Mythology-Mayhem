@@ -39,7 +39,7 @@ public class CavernLeverPuzzleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Lever1.GetComponent<LeverPuzzle>().switchOn == true /*&& Lever2.GetComponent<LeverPuzzle>().switchOn == false && Lever3.GetComponent<LeverPuzzle>().switchOn == true && Lever4.GetComponent<LeverPuzzle>().switchOn == false && Lever5.GetComponent<LeverPuzzle>().switchOn == true && Lever6.GetComponent<LeverPuzzle>().switchOn == false && Lever7.GetComponent<LeverPuzzle>().switchOn == true && Lever8.GetComponent<LeverPuzzle>().switchOn == false && Lever9.GetComponent<LeverPuzzle>().switchOn == true && Lever10.GetComponent<LeverPuzzle>().switchOn == false*/)
+        if(Lever1.GetComponent<LeverPuzzle>().switchOn == true && Lever2.GetComponent<LeverPuzzle>().switchOn == false && Lever3.GetComponent<LeverPuzzle>().switchOn == true && Lever4.GetComponent<LeverPuzzle>().switchOn == false && Lever5.GetComponent<LeverPuzzle>().switchOn == true && Lever6.GetComponent<LeverPuzzle>().switchOn == false && Lever7.GetComponent<LeverPuzzle>().switchOn == true && Lever8.GetComponent<LeverPuzzle>().switchOn == false && Lever9.GetComponent<LeverPuzzle>().switchOn == true && Lever10.GetComponent<LeverPuzzle>().switchOn == false)
         {
             if(owlSpawned == false && PlayerPrefs.GetInt("owl") == 0)
             {
