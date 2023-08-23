@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MythologyMayhem
 {
     [SerializeField] private Animator animator;
     [Header("Stats")]
-    [SerializeField] private int atkDamage = 1;
-    [SerializeField] private int maxHealth = 10;
+    [SerializeField] private Enemies enemyType;
+    [SerializeField] private int atkDamage;
+    [SerializeField] private int maxHealth;
     [SerializeField] private LayerMask playerLayers;
     [SerializeField] private bool canAttack = true;
-    [SerializeField] private float attackRate = 1.5f;
+    [SerializeField] public float attackRate;
+    [Header("Viking1 Stats")]
+    [SerializeField] private int viking1AtkDamage;
+    [SerializeField] private int viking1MaxHealth;
+    [SerializeField] private float timeLastTaunt;
+    [SerializeField] private float tauntRate;
+    [Header("Viking2 Stats")]
+    [SerializeField] private int viking2AtkDamage;
 
     private int currHealth;
 
@@ -22,7 +30,49 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetStats();
         currHealth = maxHealth;
+    }
+
+    void Update()
+    {
+        switch(enemyType)
+        {
+            case Enemies.Default:
+                break;
+
+            case Enemies.Viking1:
+                if(Time.time - timeLastTaunt >= tauntRate) 
+                {
+                    Debug.Log("Run Taunt" + Time.time + " " + timeLastTaunt + " " + (Time.time - timeLastTaunt));
+                    timeLastTaunt = Time.time;
+                }
+                
+                break;
+
+            case Enemies.Viking2:
+                break;
+        }
+    }
+
+    public void SetStats()
+    {
+        switch(enemyType)
+        {
+            case Enemies.Default:
+                atkDamage = 1;
+                maxHealth = 10;
+                attackRate = 1.5f;
+                break;
+
+            case Enemies.Viking1:
+                atkDamage = viking1AtkDamage;
+                maxHealth = viking1MaxHealth;
+                break;
+            case Enemies.Viking2:
+                atkDamage = viking2AtkDamage;  
+                break;
+        }
     }
 
     public void TakeDamage(int damage) 
