@@ -1,7 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class MouseAI : MonoBehaviour
 {
+    [Header("Enemy Type")]
+    [SerializeField] bool isBoar;
+
+    [Header("Special Animations")]
+    [SerializeField] GameObject boarCloudAnimation;
+
     [Header("Mouse Movement")]
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
@@ -61,6 +68,9 @@ public class MouseAI : MonoBehaviour
 
         ogWalkSpeed = walkSpeed;
         ogRunSpeed = runSpeed;
+
+        boarCloudAnimation.gameObject.SetActive(false);
+        chargingTimer = gameObject.GetComponent<Enemy>().attackRate;
 
     }
 
@@ -134,15 +144,32 @@ public class MouseAI : MonoBehaviour
         }
     }
 
+    float chargingTimer;
+
     void AttackPlayer()
     {
         attacking = soundTrigger.IsTouching(attackTarget.GetComponent<Collider2D>());
         if (attacking && gameObject.GetComponent<Enemy>().CanAttack)
         {
             transform.position = Vector2.MoveTowards(transform.position, attackTarget.transform.position, runSpeed * Time.deltaTime);
+        } else 
+        if (attacking && !gameObject.GetComponent<Enemy>().CanAttack) {
+            if(isBoar && chargingTimer > gameObject.GetComponent<Enemy>().attackRate) {
+                StartCoroutine(ChargingCloud());
+                chargingTimer = 0f;
+            } else if(isBoar) {
+                chargingTimer += 1f * Time.deltaTime;
+            }
         }
         mouseAnim.SetBool("IsAttacking", attacking);
     }
+
+    IEnumerator ChargingCloud() {
+        boarCloudAnimation.gameObject.SetActive(true);
+        yield return new WaitForSeconds(gameObject.GetComponent<Enemy>().attackRate);
+        boarCloudAnimation.gameObject.SetActive(false);
+    }
+
     void Idle()
     {
         if (Time.time >= idleTimer)

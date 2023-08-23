@@ -11,7 +11,7 @@ public class Enemy : MythologyMayhem
     [SerializeField] private int maxHealth;
     [SerializeField] private LayerMask playerLayers;
     [SerializeField] private bool canAttack = true;
-    [SerializeField] private float attackRate;
+    [SerializeField] public float attackRate;
     [Header("Viking1 Stats")]
     [SerializeField] private int viking1AtkDamage;
     [SerializeField] private int viking1MaxHealth;
