@@ -23,7 +23,17 @@ public class StatueBody3D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        var playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var playerObject in playerObjects)
+        {
+            if (playerObject.GetComponent<CharacterController>())
+            {
+                player = playerObject.transform;
+                break;
+            }
+        }
+
         /*StatueBody2D[] allstatueBodies2D = FindObjectsOfType<StatueBody2D>();
 
         foreach (StatueBody2D statueBody in allstatueBodies2D)

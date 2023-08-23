@@ -7,6 +7,7 @@ public class StatueWeapon : MonoBehaviour
     public StatuePuzzle statueManager;
     public int weaponElement;
     private SpriteRenderer weaponSprite;
+    
 
     private Transform player;
 
@@ -16,10 +17,19 @@ public class StatueWeapon : MonoBehaviour
     public bool deBugStatueWeaponReset = false;
 
     // Start is called before the first frame update
-    void OnEnable()
+    void Start()
     {
         weaponSprite = GetComponent<SpriteRenderer>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        var playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var playerObject in playerObjects)
+        {
+            if (playerObject.GetComponent<Rigidbody2D>())
+            {
+                player = playerObject.transform;
+                break;
+            }
+        }
 
         if(deBugStatueWeaponReset)
         {
