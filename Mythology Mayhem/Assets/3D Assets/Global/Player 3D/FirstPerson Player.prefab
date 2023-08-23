@@ -365,6 +365,8 @@ MonoBehaviour:
   glideStaminaUsage: 1
   Amunet3dCloud: {fileID: 2065376410149743087}
   doubleJumped: 0
+  frozen: 0
+  frozenTimer: 0
 --- !u!114 &87501260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   inScene: 0
+  vCam: {fileID: 0}
 --- !u!1 &289352684733399155
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 500
   playerBody: {fileID: 289352684015478264}
+  playerMovement3D: {fileID: 0}
 --- !u!114 &9074964230819901009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +619,7 @@ MonoBehaviour:
     m_Bits: 2039
   offsetFactor: 0
   scale: {x: 7, y: 15, z: 7}
-  key: 101
+  mousebutton: 0
   isReady: 0
 --- !u!1 &1736968575000924240
 GameObject:
@@ -1014,6 +1018,7 @@ MonoBehaviour:
   enemies: []
   Dis: 10
   player: {fileID: 289352684015478264}
+  weaponSwitcher: {fileID: 0}
 --- !u!1 &8188041831720933935
 GameObject:
   m_ObjectHideFlags: 0
