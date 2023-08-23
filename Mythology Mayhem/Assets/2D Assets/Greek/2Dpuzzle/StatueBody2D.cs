@@ -15,7 +15,7 @@ public class StatueBody2D : MonoBehaviour
     public List<Sprite> weaponBodySprite;
 
     // Start is called before the first frame update
-    void OnEnable()
+    void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         ChangeHeads();

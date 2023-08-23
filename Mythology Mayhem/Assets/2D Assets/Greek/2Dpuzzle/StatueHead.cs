@@ -22,7 +22,16 @@ public class StatueHead : MonoBehaviour
     {
         //meshFilter = GetComponent<MeshFilter>();
         //meshFilter.mesh = statueManager.heads[headElement];
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+         var playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var playerObject in playerObjects)
+        {
+            if (playerObject.GetComponent<CharacterController>())
+            {
+                player = playerObject.transform;
+                break;
+            }
+        }
 
         if(deBugStatueHeadReset)
         {
