@@ -53,5 +53,16 @@ public class LeverPuzzle : MonoBehaviour
             anim.Play("LeverOff");
             switchOn = false;
         }
+
+        if (inRange == true && Input.GetKey(KeyCode.E) && !switchOn)
+        {
+            anim.Play("LeverAnim");
+            switchOn = true;
+        }
+        else if (inRange == true && Input.GetKey(KeyCode.E) && switchOn)
+        {
+            anim.Play("LeverOff");
+            switchOn = false;
+        }
     }
 }
