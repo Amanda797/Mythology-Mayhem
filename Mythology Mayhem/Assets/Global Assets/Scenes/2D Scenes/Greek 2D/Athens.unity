@@ -2091,6 +2091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 300478889}
   - component: {fileID: 300478888}
+  - component: {fileID: 300478890}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2175,6 +2176,26 @@ Transform:
   m_Father: {fileID: 1019585231}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &300478890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300478887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &319121063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7901,22 +7922,22 @@ PrefabInstance:
         couple of pellets? It is all on a document on Nyctimene.\r\n \r\nDear Assistant,\r\nYou
         do know the owl we have here in the library was once called Nyctimene? She
         may have made a mess on a slanderous claim against her in your document.
-        Maybe leave her a mouse as an offering to not desecrate our scrolls.\r\n
-        \r\nDear Scholar,\r\nI had a mouse on my desk for her and she ate it and
-        then defecated on the document anyway. What else could I do other than maybe
-        translate the documents into a language she wouldn\u2019t know like the elder
-        futhark?\r\n \r\nDear Administrator,\r\nCould we cage that blasted owl? It
-        keeps defecating on whatever I have on my desk. I am concerned on how to
-        clean the scrolls without ruining the writing. I had a scroll on Nyctimene
-        on my desk with an offering alongside a note asking the owl to not defecate
-        on the scroll in Greek and well there was a pile of pellets and feathers
-        on the document.\r\n \r\nDear Insensitive scholar,\r\nOur owl was once called
-        Nyctimene. We warned everyone who enters to not leave the scrolls relating
-        to her out. If possible don\u2019t even let her see you taking the scroll
-        from the shelves or she will target you for reading Ovid\u2019s slanderous
-        claims that she egged her father on to rape her. You are upsetting her by
-        studying that scroll in particular. Maybe offer an olive branch rather than
-        a spear to her and you wouldn\u2019t have to worry about finding her droppings.\r\n"
+        Maybe leave her a mouse as an offering to not desecrate our scrolls.\r\n\r\nDear
+        Scholar,\r\nI had a mouse on my desk for her and she ate it and then defecated
+        on the document anyway. What else could I do other than maybe translate the
+        documents into a language she wouldn\u2019t know like the elder futhark?\r\n\r\nDear
+        Administrator,\r\nCould we cage that blasted owl? It keeps defecating on
+        whatever I have on my desk. I am concerned on how to clean the scrolls without
+        ruining the writing. I had a scroll on Nyctimene on my desk with an offering
+        alongside a note asking the owl to not defecate on the scroll in Greek and
+        well there was a pile of pellets and feathers on the document.\r\n\r\nDear
+        Insensitive scholar,\r\nOur owl was once called Nyctimene. We warned everyone
+        who enters to not leave the scrolls relating to her out. If possible don\u2019t
+        even let her see you taking the scroll from the shelves or she will target
+        you for reading Ovid\u2019s slanderous claims that she egged her father on
+        to rape her. You are upsetting her by studying that scroll in particular.
+        Maybe offer an olive branch rather than a spear to her and you wouldn\u2019t
+        have to worry about finding her droppings.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: textUI
@@ -14512,7 +14533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe70b4b9c1a27f40813b77c2a5ec4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
   spwanPoints:
   - {fileID: 2708325522179400584}
   - {fileID: 205475994}
