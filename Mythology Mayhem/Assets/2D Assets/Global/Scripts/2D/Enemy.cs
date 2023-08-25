@@ -97,8 +97,8 @@ public class Enemy : MythologyMayhem
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().simulated = false;
         GetComponent<KnockBackFeedback>().enabled = false;
-        GetComponent<MouseAI>().enabled = false;
         GetComponent<MouseAI>().dead = true;
+        GetComponent<MouseAI>().enabled = false;
         if(GetComponent<DropScrolls>() != null) {
             GetComponent<DropScrolls>().enabled = false;
         }
