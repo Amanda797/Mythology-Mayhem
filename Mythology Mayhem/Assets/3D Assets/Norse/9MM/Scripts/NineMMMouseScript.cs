@@ -92,9 +92,7 @@ public class NineMMMouseScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-        bool hitTile = false;
         NineMMSlotScript slotScript = null;
-        bool hitPiece = false;
         RaycastHit hit;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -105,8 +103,6 @@ public class NineMMMouseScript : MonoBehaviour
             pinpoint.position = hit.point;
             if (hit.collider.tag == "9MMMarble")
             {
-
-                hitPiece = true;
                 if (nmm != null)
                 {
                     if (nmm.currentTurn == NineMMMechanics.Turn.Player1SelectCaptureStart)
@@ -186,7 +182,6 @@ public class NineMMMouseScript : MonoBehaviour
             }
             if (hit.collider.tag == "9MMSlot")
             {
-                hitTile = true;
 
                 if (nmm != null)
                 {
@@ -199,7 +194,6 @@ public class NineMMMouseScript : MonoBehaviour
                             {
                                 mouseClicked = false;
                                 nmm.PlaceMarble(slotScript, 1);
-                                hitTile = false;
                             }
                         }
                     }
@@ -212,7 +206,6 @@ public class NineMMMouseScript : MonoBehaviour
                             {
                                 mouseClicked = false;
                                 nmm.PlaceMarble(slotScript, 2);
-                                hitTile = false;
                             }
                         }
                     }
@@ -225,7 +218,6 @@ public class NineMMMouseScript : MonoBehaviour
                             {
                                 mouseClicked = false;
                                 nmm.Player1SelectSlot(slotScript);
-                                hitTile = false;
                             }
                         }
                     }
@@ -238,7 +230,6 @@ public class NineMMMouseScript : MonoBehaviour
                             {
                                 mouseClicked = false;
                                 nmm.Player2SelectSlot(slotScript);
-                                hitTile = false;
                             }
                         }
                     }

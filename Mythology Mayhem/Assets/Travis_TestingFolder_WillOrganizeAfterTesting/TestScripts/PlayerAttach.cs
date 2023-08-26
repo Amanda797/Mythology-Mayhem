@@ -23,6 +23,20 @@ public class PlayerAttach : MythologyMayhem
     {
         tafl = FindObjectOfType<TaflMechanics>();
         nmm = FindObjectOfType<NineMMMechanics>();
+        if (tafl != null)
+        {
+            if (tafl.gameObject.scene != this.gameObject.scene)
+            {
+                tafl = null;
+            }
+        }
+        if (nmm != null)
+        {
+            if (nmm.gameObject.scene != this.gameObject.scene)
+            {
+                nmm = null;
+            }
+        }
         if (tafl != null || nmm != null) 
         {
             pinpoint.gameObject.SetActive(true);
@@ -51,7 +65,6 @@ public class PlayerAttach : MythologyMayhem
         {
             bool hitTile = false;
             TaflTileScript tileScript = null;
-            bool hitPiece = false;
             RaycastHit hit;
 
             Debug.DrawRay(cam.transform.position, cam.transform.forward * 10, Color.blue, 0.1f);
@@ -61,8 +74,6 @@ public class PlayerAttach : MythologyMayhem
                 pinpoint.gameObject.SetActive(true);
                 if (hit.collider.tag == "TaflPiece")
                 {
-
-                    hitPiece = true;
                     if (tafl != null)
                     {
                         if (tafl.currentTurn == TaflMechanics.Turn.Player1Turn)
@@ -131,9 +142,7 @@ public class PlayerAttach : MythologyMayhem
         }
         if (nmm != null)
         {
-            bool hitTile = false;
             NineMMSlotScript slotScript = null;
-            bool hitPiece = false;
             RaycastHit hit;
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -144,8 +153,6 @@ public class PlayerAttach : MythologyMayhem
                 pinpoint.gameObject.SetActive(true);
                 if (hit.collider.tag == "9MMMarble")
                 {
-
-                    hitPiece = true;
                     if (nmm != null)
                     {
                         if (nmm.currentTurn == NineMMMechanics.Turn.Player1SelectCaptureStart)
@@ -225,7 +232,6 @@ public class PlayerAttach : MythologyMayhem
                 }
                 if (hit.collider.tag == "9MMSlot")
                 {
-                    hitTile = true;
 
                     if (nmm != null)
                     {
@@ -238,7 +244,6 @@ public class PlayerAttach : MythologyMayhem
                                 {
                                     tPressed = false;
                                     nmm.PlaceMarble(slotScript, 1);
-                                    hitTile = false;
                                 }
                             }
                         }
@@ -251,7 +256,6 @@ public class PlayerAttach : MythologyMayhem
                                 {
                                     tPressed = false;
                                     nmm.PlaceMarble(slotScript, 2);
-                                    hitTile = false;
                                 }
                             }
                         }
@@ -264,7 +268,6 @@ public class PlayerAttach : MythologyMayhem
                                 {
                                     tPressed = false;
                                     nmm.Player1SelectSlot(slotScript);
-                                    hitTile = false;
                                 }
                             }
                         }
@@ -277,7 +280,6 @@ public class PlayerAttach : MythologyMayhem
                                 {
                                     tPressed = false;
                                     nmm.Player2SelectSlot(slotScript);
-                                    hitTile = false;
                                 }
                             }
                         }

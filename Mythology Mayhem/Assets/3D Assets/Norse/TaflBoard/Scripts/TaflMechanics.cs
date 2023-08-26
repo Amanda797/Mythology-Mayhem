@@ -181,7 +181,6 @@ public class TaflMechanics : MonoBehaviour
 
                         placedPieces[x, y] = startPositions[currentStartPiece].piece;
                         exposedArray.Add(x + ":" + y + "/" + startPositions[currentStartPiece].piece);
-                        print((x + 1) + ":" + (y + 1) + ":" + startPositions[currentStartPiece].piece.ToString());
 
                         GameObject obj = Instantiate(FindPrefabPiece(startPositions[currentStartPiece].piece), centerPosition.position + FindPosition(x + 1, y + 1, false), Quaternion.identity, centerPosition);
                         TaflPieceScript pieceScript = obj.GetComponent<TaflPieceScript>();
@@ -376,8 +375,6 @@ public class TaflMechanics : MonoBehaviour
     {
         Vector3 tempVect = Vector3.zero;
 
-        TaflPosition.TaflDirection tempY = 0;
-
         switch (x)
         {
             case 1:
@@ -433,9 +430,6 @@ public class TaflMechanics : MonoBehaviour
         {
             tile.gameObject.SetActive(false);
         }
-        print("Set Renderers to false");
-        bool legal = true;
-        print(pieceX + ":" + pieceY);
 
         //North
         for (int y = pieceY + 1; y <= 11; y++)
@@ -588,12 +582,10 @@ public class TaflMechanics : MonoBehaviour
                         if (tile.occupying.type == TaflPosition.TaflPieces.King || tile.occupying.type == TaflPosition.TaflPieces.Pawn)
                         {
                             tile.occupying.rend.gameObject.transform.parent.GetComponent<Collider>().enabled = true;
-                            print("Enable Collider");
                         }
                         else
                         {
                             tile.occupying.rend.gameObject.transform.parent.GetComponent<Collider>().enabled = false;
-                            print("Disable Collider");
                         }
                     }
                 }
