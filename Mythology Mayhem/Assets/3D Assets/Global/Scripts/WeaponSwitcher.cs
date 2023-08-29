@@ -36,7 +36,6 @@ public class WeaponSwitcher : MythologyMayhem
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
-            print("1 Pressed");
             switch (currentMain) 
             {
                 case MainHand.MainWeapon:

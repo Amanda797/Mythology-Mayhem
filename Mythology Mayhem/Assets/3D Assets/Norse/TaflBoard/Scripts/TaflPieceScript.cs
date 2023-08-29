@@ -14,7 +14,6 @@ public class TaflPieceScript : MonoBehaviour
     {
         GameObject obj = Instantiate(ghostToSpawn, transform.position, transform.rotation);
         
-        print("Captured Piece " + name);
         gameObject.SetActive(false);
     }
 }

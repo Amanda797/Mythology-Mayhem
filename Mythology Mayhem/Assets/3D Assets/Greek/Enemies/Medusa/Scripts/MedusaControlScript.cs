@@ -71,9 +71,6 @@ public class MedusaControlScript : MonoBehaviour
     int currentMelee = 0;
     [SerializeField] List<AttackType> rangedAttacks;
     int currentRanged = 0;
-    private bool activatedRange = false;
-    [SerializeField] float rangedAttackDist = 20f;
-    [SerializeField] float meleeAttackDist = 5f;
 
     [Header("UI")]
     [SerializeField] Transform healthBarCanvasPivot;

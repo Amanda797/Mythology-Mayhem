@@ -8,7 +8,7 @@ public class ConditionPickup : MonoBehaviour
 
     public Conditional conditional;
 
-    public string tag;
+    public string tagToUse;
     public bool destroyOnPickup;
     private bool pickedUp;
     // Start is called before the first frame update
