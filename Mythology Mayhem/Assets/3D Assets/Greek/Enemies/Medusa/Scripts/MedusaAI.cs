@@ -12,11 +12,9 @@ public class MedusaAI : MonoBehaviour
     [SerializeField] List<Transform> t;
     [SerializeField] List<Transform> waypoints;
     [SerializeField] FPSHealth playerHealth;
-    float timer = 0f;
 
     Vector3 lastPosition;
 
-    private int waypointIndex = -1;
     [SerializeField] Vector3 target;
 
     void Awake() {

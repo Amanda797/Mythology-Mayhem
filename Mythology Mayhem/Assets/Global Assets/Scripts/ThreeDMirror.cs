@@ -5,7 +5,6 @@ using UnityEngine;
 public class ThreeDMirror : MythologyMayhem
 {
     [SerializeField] bool testingBool;
-    [SerializeField] bool canUseMirror;
     [Tooltip("Is the mirror in cooldown mode?")]
     [SerializeField] bool mirrorCoolDown = false;
     [Tooltip("How long should it take for the enemy to be slowed down/frozen?")]
@@ -24,14 +23,12 @@ public class ThreeDMirror : MythologyMayhem
     void Update()
     {
         if(testingBool) {
-            canUseMirror = true;
             ActivateMirror();
             testingBool = false;
         }
 
         if(Input.GetMouseButtonDown(1) && weaponSwitcher.currentOffHand == OffHand.Mirror) {
             mirrorCoolDown = true;
-            canUseMirror = false;
             lastUsedTime = Time.time;
             ActivateMirror();
         }
@@ -41,7 +38,6 @@ public class ThreeDMirror : MythologyMayhem
             if (coolDownDuration <= Time.time - lastUsedTime) 
             {
                 mirrorCoolDown = false;
-                canUseMirror = true;
             }
         }
     }
@@ -55,7 +51,6 @@ public class ThreeDMirror : MythologyMayhem
 
         if (Physics.Raycast(mirrorRay, out RaycastHit hit))
         {
-            print(hit.transform.gameObject.name);
             if (hit.transform.gameObject.tag.Equals("Medusa"))
             {
                 print("Hit: " + hit.transform.name);
@@ -93,7 +88,6 @@ public class ThreeDMirror : MythologyMayhem
     IEnumerator MirrorCooldown() {
         yield return new WaitForSeconds(coolDownDuration);
         mirrorCoolDown = false;
-        canUseMirror = true;
     }//end cooldown coroutine
 
     IEnumerator MedusaCooldown(GameObject medusa) {

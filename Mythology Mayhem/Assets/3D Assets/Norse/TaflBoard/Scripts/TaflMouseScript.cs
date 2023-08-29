@@ -94,7 +94,6 @@ public class TaflMouseScript : MonoBehaviour
 
             bool hitTile = false;
             TaflTileScript tileScript = null;
-            bool hitPiece = false;
             RaycastHit hit;
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -105,8 +104,6 @@ public class TaflMouseScript : MonoBehaviour
                 pinpoint.position = hit.point;
                 if (hit.collider.tag == "TaflPiece")
                 {
-
-                    hitPiece = true;
                     if (tafl != null)
                     {
                         if (tafl.currentTurn == TaflMechanics.Turn.Player1Turn)
