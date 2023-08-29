@@ -77,8 +77,10 @@ public class QuizManager : MonoBehaviour
             question.text = "Final Score: " + score;
             if(score >= 2) {                
                 answer1.text = "You won! You may pass...";
+                won = true;
             } else {
                 answer1.text = "You lost and bear a curse!";
+                won = false;
             }
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
@@ -90,6 +92,8 @@ public class QuizManager : MonoBehaviour
             if(won) {
                 foreach(GameObject enemy in enemy_go) {
                     enemy.GetComponent<BoxCollider2D>().enabled = false;
+                    enemy.GetComponent<Enemy>().CanAttack = false;
+                    enemy.GetComponent<Animator>().SetBool("AttackMode", false);
                 }
             } else {
                 foreach(GameObject enemy in enemy_go) {

@@ -89,16 +89,29 @@ public class Enemy : MythologyMayhem
 
     void Die() 
     {
-        animator.SetBool("IsAttacking", false);
-        animator.SetBool("IsDead", true);
+        if(animator != null) {
+            animator.SetBool("IsAttacking", false);
+            animator.SetBool("IsDead", true);
+        }
 
         Debug.Log("Enemy Died");
 
-        GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().simulated = false;
-        GetComponent<KnockBackFeedback>().enabled = false;
-        GetComponent<MouseAI>().enabled = false;
-        GetComponent<MouseAI>().dead = true;
+        if(GetComponent<Collider2D>()) {
+            GetComponent<Collider2D>().enabled = false;
+        }
+        if(GetComponent<Rigidbody2D>()) {
+            GetComponent<Rigidbody2D>().simulated = false;
+        }
+        if(GetComponent<KnockBackFeedback>()) {
+            GetComponent<KnockBackFeedback>().enabled = false;
+        }
+        if(GetComponent<MouseAI>()) {
+            GetComponent<MouseAI>().dead = true;
+            GetComponent<MouseAI>().enabled = false;
+        }
+        if(GetComponent<Bat2DAI>()) {
+            GetComponent<Bat2DAI>().enabled = false;
+        }
         if(GetComponent<DropScrolls>() != null) {
             GetComponent<DropScrolls>().enabled = false;
         }
@@ -114,7 +127,7 @@ public class Enemy : MythologyMayhem
 
     private void OnCollisionStay2D(Collision2D other) 
     {
-        if (other.gameObject.layer == 3)
+        if (other.gameObject.tag == "Player")
         {
             if(canAttack) {
                 if(other.gameObject.GetComponent<PlayerStats>())
@@ -123,11 +136,25 @@ public class Enemy : MythologyMayhem
                     other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
                 canAttack = false;
                 StartCoroutine(AttackRate());
-                //TODO: Add dust cloud animation/particles
             }
             
         }
     }//end on collision enter 2d
+
+    public void Attack(GameObject target) {
+        if (target.tag == "Player")
+        {
+            if(canAttack) {
+                if(target.GetComponent<PlayerStats>())
+                    target.GetComponent<PlayerStats>().TakeDamage(atkDamage);
+                if(target.GetComponent<KnockBackFeedback>())
+                    target.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+                canAttack = false;
+                StartCoroutine(AttackRate());
+            }
+            
+        }
+    }
 
     IEnumerator AttackRate() {
         yield return new WaitForSeconds(attackRate);

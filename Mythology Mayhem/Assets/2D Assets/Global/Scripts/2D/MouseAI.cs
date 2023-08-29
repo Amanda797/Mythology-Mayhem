@@ -96,6 +96,8 @@ public class MouseAI : MonoBehaviour
             }
             AttackPlayer();
             Flip();
+        } else {
+            boarCloudAnimation.gameObject.SetActive(false);
         }
 
     }
