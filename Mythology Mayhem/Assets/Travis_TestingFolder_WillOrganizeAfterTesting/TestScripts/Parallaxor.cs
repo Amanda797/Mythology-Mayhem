@@ -53,6 +53,8 @@ public class Parallaxor : MythologyMayhem
             LayerPositionSet(Layer6Holders, modifierX[6]);
             LayerPositionSet(Layer7Holders, modifierX[7]);
             LayerPositionSet(Layer8Holders, modifierX[8]);
+            LayerPositionSet(Layer9Holders, modifierX[9]);
+            LayerPositionSet(Layer10Holders, modifierX[10]);
         }
     }
 
