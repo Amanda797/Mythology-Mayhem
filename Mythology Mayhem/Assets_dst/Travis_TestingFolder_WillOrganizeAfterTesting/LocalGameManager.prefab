@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5444431951995405099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 617144638856596412}
+  - component: {fileID: 4734550838967186337}
+  m_Layer: 0
+  m_Name: LocalGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &617144638856596412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444431951995405099}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7538481586903290538}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4734550838967186337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444431951995405099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10d7e485b73bc64eac17f0bff145cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainGameManager: {fileID: 0}
+  sceneType: 0
+  player3D: {fileID: 0}
+  player2D: {fileID: 0}
+  player: {fileID: 0}
+  sceneOrigin: {fileID: 0}
+  sceneOriginOnLoad: {x: 0, y: 0, z: 0}
+  inScene: 0
+  scenesNeeded: 
+  scenesLoadedOnStart: 
+  scenesLoadedOnProximity: []
+  transitionPoints: []
+  loadNextOnStart: 0
+  activePlayerSpawner: {fileID: 0}
+  playerSpawnerPrefab: {fileID: 8849754181982942137, guid: 1800e1f7f17ed474b82784c6c7727f8e, type: 3}
+  spawnPointPrefab: {fileID: 3937955288290498419, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+  sceneTransitionPoint2D: {fileID: 2185147748737934607, guid: 9bca9568a32966048a4e080d9f743935, type: 3}
+  sceneTransitionPoint3D: {fileID: 7683470313968893340, guid: 1fb258b713afeae4280f2159021beb36, type: 3}
+  spawnPointCreator: {fileID: 7538481586903290538}
+  sceneToConnect: 0
+  canTransition: 1
+  activeByDefault: 1
+  useOffset: 0
+  levelOffset: {x: 0, y: 0, z: 0}
+  moveLevel: {x: 0, y: 0, z: 0}
+  levelsToDrag: 
+  useCustom: 0
+  aimAtTarget: 0
+  followOffset: {x: 0, y: 0, z: 0}
+  orthoSize: 0
+--- !u!1001 &8629859181803376661
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 617144638856596412}
+    m_Modifications:
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937955288290498419, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+      propertyPath: m_Name
+      value: SpawnPointCreator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+--- !u!4 &7538481586903290538 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2260096882983895743, guid: bad39fea787e9ce4eb9ace7fcffcfd49, type: 3}
+  m_PrefabInstance: {fileID: 8629859181803376661}
+  m_PrefabAsset: {fileID: 0}
