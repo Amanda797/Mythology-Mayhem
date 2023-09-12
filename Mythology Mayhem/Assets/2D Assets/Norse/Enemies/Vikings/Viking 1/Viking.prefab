@@ -303,7 +303,7 @@ Animator:
   m_GameObject: {fileID: 5995209681267350709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cdb9076cbcf52c74d95ff9b0371d04d8, type: 2}
+  m_Controller: {fileID: 9100000, guid: e92845a6facd97141bbf4c69ae559523, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -325,6 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoar: 0
+  boarCloudAnimation: {fileID: 0}
   walkSpeed: 4
   runSpeed: 6
   soundTrigger: {fileID: 5995209680792824171}
@@ -379,6 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5995209681267350710}
+  enemyType: 0
   atkDamage: 2
   maxHealth: 13
   playerLayers:
@@ -386,6 +389,11 @@ MonoBehaviour:
     m_Bits: 8
   canAttack: 1
   attackRate: 1.5
+  viking1AtkDamage: 0
+  viking1MaxHealth: 0
+  timeLastTaunt: 0
+  tauntRate: 0
+  viking2AtkDamage: 0
 --- !u!50 &5995209681267350716
 Rigidbody2D:
   serializedVersion: 4
