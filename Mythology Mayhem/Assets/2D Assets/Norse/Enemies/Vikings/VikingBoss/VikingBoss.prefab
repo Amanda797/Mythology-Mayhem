@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4119773524919623736}
   - component: {fileID: 4119773524919623735}
   - component: {fileID: 4119773524919623734}
-  - component: {fileID: 4119773524919623737}
   - component: {fileID: 4119773524919623742}
+  - component: {fileID: 4119773524919623737}
   - component: {fileID: 4119773524919623741}
   - component: {fileID: 4119773524919623740}
   - component: {fileID: 4119773524919623739}
@@ -114,33 +114,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4119773524919623737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4119773524919623733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 4
-  runSpeed: 6
-  soundTrigger: {fileID: 4119773525922502123}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 0}
-  sr: {fileID: 0}
-  idleDuration: 5
-  waypoints:
-  - {fileID: 4119773525777053283}
-  - {fileID: 4119773525421408881}
-  waypointIndex: 0
-  mirrorInRange: {fileID: 0}
-  rb2d: {fileID: 0}
-  dead: 0
-  patrolBool: IsPatrolling
 --- !u!61 &4119773524919623742
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,6 +140,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.182892, y: 5.906825}
   m_EdgeRadius: 0
+--- !u!114 &4119773524919623737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4119773524919623733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBoar: 0
+  boarCloudAnimation: {fileID: 0}
+  walkSpeed: 4
+  runSpeed: 6
+  soundTrigger: {fileID: 4119773525922502123}
+  attackTarget: {fileID: 0}
+  mouseAnim: {fileID: 4119773524919623734}
+  sr: {fileID: 0}
+  idleDuration: 5
+  waypoints:
+  - {fileID: 4119773525777053283}
+  - {fileID: 4119773525421408881}
+  waypointIndex: 0
+  mirrorInRange: {fileID: 0}
+  rb2d: {fileID: 0}
+  dead: 0
+  patrolBool: IsPatrolling
 --- !u!114 &4119773524919623741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4119773524919623734}
+  enemyType: 0
   atkDamage: 2
   maxHealth: 13
   playerLayers:
@@ -187,6 +190,11 @@ MonoBehaviour:
     m_Bits: 8
   canAttack: 1
   attackRate: 1.5
+  viking1AtkDamage: 0
+  viking1MaxHealth: 0
+  timeLastTaunt: 0
+  tauntRate: 0
+  viking2AtkDamage: 0
 --- !u!50 &4119773524919623740
 Rigidbody2D:
   serializedVersion: 4

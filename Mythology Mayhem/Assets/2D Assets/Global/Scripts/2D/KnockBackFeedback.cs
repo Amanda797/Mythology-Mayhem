@@ -29,14 +29,14 @@ public class KnockBackFeedback : MonoBehaviour
     private IEnumerator Reset() 
     {
         yield return new WaitForSeconds(delay);
-        rb2d.velocity = Vector3.zero;
+        rb2d.velocity = Vector2.zero;
         OnDone?.Invoke();
     }
 
     private IEnumerator ResetY()
     {
         yield return new WaitForSeconds(delay/4);
-        rb2d.velocity = new Vector3(rb2d.velocity.x, 0f, 0f);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
     
     }
 }

@@ -210,14 +210,14 @@ GameObject:
   - component: {fileID: 5995209681267350712}
   - component: {fileID: 5995209681267350711}
   - component: {fileID: 5995209681267350710}
-  - component: {fileID: 5995209681267350713}
   - component: {fileID: 5995209681267350718}
+  - component: {fileID: 5995209681267350713}
   - component: {fileID: 5995209681267350717}
   - component: {fileID: 5995209681267350716}
   - component: {fileID: 5995209681267350715}
   - component: {fileID: 5995209681267350714}
   m_Layer: 6
-  m_Name: Viking
+  m_Name: Dwarf1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ Animator:
   m_GameObject: {fileID: 5995209681267350709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cdb9076cbcf52c74d95ff9b0371d04d8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 171cb18092f79ab4384a75c2ee6566cc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -313,6 +313,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &5995209681267350718
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995209681267350709}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.31, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.22, y: 3.823242}
+    newSize: {x: 9, y: 9}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.86, y: 3.1}
+  m_EdgeRadius: 0
 --- !u!114 &5995209681267350713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoar: 0
+  boarCloudAnimation: {fileID: 0}
   walkSpeed: 4
   runSpeed: 6
   soundTrigger: {fileID: 5995209680792824171}
@@ -340,32 +368,6 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   dead: 0
   patrolBool: IsPatrolling
---- !u!61 &5995209681267350718
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5995209681267350709}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.3948822, y: -0.42777967}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.22, y: 3.823242}
-    newSize: {x: 9, y: 9}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.182892, y: 5.906825}
-  m_EdgeRadius: 0
 --- !u!114 &5995209681267350717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5995209681267350710}
+  enemyType: 0
   atkDamage: 2
   maxHealth: 13
   playerLayers:
@@ -386,6 +389,11 @@ MonoBehaviour:
     m_Bits: 8
   canAttack: 1
   attackRate: 1.5
+  viking1AtkDamage: 0
+  viking1MaxHealth: 0
+  timeLastTaunt: 0
+  tauntRate: 0
+  viking2AtkDamage: 0
 --- !u!50 &5995209681267350716
 Rigidbody2D:
   serializedVersion: 4
