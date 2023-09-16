@@ -19,6 +19,10 @@ public class Enemy : MythologyMayhem
     [SerializeField] private float tauntRate;
     [Header("Viking2 Stats")]
     [SerializeField] private int viking2AtkDamage;
+    [Header("Viking3 Stats")]
+    [SerializeField] private int viking3AtkDamage;
+    [Header("Viking4 Stats")]
+    [SerializeField] private int viking4AtkDamage;
 
     private int currHealth;
 
@@ -71,6 +75,12 @@ public class Enemy : MythologyMayhem
                 break;
             case Enemies.Viking2:
                 atkDamage = viking2AtkDamage;  
+                break;
+            case Enemies.Viking3:
+                atkDamage = viking3AtkDamage;
+                break;
+            case Enemies.Viking4:
+                atkDamage = viking4AtkDamage;
                 break;
         }
     }
