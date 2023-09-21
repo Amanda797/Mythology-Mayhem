@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour
     private GameObject owl;
     [HideInInspector]public int hitCount;
 
+    public PlayerAttach attachScript;
     // Start is called before the first frame update
     void Awake()
     {        
@@ -118,6 +119,7 @@ public class PlayerStats : MonoBehaviour
                 huic.PlayerCurrHealth = ps.CurrHealth;
             if(ps.CurrHealth <= 0)
             {
+                print("0");
                 Die();
             }
         }
@@ -141,16 +143,23 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
+        print("Dead");
         anim.SetBool("IsDead", true);
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().simulated = false;
         GetComponent<KnockBackFeedback>().enabled = false;
         GetComponent<PlayerController>().enabled = false;
-        this.enabled = false;
+        //this.enabled = false;
 
         ps.CurrHealth = ps.MaxHealth;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (attachScript != null && attachScript.localGameManager != null)
+        {
+            StartCoroutine(Respawn());
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
    /*  void OnDrawGizmosSelected()
@@ -168,6 +177,24 @@ public class PlayerStats : MonoBehaviour
     public void PlaySwordSwing()
     {
         aud.Play();
+    }
+
+    public IEnumerator Respawn() 
+    {
+        yield return new WaitForSeconds(2f);
+        print("Respawn");
+        if(attachScript.localGameManager != null) 
+        {
+            transform.position = attachScript.localGameManager.activePlayerSpawner.spwanPoints[0].position;
+        }
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().simulated = true;
+        GetComponent<KnockBackFeedback>().enabled = true;
+        GetComponent<PlayerController>().enabled = true;
+        ps.CurrHealth = ps.MaxHealth;
+
+        if (huic != null)
+            huic.PlayerCurrHealth = ps.CurrHealth;
     }
     
 }
