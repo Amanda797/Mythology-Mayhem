@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     // ***PROPERTIES***
     // --------------------------
     [SerializeField] private float MaxHealth;
-    [SerializeField] private float health;
+    [SerializeField] private float _health;
     [SerializeField] private Behaviour[] components;
     [SerializeField] private GameObject mainObject; // Parent Self
     public GameObject rewardObject; // Reward Object
@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
     // --------------------------
     void Start()
     {
-        health = MaxHealth;
+        Life = MaxHealth;
     }// end start
 
     void FixedUpdate() {
@@ -43,35 +43,44 @@ public class Health : MonoBehaviour
         }
     }//end fixed update
 
+    public float Life
+    {
+        get { return _health; }
+        set { _health = value; }
+    }
+
     public void SetHealth(float h) {
-        health = h;
+        Life = h;
     }// end set health
 
     public float GetHealth() {
-        return health;
+        return Life;
     }//end get health
 
     public void TakeDamage(float d) {
         if(gameObject.tag == "Enemy") 
         {
-            anim.SetTrigger(hurtTrigger);
+            if(anim != null)
+                anim.SetTrigger(hurtTrigger);
         }
-        health -= d;
+        Life -= d;
         if(GetHealth() <= 0) {
             Death();
         }
     }//end take damage
 
     public void Heal(float h) {
-        anim.SetTrigger(healTrigger);
-        health += h;
+        if(anim != null)
+            anim.SetTrigger(healTrigger);
+        Life += h;
     }//end heal
 
     public void Death() {
         if(GetHealth() <= 0) {
             if(gameObject.tag == "Enemy") 
             {
-                anim.SetTrigger(deathTrigger);
+                if(anim != null)
+                    anim.SetTrigger(deathTrigger);
             }     
             //this? 
             //foreach (Behaviour component in components) {
@@ -87,7 +96,8 @@ public class Health : MonoBehaviour
         if(GetHealth() <= 0) {
             if(gameObject.tag == "Enemy") 
             {
-                anim.SetTrigger(deathTrigger);
+                if(anim != null)
+                    anim.SetTrigger(deathTrigger);
             }
                   
             //this? 

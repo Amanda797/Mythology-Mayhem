@@ -18,7 +18,8 @@ public class HealthUIController : MonoBehaviour
     [SerializeField] public PlayerStats_SO ps;
 
     //Properties
-    public int PlayerCurrHealth{
+    public float PlayerCurrHealth
+    {
         get {
            return ps.CurrHealth; 
         }
@@ -29,7 +30,8 @@ public class HealthUIController : MonoBehaviour
         }
     }
 
-    public int PlayerMaxHealth{
+    public float PlayerMaxHealth
+    {
         get {
             return ps.MaxHealth;
         }
@@ -54,10 +56,10 @@ public class HealthUIController : MonoBehaviour
         SetHealthBar(PlayerCurrHealth);
     }
 
-    private void SetHealthBar(int health) {
+    private void SetHealthBar(float health) {
         for (int i = 0; i < _heartPanel.childCount; i++)
         {
-            int remainderHealth = Mathf.Clamp(health - (i * 4), 0, 4);
+            float remainderHealth = Mathf.Clamp(health - (i * 4), 0, 4);
     
             switch (remainderHealth)
             {
@@ -81,7 +83,7 @@ public class HealthUIController : MonoBehaviour
     }// end set health bar
 
     //Used to update the amount of Heart sprites in the Health Bar automatically.
-    public void UpdateHealthBarCount(int maxHealth)
+    public void UpdateHealthBarCount(float maxHealth)
     {
         //Convert maxHealth "quarter hearts" value into whole hearts value.
         //Ceil to ensure less than a whole heart still spawns heart object
@@ -91,7 +93,7 @@ public class HealthUIController : MonoBehaviour
     
         if(maxHealth > heartCount)
         {
-            int heartsToAdd = maxHealth - heartCount;
+            float heartsToAdd = maxHealth - heartCount;
     
             for(int i = 0; i < heartsToAdd; i++)
             {
@@ -102,7 +104,7 @@ public class HealthUIController : MonoBehaviour
         }
         else if(maxHealth < heartCount)
         {
-            int heartsToRemove = heartCount - maxHealth;
+            float heartsToRemove = heartCount - maxHealth;
             for(int i = 0; i < heartsToRemove; i++)
             {
                 int lastHeartIndex = _heartPanel.childCount - 1;

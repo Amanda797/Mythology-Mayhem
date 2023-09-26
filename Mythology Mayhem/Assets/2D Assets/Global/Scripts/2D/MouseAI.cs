@@ -69,8 +69,11 @@ public class MouseAI : MonoBehaviour
         ogWalkSpeed = walkSpeed;
         ogRunSpeed = runSpeed;
 
-        boarCloudAnimation.gameObject.SetActive(false);
-        chargingTimer = gameObject.GetComponent<Enemy>().attackRate;
+        if(isBoar && boarCloudAnimation != null)
+        {
+            boarCloudAnimation.gameObject.SetActive(false);
+            chargingTimer = gameObject.GetComponent<Enemy>().attackRate;
+        }            
 
     }
 
@@ -94,24 +97,40 @@ public class MouseAI : MonoBehaviour
             {
                 Idle();
             }
-            AttackPlayer();
+            if (attackTarget != null)
+            {
+                AttackPlayer();
+            }
+            else 
+            {
+                
+            }
             Flip();
         } else {
-            boarCloudAnimation.gameObject.SetActive(false);
+            if (boarCloudAnimation != null)
+            {
+                boarCloudAnimation.gameObject.SetActive(false);
+            }
         }
 
     }
 
     void MoveMouse()
-    {        
-        mouseAnim.SetBool(patrolBool, true);
+    {
+        if (mouseAnim != null)
+        {
+            mouseAnim.SetBool(patrolBool, true);
+        }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, walkSpeed * Time.deltaTime);
         Vector3 distance = new Vector3(transform.position.x - waypoints[waypointIndex].transform.position.x, transform.position.y - waypoints[waypointIndex].transform.position.y, transform.position.z - waypoints[waypointIndex].transform.position.z);
         if (Mathf.Abs(distance.x) < .3)
         {
             waypointIndex += 1;
             idle = true;
-            mouseAnim.SetBool(patrolBool, false);
+            if (mouseAnim != null)
+            {
+                mouseAnim.SetBool(patrolBool, false);
+            }
             idleTimer = Time.time + idleDuration;
         }
         if (waypointIndex >= waypoints.Length)
