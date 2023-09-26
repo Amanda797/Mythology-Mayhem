@@ -69,6 +69,7 @@ public class MythologyMayhem : MonoBehaviour
         Viking1,
         Viking2,
         Viking3,
+        Viking4,
         None
     }
 

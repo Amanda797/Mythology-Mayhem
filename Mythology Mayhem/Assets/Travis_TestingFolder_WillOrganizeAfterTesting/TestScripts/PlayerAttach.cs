@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class PlayerAttach : MythologyMayhem
 {
+    public LocalGameManager localGameManager;
     public Dimension type;
     public Level inScene;
     public CinemachineVirtualCamera vCam;
