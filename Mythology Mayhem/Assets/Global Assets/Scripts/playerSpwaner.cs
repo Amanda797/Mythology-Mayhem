@@ -109,6 +109,7 @@ public class playerSpwaner : MythologyMayhem
                 playerAttach = obj.GetComponent<PlayerAttach>();
                 if (playerAttach != null)
                 {
+                    playerAttach.localGameManager = localGameManager;
                     playerAttach.inScene = localGameManager.inScene;
                     playerAttach.type = localGameManager.sceneType;
                     obj.name = (localGameManager.sceneType.ToString() + " Character " + localGameManager.inScene);
