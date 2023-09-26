@@ -10,7 +10,7 @@ public class Owl_Animator : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask enemyLayer;
-    private float timing = 0.1f;
+    //private float timing = 0.1f;
     private float freshDelay;
     public bool playerInRange = false;
     private bool awake = false;

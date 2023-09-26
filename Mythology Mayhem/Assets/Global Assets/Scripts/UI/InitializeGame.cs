@@ -17,6 +17,7 @@ public class InitializeGame : MonoBehaviour
         //Set default audio volume
         if(vs == null) {
             AudioListener.volume = volume;
+            PlayerPrefs.SetInt("Volume", (int) volume);
         }
         //Set Player Health to 100%
         if(ps != null) {

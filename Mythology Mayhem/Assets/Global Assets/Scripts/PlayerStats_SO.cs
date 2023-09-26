@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerStats_SO : ScriptableObject
 {
     //Fields
-    [SerializeField] private int _mh;
-    [SerializeField] private int _ch;
-    [SerializeField] private int _attackDamage;
+    [SerializeField] private float _mh;
+    [SerializeField] private float _ch;
+    [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackRate;
     [SerializeField] private float _attackRange;
     [SerializeField] private float _attackHeight;
@@ -16,7 +16,7 @@ public class PlayerStats_SO : ScriptableObject
     [SerializeField] private bool _canAttack;
 
     //Properties
-    [SerializeField] public int MaxHealth { 
+    [SerializeField] public float MaxHealth { 
         get {
             return _mh;
         } 
@@ -24,7 +24,7 @@ public class PlayerStats_SO : ScriptableObject
             _mh = value;
         } 
     }
-    [SerializeField] public int CurrHealth { 
+    [SerializeField] public float CurrHealth { 
         get {
             return _ch;
         } 
@@ -32,7 +32,7 @@ public class PlayerStats_SO : ScriptableObject
             _ch = value;
         } 
     }
-    [SerializeField] public int AttackDamage { 
+    [SerializeField] public float AttackDamage { 
         get {
             return _attackDamage;
         } 

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3003051934419592274}
   - component: {fileID: 3003051934419592285}
   - component: {fileID: 3003051934419592284}
-  - component: {fileID: 3003051934419592275}
   - component: {fileID: 3003051934419592276}
+  - component: {fileID: 3003051934419592275}
   - component: {fileID: 3003051934419592279}
   - component: {fileID: 3003051934419592278}
   - component: {fileID: 3003051934419592273}
@@ -104,7 +104,7 @@ Animator:
   m_GameObject: {fileID: 3003051934419592287}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cdb9076cbcf52c74d95ff9b0371d04d8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 483a021241468a741b7a962aed7c935b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -114,33 +114,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3003051934419592275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3003051934419592287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 4
-  runSpeed: 6
-  soundTrigger: {fileID: 3003051934894444929}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 0}
-  sr: {fileID: 0}
-  idleDuration: 5
-  waypoints:
-  - {fileID: 3003051934740017673}
-  - {fileID: 3003051934988420635}
-  waypointIndex: 0
-  mirrorInRange: {fileID: 0}
-  rb2d: {fileID: 0}
-  dead: 0
-  patrolBool: IsPatrolling
 --- !u!61 &3003051934419592276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,6 +140,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.182892, y: 5.906825}
   m_EdgeRadius: 0
+--- !u!114 &3003051934419592275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003051934419592287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBoar: 0
+  boarCloudAnimation: {fileID: 0}
+  walkSpeed: 4
+  runSpeed: 6
+  soundTrigger: {fileID: 3003051934894444929}
+  attackTarget: {fileID: 0}
+  mouseAnim: {fileID: 3003051934419592284}
+  sr: {fileID: 0}
+  idleDuration: 5
+  waypoints:
+  - {fileID: 3003051934740017673}
+  - {fileID: 3003051934988420635}
+  waypointIndex: 0
+  mirrorInRange: {fileID: 0}
+  rb2d: {fileID: 0}
+  dead: 0
+  patrolBool: IsPatrolling
 --- !u!114 &3003051934419592279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3003051934419592284}
+  enemyType: 0
   atkDamage: 2
   maxHealth: 13
   playerLayers:
@@ -187,6 +190,11 @@ MonoBehaviour:
     m_Bits: 8
   canAttack: 1
   attackRate: 1.5
+  viking1AtkDamage: 0
+  viking1MaxHealth: 0
+  timeLastTaunt: 0
+  tauntRate: 0
+  viking2AtkDamage: 0
 --- !u!50 &3003051934419592278
 Rigidbody2D:
   serializedVersion: 4
