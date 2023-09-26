@@ -39,7 +39,7 @@ public class FPSHealth : MonoBehaviour
     }//end fixed update
 
     public void SetHealth(float h) {
-        huic.PlayerCurrHealth  = (int) h;
+        huic.PlayerCurrHealth = h;
     }// end set health
 
     public float GetHealth() {
@@ -47,14 +47,14 @@ public class FPSHealth : MonoBehaviour
     }//end get health
 
     public void TakeDamage(float d) {
-        huic.PlayerCurrHealth -= (int) d;
+        huic.PlayerCurrHealth -= d;
         if(GetHealth() <= 0) {
             Death();
         }
     }//end take damage
 
     public void Heal(float h) {
-        huic.PlayerCurrHealth += (int) h;
+        huic.PlayerCurrHealth += h;
     }//end heal
 
     public void Death() {

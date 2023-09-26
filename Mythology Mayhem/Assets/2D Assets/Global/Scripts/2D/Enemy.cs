@@ -1,97 +1,192 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
+using System;
+using UnityEngine.AI;
 
 public class Enemy : MythologyMayhem
 {
-    [SerializeField] private Animator animator;
+    public Animator animator;
+    public Rigidbody rigidBody3D;
+    public Rigidbody2D rigidBody2D;
+    public SpriteRenderer spriteRenderer;
+    public NavMeshAgent agent;
+    public Health health;
+
     [Header("Stats")]
     [SerializeField] private Enemies enemyType;
-    [SerializeField] private int atkDamage;
-    [SerializeField] private int maxHealth;
+    public float attackDamage;
     [SerializeField] private LayerMask playerLayers;
     [SerializeField] private bool canAttack = true;
     [SerializeField] public float attackRate;
-    [Header("Viking1 Stats")]
-    [SerializeField] private int viking1AtkDamage;
-    [SerializeField] private int viking1MaxHealth;
-    [SerializeField] private float timeLastTaunt;
-    [SerializeField] private float tauntRate;
-    [Header("Viking2 Stats")]
-    [SerializeField] private int viking2AtkDamage;
-    [Header("Viking3 Stats")]
-    [SerializeField] private int viking3AtkDamage;
-    [Header("Viking4 Stats")]
-    [SerializeField] private int viking4AtkDamage;
+    public GameObject player;
 
-    private int currHealth;
+    [Header("Enemy Movement")]
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
+
+    [Header("Enemy Waypoints")]
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private int waypointIndex = 0;
+    public Vector3 target;
+    public float idleTimerMax = 3f;
+    public float idleTimer;
 
     public bool CanAttack {
         get {return canAttack;} 
         set {canAttack = value;}
     }
 
+    public UnityEvent IdleDelegate;
+    public UnityEvent<Vector3> PatrolDelegate;
+    public UnityEvent<GameObject> AttackDelegate;
+    public UnityEvent DeadDelegate;
+
+    public enum EnemyStates { Idle, Patrol, Attack, Dead };
+    public EnemyStates currentState;
+    public enum StatePosition { Exit, Current, Entry }; //0 = exit, 1 = current, 2 = entry
+    public StatePosition currentStatePosition;
+
     // Start is called before the first frame update
     void Start()
     {
-        SetStats();
-        currHealth = maxHealth;
+        health = gameObject.GetComponent<Health>();
+
+        currentState = EnemyStates.Idle;
+        currentStatePosition = StatePosition.Entry;
+        EnterState(currentState);
+    }
+
+    public void PrintState()
+    {
+        Debug.Log(currentState);
     }
 
     void Update()
     {
-        switch(enemyType)
+        switch (currentState)
         {
-            case Enemies.Default:
-                break;
-
-            case Enemies.Viking1:
-                if(Time.time - timeLastTaunt >= tauntRate) 
+            case EnemyStates.Idle:
                 {
-                    Debug.Log("Run Taunt" + Time.time + " " + timeLastTaunt + " " + (Time.time - timeLastTaunt));
-                    timeLastTaunt = Time.time;
+                    IdleDelegate.Invoke();
+                    break;
                 }
-                
-                break;
-
-            case Enemies.Viking2:
-                break;
+            case EnemyStates.Patrol:
+                {
+                    PatrolDelegate.Invoke(target);
+                    break;
+                }
+            case EnemyStates.Attack:
+                {
+                    AttackDelegate.Invoke(player);
+                    break;
+                }
+            case EnemyStates.Dead:
+                {
+                    DeadDelegate.Invoke();
+                    break;
+                }
+            default: { break; }
         }
     }
 
-    public void SetStats()
+    public void SwitchStates(EnemyStates newState)
     {
-        switch(enemyType)
+        ExitState(currentState);
+        currentState = newState;
+        EnterState(currentState);
+    }//switch states
+
+    public void EnterState(EnemyStates newState)
+    {
+        switch (newState)
         {
-            case Enemies.Default:
-                atkDamage = 1;
-                maxHealth = 10;
-                attackRate = 1.5f;
-                break;
+            case EnemyStates.Idle:
+                {
+                    idleTimer = idleTimerMax;
+                    currentStatePosition = StatePosition.Current;
+                    break;
+                }
+            case EnemyStates.Patrol:
+                {
+                    //Update waypoint
+                    if(waypointIndex >= waypoints.Length - 1)
+                    {
+                        waypointIndex = 0;
+                    } else
+                    {
+                        waypointIndex++;
+                    }
 
-            case Enemies.Viking1:
-                atkDamage = viking1AtkDamage;
-                maxHealth = viking1MaxHealth;
-                break;
-            case Enemies.Viking2:
-                atkDamage = viking2AtkDamage;  
-                break;
-            case Enemies.Viking3:
-                atkDamage = viking3AtkDamage;
-                break;
-            case Enemies.Viking4:
-                atkDamage = viking4AtkDamage;
-                break;
+                    //Update target
+                    target = waypoints[waypointIndex].position;
+
+                    //Update Nav mesh agent
+                    if(agent != null)
+                    {
+                        agent.speed = walkSpeed;
+                    }
+
+                    currentStatePosition = StatePosition.Current;
+                    break;
+                }
+            case EnemyStates.Attack:
+                {
+                    //Update target
+                    target = player.transform.position;
+
+                    //Update Nav mesh agent
+                    if (agent != null)
+                    {
+                        agent.speed = runSpeed;
+                    }
+
+                    currentStatePosition = StatePosition.Current;
+                    break;
+                }
+            case EnemyStates.Dead:
+                {
+                    currentStatePosition = StatePosition.Current;
+                    break;
+                }
+            default: { break; }
+        }
+
+        PrintState();
+    }
+
+    public void ExitState(EnemyStates newState)
+    {
+        switch (newState)
+        {
+            case EnemyStates.Idle:
+                {
+                    break;
+                }
+            case EnemyStates.Patrol:
+                {
+                    break;
+                }
+            case EnemyStates.Attack:
+                {
+                    break;
+                }
+            case EnemyStates.Dead:
+                {
+                    break;
+                }
+            default: { break; }
         }
     }
 
-    public void TakeDamage(int damage) 
+    public void TakeDamage(float damage) 
     {
-        currHealth -= damage;
+        health.Life -= damage;
 
         animator.SetTrigger("Hurt");
 
-        if(currHealth <= 0)
+        if(health.Life <= 0)
         {
             Die();
         }
@@ -135,28 +230,30 @@ public class Enemy : MythologyMayhem
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionStay2D(Collision2D other) 
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.tag == "Player")
         {
-            if(canAttack) {
-                if(other.gameObject.GetComponent<PlayerStats>())
-                    other.gameObject.GetComponent<PlayerStats>().TakeDamage(atkDamage);
-                if(other.gameObject.GetComponent<KnockBackFeedback>())
-                    other.gameObject.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
-                canAttack = false;
-                StartCoroutine(AttackRate());
-            }
-            
+            player = other.gameObject;
+            SwitchStates(EnemyStates.Attack);            
         }
-    }//end on collision enter 2d
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            player = other.gameObject;
+            SwitchStates(EnemyStates.Attack);
+        }
+    }
 
     public void Attack(GameObject target) {
         if (target.tag == "Player")
         {
             if(canAttack) {
                 if(target.GetComponent<PlayerStats>())
-                    target.GetComponent<PlayerStats>().TakeDamage(atkDamage);
+                    target.GetComponent<PlayerStats>().TakeDamage(attackDamage);
                 if(target.GetComponent<KnockBackFeedback>())
                     target.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
                 canAttack = false;
@@ -166,7 +263,7 @@ public class Enemy : MythologyMayhem
         }
     }
 
-    IEnumerator AttackRate() {
+    public IEnumerator AttackRate() {
         yield return new WaitForSeconds(attackRate);
         canAttack = true;
     }

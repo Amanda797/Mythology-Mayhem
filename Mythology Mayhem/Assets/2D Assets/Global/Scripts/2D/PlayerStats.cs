@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
         aud = GetComponent<AudioSource>();
         huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
 
-        if(huic != null) { 
+        if (huic != null) { 
             ps = huic.ps;
             ps.CanAttack = true;
             ps.NextAttackTime = 0;
@@ -103,13 +103,15 @@ public class PlayerStats : MonoBehaviour
             if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
             {
                 hitCount++;
+                //Play Sound
+                aud.Play();
                 enemy.GetComponent<Enemy>().TakeDamage(ps.AttackDamage);
                 enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
         }
     }
 
-    public void TakeDamage(int damage) 
+    public void TakeDamage(float damage) 
     {
         if(ps.CurrHealth >= 0)
         {

@@ -69,11 +69,11 @@ public class MouseAI : MonoBehaviour
         ogWalkSpeed = walkSpeed;
         ogRunSpeed = runSpeed;
 
-        if (boarCloudAnimation != null)
+        if(isBoar && boarCloudAnimation != null)
         {
             boarCloudAnimation.gameObject.SetActive(false);
-        }
-        chargingTimer = gameObject.GetComponent<Enemy>().attackRate;
+            chargingTimer = gameObject.GetComponent<Enemy>().attackRate;
+        }            
 
     }
 

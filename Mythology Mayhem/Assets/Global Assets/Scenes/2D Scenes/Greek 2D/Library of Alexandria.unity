@@ -178,18 +178,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
 --- !u!1001 &19054627
@@ -247,18 +235,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 3.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
 --- !u!1 &37197530
@@ -271,6 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 37197532}
   - component: {fileID: 37197531}
+  - component: {fileID: 37197533}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -355,6 +332,26 @@ Transform:
   m_Father: {fileID: 1390468329}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &37197533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37197530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!114 &67009219 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1316026515818321198, guid: 5bd5a67ac69da0541997a73fb2cd445c, type: 3}
@@ -560,6 +557,7 @@ MonoBehaviour:
   text: Dear Acolyte,<br><br> Press E and up to climb ladders if you want to avoid
     mice and falling scrolls<br><br> Head Librarian
   pressEText: {fileID: 0}
+  requirements: 0
 --- !u!212 &76960574
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1267,14 +1265,6 @@ PrefabInstance:
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 3.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
@@ -2121,6 +2111,7 @@ MonoBehaviour:
     rats you fight inside this library are the actual vermin.<br><br>  Truly Yours,<br><br> 
     Head Librarian"
   pressEText: {fileID: 2195325134103196066}
+  requirements: 0
 --- !u!212 &329324495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3664,6 +3655,7 @@ MonoBehaviour:
     this as it will be instrumental in your organization of our nearly 400,000 scrolls.<br><br> 
     - Head Librarian Aristarchus
   pressEText: {fileID: 2195325134103196066}
+  requirements: 0
 --- !u!61 &522090953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4048,18 +4040,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 4.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
 --- !u!1 &664067407
@@ -4210,6 +4190,7 @@ MonoBehaviour:
     the rodents at bay, and I suggest looking into it if you have any problems with
     them in the future,<br><br>  - Petsis, Sub-Librarian "
   pressEText: {fileID: 0}
+  requirements: 0
 --- !u!212 &673080616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4730,6 +4711,7 @@ MonoBehaviour:
   text: Acolyte,<br><br> Press E to push a box and pull a lever. Pull the lever to
     see what happens.
   pressEText: {fileID: 0}
+  requirements: 0
 --- !u!212 &756719113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5093,18 +5075,6 @@ PrefabInstance:
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
@@ -5759,126 +5729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d77282dc506b0441b541c45dddcef22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1040965086
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1720918050}
-    m_Modifications:
-    - target: {fileID: 450319774758561872, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_Name
-      value: ScrollMouse (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 570641403531026896, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 570641403531026896, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -164.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.404319
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: playerLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079830979151344108, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079830979151344108, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: runSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: walkSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 1.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
---- !u!4 &1040965087 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-  m_PrefabInstance: {fileID: 1040965086}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1040965088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8389002920890670447, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-  m_PrefabInstance: {fileID: 1040965086}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1040965089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040965088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96ea627b4cd5dc468458ecc0066d016, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallingScroll: {fileID: 4034391330369518814, guid: 8931aa4494dad7d40809ec48fd5c45b0, type: 3}
 --- !u!1 &1041028305
 GameObject:
   m_ObjectHideFlags: 0
@@ -6044,6 +5894,7 @@ MonoBehaviour:
     see if you can push the object to get it out of your way.<br><br>Sincerely,<br><br> 
     Head Librarian
   pressEText: {fileID: 0}
+  requirements: 0
 --- !u!212 &1046704611
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7174,14 +7025,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
 --- !u!1 &1233026415
@@ -8114,6 +7957,7 @@ MonoBehaviour:
     for the bathhouses and destroyed. It is said that it took nearly six months to
     burn everything. Truly terrible.<br><br>  - A distraught citizen of Alexandria"
   pressEText: {fileID: 0}
+  requirements: 0
 --- !u!212 &1389410026
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8783,14 +8627,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
 --- !u!1 &1479000142
@@ -9204,21 +9040,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrollMouse (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 570641403531026896, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 570641403531026896, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -158.78
+      value: -146.64
       objectReference: {fileID: 0}
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9256,37 +9084,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: playerLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079830979151344108, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079830979151344108, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670440, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: runSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: walkSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 2
+    - target: {fileID: 5442366955441259943, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: dropsScrolls
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
@@ -9650,7 +9450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720918049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 269.48682, y: -5.4, z: -24.302277}
+  m_LocalPosition: {x: 269.48682, y: -5.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9664,7 +9464,7 @@ Transform:
   - {fileID: 2016721219}
   - {fileID: 1211550132}
   - {fileID: 1614534960}
-  - {fileID: 1040965087}
+  - {fileID: 2057221955}
   m_Father: {fileID: 2003821081}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9726,24 +9526,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 23.40044}
   m_EdgeRadius: 0
---- !u!1 &1793824603 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8389002920890670447, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-  m_PrefabInstance: {fileID: 1651723422}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1793824613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793824603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96ea627b4cd5dc468458ecc0066d016, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallingScroll: {fileID: 4034391330369518814, guid: 8931aa4494dad7d40809ec48fd5c45b0, type: 3}
 --- !u!1 &1801498581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10648,6 +10430,7 @@ MonoBehaviour:
     course Afro-Asian. I wish you success in this endeavor, as it affects the entire
     library.<br><br>  - Didymus \u201CBronze-Guts\u201D Chalcenterus"
   pressEText: {fileID: 0}
+  requirements: 0
 --- !u!212 &1975728559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10890,14 +10673,6 @@ PrefabInstance:
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 4.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
@@ -11180,6 +10955,72 @@ Transform:
   m_Father: {fileID: 1256670061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2057221954
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1720918050}
+    m_Modifications:
+    - target: {fileID: 450319774758561872, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_Name
+      value: ScrollMouse (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -161.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.404319
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442366955441259943, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+      propertyPath: dropsScrolls
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+--- !u!4 &2057221955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
+  m_PrefabInstance: {fileID: 2057221954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2099338767
 GameObject:
   m_ObjectHideFlags: 0
@@ -12923,18 +12764,6 @@ PrefabInstance:
     - target: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: attackRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389546133798722667, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: playerLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389002920890670443, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
-      propertyPath: idleDuration
-      value: 4.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
