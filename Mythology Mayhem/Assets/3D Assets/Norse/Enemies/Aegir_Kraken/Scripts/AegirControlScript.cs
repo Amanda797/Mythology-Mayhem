@@ -497,7 +497,7 @@ public class AegirControlScript : MonoBehaviour
                         jetStarted = false;
                         WaveLarge();
                         lastLarge = Time.time;
-                        ChangeState(State.LargeWaveAttack4);
+                        ChangeState(State.LargeWaveAttack5);
                     }
                 }
                 break;
