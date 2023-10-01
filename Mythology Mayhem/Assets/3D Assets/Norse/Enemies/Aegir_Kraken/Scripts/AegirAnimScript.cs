@@ -23,4 +23,19 @@ public class AegirAnimScript : MonoBehaviour
     {
         aegirControl.ActivateJet();
     }
+
+    public void SmallWaveSpawn() 
+    {
+        aegirControl.SmallWaveSpawn();
+    }
+
+    public void MediumWaveSpawn() 
+    {
+        aegirControl.MediumWaveSpawn();
+    }
+
+    public void LargeWaveSpawn() 
+    {
+        aegirControl.LargeWaveSpawn();
+    }
 }
