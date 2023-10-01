@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curState: 0
   health: 1000
-  riseSpeed: 0.5
+  riseSpeed: 5
   risePosition: {fileID: 0}
   distanceToStart: 0.1
   smallWaveDamage: 10
@@ -61,27 +61,28 @@ MonoBehaviour:
   smallWavePrefab: {fileID: 1296750564792458658, guid: e97dde3d2cdf772468f2b686621ee710, type: 3}
   waveSpawnPoint: {fileID: 9166887837952356244}
   mediuemWaveDamage: 25
-  mediumWavePrefab: {fileID: 4128005271220347862, guid: 7100785fc387f774ea40fa824a38dd7f, type: 3}
+  mediumWavePrefab: {fileID: 8967713678691801961, guid: 7100785fc387f774ea40fa824a38dd7f, type: 3}
   mediumWaveCooldown: 5
   lastMed: 0
   largeWaveDamage: 50
-  largeWavePrefab: {fileID: 5379925282859368929, guid: 51446fc4dae54a442a11cbf4dff009c7, type: 3}
+  largeWavePrefab: {fileID: 7845016511142462862, guid: 51446fc4dae54a442a11cbf4dff009c7, type: 3}
   largeWaveCooldown: 5
   lastLarge: 0
+  animatingWave: 0
   waterJetDamage: 10
   jetStarted: 0
   jetStart: 0
-  jetTime: 10
+  jetTime: 2
   waterJet: {fileID: 5699270176180455191}
   startKrakenTime: 5
-  krakenSummonTime: 5
+  krakenSummonTime: 30
   healAmount: 100
   startHealTime: 0
-  healTime: 10
+  healTime: 2
   healthStart: 0
-  krakenActive: 0
   startFight: 0
   anim: {fileID: 1977144444991491906}
+  krakenHeadScript: {fileID: 0}
 --- !u!1 &2959800183871842015
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,15 +309,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6265661400326893081, guid: 747542e6883706d47a85ab28c9a9a92a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5425553397129409149, guid: 747542e6883706d47a85ab28c9a9a92a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4382930252876031322, guid: 747542e6883706d47a85ab28c9a9a92a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 747542e6883706d47a85ab28c9a9a92a, type: 3}
       propertyPath: m_Name
@@ -324,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2121571102637705009, guid: 747542e6883706d47a85ab28c9a9a92a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 747542e6883706d47a85ab28c9a9a92a, type: 3}

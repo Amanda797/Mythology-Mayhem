@@ -34,6 +34,9 @@ public class AegirControlScript : MonoBehaviour
     public float largeWaveCooldown;
     public float lastLarge;
 
+    [Header("All Waves")]
+    public bool animatingWave; 
+
     [Header("Water Jet")]
     public int waterJetDamage;
     public bool jetStarted;
@@ -48,11 +51,11 @@ public class AegirControlScript : MonoBehaviour
     public float startHealTime;
     public float healTime;
     public int healthStart;
-    public bool krakenActive;
 
     public bool startFight;
 
     public Animator anim;
+    public KrakenHeadScript krakenHeadScript;
 
     public enum State 
     { 
@@ -122,34 +125,34 @@ public class AegirControlScript : MonoBehaviour
             case State.SmallWaveAttack1:
                 if (curSmallWave == 1) 
                 {
+                    animatingWave = true;
                     WaveSmall();
-                    lastSmall = Time.time;
                     curSmallWave = 2;
                 }
-                if (curSmallWave == 2) 
+                if (curSmallWave == 2 && !animatingWave) 
                 {
                     if (smallWaveCooldown1 < (Time.time - lastSmall)) 
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 3;
                     }
                 }
-                if (curSmallWave == 3) 
+                if (curSmallWave == 3 && !animatingWave) 
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall)) 
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 4;
                     }
                 }
-                if (curSmallWave == 4) 
+                if (curSmallWave == 4 && !animatingWave) 
                 {
-                    if (smallWaveCooldown2 < (Time.time - lastSmall))
+                    if (smallWaveCooldown3 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaterJet();
-                        lastSmall = Time.time;
                         curSmallWave = 0;
                         ChangeState(State.WaterJet1);
                     }
@@ -165,7 +168,7 @@ public class AegirControlScript : MonoBehaviour
                         waterJet.SetActive(false);
                         jetStarted = false;
                         startKrakenTime = Time.time;
-                        krakenActive = true;
+                        krakenHeadScript.SummonKraken(1);
                         ChangeState(State.Kraken1);
                     }
                 }
@@ -176,6 +179,10 @@ public class AegirControlScript : MonoBehaviour
                     healthStart = health;
                     startHealTime = 0;
                     ChangeState(State.Heal1);
+                }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.SmallWaveAttack2);
                 }
                 break;
             case State.Heal1:
@@ -189,9 +196,13 @@ public class AegirControlScript : MonoBehaviour
                 {
                     ChangeState(State.WaitForKraken1);
                 }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.SmallWaveAttack2);
+                }
                 break;
             case State.WaitForKraken1:
-                if (!krakenActive) 
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated) 
                 {
                     ChangeState(State.SmallWaveAttack2);
                 }
@@ -199,34 +210,33 @@ public class AegirControlScript : MonoBehaviour
             case State.SmallWaveAttack2:
                 if (curSmallWave == 1)
                 {
+                    animatingWave = true;
                     WaveSmall();
-                    lastSmall = Time.time;
                     curSmallWave = 2;
                 }
-                if (curSmallWave == 2)
+                if (curSmallWave == 2 && !animatingWave)
                 {
                     if (smallWaveCooldown1 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 3;
                     }
                 }
-                if (curSmallWave == 3)
+                if (curSmallWave == 3 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 4;
                     }
                 }
-                if (curSmallWave == 4)
+                if (curSmallWave == 4 && !animatingWave)
                 {
-                    if (smallWaveCooldown2 < (Time.time - lastSmall))
+                    if (smallWaveCooldown3 < (Time.time - lastSmall))
                     {
                         WaterJet();
-                        lastSmall = Time.time;
                         curSmallWave = 0;
                         ChangeState(State.WaterJet2);
                     }
@@ -240,18 +250,18 @@ public class AegirControlScript : MonoBehaviour
                         anim.SetBool("Jet", false);
                         waterJet.SetActive(false);
                         jetStarted = false;
+                        animatingWave = true;
                         WaveMedium();
-                        lastMed = Time.time;
                         ChangeState(State.MediumWaveAttack2);
                     }
                 }
                 break;
             case State.MediumWaveAttack2:
-                if (mediumWaveCooldown <= (Time.time - lastMed)) 
+                if (mediumWaveCooldown <= (Time.time - lastMed) && !animatingWave) 
                 {
                     startKrakenTime = Time.time;
-                    krakenActive = true;
                     anim.SetTrigger("Kraken");
+                    krakenHeadScript.SummonKraken(2);
                     ChangeState(State.Kraken2);
                 }
                 break;
@@ -261,6 +271,10 @@ public class AegirControlScript : MonoBehaviour
                     healthStart = health;
                     startHealTime = 0;
                     ChangeState(State.Heal2);
+                }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated) 
+                {
+                    ChangeState(State.SmallWaveAttack3);
                 }
                 break;
             case State.Heal2:
@@ -274,9 +288,13 @@ public class AegirControlScript : MonoBehaviour
                 {
                     ChangeState(State.WaitForKraken2);
                 }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.SmallWaveAttack3);
+                }
                 break;
             case State.WaitForKraken2:
-                if (!krakenActive)
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
                 {
                     ChangeState(State.SmallWaveAttack3);
                 }
@@ -284,29 +302,29 @@ public class AegirControlScript : MonoBehaviour
             case State.SmallWaveAttack3:
                 if (curSmallWave == 1)
                 {
+                    animatingWave = true;
                     WaveSmall();
-                    lastSmall = Time.time;
                     curSmallWave = 2;
                 }
-                if (curSmallWave == 2)
+                if (curSmallWave == 2 && !animatingWave)
                 {
                     if (smallWaveCooldown1 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 3;
                     }
                 }
-                if (curSmallWave == 3)
+                if (curSmallWave == 3 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 4;
                     }
                 }
-                if (curSmallWave == 4)
+                if (curSmallWave == 4 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
@@ -325,18 +343,18 @@ public class AegirControlScript : MonoBehaviour
                         anim.SetBool("Jet", false);
                         waterJet.SetActive(false);
                         jetStarted = false;
+                        animatingWave = true;
                         WaveMedium();
-                        lastMed = Time.time;
                         ChangeState(State.MediumWaveAttack3);
                     }
                 }
                 break;
             case State.MediumWaveAttack3:
-                if (mediumWaveCooldown <= (Time.time - lastMed))
+                if (mediumWaveCooldown <= (Time.time - lastMed) && !animatingWave)
                 {
                     startKrakenTime = Time.time;
-                    krakenActive = true;
                     anim.SetTrigger("Kraken");
+                    krakenHeadScript.SummonKraken(3);
                     ChangeState(State.Kraken3);
                 }
                 break;
@@ -346,6 +364,10 @@ public class AegirControlScript : MonoBehaviour
                     healthStart = health;
                     startHealTime = 0;
                     ChangeState(State.Heal3);
+                }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.SmallWaveAttack4);
                 }
                 break;
             case State.Heal3:
@@ -359,9 +381,13 @@ public class AegirControlScript : MonoBehaviour
                 {
                     ChangeState(State.WaitForKraken3);
                 }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.SmallWaveAttack4);
+                }
                 break;
             case State.WaitForKraken3:
-                if (!krakenActive)
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
                 {
                     ChangeState(State.SmallWaveAttack4);
                 }
@@ -369,29 +395,29 @@ public class AegirControlScript : MonoBehaviour
             case State.SmallWaveAttack4:
                 if (curSmallWave == 1)
                 {
+                    animatingWave = true;
                     WaveSmall();
-                    lastSmall = Time.time;
                     curSmallWave = 2;
                 }
-                if (curSmallWave == 2)
+                if (curSmallWave == 2 && !animatingWave)
                 {
                     if (smallWaveCooldown1 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 3;
                     }
                 }
-                if (curSmallWave == 3)
+                if (curSmallWave == 3 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveSmall();
-                        lastSmall = Time.time;
                         curSmallWave = 4;
                     }
                 }
-                if (curSmallWave == 4)
+                if (curSmallWave == 4 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
@@ -410,18 +436,18 @@ public class AegirControlScript : MonoBehaviour
                         anim.SetBool("Jet", false);
                         waterJet.SetActive(false);
                         jetStarted = false;
+                        animatingWave = true;
                         WaveLarge();
-                        lastLarge = Time.time;
                         ChangeState(State.LargeWaveAttack4);
                     }
                 }
                 break;
             case State.LargeWaveAttack4:
-                if (largeWaveCooldown <= (Time.time - lastLarge))
+                if (largeWaveCooldown <= (Time.time - lastLarge) && !animatingWave)
                 {
                     startKrakenTime = Time.time;
-                    krakenActive = true;
                     anim.SetTrigger("Kraken");
+                    krakenHeadScript.SummonKraken(4);
                     ChangeState(State.Kraken4);
                 }
                 break;
@@ -431,6 +457,10 @@ public class AegirControlScript : MonoBehaviour
                     healthStart = health;
                     startHealTime = 0;
                     ChangeState(State.Heal4);
+                }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.MediumWaveAttack5);
                 }
                 break;
             case State.Heal4:
@@ -444,9 +474,13 @@ public class AegirControlScript : MonoBehaviour
                 {
                     ChangeState(State.WaitForKraken4);
                 }
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
+                {
+                    ChangeState(State.MediumWaveAttack5);
+                }
                 break;
             case State.WaitForKraken4:
-                if (!krakenActive)
+                if (krakenHeadScript.currentState == KrakenHeadScript.State.Defeated)
                 {
                     ChangeState(State.MediumWaveAttack5);
                 }
@@ -454,29 +488,29 @@ public class AegirControlScript : MonoBehaviour
             case State.MediumWaveAttack5:
                 if (curSmallWave == 1)
                 {
+                    animatingWave = true;
                     WaveMedium();
-                    lastSmall = Time.time;
                     curSmallWave = 2;
                 }
-                if (curSmallWave == 2)
+                if (curSmallWave == 2 && !animatingWave)
                 {
                     if (smallWaveCooldown1 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveMedium();
-                        lastSmall = Time.time;
                         curSmallWave = 3;
                     }
                 }
-                if (curSmallWave == 3)
+                if (curSmallWave == 3 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
+                        animatingWave = true;
                         WaveMedium();
-                        lastSmall = Time.time;
                         curSmallWave = 4;
                     }
                 }
-                if (curSmallWave == 4)
+                if (curSmallWave == 4 && !animatingWave)
                 {
                     if (smallWaveCooldown2 < (Time.time - lastSmall))
                     {
@@ -495,14 +529,14 @@ public class AegirControlScript : MonoBehaviour
                         anim.SetBool("Jet", false);
                         waterJet.SetActive(false);
                         jetStarted = false;
+                        animatingWave = true;
                         WaveLarge();
-                        lastLarge = Time.time;
                         ChangeState(State.LargeWaveAttack5);
                     }
                 }
                 break;
             case State.LargeWaveAttack5:
-                if (largeWaveCooldown <= (Time.time - lastLarge))
+                if (largeWaveCooldown <= (Time.time - lastLarge) && !animatingWave)
                 {
                     ChangeState(State.MediumWaveAttack5);
                 }
@@ -608,7 +642,7 @@ public class AegirControlScript : MonoBehaviour
 
     void WaveSmall() 
     {
-        int which = (int)Random.Range(1, 2);
+        int which = (int)Random.Range(1, 3);
         if (which == 1)
         {
             anim.SetTrigger("Wave1");
@@ -617,35 +651,52 @@ public class AegirControlScript : MonoBehaviour
         {
             anim.SetTrigger("Wave2");
         }
+    }
 
+    public void SmallWaveSpawn() 
+    {
         GameObject obj = Instantiate(smallWavePrefab, waveSpawnPoint.position, waveSpawnPoint.rotation);
         AegirWaveScript waveScript = obj.GetComponent<AegirWaveScript>();
-        if (waveScript != null) 
+        if (waveScript != null)
         {
             waveScript.damage = smallWaveDamage;
         }
+        lastSmall = Time.time;
+        animatingWave = false;
     }
 
     void WaveMedium() 
     {
         anim.SetTrigger("Wave3");
+    }
+
+    public void MediumWaveSpawn() 
+    {
         GameObject obj = Instantiate(mediumWavePrefab, waveSpawnPoint.position, waveSpawnPoint.rotation);
         AegirWaveScript waveScript = obj.GetComponent<AegirWaveScript>();
         if (waveScript != null)
         {
             waveScript.damage = mediuemWaveDamage;
         }
+        lastMed = Time.time;
+        animatingWave = false;
     }
 
     void WaveLarge() 
     {
         anim.SetTrigger("Wave4");
+    }
+
+    public void LargeWaveSpawn() 
+    {
         GameObject obj = Instantiate(largeWavePrefab, waveSpawnPoint.position, waveSpawnPoint.rotation);
         AegirWaveScript waveScript = obj.GetComponent<AegirWaveScript>();
         if (waveScript != null)
         {
             waveScript.damage = largeWaveDamage;
         }
+        lastLarge = Time.time;
+        animatingWave = false;
     }
 
     void WaterJet() 
