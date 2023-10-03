@@ -9,7 +9,9 @@ public class Vikings2D : MonoBehaviour
 
     [Header("Idle & Patrol")]
     [SerializeField] string patrollingBool;
-    [SerializeField] float patrolDistance = 30f;
+    [SerializeField] float speed = .6f;
+    [SerializeField] float flipSensitivity = 1f;
+    [SerializeField] float patrolDistance = 3f;
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
@@ -19,6 +21,7 @@ public class Vikings2D : MonoBehaviour
     [Header("Taunt Attack")]
     [SerializeField] GameObject summonViking;
     [SerializeField] bool summonUsed;
+    [SerializeField] string tauntAttackTrigger;
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +33,10 @@ public class Vikings2D : MonoBehaviour
     {
         if(enemy.idleTimer <= 0)
         {
-            enemy.agent.isStopped = false;
             enemy.animator.SetBool(patrollingBool, true);
             enemy.SwitchStates(Enemy.EnemyStates.Patrol);
         } else
         {
-            enemy.agent.isStopped = true;
             enemy.idleTimer -= Time.deltaTime;
             enemy.animator.SetBool(patrollingBool, false);
         }
@@ -43,14 +44,25 @@ public class Vikings2D : MonoBehaviour
 
     public void MoveToTarget(Vector3 targetPosition)
     {
-        if(Vector3.Distance(enemy.gameObject.transform.position, targetPosition) < 3f)
+        if (Vector3.Distance(enemy.gameObject.transform.position, targetPosition) < 3f)
         {
             //Close enough to Idle
-            enemy.SwitchStates(Enemy.EnemyStates.Idle);  
-        } else
+            enemy.SwitchStates(Enemy.EnemyStates.Idle);
+        }
+        else
         {
-            enemy.agent.isStopped = false;
-            enemy.agent.SetDestination(targetPosition);
+            //Flip, Rotate Y
+            if (targetPosition.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+
+            }
+            else if (targetPosition.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            //Move
+            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, targetPosition, speed));
         }
     }//end move to target
 
@@ -72,7 +84,7 @@ public class Vikings2D : MonoBehaviour
         }
     }//end melee attack
 
-    public void RangedAttack(GameObject player)
+    public void SummonAttack(GameObject player)
     {
         if (Vector3.Distance(enemy.gameObject.transform.position, player.transform.position) < patrolDistance && !summonUsed)
         {
@@ -101,8 +113,12 @@ public class Vikings2D : MonoBehaviour
 
             if (summonViking != null)
             {
-                summonViking.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = summonViking.GetComponent<Enemy>().runSpeed;
-                summonViking.GetComponent<Enemy>().target = gameObject.transform.position;
+                if(tauntAttackTrigger != "")
+                {
+                    enemy.animator.SetTrigger(tauntAttackTrigger);
+                }
+                
+                enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, gameObject.transform.position, Time.deltaTime));
             }
         }
     }//end Summon Attack

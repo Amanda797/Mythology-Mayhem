@@ -211,12 +211,12 @@ GameObject:
   - component: {fileID: 9215012346645743395}
   - component: {fileID: 9215012346645743394}
   - component: {fileID: 9215012346645743402}
-  - component: {fileID: 9215012346645743405}
   - component: {fileID: 9215012346645743401}
   - component: {fileID: 9215012346645743400}
   - component: {fileID: 9215012346645743407}
   - component: {fileID: 9215012346645743406}
   - component: {fileID: 3447044666153701234}
+  - component: {fileID: 964127300907280597}
   m_Layer: 6
   m_Name: Viking2
   m_TagString: Enemy
@@ -340,35 +340,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.182892, y: 5.906825}
   m_EdgeRadius: 0
---- !u!114 &9215012346645743405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215012346645743393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isBoar: 0
-  boarCloudAnimation: {fileID: 0}
-  walkSpeed: 4
-  runSpeed: 6
-  soundTrigger: {fileID: 9215012346045887231}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 9215012346645743394}
-  sr: {fileID: 0}
-  idleDuration: 5
-  waypoints:
-  - {fileID: 9215012345925063031}
-  - {fileID: 9215012346072753509}
-  waypointIndex: 0
-  mirrorInRange: {fileID: 0}
-  rb2d: {fileID: 0}
-  dead: 0
-  patrolBool: IsPatrolling
 --- !u!114 &9215012346645743401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,12 +354,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 9215012346645743394}
   rigidBody3D: {fileID: 0}
-  rigidBody2D: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  rigidBody2D: {fileID: 9215012346645743400}
+  spriteRenderer: {fileID: 9215012346645743395}
   agent: {fileID: 0}
-  health: {fileID: 0}
+  health: {fileID: 3447044666153701234}
   enemyType: 0
-  attackDamage: 0
+  attackDamage: 2
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -397,7 +368,9 @@ MonoBehaviour:
   player: {fileID: 0}
   walkSpeed: 5
   runSpeed: 10
-  waypoints: []
+  waypoints:
+  - {fileID: 9215012345925063031}
+  - {fileID: 9215012346072753509}
   waypointIndex: 0
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
@@ -405,13 +378,13 @@ MonoBehaviour:
   IdleDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215012346645743393}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 964127300907280597}
+        m_TargetAssemblyTypeName: Vikings2D, Assembly-CSharp
+        m_MethodName: Idle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -420,13 +393,13 @@ MonoBehaviour:
   PatrolDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215012346645743393}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 964127300907280597}
+        m_TargetAssemblyTypeName: Vikings2D, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -435,25 +408,25 @@ MonoBehaviour:
   AttackDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215012346645743393}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 964127300907280597}
+        m_TargetAssemblyTypeName: Vikings2D, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 9215012346645743393}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 964127300907280597}
+        m_TargetAssemblyTypeName: Vikings2D, Assembly-CSharp
+        m_MethodName: SummonAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -462,13 +435,13 @@ MonoBehaviour:
   DeadDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215012346645743393}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 3447044666153701234}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -515,7 +488,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215012346645743405}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -542,7 +515,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215012346645743405}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -680,6 +653,27 @@ MonoBehaviour:
   mainObject: {fileID: 9215012346645743393}
   rewardObject: {fileID: 0}
   anim: {fileID: 9215012346645743394}
-  hurtTrigger: 
-  deathTrigger: 
+  hurtTrigger: Hurt
+  deathTrigger: IsDead
   healTrigger: 
+--- !u!114 &964127300907280597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9215012346645743393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e569a481bcba2e54fb3131286880e8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrollingBool: IsPatrolling
+  speed: 0.6
+  flipSensitivity: 1
+  patrolDistance: 10
+  body: {fileID: 9215012346645743393}
+  meleeAttackTrigger: IsAttacking
+  meleeDistance: 3
+  summonViking: {fileID: 0}
+  summonUsed: 0
