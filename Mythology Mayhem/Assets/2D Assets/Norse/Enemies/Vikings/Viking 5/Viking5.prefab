@@ -386,15 +386,11 @@ MonoBehaviour:
   player: {fileID: 0}
   walkSpeed: 5
   runSpeed: 10
-  viking1AtkDamage: 0
-  viking1MaxHealth: 0
-  timeLastTaunt: 0
-  tauntRate: 0
-  viking2AtkDamage: 0
   waypoints:
   - {fileID: 8703386766623644982}
   - {fileID: 8703386766251674347}
   waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
   idleTimer: 0
   IdleDelegate:
@@ -492,17 +488,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e569a481bcba2e54fb3131286880e8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkBool: Walking
-  runBool: Running
+  patrollingBool: 
+  speed: 0.6
+  flipSensitivity: 1
   patrolDistance: 30
   body: {fileID: 8703386765692791768}
   meleeAttackTrigger: Slashing
   meleeDistance: 10
-  snowballPrefab: {fileID: 0}
-  throwPoint: {fileID: 0}
-  throwForce: 0
-  rangedAttackTrigger: 
-  rangedDistance: 20
+  summonViking: {fileID: 0}
+  summonUsed: 0
+  tauntAttackTrigger: 
 --- !u!1 &8703386766251674346
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +635,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
