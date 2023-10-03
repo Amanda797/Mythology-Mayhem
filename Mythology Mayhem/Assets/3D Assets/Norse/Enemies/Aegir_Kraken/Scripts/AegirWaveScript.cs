@@ -9,20 +9,34 @@ public class AegirWaveScript : MonoBehaviour
 
     public int damage;
 
+    public ParticleSystem waveBuildup;
+    public ParticleSystem waveProjectile;
+    public bool buildupComplete;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        waveProjectile.gameObject.SetActive(false);
+        waveBuildup.gameObject.SetActive(true);
+        waveBuildup.Play();
+        buildupComplete = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
+
+        if (!waveBuildup.isPlaying && !buildupComplete) 
+        {
+            waveBuildup.gameObject.SetActive(false);
+            waveProjectile.gameObject.SetActive(true);
+            buildupComplete = true;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
+    public void ColliderTrigger(Collider other) 
+    { 
         
     }
 }
