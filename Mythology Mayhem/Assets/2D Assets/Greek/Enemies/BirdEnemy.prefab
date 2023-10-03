@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 6941042192989938914}
   - component: {fileID: 6941042192989938915}
   - component: {fileID: 6941042192989938913}
-  - component: {fileID: 6941042192989938912}
   - component: {fileID: 345259985932210363}
   - component: {fileID: 5518047496158701024}
   - component: {fileID: 4499961040525648673}
   - component: {fileID: 2559135161097222505}
   - component: {fileID: 4341705790796040120}
+  - component: {fileID: 5938821028154963895}
+  - component: {fileID: 2276455077882768558}
   m_Layer: 6
   m_Name: BirdEnemy
   m_TagString: Enemy
@@ -31,7 +32,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6941042192989938916}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.387403, y: 19.236681, z: 2.404319}
   m_LocalScale: {x: 0.6968401, y: 0.6670161, z: 1}
   m_ConstrainProportionsScale: 0
@@ -114,31 +115,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6941042192989938912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941042192989938916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 3
-  runSpeed: 5.5
-  soundTrigger: {fileID: 6941042193202341061}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 6941042192989938913}
-  sr: {fileID: 0}
-  idleDuration: 5
-  waypoints:
-  - {fileID: 7212906073660704871}
-  - {fileID: 1428595430133209179}
-  waypointIndex: 0
-  rb2d: {fileID: 0}
-  dead: 0
 --- !u!61 &345259985932210363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -149,10 +125,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00085902214, y: -0.0119124055}
+  m_Offset: {x: -4.2396393, y: -8.468014}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -163,7 +139,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.7373838, y: 2.495181}
+  m_Size: {x: 12.214941, y: 19.407387}
   m_EdgeRadius: 0
 --- !u!114 &5518047496158701024
 MonoBehaviour:
@@ -178,11 +154,90 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6941042192989938913}
-  atkDamage: 1
-  maxHealth: 8
+  rigidBody3D: {fileID: 0}
+  rigidBody2D: {fileID: 4499961040525648673}
+  spriteRenderer: {fileID: 6941042192989938915}
+  agent: {fileID: 0}
+  health: {fileID: 5938821028154963895}
+  enemyType: 0
+  attackDamage: 1
   playerLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  canAttack: 1
+  attackRate: 1.5
+  player: {fileID: 0}
+  walkSpeed: 5
+  runSpeed: 10
+  waypoints:
+  - {fileID: 7212906073660704871}
+  - {fileID: 1428595430133209179}
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
+  idleTimerMax: 3
+  idleTimer: 0
+  IdleDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2276455077882768558}
+        m_TargetAssemblyTypeName: GreekBird2D, Assembly-CSharp
+        m_MethodName: Idle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PatrolDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2276455077882768558}
+        m_TargetAssemblyTypeName: GreekBird2D, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2276455077882768558}
+        m_TargetAssemblyTypeName: GreekBird2D, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeadDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5938821028154963895}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  currentState: 0
+  currentStatePosition: 0
 --- !u!50 &4499961040525648673
 Rigidbody2D:
   serializedVersion: 4
@@ -222,7 +277,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6941042192989938912}
+      - m_Target: {fileID: 2276455077882768558}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -249,7 +304,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6941042192989938912}
+      - m_Target: {fileID: 2276455077882768558}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -293,7 +348,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.5278349
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -369,6 +424,51 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5938821028154963895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941042192989938916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 4
+  components:
+  - {fileID: 2276455077882768558}
+  - {fileID: 2559135161097222505}
+  - {fileID: 6941042192989938913}
+  - {fileID: 6941042192989938913}
+  mainObject: {fileID: 6941042192989938916}
+  rewardObject: {fileID: 0}
+  hurtSound: {fileID: 4341705790796040120}
+  deathSound: {fileID: 4341705790796040120}
+  healSound: {fileID: 0}
+  anim: {fileID: 6941042192989938913}
+  hurtTrigger: Hurt
+  deathTrigger: Dead
+  healTrigger: 
+--- !u!114 &2276455077882768558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941042192989938916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d380b7409f9e9c49840af052b7a3439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolBool: IsPatrolling
+  speed: 0.6
+  patrolDistance: 4
+  body: {fileID: 6941042192989938916}
+  attackBool: IsAttacking
+  meleeDistance: 10
 --- !u!1 &6941042193202341063
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6941042193202341062}
   - component: {fileID: 6941042193202341061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Detection Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7212906073660704871}
   - component: {fileID: 7839351165060283341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1428595430133209179}
   - component: {fileID: 1357778305398809367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

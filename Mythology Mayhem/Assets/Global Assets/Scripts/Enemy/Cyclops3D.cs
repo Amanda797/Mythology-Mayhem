@@ -5,7 +5,6 @@ using UnityEngine;
 public class Cyclops3D : MonoBehaviour
 {
     Enemy enemy;
-    GameObject player;
 
     [Header("Idle & Patrol")]
     [SerializeField] string walkBool;
@@ -45,60 +44,60 @@ public class Cyclops3D : MonoBehaviour
         }
     }//end move to target
 
-    public void MoveToTarget(Vector3 targetPosition)
+    public void MoveToTarget()
     {
-        if(Vector3.Distance(enemy.gameObject.transform.position, targetPosition) < 3f)
+        if(Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < 3f)
         {
             //Close enough to Idle
             enemy.SwitchStates(Enemy.EnemyStates.Idle);  
         } else
         {
             enemy.agent.isStopped = false;
-            enemy.agent.SetDestination(targetPosition);
+            enemy.agent.SetDestination(enemy.target);
         }
     }//end move to target
 
-    public void SwitchAttack(GameObject player)
+    public void SwitchAttack()
     {
-        if(Vector3.Distance(body.transform.position, player.transform.position) > patrolDistance)
+        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) > patrolDistance)
         {
             enemy.SwitchStates(Enemy.EnemyStates.Patrol);
-        } else if (Vector3.Distance(body.transform.position, player.transform.position) < meleeDistance)
+        } else if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance)
         {
-            MeleeAttack(player);
-        } else if (Vector3.Distance(body.transform.position, player.transform.position) < rangedDistance)
+            MeleeAttack();
+        } else if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < rangedDistance)
         {
-            RangedAttack(player);
+            RangedAttack();
         }
     }//end Switch Attack
 
-    public void MeleeAttack(GameObject player)
+    public void MeleeAttack()
     {
-        if(Vector3.Distance(body.transform.position, player.transform.position) < meleeDistance && enemy.CanAttack)
+        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             enemy.agent.isStopped = true;
             enemy.animator.SetTrigger(meleeAttackTrigger);
-            player.GetComponent<FPSHealth>().TakeDamage(enemy.attackDamage);
-            if (player.GetComponent<KnockBackFeedback>())
-                player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+            enemy.player.GetComponent<FPSHealth>().TakeDamage(enemy.attackDamage);
+            if (enemy.player.GetComponent<KnockBackFeedback>())
+                enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
             StartCoroutine(enemy.AttackRate());
         }
         else
         {
             enemy.agent.isStopped = false;
-            enemy.agent.SetDestination(player.transform.position);
+            enemy.agent.SetDestination(enemy.player.transform.position);
             enemy.animator.SetBool(runBool, true);
         }
     }//end melee attack
 
-    public void RangedAttack(GameObject player)
+    public void RangedAttack()
     {
-        if (Vector3.Distance(enemy.gameObject.transform.position, player.transform.position) < rangedDistance && enemy.CanAttack)
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.player.transform.position) < rangedDistance && enemy.CanAttack)
         {
             enemy.agent.isStopped = true;
             enemy.animator.SetTrigger(rangedAttackTrigger);
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, player.transform.position, 0, 0);
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, enemy.player.transform.position, 0, 0);
             GameObject snowball = Instantiate(snowballPrefab, throwPoint.position, throwPoint.rotation);
             snowball.transform.rotation.SetLookRotation(newDirection);
             snowball.GetComponent<SnowballProjectile>().enemy = enemy;
@@ -109,7 +108,7 @@ public class Cyclops3D : MonoBehaviour
         else
         {
             enemy.agent.isStopped = false;
-            enemy.agent.SetDestination(player.transform.position);
+            enemy.agent.SetDestination(enemy.player.transform.position);
             enemy.animator.SetBool(runBool, true);
         }
     }//end ranged attack
