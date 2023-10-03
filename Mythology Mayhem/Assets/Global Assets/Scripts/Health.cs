@@ -8,12 +8,15 @@ public class Health : MonoBehaviour
     // ***PROPERTIES***
     // --------------------------
     [SerializeField] private float MaxHealth;
-    [SerializeField] private float _health;
+    private float _health;
     [SerializeField] private Behaviour[] components;
     [SerializeField] private GameObject mainObject; // Parent Self
     public GameObject rewardObject; // Reward Object
 
     [Header("Animation")]
+    [SerializeField] private AudioSource hurtSound;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource healSound;
     [SerializeField] private Animator anim;
     [SerializeField] private string hurtTrigger;
     [SerializeField] private string deathTrigger;
@@ -28,15 +31,6 @@ public class Health : MonoBehaviour
     }// end start
 
     void FixedUpdate() {
-        // Test
-        float f = 0f;
-        if(f >= 1f) {
-            TakeDamage(1);
-            print(GetHealth());
-        } else {
-            f += Time.deltaTime;
-        }        
-
         //Death Check
         if(GetHealth() <= 0) {
             SetHealth(0);
@@ -60,68 +54,72 @@ public class Health : MonoBehaviour
     public void TakeDamage(float d) {
         if(gameObject.tag == "Enemy") 
         {
+            if (hurtSound != null)
+            {
+                hurtSound.Play();
+                Debug.Log("Damaged");
+            }
             if(anim != null)
                 anim.SetTrigger(hurtTrigger);
         }
         Life -= d;
+
         if(GetHealth() <= 0) {
             Death();
         }
     }//end take damage
 
     public void Heal(float h) {
-        if(anim != null)
+        if (healSound != null)
+            healSound.Play();
+        if (anim != null)
             anim.SetTrigger(healTrigger);
         Life += h;
     }//end heal
 
     public void Death() {
         if(GetHealth() <= 0) {
-            if(gameObject.tag == "Enemy") 
+            if(gameObject.tag == "Enemy")
             {
-                if(anim != null)
+                if (deathSound != null)
+                    deathSound.Play();
+                if (anim != null)
                     anim.SetTrigger(deathTrigger);
             }     
-            //this? 
-            //foreach (Behaviour component in components) {
-            //    component.enabled = false;
-            //}
-            //or this??
-
+            foreach (Behaviour component in components) {
+                component.enabled = false;
+            }
             StartCoroutine(DeathTimer(3f));
         }//check that health is really less than 0 when called        
     }//end death
 
     public void Death(float time) {
         if(GetHealth() <= 0) {
-            if(gameObject.tag == "Enemy") 
+            if(gameObject.tag == "Enemy")
             {
-                if(anim != null)
+                if (deathSound != null)
+                    deathSound.Play();
+                if (anim != null)
                     anim.SetTrigger(deathTrigger);
             }
-                  
-            //this? 
-            //foreach (Behaviour component in components) {
-            //    component.enabled = false;
-            //}
-            //or this??
+            foreach (Behaviour component in components)
+            {
+                component.enabled = false;
+            }
             StartCoroutine(DeathTimer(time));
         }//check that health is really less than 0 when called        
     }//end death
-
 
     public IEnumerator DeathTimer(float time) {
         yield return new WaitForSeconds(time);
         if(rewardObject != null)
         {
-
             GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);
             reward.name = rewardObject.name;
             SaveScene.AddObject(reward, rewardObject);
         }
 
         mainObject.SetActive(false);
-    }//end death timer
-    
+    }//end death timer    
 
 }//end health class

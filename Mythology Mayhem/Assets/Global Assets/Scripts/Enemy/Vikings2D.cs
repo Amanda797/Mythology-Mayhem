@@ -5,13 +5,12 @@ using UnityEngine;
 public class Vikings2D : MonoBehaviour
 {
     Enemy enemy;
-    GameObject player;
 
     [Header("Idle & Patrol")]
     [SerializeField] string patrollingBool;
     [SerializeField] float speed = .6f;
     [SerializeField] float flipSensitivity = 1f;
-    [SerializeField] float patrolDistance = 3f;
+    [SerializeField] float patrolDistance = 5f;
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
@@ -42,9 +41,9 @@ public class Vikings2D : MonoBehaviour
         }
     }//end move to target
 
-    public void MoveToTarget(Vector3 targetPosition)
+    public void MoveToTarget()
     {
-        if (Vector3.Distance(enemy.gameObject.transform.position, targetPosition) < 3f)
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
         {
             //Close enough to Idle
             enemy.SwitchStates(Enemy.EnemyStates.Idle);
@@ -52,41 +51,54 @@ public class Vikings2D : MonoBehaviour
         else
         {
             //Flip, Rotate Y
-            if (targetPosition.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            if (enemy.target.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
             }
-            else if (targetPosition.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            else if (enemy.target.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
             //Move
-            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, targetPosition, speed));
+            Vector2 xOnlyTargetPosition = new Vector2(enemy.target.x, gameObject.transform.position.y);
+            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
         }
     }//end move to target
 
-    public void MeleeAttack(GameObject player)
+    public void MeleeAttack()
     {
-        if(Vector3.Distance(body.transform.position, player.transform.position) < meleeDistance && enemy.CanAttack)
+        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             enemy.animator.SetTrigger(meleeAttackTrigger);
-            player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
-            if (player.GetComponent<KnockBackFeedback>())
-                player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+            enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
+            if (enemy.player.GetComponent<KnockBackFeedback>())
+                enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
             enemy.animator.SetTrigger(meleeAttackTrigger);
             StartCoroutine(enemy.AttackRate());
         }
         else
         {
-            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, player.transform.position, Time.deltaTime));
+            //Flip, Rotate Y
+            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+
+            }
+            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            //Move
+            Vector2 xOnlyTargetPosition = new Vector2(enemy.player.transform.position.x, gameObject.transform.position.y);
+            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
         }
     }//end melee attack
 
-    public void SummonAttack(GameObject player)
+    public void SummonAttack()
     {
-        if (Vector3.Distance(enemy.gameObject.transform.position, player.transform.position) < patrolDistance && !summonUsed)
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.player.transform.position) < patrolDistance && !summonUsed)
         {
             //Need some kinf of visual effect or indication that the Viking used Taunt Attack
             //enemy.animator.SetTrigger(rangedAttackTrigger);

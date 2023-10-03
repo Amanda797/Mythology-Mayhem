@@ -39,8 +39,8 @@ public class Enemy : MythologyMayhem
     }
 
     public UnityEvent IdleDelegate;
-    public UnityEvent<Vector3> PatrolDelegate;
-    public UnityEvent<GameObject> AttackDelegate;
+    public UnityEvent PatrolDelegate;
+    public UnityEvent AttackDelegate;
     public UnityEvent DeadDelegate;
 
     public enum EnemyStates { Idle, Patrol, Attack, Dead };
@@ -49,18 +49,13 @@ public class Enemy : MythologyMayhem
     public StatePosition currentStatePosition;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         health = gameObject.GetComponent<Health>();
 
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
         EnterState(currentState);
-    }
-
-    public void PrintState()
-    {
-        Debug.Log(currentState);
     }
 
     void Update()
@@ -74,12 +69,12 @@ public class Enemy : MythologyMayhem
                 }
             case EnemyStates.Patrol:
                 {
-                    PatrolDelegate.Invoke(target);
+                    PatrolDelegate.Invoke();
                     break;
                 }
             case EnemyStates.Attack:
                 {
-                    AttackDelegate.Invoke(player);
+                    AttackDelegate.Invoke();
                     break;
                 }
             case EnemyStates.Dead:
@@ -152,8 +147,6 @@ public class Enemy : MythologyMayhem
                 }
             default: { break; }
         }
-
-        PrintState();
     }
 
     public void ExitState(EnemyStates newState)
@@ -178,56 +171,6 @@ public class Enemy : MythologyMayhem
                 }
             default: { break; }
         }
-    }
-
-    public void TakeDamage(float damage) 
-    {
-        health.Life -= damage;
-
-        animator.SetTrigger("Hurt");
-
-        if(health.Life <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die() 
-    {
-        if(animator != null) {
-            animator.SetBool("IsAttacking", false);
-            animator.SetBool("IsDead", true);
-        }
-
-        Debug.Log("Enemy Died");
-
-        if(GetComponent<Collider2D>()) {
-            GetComponent<Collider2D>().enabled = false;
-        }
-        if(GetComponent<Rigidbody2D>()) {
-            GetComponent<Rigidbody2D>().simulated = false;
-        }
-        if(GetComponent<KnockBackFeedback>()) {
-            GetComponent<KnockBackFeedback>().enabled = false;
-        }
-        if(GetComponent<MouseAI>()) {
-            GetComponent<MouseAI>().dead = true;
-            GetComponent<MouseAI>().enabled = false;
-        }
-        if(GetComponent<Bat2DAI>()) {
-            GetComponent<Bat2DAI>().enabled = false;
-        }
-        if(GetComponent<DropScrolls>() != null) {
-            GetComponent<DropScrolls>().enabled = false;
-        }
-
-        StartCoroutine(Disappear());
-    }
-
-    IEnumerator Disappear() {
-        yield return new WaitForSeconds(4);
-
-        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other) 

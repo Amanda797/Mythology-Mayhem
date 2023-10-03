@@ -123,7 +123,7 @@ public class Owl_Animator : MonoBehaviour
             {
                 if (enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
                 {
-                    enemy.GetComponent<Enemy>().TakeDamage(atkDamage);
+                    enemy.GetComponent<Health>().TakeDamage(atkDamage);
                     enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
                     attackComplete = true;
                     Debug.Log("Owl did Damage");
