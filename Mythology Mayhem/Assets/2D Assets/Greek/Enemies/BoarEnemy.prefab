@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 388321725943493504}
   - component: {fileID: 7136796821232943582}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,12 +266,13 @@ GameObject:
   - component: {fileID: 8566816731040993081}
   - component: {fileID: 8566816731040993080}
   - component: {fileID: 8566816731040993082}
-  - component: {fileID: 8566816731040993083}
   - component: {fileID: 1331490250871995232}
   - component: {fileID: 6495582106981125691}
   - component: {fileID: 2937448451238742266}
   - component: {fileID: 3833448020936151730}
   - component: {fileID: 2647877704999172001}
+  - component: {fileID: 1537699233321417100}
+  - component: {fileID: 3341197332674699827}
   m_Layer: 6
   m_Name: BoarEnemy
   m_TagString: Enemy
@@ -286,7 +287,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8566816731040993087}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6968401, y: 0.6670161, z: 1}
   m_ConstrainProportionsScale: 0
@@ -370,35 +371,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8566816731040993083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8566816731040993087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isBoar: 1
-  boarCloudAnimation: {fileID: 8125699907782810778}
-  walkSpeed: 3
-  runSpeed: 8
-  soundTrigger: {fileID: 8566816731239632670}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 8566816731040993082}
-  sr: {fileID: 0}
-  idleDuration: 5
-  waypoints:
-  - {fileID: 8262302870376178620}
-  - {fileID: 388321725943493504}
-  waypointIndex: 0
-  mirrorInRange: {fileID: 0}
-  rb2d: {fileID: 0}
-  dead: 0
-  patrolBool: IsPatrolling
 --- !u!61 &1331490250871995232
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -438,19 +410,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8566816731040993082}
+  rigidBody3D: {fileID: 0}
+  rigidBody2D: {fileID: 2937448451238742266}
+  spriteRenderer: {fileID: 8566816731040993080}
+  agent: {fileID: 0}
+  health: {fileID: 1537699233321417100}
   enemyType: 0
-  atkDamage: 1
-  maxHealth: 10
+  attackDamage: 2
   playerLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   canAttack: 1
-  attackRate: 0
-  viking1AtkDamage: 0
-  viking1MaxHealth: 0
-  timeLastTaunt: 0
-  tauntRate: 0
-  viking2AtkDamage: 0
+  attackRate: 1.5
+  player: {fileID: 0}
+  walkSpeed: 5
+  runSpeed: 10
+  waypoints:
+  - {fileID: 8262302870376178620}
+  - {fileID: 388321725943493504}
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
+  idleTimerMax: 3
+  idleTimer: 0
+  IdleDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3341197332674699827}
+        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
+        m_MethodName: Idle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PatrolDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3341197332674699827}
+        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3341197332674699827}
+        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
+        m_MethodName: ChargingCloud
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3341197332674699827}
+        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeadDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1537699233321417100}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  currentState: 0
+  currentStatePosition: 0
 --- !u!50 &2937448451238742266
 Rigidbody2D:
   serializedVersion: 4
@@ -490,7 +545,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8566816731040993083}
+      - m_Target: {fileID: 3341197332674699827}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -517,7 +572,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8566816731040993083}
+      - m_Target: {fileID: 3341197332674699827}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -637,6 +692,52 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1537699233321417100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566816731040993087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 6
+  components:
+  - {fileID: 3341197332674699827}
+  - {fileID: 3833448020936151730}
+  - {fileID: 6495582106981125691}
+  - {fileID: 8566816731040993082}
+  mainObject: {fileID: 8566816731040993087}
+  rewardObject: {fileID: 0}
+  hurtSound: {fileID: 2647877704999172001}
+  deathSound: {fileID: 2647877704999172001}
+  healSound: {fileID: 0}
+  anim: {fileID: 8566816731040993082}
+  hurtTrigger: Hurt
+  deathTrigger: IsDead
+  healTrigger: 
+--- !u!114 &3341197332674699827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566816731040993087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57f936d449154e49a6bb7b6baffc269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolBool: IsPatrolling
+  speed: 0.6
+  patrolDistance: 4
+  body: {fileID: 8566816731040993087}
+  attackBool: IsAttacking
+  meleeDistance: 10
+  boarCloudAnimation: {fileID: 8125699907782810778}
 --- !u!1 &8566816731239632668
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8566816731239632669}
   - component: {fileID: 8566816731239632670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SoundTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8262302870376178620}
   - component: {fileID: 8758382262883434593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
