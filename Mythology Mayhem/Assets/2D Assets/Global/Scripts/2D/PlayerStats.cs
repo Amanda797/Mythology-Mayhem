@@ -105,7 +105,7 @@ public class PlayerStats : MonoBehaviour
                 hitCount++;
                 //Play Sound
                 aud.Play();
-                enemy.GetComponent<Enemy>().TakeDamage(ps.AttackDamage);
+                enemy.GetComponent<Health>().TakeDamage(ps.AttackDamage);
                 enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
         }
