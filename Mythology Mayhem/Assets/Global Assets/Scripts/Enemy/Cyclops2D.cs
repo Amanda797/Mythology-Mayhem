@@ -15,8 +15,12 @@ public class Cyclops2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
+    [SerializeField] Collider2D attack;
+    [SerializeField] Collider2D playerCollider;
     [SerializeField] string attackBool;
     [SerializeField] float meleeDistance = 4f;
+    [SerializeField] float alertTimer = 3f;
+    float alertTime = 0f;
 
     [Header("Range Attack")]
     [SerializeField] GameObject snowballPrefab;
@@ -29,14 +33,23 @@ public class Cyclops2D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
+        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
+        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     public void Idle()
     {
+        //Check for Player
+        if (attack.IsTouching(playerCollider))
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue Idle
         if (enemy.idleTimer <= 0)
         {
             enemy.animator.SetBool(patrolBool, true);
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         }
         else
         {
@@ -47,10 +60,17 @@ public class Cyclops2D : MonoBehaviour
 
     public void MoveToTarget()
     {
+        //Check for Player
+        if (attack.IsTouching(playerCollider))
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue M2T
         if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
         {
             //Close enough to Idle
-            enemy.SwitchStates(Enemy.EnemyStates.Idle);
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Idle, 0));
         }
         else
         {
@@ -74,7 +94,7 @@ public class Cyclops2D : MonoBehaviour
     {
         if(Vector3.Distance(body.transform.position, enemy.player.transform.position) > patrolDistance)
         {
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, alertTimer));
         } else if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance)
         {
             MeleeAttack();

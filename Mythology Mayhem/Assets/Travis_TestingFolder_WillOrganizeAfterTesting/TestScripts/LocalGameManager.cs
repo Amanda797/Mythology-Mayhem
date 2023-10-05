@@ -24,7 +24,7 @@ public class LocalGameManager : MythologyMayhem
     [SerializeField] public List<SceneTransitionPoint> transitionPoints;
     public bool loadNextOnStart;
 
-    [SerializeField] public playerSpwaner activePlayerSpawner;
+    [SerializeField] public playerSpawner activePlayerSpawner;
     public GameObject playerSpawnerPrefab;
     public GameObject spawnPointPrefab;
     public GameObject sceneTransitionPoint2D;
@@ -214,7 +214,7 @@ public class LocalGameManager : MythologyMayhem
     public void AddSpawner()
     {
         GameObject obj = Instantiate(playerSpawnerPrefab, spawnPointCreator.transform.position, spawnPointCreator.transform.rotation, this.transform);
-        activePlayerSpawner = obj.GetComponent<playerSpwaner>();
+        activePlayerSpawner = obj.GetComponent<playerSpawner>();
         if (activePlayerSpawner != null)
         {
             activePlayerSpawner.type = sceneType;
@@ -247,7 +247,7 @@ public class LocalGameManager : MythologyMayhem
                     spawnPointObj.name = sceneToConnect.ToString();
                     AddSceneToNeeded(sceneToConnect);
                     AddSceneToStart(sceneToConnect);
-                    activePlayerSpawner.spwanPoints.Add(spawnPointObj.transform);
+                    activePlayerSpawner.spawnPoints.Add(spawnPointObj.transform);
                     return;
                 }
                 else
@@ -266,7 +266,7 @@ public class LocalGameManager : MythologyMayhem
                     spawnPointObj.name = sceneToConnect.ToString();
                     AddSceneToNeeded(sceneToConnect);
                     AddSceneToStart(sceneToConnect);
-                    activePlayerSpawner.spwanPoints.Add(spawnPointObj.transform);
+                    activePlayerSpawner.spawnPoints.Add(spawnPointObj.transform);
                     return;
                 }
             }
@@ -274,7 +274,7 @@ public class LocalGameManager : MythologyMayhem
             {
                 GameObject obj = Instantiate(spawnPointPrefab, spawnPointCreator.transform.position, spawnPointCreator.transform.rotation, activePlayerSpawner.transform);
                 obj.name = sceneToConnect.ToString();
-                activePlayerSpawner.spwanPoints.Add(obj.transform);
+                activePlayerSpawner.spawnPoints.Add(obj.transform);
             }
         }
     }

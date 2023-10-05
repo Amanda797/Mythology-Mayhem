@@ -86,6 +86,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8326508964459842762}
     m_Modifications:
+    - target: {fileID: 3463567240691457557, guid: f61da61c666746741aeb500f4531ecd2, type: 3}
+      propertyPath: patrolDistance
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6058577307628126240, guid: f61da61c666746741aeb500f4531ecd2, type: 3}
       propertyPath: m_Name
       value: OldLadyFate
@@ -141,34 +145,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6058577307628126246, guid: f61da61c666746741aeb500f4531ecd2, type: 3}
   m_PrefabInstance: {fileID: 901647259741086477}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6383615604300489517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6058577307628126240, guid: f61da61c666746741aeb500f4531ecd2, type: 3}
-  m_PrefabInstance: {fileID: 901647259741086477}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6449249299113267448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383615604300489517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 20
-  components: []
-  mainObject: {fileID: 0}
-  rewardObject: {fileID: 0}
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  healSound: {fileID: 0}
-  anim: {fileID: 0}
-  hurtTrigger: 
-  deathTrigger: 
-  healTrigger: 
 --- !u!1001 &5784062519543845204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,7 +200,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2578502097357954860, guid: 60f8f4cfcc7ffd345913ed9991747b69, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 60f8f4cfcc7ffd345913ed9991747b69, type: 3}
 --- !u!4 &8326508964658351735 stripped
 Transform:

@@ -13,8 +13,11 @@ public class Cyclops3D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
+    [SerializeField] Collider attack;
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = 10f;
+    [SerializeField] float alertTimer = 3f;
+    float alertTime = 0f;
 
     [Header("Range Attack")]
     [SerializeField] GameObject snowballPrefab;
@@ -27,15 +30,34 @@ public class Cyclops3D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
+        attack = enemy.attackCollider.GetComponent<BoxCollider>();
     }
 
     public void Idle()
     {
-        if(enemy.idleTimer <= 0)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for(int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if(hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue Idle
+        if (enemy.idleTimer <= 0)
         {
             enemy.agent.isStopped = false;
             enemy.animator.SetBool(walkBool, true);
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol,0));
         } else
         {
             enemy.agent.isStopped = true;
@@ -46,10 +68,28 @@ public class Cyclops3D : MonoBehaviour
 
     public void MoveToTarget()
     {
-        if(Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < 3f)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue M2T
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < 3f)
         {
             //Close enough to Idle
-            enemy.SwitchStates(Enemy.EnemyStates.Idle);  
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Idle, 0));
         } else
         {
             enemy.agent.isStopped = false;
@@ -59,9 +99,27 @@ public class Cyclops3D : MonoBehaviour
 
     public void SwitchAttack()
     {
-        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) > patrolDistance)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
         {
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (!isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
+        }
+
+        // Continue Attack
+        if (Vector3.Distance(body.transform.position, enemy.player.transform.position) > patrolDistance)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         } else if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance)
         {
             MeleeAttack();
@@ -73,7 +131,25 @@ public class Cyclops3D : MonoBehaviour
 
     public void MeleeAttack()
     {
-        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (!isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
+        }
+
+        // Continue Attack
+        if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             enemy.agent.isStopped = true;
             enemy.animator.SetTrigger(meleeAttackTrigger);
@@ -93,6 +169,24 @@ public class Cyclops3D : MonoBehaviour
 
     public void RangedAttack()
     {
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (!isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
+        }
+
+        // Continue Attack
         if (Vector3.Distance(enemy.gameObject.transform.position, enemy.player.transform.position) < rangedDistance && enemy.CanAttack)
         {
             enemy.agent.isStopped = true;
