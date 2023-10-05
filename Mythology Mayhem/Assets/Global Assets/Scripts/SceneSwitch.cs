@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneSwitch : MonoBehaviour
 {
     [SerializeField] public string sceneName;
-    [Tooltip("Location (Index) in next scene")]
-    [SerializeField] public int spawnPointIndex;
     public float distance;
     //public SaveScene saveScene;
     [SerializeField] Transform player;
@@ -26,13 +24,15 @@ public class SceneSwitch : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
+        //print(Vector3.Distance(player.position, transform.position) < distance);
+
         if(Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.position, transform.position) < distance) {
-            PlayerPrefs.SetInt("spwanPointIndex", spawnPointIndex);
+            //PlayerPrefs.SetInt("spwanPointIndex", spawnPointIndex);
 
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single); 
         }
 
-        if(Vector3.Distance(player.position, transform.position) < distance)
+        /*if(Vector3.Distance(player.position, transform.position) < distance)
         {
             //print("Right Distance: " + itemSlot.gameObject.activeSelf);
             if(itemSlot != null && itemSlot.item != null)
@@ -57,27 +57,11 @@ public class SceneSwitch : MonoBehaviour
                 }
             }
             
-        }
+        }*/
     }
 
     public void LoadScene() {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single); 
     }
 
-    public int IndexOfScene(GameObject gameObject)
-    {
-        int index = 0;
-        // foreach (var item in saveScene.sceneObjects.objects)
-        // {
-        //     if(item.gameObject == gameObject)
-        //     {
-        //         index = saveScene.sceneObjects.objects.IndexOf(item);
-        //     }
-        // }
-        return index;
-    }
-    void LateUpdate()
-    {
-        
-    }
 }

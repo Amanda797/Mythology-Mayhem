@@ -128,7 +128,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.2396393, y: -8.468014}
+  m_Offset: {x: -1.9271894, y: -0.88337755}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -139,7 +139,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.214941, y: 19.407387}
+  m_Size: {x: 7.5900393, y: 4.238112}
   m_EdgeRadius: 0
 --- !u!114 &5518047496158701024
 MonoBehaviour:
@@ -153,20 +153,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6941042192989938913}
-  rigidBody3D: {fileID: 0}
   rigidBody2D: {fileID: 4499961040525648673}
   spriteRenderer: {fileID: 6941042192989938915}
+  rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
-  health: {fileID: 5938821028154963895}
-  enemyType: 0
-  attackDamage: 1
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 5938821028154963895}
+  animator: {fileID: 6941042192989938913}
   attackRate: 1.5
-  player: {fileID: 0}
+  attackDamage: 1
+  canAttack: 1
+  attackCollider: {fileID: 6941042193202341063}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -442,6 +443,7 @@ MonoBehaviour:
   - {fileID: 2559135161097222505}
   - {fileID: 6941042192989938913}
   - {fileID: 6941042192989938913}
+  - {fileID: 345259985932210363}
   mainObject: {fileID: 6941042192989938916}
   rewardObject: {fileID: 0}
   hurtSound: {fileID: 4341705790796040120}
@@ -464,11 +466,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolBool: IsPatrolling
-  speed: 0.6
-  patrolDistance: 4
+  speed: 1.2
+  patrolDistance: 6
   body: {fileID: 6941042192989938916}
+  attack: {fileID: 6941042193202341061}
+  playerCollider: {fileID: 0}
   attackBool: IsAttacking
-  meleeDistance: 10
+  meleeDistance: 4
+  alertTimer: 3
 --- !u!1 &6941042193202341063
 GameObject:
   m_ObjectHideFlags: 0

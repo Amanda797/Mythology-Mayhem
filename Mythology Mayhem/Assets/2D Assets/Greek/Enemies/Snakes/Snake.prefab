@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3371725773603234040}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3371725774286228724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 
@@ -99,12 +99,13 @@ GameObject:
   - component: {fileID: 3371725774677677152}
   - component: {fileID: 3371725774677677144}
   - component: {fileID: 3371725774677677145}
-  - component: {fileID: 3371725774677677146}
   - component: {fileID: 3371725774677677147}
   - component: {fileID: 3371725774677677156}
   - component: {fileID: 3371725774677677157}
   - component: {fileID: 3371725774677677158}
   - component: {fileID: 3371725774677677159}
+  - component: {fileID: 636311232826927295}
+  - component: {fileID: 8564268730215925655}
   m_Layer: 6
   m_Name: Snake
   m_TagString: Enemy
@@ -202,33 +203,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3371725774677677146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3371725774677677153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 9
-  soundTrigger: {fileID: 3371725775119735544}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 3371725774677677145}
-  sr: {fileID: 3371725774677677144}
-  idleDuration: 3
-  waypoints:
-  - {fileID: 3371725774286228715}
-  - {fileID: 3371725773603234047}
-  waypointIndex: 0
-  mirrorInRange: {fileID: 0}
-  rb2d: {fileID: 3371725774677677157}
-  dead: 0
-  patrolBool: isPatrolling
 --- !u!61 &3371725774677677147
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -242,7 +216,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.68, y: -0.043827772}
+  m_Offset: {x: -0.44377816, y: -0.043827772}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -253,7 +227,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.03, y: 5.3506017}
+  m_Size: {x: 7.782444, y: 5.3506017}
   m_EdgeRadius: 0
 --- !u!114 &3371725774677677156
 MonoBehaviour:
@@ -267,14 +241,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3371725774677677145}
-  atkDamage: 3
-  maxHealth: 16
+  rigidBody2D: {fileID: 3371725774677677157}
+  spriteRenderer: {fileID: 3371725774677677144}
+  rigidBody3D: {fileID: 0}
+  agent: {fileID: 0}
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 636311232826927295}
+  animator: {fileID: 3371725774677677145}
   attackRate: 1.5
+  attackDamage: 1.5
+  canAttack: 1
+  attackCollider: {fileID: 3371725775119735546}
+  walkSpeed: 5
+  runSpeed: 10
+  waypoints:
+  - {fileID: 3371725774286228715}
+  - {fileID: 3371725773603234047}
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
+  idleTimerMax: 3
+  idleTimer: 0
+  IdleDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8564268730215925655}
+        m_TargetAssemblyTypeName: Snake2D, Assembly-CSharp
+        m_MethodName: Idle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PatrolDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8564268730215925655}
+        m_TargetAssemblyTypeName: Snake2D, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8564268730215925655}
+        m_TargetAssemblyTypeName: Snake2D, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeadDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 636311232826927295}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  currentState: 0
+  currentStatePosition: 0
 --- !u!50 &3371725774677677157
 Rigidbody2D:
   serializedVersion: 4
@@ -314,7 +366,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3371725774677677146}
+      - m_Target: {fileID: 8564268730215925655}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -341,7 +393,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3371725774677677146}
+      - m_Target: {fileID: 8564268730215925655}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -461,6 +513,55 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &636311232826927295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371725774677677153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 5
+  components:
+  - {fileID: 8564268730215925655}
+  - {fileID: 3371725774677677158}
+  - {fileID: 3371725774677677156}
+  - {fileID: 3371725774677677145}
+  - {fileID: 3371725774677677147}
+  mainObject: {fileID: 3371725774677677153}
+  rewardObject: {fileID: 0}
+  hurtSound: {fileID: 3371725774677677159}
+  deathSound: {fileID: 3371725774677677159}
+  healSound: {fileID: 0}
+  anim: {fileID: 3371725774677677145}
+  hurtTrigger: Hurt
+  deathTrigger: Dead
+  healTrigger: 
+--- !u!114 &8564268730215925655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371725774677677153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef162dfba898db34985eb2e08b6f25f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolBool: IsPatrolling
+  speed: 3
+  patrolDistance: 8
+  body: {fileID: 3371725774677677153}
+  attack: {fileID: 3371725775119735544}
+  playerCollider: {fileID: 0}
+  attackBool: IsAttacking
+  meleeDistance: 6
+  alertTimer: 3
 --- !u!1 &3371725775119735546
 GameObject:
   m_ObjectHideFlags: 0

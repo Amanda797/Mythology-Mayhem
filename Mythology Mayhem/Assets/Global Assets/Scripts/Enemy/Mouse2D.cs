@@ -15,8 +15,12 @@ public class Mouse2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
+    [SerializeField] Collider2D attack;
+    [SerializeField] Collider2D playerCollider;
     [SerializeField] string attackBool;
     [SerializeField] float meleeDistance = 10f;
+    [SerializeField] float alertTimer = 3f;
+    float alertTime = 0f;
 
     [Header("Range Attack")]
     [SerializeField] bool dropsScrolls;
@@ -27,14 +31,34 @@ public class Mouse2D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
+        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
+        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+    }
+
+    void Update()
+    {
+        if (enemy == null)
+        {
+            enemy = gameObject.GetComponent<Enemy>();
+        }
+        if (playerCollider == null)
+        {
+            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+        }
     }
 
     public void Idle()
     {
-        if(enemy.idleTimer <= 0)
+        //Check for Player
+        if (attack.IsTouching(playerCollider))
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
+        } else
+        // Continue Idle
+        if (enemy.idleTimer <= 0)
         {
             enemy.animator.SetBool(patrolBool, true);
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol,0));
         } else
         {
             enemy.animator.SetBool(patrolBool, false);
@@ -44,10 +68,17 @@ public class Mouse2D : MonoBehaviour
 
     public void MoveToTarget()
     {
-        if(Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
+        //Check for Player
+        if (attack.IsTouching(playerCollider))
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
+        }
+        else
+        // Continue M2T
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
         {
             //Close enough to Idle
-            enemy.SwitchStates(Enemy.EnemyStates.Idle);  
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Idle,0));  
         } else
         {
             //Flip, Rotate Y
@@ -67,7 +98,21 @@ public class Mouse2D : MonoBehaviour
 
     public void MeleeAttack()
     {
-        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
+        //Check for Player
+        if (!attack.IsTouching(playerCollider))
+        {
+            if (alertTime > alertTimer)
+            {
+                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, alertTimer));
+            }                
+            else
+            {
+                alertTime += Time.deltaTime;
+            }                
+        }
+        
+        // Continue Attack
+        if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             enemy.animator.SetBool(attackBool, true);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);

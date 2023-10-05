@@ -18,7 +18,8 @@ public class SceneTransitionPoint : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Local Game Mananger Scene: " + localGameManager.inScene);
+        Debug.Log("Local Game Mananger Scene: " + localGameManager.mainGameManager.currentScene);
     }
     public void CheckInput()
     {

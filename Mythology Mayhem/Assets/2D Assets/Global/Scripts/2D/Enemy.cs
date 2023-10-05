@@ -7,26 +7,30 @@ using UnityEngine.AI;
 
 public class Enemy : MythologyMayhem
 {
-    public Animator animator;
-    public Rigidbody rigidBody3D;
+    [Header("2D Components")]
     public Rigidbody2D rigidBody2D;
     public SpriteRenderer spriteRenderer;
+
+    [Header("3D Components")]
+    public Rigidbody rigidBody3D;
     public NavMeshAgent agent;
-    public Health health;
 
     [Header("Stats")]
-    [SerializeField] private Enemies enemyType;
-    public float attackDamage;
-    [SerializeField] private LayerMask playerLayers;
-    [SerializeField] private bool canAttack = true;
-    [SerializeField] public float attackRate;
+    public Dimension enemyDimension;
     public GameObject player;
+    public LayerMask playerLayers;
+    public Health health;
+    public Animator animator;
+    [SerializeField] public float attackRate;
+    public float attackDamage;
+    [SerializeField] private bool canAttack = true;
+    [SerializeField] public GameObject attackCollider;
 
-    [Header("Enemy Movement")]
+    [Header("Movement")]
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
 
-    [Header("Enemy Waypoints")]
+    [Header("Waypoints")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private int waypointIndex = 0;
     public Vector3 target;
@@ -49,9 +53,10 @@ public class Enemy : MythologyMayhem
     public StatePosition currentStatePosition;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         health = gameObject.GetComponent<Health>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
@@ -60,6 +65,18 @@ public class Enemy : MythologyMayhem
 
     void Update()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        //Check for Death
+
+        if (health.GetHealth() <= 0)
+        {
+            StartCoroutine(SwitchStates(EnemyStates.Dead,0));
+        }
+
         switch (currentState)
         {
             case EnemyStates.Idle:
@@ -86,9 +103,10 @@ public class Enemy : MythologyMayhem
         }
     }
 
-    public void SwitchStates(EnemyStates newState)
+    public IEnumerator SwitchStates(EnemyStates newState, float delay)
     {
         ExitState(currentState);
+        yield return new WaitForSeconds(delay);
         currentState = newState;
         EnterState(currentState);
     }//switch states
@@ -106,16 +124,19 @@ public class Enemy : MythologyMayhem
             case EnemyStates.Patrol:
                 {
                     //Update waypoint
-                    if(waypointIndex >= waypoints.Length - 1)
+                    if(waypoints.Length > 0)
                     {
-                        waypointIndex = 0;
-                    } else
-                    {
-                        waypointIndex++;
-                    }
+                        if(waypointIndex >= waypoints.Length - 1)
+                        {
+                            waypointIndex = 0;
+                        } else
+                        {
+                            waypointIndex++;
+                        }
 
-                    //Update target
-                    target = waypoints[waypointIndex].position;
+                        //Update target
+                        target = waypoints[waypointIndex].position;
+                    }                    
 
                     //Update Nav mesh agent
                     if(agent != null)
@@ -149,9 +170,9 @@ public class Enemy : MythologyMayhem
         }
     }
 
-    public void ExitState(EnemyStates newState)
+    public void ExitState(EnemyStates oldState)
     {
-        switch (newState)
+        switch (oldState)
         {
             case EnemyStates.Idle:
                 {
@@ -163,46 +184,15 @@ public class Enemy : MythologyMayhem
                 }
             case EnemyStates.Attack:
                 {
+                    canAttack = false;
                     break;
                 }
             case EnemyStates.Dead:
                 {
+                    canAttack = false;
                     break;
                 }
             default: { break; }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            player = other.gameObject;
-            SwitchStates(EnemyStates.Attack);            
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            player = other.gameObject;
-            SwitchStates(EnemyStates.Attack);
-        }
-    }
-
-    public void Attack(GameObject target) {
-        if (target.tag == "Player")
-        {
-            if(canAttack) {
-                if(target.GetComponent<PlayerStats>())
-                    target.GetComponent<PlayerStats>().TakeDamage(attackDamage);
-                if(target.GetComponent<KnockBackFeedback>())
-                    target.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
-                canAttack = false;
-                StartCoroutine(AttackRate());
-            }
-            
         }
     }
 
