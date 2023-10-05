@@ -32,9 +32,9 @@ public class Health : MonoBehaviour
 
     void FixedUpdate() {
         //Death Check
-        if(GetHealth() <= 0) {
-            SetHealth(0);
-        }
+        //if(GetHealth() <= 0) {
+        //    SetHealth(0);
+        //}
     }//end fixed update
 
     public float Life
@@ -63,10 +63,6 @@ public class Health : MonoBehaviour
                 anim.SetTrigger(hurtTrigger);
         }
         Life -= d;
-
-        if(GetHealth() <= 0) {
-            Death();
-        }
     }//end take damage
 
     public void Heal(float h) {
@@ -78,13 +74,23 @@ public class Health : MonoBehaviour
     }//end heal
 
     public void Death() {
-        if(GetHealth() <= 0) {
+        if(GetHealth() <= 0 && Life != -1000) {
+            Life = -1000;
+
             if(gameObject.tag == "Enemy")
             {
                 if (deathSound != null)
                     deathSound.Play();
                 if (anim != null)
                     anim.SetTrigger(deathTrigger);
+                if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
+                {
+                    gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                }
+                else
+                {
+                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                }
             }     
             foreach (Behaviour component in components) {
                 component.enabled = false;
@@ -101,6 +107,13 @@ public class Health : MonoBehaviour
                     deathSound.Play();
                 if (anim != null)
                     anim.SetTrigger(deathTrigger);
+                if(gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
+                {
+                    gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                } else
+                {
+                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                }
             }
             foreach (Behaviour component in components)
             {

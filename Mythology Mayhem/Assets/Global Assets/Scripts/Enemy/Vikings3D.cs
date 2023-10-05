@@ -14,8 +14,11 @@ public class Vikings3D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
+    [SerializeField] Collider attack;
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = 10f;
+    [SerializeField] float alertTimer = 3f;
+    float alertTime = 0f;
 
     [Header("Taunt Attack")]
     [SerializeField] GameObject summonViking;
@@ -25,16 +28,36 @@ public class Vikings3D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
+        attack = enemy.attackCollider.GetComponent<BoxCollider>();
     }
 
     public void Idle()
     {
-        if(enemy.idleTimer <= 0)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue Idle
+        if (enemy.idleTimer <= 0)
         {
             enemy.agent.isStopped = false;
             enemy.animator.SetBool(walkBool, true);
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
-        } else
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
+        }
+        else
         {
             enemy.agent.isStopped = true;
             enemy.idleTimer -= Time.deltaTime;
@@ -44,11 +67,30 @@ public class Vikings3D : MonoBehaviour
 
     public void MoveToTarget()
     {
-        if(Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < 3f)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue M2T
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < 3f)
         {
             //Close enough to Idle
-            enemy.SwitchStates(Enemy.EnemyStates.Idle);  
-        } else
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Idle, 0));
+        }
+        else
         {
             enemy.agent.isStopped = false;
             enemy.agent.SetDestination(enemy.target);
@@ -57,7 +99,25 @@ public class Vikings3D : MonoBehaviour
 
     public void MeleeAttack()
     {
-        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
+        //Check for Player
+        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
+        bool isTouching = false;
+        for (int i = 0; i < hitColliders.Length - 1; i++)
+        {
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                isTouching = true;
+                break;
+            }
+        }
+
+        if (!isTouching)
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
+        }
+
+        // Continue Attack
+        if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             enemy.agent.isStopped = true;
             enemy.animator.SetTrigger(meleeAttackTrigger);

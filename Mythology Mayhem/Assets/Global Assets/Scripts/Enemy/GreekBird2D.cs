@@ -15,23 +15,36 @@ public class GreekBird2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
+    [SerializeField] Collider2D attack;
+    [SerializeField] Collider2D playerCollider;
     [SerializeField] string attackBool;
     [SerializeField] float meleeDistance = .5f;
+    [SerializeField] float alertTimer = 3f;
+    float alertTime = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
+        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
+        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
     }
 
     public void Idle()
     {
-        if(enemy.idleTimer <= 0)
+        //Check for Player
+        if (attack.IsTouching(playerCollider))
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue Idle
+        if (enemy.idleTimer <= 0)
         {
             enemy.animator.SetBool(patrolBool, true);
-            enemy.SwitchStates(Enemy.EnemyStates.Patrol);
-            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, enemy.target, speed * Time.deltaTime));
-        } else
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
+        }
+        else
         {
             enemy.animator.SetBool(patrolBool, false);
             enemy.idleTimer -= Time.deltaTime;
@@ -40,18 +53,27 @@ public class GreekBird2D : MonoBehaviour
 
     public void MoveToTarget()
     {
-        if(Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
-        {            
+        //Check for Player
+        if (attack.IsTouching(playerCollider))
+        {
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }
+        else
+        // Continue M2T
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
+        {
             //Close enough to Idle
-            enemy.SwitchStates(Enemy.EnemyStates.Idle);
-        } else
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Idle, 0));
+        }
+        else
         {
             //Flip, Rotate Y
-            if(enemy.target.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            if (enemy.target.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
-            } else if (enemy.target.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            }
+            else if (enemy.target.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
@@ -63,7 +85,21 @@ public class GreekBird2D : MonoBehaviour
 
     public void MeleeAttack()
     {
-        if(Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
+        //Check for Player
+        if (!attack.IsTouching(playerCollider))
+        {
+            if (alertTime > alertTimer)
+            {
+                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, alertTimer));
+            }
+            else
+            {
+                alertTime += Time.deltaTime;
+            }
+        }
+
+        // Continue Attack
+        if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             enemy.animator.SetBool(attackBool, true);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);

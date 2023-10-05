@@ -409,20 +409,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8566816731040993082}
-  rigidBody3D: {fileID: 0}
   rigidBody2D: {fileID: 2937448451238742266}
   spriteRenderer: {fileID: 8566816731040993080}
+  rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
-  health: {fileID: 1537699233321417100}
-  enemyType: 0
-  attackDamage: 2
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 1537699233321417100}
+  animator: {fileID: 8566816731040993082}
   attackRate: 1.5
-  player: {fileID: 0}
+  attackDamage: 2
+  canAttack: 1
+  attackCollider: {fileID: 8566816731239632668}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -467,8 +468,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3341197332674699827}
         m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
-        m_MethodName: ChargingCloud
-        m_Mode: 1
+        m_MethodName: MeleeAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -479,8 +480,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3341197332674699827}
         m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
-        m_MethodName: MeleeAttack
-        m_Mode: 0
+        m_MethodName: ChargingCloud
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -710,6 +711,7 @@ MonoBehaviour:
   - {fileID: 3833448020936151730}
   - {fileID: 6495582106981125691}
   - {fileID: 8566816731040993082}
+  - {fileID: 1331490250871995232}
   mainObject: {fileID: 8566816731040993087}
   rewardObject: {fileID: 0}
   hurtSound: {fileID: 2647877704999172001}
@@ -733,10 +735,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolBool: IsPatrolling
   speed: 0.6
-  patrolDistance: 4
+  patrolDistance: 10
   body: {fileID: 8566816731040993087}
+  attack: {fileID: 8566816731239632670}
+  playerCollider: {fileID: 0}
   attackBool: IsAttacking
-  meleeDistance: 10
+  meleeDistance: 4
+  alertTimer: 3
   boarCloudAnimation: {fileID: 8125699907782810778}
 --- !u!1 &8566816731239632668
 GameObject:

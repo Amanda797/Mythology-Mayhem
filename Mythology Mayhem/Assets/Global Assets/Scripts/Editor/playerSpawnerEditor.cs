@@ -5,17 +5,17 @@ using UnityEditor;
 
 
 //Make custom button to reset spwan point index
-[CustomEditor(typeof(playerSpwaner))]
-public class playerSpwanerEditor : Editor
+[CustomEditor(typeof(playerSpawner))]
+public class playerSpawnerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        playerSpwaner myScript = (playerSpwaner)target;
-        if (GUILayout.Button("Reset Spwan Point Index"))
+        playerSpawner myScript = (playerSpawner)target;
+        if (GUILayout.Button("Reset Spawn Point Index"))
         {
-            PlayerPrefs.SetInt("spwanPointIndex", 0);
+            PlayerPrefs.SetInt("spawnPointIndex", 0);
         }
 
         //Make custom button to reset player prefs
