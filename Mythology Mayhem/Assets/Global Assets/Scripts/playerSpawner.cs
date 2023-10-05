@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
-public class playerSpwaner : MythologyMayhem
+public class playerSpawner : MythologyMayhem
 {
     public Dimension type;
 
-    int spwanPointIndex;
+    int spawnPointIndex;
     int playerIndex;
     int sceneIndex;
-    public List<Transform> spwanPoints = new List<Transform>();
+    public List<Transform> spawnPoints = new List<Transform>();
     public playerSelectable PlayerPrefabs2D;
     public playerSelectable PlayerPrefabs3D;
 
@@ -29,7 +29,7 @@ public class playerSpwaner : MythologyMayhem
     void Awake()
     {       
         //PlayerPrefs.SetInt("spwanPointIndex", 0);
-        if(PlayerPrefs.HasKey("spwanPointIndex"))
+        /*if(PlayerPrefs.HasKey("spwanPointIndex"))
         {
             spwanPointIndex = PlayerPrefs.GetInt("spwanPointIndex");
         }
@@ -57,28 +57,28 @@ public class playerSpwaner : MythologyMayhem
 
         // Save Scene Status
         PlayerPrefs.SetInt("sceneIndex", SceneManager.GetActiveScene().buildIndex);
+        */
 
         if (overrideBool) 
         {
-            spwanPointIndex = overrideIndex;
-            for (int i = 0; i < spwanPoints.Count; i++) 
-            { 
-                
-            }
+            spawnPointIndex = overrideIndex;            
         }
+
         GameObject obj = null;
 
         if (localGameManager == null)
         {
             if (type == Dimension.TwoD)
             {
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
                 obj.transform.parent = this.transform;
+                obj.SetActive(true);
             }
             else
             {
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
                 obj.transform.parent = this.transform;
+                obj.SetActive(true);
             }
         }
         else
@@ -86,11 +86,11 @@ public class playerSpwaner : MythologyMayhem
 
             if (localGameManager.sceneType == Dimension.TwoD)
             {
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
             }
             else
             {
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 
                 EnemyAI3D[] tempEnemies = FindObjectsOfType<EnemyAI3D>();
 
@@ -98,7 +98,6 @@ public class playerSpwaner : MythologyMayhem
                 {
                     enemy.player = obj.GetComponent<Collider>();
                 }
-                Debug.Log("PLAYER");
             }
         }
 
@@ -121,7 +120,7 @@ public class playerSpwaner : MythologyMayhem
         if (PlayerPrefs.GetInt("owl") == 1)
         {
             Debug.Log("Owl is active");
-            GameObject owl = Instantiate(owlPrefab, spwanPoints[spwanPointIndex].position, spwanPoints[spwanPointIndex].rotation);
+            GameObject owl = Instantiate(owlPrefab, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
             owl.transform.parent = this.transform;
         } 
 
