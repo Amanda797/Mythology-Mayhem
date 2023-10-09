@@ -66,6 +66,17 @@ public class Attack3D : MythologyMayhem
                             hitCount++;
                         }
                     }
+                    else if (enemy.gameObject.tag == "Tentacle") 
+                    {
+                        KrakenTentacleScript kts = enemy.gameObject.transform.root.GetComponent<KrakenTentacleScript>();
+                        if(kts != null) 
+                        {
+                            print("Found Tentacle Script");
+                            kts.Damage((int)damage);
+                            isAttacking = false;
+                            hitCount++;
+                        }
+                    }
                 }
                 else if (objectType == ObjectType.Enemy)
                 {
