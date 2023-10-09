@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class AegirControlScript : MonoBehaviour
 {
+    public LocalGameManager localGameManager;
+    public MythologyMayhem.Level inScene;
     public State curState;
+    public State returnState;
     public int health;
 
     [Header("Spawning")]
@@ -52,6 +55,11 @@ public class AegirControlScript : MonoBehaviour
     public float healTime;
     public int healthStart;
 
+    [Header("Stun")]
+    public float stunStartTime;
+    public float stunTime;
+
+    public float startTimer;
     public bool startFight;
 
     public Animator anim;
@@ -87,6 +95,7 @@ public class AegirControlScript : MonoBehaviour
         MediumWaveAttack5,
         WaterJet5,
         LargeWaveAttack5,
+        Stun,
         Death
 
     }
@@ -100,6 +109,15 @@ public class AegirControlScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (localGameManager.mainGameManager.currentScene == inScene && !startFight) 
+        {
+            startTimer -= Time.deltaTime;
+            if (startTimer <= 0) 
+            {
+                startTimer = 0;
+                startFight = true;
+            }
+        }
         RunState();
     }
 
@@ -541,6 +559,13 @@ public class AegirControlScript : MonoBehaviour
                     ChangeState(State.MediumWaveAttack5);
                 }
                 break;
+            case State.Stun:
+                if (Time.time - stunStartTime >= stunTime) 
+                {
+                    ChangeState(returnState);
+                    anim.SetBool("Stun", false);
+                }
+                break;
             case State.Death:
 
                 break;
@@ -710,13 +735,23 @@ public class AegirControlScript : MonoBehaviour
         jetStart = Time.time;
         waterJet.SetActive(true);
     }
-    void SummonKraken() 
-    { 
-    
+
+    public void Shock() 
+    {
+        returnState = curState;
+        stunStartTime = Time.time;
+        ChangeState(State.Stun);
+        anim.SetBool("Stun", true);
     }
 
-    void Heal() 
-    { 
-    
+    public void Damage(int amount) 
+    {
+        health -= amount;
+        if (health <= 0) 
+        {
+            health = 0;
+            anim.SetBool("Dead", true);
+            ChangeState(State.Death);
+        }
     }
 }
