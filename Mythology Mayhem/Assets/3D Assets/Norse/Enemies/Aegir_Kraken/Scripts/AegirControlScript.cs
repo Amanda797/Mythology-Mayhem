@@ -746,12 +746,15 @@ public class AegirControlScript : MonoBehaviour
 
     public void Damage(int amount) 
     {
-        health -= amount;
-        if (health <= 0) 
+        if (curState == State.Stun)
         {
-            health = 0;
-            anim.SetBool("Dead", true);
-            ChangeState(State.Death);
+            health -= amount;
+            if (health <= 0)
+            {
+                health = 0;
+                anim.SetBool("Dead", true);
+                ChangeState(State.Death);
+            }
         }
     }
 }
