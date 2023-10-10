@@ -187,7 +187,7 @@ public class PlayerStats : MonoBehaviour
         print("Respawn");
         if(attachScript.localGameManager != null) 
         {
-            transform.position = attachScript.localGameManager.activePlayerSpawner.spwanPoints[0].position;
+            transform.position = attachScript.localGameManager.activePlayerSpawner.spawnPoints[0].position;
         }
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Rigidbody2D>().simulated = true;

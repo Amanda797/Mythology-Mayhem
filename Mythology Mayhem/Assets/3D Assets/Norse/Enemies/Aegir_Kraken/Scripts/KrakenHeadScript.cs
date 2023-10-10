@@ -54,7 +54,7 @@ public class KrakenHeadScript : MonoBehaviour
                 {
                     case 1:
                         GenerateNewIndex();
-                        SpawnTentacles(3);
+                        SpawnTentacles(8);
                         break;
                     case 2:
                         GenerateNewIndex();

@@ -223,12 +223,12 @@ public class GameManager : MythologyMayhem
 
     void AlignCurrentPlayerCharacter(Level scene)
     {
-        for (int i = 0; i < currentLocalManager.activePlayerSpawner.spwanPoints.Count; i++)
+        for (int i = 0; i < currentLocalManager.activePlayerSpawner.spawnPoints.Count; i++)
         {
-            if (currentLocalManager.activePlayerSpawner.spwanPoints[i].name == scene.ToString())
+            if (currentLocalManager.activePlayerSpawner.spawnPoints[i].name == scene.ToString())
             {
                 currentPlayer.gameObject.SetActive(false);
-                currentPlayer.transform.position = currentLocalManager.activePlayerSpawner.spwanPoints[i].position;
+                currentPlayer.transform.position = currentLocalManager.activePlayerSpawner.spawnPoints[i].position;
                 currentPlayer.gameObject.SetActive(true);
             }
         }

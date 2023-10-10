@@ -74,7 +74,8 @@ GameObject:
   - component: {fileID: 2578502097357954854}
   - component: {fileID: 2578502097357954853}
   - component: {fileID: 2578502097357954852}
-  - component: {fileID: 2578502097357954860}
+  - component: {fileID: 8062461792910637000}
+  - component: {fileID: 6231685702661598096}
   m_Layer: 6
   m_Name: YoungLadyFate
   m_TagString: Enemy
@@ -208,14 +209,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2578502097357954858}
-  atkDamage: 6
-  maxHealth: 20
+  rigidBody2D: {fileID: 2578502097357954854}
+  spriteRenderer: {fileID: 2578502097357954859}
+  rigidBody3D: {fileID: 0}
+  agent: {fileID: 0}
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 0
+  health: {fileID: 6231685702661598096}
+  animator: {fileID: 2578502097357954858}
   attackRate: 1.5
+  attackDamage: 10
+  canAttack: 0
+  attackCollider: {fileID: 2578502095996227135}
+  walkSpeed: 5
+  runSpeed: 10
+  waypoints: []
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
+  idleTimerMax: 3
+  idleTimer: 0
+  IdleDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8062461792910637000}
+        m_TargetAssemblyTypeName: Fates2D, Assembly-CSharp
+        m_MethodName: Idle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PatrolDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8062461792910637000}
+        m_TargetAssemblyTypeName: Fates2D, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8062461792910637000}
+        m_TargetAssemblyTypeName: Fates2D, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeadDelegate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6231685702661598096}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  currentState: 0
+  currentStatePosition: 0
 --- !u!50 &2578502097357954854
 Rigidbody2D:
   serializedVersion: 4
@@ -255,7 +332,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8062461792910637000}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -282,7 +359,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8062461792910637000}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -402,7 +479,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2578502097357954860
+--- !u!114 &8062461792910637000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,19 +488,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 2578502097357954850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b02ee5e405f234dbed7bda00815d57, type: 3}
+  m_Script: {fileID: 11500000, guid: 07f5b61ebc5a7994e8661a0d0912d612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 7
-  soundTrigger: {fileID: 2578502095996227105}
-  attackTarget: {fileID: 0}
-  mouseAnim: {fileID: 2578502097357954858}
-  sr: {fileID: 2578502097357954859}
-  idleDuration: 0
-  waypoints: []
-  waypointIndex: 0
-  mirrorInRange: {fileID: 0}
-  rb2d: {fileID: 0}
-  dead: 0
   patrolBool: IsPatrolling
+  speed: 0.6
+  patrolDistance: 10
+  body: {fileID: 2578502097357954850}
+  attack: {fileID: 2578502095996227105}
+  playerCollider: {fileID: 0}
+  attackBool: IsAttacking
+  meleeDistance: 3
+  alertTimer: 3
+--- !u!114 &6231685702661598096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2578502097357954850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 200
+  components:
+  - {fileID: 8062461792910637000}
+  - {fileID: 2578502097357954853}
+  - {fileID: 2578502097357954855}
+  - {fileID: 2578502097357954858}
+  - {fileID: 2578502097357954856}
+  mainObject: {fileID: 2578502097357954850}
+  rewardObject: {fileID: 0}
+  hurtSound: {fileID: 2578502097357954852}
+  deathSound: {fileID: 2578502097357954852}
+  healSound: {fileID: 0}
+  anim: {fileID: 2578502097357954858}
+  hurtTrigger: 
+  deathTrigger: 
+  healTrigger: 

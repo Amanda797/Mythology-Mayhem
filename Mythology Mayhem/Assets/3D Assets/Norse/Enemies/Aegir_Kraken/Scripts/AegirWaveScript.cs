@@ -13,6 +13,8 @@ public class AegirWaveScript : MonoBehaviour
     public ParticleSystem waveProjectile;
     public bool buildupComplete;
 
+    public float despawnTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,12 @@ public class AegirWaveScript : MonoBehaviour
             waveBuildup.gameObject.SetActive(false);
             waveProjectile.gameObject.SetActive(true);
             buildupComplete = true;
+        }
+
+        despawnTimer -= Time.deltaTime;
+        if (despawnTimer <= 0) 
+        {
+            Destroy(this.gameObject);
         }
     }
 
