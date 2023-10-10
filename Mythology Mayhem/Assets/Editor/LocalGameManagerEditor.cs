@@ -32,7 +32,7 @@ public class LocalGameManagerEditor : Editor
 
             if (myScript.activePlayerSpawner != null)
             {
-                if (myScript.activePlayerSpawner.spwanPoints.Count == 0)
+                if (myScript.activePlayerSpawner.spawnPoints.Count == 0)
                 {
                     EditorGUILayout.HelpBox("You need to add at least one Spawn Point to this Level", MessageType.Error);
                 }
