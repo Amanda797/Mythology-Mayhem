@@ -18,6 +18,7 @@ public class Fates2D : MonoBehaviour
     [SerializeField] Collider2D attack;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] string attackBool;
+    [SerializeField] string attackLock;
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;
@@ -27,7 +28,7 @@ public class Fates2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -69,6 +70,7 @@ public class Fates2D : MonoBehaviour
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
             enemy.animator.SetBool(attackBool, false);
+            enemy.animator.SetBool(attackLock, false);
             StartCoroutine(enemy.AttackRate());
         }
         else

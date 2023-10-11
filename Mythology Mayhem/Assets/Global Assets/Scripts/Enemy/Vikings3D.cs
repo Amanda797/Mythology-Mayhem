@@ -31,6 +31,8 @@ public class Vikings3D : MonoBehaviour
         attack = enemy.attackCollider.GetComponent<BoxCollider>();
     }
 
+    bool idleTransition = false; 
+
     public void Idle()
     {
         //Check for Player
@@ -49,16 +51,19 @@ public class Vikings3D : MonoBehaviour
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
-        else
+
+        
         // Continue Idle
-        if (enemy.idleTimer <= 0)
+        if (enemy.idleTimer <= 0 && !idleTransition)
         {
+            idleTransition = true;
             enemy.agent.isStopped = false;
             enemy.animator.SetBool(walkBool, true);
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         }
         else
         {
+            idleTransition = false;
             enemy.agent.isStopped = true;
             enemy.idleTimer -= Time.deltaTime;
             enemy.animator.SetBool(walkBool, false);
@@ -83,7 +88,8 @@ public class Vikings3D : MonoBehaviour
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
-        else
+
+        
         // Continue M2T
         if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < 3f)
         {

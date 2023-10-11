@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MythologyMayhem
 {
     [Header("Game Data")]
+    public static GameManager instance;
     public GameData gameData;
 
     [Header("Load Scene System")]
@@ -25,6 +26,7 @@ public class GameManager : MythologyMayhem
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         LoadSystemsStart();
     }
 

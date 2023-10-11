@@ -388,8 +388,10 @@ MonoBehaviour:
   runBool: Run
   patrolDistance: 30
   body: {fileID: 4991383578755861438}
+  attack: {fileID: 0}
   meleeAttackTrigger: MeleeAttack
   meleeDistance: 10
+  alertTimer: 3
   snowballPrefab: {fileID: 1614976548141274923, guid: becb172cc605cd643883d8cf750999ef, type: 3}
   throwPoint: {fileID: 5297813412425396381}
   throwForce: 675
@@ -407,20 +409,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1796664204916919166}
-  rigidBody3D: {fileID: 5297813412182636020}
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  rigidBody3D: {fileID: 5297813412182636020}
   agent: {fileID: 5297813412182636018}
-  health: {fileID: 5297813412182636016}
-  enemyType: 0
-  attackDamage: 2
+  enemyDimension: 1
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 5297813412182636016}
+  animator: {fileID: 1796664204916919166}
   attackRate: 4
-  player: {fileID: 0}
+  attackDamage: 2
+  canAttack: 1
+  attackCollider: {fileID: 4991383578755861438}
   walkSpeed: 5
   runSpeed: 9
   waypoints:
@@ -490,6 +493,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!114 &5297813412182636016
@@ -505,10 +509,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
-  _health: 0
   components: []
   mainObject: {fileID: 5297813411332827587}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 1796664204916919166}
   hurtTrigger: Hurt
   deathTrigger: Die
