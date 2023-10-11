@@ -1203,10 +1203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 8
-  _health: 0
   components: []
   mainObject: {fileID: 8966506931405394489}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 7516868598088510610}
   hurtTrigger: Hurt
   deathTrigger: Die
@@ -1223,20 +1225,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 7516868598088510610}
-  rigidBody3D: {fileID: 5943613746777345728}
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  rigidBody3D: {fileID: 5943613746777345728}
   agent: {fileID: 564995977707538061}
-  health: {fileID: 8554052353116735649}
-  enemyType: 0
-  attackDamage: 2
+  enemyDimension: 1
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 8554052353116735649}
+  animator: {fileID: 7516868598088510610}
   attackRate: 2
-  player: {fileID: 0}
+  attackDamage: 2
+  canAttack: 1
+  attackCollider: {fileID: 8119435276968971380}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -1318,6 +1321,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!114 &2805903087689158274
@@ -1336,8 +1340,10 @@ MonoBehaviour:
   runBool: Running
   patrolDistance: 30
   body: {fileID: 8119435276968971380}
+  attack: {fileID: 0}
   meleeAttackTrigger: MeleeAttack
   meleeDistance: 10
+  alertTimer: 3
   summonViking: {fileID: 0}
   summonUsed: 0
 --- !u!65 &973471421942452451

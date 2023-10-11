@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 8901366385754117239}
   - component: {fileID: 5920203210461035208}
   - component: {fileID: 2658075091566431397}
+  - component: {fileID: 3936884908693418957}
   m_Layer: 6
   m_Name: viking_B
   m_TagString: Enemy
@@ -335,7 +336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392350038040858009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17020226, y: -0.049812555, z: -0.20095444}
+  m_LocalPosition: {x: 0.17020424, y: -0.049812317, z: -0.20095697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -428,10 +429,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 8
-  _health: 0
   components: []
   mainObject: {fileID: 2275433997857369835}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 3912601279583781683}
   hurtTrigger: Hurt
   deathTrigger: Die
@@ -448,20 +451,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3912601279583781683}
-  rigidBody3D: {fileID: 3131993931898083687}
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  rigidBody3D: {fileID: 3131993931898083687}
   agent: {fileID: 3276639742436357627}
-  health: {fileID: 6996831235362905823}
-  enemyType: 0
-  attackDamage: 2
+  enemyDimension: 1
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 6996831235362905823}
+  animator: {fileID: 3912601279583781683}
   attackRate: 2
-  player: {fileID: 0}
+  attackDamage: 2
+  canAttack: 1
+  attackCollider: {fileID: 1392350038040858009}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -545,6 +549,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!114 &5920203210461035208
@@ -563,8 +568,10 @@ MonoBehaviour:
   runBool: Running
   patrolDistance: 30
   body: {fileID: 1392350038040858009}
+  attack: {fileID: 0}
   meleeAttackTrigger: MeleeAttack
   meleeDistance: 10
+  alertTimer: 3
   summonViking: {fileID: 0}
   summonUsed: 0
 --- !u!65 &2658075091566431397
@@ -580,6 +587,102 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 2, z: 4}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!82 &3936884908693418957
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392350038040858009}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8463054763522895652, guid: 7d68d8f1252686945aebfe707bfe4938, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 749754cf52894dc4e9bea9ee16e69dff, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1511553389485062305
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9215012345925063031}
-  - component: {fileID: 9215012345925063024}
   m_Layer: 6
   m_Name: 'Waypoint 1 '
   m_TagString: Untagged
@@ -32,18 +31,6 @@ Transform:
   m_Father: {fileID: 9215012346645743404}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9215012345925063024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215012345925063030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9215012346045887230
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9215012346045887225}
-  - component: {fileID: 9215012346045887224}
   - component: {fileID: 9215012346045887231}
   m_Layer: 0
   m_Name: SoundTrigger
@@ -77,58 +63,6 @@ Transform:
   m_Father: {fileID: 9215012346645743404}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9215012346045887224
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215012346045887230}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!61 &9215012346045887231
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.22817388, y: 0.012525395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -153,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.6}
+  m_Size: {x: 0.54365224, y: 0.17413715}
   m_EdgeRadius: 0
 --- !u!1 &9215012346072753508
 GameObject:
@@ -164,7 +98,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9215012346072753509}
-  - component: {fileID: 9215012346072753510}
   m_Layer: 6
   m_Name: 'Waypoint 2 '
   m_TagString: Untagged
@@ -187,18 +120,6 @@ Transform:
   m_Father: {fileID: 9215012346645743404}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9215012346072753510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215012346072753508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9215012346645743393
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +225,7 @@ Animator:
   m_GameObject: {fileID: 9215012346645743393}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 73224550c3959ed488387b1a270d64cb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 627e662a7f16d244fb7ce97aebe0389f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -352,20 +273,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 9215012346645743394}
-  rigidBody3D: {fileID: 0}
   rigidBody2D: {fileID: 9215012346645743400}
   spriteRenderer: {fileID: 9215012346645743395}
+  rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
-  health: {fileID: 3447044666153701234}
-  enemyType: 0
-  attackDamage: 2
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 3447044666153701234}
+  animator: {fileID: 9215012346645743394}
   attackRate: 1.5
-  player: {fileID: 0}
+  attackDamage: 2
+  canAttack: 1
+  attackCollider: {fileID: 9215012346045887230}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -488,7 +410,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 964127300907280597}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -515,7 +437,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 964127300907280597}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -548,7 +470,7 @@ AudioSource:
   m_GameObject: {fileID: 9215012346645743393}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8463054763522895652, guid: 7d68d8f1252686945aebfe707bfe4938, type: 2}
   m_audioClip: {fileID: 8300000, guid: 043dc51f66802474d9891ed6d96bdc21, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -648,10 +570,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 8
-  _health: 0
-  components: []
+  components:
+  - {fileID: 964127300907280597}
+  - {fileID: 9215012346645743407}
+  - {fileID: 9215012346645743401}
+  - {fileID: 9215012346645743402}
+  - {fileID: 9215012346645743394}
   mainObject: {fileID: 9215012346645743393}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 9215012346645743406}
+  deathSound: {fileID: 9215012346645743406}
+  healSound: {fileID: 9215012346645743406}
   anim: {fileID: 9215012346645743394}
   hurtTrigger: Hurt
   deathTrigger: IsDead
@@ -668,12 +597,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e569a481bcba2e54fb3131286880e8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrollingBool: IsPatrolling
-  speed: 0.6
+  patrolBool: IsPatrolling
+  speed: 1
   flipSensitivity: 1
   patrolDistance: 10
   body: {fileID: 9215012346645743393}
-  meleeAttackTrigger: IsAttacking
+  attack: {fileID: 9215012346045887231}
+  playerCollider: {fileID: 0}
+  meleeAttackTriggers:
+  - IsAttacking
   meleeDistance: 3
+  alertTimer: 3
   summonViking: {fileID: 0}
   summonUsed: 0
+  tauntAttackTrigger: Taunt

@@ -27,17 +27,20 @@ public class Bat2D : MonoBehaviour {
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     public void Idle()
     {
-        //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (playerCollider != null)
         {
-            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            //Check for Player
+            if (attack.IsTouching(playerCollider))
+            {
+                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            }
         }
-        else
+
         // Continue Idle
         if (enemy.idleTimer <= 0)
         {
@@ -112,18 +115,18 @@ public class Bat2D : MonoBehaviour {
         else
         {
             //Flip, Rotate Y
-            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
-            {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
-            }
-            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+            }
+            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
             }
             //Move
             Vector2 xOnlyTargetPosition = new Vector2(enemy.player.transform.position.x, gameObject.transform.position.y);
-            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
+            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, enemy.player.transform.position, (speed * 3f) * Time.deltaTime));
         }
     }
 
