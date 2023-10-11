@@ -839,22 +839,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 4853475714047051653}
-  rigidBody3D: {fileID: 4853475714047051655}
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  rigidBody3D: {fileID: 4853475714047051655}
   agent: {fileID: 4853475714047051650}
-  health: {fileID: 4853475714047051651}
-  enemyType: 0
-  attackDamage: 2
+  enemyDimension: 1
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 4853475714047051651}
+  animator: {fileID: 4853475714047051653}
   attackRate: 2
-  player: {fileID: 0}
-  walkSpeed: 4
-  runSpeed: 8
+  attackDamage: 2
+  canAttack: 1
+  attackCollider: {fileID: 4853475714047051648}
+  walkSpeed: 6
+  runSpeed: 10
   waypoints:
   - {fileID: 5736015426491010739}
   - {fileID: 5736015425577964434}
@@ -934,6 +935,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!114 &4853475714047051656
@@ -952,8 +954,10 @@ MonoBehaviour:
   runBool: Running
   patrolDistance: 30
   body: {fileID: 4853475714047051648}
+  attack: {fileID: 0}
   meleeAttackTrigger: MeleeAttack
   meleeDistance: 10
+  alertTimer: 3
   summonViking: {fileID: 0}
   summonUsed: 0
 --- !u!65 &5493566629572558601
