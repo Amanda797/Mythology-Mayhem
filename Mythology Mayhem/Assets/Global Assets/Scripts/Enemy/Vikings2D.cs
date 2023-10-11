@@ -16,7 +16,7 @@ public class Vikings2D : MonoBehaviour
     [SerializeField] GameObject body;
     [SerializeField] Collider2D attack;
     [SerializeField] Collider2D playerCollider;
-    [SerializeField] string meleeAttackTrigger;
+    [SerializeField] string[] meleeAttackTriggers;
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;
@@ -36,12 +36,14 @@ public class Vikings2D : MonoBehaviour
 
     public void Idle()
     {
-        //Check for Player
-        if (attack.IsTouching(playerCollider))
-        {
-            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-        }
-        else
+        if (playerCollider != null) {
+            //Check for Player
+            if (attack.IsTouching(playerCollider))
+            {
+                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            }
+        }        
+        
         // Continue Idle
         if (enemy.idleTimer <= 0)
         {
@@ -105,12 +107,12 @@ public class Vikings2D : MonoBehaviour
         // Continue Attack
         if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
-            enemy.animator.SetTrigger(meleeAttackTrigger);
+            enemy.animator.SetTrigger(meleeAttackTriggers[Random.Range(0,meleeAttackTriggers.Length)]);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
             if (enemy.player.GetComponent<KnockBackFeedback>())
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
-            enemy.animator.SetTrigger(meleeAttackTrigger);
+            enemy.animator.SetTrigger(meleeAttackTriggers[Random.Range(0, meleeAttackTriggers.Length)]);
             StartCoroutine(enemy.AttackRate());
         }
         else
@@ -135,8 +137,6 @@ public class Vikings2D : MonoBehaviour
     {
         if (Vector3.Distance(enemy.gameObject.transform.position, enemy.player.transform.position) < patrolDistance && !summonUsed)
         {
-            //Need some kinf of visual effect or indication that the Viking used Taunt Attack
-            //enemy.animator.SetTrigger(rangedAttackTrigger);
             summonUsed = true;
 
             Vikings2D[] summonVikings = FindObjectsOfType<Vikings2D>();

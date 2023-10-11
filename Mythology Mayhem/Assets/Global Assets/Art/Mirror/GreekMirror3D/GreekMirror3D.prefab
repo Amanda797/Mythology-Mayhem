@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 2284636183875901280}
   - component: {fileID: 540866449}
   - component: {fileID: 540866448}
+  - component: {fileID: 724126343001790440}
   m_Layer: 0
   m_Name: GreekMirror3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2284636183875901280
 Transform:
   m_ObjectHideFlags: 0
@@ -62,12 +63,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testingBool: 1
-  canUseMirror: 0
   mirrorCoolDown: 0
   enemySlowDuration: 5
   coolDownDuration: 5
+  lastUsedTime: 0
   normal: {fileID: 2100000, guid: e33dea25835dc124d89553a109fa7f79, type: 2}
   stone: {fileID: 2100000, guid: 0e35ee307d576544e8aacb83e9a0af5a, type: 2}
+  reflectionVFX: {fileID: 0}
+  playerCamera: {fileID: 0}
+  weaponSwitcher: {fileID: 0}
+--- !u!114 &724126343001790440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513060137413971418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d1be064a999e047bc40a27b99b607b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainOrOff: 0
+  mainHand: 0
+  offHand: 2
 --- !u!1 &1790301626949548809
 GameObject:
   m_ObjectHideFlags: 0
