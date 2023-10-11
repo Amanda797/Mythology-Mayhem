@@ -33,6 +33,8 @@ public class Cyclops3D : MonoBehaviour
         attack = enemy.attackCollider.GetComponent<BoxCollider>();
     }
 
+    bool idleTransition = false;
+
     public void Idle()
     {
         //Check for Player
@@ -53,13 +55,15 @@ public class Cyclops3D : MonoBehaviour
         }
         else
         // Continue Idle
-        if (enemy.idleTimer <= 0)
+        if (enemy.idleTimer <= 0 && !idleTransition)
         {
+            idleTransition = true;
             enemy.agent.isStopped = false;
             enemy.animator.SetBool(walkBool, true);
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol,0));
         } else
         {
+            idleTransition = false;
             enemy.agent.isStopped = true;
             enemy.idleTimer -= Time.deltaTime;
             enemy.animator.SetBool(walkBool, false);
