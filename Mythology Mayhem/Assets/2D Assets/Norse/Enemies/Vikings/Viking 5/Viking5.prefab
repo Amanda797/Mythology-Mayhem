@@ -370,20 +370,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8703386765692791770}
-  rigidBody3D: {fileID: 0}
   rigidBody2D: {fileID: 8703386765692791777}
   spriteRenderer: {fileID: 8703386765692791771}
+  rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
-  health: {fileID: 8703386765692791781}
-  enemyType: 0
-  attackDamage: 2.5
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 8703386765692791781}
+  animator: {fileID: 8703386765692791770}
   attackRate: 1.5
-  player: {fileID: 0}
+  attackDamage: 2.5
+  canAttack: 1
+  attackCollider: {fileID: 8703386766834006257}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -468,10 +469,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
-  _health: 0
-  components: []
+  components:
+  - {fileID: 8703386765692791780}
+  - {fileID: 8703386765692791782}
+  - {fileID: 8703386765692791783}
+  - {fileID: 8703386765692791770}
+  - {fileID: 8703386765692791778}
   mainObject: {fileID: 8703386766743047780}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 8703386765692791776}
+  deathSound: {fileID: 8703386765692791776}
+  healSound: {fileID: 8703386765692791776}
   anim: {fileID: 8703386765692791770}
   hurtTrigger: Hurt
   deathTrigger: Die
@@ -488,16 +496,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e569a481bcba2e54fb3131286880e8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrollingBool: 
-  speed: 0.6
+  patrolBool: Walking
+  speed: 1.2
   flipSensitivity: 1
-  patrolDistance: 30
+  patrolDistance: 10
   body: {fileID: 8703386765692791768}
-  meleeAttackTrigger: Slashing
-  meleeDistance: 10
+  attack: {fileID: 8703386766834006259}
+  playerCollider: {fileID: 0}
+  meleeAttackTriggers:
+  - Kicking
+  - Slashing
+  - Sliding
+  - Throwing
+  meleeDistance: 4
+  alertTimer: 3
   summonViking: {fileID: 0}
   summonUsed: 0
-  tauntAttackTrigger: 
+  tauntAttackTrigger: Slashing
 --- !u!1 &8703386766251674346
 GameObject:
   m_ObjectHideFlags: 0

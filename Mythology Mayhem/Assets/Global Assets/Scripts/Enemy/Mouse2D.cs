@@ -32,7 +32,7 @@ public class Mouse2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -49,11 +49,15 @@ public class Mouse2D : MonoBehaviour
 
     public void Idle()
     {
-        //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (playerCollider != null)
         {
-            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
-        } else
+            //Check for Player
+            if (attack.IsTouching(playerCollider))
+            {
+                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            }
+        }
+
         // Continue Idle
         if (enemy.idleTimer <= 0)
         {
