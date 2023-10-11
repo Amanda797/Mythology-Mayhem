@@ -46,17 +46,16 @@ public class Enemy : MythologyMayhem
     public UnityEvent PatrolDelegate;
     public UnityEvent AttackDelegate;
     public UnityEvent DeadDelegate;
+    public LocalGameManager _localGameManager;
 
     public enum EnemyStates { Idle, Patrol, Attack, Dead };
     public EnemyStates currentState;
     public enum StatePosition { Exit, Current, Entry }; //0 = exit, 1 = current, 2 = entry
     public StatePosition currentStatePosition;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         health = gameObject.GetComponent<Health>();
-        player = GameObject.FindGameObjectWithTag("Player");
 
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
@@ -67,7 +66,17 @@ public class Enemy : MythologyMayhem
     {
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            if(_localGameManager != null )
+            {
+                if(_localGameManager.player != null)
+                {
+                    player = _localGameManager.player.gameObject;
+                }
+            } else
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+
         }
 
         //Check for Death

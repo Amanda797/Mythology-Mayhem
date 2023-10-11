@@ -49,19 +49,20 @@ public class MythologyMayhem : MonoBehaviour
         Micos
     }
 
-    public enum MainHand 
-    { 
+    public enum MainHand
+    {
+        None,
         MainWeapon,
         Bow,
-        None
+        ThorsHammer
     }
 
-    public enum OffHand 
-    { 
+    public enum OffHand
+    {
+        None,
         Crystal,
         Mirror,
-        Compass,
-        None
+        Compass
     }
     public enum Enemies 
     { 
