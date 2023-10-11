@@ -62,6 +62,7 @@ public class LocalGameManager : MythologyMayhem
             else
             {
                 mainGameManager.loadedLocalManagers.Add(this);
+                sceneOriginOnLoad = this.sceneOrigin.position;
             }
         }
     }

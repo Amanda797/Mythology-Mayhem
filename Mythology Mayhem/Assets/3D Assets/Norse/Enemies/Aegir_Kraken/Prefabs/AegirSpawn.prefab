@@ -47,16 +47,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637973a6f042c68429a11f092eeef575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localGameManager: {fileID: 0}
+  inScene: 7
   curState: 0
+  returnState: 0
   health: 1000
   riseSpeed: 5
   risePosition: {fileID: 0}
   distanceToStart: 0.1
   smallWaveDamage: 10
   curSmallWave: 0
-  smallWaveCooldown1: 5
-  smallWaveCooldown2: 5
-  smallWaveCooldown3: 5
+  smallWaveCooldown1: 2
+  smallWaveCooldown2: 2
+  smallWaveCooldown3: 2
   lastSmall: 0
   smallWavePrefab: {fileID: 1296750564792458658, guid: e97dde3d2cdf772468f2b686621ee710, type: 3}
   waveSpawnPoint: {fileID: 9166887837952356244}
@@ -80,6 +83,9 @@ MonoBehaviour:
   startHealTime: 0
   healTime: 2
   healthStart: 0
+  stunStartTime: 0
+  stunTime: 0
+  startTimer: 30
   startFight: 0
   anim: {fileID: 1977144444991491906}
   krakenHeadScript: {fileID: 0}
