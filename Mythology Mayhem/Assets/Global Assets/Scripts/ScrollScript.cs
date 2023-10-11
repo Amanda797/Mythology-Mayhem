@@ -28,6 +28,15 @@ public class ScrollScript : MonoBehaviour
 
     [SerializeField] bool requirements;
 
+    // EFFECTS
+    [SerializeField] float textSize = 30f;
+    [SerializeField] bool textSizeShift = false;
+    [SerializeField] float shiftedTextSize;
+    [SerializeField] bool bold;
+    [SerializeField] bool italics;
+    [SerializeField] bool underline;
+    [SerializeField] bool strikethrough;
+
     // --------------------------
     // ***METHODS***
     // --------------------------
@@ -39,6 +48,8 @@ public class ScrollScript : MonoBehaviour
         //print(gameObject.name + ": " + text);
         keyTriggered = false;
         keyCooldown = 1f;
+
+        textUI.fontSize = textSize;
     }//end start
 
     void Update()
@@ -90,9 +101,36 @@ public class ScrollScript : MonoBehaviour
         }
     }//end on collision exit 2d
 
-    public void OpenScroll() {        
+    public void OpenScroll()
+    {
         LoadText();
         ScrollPanel.SetActive(true);
+        textUI.fontSize = textSize;
+        textUI.fontStyle = FontStyles.Normal;
+        ScrollRect scroll = textUI.gameObject.GetComponentInParent<ScrollRect>();
+        scroll.verticalNormalizedPosition = 1f;
+        //FontStyle fontEffect = new FontStyle();
+        //fontEffect = FontStyles.Normal;
+        if (textSizeShift)
+        {
+            textUI.fontSize = shiftedTextSize;
+        }
+        if(bold)
+        {
+            textUI.fontStyle = FontStyles.Bold;
+        }
+        if (italics)
+        {
+            textUI.fontStyle = FontStyles.Italic;
+        }
+        if (underline)
+        {
+            textUI.fontStyle = FontStyles.Underline;
+        }
+        if (strikethrough)
+        {
+            textUI.fontStyle = FontStyles.Strikethrough;
+        }
     }//end open scroll
 
     public void CloseScroll() {
