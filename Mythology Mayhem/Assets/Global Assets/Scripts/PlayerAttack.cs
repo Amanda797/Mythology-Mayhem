@@ -8,12 +8,13 @@ public class PlayerAttack : MythologyMayhem
     public Animator anim;
     public AnimationClip attackAnim;
     public Attack3D attack3D;
+    public float mainHandDamage = 10f;
 
     public SwordEffectScript effectsScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        attack3D.damage = mainHandDamage;
     }
 
     // Update is called once per frame
