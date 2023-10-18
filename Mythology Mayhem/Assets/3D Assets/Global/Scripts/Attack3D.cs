@@ -80,10 +80,10 @@ public class Attack3D : MythologyMayhem
                 }
                 else if (objectType == ObjectType.Enemy)
                 {
-                    print(enemy.gameObject.name);
+                    //print(enemy.gameObject.name);
                     if (enemy.gameObject.tag == "Player")
                     {
-                        print("We hit " + enemy.name);
+                        //print("We hit " + enemy.name);
                         Health health = enemy.GetComponent<Health>();
                         enemySimpleAI enemyAI = enemy.GetComponent<enemySimpleAI>();
                         if (health != null)
