@@ -6,9 +6,10 @@ public class Levitate2D : MonoBehaviour
 {
     [SerializeField] private float amplitude = 0.5f;
     [SerializeField] private float frequency = 1f;
+    [SerializeField] private float zValue = 0f;
     float randomFrequency;
-    private Vector2 posOffset = new Vector2();
-    private Vector2 tempPos = new Vector2();
+    private Vector3 posOffset = new Vector3();
+    private Vector3 tempPos = new Vector3();
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Levitate2D : MonoBehaviour
     {
         tempPos = posOffset;
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * randomFrequency) * amplitude;
+        tempPos.z = zValue;
         transform.position = tempPos;
     }
 }
