@@ -80125,12 +80125,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 20
-  health: 0
   components:
   - {fileID: 926002231}
   - {fileID: 926002230}
   mainObject: {fileID: 0}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 1969717099}
   hurtTrigger: Hit
   deathTrigger: Die
@@ -80407,12 +80409,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 20
-  health: 0
   components:
   - {fileID: 1021492711}
   - {fileID: 1021492712}
   mainObject: {fileID: 1443910382}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 1014122626}
   hurtTrigger: Hit
   deathTrigger: Die
@@ -86834,8 +86838,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  spwanPoints:
-  - {fileID: 943137901}
+  spawnPoints: []
+  playerContainer2D: {fileID: 0}
+  playerContainer3D: {fileID: 2022008766007667003, guid: 8c6aba2434faa21488922cd73373b76d, type: 3}
   PlayerPrefabs2D: {fileID: 0}
   PlayerPrefabs3D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
   owlPrefab: {fileID: 1970649705876168535, guid: b7a401bfe9ca7cd4bb9d081ebbf5faca, type: 3}
@@ -88041,12 +88046,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 40
-  health: 0
   components:
   - {fileID: 1581959127}
   - {fileID: 1581959128}
   mainObject: {fileID: 1581990166}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 1591358130}
   hurtTrigger: Hit
   deathTrigger: Die
@@ -95052,7 +95059,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 2Dlabyrinth_Pedastals
-  spawnPointIndex: 0
   distance: 5
   player: {fileID: 0}
 --- !u!65 &1854629086
@@ -95179,7 +95185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 2Dlabyrinth_Levers 1
-  spawnPointIndex: 0
   distance: 5
   player: {fileID: 0}
 --- !u!65 &1872431738
