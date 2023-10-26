@@ -30,6 +30,23 @@ public class OwlCompanion : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+
+        GameObject[] _players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject _player in _players)
+        {
+            if (_player != null)
+            {
+                if (gameObject.GetComponent<BoxCollider2D>())
+                {
+                    player2D = _player;
+                }
+                else if (gameObject.GetComponent<BoxCollider>())
+                {
+                    player3D = _player;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -82,7 +99,7 @@ public class OwlCompanion : MonoBehaviour
         }
         #endregion
 
-        #region Attack
+        #region Detect Enemy for Attack
 
         if (attackTrigger.triggered)
         {
