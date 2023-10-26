@@ -27,7 +27,18 @@ public class Satyr2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+    }
+
+    void Update()
+    {
+        if (enemy == null)
+        {
+            enemy = gameObject.GetComponent<Enemy>();
+        }
+        if (playerCollider == null)
+        {
+            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+        }
     }
 
     public void Idle()
