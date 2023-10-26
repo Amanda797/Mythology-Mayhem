@@ -28,12 +28,20 @@ public class Fates2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     private void Update()
     {
-        StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
+        //StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
+
+        if (enemy == null)
+        {
+            enemy = gameObject.GetComponent<Enemy>();
+        }
+        if (playerCollider == null)
+        {
+            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+        }
     }
 
     public void Idle()

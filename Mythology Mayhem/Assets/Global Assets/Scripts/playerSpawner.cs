@@ -46,7 +46,6 @@ public class playerSpawner : MythologyMayhem
             {
 
                 spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
-                print(spawnPlayerContainer);
 
                 obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
 

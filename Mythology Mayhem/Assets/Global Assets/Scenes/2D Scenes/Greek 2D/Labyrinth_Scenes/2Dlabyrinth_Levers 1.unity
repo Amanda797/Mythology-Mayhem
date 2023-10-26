@@ -1259,6 +1259,8 @@ MonoBehaviour:
   type: 0
   spawnPoints:
   - {fileID: 708189250}
+  playerContainer2D: {fileID: 0}
+  playerContainer3D: {fileID: 0}
   PlayerPrefabs2D: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
   PlayerPrefabs3D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}
   owlPrefab: {fileID: 0}
@@ -1390,6 +1392,7 @@ GameObject:
   - component: {fileID: 965601943}
   - component: {fileID: 965601942}
   - component: {fileID: 965601945}
+  - component: {fileID: 965601946}
   m_Layer: 0
   m_Name: Minotaur 0
   m_TagString: Untagged
@@ -1511,6 +1514,19 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   dead: 0
   patrolBool: IsPatrolling
+--- !u!114 &965601946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965601941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40162f28c3e61024d91d6ad3b2d71974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PersonalID: 12
 --- !u!1 &998689357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7692487075164556626, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -1859,13 +1875,14 @@ GameObject:
   - component: {fileID: 1338900935}
   - component: {fileID: 1338900937}
   - component: {fileID: 1338900938}
+  - component: {fileID: 1338900939}
   m_Layer: 0
   m_Name: GreekMirror2d_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1338900935
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1977,6 +1994,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9, y: 8.44}
   m_EdgeRadius: 0
+--- !u!114 &1338900939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338900934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40162f28c3e61024d91d6ad3b2d71974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PersonalID: 12345
 --- !u!1 &1373626558
 GameObject:
   m_ObjectHideFlags: 0
