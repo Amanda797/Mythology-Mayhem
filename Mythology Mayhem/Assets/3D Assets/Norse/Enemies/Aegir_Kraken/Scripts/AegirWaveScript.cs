@@ -44,7 +44,14 @@ public class AegirWaveScript : MonoBehaviour
     }
 
     public void ColliderTrigger(Collider other) 
-    { 
-        
+    {
+        if (other.tag == "Ship") 
+        {
+            ShipScript ship = other.gameObject.GetComponent<ShipScript>();
+            if (ship != null) 
+            {
+                ship.anim.SetTrigger("Wave");
+            }
+        }
     }
 }

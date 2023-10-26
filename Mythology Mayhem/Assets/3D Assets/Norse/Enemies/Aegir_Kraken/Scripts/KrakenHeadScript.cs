@@ -17,11 +17,13 @@ public class KrakenHeadScript : MonoBehaviour
     public GameObject tentaclePrefab;
 
     public List<KrakenTentacleScript> spawnedTentacles;
-    public int currentTentacle;
 
     public Transform[] tentacleStartPositions;
     public Transform[] tentacleGrabPositions;
     public List<int> remainingIndexes;
+
+    public KrakenTentacleScript currentTentacle;
+    public ShipScript ship;
 
     public enum State 
     { 
@@ -106,6 +108,21 @@ public class KrakenHeadScript : MonoBehaviour
                 }
             }
         }
+        if (currentTentacle != null)
+        {
+            if (currentTentacle.currentState == KrakenTentacleScript.State.Attached)
+            {
+                ship.anim.SetBool("Tentacle", true);
+            }
+            else
+            {
+                ship.anim.SetBool("Tentacle", false);
+            }
+        }
+        else 
+        {
+            ship.anim.SetBool("Tentacle", false);
+        }
     }
     void ChangeState(State newState) 
     {
@@ -163,7 +180,7 @@ public class KrakenHeadScript : MonoBehaviour
         if(spawnedTentacles.Count > 0)
         { 
             int index = (int)Random.Range(0, spawnedTentacles.Count);
-            currentTentacle = index;
+            currentTentacle = spawnedTentacles[index];
             spawnedTentacles[index].Select();
             spawnedTentacles.RemoveAt(index);
         }
