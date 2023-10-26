@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     // ***PROPERTIES***
     // --------------------------
     [SerializeField] private float MaxHealth;
+    [SerializeField]
     private float _health;
     [SerializeField] private Behaviour[] components;
     [SerializeField] private GameObject mainObject; // Parent Self

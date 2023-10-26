@@ -32,7 +32,7 @@ public class Mouse2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+        //playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     void Update()

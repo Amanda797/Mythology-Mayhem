@@ -23,13 +23,12 @@ public class enemySimpleAI : MonoBehaviour
 
     void Update()
     {
-        if(health.GetHealth() <= 0)
+        if(health.GetHealth() <= 0 && health.GetHealth() != -1000)
         {
-            isDead = true;
-            animator.SetFloat("Speed", 0f);
-            //animator.SetBool("isDead", true);
-            return;
+            Debug.Log("Health = " + health.GetHealth());
+            Die();
         }
+
         if(isHurt)
         {
             isAttacking = false;
@@ -106,8 +105,8 @@ public class enemySimpleAI : MonoBehaviour
     public void Die()
     {
         isDead = true;
-        //animator.SetTrigger("Die");
-        //Destroy(gameObject, 2f);
+        animator.SetFloat("Speed", 0f);
+        health.Death();
     }
 }
 

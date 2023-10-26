@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 4787767355810335381}
   - component: {fileID: 6881883327284957405}
   - component: {fileID: 4630357769035066892}
+  - component: {fileID: 7059657413409074046}
   m_Layer: 6
   m_Name: Bat
   m_TagString: Enemy
@@ -246,8 +247,8 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.3951554}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    border: {x: 0, y: 8.79, z: 14.849999, w: 7.5299997}
+    pivot: {x: 0.13330181, y: 0.5283286}
     oldSize: {x: 20.48, y: 20.48}
     newSize: {x: 20.48, y: 20.48}
     adaptiveTilingThreshold: 0.5
@@ -269,20 +270,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2040423835894828373}
-  enemyType: 0
-  atkDamage: 2
-  maxHealth: 8
+  rigidBody2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  rigidBody3D: {fileID: 0}
+  agent: {fileID: 0}
+  enemyDimension: 0
+  player: {fileID: 0}
   playerLayers:
     serializedVersion: 2
     m_Bits: 8
-  canAttack: 1
+  health: {fileID: 0}
+  animator: {fileID: 2040423835894828373}
   attackRate: 2
-  viking1AtkDamage: 0
-  viking1MaxHealth: 0
-  timeLastTaunt: 0
-  tauntRate: 0
-  viking2AtkDamage: 0
+  attackDamage: 0
+  canAttack: 1
+  attackCollider: {fileID: 0}
+  walkSpeed: 5
+  runSpeed: 10
+  waypoints: []
+  waypointIndex: 0
+  target: {x: 0, y: 0, z: 0}
+  idleTimerMax: 3
+  idleTimer: 0
+  IdleDelegate:
+    m_PersistentCalls:
+      m_Calls: []
+  PatrolDelegate:
+    m_PersistentCalls:
+      m_Calls: []
+  AttackDelegate:
+    m_PersistentCalls:
+      m_Calls: []
+  DeadDelegate:
+    m_PersistentCalls:
+      m_Calls: []
+  _localGameManager: {fileID: 0}
+  currentState: 0
+  currentStatePosition: 0
 --- !u!50 &4787767355810335381
 Rigidbody2D:
   serializedVersion: 4
@@ -469,6 +493,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7059657413409074046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040423835894828368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
+  components: []
+  mainObject: {fileID: 0}
+  rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
+  anim: {fileID: 0}
+  hurtTrigger: 
+  deathTrigger: 
+  healTrigger: 
 --- !u!1 &2040423836221656435
 GameObject:
   m_ObjectHideFlags: 0
