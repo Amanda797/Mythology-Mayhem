@@ -53,31 +53,34 @@ public class Enemy : MythologyMayhem
     public enum StatePosition { Exit, Current, Entry }; //0 = exit, 1 = current, 2 = entry
     public StatePosition currentStatePosition;
 
-    void Awake()
+    void Start()
     {
         health = gameObject.GetComponent<Health>();
 
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
         EnterState(currentState);
-    }
 
-    void Update()
-    {
         if (player == null)
         {
-            if(_localGameManager != null )
+            if (_localGameManager != null)
             {
-                if(_localGameManager.player != null)
+                if (_localGameManager.player != null)
                 {
                     player = _localGameManager.player.gameObject;
                 }
-            } else
+            }
+            else
             {
                 player = GameObject.FindGameObjectWithTag("Player");
             }
 
         }
+    }//end Awake
+
+    void Update()
+    {
+        
 
         //Check for Death
 

@@ -31,12 +31,23 @@ public class Boar2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
 
         if (boarCloudAnimation != null)
         {
             boarCloudAnimation.gameObject.SetActive(false);
             chargingTimer = gameObject.GetComponent<Enemy>().attackRate;
+        }
+    }
+
+    void Update()
+    {
+        if (enemy == null)
+        {
+            enemy = gameObject.GetComponent<Enemy>();
+        }
+        if (playerCollider == null)
+        {
+            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
         }
     }
 

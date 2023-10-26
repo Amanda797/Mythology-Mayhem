@@ -180,6 +180,9 @@ public class SaveScene : MonoBehaviour
                     obj.transform.position = item.position;
                     obj.transform.localScale = item.scale;
                     obj.SetActive(item.isEnabled);
+                } else
+                {
+                    sceneObjects.objects.Remove(item);
                 }
             }
             

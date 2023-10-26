@@ -3,51 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Xml;
+using TMPro;
 
 public class PauseMenuUIController : MonoBehaviour
 {
-    private UIDocument _pauseMenu;
-    private VisualElement pauseMenuContainer;
-    [SerializeField] Sprite pauseBackground;
+    [SerializeField] GameObject pauseBackground;
+    [SerializeField] Sprite pauseSprite;
+    [SerializeField] TextMeshProUGUI menuTitle;
+    [SerializeField] GameObject returnButton;
 
-    [SerializeField] private VisualTreeAsset _pauseScreen;
-    [SerializeField] private VisualTreeAsset _optionsScreen;
-    [SerializeField] private VisualTreeAsset _creditsScreen;
-    [SerializeField] private VisualTreeAsset _helpScreen;
+    [Header("Help")]
+    [SerializeField] GameObject HelpContainer;
+    [SerializeField] GameObject HelpContent;
+    [SerializeField] GameObject HelpPrefab;
+    [SerializeField] HelpOption[] _help;
 
-    [SerializeField] private VisualElement _pauseScreenPrefab;
-    [SerializeField] private VisualElement _optionsScreenPrefab;
-    [SerializeField] private VisualElement _creditsScreenPrefab;
-    [SerializeField] private VisualElement _helpScreenPrefab;
-
-    [SerializeField] string creditsPath;
-    [SerializeField] string helpPath;
 
     private void OnEnable()
     {
-        _pauseMenu = GetComponent<UIDocument>();
-        pauseMenuContainer = _pauseMenu.rootVisualElement.Q("MenuContainer");
-        _pauseMenu.rootVisualElement.Q("PauseMenuBackground").style.backgroundImage = new StyleBackground(pauseBackground);
+        //Pause Background
+        pauseBackground.GetComponent<Image>().image = pauseSprite.texture;
 
-        //Find Menu UXMLs
-        _pauseScreen = Resources.Load<VisualTreeAsset>("UI Toolkit/Pause-UIBP");
-        _optionsScreen = Resources.Load<VisualTreeAsset>("UI Toolkit/Options-UIBP");
-        _creditsScreen = Resources.Load<VisualTreeAsset>("UI Toolkit/Credits-UIBP");
-        _helpScreen = Resources.Load<VisualTreeAsset>("UI Toolkit/Help-UIBP");
-
-        //Clone prefabs
-        _pauseScreenPrefab = _pauseScreen.CloneTree();
-        _optionsScreenPrefab = _optionsScreen.CloneTree();
-        _creditsScreenPrefab = _creditsScreen.CloneTree();
-        _helpScreenPrefab = _helpScreen.CloneTree();
+        //Help
+        foreach(HelpOption help in _help)
+        {
+            GameObject newPrefab = Instantiate(HelpPrefab, HelpContent.transform);
+            newPrefab.GetComponent<TextMeshProUGUI>().text = help.Description;
+            if(help.IsTitle)
+            {
+                newPrefab.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+            }
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //Start with pause screen options
-        pauseMenuContainer.Add(_pauseScreenPrefab);
+
     }
 
     
+
+    
+}
+
+[System.Serializable]
+public class HelpOption
+{
+    public bool IsTitle;
+    [TextArea(3,8)]
+    public string Description;
+}
+
+[System.Serializable]
+public class CreditOption
+{
+    public string Title;
+    public string Creditor;
 }
