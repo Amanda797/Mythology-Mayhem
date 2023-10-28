@@ -9,6 +9,33 @@ public class TriggerDetector : MonoBehaviour
     public Collider otherCollider3D;
     public Collider2D otherCollider2D;
 
+    public LayerMask enemyLayer;
+    public LayerMask companionLayer;
+
+    private void Start()
+    {
+        if (gameObject.GetComponent<Collider2D>())
+        {
+            for(int i = 1; i <= 31; i++)
+            {
+                if(i != enemyLayer)
+                {
+                    Physics2D.IgnoreLayerCollision(i, companionLayer);
+                }
+            }
+        }
+        else if (gameObject.GetComponent<Collider>())
+        {
+            for (int i = 1; i <= 31; i++)
+            {
+                if (i != enemyLayer)
+                {
+                    Physics.IgnoreLayerCollision(i, companionLayer);
+                }
+            }
+        }
+    }//end start
+
     #region 3D Triggers
 
     private void OnTriggerEnter(Collider other)

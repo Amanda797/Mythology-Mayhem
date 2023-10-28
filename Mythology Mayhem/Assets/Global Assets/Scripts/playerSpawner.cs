@@ -34,6 +34,9 @@ public class playerSpawner : MythologyMayhem
         if (overrideBool) 
         {
             spawnPointIndex = overrideIndex;
+        } else
+        {
+            spawnPointIndex = PlayerPrefs.GetInt("spawnPointIndex");
         }
 
         GameObject spawnPlayerContainer = null;

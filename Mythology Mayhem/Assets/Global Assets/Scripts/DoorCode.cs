@@ -7,6 +7,7 @@ public class DoorCode : MonoBehaviour
 {
     [SerializeField] private string nextLevel;
     [SerializeField] private GameObject lever;
+    [SerializeField] int nextSpawnIndex;
     public bool entered = false;
     public bool blocked = true;
     public bool doorOpen = false;
@@ -70,8 +71,26 @@ public class DoorCode : MonoBehaviour
             lever.GetComponent<TwoDLever>().SetCanOpen(true);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 3)
+        {
+            entered = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 3)
+        {
+            entered = false;
+        }
+    }
+
     public void LoadNextScene()
     {
+        PlayerPrefs.SetInt("spawnPointIndex", nextSpawnIndex);
         SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
     }
     public void OpenDoor()
