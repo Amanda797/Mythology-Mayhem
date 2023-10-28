@@ -723,6 +723,10 @@ PrefabInstance:
       propertyPath: nextLevel
       value: Labyrinth 3D
       objectReference: {fileID: 0}
+    - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
+      propertyPath: nextSpawnIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2874544876076593522, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: m_Name
       value: Door1
@@ -1039,7 +1043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &694201512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1242,7 @@ GameObject:
   - component: {fileID: 708189249}
   - component: {fileID: 708189251}
   m_Layer: 0
-  m_Name: Spwaner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1258,8 +1262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   spawnPoints:
-  - {fileID: 708189250}
-  playerContainer2D: {fileID: 0}
+  - {fileID: 904904429}
+  playerContainer2D: {fileID: 2899756347321618838, guid: dd6c0b85d5052cc43a41c1824cdb8eed, type: 3}
   playerContainer3D: {fileID: 0}
   PlayerPrefabs2D: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
   PlayerPrefabs3D: {fileID: 11400000, guid: d82fef90b43a5434eb45b0e846267d7e, type: 2}

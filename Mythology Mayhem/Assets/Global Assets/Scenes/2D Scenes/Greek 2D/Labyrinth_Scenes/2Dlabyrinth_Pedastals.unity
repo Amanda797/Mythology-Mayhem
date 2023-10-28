@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: nextLevel
       value: Athens
       objectReference: {fileID: 0}
+    - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
+      propertyPath: nextSpawnIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2874544876076593522, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: m_Name
       value: Athens Door
@@ -653,6 +657,10 @@ PrefabInstance:
     - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: nextLevel
       value: Labyrinth 3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
+      propertyPath: nextSpawnIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2874544876076593522, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: m_Name
@@ -1100,7 +1108,7 @@ GameObject:
   - component: {fileID: 708189249}
   - component: {fileID: 708189251}
   m_Layer: 0
-  m_Name: Spwaner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1119,8 +1127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  spwanPoints:
-  - {fileID: 1208276694}
+  spawnPoints:
+  - {fileID: 904904429}
+  playerContainer2D: {fileID: 2899756347321618838, guid: dd6c0b85d5052cc43a41c1824cdb8eed, type: 3}
+  playerContainer3D: {fileID: 0}
   PlayerPrefabs2D: {fileID: 11400000, guid: e3596d55a7f1ae145b43249728bb066b, type: 2}
   PlayerPrefabs3D: {fileID: 0}
   owlPrefab: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}

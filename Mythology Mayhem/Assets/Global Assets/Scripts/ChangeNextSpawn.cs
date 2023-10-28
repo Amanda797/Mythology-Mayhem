@@ -6,7 +6,7 @@ public class ChangeNextSpawn : MonoBehaviour
 {
     public void NextSpawn(int index)
     {
-        PlayerPrefs.SetInt("spwanPointIndex", index);
+        PlayerPrefs.SetInt("spawnPointIndex", index);
     }
     public void NextCharacter(int index)
     {
