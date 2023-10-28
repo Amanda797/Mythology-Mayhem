@@ -109,13 +109,19 @@ public class AegirControlScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (localGameManager.mainGameManager.currentScene == inScene && !startFight) 
+        if (localGameManager != null)
         {
-            startTimer -= Time.deltaTime;
-            if (startTimer <= 0) 
+            if (localGameManager.mainGameManager != null)
             {
-                startTimer = 0;
-                startFight = true;
+                if (localGameManager.mainGameManager.currentScene == inScene && !startFight)
+                {
+                    startTimer -= Time.deltaTime;
+                    if (startTimer <= 0)
+                    {
+                        startTimer = 0;
+                        startFight = true;
+                    }
+                }
             }
         }
         RunState();
