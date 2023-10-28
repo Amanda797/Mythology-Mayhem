@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class ForegroundManager : MonoBehaviour
 {
-    Transform[] fgObjects;
+    SpriteRenderer sr;
+    Color original;
+    [SerializeField] float opacity = .706f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        //fgObjects = GameObject.find    
+        sr = GetComponent<SpriteRenderer>();
+        original = sr.color;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.tag == "Player")
+        {
+            sr.color = new Color(original.r, original.g, original.b, opacity);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            sr.color = original;
+        }
     }
 }

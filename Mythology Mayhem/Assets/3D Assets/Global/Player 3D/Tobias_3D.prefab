@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  _health: 0
   components:
   - {fileID: 1234530420529872034}
   mainObject: {fileID: 1234530420529872037}
@@ -1176,6 +1177,12 @@ MonoBehaviour:
   time: 1
   gem: {fileID: 7685039813801856306}
   enemies: []
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  gemLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Dis: 10
   player: {fileID: 1234530420529872035}
   weaponSwitcher: {fileID: 7297297311931586162}
@@ -1392,6 +1399,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495159458cd793a4595fa15d9ccb2bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  anim: {fileID: 0}
+  attackTrigger: 
+  attack3D: {fileID: 0}
+  hammerDamage: 20
+  throwForce: 300
+  ThorHammer2D: {fileID: 0}
+  ThorHammer3D: {fileID: 0}
+  hammerTimer: 15
 --- !u!1001 &7556068099762133968
 PrefabInstance:
   m_ObjectHideFlags: 0
