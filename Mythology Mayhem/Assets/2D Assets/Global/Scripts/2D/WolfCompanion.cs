@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
-public class WolfCompanion : MonoBehaviour
+public class WolfCompanion : MythologyMayhem
 {
+    [SerializeField] Scene thisScene;
+
+
+    public Dimension companionDimension;
+
     [SerializeField] public GameObject player2D;
     [SerializeField] public GameObject player3D;
 
@@ -12,6 +18,7 @@ public class WolfCompanion : MonoBehaviour
     Rigidbody2D rb2D;
     NavMeshAgent agent;
     Animator anim;
+    [SerializeField] string attackTriggerName;
 
     public float speed = 9f;
     public float attackDamage = 5f;
@@ -29,24 +36,40 @@ public class WolfCompanion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        thisScene = SceneManager.GetActiveScene();
 
         GameObject[] _players = GameObject.FindGameObjectsWithTag("Player");
 
-        foreach(GameObject _player in _players)
+        if (companionDimension == Dimension.TwoD)
         {
-            if (_player != null)
-            {
-                if (gameObject.GetComponent<BoxCollider2D>())
+            int i = 0;
+
+            do {
+                if(_players[i].scene == this.gameObject.scene)
                 {
-                    player2D = _player;
+                    player2D = _players[i];
+                    Debug.Log("Found player. Scene: " + this.gameObject.scene.name);
                 }
-                else if (gameObject.GetComponent<BoxCollider>())
-                {
-                    player3D = _player;
-                }
+                i++;
             }
-        }        
+            while (i < _players.Length || player2D == null);
+        } else
+        {
+            int i = 0;
+
+            do
+            {
+                if (_players[i].scene == this.gameObject.scene)
+                {
+                    player3D = _players[i];
+                    Debug.Log("Found player. Scene: " + this.gameObject.scene.name);
+                }
+                i++;
+            }
+            while (i < _players.Length || player3D == null);
+        }
+
+        anim = gameObject.GetComponent<Animator>();
     }//end start
 
     // Update is called once per frame
@@ -100,17 +123,30 @@ public class WolfCompanion : MonoBehaviour
 
         if (attackTrigger.triggered)
         {
-            if(player2D != null && attackTrigger.otherCollider2D.tag != "Player")
+            GameObject enemy = attackTrigger.otherCollider2D.gameObject;
+
+            if (player2D != null && enemy.tag == "Enemy")
             {
-                Attack(attackTrigger.otherCollider2D.gameObject);
+                if(Vector2.Distance(enemy.transform.position, gameObject.transform.position) < 3f)
+                {
+                    Attack(enemy);
+                } else
+                {
+                    Vector2 xOnlyTargetPosition = new Vector2(enemy.transform.position.x, gameObject.transform.position.y);
+                    gameObject.GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
+                }
             } 
             else if (player3D != null && attackTrigger.otherCollider3D.tag != "Player")
             {
-                Attack(attackTrigger.otherCollider3D.gameObject);
-            }
-            else
-            {
-                Debug.LogWarning("Companion Dimension Type Inconclusive; no attack made.");
+                if (Vector3.Distance(enemy.transform.position, gameObject.transform.position) < 2f)
+                {
+                    Attack(enemy);
+                }
+                else
+                {
+                    Vector3 xOnlyTargetPosition = new Vector3(enemy.transform.position.x, gameObject.transform.position.y, enemy.transform.position.z);
+                    gameObject.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
+                }
             }
         }
         #endregion
@@ -121,6 +157,7 @@ public class WolfCompanion : MonoBehaviour
     {
         if(enemy.tag == "Enemy" && enemy.GetComponent<Health>())
         {
+            anim.SetTrigger(attackTriggerName);
             enemy.GetComponent<Health>().TakeDamage(attackDamage);
             StartCoroutine(AttackRate(attackTimer));
         }
