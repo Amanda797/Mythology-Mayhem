@@ -76,14 +76,18 @@ public class Health : MonoBehaviour
 
     public void Death() {
         if(GetHealth() <= 0 && Life != -1000) {
+            //Lock Death() from being called again
             Life = -1000;
 
-            if(gameObject.tag == "Enemy")
+            //Trigger Death sounds and animations
+            if (deathSound != null)
+                deathSound.Play();
+            if (anim != null)
+                anim.SetTrigger(deathTrigger);
+
+            if (gameObject.tag == "Enemy")
             {
-                if (deathSound != null)
-                    deathSound.Play();
-                if (anim != null)
-                    anim.SetTrigger(deathTrigger);
+                //Make rigidbody static
                 if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
                 {
                     gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
@@ -92,10 +96,8 @@ public class Health : MonoBehaviour
                 {
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
-            }     
-            foreach (Behaviour component in components) {
-                component.enabled = false;
             }
+
             StartCoroutine(DeathTimer(3f));
         }//check that health is really less than 0 when called        
     }//end death
@@ -125,7 +127,13 @@ public class Health : MonoBehaviour
     }//end death
 
     public IEnumerator DeathTimer(float time) {
+        foreach(Behaviour b in components)
+        {
+            b.enabled = false;
+        }
+
         yield return new WaitForSeconds(time);
+
         if(rewardObject != null)
         {
             GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);

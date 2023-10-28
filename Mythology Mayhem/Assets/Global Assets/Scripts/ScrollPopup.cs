@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScrollPopup : MonoBehaviour
 {
     public KeyCode key;
-    public float activeDistance;
+    public float activeDistance = 6f;
     public float hoverDistance;
     float hover;
     public GameObject popup;
+    public GameObject textMeshObject;
     public GameObject pressText;
     public GameObject supriseObject;
     bool isPopupActive = false;
     GameObject player;
     bool surpriseSpawned = false;
+    [TextArea(4, 9)]
+    public string scrollText;
 
     void Start()
     {
@@ -63,6 +67,7 @@ public class ScrollPopup : MonoBehaviour
     }
     public void ShowPopup()
     {
+        textMeshObject.GetComponent<TMP_Text>().text = scrollText;
         popup.SetActive(true);
         hover = 0;
         Time.timeScale = 0;

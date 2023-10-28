@@ -14,6 +14,8 @@ public class VisionControl : MythologyMayhem
     GameObject[] objs;
     List<GameObject> gems = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
+    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] LayerMask gemLayer;
     public float Dis;
     public Transform player;
 
@@ -32,7 +34,7 @@ public class VisionControl : MythologyMayhem
         
         //gem = GameObject.FindGameObjectsWithTag("Gem");
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-        
+
     }
     void Update()
     {
