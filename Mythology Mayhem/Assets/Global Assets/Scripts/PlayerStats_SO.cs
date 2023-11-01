@@ -15,6 +15,9 @@ public class PlayerStats_SO : ScriptableObject
     [SerializeField] private float _nextAttackTime;
     [SerializeField] private bool _canAttack;
 
+    [SerializeField] private float _msh;
+    [SerializeField] private float _csh;
+
     //Properties
     [SerializeField] public float MaxHealth { 
         get {
@@ -31,6 +34,28 @@ public class PlayerStats_SO : ScriptableObject
         set {
             _ch = value;
         } 
+    }
+    [SerializeField] public float MaxShipHealth
+    {
+        get
+        {
+            return _msh;
+        }
+        set
+        {
+            _msh = value;
+        }
+    }
+    [SerializeField] public float CurrShipHealth
+    {
+        get
+        {
+            return _csh;
+        }
+        set
+        {
+            _csh = value;
+        }
     }
     [SerializeField] public float AttackDamage { 
         get {

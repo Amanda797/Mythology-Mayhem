@@ -11,7 +11,6 @@ public class Fates2D : MonoBehaviour
     [Range(0,5)]
     [SerializeField] float speed = .6f;
     float flipSensitivity = 1f;
-    [SerializeField] float patrolDistance = 4f;
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
