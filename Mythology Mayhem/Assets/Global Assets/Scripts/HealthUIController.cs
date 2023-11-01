@@ -13,6 +13,13 @@ public class HealthUIController : MonoBehaviour
     [SerializeField] private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
 
+    private VisualElement _shipPanel;
+    [SerializeField] private VisualTreeAsset _shipUXML;
+    [SerializeField] private VisualElement _shipPrefab;
+    [SerializeField] private List<Sprite> _shipModes;
+    public bool useShipHealth;
+
+
     //External Components
     [Header("External Components")]
     [SerializeField] public PlayerStats_SO ps;
@@ -40,20 +47,67 @@ public class HealthUIController : MonoBehaviour
             UpdateHealthBarCount(PlayerMaxHealth);
         }
     }
+    public float ShipCurrHealth
+    {
+        get
+        {
+            return ps.CurrShipHealth;
+        }
+        set
+        {
+            ps.CurrShipHealth = Mathf.Clamp(value, 0, ShipMaxHealth);
+            SetShipHealthBar(ShipCurrHealth);
+            UpdateShipHealthBarCount(ShipMaxHealth);
+        }
+    }
+
+    public float ShipMaxHealth
+    {
+        get
+        {
+            return ps.MaxShipHealth;
+        }
+        set
+        {
+            ps.MaxShipHealth = Mathf.Max(0, value);
+            UpdateShipHealthBarCount(ShipMaxHealth);
+        }
+    }
 
     void OnEnable() {
         _doc = GetComponent<UIDocument>();
-        _heartPanel = _doc.rootVisualElement.Q("PlayerHealth");
-        //Works in Build with a Resource Folder in Assets
-        _heartUXML = Resources.Load<VisualTreeAsset>("UI Toolkit/Heart-UIBP");
-        _heartPrefab = _heartUXML.CloneTree("Heart");
+        if (!useShipHealth)
+        {
+            _heartPanel = _doc.rootVisualElement.Q("PlayerHealth");
+            //Works in Build with a Resource Folder in Assets
+            _heartUXML = Resources.Load<VisualTreeAsset>("UI Toolkit/Heart-UIBP");
+            _heartPrefab = _heartUXML.CloneTree("Heart");
 
-        _heartPanel.Add(_heartPrefab);
+            _heartPanel.Add(_heartPrefab);
+
+        }
+        else
+        {
+            _shipPanel = _doc.rootVisualElement.Q("PlayerHealth");
+
+            _shipUXML = Resources.Load<VisualTreeAsset>("UI Toolkit/ShipHealth-UIBP");
+            _shipPrefab = _shipUXML.CloneTree("Ship");
+            _shipPanel.Add(_shipPrefab);
+        }
     }
 
-    void Start() {
-        UpdateHealthBarCount(PlayerMaxHealth);
-        SetHealthBar(PlayerCurrHealth);
+    void Start()
+    {
+        if (!useShipHealth)
+        {
+            UpdateHealthBarCount(PlayerMaxHealth);
+            SetHealthBar(PlayerCurrHealth);
+        }
+        else
+        {
+            UpdateShipHealthBarCount(ShipMaxHealth);
+            SetShipHealthBar(ShipCurrHealth);
+        }
     }
 
     private void SetHealthBar(float health) {
@@ -112,5 +166,64 @@ public class HealthUIController : MonoBehaviour
             }
         } 
     }// end update health bar count
+
+    private void SetShipHealthBar(float health)
+    {
+        for (int i = 0; i < _shipPanel.childCount; i++)
+        {
+            float remainderHealth = Mathf.Clamp(health - (i * 5), 0, 5);
+            print(remainderHealth);
+            switch (remainderHealth)
+            {
+                case 0:
+                    _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[5]);
+                    break;
+                case 1:
+                    _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[4]);
+                    break;
+                case 2:
+                    _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[3]);
+                    break;
+                case 3:
+                    _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[2]);
+                    break;
+                case 4:
+                    _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[1]);
+                    break;
+                case 5:
+                    _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[0]);
+                    break;
+            };
+        }
+    }
+
+    public void UpdateShipHealthBarCount(float maxHealth)
+    {
+
+        maxHealth = Mathf.CeilToInt(maxHealth / 4.0f);
+        print(maxHealth);
+        int shipCount = _shipPanel.childCount;
+
+        if (maxHealth > shipCount)
+        {
+            float shipsToAdd = maxHealth - shipCount;
+
+            for (int i = 0; i < shipsToAdd; i++)
+            {
+                _shipPanel = _shipUXML.CloneTree("Ship");
+                _shipPanel.Add(_shipPrefab);
+            }
+            SetShipHealthBar(ShipMaxHealth);
+        }
+        else if (maxHealth < shipCount)
+        {
+            float shipsToRemove = shipCount - maxHealth;
+            for (int i = 0; i < shipsToRemove; i++)
+            {
+                int lastShipIndex = _shipPanel.childCount - 1;
+                _shipPanel.Remove(_shipPanel.ElementAt(lastShipIndex));
+            }
+        }
+    }
 
 }
