@@ -73,13 +73,13 @@ public class Mouse2D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (attack.IsTouching(playerCollider) && enemy.currentStatePosition == Enemy.StatePosition.Current)
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
         }
         else
         // Continue M2T
-        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance && enemy.currentStatePosition == Enemy.StatePosition.Current)
         {
             //Close enough to Idle
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Idle,0));  

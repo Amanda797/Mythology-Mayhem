@@ -260,7 +260,7 @@ Animator:
   m_GameObject: {fileID: 5350388109061472975}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0b2d4328acfa8d8448c4daccb35f6cd0, type: 2}
+  m_Controller: {fileID: 22100000, guid: 0fcce647d8519334d9db18b157d18072, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!50 &1468452768109577482
@@ -598,7 +599,7 @@ MonoBehaviour:
   body: {fileID: 5350388109061472975}
   attack: {fileID: 5350388108874367726}
   playerCollider: {fileID: 0}
-  attackBool: IsAttacking
+  attackTrigger: IsAttacking
   meleeDistance: 4
   alertTimer: 3
 --- !u!114 &6804006675513583052
@@ -614,12 +615,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 6
+  _health: 0
   components:
   - {fileID: 3691295615040856826}
   - {fileID: 689107250099642178}
   - {fileID: 7388126929586045899}
-  - {fileID: 5350388109061472970}
-  - {fileID: 7388126929586045899}
+  - {fileID: 3375853204961621648}
   mainObject: {fileID: 5350388109061472975}
   rewardObject: {fileID: 0}
   hurtSound: {fileID: 1608694172038668691}
