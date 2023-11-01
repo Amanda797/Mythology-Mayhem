@@ -912,6 +912,10 @@ PrefabInstance:
       propertyPath: nextLevel
       value: 2D cavern
       objectReference: {fileID: 0}
+    - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
+      propertyPath: nextSpawnIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2874544876076593522, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: m_Name
       value: Door1
@@ -1355,8 +1359,9 @@ GameObject:
   - component: {fileID: 708189250}
   - component: {fileID: 708189249}
   - component: {fileID: 708189251}
+  - component: {fileID: 708189252}
   m_Layer: 0
-  m_Name: Spwaner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1421,6 +1426,18 @@ MonoBehaviour:
     item: {fileID: 5263410413950716904, guid: 70d2eef0506087c44bab88e88e57568e, type: 3}
   itemSpawnPoint: {fileID: 6478159597610387670, guid: a12d6a78a50660148b663febb14441ae, type: 3}
   ResstPref: 0
+--- !u!114 &708189252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708189248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f52a87fdae9cf4c8c29c688afb5b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &719968869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7692487075164556626, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -1590,7 +1607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904904428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -1, z: 0}
+  m_LocalPosition: {x: 2.5, y: 2.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
