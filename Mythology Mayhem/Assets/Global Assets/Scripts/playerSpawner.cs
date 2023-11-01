@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
+
+[DefaultExecutionOrder(-10)]
 public class playerSpawner : MythologyMayhem
 {
     public Dimension type;
@@ -36,7 +38,13 @@ public class playerSpawner : MythologyMayhem
             spawnPointIndex = overrideIndex;
         } else
         {
-            spawnPointIndex = PlayerPrefs.GetInt("spawnPointIndex");
+            if(PlayerPrefs.GetInt("spawnPointIndex") >= spawnPoints.Count)
+            {
+                spawnPointIndex = 0;
+            } else
+            {
+                spawnPointIndex = PlayerPrefs.GetInt("spawnPointIndex");
+            }
         }
 
         GameObject spawnPlayerContainer = null;

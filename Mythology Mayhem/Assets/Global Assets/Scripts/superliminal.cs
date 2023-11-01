@@ -231,8 +231,11 @@ public class superliminal : MonoBehaviour
             if(targetScale.x * originalScale > 60f)
             {
                 tarScale = new Vector3(60f, 60f, 60f);
+            } else if (targetScale.x * originalScale < 2f)
+            {
+                tarScale = new Vector3(2f, 2f, 2f);
             }
- 
+
             // Set the scale for the target objectm, multiplied by the original scale
             target.localScale = tarScale;
         }
