@@ -17,7 +17,6 @@ public class Cyclops3D : MonoBehaviour
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
-    float alertTime = 0f;
 
     [Header("Range Attack")]
     [SerializeField] GameObject snowballPrefab;
@@ -51,7 +50,7 @@ public class Cyclops3D : MonoBehaviour
 
         if (isTouching)
         {
-            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, alertTimer));
         }
         else
         // Continue Idle

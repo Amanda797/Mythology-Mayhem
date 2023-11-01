@@ -19,8 +19,6 @@ public class DwarfWizard2D : MonoBehaviour
     [SerializeField] string[] meleeAttackTriggers;
     [SerializeField] GameObject[] familiars;
     [SerializeField] float meleeDistance = 10f;
-    [SerializeField] float alertTimer = 3f;
-    float alertTime = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -88,7 +86,7 @@ public class DwarfWizard2D : MonoBehaviour
 
     public void SummonFamiliar()
     {
-        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.player.transform.position) < patrolDistance && enemy.CanAttack)
+        if (Vector3.Distance(enemy.gameObject.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
             GameObject summonedFamiliar;
 

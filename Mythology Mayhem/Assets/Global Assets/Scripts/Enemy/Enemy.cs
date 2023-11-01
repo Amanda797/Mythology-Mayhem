@@ -59,7 +59,9 @@ public class Enemy : MythologyMayhem
 
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
-        EnterState(currentState);
+        StartCoroutine(SwitchStates(currentState,0));
+
+        _localGameManager = GameObject.FindGameObjectWithTag("LocalGameManager").GetComponent<LocalGameManager>();
 
         if (player == null)
         {
@@ -68,6 +70,9 @@ public class Enemy : MythologyMayhem
                 if (_localGameManager.player != null)
                 {
                     player = _localGameManager.player.gameObject;
+                } else
+                {
+                    player = GameObject.FindGameObjectWithTag("Player");
                 }
             }
             else
@@ -76,44 +81,48 @@ public class Enemy : MythologyMayhem
             }
 
         }
-    }//end Awake
+    }//end Start
 
     void Update()
-    {
-        
-
+    { 
         //Check for Death
 
-        if (health.GetHealth() <= 0)
+        if (health.GetHealth() <= 0 && currentState != EnemyStates.Dead)
         {
             StartCoroutine(SwitchStates(EnemyStates.Dead,0));
         }
 
-        switch (currentState)
+        // If not transitioning states, invoke state action
+
+        if(currentStatePosition == StatePosition.Current)
         {
-            case EnemyStates.Idle:
-                {
-                    IdleDelegate.Invoke();
-                    break;
-                }
-            case EnemyStates.Patrol:
-                {
-                    PatrolDelegate.Invoke();
-                    break;
-                }
-            case EnemyStates.Attack:
-                {
-                    AttackDelegate.Invoke();
-                    break;
-                }
-            case EnemyStates.Dead:
-                {
-                    DeadDelegate.Invoke();
-                    break;
-                }
-            default: { break; }
-        }
-    }
+            switch (currentState)
+            {
+                case EnemyStates.Idle:
+                    {
+                        IdleDelegate.Invoke();
+                        break;
+                    }
+                case EnemyStates.Patrol:
+                    {
+                        PatrolDelegate.Invoke();
+                        break;
+                    }
+                case EnemyStates.Attack:
+                    {
+                        AttackDelegate.Invoke();
+                        break;
+                    }
+                case EnemyStates.Dead:
+                    {
+                        DeadDelegate.Invoke();
+                        currentStatePosition = StatePosition.Exit;
+                        break;
+                    }
+                default: { break; }
+            }
+        }        
+    }//end update
 
     public IEnumerator SwitchStates(EnemyStates newState, float delay)
     {
@@ -121,16 +130,18 @@ public class Enemy : MythologyMayhem
         yield return new WaitForSeconds(delay);
         currentState = newState;
         EnterState(currentState);
+        currentStatePosition = StatePosition.Current;
     }//switch states
 
     public void EnterState(EnemyStates newState)
     {
+        currentStatePosition = StatePosition.Entry;
+
         switch (newState)
         {
             case EnemyStates.Idle:
                 {
                     idleTimer = idleTimerMax;
-                    currentStatePosition = StatePosition.Current;
                     break;
                 }
             case EnemyStates.Patrol:
@@ -155,8 +166,6 @@ public class Enemy : MythologyMayhem
                     {
                         agent.speed = walkSpeed;
                     }
-
-                    currentStatePosition = StatePosition.Current;
                     break;
                 }
             case EnemyStates.Attack:
@@ -169,13 +178,10 @@ public class Enemy : MythologyMayhem
                     {
                         agent.speed = runSpeed;
                     }
-
-                    currentStatePosition = StatePosition.Current;
                     break;
                 }
             case EnemyStates.Dead:
                 {
-                    currentStatePosition = StatePosition.Current;
                     break;
                 }
             default: { break; }
@@ -184,6 +190,8 @@ public class Enemy : MythologyMayhem
 
     public void ExitState(EnemyStates oldState)
     {
+        currentStatePosition = StatePosition.Exit;
+
         switch (oldState)
         {
             case EnemyStates.Idle:
@@ -208,7 +216,9 @@ public class Enemy : MythologyMayhem
         }
     }
 
-    public IEnumerator AttackRate() {
+    public IEnumerator AttackRate()
+    {
+        canAttack = false;
         yield return new WaitForSeconds(attackRate);
         canAttack = true;
     }

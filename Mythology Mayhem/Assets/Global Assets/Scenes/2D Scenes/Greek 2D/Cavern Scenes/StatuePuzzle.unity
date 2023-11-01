@@ -7309,7 +7309,7 @@ GameObject:
   - component: {fileID: 2016772615}
   - component: {fileID: 2016772618}
   - component: {fileID: 2016772617}
-  - component: {fileID: 2016772616}
+  - component: {fileID: 2016772619}
   m_Layer: 0
   m_Name: Door to Statue Puzzle
   m_TagString: Untagged
@@ -7332,21 +7332,6 @@ Transform:
   m_Father: {fileID: 1976390999}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2016772616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016772614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6487610aa1710054fbff284366c5d70b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: 2D cavern
-  distance: 10
-  player: {fileID: 0}
 --- !u!61 &2016772617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7425,6 +7410,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2016772619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016772614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d77282dc506b0441b541c45dddcef22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevel: 2D cavern
+  lever: {fileID: 0}
+  nextSpawnIndex: 2
+  entered: 0
+  blocked: 0
+  doorOpen: 0
 --- !u!1 &2017950798
 GameObject:
   m_ObjectHideFlags: 0
