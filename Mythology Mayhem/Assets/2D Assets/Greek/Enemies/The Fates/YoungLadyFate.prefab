@@ -291,6 +291,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!50 &2578502097357954854
@@ -493,11 +494,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolBool: IsPatrolling
   speed: 0.6
-  patrolDistance: 10
   body: {fileID: 2578502097357954850}
   attack: {fileID: 2578502095996227105}
   playerCollider: {fileID: 0}
   attackBool: IsAttacking
+  attackLock: AttackMode
   meleeDistance: 3
   alertTimer: 3
 --- !u!114 &6231685702661598096
@@ -513,11 +514,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 200
+  _health: 0
   components:
   - {fileID: 8062461792910637000}
   - {fileID: 2578502097357954853}
   - {fileID: 2578502097357954855}
-  - {fileID: 2578502097357954858}
   - {fileID: 2578502097357954856}
   mainObject: {fileID: 2578502097357954850}
   rewardObject: {fileID: 0}

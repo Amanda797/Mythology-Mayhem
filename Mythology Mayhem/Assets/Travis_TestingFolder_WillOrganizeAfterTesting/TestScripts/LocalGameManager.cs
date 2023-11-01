@@ -109,7 +109,7 @@ public class LocalGameManager : MythologyMayhem
     public void AddPlayerLocalAndGlobal(PlayerAttach _player)
     {
         player = _player;
-        if (useCustom)
+        if (useCustom && player.vCam != null)
         {
             if (!aimAtTarget)
             {
