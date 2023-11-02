@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 756750aa0489750498db331458869749, type: 2}
+--- !u!1 &46977448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1234530419785843943, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
+  m_PrefabInstance: {fileID: 488568094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &60213162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2137,9 +2142,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9901487071122050, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 46977448}
+    - target: {fileID: 9901487071122050, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
       propertyPath: reflectionVFX
       value: 
       objectReference: {fileID: 2044425114}
+    - target: {fileID: 9901487071122050, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
+      propertyPath: weaponSwitcher
+      value: 
+      objectReference: {fileID: 1880071030}
     - target: {fileID: 9901487071122050, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
       propertyPath: coolDownDuration
       value: 1
@@ -3773,6 +3786,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1512473369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1503170332708481224, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
+  m_PrefabInstance: {fileID: 488568094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1581375503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4262,6 +4280,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1234530420529872035, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
   m_PrefabInstance: {fileID: 488568094}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1880071030 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7297297311931586162, guid: 2a81c0b22c41b814fafe202fdbe24db1, type: 3}
+  m_PrefabInstance: {fileID: 488568094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0349b484ee6af409f9610a14357ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1946450138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4603,6 +4632,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2502243245861701751, guid: c5ed513a168bb554a9615fa77d6b24c3, type: 3}
+      propertyPath: mirror
+      value: 
+      objectReference: {fileID: 1512473369}
     - target: {fileID: 2502243245861701751, guid: c5ed513a168bb554a9615fa77d6b24c3, type: 3}
       propertyPath: MainPlatform
       value: 
