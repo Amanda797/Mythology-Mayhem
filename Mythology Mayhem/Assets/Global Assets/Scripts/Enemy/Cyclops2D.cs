@@ -20,7 +20,6 @@ public class Cyclops2D : MonoBehaviour
     [SerializeField] string attackBool;
     [SerializeField] float meleeDistance = 4f;
     [SerializeField] float alertTimer = 3f;
-    float alertTime = 0f;
 
     [Header("Range Attack")]
     [SerializeField] GameObject snowballPrefab;

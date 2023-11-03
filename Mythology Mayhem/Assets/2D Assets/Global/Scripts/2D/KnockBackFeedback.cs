@@ -17,13 +17,19 @@ public class KnockBackFeedback : MonoBehaviour
 
     public void PlayerFeedback(GameObject sender)
     {
-        StopAllCoroutines();
-        OnBegin?.Invoke();
-        Vector2 direction = (transform.position - sender.transform.position).normalized;
-        //direction = new Vector2(0,1f) + direction;
-        rb2d.AddForce(direction*strength, ForceMode2D.Impulse);
-        StartCoroutine(Reset());
-        StartCoroutine(ResetY());
+        if(GetComponent<Health>())
+        {
+            if(GetComponent<Health>().GetHealth() > 0)
+            {
+                StopAllCoroutines();
+                OnBegin?.Invoke();
+                Vector2 direction = (transform.position - sender.transform.position).normalized;
+                //direction = new Vector2(0,1f) + direction;
+                rb2d.AddForce(direction*strength, ForceMode2D.Impulse);
+                StartCoroutine(Reset());
+                StartCoroutine(ResetY());
+            }
+        }        
     }
 
     private IEnumerator Reset() 
