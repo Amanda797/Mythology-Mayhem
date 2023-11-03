@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     #region Unity Methods
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 

@@ -51,15 +51,17 @@ namespace UnityStandardAssets.ImageEffects
                     if (textureImporter.mipmapEnabled == true) {
                         doImport = true;
                     }
-                    if (textureImporter.textureFormat != TextureImporterFormat.AutomaticTruecolor) {
-                        doImport = true;
-                    }
+                    //deprecated
+                    //if (textureImporter.textureFormat != TextureImporterFormat.AutomaticTruecolor) {
+                    //    doImport = true;
+                    //}
 
                     if (doImport)
                     {
                         textureImporter.isReadable = true;
                         textureImporter.mipmapEnabled = false;
-                        textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
+                        //obsolete
+                        //textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
                         AssetDatabase.ImportAsset (path, ImportAssetOptions.ForceUpdate);
                         //tex = AssetDatabase.LoadMainAssetAtPath(path);
                     }

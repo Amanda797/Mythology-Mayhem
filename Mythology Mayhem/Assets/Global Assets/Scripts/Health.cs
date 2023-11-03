@@ -23,6 +23,10 @@ public class Health : MonoBehaviour
     [SerializeField] private string deathTrigger;
     [SerializeField] private string healTrigger;
 
+    public bool _attacked;
+    [HideInInspector]
+    public float _defenseTimer = 0f;
+
     // --------------------------
     // ***METHODS***
     // --------------------------
@@ -30,13 +34,6 @@ public class Health : MonoBehaviour
     {
         Life = MaxHealth;
     }// end start
-
-    void FixedUpdate() {
-        //Death Check
-        //if(GetHealth() <= 0) {
-        //    SetHealth(0);
-        //}
-    }//end fixed update
 
     public float Life
     {
@@ -53,18 +50,34 @@ public class Health : MonoBehaviour
     }//end get health
 
     public void TakeDamage(float d) {
-        if(gameObject.tag == "Enemy") 
+        //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
+        if(!_attacked)
         {
-            if (hurtSound != null)
+            if (gameObject.tag == "Enemy")
             {
-                hurtSound.Play();
-                Debug.Log("Damaged");
+                if (hurtSound != null)
+                {
+                    hurtSound.Play();
+                }
+
+                if (anim != null)
+                {
+                    anim.SetTrigger(hurtTrigger);
+                }
+
+                StartCoroutine(Attacked());
             }
-            if(anim != null)
-                anim.SetTrigger(hurtTrigger);
-        }
-        Life -= d;
+
+            Life -= d;
+        }        
     }//end take damage
+
+    IEnumerator Attacked()
+    {
+        _attacked = true;
+        yield return new WaitForSeconds(_defenseTimer);
+        _attacked = false;
+    }
 
     public void Heal(float h) {
         if (healSound != null)
@@ -130,6 +143,11 @@ public class Health : MonoBehaviour
         foreach(Behaviour b in components)
         {
             b.enabled = false;
+        }
+
+        if(GetComponent<Collider>())
+        {
+            GetComponent<Collider>().enabled = false;
         }
 
         yield return new WaitForSeconds(time);

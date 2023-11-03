@@ -21,7 +21,7 @@ public class EnemyAI3D : MonoBehaviour
     [SerializeField] protected Animator anim;
     [SerializeField] protected string walkingBool;
     [SerializeField] protected string runningBool;
-    [SerializeField] protected string attackTrigger;
+    [SerializeField] protected string[] attackTriggers;
     [SerializeField] protected AudioSource attackSound;
 
     [Header("Movement")]
@@ -60,10 +60,6 @@ public class EnemyAI3D : MonoBehaviour
     void Awake() {
         this.fixedDeltaTime = Time.fixedDeltaTime;
         Time.timeScale = 1.0f;
-
-        //IdleStateSOInstance = Instantiate(IdleStateSOBase);
-        //PatrolStateSOInstance = Instantiate(PatrolStateSOBase);
-        //AttackStateSOInstance = Instantiate(AttackStateSOBase);
     }
 
     // Start is called before the first frame update
@@ -72,52 +68,23 @@ public class EnemyAI3D : MonoBehaviour
         attackSound = gameObject.GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         Move();
-
-        //IdleStateSOInstance = Initialize3D(this, gameObject);
-        //PatrolStateSOInstance = Initialize3D(this, gameObject);
-        //AttackStateSOInstance = Initialize3D(this, gameObject);
     }//end start
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
-        CalculateAIState();
-        //Adjust the current AI state
-        switch(currAIState) 
+        if(currAIState != AIState.Death)
         {
-            case AIState.Idle: 
-            {
-                Idle();
-                break;
-            }
-            case AIState.Walking: 
-            {
-                Walking();
-                break;
-            }
-            case AIState.Attack: 
-            {
-                Attack();
-                break;
-            }
-            case AIState.Death: 
-            {
-                Death();
-                break;
-            }
-            default: 
-            {
-                print("Calculate AI STate: Defaulted");
-                Idle();
-                break;
-            }
-        }//end switch statement
+            CalculateAIState();
+        }
+        
         transform.LookAt(agent.steeringTarget);        
     }//end update
 
     protected virtual void CalculateAIState() {
+        #region Calculate AI State
         // Determine death state first
-        if(this.GetComponent<Health>().GetHealth() <= 0) {
+        if (this.GetComponent<Health>().GetHealth() <= 0) {
             currAIState = AIState.Death;
         } else 
         // Determine attack state	
@@ -132,6 +99,41 @@ public class EnemyAI3D : MonoBehaviour
         {
             currAIState = AIState.Idle;
         }
+        #endregion
+
+        #region Adjust Current AI State
+        //Adjust the current AI state
+        switch (currAIState)
+        {
+            case AIState.Idle:
+                {
+                    Idle();
+                    break;
+                }
+            case AIState.Walking:
+                {
+                    Walking();
+                    break;
+                }
+            case AIState.Attack:
+                {
+                    Attack();
+                    break;
+                }
+            case AIState.Death:
+                {
+                    Death();
+                    break;
+                }
+            default:
+                {
+                    print("CalculateAIState(): Defaulted");
+                    Idle();
+                    break;
+                }
+        }//end switch statement
+        #endregion
+
     }//end calculate ai state
 
     public virtual void Idle() {
@@ -172,17 +174,17 @@ public class EnemyAI3D : MonoBehaviour
         if(player != null)
         {
             //Attack target once near
-            Debug.Log(Vector3.Distance(transform.position, player.transform.position).ToString());
-            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 3f) {
-                Debug.Log("Attacking Player!");
+            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < 2f) {
                 if(anim != null) {
-                   anim.SetBool(runningBool, false);
+                    anim.SetBool(runningBool, false);
                     anim.SetBool(walkingBool, false); 
                 }
                 
                 if(attackTimer >= attackDuration) {
                     if(anim != null)
-                        anim.SetTrigger(attackTrigger);
+                    {
+                        anim.SetTrigger(attackTriggers[Random.Range(0,attackTriggers.Length)]);
+                    }
                     //Play Sound
                     attackSound.Play();
                     player.gameObject.GetComponent<FPSHealth>().TakeDamage(attackDamage);
@@ -238,7 +240,6 @@ public class EnemyAI3D : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "Player" && !isAttacking) {
-            Debug.Log("Hit Player!");
             isAttacking = true;
             target = col.gameObject.transform.position;
             player = col;        
@@ -247,7 +248,6 @@ public class EnemyAI3D : MonoBehaviour
 
     public virtual void OnTriggerExit(Collider col) {
         if(col.gameObject.tag == "Player" && isAttacking) {
-            Debug.Log("No Player!");
             isAttacking = false;
             player = null;
         }

@@ -16,8 +16,6 @@ public class Wizard3D : MonoBehaviour
     [SerializeField] Collider attack;
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = 10f;
-    [SerializeField] float alertTimer = 3f;
-    float alertTime = 0f;
 
     [Header("Range Attack")]
     [SerializeField] GameObject snowballPrefab;
