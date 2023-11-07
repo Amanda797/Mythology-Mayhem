@@ -929,6 +929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: 
   lever: {fileID: 0}
+  nextSpawnIndex: 0
   entered: 0
   blocked: 1
   doorOpen: 0
@@ -1114,6 +1115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPerson Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8825841406787374846, guid: b7196914d7be02248b264656e8613db0, type: 3}
+      propertyPath: playerMovement3D
+      value: 
+      objectReference: {fileID: 1566858735}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7196914d7be02248b264656e8613db0, type: 3}
 --- !u!4 &518174984 stripped
@@ -1804,6 +1809,17 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!114 &1566858735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 289352684015478265, guid: b7196914d7be02248b264656e8613db0, type: 3}
+  m_PrefabInstance: {fileID: 493422072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af333f57ce580034291ab1744fd53801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1841082680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,6 +2006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: 3DMedusaCave
   lever: {fileID: 0}
+  nextSpawnIndex: 0
   entered: 0
   blocked: 0
   doorOpen: 0
