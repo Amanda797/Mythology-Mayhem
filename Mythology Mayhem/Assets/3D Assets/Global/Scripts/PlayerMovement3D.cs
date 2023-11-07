@@ -71,6 +71,9 @@ public class PlayerMovement3D : MythologyMayhem
                 playerAttack.SetSpeed(input.magnitude / 1.414f);
 
             Vector3 move = transform.right * x + transform.forward * z;
+            if(move.sqrMagnitude > 1f){
+                move = move.normalized;
+            }
 
             controller.Move(move * speed * Time.deltaTime);
 
