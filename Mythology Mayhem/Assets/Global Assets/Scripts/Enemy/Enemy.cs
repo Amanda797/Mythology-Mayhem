@@ -61,7 +61,12 @@ public class Enemy : MythologyMayhem
         currentStatePosition = StatePosition.Entry;
         StartCoroutine(SwitchStates(currentState,0));
 
-        _localGameManager = GameObject.FindGameObjectWithTag("LocalGameManager").GetComponent<LocalGameManager>();
+        GameObject tempLocalManager = GameObject.FindGameObjectWithTag("LocalGameManager");
+
+        if (tempLocalManager != null)
+        {
+            _localGameManager =  tempLocalManager.GetComponent<LocalGameManager>();
+        }
 
         if (player == null)
         {
