@@ -140,6 +140,8 @@ public class Health : MonoBehaviour
     }//end death
 
     public IEnumerator DeathTimer(float time) {
+       
+       /*
         foreach(Behaviour b in components)
         {
             b.enabled = false;
@@ -149,6 +151,7 @@ public class Health : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;
         }
+        */
 
         yield return new WaitForSeconds(time);
 
