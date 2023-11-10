@@ -104,13 +104,19 @@ public class Health : MonoBehaviour
                 if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
                 {
                     gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
                 }
                 else
                 {
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                    gameObject.GetComponent<Rigidbody>().velocity = new Vector2(0, 0);
                 }
             }
 
+            foreach (Behaviour component in components)
+            {
+                component.enabled = false;
+            }
             StartCoroutine(DeathTimer(3f));
         }//check that health is really less than 0 when called        
     }//end death
@@ -131,6 +137,7 @@ public class Health : MonoBehaviour
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
+
             foreach (Behaviour component in components)
             {
                 component.enabled = false;
@@ -140,18 +147,6 @@ public class Health : MonoBehaviour
     }//end death
 
     public IEnumerator DeathTimer(float time) {
-       
-       /*
-        foreach(Behaviour b in components)
-        {
-            b.enabled = false;
-        }
-
-        if(GetComponent<Collider>())
-        {
-            GetComponent<Collider>().enabled = false;
-        }
-        */
 
         yield return new WaitForSeconds(time);
 
