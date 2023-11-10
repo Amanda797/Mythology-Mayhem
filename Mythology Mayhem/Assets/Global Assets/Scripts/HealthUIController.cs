@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,12 +10,12 @@ public class HealthUIController : MonoBehaviour
     private UIDocument _doc;
     private VisualElement _heartPanel;
     [SerializeField] private VisualTreeAsset _heartUXML;
-    [SerializeField] private VisualElement _heartPrefab;
+    private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
 
     private VisualElement _shipPanel;
     [SerializeField] private VisualTreeAsset _shipUXML;
-    [SerializeField] private VisualElement _shipPrefab;
+    private VisualElement _shipPrefab;
     [SerializeField] private List<Sprite> _shipModes;
     public bool useShipHealth;
 
@@ -132,7 +132,7 @@ public class HealthUIController : MonoBehaviour
                 case 4:
                     _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[0]);
                     break;
-            };
+            }
         }
     }// end set health bar
 
@@ -172,7 +172,6 @@ public class HealthUIController : MonoBehaviour
         for (int i = 0; i < _shipPanel.childCount; i++)
         {
             float remainderHealth = Mathf.Clamp(health - (i * 5), 0, 5);
-            print(remainderHealth);
             switch (remainderHealth)
             {
                 case 0:
@@ -193,7 +192,7 @@ public class HealthUIController : MonoBehaviour
                 case 5:
                     _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[0]);
                     break;
-            };
+            }
         }
     }
 
@@ -210,7 +209,7 @@ public class HealthUIController : MonoBehaviour
 
             for (int i = 0; i < shipsToAdd; i++)
             {
-                _shipPanel = _shipUXML.CloneTree("Ship");
+                _shipPrefab = _shipUXML.CloneTree("Ship");
                 _shipPanel.Add(_shipPrefab);
             }
             SetShipHealthBar(ShipMaxHealth);
