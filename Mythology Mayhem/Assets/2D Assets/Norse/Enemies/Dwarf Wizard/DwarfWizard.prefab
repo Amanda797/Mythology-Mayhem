@@ -379,7 +379,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5247813070128208693}
         m_TargetAssemblyTypeName: DwarfWizard2D, Assembly-CSharp
-        m_MethodName: MeleeAttack
+        m_MethodName: SummonFamiliar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 12
+  _health: 0
   components:
   - {fileID: 5247813070128208693}
   - {fileID: 5247813070128208691}
@@ -434,6 +435,8 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Death
   healTrigger: 
+  _attacked: 0
+  _defenseTimer: 0
 --- !u!114 &5247813070128208693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,7 +462,6 @@ MonoBehaviour:
   - {fileID: 1111917889086952888, guid: e999183400d874b4fb458fc21d7c136b, type: 3}
   - {fileID: 6223908140358427202, guid: ffbcbf102f5c531438cc73c65620559b, type: 3}
   meleeDistance: 2
-  alertTimer: 3
 --- !u!82 &5247813070128208694
 AudioSource:
   m_ObjectHideFlags: 0

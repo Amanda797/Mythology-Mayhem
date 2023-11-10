@@ -4,51 +4,47 @@ using UnityEngine.Events;
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Companion : MythologyMayhem
 {
-    [Header("2D Components")]
-    public Rigidbody2D rigidBody2D;
-    public SpriteRenderer spriteRenderer;
-
-    [Header("3D Components")]
-    public Rigidbody rigidBody3D;
-    public NavMeshAgent agent;
-
-    [Header("Stats")]
+    public Scene thisScene;
     public Dimension companionDimension;
-    public GameObject player;
-    public LayerMask playerLayers;
+
+    public GameObject player2D;
+    public GameObject player3D;
+
+    public float playerRange = 2f;
+
+    public Rigidbody rb3D;
+    public Rigidbody2D rb2D;
+    public NavMeshAgent agent;
+    public Animator anim;
+    public string attackTriggerName;
+
     public Health health;
-    public Animator animator;
-    [SerializeField] public float attackRate;
-    public float attackDamage;
-    [SerializeField] private bool canAttack = true;
-    [SerializeField] public GameObject attackCollider;
 
-    [Header("Movement")]
-    public float walkSpeed = 5f;
-    public float runSpeed = 10f;
+    public float speed = 9f;
+    public float attackDamage = 5f;
+    protected bool canAttack;
+    protected float attackRate = 3f;
+    public float attackTimer = 6f;
+    public TriggerDetector attackTrigger;
 
-    [Header("Waypoints")]
-    [SerializeField] private Transform[] waypoints;
-    [SerializeField] private int waypointIndex = 0;
-    public Vector3 target;
-    public float idleTimerMax = 3f;
-    public float idleTimer;
+    [SerializeField] protected LayerMask playerLayer;
+    [SerializeField] protected LayerMask enemyLayer;
 
     public bool CanAttack {
         get {return canAttack;} 
         set {canAttack = value;}
     }
 
-    public UnityEvent IdleDelegate;
-    public UnityEvent PatrolDelegate;
+    public UnityEvent FollowPlayerDelegate;
     public UnityEvent AttackDelegate;
     public UnityEvent DeadDelegate;
     public LocalGameManager _localGameManager;
 
-    public enum CompanionStates { Idle, Patrol, Attack, Dead };
+    public enum CompanionStates { Hidden, FollowingPlayer, Patrol, Attack, Dead };
     public CompanionStates currentState;
     public enum StatePosition { Exit, Current, Entry }; //0 = exit, 1 = current, 2 = entry
     public StatePosition currentStatePosition;
@@ -57,25 +53,11 @@ public class Companion : MythologyMayhem
     {
         health = gameObject.GetComponent<Health>();
 
-        currentState = CompanionStates.Idle;
+        currentState = CompanionStates.Hidden;
         currentStatePosition = StatePosition.Entry;
         StartCoroutine(SwitchStates(currentState,0));
 
-        if (player == null)
-        {
-            if (_localGameManager != null)
-            {
-                if (_localGameManager.player != null)
-                {
-                    player = _localGameManager.player.gameObject;
-                }
-            }
-            else
-            {
-                player = GameObject.FindGameObjectWithTag("Player");
-            }
-
-        }
+        
     }//end Awake
 
     void Update()
@@ -93,14 +75,14 @@ public class Companion : MythologyMayhem
         {
             switch (currentState)
             {
-                case CompanionStates.Idle:
+                case CompanionStates.Hidden:
                     {
-                        IdleDelegate.Invoke();
+                        //IdleDelegate.Invoke();
                         break;
                     }
                 case CompanionStates.Patrol:
                     {
-                        PatrolDelegate.Invoke();
+                        //PatrolDelegate.Invoke();
                         break;
                     }
                 case CompanionStates.Attack:
@@ -132,7 +114,7 @@ public class Companion : MythologyMayhem
     {
         currentStatePosition = StatePosition.Entry;
 
-        switch (newState)
+        /*switch (newState)
         {
             case CompanionStates.Idle:
                 {
@@ -181,13 +163,14 @@ public class Companion : MythologyMayhem
                 }
             default: { break; }
         }
+    */
     }
 
     public void ExitState(CompanionStates oldState)
     {
         currentStatePosition = StatePosition.Exit;
 
-        switch (oldState)
+        /*switch (oldState)
         {
             case CompanionStates.Idle:
                 {
@@ -208,7 +191,7 @@ public class Companion : MythologyMayhem
                     break;
                 }
             default: { break; }
-        }
+        }*/
     }
 
     public IEnumerator AttackRate() {
