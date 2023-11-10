@@ -4,35 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class WolfCompanion : MythologyMayhem
+public class WolfCompanion : Companion
 {
-    [SerializeField] Scene thisScene;
-
-
-    public Dimension companionDimension;
-
-    [SerializeField] public GameObject player2D;
-    [SerializeField] public GameObject player3D;
-
-    Rigidbody rb3D;
-    Rigidbody2D rb2D;
-    NavMeshAgent agent;
-    Animator anim;
-    [SerializeField] string attackTriggerName;
-
-    public float speed = 9f;
-    public float attackDamage = 5f;
-    bool canAttack;
-    [SerializeField] float attackTimer = 6f;
-    [SerializeField] TriggerDetector attackTrigger;
-
-    //[SerializeField] float flipSensitivity = 5f;
-
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private LayerMask enemyLayer;
-
-    [SerializeField] float playerRange = 2f;
-
     // Start is called before the first frame update
     void Start()
     {
