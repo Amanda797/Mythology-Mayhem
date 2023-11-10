@@ -80,7 +80,7 @@ public class CharacterSelectDetails : MonoBehaviour
                 descripPosX = 380f;
                 CharacterDescriptionPanel.SetActive(true);
                 cdpHead.text = "GORM";
-                cdpText.text = "Gorm comes from the icy north, in a Viking village. He was meant to be a great warrior and yields an axe, but his ability to protect himself and friends gives him a better defense a player.";
+                cdpText.text = "Gorm comes from the icy north, in a Viking village. He was meant to be a great warrior and yields an axe, but his ability to protect himself and friends gives him a better defense.";
                 break;
             }
             case 2: {
