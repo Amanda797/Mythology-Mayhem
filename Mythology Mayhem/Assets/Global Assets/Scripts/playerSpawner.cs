@@ -32,7 +32,6 @@ public class playerSpawner : MythologyMayhem
     // Start is called before the first frame update
     void Awake()
     {      
-        
         if (overrideBool) 
         {
             spawnPointIndex = overrideIndex;

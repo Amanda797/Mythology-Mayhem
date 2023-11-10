@@ -172,7 +172,6 @@ public class HealthUIController : MonoBehaviour
         for (int i = 0; i < _shipPanel.childCount; i++)
         {
             float remainderHealth = Mathf.Clamp(health - (i * 5), 0, 5);
-            print(remainderHealth);
             switch (remainderHealth)
             {
                 case 0:
