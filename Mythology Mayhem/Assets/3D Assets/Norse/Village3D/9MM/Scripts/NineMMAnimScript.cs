@@ -28,7 +28,10 @@ public class NineMMAnimScript : MonoBehaviour
 
     public void RunMove()
     {
-        anim.SetInteger("Move", currentMove);
+        if (anim != null)
+        {
+            anim.SetInteger("Move", currentMove);
+        }
         switch (currentMove)
         {
             case 0:
