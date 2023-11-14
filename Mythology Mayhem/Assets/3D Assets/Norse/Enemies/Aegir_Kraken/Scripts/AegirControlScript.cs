@@ -65,6 +65,10 @@ public class AegirControlScript : MonoBehaviour
     public Animator anim;
     public KrakenHeadScript krakenHeadScript;
 
+    [Header("Restart Values")]
+    public Vector3 startPos;
+
+
     public enum State 
     { 
         Hidden,
@@ -104,11 +108,35 @@ public class AegirControlScript : MonoBehaviour
     {
         startFight = false;
         curSmallWave = 0;
+        startPos = transform.position;
     }
-
+    void Restart() 
+    {
+        transform.position = startPos;
+        ChangeState(State.Hidden);
+        returnState = State.Hidden;
+        health = 1000;
+        curSmallWave = 0;
+        lastSmall = 0;
+        mediumWaveCooldown = 0;
+        lastMed = 0;
+        animatingWave = false;
+        jetStarted = false;
+        jetStart = 0;
+        startHealTime = 0;
+        healthStart = 0;
+        stunStartTime = 0;
+        stunTime = 0;
+        startTimer = 30;
+        startFight = false;
+    }
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            Restart();
+        }
         if (localGameManager != null)
         {
             if (localGameManager.mainGameManager != null)
