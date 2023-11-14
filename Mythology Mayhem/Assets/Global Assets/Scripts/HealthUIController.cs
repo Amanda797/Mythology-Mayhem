@@ -199,7 +199,7 @@ public class HealthUIController : MonoBehaviour
     public void UpdateShipHealthBarCount(float maxHealth)
     {
 
-        maxHealth = Mathf.CeilToInt(maxHealth / 4.0f);
+        maxHealth = Mathf.CeilToInt(maxHealth / 5.0f);
         print(maxHealth);
         int shipCount = _shipPanel.childCount;
 
