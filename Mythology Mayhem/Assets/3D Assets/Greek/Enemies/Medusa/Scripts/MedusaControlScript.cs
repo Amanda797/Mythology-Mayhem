@@ -40,6 +40,8 @@ public class MedusaControlScript : MonoBehaviour
 
     public GameObject damageSphere;
 
+    public MedusaExitDoorScript doorScript;
+
     [Header("Timers")]
     [SerializeField] float introTime = 5f;
     float cooldown;
@@ -623,6 +625,7 @@ public class MedusaControlScript : MonoBehaviour
                     }
                     medusaAgent.isStopped = true;
                     Destroy(this.gameObject.transform.parent.gameObject, deathDelay);
+                    doorScript.RaiseDoor(true);
                     return;
                     //}
                 }
