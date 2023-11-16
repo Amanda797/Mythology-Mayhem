@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using System;
@@ -10,6 +9,7 @@ public class Enemy : MythologyMayhem
     [Header("2D Components")]
     public Rigidbody2D rigidBody2D;
     public SpriteRenderer spriteRenderer;
+    public TriggerDetector2D triggerDetector2D;
 
     [Header("3D Components")]
     public Rigidbody rigidBody3D;

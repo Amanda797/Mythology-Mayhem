@@ -68,7 +68,7 @@ public class OwlFollower3D : MonoBehaviour
             return;
         }
 
-        agent.SetDestination(player.transform.position);
+        //agent.SetDestination(player.transform.position);
 
         if (agent.remainingDistance > 20f)
         {
