@@ -25,7 +25,14 @@ public class DwarfWizard2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+    }
+
+    private void Update()
+    {
+        if(playerCollider == null && enemy.player.GetComponent<BoxCollider2D>())
+        {
+            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+        }
     }
 
     public void Idle()
@@ -33,7 +40,7 @@ public class DwarfWizard2D : MonoBehaviour
         if (playerCollider != null)
         {
             //Check for Player
-            if (attack.IsTouching(playerCollider))
+            if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
             {
                 StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
             }
@@ -55,7 +62,7 @@ public class DwarfWizard2D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -69,15 +76,16 @@ public class DwarfWizard2D : MonoBehaviour
         else
         {
             //Flip, Rotate Y
-            if (enemy.target.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
-            {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
-            }
-            else if (enemy.target.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            if (enemy.target.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
             }
+            else if (enemy.target.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+
             //Move
             Vector2 xOnlyTargetPosition = new Vector2(enemy.target.x, gameObject.transform.position.y);
             enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
@@ -92,13 +100,13 @@ public class DwarfWizard2D : MonoBehaviour
 
             if (familiars.Length > 1)
             {
-                summonedFamiliar = familiars[Random.Range(0, familiars.Length - 1)];
+                summonedFamiliar = familiars[Random.Range(0, familiars.Length)];
             } else
             {
                 summonedFamiliar = familiars[0];
             }
 
-            Instantiate(summonedFamiliar, this.gameObject.transform);
+            Instantiate(summonedFamiliar, new Vector3((gameObject.transform.position.x + enemy.player.transform.position.x)/2, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
 
             StartCoroutine(enemy.AttackRate());
         }

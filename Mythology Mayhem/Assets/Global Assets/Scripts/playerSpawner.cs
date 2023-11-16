@@ -59,6 +59,8 @@ public class playerSpawner : MythologyMayhem
 
                 obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
 
+                spawnPlayerContainer.GetComponentInChildren<CompanionController>()._player = obj;
+
                 obj.transform.position = spawnPoints[spawnPointIndex].position;
                 obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
 
@@ -69,6 +71,8 @@ public class playerSpawner : MythologyMayhem
                 spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
 
                 obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
+
+                spawnPlayerContainer.GetComponentInChildren<CompanionController>()._player = obj;
 
                 obj.transform.position = spawnPoints[spawnPointIndex].position;
                 obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;

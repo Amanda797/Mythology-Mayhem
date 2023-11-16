@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CompanionController : MythologyMayhem
 {
-
-    [SerializeField] GameObject[] companions;
+    [SerializeField] public Companion[] companions;
+    [HideInInspector] public GameObject _player;
     int currentCompanion = -1; //-1 equals no companion active
     bool callLock = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject pet in companions)
+        foreach(Companion pet in companions)
         {
-            pet.SetActive(false);
+            pet.gameObject.SetActive(false);
+            pet._player = _player;
         }       
     }
 
@@ -25,7 +26,7 @@ public class CompanionController : MythologyMayhem
             //Disable current companion if set
             if (currentCompanion != -1)
             {
-                companions[currentCompanion].SetActive(false);
+                companions[currentCompanion].gameObject.SetActive(false);
             }
 
             //Iterate Companions
@@ -39,16 +40,7 @@ public class CompanionController : MythologyMayhem
             }
 
             //Activate next companion
-            companions[currentCompanion].SetActive(true);
-            
-            //Assign player to companion
-            if(gameObject.GetComponent<BoxCollider2D>())
-            {
-                companions[currentCompanion].GetComponent<WolfCompanion>().player2D = gameObject;
-            } else if (gameObject.GetComponent<BoxCollider>())
-            {
-                companions[currentCompanion].GetComponent<WolfCompanion>().player3D = gameObject;
-            }
+            companions[currentCompanion].gameObject.SetActive(true);
         }
     }
 
@@ -56,7 +48,7 @@ public class CompanionController : MythologyMayhem
     {
         if (companions.Length >= 1)
         {
-            companions[currentCompanion].SetActive(false);
+            companions[currentCompanion].gameObject.SetActive(false);
             currentCompanion = -1;
         }
     }
@@ -73,14 +65,14 @@ public class CompanionController : MythologyMayhem
     {
         if(!callLock)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.P))
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
             {
                 Debug.Log("Dismiss Companion");
                 DismissCompanion();
 
                 StartCoroutine(CallLock(2f));
             }
-            else if (Input.GetKey(KeyCode.P))
+            else if (Input.GetKeyDown(KeyCode.C))
             {
                 Debug.Log("Call Companion");
                 CallCompanion();

@@ -28,8 +28,15 @@ public class Wolf2D : MonoBehaviour
     {
         enemy = gameObject.GetComponent<Enemy>();
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
 
+    }
+
+    private void Update()
+    {
+        if (playerCollider == null && enemy.player.GetComponent<BoxCollider2D>())
+        {
+            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+        }
     }
 
     public void Idle()
@@ -37,9 +44,10 @@ public class Wolf2D : MonoBehaviour
         if (playerCollider != null)
         {
             //Check for Player
-            if (attack.IsTouching(playerCollider))
+            if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
             {
                 StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+                enemy.animator.SetTrigger(howlTrigger);
             }
         }
 
@@ -59,9 +67,10 @@ public class Wolf2D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            enemy.animator.SetTrigger(howlTrigger);
         }
         else
         // Continue M2T
@@ -91,7 +100,7 @@ public class Wolf2D : MonoBehaviour
     public void MeleeAttack()
     {
         //Check for Player
-        if (!attack.IsTouching(playerCollider))
+        if (!enemy.triggerDetector2D.triggered)
         {
             if (alertTime > alertTimer)
             {
@@ -116,14 +125,14 @@ public class Wolf2D : MonoBehaviour
         else
         {
             //Flip, Rotate Y
-            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
-            {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
-            }
-            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+            }
+            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
             //Move
             Vector2 xOnlyTargetPosition = new Vector2(enemy.player.transform.position.x, gameObject.transform.position.y);
