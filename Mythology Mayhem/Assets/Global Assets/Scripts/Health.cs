@@ -23,9 +23,13 @@ public class Health : MonoBehaviour
     [SerializeField] private string deathTrigger;
     [SerializeField] private string healTrigger;
 
-    public bool _attacked;
+    public bool _attacked = false;
+    public bool _defenseUp = false;
     [HideInInspector]
     public float _defenseTimer = 0f;
+
+    public float respawnTimer = 50f;
+    public bool canRespawn = false;
 
     // --------------------------
     // ***METHODS***
@@ -49,9 +53,14 @@ public class Health : MonoBehaviour
         return Life;
     }//end get health
 
+    public void Respawn(float _respawnHealth)
+    {
+        SetHealth(_respawnHealth);
+    }
+
     public void TakeDamage(float d) {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
-        if(!_attacked)
+        if(!_attacked && !_defenseUp)
         {
             if (gameObject.tag == "Enemy")
             {
@@ -95,21 +104,23 @@ public class Health : MonoBehaviour
             //Trigger Death sounds and animations
             if (deathSound != null)
                 deathSound.Play();
-            if (anim != null)
+            if (anim != null && deathTrigger != "")
                 anim.SetTrigger(deathTrigger);
 
             if (gameObject.tag == "Enemy")
             {
                 //Make rigidbody static
-                if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
+                if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
                 {
                     gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                     gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
                 }
-                else
+                else if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.ThreeD)
                 {
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Rigidbody>().velocity = new Vector2(0, 0);
+                    Destroy(gameObject.GetComponent<BoxCollider>());
+                    gameObject.tag = "Untagged";
                 }
             }
 
@@ -158,6 +169,18 @@ public class Health : MonoBehaviour
         }
 
         mainObject.SetActive(false);
-    }//end death timer    
+
+        if(mainObject.CompareTag("Companion"))
+        {
+            StartCoroutine(CompanionRespawn(respawnTimer));
+        }
+    }//end death timer
+     //
+     public IEnumerator CompanionRespawn(float time)
+    {
+        canRespawn = false;
+        yield return new WaitForSeconds(time);
+        canRespawn = true;
+    }//end companion respawn timer
 
 }//end health class

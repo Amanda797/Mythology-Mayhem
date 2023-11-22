@@ -8,194 +8,156 @@ using UnityEngine.SceneManagement;
 
 public class Companion : MythologyMayhem
 {
-    public Scene thisScene;
-    public Dimension companionDimension;
+    [HideInInspector] public Health _health;
+    [HideInInspector] public GameObject _player;
+    [SerializeField] Animator anim;
+    [SerializeField] float attackDamage;
+    [SerializeField] float attackRate;
+    float speed = 5f;
+    bool canAttack = true;
+    [SerializeField] TriggerDetector _td;
+    [SerializeField] string walkingBool;
+    [SerializeField] string attackTrigger;
+    float lastXPosition;
+    Vector3 lastPosition;
 
-    public GameObject player2D;
-    public GameObject player3D;
+    public enum CompanionState { Following, Attacking };
+    public CompanionState currentState = CompanionState.Following;
 
-    public float playerRange = 2f;
-
-    public Rigidbody rb3D;
-    public Rigidbody2D rb2D;
-    public NavMeshAgent agent;
-    public Animator anim;
-    public string attackTriggerName;
-
-    public Health health;
-
-    public float speed = 9f;
-    public float attackDamage = 5f;
-    protected bool canAttack;
-    protected float attackRate = 3f;
-    public float attackTimer = 6f;
-    public TriggerDetector attackTrigger;
-
-    [SerializeField] protected LayerMask playerLayer;
-    [SerializeField] protected LayerMask enemyLayer;
-
-    public bool CanAttack {
-        get {return canAttack;} 
-        set {canAttack = value;}
-    }
-
-    public UnityEvent FollowPlayerDelegate;
-    public UnityEvent AttackDelegate;
-    public UnityEvent DeadDelegate;
-    public LocalGameManager _localGameManager;
-
-    public enum CompanionStates { Hidden, FollowingPlayer, Patrol, Attack, Dead };
-    public CompanionStates currentState;
-    public enum StatePosition { Exit, Current, Entry }; //0 = exit, 1 = current, 2 = entry
-    public StatePosition currentStatePosition;
-
-    void Start()
+    private void Start()
     {
-        health = gameObject.GetComponent<Health>();
+        //Ignore Player and Companion Collisions
+        Physics2D.IgnoreLayerCollision(3, 14);
 
-        currentState = CompanionStates.Hidden;
-        currentStatePosition = StatePosition.Entry;
-        StartCoroutine(SwitchStates(currentState,0));
-
-        
-    }//end Awake
-
-    void Update()
-    { 
-        //Check for Death
-
-        if (health.GetHealth() <= 0 && currentState != CompanionStates.Dead)
+        //Save Health Component Reference
+        try
         {
-            StartCoroutine(SwitchStates(CompanionStates.Dead,0));
+            _health = gameObject.GetComponent<Health>();
         }
-
-        // If not transitioning states, invoke state action
-
-        if(currentStatePosition == StatePosition.Current)
+        catch(NullReferenceException nre)
         {
-            switch (currentState)
+            print(nre.Source + ": " + nre.Message);
+            _health = gameObject.AddComponent<Health>();
+            _health.Life = 10f;
+        }
+    }//end start
+
+    private void Update()
+    {
+        if(currentState == CompanionState.Following)
+        {
+            //2D
+            //Follow Player            
+            if(GetComponent<Rigidbody2D>())
             {
-                case CompanionStates.Hidden:
-                    {
-                        //IdleDelegate.Invoke();
-                        break;
-                    }
-                case CompanionStates.Patrol:
-                    {
-                        //PatrolDelegate.Invoke();
-                        break;
-                    }
-                case CompanionStates.Attack:
-                    {
-                        AttackDelegate.Invoke();
-                        break;
-                    }
-                case CompanionStates.Dead:
-                    {
-                        DeadDelegate.Invoke();
-                        currentStatePosition = StatePosition.Exit;
-                        break;
-                    }
-                default: { break; }
+                Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, gameObject.transform.position.y);
+                GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, 2f));
+
+                if (lastXPosition != gameObject.transform.position.x && walkingBool != "")
+                {
+                    anim.SetBool(walkingBool, true);
+                }
+                else if (walkingBool != "")
+                {
+                    anim.SetBool(walkingBool, false);
+                }
+
+                lastXPosition = gameObject.transform.position.x;
+
+                //Flip Companion based on Player Sprite Renderer
+                if (_player.GetComponentInChildren<SpriteRenderer>().flipX)
+                {
+                    gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                } else
+                {
+                    gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
             }
-        }        
+            
+            //3D
+            if(GetComponent<NavMeshAgent>())
+            {
+                //TODO: Add an Offset
+                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 6f, gameObject.transform.position.y, _player.transform.position.z - 6f);
+                GetComponent<NavMeshAgent>().SetDestination(xzOnlyTargetPosition);
+
+                if (lastPosition != gameObject.transform.position && walkingBool != "")
+                {
+                    anim.SetBool(walkingBool, true);
+                }
+                else if (walkingBool != "")
+                {
+                    anim.SetBool(walkingBool, false);
+                }
+
+                lastPosition = gameObject.transform.position;
+            }
+
+            //Switch State Condition
+            if(_td.triggered)
+            {
+                if(gameObject.GetComponent<SpriteRenderer>() && _td.otherCollider2D.tag == "Enemy")
+                {
+                    currentState = CompanionState.Attacking;
+                } else if (gameObject.GetComponent<NavMeshAgent>() && _td.otherCollider3D.tag == "Enemy")
+                {
+                    currentState = CompanionState.Attacking;
+                }
+            }
+            
+        }
+        else //currentState == CompanionState.Attacking
+        {
+            //Attack Enemy
+            if (_td.triggered)
+            {
+                //2D
+                if(_td.otherCollider2D != null)
+                {
+                    Vector2 xOnlyTargetPosition = new Vector2(_td.otherCollider2D.transform.position.x - 2f, gameObject.transform.position.y);
+                    GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
+
+                    if (canAttack && Vector3.Distance(gameObject.transform.position, _td.otherCollider2D.transform.position) <= 4f)
+                    {
+                        //Attack
+                        anim.SetTrigger(attackTrigger);
+                        _td.otherCollider2D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+                    
+                        StartCoroutine(AttackRate());
+                    }
+                }
+                
+
+                //3D
+                if (_td.otherCollider3D != null && Vector3.Distance(gameObject.transform.position, _td.otherCollider3D.transform.position) > 4f)
+                {
+                    //Catch Up
+                    gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, _td.otherCollider3D.transform.position, 4f);
+                }
+                else if (canAttack && _td.otherCollider3D != null && Vector3.Distance(gameObject.transform.position, _td.otherCollider3D.transform.position) <= 4f)
+                {
+                    //Attack
+                    _td.otherCollider3D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+                    StartCoroutine(AttackRate());
+                }
+            }
+
+            //Switch State Condition
+            if (!_td.triggered)
+            {
+                if (_td.otherCollider2D == null && _td.otherCollider3D == null)
+                {
+                    currentState = CompanionState.Following;
+                }
+            }
+        }
     }//end update
 
-    public IEnumerator SwitchStates(CompanionStates newState, float delay)
+    public IEnumerator AttackRate()
     {
-        ExitState(currentState);
-        yield return new WaitForSeconds(delay);
-        currentState = newState;
-        EnterState(currentState);
-        currentStatePosition = StatePosition.Current;
-    }//switch states
-
-    public void EnterState(CompanionStates newState)
-    {
-        currentStatePosition = StatePosition.Entry;
-
-        /*switch (newState)
-        {
-            case CompanionStates.Idle:
-                {
-                    idleTimer = idleTimerMax;
-                    break;
-                }
-            case CompanionStates.Patrol:
-                {
-                    //Update waypoint
-                    if(waypoints.Length > 0)
-                    {
-                        if(waypointIndex >= waypoints.Length - 1)
-                        {
-                            waypointIndex = 0;
-                        } else
-                        {
-                            waypointIndex++;
-                        }
-
-                        //Update target
-                        target = waypoints[waypointIndex].position;
-                    }                    
-
-                    //Update Nav mesh agent
-                    if(agent != null)
-                    {
-                        agent.speed = walkSpeed;
-                    }
-                    break;
-                }
-            case CompanionStates.Attack:
-                {
-                    //Update target
-                    target = player.transform.position;
-
-                    //Update Nav mesh agent
-                    if (agent != null)
-                    {
-                        agent.speed = runSpeed;
-                    }
-                    break;
-                }
-            case CompanionStates.Dead:
-                {
-                    break;
-                }
-            default: { break; }
-        }
-    */
-    }
-
-    public void ExitState(CompanionStates oldState)
-    {
-        currentStatePosition = StatePosition.Exit;
-
-        /*switch (oldState)
-        {
-            case CompanionStates.Idle:
-                {
-                    break;
-                }
-            case CompanionStates.Patrol:
-                {
-                    break;
-                }
-            case CompanionStates.Attack:
-                {
-                    canAttack = false;
-                    break;
-                }
-            case CompanionStates.Dead:
-                {
-                    canAttack = false;
-                    break;
-                }
-            default: { break; }
-        }*/
-    }
-
-    public IEnumerator AttackRate() {
+        canAttack = false;
         yield return new WaitForSeconds(attackRate);
         canAttack = true;
     }
-}
+
+}//end companion script

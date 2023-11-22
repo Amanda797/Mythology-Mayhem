@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MythologyMayhem : MonoBehaviour
 {
+    [HideInInspector]
+    public string[] PlayerPrefKeys = new string[] { "spawningScene", "spwanPointIndex", "playerIndex" };
     public enum Dimension
     {
         TwoD,

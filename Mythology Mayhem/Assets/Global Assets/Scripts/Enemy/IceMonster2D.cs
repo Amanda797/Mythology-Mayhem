@@ -14,8 +14,6 @@ public class IceMonster2D : MonoBehaviour {
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider2D attack;
-    [SerializeField] Collider2D playerCollider;
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = .5f;
     [SerializeField] float alertTimer = 3f;
@@ -25,19 +23,14 @@ public class IceMonster2D : MonoBehaviour {
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     public void Idle()
     {
-        if (playerCollider != null)
+        // Check for Player
+        if (enemy.DetectPlayer())
         {
-            //Check for Player
-            if (attack.IsTouching(playerCollider))
-            {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-            }
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));            
         }
 
         // Continue Idle
@@ -54,7 +47,7 @@ public class IceMonster2D : MonoBehaviour {
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -86,7 +79,7 @@ public class IceMonster2D : MonoBehaviour {
     public void MeleeAttack()
     {
         //Check for Player
-        if (!attack.IsTouching(playerCollider))
+        if (!enemy.DetectPlayer())
         {
             if (alertTime > alertTimer)
             {
@@ -112,14 +105,14 @@ public class IceMonster2D : MonoBehaviour {
         else
         {
             //Flip, Rotate Y
-            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
             {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
             }
-            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
             //Move
             Vector2 xOnlyTargetPosition = new Vector2(enemy.player.transform.position.x, gameObject.transform.position.y);
