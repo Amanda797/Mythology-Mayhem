@@ -12,6 +12,11 @@ public class VolumeSaveSlider : MonoBehaviour
         {
             LoadVolume();
         }
+
+        if(gameObject.scene.name == "MainMenu" || gameObject.scene.name == "TitleSequence")
+        {
+            SaveVolume(18);
+        }
     }
 
     public void SaveVolume() {
@@ -27,7 +32,7 @@ public class VolumeSaveSlider : MonoBehaviour
     }
 
     public void SaveVolume(float volume) {
-        PlayerPrefs.SetFloat("Volume", volume/10);
+        PlayerPrefs.SetFloat("Volume", volume);
         LoadVolume(volume);
     }
 

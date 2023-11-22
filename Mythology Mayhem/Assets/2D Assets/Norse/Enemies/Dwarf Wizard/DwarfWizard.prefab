@@ -164,7 +164,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 4582079794926504062}
   m_Father: {fileID: 5247813068572901436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -208,7 +209,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 64
+  m_SortingOrder: 164
   m_Sprite: {fileID: 21300000, guid: ef2b3fa775f75db45ad1eb8b231477bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -253,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.5878906, y: 0.1893971}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -264,7 +265,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15.175781, y: 2.796956}
+  m_Size: {x: 3.62, y: 2.2}
   m_EdgeRadius: 0
 --- !u!50 &5247813070128208689
 Rigidbody2D:
@@ -322,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody2D: {fileID: 5247813070128208689}
   spriteRenderer: {fileID: 5247813070128208680}
+  triggerDetector2D: {fileID: 1461081431806033223}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
@@ -331,10 +333,10 @@ MonoBehaviour:
     m_Bits: 8
   health: {fileID: 5247813070128208692}
   animator: {fileID: 5247813070128208681}
-  attackRate: 3
+  attackRate: 10
   attackDamage: 5
   canAttack: 1
-  attackCollider: {fileID: 5247813070128208682}
+  attackCollider: {fileID: 7262524867252174471}
   walkSpeed: 5
   runSpeed: 10
   waypoints:
@@ -419,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 12
+  MaxHealth: 8
   _health: 0
   components:
   - {fileID: 5247813070128208693}
@@ -437,6 +439,8 @@ MonoBehaviour:
   healTrigger: 
   _attacked: 0
   _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &5247813070128208693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,14 +458,14 @@ MonoBehaviour:
   flipSensitivity: 1
   patrolDistance: 5
   body: {fileID: 5247813070128208682}
-  attack: {fileID: 5247813070128208688}
+  attack: {fileID: 5021136424473678323}
   playerCollider: {fileID: 0}
   meleeAttackTriggers:
   - CastSpell
   familiars:
   - {fileID: 1111917889086952888, guid: e999183400d874b4fb458fc21d7c136b, type: 3}
   - {fileID: 6223908140358427202, guid: ffbcbf102f5c531438cc73c65620559b, type: 3}
-  meleeDistance: 2
+  meleeDistance: 40
 --- !u!82 &5247813070128208694
 AudioSource:
   m_ObjectHideFlags: 0
@@ -558,3 +562,76 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &7262524867252174471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4582079794926504062}
+  - component: {fileID: 5021136424473678323}
+  - component: {fileID: 1461081431806033223}
+  m_Layer: 6
+  m_Name: SoundTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4582079794926504062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262524867252174471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5247813070128208695}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &5021136424473678323
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262524867252174471}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.24}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.23, y: 2.25}
+  m_EdgeRadius: 0
+--- !u!114 &1461081431806033223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262524867252174471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a051a17bed5dc44bbd00b0779559fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  otherCollider2D: {fileID: 0}

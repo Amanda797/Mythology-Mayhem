@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 1522799808658085856}
   - component: {fileID: 7297297311931586162}
   - component: {fileID: 4643650408523221103}
+  - component: {fileID: 6632510784918097942}
   m_Layer: 3
   m_Name: Tobias_3D
   m_TagString: Player
@@ -450,7 +451,10 @@ MonoBehaviour:
   deathTrigger: Death
   healTrigger: Heal
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &7297297311931586162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +504,36 @@ MonoBehaviour:
   nmm: {fileID: 0}
   pinpoint: {fileID: 3095639554088769117}
   tPressed: 0
+--- !u!114 &6632510784918097942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234530420529872037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: b5ff917b6f8397642a4d7fad9f5ccc93, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1522799809896607120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,6 +1505,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6623275997944953365, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634773385005766957, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

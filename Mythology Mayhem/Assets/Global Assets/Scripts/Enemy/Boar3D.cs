@@ -12,7 +12,6 @@ public class Boar3D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider attack;
     [SerializeField] string[] attackTriggers;
     [SerializeField] float meleeDistance = 2f;
 
@@ -24,8 +23,10 @@ public class Boar3D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Ignore Enemy and 3DGround Collisions
+        Physics.IgnoreLayerCollision(6, 9);
+
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider>();
         GetComponent<Health>()._defenseTimer = defenseTimer;
     }
 
@@ -33,7 +34,7 @@ public class Boar3D : MonoBehaviour
     {
         transform.LookAt(enemy.agent.steeringTarget);
 
-        if (CheckIfTouching())
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -56,7 +57,7 @@ public class Boar3D : MonoBehaviour
     {
         transform.LookAt(enemy.agent.steeringTarget);
 
-        if (CheckIfTouching())
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -88,7 +89,7 @@ public class Boar3D : MonoBehaviour
 
     public void MeleeAttack()
     {
-        if (!CheckIfTouching())
+        if (!enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         }
@@ -124,29 +125,14 @@ public class Boar3D : MonoBehaviour
         {
             enemy.animator.SetBool(defenseBool, false);
             defenseTime = 0;
+            GetComponent<Health>()._defenseUp = false;
         }
         else
         {
             enemy.animator.SetBool(defenseBool, true);
             defenseTime += Time.deltaTime;
+            GetComponent<Health>()._defenseUp = true;
         }
     }//end defend
-
-    bool CheckIfTouching()
-    {
-        //Check for Player
-        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
-        bool isTouching = false;
-        for (int i = 0; i < hitColliders.Length - 1; i++)
-        {
-            if (hitColliders[i].CompareTag("Player"))
-            {
-                isTouching = true;
-                break;
-            }
-        }
-
-        return isTouching;
-    }//end check if touching
 
 }

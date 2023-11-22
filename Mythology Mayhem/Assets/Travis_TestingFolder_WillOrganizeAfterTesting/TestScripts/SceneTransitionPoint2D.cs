@@ -28,6 +28,9 @@ public class SceneTransitionPoint2D : SceneTransitionPoint
             {
                 if (keyPress)
                 {
+                    //PlayerPrefs.SetString("spawningScene", sceneToTransition.ToString());
+                    //string loadScene = PlayerPrefs.GetString("spawningScene");
+
                     localGameManager.SceneTransition(sceneToTransition);
                     keyPress = false;
                 }

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121983304384078781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BatEnemyFixed
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121983305367499950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.82, y: 6.98}
+  m_Size: {x: 13.8, y: 6.98}
   m_EdgeRadius: 0
 --- !u!114 &7669933034497791012
 MonoBehaviour:
@@ -222,12 +222,9 @@ MonoBehaviour:
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
-  player: {fileID: 0}
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 8
   health: {fileID: 5418738702931030166}
   animator: {fileID: 5095419021229708581}
+  player: {fileID: 0}
   attackRate: 2
   attackDamage: 2
   canAttack: 1
@@ -507,9 +504,7 @@ MonoBehaviour:
   flipSensitivity: 13
   patrolDistance: 12
   body: {fileID: 5095419021229708576}
-  attack: {fileID: 5095419021441979649}
-  playerCollider: {fileID: 0}
-  meleeAttackTrigger: IsAttacking
+  meleeAttackTrigger: Attacking
   meleeDistance: 8
   alertTimer: 3
 --- !u!114 &5418738702931030166
@@ -540,6 +535,10 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Dead
   healTrigger: 
+  _attacked: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!1 &5095419021441979651
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +549,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5095419021441979650}
   - component: {fileID: 5095419021441979649}
-  m_Layer: 0
+  - component: {fileID: 3964217387003330533}
+  m_Layer: 6
   m_Name: Detection Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,6 +598,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 1.5739725}
   m_EdgeRadius: 0
+--- !u!114 &3964217387003330533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095419021441979651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a051a17bed5dc44bbd00b0779559fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  otherCollider2D: {fileID: 0}
 --- !u!1 &5321535897693837951
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4826867422043470243}
   - component: {fileID: 5345739611764541961}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3834386799553522079}
   - component: {fileID: 3761303589675635411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

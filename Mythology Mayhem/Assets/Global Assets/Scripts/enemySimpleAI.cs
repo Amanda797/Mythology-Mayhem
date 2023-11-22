@@ -25,7 +25,6 @@ public class enemySimpleAI : MonoBehaviour
     {
         if(health.GetHealth() <= 0 && health.GetHealth() != -1000)
         {
-            Debug.Log("Health = " + health.GetHealth());
             Die();
         }
 
@@ -87,7 +86,6 @@ public class enemySimpleAI : MonoBehaviour
     void Attack()
     {
         // Play attack animation or perform attack action
-        Debug.Log("Attacking player");
         player.GetComponent<FPSHealth>().TakeDamage(attackDamage);
         animator.SetTrigger("Attack");
     }
