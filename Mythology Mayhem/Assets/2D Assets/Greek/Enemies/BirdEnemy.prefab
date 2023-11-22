@@ -158,12 +158,9 @@ MonoBehaviour:
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
-  player: {fileID: 0}
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 8
   health: {fileID: 5938821028154963895}
   animator: {fileID: 6941042192989938913}
+  player: {fileID: 0}
   attackRate: 1.5
   attackDamage: 1
   canAttack: 1
@@ -454,6 +451,10 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Dead
   healTrigger: 
+  _attacked: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &2276455077882768558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,10 +471,8 @@ MonoBehaviour:
   speed: 1.2
   patrolDistance: 6
   body: {fileID: 6941042192989938916}
-  attack: {fileID: 6941042193202341061}
-  playerCollider: {fileID: 0}
   attackBool: IsAttacking
-  meleeDistance: 4
+  meleeDistance: 15
   alertTimer: 3
 --- !u!1 &6941042193202341063
 GameObject:
@@ -485,6 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6941042193202341062}
   - component: {fileID: 6941042193202341061}
+  - component: {fileID: 726869620920881028}
   m_Layer: 6
   m_Name: Detection Trigger
   m_TagString: Untagged
@@ -533,6 +533,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3919129, y: 1.3163347}
   m_EdgeRadius: 0
+--- !u!114 &726869620920881028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941042193202341063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a051a17bed5dc44bbd00b0779559fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  otherCollider2D: {fileID: 0}
 --- !u!1 &8015559850610420667
 GameObject:
   m_ObjectHideFlags: 0

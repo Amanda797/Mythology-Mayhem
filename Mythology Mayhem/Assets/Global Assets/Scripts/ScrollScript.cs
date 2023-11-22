@@ -81,6 +81,7 @@ public class ScrollScript : MonoBehaviour
             if(keyTriggered && !ScrollPanel.activeSelf) {
                 this.gameObject.GetComponent<AudioSource>().Play();
                 OpenScroll();
+                Debug.Log("Opening Scroll: " + text.Substring(0, 20));
                 keyTriggered = false;
             } else if(keyTriggered && ScrollPanel.activeSelf) {
                 this.gameObject.GetComponent<AudioSource>().Play();

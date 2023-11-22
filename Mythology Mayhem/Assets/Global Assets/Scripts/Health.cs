@@ -23,7 +23,8 @@ public class Health : MonoBehaviour
     [SerializeField] private string deathTrigger;
     [SerializeField] private string healTrigger;
 
-    public bool _attacked;
+    public bool _attacked = false;
+    public bool _defenseUp = false;
     [HideInInspector]
     public float _defenseTimer = 0f;
 
@@ -59,7 +60,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float d) {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
-        if(!_attacked)
+        if(!_attacked && !_defenseUp)
         {
             if (gameObject.tag == "Enemy")
             {
@@ -109,15 +110,17 @@ public class Health : MonoBehaviour
             if (gameObject.tag == "Enemy")
             {
                 //Make rigidbody static
-                if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
+                if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
                 {
                     gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                     gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
                 }
-                else
+                else if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.ThreeD)
                 {
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Rigidbody>().velocity = new Vector2(0, 0);
+                    Destroy(gameObject.GetComponent<BoxCollider>());
+                    gameObject.tag = "Untagged";
                 }
             }
 

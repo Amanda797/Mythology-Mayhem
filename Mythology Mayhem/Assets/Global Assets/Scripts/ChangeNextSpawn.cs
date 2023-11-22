@@ -12,4 +12,8 @@ public class ChangeNextSpawn : MonoBehaviour
     {
         PlayerPrefs.SetInt("playerIndex", index);
     }
+    public void NextScene(string index)
+    {
+        PlayerPrefs.SetString("spawningScene", index);
+    }
 }

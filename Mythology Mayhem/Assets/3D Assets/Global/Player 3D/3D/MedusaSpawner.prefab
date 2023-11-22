@@ -1479,7 +1479,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878494797352120207}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1492,7 +1492,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2bb85347d6025f44c933abfbb86de29c, type: 2}
+  - {fileID: 2100000, guid: a535545f823e17a48aa196f412d1ae02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1534,11 +1534,11 @@ LineRenderer:
       - serializedVersion: 3
         time: 1
         value: 0.5121951
-        inSlope: -1.0776049
-        outSlope: -1.0776049
+        inSlope: -1.897049
+        outSlope: -1.897049
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.49438274
+        inWeight: 0.29463026
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -1573,7 +1573,7 @@ LineRenderer:
       m_NumColorKeys: 3
       m_NumAlphaKeys: 3
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 1
     alignment: 0
     textureMode: 1
     shadowBias: 0.5
@@ -6371,6 +6371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: 0
+  revealExit: {fileID: 0}
   health: 1000
   startingHealth: 1000
   deathDelay: 5
@@ -6415,8 +6416,6 @@ MonoBehaviour:
   - {fileID: 0}
   meleeAttacks: 0100000003000000
   rangedAttacks: 0000000002000000
-  rangedAttackDist: 20
-  meleeAttackDist: 5
   healthBarCanvasPivot: {fileID: 9117841991548526859}
   totalHealthDisplay: {fileID: 2264365512448132251}
   healthBar: {fileID: 2402553940029420621}
@@ -9218,7 +9217,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2bb85347d6025f44c933abfbb86de29c, type: 2}
+  - {fileID: 2100000, guid: a535545f823e17a48aa196f412d1ae02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

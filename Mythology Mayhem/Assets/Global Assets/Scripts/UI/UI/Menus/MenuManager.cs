@@ -41,25 +41,27 @@ public class MenuManager : MonoBehaviour
         int spwanPointIndex = 0;
         int playerIndex = 0;
 
-        PlayerPrefs.SetInt("spwanPointIndex", 0);
-        spwanPointIndex = PlayerPrefs.GetInt("spwanPointIndex");
+        PlayerPrefs.SetInt("spawnPointIndex", 0);
+        spwanPointIndex = PlayerPrefs.GetInt("spawnPointIndex");
 
         PlayerPrefs.SetInt("playerIndex", 0);
         playerIndex = PlayerPrefs.GetInt("playerIndex");
-        
+
         //Load First Scene
 
-        PlayerPrefs.SetInt("sceneIndex", 1);
-        sceneIndex = PlayerPrefs.GetInt("sceneIndex");
-        SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
+        //PlayerPrefs.SetInt("sceneIndex", 1);
+        //sceneIndex = PlayerPrefs.GetInt("sceneIndex");
 
+        PlayerPrefs.SetString("spawningScene", "Cutscene1");
+        string loadScene = PlayerPrefs.GetString("spawningScene");
+        SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
     }
 
     public void ContinueGame() {
-        if(PlayerPrefs.HasKey("sceneIndex"))
+        if(PlayerPrefs.HasKey("spawningScene"))
         {
-            sceneIndex = PlayerPrefs.GetInt("sceneIndex");
-            SceneManager.LoadScene(sceneIndex);
+            string loadScene = PlayerPrefs.GetString("spawningScene");
+            SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
         }
         else
         {

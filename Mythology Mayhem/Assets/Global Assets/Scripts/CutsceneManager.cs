@@ -19,14 +19,19 @@ public class CutsceneManager : MonoBehaviour
     {
         // Check for early player skipping
         if(Input.GetMouseButtonDown(0)) {
-            SceneManager.LoadScene(nextScene);
+            PlayerPrefs.SetString("spawningScene", nextScene);
+            string loadScene = PlayerPrefs.GetString("spawningScene");
+            SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
         } 
         
         // Change scene after video is done playing
         if (cutsceneTimer > 0) {
             cutsceneTimer -= 1 * Time.deltaTime;
-        } else {
-            SceneManager.LoadScene(nextScene);
+        } else
+        {
+            PlayerPrefs.SetString("spawningScene", nextScene);
+            string loadScene = PlayerPrefs.GetString("spawningScene");
+            SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
         }
     }
 }

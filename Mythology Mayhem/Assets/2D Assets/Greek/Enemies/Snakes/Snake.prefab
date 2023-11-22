@@ -246,12 +246,9 @@ MonoBehaviour:
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
-  player: {fileID: 0}
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 8
   health: {fileID: 636311232826927295}
   animator: {fileID: 3371725774677677145}
+  player: {fileID: 0}
   attackRate: 1.5
   attackDamage: 1.5
   canAttack: 1
@@ -542,6 +539,10 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Dead
   healTrigger: 
+  _attacked: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &8564268730215925655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3371725775119735545}
   - component: {fileID: 3371725775119735544}
+  - component: {fileID: 4209731529934450733}
   m_Layer: 0
   m_Name: SoundTrigger
   m_TagString: Untagged
@@ -621,3 +623,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &4209731529934450733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371725775119735546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a051a17bed5dc44bbd00b0779559fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  otherCollider2D: {fileID: 0}
