@@ -13,7 +13,6 @@ public class Wizard3D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider attack;
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = 10f;
 
@@ -28,7 +27,6 @@ public class Wizard3D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider>();
     }
 
     bool idleTransition = false;
@@ -36,18 +34,7 @@ public class Wizard3D : MonoBehaviour
     public void Idle()
     {
         //Check for Player
-        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
-        bool isTouching = false;
-        for(int i = 0; i < hitColliders.Length - 1; i++)
-        {
-            if(hitColliders[i].CompareTag("Player"))
-            {
-                isTouching = true;
-                break;
-            }
-        }
-
-        if (isTouching)
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -71,18 +58,7 @@ public class Wizard3D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
-        bool isTouching = false;
-        for (int i = 0; i < hitColliders.Length - 1; i++)
-        {
-            if (hitColliders[i].CompareTag("Player"))
-            {
-                isTouching = true;
-                break;
-            }
-        }
-
-        if (isTouching)
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -102,18 +78,7 @@ public class Wizard3D : MonoBehaviour
     public void SwitchAttack()
     {
         //Check for Player
-        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
-        bool isTouching = false;
-        for (int i = 0; i < hitColliders.Length - 1; i++)
-        {
-            if (hitColliders[i].CompareTag("Player"))
-            {
-                isTouching = true;
-                break;
-            }
-        }
-
-        if (!isTouching)
+        if (!enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         }
@@ -134,18 +99,7 @@ public class Wizard3D : MonoBehaviour
     public void MeleeAttack()
     {
         //Check for Player
-        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
-        bool isTouching = false;
-        for (int i = 0; i < hitColliders.Length - 1; i++)
-        {
-            if (hitColliders[i].CompareTag("Player"))
-            {
-                isTouching = true;
-                break;
-            }
-        }
-
-        if (!isTouching)
+        if (!enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         }
@@ -172,18 +126,7 @@ public class Wizard3D : MonoBehaviour
     public void RangedAttack()
     {
         //Check for Player
-        Collider[] hitColliders = Physics.OverlapBox(body.transform.position, attack.bounds.size / 2, Quaternion.identity, enemy.playerLayers);
-        bool isTouching = false;
-        for (int i = 0; i < hitColliders.Length - 1; i++)
-        {
-            if (hitColliders[i].CompareTag("Player"))
-            {
-                isTouching = true;
-                break;
-            }
-        }
-
-        if (!isTouching)
+        if (!enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, 0));
         }

@@ -34,8 +34,6 @@ public class GameManager : MythologyMayhem
     void Update()
     {
         LoadSystemsUpdate();
-
-
     }
 
     void LoadSystemsStart() 

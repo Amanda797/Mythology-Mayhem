@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class PlayerAttach : MythologyMayhem
 {
+    public GameplayActions gameActions;
     public LocalGameManager localGameManager;
     public Dimension type;
     public Level inScene;
@@ -19,6 +21,20 @@ public class PlayerAttach : MythologyMayhem
     public Transform pinpoint;
 
     public bool tPressed;
+
+    private void Awake()
+    {
+        gameActions = new GameplayActions();
+    }
+
+    private void OnEnable()
+    {
+        gameActions.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        gameActions.Player.Disable();
+    }
 
     private void Start()
     {
@@ -53,6 +69,11 @@ public class PlayerAttach : MythologyMayhem
                 tPressed = true;
                 StartCoroutine(ButtonPress());
             }
+        }
+
+        if (gameActions.Player.ExitGame.IsPressed())
+        {
+            Application.Quit();
         }
     }
     private void FixedUpdate()

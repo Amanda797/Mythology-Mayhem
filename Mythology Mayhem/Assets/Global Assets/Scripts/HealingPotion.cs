@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HealingPotion : MonoBehaviour
 {
-    [SerializeField] private PlayerStats player;
+    //[SerializeField] private PlayerStats player;
     [SerializeField] private bool smallPotion;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerStats>();
+        //player = FindObjectOfType<PlayerStats>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -33,9 +33,9 @@ public class HealingPotion : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             if (smallPotion) 
-                other.gameObject.GetComponent<PlayerStats>().Heal(2);
+                other.gameObject.GetComponent<FPSHealth>().Heal(2);
             else
-                other.gameObject.GetComponent<PlayerStats>().Heal(4);
+                other.gameObject.GetComponent<FPSHealth>().Heal(4);
             
             if(gameObject.GetComponent<AudioSource>())
                 gameObject.GetComponent<AudioSource>().Play();

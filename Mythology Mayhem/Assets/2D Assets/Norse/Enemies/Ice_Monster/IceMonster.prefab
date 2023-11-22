@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1812931705460918497
 Transform:
@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578690988395696211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.72, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 160
   m_Sprite: {fileID: 21300000, guid: aad1342db012edc41b0864a7188fa117, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -256,7 +256,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!82 &5888939538468200170
 AudioSource:
   m_ObjectHideFlags: 0
@@ -436,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody2D: {fileID: 4274905291666517707}
   spriteRenderer: {fileID: 6504770300798575520}
+  triggerDetector2D: {fileID: 719528204496244571}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
@@ -518,6 +519,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!114 &2595412436220990724
@@ -533,8 +535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  _health: 0
   components:
-  - {fileID: 0}
   - {fileID: 5243203118242357128}
   - {fileID: 706826185972928367}
   - {fileID: 5929644445328718899}
@@ -548,6 +550,10 @@ MonoBehaviour:
   hurtTrigger: IsHurt
   deathTrigger: 
   healTrigger: 
+  _attacked: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &2301810347112904554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +573,7 @@ MonoBehaviour:
   attack: {fileID: 1445899397104237421}
   playerCollider: {fileID: 0}
   meleeAttackTrigger: IsAttacking
-  meleeDistance: 0.5
+  meleeDistance: 10
   alertTimer: 3
 --- !u!1 &7067753909146677384
 GameObject:
@@ -579,6 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6297207106624756333}
   - component: {fileID: 1445899397104237421}
+  - component: {fileID: 719528204496244571}
   m_Layer: 6
   m_Name: SoundTrigger
   m_TagString: Untagged
@@ -625,8 +632,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16, y: 7.159577}
+  m_Size: {x: 30, y: 7.159577}
   m_EdgeRadius: 0
+--- !u!114 &719528204496244571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7067753909146677384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a051a17bed5dc44bbd00b0779559fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  otherCollider2D: {fileID: 0}
 --- !u!1 &8504642424823756350
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +662,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &62362991027655042
 Transform:
@@ -651,7 +672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8504642424823756350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.92, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

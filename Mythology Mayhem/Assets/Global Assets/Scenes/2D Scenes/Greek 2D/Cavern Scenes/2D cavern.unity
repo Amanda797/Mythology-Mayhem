@@ -898,7 +898,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &125701140
 SpriteRenderer:
@@ -6218,7 +6217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &1117082936
 SpriteRenderer:
@@ -7314,7 +7312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &1269006628
 SpriteRenderer:
@@ -8396,7 +8393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &1444890485
 SpriteRenderer:
@@ -8731,7 +8727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 1
 --- !u!212 &1468393974
 SpriteRenderer:
@@ -11057,7 +11052,7 @@ GameObject:
   - component: {fileID: 1836055126}
   - component: {fileID: 1836055129}
   - component: {fileID: 1836055128}
-  - component: {fileID: 1836055127}
+  - component: {fileID: 1836055130}
   m_Layer: 0
   m_Name: Door to Athens
   m_TagString: Untagged
@@ -11080,21 +11075,6 @@ Transform:
   m_Father: {fileID: 871012540}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1836055127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836055125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6487610aa1710054fbff284366c5d70b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Athens
-  distance: 20
-  player: {fileID: 0}
 --- !u!61 &1836055128
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11173,6 +11153,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1836055130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836055125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d77282dc506b0441b541c45dddcef22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevel: Athens
+  lever: {fileID: 0}
+  nextSpawnIndex: 1
+  entered: 0
+  blocked: 0
+  doorOpen: 0
 --- !u!1 &1836542457
 GameObject:
   m_ObjectHideFlags: 0
@@ -11331,7 +11329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &1838024179
 SpriteRenderer:
@@ -11843,7 +11840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &1901836325
 SpriteRenderer:
@@ -12687,7 +12683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &2029839166
 SpriteRenderer:
@@ -12998,7 +12993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!212 &2051837419
 SpriteRenderer:
@@ -13889,7 +13883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e7117e3e6f992479a0d4197f113e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   smallPotion: 0
 --- !u!61 &1219713923545864136
 BoxCollider2D:

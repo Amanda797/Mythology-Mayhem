@@ -15,8 +15,6 @@ public class Wolf2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider2D attack;
-    [SerializeField] Collider2D playerCollider;
     [SerializeField] string attackTrigger;
     [SerializeField] string howlTrigger;
     [SerializeField] float meleeDistance = 10f;
@@ -27,21 +25,16 @@ public class Wolf2D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
-
     }
 
     public void Idle()
     {
-        if (playerCollider != null)
+        //Check for Player
+        if (enemy.DetectPlayer())
         {
-            //Check for Player
-            if (attack.IsTouching(playerCollider))
-            {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-            }
-        }
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            enemy.animator.SetTrigger(howlTrigger);
+        }        
 
         // Continue Idle
         if (enemy.idleTimer <= 0)
@@ -59,9 +52,10 @@ public class Wolf2D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            enemy.animator.SetTrigger(howlTrigger);
         }
         else
         // Continue M2T
@@ -91,11 +85,11 @@ public class Wolf2D : MonoBehaviour
     public void MeleeAttack()
     {
         //Check for Player
-        if (!attack.IsTouching(playerCollider))
+        if (!enemy.DetectPlayer())
         {
             if (alertTime > alertTimer)
             {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, alertTimer));
+                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Patrol, alertTimer));
             }
             else
             {
@@ -116,14 +110,14 @@ public class Wolf2D : MonoBehaviour
         else
         {
             //Flip, Rotate Y
-            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
-            {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
-            }
-            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
+            if (enemy.player.transform.position.x + flipSensitivity > gameObject.transform.position.x && gameObject.transform.rotation.y != 0)
             {
                 gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+            }
+            else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
             //Move
             Vector2 xOnlyTargetPosition = new Vector2(enemy.player.transform.position.x, gameObject.transform.position.y);

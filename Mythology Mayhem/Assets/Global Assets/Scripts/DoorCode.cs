@@ -91,7 +91,9 @@ public class DoorCode : MonoBehaviour
     public void LoadNextScene()
     {
         PlayerPrefs.SetInt("spawnPointIndex", nextSpawnIndex);
-        SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
+        PlayerPrefs.SetString("spawningScene", nextLevel);
+        string loadScene = PlayerPrefs.GetString("spawningScene");
+        SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
     }
     public void OpenDoor()
     {

@@ -8,6 +8,8 @@ public class MedusaControlScript : MonoBehaviour
 {
     public AttackStates CurrentState;
 
+    public GameObject revealExit;
+
     //Public for testing, revert later
     public float health;
     public float startingHealth;
@@ -141,6 +143,8 @@ public class MedusaControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        revealExit.SetActive(false);
+
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 
         CurrentState = AttackStates.Start;
@@ -289,6 +293,7 @@ public class MedusaControlScript : MonoBehaviour
                 }
             case AttackStates.EndStage3:
                 {
+                    revealExit.SetActive(true);
                     break;
                 }
         }
