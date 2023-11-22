@@ -21,7 +21,9 @@ public class MedusaDoorColliderScript : MonoBehaviour
             print("Player in Doorway");
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                SceneManager.LoadScene(nextScene);
+                PlayerPrefs.SetString("spawningScene", nextScene);
+                string loadScene = PlayerPrefs.GetString("spawningScene");
+                SceneManager.LoadScene(loadScene);
             }
         }
     }
