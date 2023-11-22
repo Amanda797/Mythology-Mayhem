@@ -14,8 +14,6 @@ public class IceMonster2D : MonoBehaviour {
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider2D attack;
-    [SerializeField] Collider2D playerCollider;
     [SerializeField] string meleeAttackTrigger;
     [SerializeField] float meleeDistance = .5f;
     [SerializeField] float alertTimer = 3f;
@@ -25,26 +23,14 @@ public class IceMonster2D : MonoBehaviour {
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-    }
-
-    private void Update()
-    {
-        if (playerCollider == null && enemy.player.GetComponent<BoxCollider2D>())
-        {
-            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
-        }
     }
 
     public void Idle()
     {
-        if (playerCollider != null)
+        // Check for Player
+        if (enemy.DetectPlayer())
         {
-            //Check for Player
-            if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
-            {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-            }
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));            
         }
 
         // Continue Idle
@@ -61,7 +47,7 @@ public class IceMonster2D : MonoBehaviour {
     public void MoveToTarget()
     {
         //Check for Player
-        if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -93,7 +79,7 @@ public class IceMonster2D : MonoBehaviour {
     public void MeleeAttack()
     {
         //Check for Player
-        if (!enemy.triggerDetector2D.triggered)
+        if (!enemy.DetectPlayer())
         {
             if (alertTime > alertTimer)
             {

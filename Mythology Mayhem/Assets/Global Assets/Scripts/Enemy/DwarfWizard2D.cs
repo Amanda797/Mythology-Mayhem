@@ -14,8 +14,6 @@ public class DwarfWizard2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider2D attack;
-    [SerializeField] Collider2D playerCollider;
     [SerializeField] string[] meleeAttackTriggers;
     [SerializeField] GameObject[] familiars;
     [SerializeField] float meleeDistance = 10f;
@@ -24,27 +22,15 @@ public class DwarfWizard2D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-    }
-
-    private void Update()
-    {
-        if(playerCollider == null && enemy.player.GetComponent<BoxCollider2D>())
-        {
-            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
-        }
     }
 
     public void Idle()
     {
-        if (playerCollider != null)
+        //Check for Player
+        if (enemy.DetectPlayer())
         {
-            //Check for Player
-            if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
-            {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-            }
-        }
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+        }        
 
         // Continue Idle
         if (enemy.idleTimer <= 0)
@@ -62,7 +48,7 @@ public class DwarfWizard2D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        if (enemy.triggerDetector2D.triggered && enemy.triggerDetector2D.otherCollider2D.CompareTag("Player"))
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }

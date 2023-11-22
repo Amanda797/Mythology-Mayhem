@@ -9,7 +9,6 @@ public class Enemy : MythologyMayhem
     [Header("2D Components")]
     public Rigidbody2D rigidBody2D;
     public SpriteRenderer spriteRenderer;
-    public TriggerDetector2D triggerDetector2D;
 
     [Header("3D Components")]
     public Rigidbody rigidBody3D;
@@ -17,10 +16,9 @@ public class Enemy : MythologyMayhem
 
     [Header("Stats")]
     public Dimension enemyDimension;
-    public GameObject player;
-    public LayerMask playerLayers;
     public Health health;
     public Animator animator;
+    public GameObject player;
     [SerializeField] public float attackRate;
     public float attackDamage;
     [SerializeField] private bool canAttack = true;
@@ -67,25 +65,7 @@ public class Enemy : MythologyMayhem
         {
             _localGameManager =  tempLocalManager.GetComponent<LocalGameManager>();
         }
-
-        if (player == null)
-        {
-            if (_localGameManager != null)
-            {
-                if (_localGameManager.player != null)
-                {
-                    player = _localGameManager.player.gameObject;
-                } else
-                {
-                    player = GameObject.FindGameObjectWithTag("Player");
-                }
-            }
-            else
-            {
-                player = GameObject.FindGameObjectWithTag("Player");
-            }
-
-        }
+        
     }//end Start
 
     void Update()
@@ -175,9 +155,6 @@ public class Enemy : MythologyMayhem
                 }
             case EnemyStates.Attack:
                 {
-                    //Update target
-                    target = player.transform.position;
-
                     //Update Nav mesh agent
                     if (agent != null)
                     {
@@ -226,5 +203,45 @@ public class Enemy : MythologyMayhem
         canAttack = false;
         yield return new WaitForSeconds(attackRate);
         canAttack = true;
+    }
+
+    public bool DetectPlayer()
+    {
+        if(enemyDimension == Dimension.TwoD)
+        {
+            if(attackCollider.GetComponent<TriggerDetector2D>().triggered)
+            {
+                if(attackCollider.GetComponent<TriggerDetector2D>().otherCollider2D.CompareTag("Player"))
+                {
+                    target = attackCollider.GetComponent<TriggerDetector2D>().otherCollider2D.transform.position;
+                    player = attackCollider.GetComponent<TriggerDetector2D>().otherCollider2D.gameObject;
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            } else
+            {
+                return false;
+            }
+        } else
+        {
+            if(attackCollider.GetComponent<TriggerDetector3D>().triggered)
+            {
+                if (attackCollider.GetComponent<TriggerDetector3D>().otherCollider3D.CompareTag("Player"))
+                {
+                    target = attackCollider.GetComponent<TriggerDetector3D>().otherCollider3D.transform.position;
+                    player = attackCollider.GetComponent<TriggerDetector3D>().otherCollider3D.gameObject;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } else
+            {
+                return false;
+            }
+        }
     }
 }

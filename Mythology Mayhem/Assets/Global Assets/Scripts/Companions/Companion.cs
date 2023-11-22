@@ -19,6 +19,7 @@ public class Companion : MythologyMayhem
     [SerializeField] string walkingBool;
     [SerializeField] string attackTrigger;
     float lastXPosition;
+    Vector3 lastPosition;
 
     public enum CompanionState { Following, Attacking };
     public CompanionState currentState = CompanionState.Following;
@@ -52,11 +53,11 @@ public class Companion : MythologyMayhem
                 Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, gameObject.transform.position.y);
                 GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, 2f));
 
-                if (lastXPosition != gameObject.transform.position.x)
+                if (lastXPosition != gameObject.transform.position.x && walkingBool != "")
                 {
                     anim.SetBool(walkingBool, true);
                 }
-                else
+                else if (walkingBool != "")
                 {
                     anim.SetBool(walkingBool, false);
                 }
@@ -64,7 +65,7 @@ public class Companion : MythologyMayhem
                 lastXPosition = gameObject.transform.position.x;
 
                 //Flip Companion based on Player Sprite Renderer
-                if (_player.GetComponent<SpriteRenderer>().flipX)
+                if (_player.GetComponentInChildren<SpriteRenderer>().flipX)
                 {
                     gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 } else
@@ -79,9 +80,18 @@ public class Companion : MythologyMayhem
                 //TODO: Add an Offset
                 Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 6f, gameObject.transform.position.y, _player.transform.position.z - 6f);
                 GetComponent<NavMeshAgent>().SetDestination(xzOnlyTargetPosition);
-            }
 
-            anim.SetBool(walkingBool, true);
+                if (lastPosition != gameObject.transform.position && walkingBool != "")
+                {
+                    anim.SetBool(walkingBool, true);
+                }
+                else if (walkingBool != "")
+                {
+                    anim.SetBool(walkingBool, false);
+                }
+
+                lastPosition = gameObject.transform.position;
+            }
 
             //Switch State Condition
             if(_td.triggered)

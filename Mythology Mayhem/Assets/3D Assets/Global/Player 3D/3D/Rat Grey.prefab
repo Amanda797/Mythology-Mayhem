@@ -14,15 +14,15 @@ GameObject:
   - component: {fileID: 527290172820061807}
   - component: {fileID: 3400320701062825120}
   - component: {fileID: 6525686864370160606}
-  - component: {fileID: 802450171492363899}
   - component: {fileID: 8236001976462873012}
-  m_Layer: 0
+  - component: {fileID: 5097839313747600501}
+  m_Layer: 6
   m_Name: Rat Grey
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &531386714663718112
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528059659217594486}
-  m_LocalRotation: {x: -0, y: 0.99996835, z: -0, w: 0.007955952}
+  m_LocalRotation: {x: 0, y: 0.99996835, z: 0, w: 0.007958659}
   m_LocalPosition: {x: 82.405525, y: 0.100037895, z: 59.549675}
   m_LocalScale: {x: 9.238336, y: 9.238337, z: 9.238336}
   m_ConstrainProportionsScale: 0
@@ -88,16 +88,19 @@ MonoBehaviour:
   _health: 0
   components:
   - {fileID: 3400320701062825120}
-  - {fileID: 433305614770297106}
   mainObject: {fileID: 528059659217594486}
   rewardObject: {fileID: 0}
   hurtSound: {fileID: 6525686864370160606}
   deathSound: {fileID: 6525686864370160606}
   healSound: {fileID: 0}
   anim: {fileID: 433305614770297106}
-  hurtTrigger: Hurt
+  hurtTrigger: Idle Reaction
   deathTrigger: Die
   healTrigger: Heal
+  _attacked: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &3400320701062825120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,10 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1f3f5c683f8bf4eb0d1a3a532b3ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
+  attackDamage: 4
   speed: 5
   attackRange: 10
-  attackDelay: 1
+  attackDelay: 2
   animator: {fileID: 433305614770297106}
   hurtDelay: 0.3
   health: {fileID: 527290172820061807}
@@ -213,7 +216,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &802450171492363899
+--- !u!54 &8236001976462873012
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528059659217594486}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5097839313747600501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,16 +249,13 @@ MonoBehaviour:
   rigidBody3D: {fileID: 8236001976462873012}
   agent: {fileID: 0}
   enemyDimension: 1
+  health: {fileID: 527290172820061807}
+  animator: {fileID: 433305614770297106}
   player: {fileID: 0}
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  health: {fileID: 0}
-  animator: {fileID: 0}
   attackRate: 0
   attackDamage: 0
   canAttack: 1
-  attackCollider: {fileID: 0}
+  attackCollider: {fileID: 528059659217594486}
   walkSpeed: 5
   runSpeed: 10
   waypoints: []
@@ -262,22 +278,6 @@ MonoBehaviour:
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
---- !u!54 &8236001976462873012
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528059659217594486}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &528479332546677388
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 522928927293708708}
   - component: {fileID: 484602286309677288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rat_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
