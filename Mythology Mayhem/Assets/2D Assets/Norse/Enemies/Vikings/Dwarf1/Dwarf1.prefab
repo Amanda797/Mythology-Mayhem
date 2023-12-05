@@ -288,21 +288,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody2D: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
+  rigidBody2D: {fileID: 5995209681267350716}
+  spriteRenderer: {fileID: 5995209681267350711}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
-  health: {fileID: 0}
+  health: {fileID: 4613613489091181207}
   animator: {fileID: 5995209681267350710}
   player: {fileID: 0}
   attackRate: 1.5
-  attackDamage: 0
+  attackDamage: 3
   canAttack: 1
   attackCollider: {fileID: 5995209680792824170}
   walkSpeed: 5
   runSpeed: 10
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   waypointIndex: 0
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
@@ -529,7 +535,7 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   meleeAttackTriggers:
   - IsAttacking
-  meleeDistance: 10
+  meleeDistance: 4
   alertTimer: 3
 --- !u!114 &4613613489091181207
 MonoBehaviour:
@@ -561,6 +567,7 @@ MonoBehaviour:
   deathTrigger: IsDead
   healTrigger: 
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
