@@ -207,15 +207,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77cc7ed5f315649add23a83859b2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolBool: 
+  patrolBool: IsPatrolling
   speed: 0.6
   flipSensitivity: 1
   patrolDistance: 5
-  body: {fileID: 0}
-  attack: {fileID: 0}
+  body: {fileID: 84100001}
+  attack: {fileID: 963502863}
   playerCollider: {fileID: 0}
-  meleeAttackTriggers: []
-  meleeDistance: 10
+  meleeAttackTriggers:
+  - 
+  meleeDistance: 4
   alertTimer: 3
 --- !u!82 &84100005
 AudioSource:
@@ -226,9 +227,9 @@ AudioSource:
   m_GameObject: {fileID: 84100001}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: -2450555063527804881, guid: 7d68d8f1252686945aebfe707bfe4938, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 043dc51f66802474d9891ed6d96bdc21, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -344,12 +345,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 84100008}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -358,29 +359,29 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 84100001}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 84100004}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 84100008}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!50 &84100007
 Rigidbody2D:
