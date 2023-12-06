@@ -28,7 +28,16 @@ public class Dwarves2D : MonoBehaviour
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
         playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
-
+    private void Update()
+    {
+        if (playerCollider == null) 
+        {
+            if (enemy.player != null) 
+            {
+                playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+            }
+        }
+    }
     public void Idle()
     {
         if (playerCollider != null)
