@@ -23,10 +23,9 @@ public class CompanionController : MythologyMayhem
 
         foreach(Companion pet in companions)
         {
-            pet.gameObject.SetActive(false);
             pet._player = _player;
-
             pet.transform.position = _player.transform.position;
+            pet.gameObject.SetActive(false);
         }       
     }
 
