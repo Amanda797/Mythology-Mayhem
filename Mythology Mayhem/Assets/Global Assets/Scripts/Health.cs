@@ -128,7 +128,7 @@ public class Health : MonoBehaviour
             {
                 component.enabled = false;
             }
-            StartCoroutine(DeathTimer(3f));
+            StartCoroutine(DeathTimer(4f));
         }//check that health is really less than 0 when called        
     }//end death
 
