@@ -14,8 +14,6 @@ public class Dwarves2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider2D attack;
-    [SerializeField] Collider2D playerCollider;
     [SerializeField] string[] meleeAttackTriggers;
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
@@ -25,28 +23,14 @@ public class Dwarves2D : MonoBehaviour
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
-    private void Update()
-    {
-        if (playerCollider == null) 
-        {
-            if (enemy.player != null) 
-            {
-                playerCollider = enemy.player.GetComponent<BoxCollider2D>();
-            }
-        }
-    }
+
     public void Idle()
     {
-        if (playerCollider != null)
+        //Check for Player
+        if (enemy.DetectPlayer())
         {
-            //Check for Player
-            if (attack.IsTouching(playerCollider))
-            {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-            }
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
 
         // Continue Idle
@@ -65,7 +49,7 @@ public class Dwarves2D : MonoBehaviour
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -97,7 +81,7 @@ public class Dwarves2D : MonoBehaviour
     public void MeleeAttack()
     {
         //Check for Player
-        if (!attack.IsTouching(playerCollider))
+        if (!enemy.DetectPlayer())
         {
             if (alertTime > alertTimer)
             {
