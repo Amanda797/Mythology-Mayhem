@@ -15,9 +15,7 @@ public class Raven2D : MonoBehaviour {
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] Collider2D attack;
-    [SerializeField] Collider2D playerCollider;
-    [SerializeField] string meleeAttackTrigger;
+    [SerializeField] string attackTrigger;
     [SerializeField] float meleeDistance = .5f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;
@@ -26,19 +24,14 @@ public class Raven2D : MonoBehaviour {
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
-        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
     }
 
     public void Idle()
     {
-        if (playerCollider != null)
+        //Check for Player
+        if (enemy.DetectPlayer())
         {
-            //Check for Player
-            if (attack.IsTouching(playerCollider))
-            {
-                StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
-            }
+            StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
 
         // Continue Idle
@@ -57,7 +50,7 @@ public class Raven2D : MonoBehaviour {
     public void MoveToTarget()
     {
         //Check for Player
-        if (attack.IsTouching(playerCollider))
+        if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
@@ -89,7 +82,7 @@ public class Raven2D : MonoBehaviour {
     public void MeleeAttack()
     {
         //Check for Player
-        if (!attack.IsTouching(playerCollider))
+        if (!enemy.DetectPlayer())
         {
             if (alertTime > alertTimer)
             {
@@ -104,12 +97,11 @@ public class Raven2D : MonoBehaviour {
         // Continue Attack
         if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
-            enemy.animator.SetTrigger(meleeAttackTrigger);
+            enemy.animator.SetTrigger(attackTrigger);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
             if (enemy.player.GetComponent<KnockBackFeedback>())
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
-            enemy.animator.SetTrigger(meleeAttackTrigger);
             StartCoroutine(enemy.AttackRate());
         }
         else
@@ -122,11 +114,11 @@ public class Raven2D : MonoBehaviour {
             }
             else if (enemy.player.transform.position.x + flipSensitivity < gameObject.transform.position.x && gameObject.transform.rotation.y != 180)
             {
-                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+                gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
             //Move
             Vector2 xOnlyTargetPosition = new Vector2(enemy.player.transform.position.x, gameObject.transform.position.y);
-            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, enemy.player.transform.position, (speed * 3f) * Time.deltaTime));
+            enemy.rigidBody2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
         }
     }
 
