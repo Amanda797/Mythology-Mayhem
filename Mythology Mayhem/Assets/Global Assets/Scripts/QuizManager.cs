@@ -20,7 +20,6 @@ public class QuizManager : MonoBehaviour
     bool won;
 
     [SerializeField] GameObject[] enemy_go;
-    [SerializeField] GameObject player;
     [SerializeField] GameObject quizTrigger;
 
     void Start() {
@@ -43,9 +42,6 @@ public class QuizManager : MonoBehaviour
         won = false;
 
         RandomQuestions();
-
-        player = GameObject.FindWithTag("Player");
-        player.GetComponent<PlayerController>().enabled = false;
     }//end start
 
     void DisplayQuestion() {
@@ -86,9 +82,8 @@ public class QuizManager : MonoBehaviour
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
             currentQuestion++;
-        } else if(currentQuestion > chosenQuestions.Length) {
-            player.GetComponent<PlayerController>().enabled = true;
-
+        } 
+        else if(currentQuestion > chosenQuestions.Length) {
             if(won) {
                 foreach(GameObject enemy in enemy_go) {
                     enemy.GetComponent<BoxCollider2D>().enabled = false;
