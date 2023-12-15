@@ -344,6 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af333f57ce580034291ab1744fd53801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   character: 0
   controller: {fileID: 289352684015478271}
   speed: 12
@@ -399,10 +403,18 @@ MonoBehaviour:
   - {fileID: 289352684015478265}
   mainObject: {fileID: 289352684015478270}
   rewardObject: {fileID: 0}
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   anim: {fileID: 0}
   hurtTrigger: Hurt
   deathTrigger: Death
   healTrigger: Heal
+  _attacked: 0
+  _defenseUp: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &8099485773210619689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,13 +427,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0349b484ee6af409f9610a14357ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   currentMain: 0
   currentOffHand: 0
-  Main: {fileID: 0}
-  Bow: {fileID: 0}
-  Crystal: {fileID: 0}
-  Mirror: {fileID: 0}
-  Compass: {fileID: 0}
+  RightHandWeapons: []
+  LeftHandWeapons: []
 --- !u!114 &6148430721087902004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +447,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832875bdfa5fb274e850added54f3f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
+  localGameManager: {fileID: 0}
   type: 0
   inScene: 0
   vCam: {fileID: 0}
@@ -601,6 +619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80f4bdf8bae6e84e91cc831dfcce947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   objectType: 0
   damage: 25
   range: 2.2
@@ -1055,15 +1077,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b08fc7e35d6e8545bffb5bed00f663c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   sl: {fileID: 871405173}
   key: 27
   vision: {fileID: 8881941879096787449}
   time: 1
   gem: {fileID: 9188658967095546985}
   enemies: []
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  gemLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Dis: 10
   player: {fileID: 289352684015478264}
-  weaponSwitcher: {fileID: 0}
+  weaponSwitcher: {fileID: 8099485773210619689}
 --- !u!1 &8188041831720933935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1585,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.9539795
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124266751385175178, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}

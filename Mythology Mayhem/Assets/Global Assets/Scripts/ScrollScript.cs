@@ -18,7 +18,6 @@ public class ScrollScript : MonoBehaviour
     // --------------------------
     // ***PROPERTIES***
     // --------------------------
-    [SerializeField] Scroll_Controller ScrollController;
     [TextArea(7,10)]
     [SerializeField] string text;
     [SerializeField] GameObject pressEText;
@@ -94,11 +93,11 @@ public class ScrollScript : MonoBehaviour
 
     public void OpenScroll()
     {
-        ScrollController.OpenScroll(text);
+        //ScrollController.OpenScroll(text);
     }//end open scroll
 
     public void CloseScroll() {
-        ScrollController.CloseScroll();
+        //ScrollController.CloseScroll();
     }//end close scroll
 
 }
