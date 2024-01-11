@@ -30,7 +30,7 @@ public class playerSpawner : MythologyMayhem
     public int overrideCharacterIndex;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {      
         if (overrideBool) 
         {
