@@ -19,9 +19,11 @@ public class CutsceneManager : MonoBehaviour
     {
         // Check for early player skipping
         if(Input.GetMouseButtonDown(0)) {
-            PlayerPrefs.SetString("spawningScene", nextScene);
-            string loadScene = PlayerPrefs.GetString("spawningScene");
-            SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
+            if(nextScene == "Library of Alexandria")
+            {
+                PlayerPrefs.SetString("spawningScene", nextScene);
+            }
+            SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
         } 
         
         // Change scene after video is done playing
@@ -29,9 +31,11 @@ public class CutsceneManager : MonoBehaviour
             cutsceneTimer -= 1 * Time.deltaTime;
         } else
         {
-            PlayerPrefs.SetString("spawningScene", nextScene);
-            string loadScene = PlayerPrefs.GetString("spawningScene");
-            SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
+            if (nextScene == "Library of Alexandria")
+            {
+                PlayerPrefs.SetString("spawningScene", nextScene);
+            }
+            SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
         }
     }
 }

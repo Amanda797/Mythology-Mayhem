@@ -568,19 +568,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: Dear Acolyte,<br><br> Press E and up to climb ladders if you want to avoid
     mice and falling scrolls<br><br> Head Librarian
   pressEText: {fileID: 0}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!212 &76960574
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2145,8 +2137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: "Dear Acolyte,<br><br>  By pressing shift and D provides the ability to run.<br><br> 
     Button E allows you to interact with objects, including item pick up.<br><br> 
     Left click on the mouse button allows you to fight. It is imperative to remember
@@ -2155,13 +2146,6 @@ MonoBehaviour:
     Head Librarian"
   pressEText: {fileID: 2195325134103196066}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!212 &329324495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2955,7 +2939,7 @@ Transform:
   m_Children:
   - {fileID: 595915147792668423}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &418183988
 GameObject:
@@ -3734,21 +3718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: Dear Mr, Adio,<br><br> I recently learned that you have been having issues
     when it comes to learning the filing system at the library. Come see me about
     this as it will be instrumental in your organization of our nearly 400,000 scrolls.<br><br> 
     - Head Librarian Aristarchus
   pressEText: {fileID: 2195325134103196066}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!61 &522090953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3931,54 +3907,6 @@ Transform:
   m_Father: {fileID: 1439061715}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &592307041
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 592307043}
-  - component: {fileID: 592307044}
-  m_Layer: 0
-  m_Name: PauseMenuUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &592307043
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592307041}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 153.49445, y: 3.3646007, z: 0.31983402}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &592307044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592307041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: f1bfae8b759bdae4d96d733aa1bbc562, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: a9f07f460fb05c34d85a53aa7eb81262, type: 3}
-  m_SortingOrder: 0
 --- !u!4 &657276932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1547413830857976226, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
@@ -4181,8 +4109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: "This note is to be catalogued for future keepers of scrolls and important
     knowledge for far after I am gone.<br><br>  Quickly becoming overwhelmed and
     dissatisfied with the method that Alexandria uses to store scrolls, as well as
@@ -4198,13 +4125,6 @@ MonoBehaviour:
     them in the future,<br><br>  - Petsis, Sub-Librarian "
   pressEText: {fileID: 0}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!212 &673080616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5598,21 +5518,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: Dear Acolyte,<br><br>  If you come across an obstacle in your path, perhaps
     the wisest course of action is to push the object to get it out of your way by
     pressing the E button. Then see if you can use a lever.<br><br>Sincerely,<br><br> 
     Head Librarian
   pressEText: {fileID: 0}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!212 &1046704611
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7681,8 +7593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: "It is hard to know that amount of history that was lost with the burning
     of the Library of Alexandria. This knowledge has had many deaths in its time
     however, and the accidental burning of this building during Julius Caesar\u2019s
@@ -7695,13 +7606,6 @@ MonoBehaviour:
     burn everything. Truly terrible.<br><br>  - A distraught citizen of Alexandria"
   pressEText: {fileID: 0}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!212 &1389410026
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7931,7 +7835,7 @@ Transform:
   - {fileID: 1398739675}
   - {fileID: 1030830183}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1390599419
 GameObject:
@@ -8316,7 +8220,7 @@ Transform:
   m_Children:
   - {fileID: 562426387}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1444528254
 PrefabInstance:
@@ -10159,7 +10063,7 @@ Transform:
   m_Children:
   - {fileID: 758995235}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1975728556
 GameObject:
@@ -10209,8 +10113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0d7c7111b3ad149b9fbf60846111cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollPanel: {fileID: 1027933569727437162}
-  textUI: {fileID: 1027933569534019186}
+  ScrollController: {fileID: 2099889264}
   text: "Dear Paarbrahm,<br><br>  You may want to prepare yourself and other library
     retainers for the incoming deposit of scrolls that a certain Roman politician
     will be donating numbering around 200,000, likely in recompense for the attack
@@ -10223,13 +10126,6 @@ MonoBehaviour:
     library.<br><br>  - Didymus \u201CBronze-Guts\u201D Chalcenterus"
   pressEText: {fileID: 0}
   requirements: 0
-  textSize: 30
-  textSizeShift: 0
-  shiftedTextSize: 0
-  bold: 0
-  italics: 0
-  underline: 0
-  strikethrough: 0
 --- !u!212 &1975728559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10672,7 +10568,7 @@ Transform:
   m_Children:
   - {fileID: 1720918050}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2016721219 stripped
 Transform:
@@ -10921,6 +10817,17 @@ Transform:
   m_Father: {fileID: 1256670061}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2099889264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7142946094375472175, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
+  m_PrefabInstance: {fileID: 1137120950629373391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d30cbed8ddca2f448c5404d0e20a260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2101418592
 GameObject:
   m_ObjectHideFlags: 0
@@ -11005,26 +10912,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &595915146349310108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595915146349310110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &595915146349310109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11032,7 +10919,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595915146349310110}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
@@ -11050,7 +10937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 595915146349310111}
   - component: {fileID: 595915146349310109}
-  - component: {fileID: 595915146349310108}
+  - component: {fileID: 595915146349310112}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -11073,6 +10960,36 @@ Transform:
   m_Father: {fileID: 595915147792668423}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &595915146349310112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595915146349310110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &595915146689031108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11613,7 +11530,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11658,6 +11575,10 @@ PrefabInstance:
     - target: {fileID: 1137120950294833302, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
       propertyPath: m_Name
       value: GameplayUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7142946094375472175, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
@@ -12554,7 +12475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2708325522575174934, guid: 50bd4e9082979ba48b833be540fc4a29, type: 3}
       propertyPath: overrideBool
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2708325522575174934, guid: 50bd4e9082979ba48b833be540fc4a29, type: 3}
       propertyPath: overrideIndex
