@@ -189,7 +189,7 @@ public class LocalGameManager : MythologyMayhem
             }
             else if(sceneCheck.name != "Null")
             {
-                mainGameManager.LoadScene(scenesLoadedOnStart[i]);
+                StartCoroutine(mainGameManager.LoadScene(scenesLoadedOnStart[i]));
                 check = false;
             }
 
