@@ -18,24 +18,15 @@ public class ScrollScript : MonoBehaviour
     // --------------------------
     // ***PROPERTIES***
     // --------------------------
-    [SerializeField] GameObject ScrollPanel;
-    [SerializeField] TextMeshProUGUI textUI;
+    [SerializeField] Scroll_Controller ScrollController;
     [TextArea(7,10)]
     [SerializeField] string text;
     [SerializeField] GameObject pressEText;
     bool keyTriggered;
+    bool activeStatus = false;
     float keyCooldown;
 
     [SerializeField] bool requirements;
-
-    // EFFECTS
-    [SerializeField] float textSize = 30f;
-    [SerializeField] bool textSizeShift = false;
-    [SerializeField] float shiftedTextSize;
-    [SerializeField] bool bold;
-    [SerializeField] bool italics;
-    [SerializeField] bool underline;
-    [SerializeField] bool strikethrough;
 
     // --------------------------
     // ***METHODS***
@@ -44,12 +35,10 @@ public class ScrollScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textUI.text = "";
-        //print(gameObject.name + ": " + text);
         keyTriggered = false;
         keyCooldown = 1f;
 
-        textUI.fontSize = textSize;
+        CloseScroll();
     }//end start
 
     void Update()
@@ -78,15 +67,16 @@ public class ScrollScript : MonoBehaviour
                 pressEText.SetActive(true);
             }
 
-            if(keyTriggered && !ScrollPanel.activeSelf) {
-                this.gameObject.GetComponent<AudioSource>().Play();
+            if(keyTriggered && !activeStatus) {
+                gameObject.GetComponent<AudioSource>().Play();
                 OpenScroll();
-                Debug.Log("Opening Scroll: " + text.Substring(0, 20));
                 keyTriggered = false;
-            } else if(keyTriggered && ScrollPanel.activeSelf) {
-                this.gameObject.GetComponent<AudioSource>().Play();
+                activeStatus = true;
+            } else if(keyTriggered && activeStatus) {
+                gameObject.GetComponent<AudioSource>().Play();
                 CloseScroll();
                 keyTriggered = false;
+                activeStatus = false;
             }
         }       
     }//end on collision stay 2d
@@ -104,42 +94,11 @@ public class ScrollScript : MonoBehaviour
 
     public void OpenScroll()
     {
-        LoadText();
-        ScrollPanel.SetActive(true);
-        textUI.fontSize = textSize;
-        textUI.fontStyle = FontStyles.Normal;
-        ScrollRect scroll = textUI.gameObject.GetComponentInParent<ScrollRect>();
-        scroll.verticalNormalizedPosition = 1f;
-        //FontStyle fontEffect = new FontStyle();
-        //fontEffect = FontStyles.Normal;
-        if (textSizeShift)
-        {
-            textUI.fontSize = shiftedTextSize;
-        }
-        if(bold)
-        {
-            textUI.fontStyle = FontStyles.Bold;
-        }
-        if (italics)
-        {
-            textUI.fontStyle = FontStyles.Italic;
-        }
-        if (underline)
-        {
-            textUI.fontStyle = FontStyles.Underline;
-        }
-        if (strikethrough)
-        {
-            textUI.fontStyle = FontStyles.Strikethrough;
-        }
+        ScrollController.OpenScroll(text);
     }//end open scroll
 
     public void CloseScroll() {
-        ScrollPanel.SetActive(false);
+        ScrollController.CloseScroll();
     }//end close scroll
-
-    void LoadText() {
-        textUI.text = this.text;
-    }//end load text
 
 }

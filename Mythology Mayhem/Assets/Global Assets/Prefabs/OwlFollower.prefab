@@ -257,6 +257,7 @@ MonoBehaviour:
   deathTrigger: Death
   healTrigger: 
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
@@ -272,10 +273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be876c646a6472a4da6718ed91352dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   _health: {fileID: 0}
   _player: {fileID: 0}
   anim: {fileID: 6478159597610387669}
-  attackDamage: 5
+  attackDamage: 3
   attackRate: 2
   _td: {fileID: 7612252755361395717}
   walkingBool: 

@@ -23,17 +23,31 @@ public class GameManager : MythologyMayhem
     public bool checkProx;
     public bool checkUnneeded;
 
+    public float startDelay;
+
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
-        LoadSystemsStart();
+        Application.backgroundLoadingPriority = ThreadPriority.Low;
     }
 
     // Update is called once per frame
     void Update()
     {
-        LoadSystemsUpdate();
+        if (startDelay > 0)
+        {
+            startDelay -= Time.deltaTime;
+            if (startDelay <= 0)
+            {
+                startDelay = 0;
+                LoadSystemsStart();
+            }
+        }
+        else
+        {
+            LoadSystemsUpdate();
+        }
     }
 
     void LoadSystemsStart() 
