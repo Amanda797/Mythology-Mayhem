@@ -25,6 +25,7 @@ public class GameManager : MythologyMayhem
     public bool checkUnneeded;
 
     public float startDelay;
+    public float unloadDelay;
 
     [Header("Testing")]
     public string testSceneLoad;
@@ -54,6 +55,15 @@ public class GameManager : MythologyMayhem
         {
             LoadSystemsUpdate();
         }
+
+        if (unloadDelay > 0) 
+        {
+            unloadDelay -= Time.deltaTime;
+            if (unloadDelay <= 0) 
+            {
+                Resources.UnloadUnusedAssets();
+            }
+        }
     }
 
     void LoadSystemsStart() 
@@ -61,15 +71,9 @@ public class GameManager : MythologyMayhem
         gameData.SetStartScene();
 
         playerControllers = new List<ScenePlayerObject>();
-        if (gameData.overrideLoad) 
-        {
-            loadScreenCamera.enabled = true;
-            StartCoroutine(LoadStartScene(testSceneLoad));
-        }
-        else
-        {
-            StartCoroutine(LoadStartScene(gameData.startScene.ToString()));
-        }
+        
+        StartCoroutine(LoadStartScene(gameData.startScene.ToString()));
+        
         DontDestroyOnLoad(this.gameObject);
         startSceneLoaded = false;
         checkStart = false;
@@ -216,7 +220,7 @@ public class GameManager : MythologyMayhem
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
-            loadProgress.text = ("Loading : " + (asyncLoad.progress * 100) + "%");
+            loadProgress.text = ("Loading " + scene.ToString() + ": " + (asyncLoad.progress * 100) + "%");
             yield return null;
         }
     }
@@ -227,6 +231,7 @@ public class GameManager : MythologyMayhem
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
+            print("Loading " + scene.ToString() + ": " + (asyncLoad.progress * 100) + "%");
             yield return null;
         }
     }
@@ -237,12 +242,14 @@ public class GameManager : MythologyMayhem
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
+            print("Loading " + scene.ToString() + ": " + (asyncLoad.progress * 100) + "%");
             yield return null;
         }
     }
 
     public void UnloadScene(string scene) 
     {
+        print(scene);
         for (int i = loadedLocalManagers.Count - 1; i >= 0; i--) 
         {
             if (loadedLocalManagers[i].inScene.ToString() == scene) 
@@ -257,7 +264,7 @@ public class GameManager : MythologyMayhem
                 playerControllers.RemoveAt(i);
             }
         }
-        StartCoroutine(UnloadSceneIEnum(scene));
+        SceneManager.UnloadSceneAsync(scene);
     }
     public IEnumerator UnloadSceneIEnum(string scene) 
     {
