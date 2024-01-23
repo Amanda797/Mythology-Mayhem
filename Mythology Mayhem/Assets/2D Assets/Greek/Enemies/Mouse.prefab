@@ -191,7 +191,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.16, y: 0.04}
+  m_Offset: {x: -0.021142721, y: 0.28}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -202,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.13, y: 2.27}
+  m_Size: {x: 7.88, y: 2.9}
   m_EdgeRadius: 0
 --- !u!50 &3047567049538542250
 Rigidbody2D:
@@ -402,10 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefKeys:
-  - spawningScene
-  - spwanPointIndex
-  - playerIndex
   rigidBody2D: {fileID: 3047567049538542250}
   spriteRenderer: {fileID: 8389002920890670440}
   rigidBody3D: {fileID: 0}
@@ -519,7 +515,7 @@ MonoBehaviour:
   patrolDistance: 2
   body: {fileID: 8389002920890670447}
   attackTrigger: Attacking
-  meleeDistance: 4
+  meleeDistance: 15
   alertTimer: 3
   dropsScrolls: 0
   countdown: 4
@@ -542,6 +538,7 @@ MonoBehaviour:
   - {fileID: 4016066765672382690}
   - {fileID: 5035569384875239389}
   - {fileID: 5442366955441259943}
+  - {fileID: 8389002920890670442}
   - {fileID: 1221228166332000560}
   mainObject: {fileID: 450319774758561872}
   rewardObject: {fileID: 0}
@@ -553,7 +550,6 @@ MonoBehaviour:
   deathTrigger: Dead
   healTrigger: 
   _attacked: 0
-  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
@@ -570,7 +566,7 @@ GameObject:
   - component: {fileID: 5081717967724157105}
   m_Layer: 0
   m_Name: SoundTrigger
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +610,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.08}
+  m_Size: {x: 1, y: 0.6}
   m_EdgeRadius: 0
 --- !u!114 &5081717967724157105
 MonoBehaviour:
