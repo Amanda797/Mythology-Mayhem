@@ -123,6 +123,79 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &264286215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264286218}
+  - component: {fileID: 264286217}
+  - component: {fileID: 264286216}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &264286216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264286215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &264286217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264286215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &264286218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264286215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &721076300 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 721076300, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
+  m_PrefabInstance: {fileID: 1386171598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1386171598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,42 +203,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipUXML
-      value: 
-      objectReference: {fileID: 9197481963319205126, guid: 2e1922316a54f004b853c52048419d62, type: 3}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: useShipHealth
-      value: 0
+    - target: {fileID: 721076300, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.size
-      value: 6
+    - target: {fileID: 1160035678, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
       objectReference: {fileID: 0}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: a07acce4eb380fd43ad416c3300d9105, type: 3}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 7cfeade0a12ebff46bf2fa100dc1688f, type: 3}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: b83279930e763e14baa90868d2835a0b, type: 3}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8e875d4d02ff5bb43b1cb7c41639b516, type: 3}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: ca1cfd9b69612024292b726a352b4bc6, type: 3}
-    - target: {fileID: 1137120949267275061, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: _shipModes.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: ac212b9daf0619b4d92eb94d752f8858, type: 3}
+    - target: {fileID: 1985785893, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8568198963555671635, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -212,55 +261,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8568198963555671636, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: startDelay
-      value: 5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8568198963555671636, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: startScene
-      value: VikingVillage_2D
+      propertyPath: unloadDelay
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8568198963555671636, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: currentScene
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8568198963555671636, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: playerControllers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: loadScreenCamera
+      value: 
+      objectReference: {fileID: 721076300}
     - target: {fileID: 8568198963555671637, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: startScene
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: overrideLoad
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: spawnerToUse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: selectedCharacter
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: overrideStartScene
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: highestLevelCompleted
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: highestChapterCompleted
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-      propertyPath: VV3DConditionals.Array.size
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
