@@ -217,10 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefKeys:
-  - spawningScene
-  - spwanPointIndex
-  - playerIndex
   rigidBody2D: {fileID: 1771615849059406565}
   spriteRenderer: {fileID: 5095419021229708583}
   rigidBody3D: {fileID: 0}
@@ -540,7 +536,6 @@ MonoBehaviour:
   deathTrigger: Dead
   healTrigger: 
   _attacked: 0
-  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
@@ -626,6 +621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4826867422043470243}
+  - component: {fileID: 5345739611764541961}
   m_Layer: 6
   m_Name: Waypoint 1
   m_TagString: Untagged
@@ -648,6 +644,18 @@ Transform:
   m_Father: {fileID: 2121983305367499950}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5345739611764541961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321535897693837951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6007551293315488710
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3834386799553522079}
+  - component: {fileID: 3761303589675635411}
   m_Layer: 6
   m_Name: Waypoint 2
   m_TagString: Untagged
@@ -679,3 +688,15 @@ Transform:
   m_Father: {fileID: 2121983305367499950}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3761303589675635411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6007551293315488710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
