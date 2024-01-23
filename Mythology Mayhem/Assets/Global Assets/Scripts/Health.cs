@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
     public void Respawn(float _respawnHealth)
     {
         SetHealth(_respawnHealth);
-    }
+    }//end respawn
 
     public void TakeDamage(float d) {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
@@ -93,7 +93,7 @@ public class Health : MonoBehaviour
             healSound.Play();
         if (anim != null)
             anim.SetTrigger(healTrigger);
-        Life += h;
+        Life += Mathf.Clamp(h,h,MaxHealth);
     }//end heal
 
     public void Death() {
