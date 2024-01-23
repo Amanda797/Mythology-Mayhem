@@ -62,17 +62,27 @@ public class Enemy : MythologyMayhem
         currentStatePosition = StatePosition.Entry;
         StartCoroutine(SwitchStates(currentState,0));
 
+        /*
         GameObject tempLocalManager = GameObject.FindGameObjectWithTag("LocalGameManager");
 
         if (tempLocalManager != null)
         {
             _localGameManager =  tempLocalManager.GetComponent<LocalGameManager>();
         }
+        */
         
     }//end Start
 
     void Update()
     { 
+        //set reference to player if in a scene using the StartScene feature
+
+        if(_localGameManager != null && player == null)
+        {
+            if(_localGameManager.player != null){
+                player = _localGameManager.player.gameObject;
+            }
+        }
         //Check for Death
 
         if (health.GetHealth() <= 0 && currentState != EnemyStates.Dead)
