@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MythologyMayhem
 {
@@ -25,12 +24,6 @@ public class GameManager : MythologyMayhem
     public bool checkUnneeded;
 
     public float startDelay;
-    public float unloadDelay;
-
-    [Header("Testing")]
-    public string testSceneLoad;
-    public Camera loadScreenCamera;
-    public Text loadProgress;
 
     // Start is called before the first frame update
     void Awake()
@@ -55,15 +48,6 @@ public class GameManager : MythologyMayhem
         {
             LoadSystemsUpdate();
         }
-
-        if (unloadDelay > 0) 
-        {
-            unloadDelay -= Time.deltaTime;
-            if (unloadDelay <= 0) 
-            {
-                Resources.UnloadUnusedAssets();
-            }
-        }
     }
 
     void LoadSystemsStart() 
@@ -71,9 +55,14 @@ public class GameManager : MythologyMayhem
         gameData.SetStartScene();
 
         playerControllers = new List<ScenePlayerObject>();
-        
-        StartCoroutine(LoadStartScene(gameData.startScene.ToString()));
-        
+        if (gameData.overrideLoad) 
+        {
+            LoadScene(gameData.overrideStartScene);
+        }
+        else
+        {
+            LoadScene(gameData.startScene);
+        }
         DontDestroyOnLoad(this.gameObject);
         startSceneLoaded = false;
         checkStart = false;
@@ -85,41 +74,18 @@ public class GameManager : MythologyMayhem
     {
         if (!startSceneLoaded)
         {
-            if (gameData.overrideLoad) 
+            if (SceneManager.GetSceneByName(gameData.startScene.ToString()).isLoaded)
             {
-                if (SceneManager.GetSceneByName(testSceneLoad).isLoaded)
+                startSceneLoaded = true;
+                currentScene = gameData.startScene;
+                for (int i = 0; i < loadedLocalManagers.Count; i++)
                 {
-                    startSceneLoaded = true;
-                    currentScene = gameData.startScene;
-                    for (int i = 0; i < loadedLocalManagers.Count; i++)
+                    if (loadedLocalManagers[i].inScene == currentScene)
                     {
-                        if (loadedLocalManagers[i].inScene == currentScene)
-                        {
-                            currentLocalManager = loadedLocalManagers[i];
-                        }
+                        currentLocalManager = loadedLocalManagers[i];
                     }
-                    SceneManager.UnloadSceneAsync("StartScene");
-
-                    loadScreenCamera.enabled = false; ;
                 }
-            }
-            else
-            {
-                if (SceneManager.GetSceneByName(gameData.startScene.ToString()).isLoaded)
-                {
-                    startSceneLoaded = true;
-                    currentScene = gameData.startScene;
-                    for (int i = 0; i < loadedLocalManagers.Count; i++)
-                    {
-                        if (loadedLocalManagers[i].inScene == currentScene)
-                        {
-                            currentLocalManager = loadedLocalManagers[i];
-                        }
-                    }
-                    SceneManager.UnloadSceneAsync("StartScene");
-
-                    loadScreenCamera.enabled = false;
-                }
+                SceneManager.UnloadSceneAsync("StartScene");
             }
         }
         if (!currentSceneLoaded && startSceneLoaded)
@@ -213,43 +179,17 @@ public class GameManager : MythologyMayhem
         return check;
     }
 
-    public IEnumerator LoadStartScene(string scene)
+    public void LoadScene(Level scene) 
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            loadProgress.text = ("Loading " + scene.ToString() + ": " + (asyncLoad.progress * 100) + "%");
-            yield return null;
-        }
+        SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
     }
-    public IEnumerator LoadScene(Level scene) 
+    public void LoadScene(string scene) 
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            print("Loading " + scene.ToString() + ": " + (asyncLoad.progress * 100) + "%");
-            yield return null;
-        }
-    }
-    public IEnumerator LoadScene(string scene) 
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-        print(asyncLoad.isDone + ": Loaded");
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            print("Loading " + scene.ToString() + ": " + (asyncLoad.progress * 100) + "%");
-            yield return null;
-        }
+        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 
     public void UnloadScene(string scene) 
     {
-        print(scene);
         for (int i = loadedLocalManagers.Count - 1; i >= 0; i--) 
         {
             if (loadedLocalManagers[i].inScene.ToString() == scene) 
@@ -266,16 +206,7 @@ public class GameManager : MythologyMayhem
         }
         SceneManager.UnloadSceneAsync(scene);
     }
-    public IEnumerator UnloadSceneIEnum(string scene) 
-    {
-        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(scene.ToString());
 
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
     void SetCurrentLocalGameManager(Level scene) 
     {
         for (int i = 0; i < loadedLocalManagers.Count; i++)
