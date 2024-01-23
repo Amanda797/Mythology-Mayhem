@@ -31,6 +31,7 @@ Transform:
   - {fileID: 3600100342448474536}
   - {fileID: 7198740032207236557}
   - {fileID: 2972434746738421138}
+  - {fileID: 7642123143132829240}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,6 +66,68 @@ Transform:
   m_Father: {fileID: 3600100342448474536}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4718580048383382522
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4962412473099732827}
+    m_Modifications:
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.561
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.336
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131555417526257091, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+      propertyPath: m_Name
+      value: ThrowPoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+--- !u!4 &7642123143132829240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3131555417526257090, guid: f2d11678ddb124a43bd07e02735df505, type: 3}
+  m_PrefabInstance: {fileID: 4718580048383382522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7199363402482985323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,10 +526,58 @@ MonoBehaviour:
   delay: 0.15
   OnBegin:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4613342907067687165}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6887137851582396208}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDone:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4613342907067687165}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6887137851582396208}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &4613342907067687165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +590,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
   rigidBody3D: {fileID: 2104184702908454589}
@@ -503,70 +618,79 @@ MonoBehaviour:
   idleTimer: 0
   IdleDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6887137851582396208}
+        m_TargetAssemblyTypeName: Wizard3D, Assembly-CSharp
+        m_MethodName: Idle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6887137851582396208}
+        m_TargetAssemblyTypeName: Wizard3D, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   AttackDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6887137851582396208}
+        m_TargetAssemblyTypeName: Wizard3D, Assembly-CSharp
+        m_MethodName: SummonFamiliar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6887137851582396208}
+        m_TargetAssemblyTypeName: Wizard3D, Assembly-CSharp
+        m_MethodName: RangedAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7320916493271483661}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
---- !u!114 &6887137851582396208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7200543647915431151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 882760cbd3b5e8f4ba5bd5bf1383a752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkBool: 
-  runBool: 
-  patrolDistance: 30
-  body: {fileID: 0}
-  meleeAttackTrigger: 
-  meleeDistance: 10
-  snowballPrefab: {fileID: 0}
-  throwPoint: {fileID: 0}
-  throwForce: 0
-  rangedAttackTrigger: 
-  rangedDistance: 20
---- !u!114 &7320916493271483661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7200543647915431151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 0
-  _health: 0
-  components: []
-  mainObject: {fileID: 0}
-  rewardObject: {fileID: 0}
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  healSound: {fileID: 0}
-  anim: {fileID: 0}
-  hurtTrigger: 
-  deathTrigger: 
-  healTrigger: 
-  _attacked: 0
-  _defenseTimer: 0
-  respawnTimer: 50
-  canRespawn: 0
 --- !u!195 &6375517180583701463
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -589,6 +713,66 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6887137851582396208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200543647915431151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882760cbd3b5e8f4ba5bd5bf1383a752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolBool: IsPatrolling
+  patrolDistance: 30
+  body: {fileID: 7200543647915431151}
+  meleeAttackTriggers:
+  - CastSpell
+  familiars:
+  - {fileID: 8316720008822130727, guid: f8e2ecc26fea31444b328dbe71af7f57, type: 3}
+  - {fileID: 8316720008822130727, guid: f8e2ecc26fea31444b328dbe71af7f57, type: 3}
+  meleeDistance: 10
+  snowballPrefab: {fileID: 0}
+  throwPoint: {fileID: 7642123143132829240}
+  throwForce: 200
+  rangedAttackTrigger: CastSpell
+  rangedDistance: 20
+--- !u!114 &7320916493271483661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200543647915431151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 8
+  _health: 0
+  components:
+  - {fileID: 6887137851582396208}
+  - {fileID: 6375517180583701463}
+  - {fileID: 4613342907067687165}
+  - {fileID: 2541173146262617064}
+  - {fileID: 5702035377619306608}
+  mainObject: {fileID: 1206001108873929495}
+  rewardObject: {fileID: 0}
+  hurtSound: {fileID: 3945866805661179451}
+  deathSound: {fileID: 3945866805661179451}
+  healSound: {fileID: 0}
+  anim: {fileID: 7114136109339445685}
+  hurtTrigger: Hurt
+  deathTrigger: Death
+  healTrigger: CastSpell
+  _attacked: 0
+  _defenseUp: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!1001 &8705930143127122821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -674,15 +858,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2029083906118424742, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}
       propertyPath: m_Size.x
-      value: 2.34
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2029083906118424742, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}
       propertyPath: m_Size.y
-      value: 1.51
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2029083906118424742, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}
       propertyPath: m_Size.z
-      value: 5.48
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2029083906118424742, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}
       propertyPath: m_Center.y
@@ -739,6 +923,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6136495090391600664, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}
   m_PrefabInstance: {fileID: 8964696957954515850}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5702035377619306608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3695399851477101562, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}
+  m_PrefabInstance: {fileID: 8964696957954515850}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095484243472996143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d0d763048fde548bfa067020dcc5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9095484243472996143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 166816633421673637, guid: 2b9aa993d2a733d4bb541eafaa420179, type: 3}

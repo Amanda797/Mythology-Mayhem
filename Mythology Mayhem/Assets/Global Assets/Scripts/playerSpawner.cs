@@ -11,7 +11,6 @@ public class playerSpawner : MythologyMayhem
     public Dimension type;
 
     int spawnPointIndex;
-    int playerIndex;
     int sceneIndex;
     public List<Transform> spawnPoints = new List<Transform>();
     public GameObject playerContainer2D;
@@ -57,7 +56,7 @@ public class playerSpawner : MythologyMayhem
 
                 spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
 
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
 
                 spawnPlayerContainer.GetComponentInChildren<CompanionController>()._player = obj;
 
@@ -70,7 +69,7 @@ public class playerSpawner : MythologyMayhem
             {
                 spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
 
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
 
                 spawnPlayerContainer.GetComponentInChildren<CompanionController>()._player = obj;
 
@@ -87,7 +86,7 @@ public class playerSpawner : MythologyMayhem
                 spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
                 print(spawnPlayerContainer);
 
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
+                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
 
                 obj.transform.position = spawnPoints[spawnPointIndex].position;
                 obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
@@ -98,7 +97,7 @@ public class playerSpawner : MythologyMayhem
             {
                 spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
 
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[playerIndex], spawnPlayerContainer.transform);
+                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
 
                 obj.transform.position = spawnPoints[spawnPointIndex].position;
                 obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
