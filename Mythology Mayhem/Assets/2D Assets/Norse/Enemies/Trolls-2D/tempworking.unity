@@ -395,6 +395,66 @@ Transform:
   m_Father: {fileID: 1510987677}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &536260088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 536260089}
+  - component: {fileID: 536260091}
+  - component: {fileID: 536260090}
+  m_Layer: 0
+  m_Name: AttackTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &536260089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536260088}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.64, y: -1.0989532, z: -0.41944385}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1763722107}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &536260090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536260088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3, y: 1.68, z: 3.3}
+  m_Center: {x: 0, y: 0.81, z: 0}
+--- !u!114 &536260091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536260088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d0d763048fde548bfa067020dcc5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  otherCollider3D: {fileID: 0}
 --- !u!1 &568096896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1224,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2274377843945941383}
+  - {fileID: 536260089}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2430,8 +2491,8 @@ MonoBehaviour:
   walkBool: Walking
   runBool: Running
   patrolDistance: 30
-  body: {fileID: 0}
-  meleeAttackTrigger: 
+  body: {fileID: 1503048019385971517}
+  meleeAttackTrigger: MeleeAttack
   meleeDistance: 10
 --- !u!114 &2274377843945941385
 MonoBehaviour:
@@ -2451,16 +2512,16 @@ MonoBehaviour:
   - playerIndex
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  rigidBody3D: {fileID: 0}
-  agent: {fileID: 0}
-  enemyDimension: 0
-  health: {fileID: 0}
-  animator: {fileID: 0}
+  rigidBody3D: {fileID: 2274377843945941390}
+  agent: {fileID: 2274377843945941387}
+  enemyDimension: 1
+  health: {fileID: 2274377843945941386}
+  animator: {fileID: 2274377843945941388}
   player: {fileID: 0}
-  attackRate: 0
-  attackDamage: 0
+  attackRate: 2
+  attackDamage: 2
   canAttack: 1
-  attackCollider: {fileID: 0}
+  attackCollider: {fileID: 536260088}
   walkSpeed: 5
   runSpeed: 10
   waypoints: []
@@ -2470,16 +2531,64 @@ MonoBehaviour:
   idleTimer: 0
   IdleDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2274377843945941384}
+        m_TargetAssemblyTypeName: SnowBomb, Assembly-CSharp
+        m_MethodName: Idle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2274377843945941384}
+        m_TargetAssemblyTypeName: SnowBomb, Assembly-CSharp
+        m_MethodName: MoveToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   AttackDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2274377843945941384}
+        m_TargetAssemblyTypeName: SnowBomb, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2274377843945941386}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
@@ -2495,17 +2604,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  _health: 0
+  MaxHealth: 10
+  _health: 10
   components: []
-  mainObject: {fileID: 0}
+  mainObject: {fileID: 7089177810246992339}
   rewardObject: {fileID: 0}
   hurtSound: {fileID: 0}
   deathSound: {fileID: 0}
   healSound: {fileID: 0}
-  anim: {fileID: 0}
-  hurtTrigger: 
-  deathTrigger: 
+  anim: {fileID: 2274377843945941388}
+  hurtTrigger: Hurt
+  deathTrigger: Die
   healTrigger: 
   _attacked: 0
   _defenseUp: 0
@@ -2520,8 +2629,8 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503048019385971517}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2530,7 +2639,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -2544,7 +2653,7 @@ Animator:
   m_GameObject: {fileID: 1503048019385971517}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 59fae51955a2c4d4fab0afac8a4bb017, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4036,10 +4145,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 807217544237104201, guid: 6b72f792c003e1b41a435122633bb5f4, type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 7089177810246992339}
     - target: {fileID: 7089177811483681040, guid: 6b72f792c003e1b41a435122633bb5f4, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -4092,7 +4197,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 6b72f792c003e1b41a435122633bb5f4, type: 3}
 --- !u!1 &7089177810246992339 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 33777791741159154, guid: 6b72f792c003e1b41a435122633bb5f4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7089177811483681043, guid: 6b72f792c003e1b41a435122633bb5f4, type: 3}
   m_PrefabInstance: {fileID: 7089177810246992338}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7100840057117712309
