@@ -101,4 +101,5 @@ public class SnowBomb : MonoBehaviour
             enemy.animator.SetBool(runBool, true);
         }
     }//end melee attack
+
 }
