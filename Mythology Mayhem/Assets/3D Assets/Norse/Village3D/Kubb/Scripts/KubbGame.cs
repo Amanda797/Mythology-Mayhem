@@ -100,7 +100,9 @@ public class KubbGame : MonoBehaviour
     public Vector3 curKubbPreviousPosition;
     public Vector3 AITarget;
     public float pauseTime;
+    public float animPlayTime;
     public float pauseTimeStamp;
+    public bool AIAnimPlaying;
     public bool AIThrowing;
     public int curKubbTravel;
 
@@ -113,6 +115,9 @@ public class KubbGame : MonoBehaviour
     [Header("Player Kubb Stand")]
     public bool playerStandStep1;
     public List<Vector3> PlayerKubbLandings;
+
+    public Animator AIAnim;
+    public bool gameOver;
 
     public enum PlayerTurn
     {
@@ -167,6 +172,7 @@ public class KubbGame : MonoBehaviour
         canGoForKing = new bool[2];
         canGoForKing[0] = false;
         canGoForKing[1] = false;
+        AIAnim.SetTrigger("Waiting");
     }
     // Update is called once per frame
     void Update()
@@ -256,12 +262,21 @@ public class KubbGame : MonoBehaviour
                 }
                 return;
             case State.AITossKubb:
-                CreateThrowArc(1, AITarget);
-                if (Time.time - pauseTimeStamp >= pauseTime && !AIThrowing)
+                if (!AIThrowing)
+                {
+                    CreateThrowArc(1, AITarget);
+                }
+                if (Time.time - pauseTimeStamp >= pauseTime && !AIAnimPlaying)
+                {
+                    AIAnimPlaying = true;
+                    AIAnim.SetTrigger("Toss");
+                }
+                if (Time.time - pauseTimeStamp >= animPlayTime && !AIThrowing && AIAnimPlaying)
                 {
                     AIThrowing = true;
                     AIThrowKubbs[curKubb].rb.isKinematic = false;
                     AIThrowKubbs[curKubb].rb.AddTorque(batonSpin, ForceMode.VelocityChange);
+                    lineRend.enabled = false;
                 }
                 if (AIThrowing)
                 {
@@ -292,6 +307,7 @@ public class KubbGame : MonoBehaviour
                             {
                                 AIThrowKubbs[curKubb].rb.velocity = Vector3.zero;
                                 AIThrowing = false;
+                                AIAnimPlaying = false;
                                 ChangeState(State.AICheckKubb);
                             }
                             curKubbPreviousPosition = AIThrowKubbs[curKubb].rb.transform.position;
@@ -301,6 +317,7 @@ public class KubbGame : MonoBehaviour
                             if (Time.time - throwTimeStamp > throwTimers.y)
                             {
                                 AIThrowing = false;
+                                AIAnimPlaying = false;
                                 ChangeState(State.AICheckKubb);
                             }
                         }
@@ -354,12 +371,21 @@ public class KubbGame : MonoBehaviour
                 }
                 return;
             case State.AIThrow:
-                CreateThrowArc(1, AITarget);
-                if (Time.time - pauseTimeStamp >= pauseTime && !AIThrowing)
+                if (!AIThrowing)
+                {
+                    CreateThrowArc(1, AITarget);
+                }
+                if (Time.time - pauseTimeStamp >= pauseTime && !AIAnimPlaying)
+                {
+                    AIAnimPlaying = true;
+                    AIAnim.SetTrigger("Toss");
+                }
+                if (Time.time - pauseTimeStamp >= animPlayTime && !AIThrowing && AIAnimPlaying)
                 {
                     AIThrowing = true;
                     batons[curBaton].isKinematic = false;
                     batons[curBaton].AddTorque(batonSpin, ForceMode.VelocityChange);
+                    lineRend.enabled = false;
                 }
                 if (AIThrowing)
                 {
@@ -388,6 +414,8 @@ public class KubbGame : MonoBehaviour
                         {
                             if (Time.time - throwTimeStamp > throwTimers.x)
                             {
+                                AIThrowing = false;
+                                AIAnimPlaying = false;
                                 batons[curBaton].velocity = Vector3.zero;
                                 ChangeState(State.AICheckThrow);
                             }
@@ -397,6 +425,8 @@ public class KubbGame : MonoBehaviour
                         {
                             if (Time.time - throwTimeStamp > throwTimers.y)
                             {
+                                AIThrowing = false;
+                                AIAnimPlaying = false;
                                 ChangeState(State.AICheckThrow);
                             }
                         }
@@ -506,7 +536,7 @@ public class KubbGame : MonoBehaviour
         switch (curState)
         {
             case State.ReadyUp:
-
+                readyText.SetActive(true);
                 return;
             case State.Accuracy:
                 readyText.SetActive(false);
@@ -534,14 +564,22 @@ public class KubbGame : MonoBehaviour
                 applyPhysics = false;
                 return;
             case State.CheckThrow:
-                canGoForKing[0] = !!CheckOpponentKubb();
+                canGoForKing[0] = !CheckOpponentKubb();
                 if (canGoForKing[0])
                 {
-                    CheckKing(PlayerTurn.Player);
+                    if (CheckKing(PlayerTurn.Player)) 
+                    {
+                        ChangeState(State.EndGame);
+                        return;
+                    }
                 }
                 else
                 {
-                    CheckKing(PlayerTurn.AI);
+                    if (CheckKing(PlayerTurn.AI))
+                    {
+                        ChangeState(State.EndGame);
+                        return;
+                    }
                 }
                 curBaton++;
                 curBatonTravel = 1;
@@ -577,9 +615,14 @@ public class KubbGame : MonoBehaviour
                 AITarget = new Vector3(Random.Range(CenterPins[0].position.x, CenterPins[1].position.x), target.position.y, Random.Range(PlayerCornerPins[0].position.z, CenterPins[0].position.z));
                 pauseTimeStamp = Time.time;
                 applyPhysics = false;
+                AIAnim.SetTrigger("Pickup");
                 return;
             case State.AICheckKubb:
-                CheckKing(PlayerTurn.Player);
+                if (CheckKing(PlayerTurn.Player))
+                {
+                    ChangeState(State.EndGame);
+                    return;
+                }
                 curKubb++;
                 if (curKubb < AIThrowKubbs.Count)
                 {
@@ -605,7 +648,7 @@ public class KubbGame : MonoBehaviour
             case State.AIThrow:
                 curBatonTravel = 1;
                 AITarget = FindTargetKubb(playerKubbs, 1).rb.transform.position;
-
+                AIAnim.SetTrigger("Pickup");
                 batons[curBaton].gameObject.SetActive(true);
                 pauseTimeStamp = Time.time;
                 applyPhysics = false;
@@ -613,11 +656,19 @@ public class KubbGame : MonoBehaviour
             case State.AICheckThrow:
                 if (canGoForKing[1])
                 {
-                    CheckKing(PlayerTurn.AI);
+                    if (CheckKing(PlayerTurn.AI))
+                    {
+                        ChangeState(State.EndGame);
+                        return;
+                    }
                 }
                 else
                 {
-                    CheckKing(PlayerTurn.Player);
+                    if (CheckKing(PlayerTurn.Player))
+                    {
+                        ChangeState(State.EndGame);
+                        return;
+                    }
                 }
                 curBaton++;
                 curBatonTravel = 1;
@@ -660,7 +711,11 @@ public class KubbGame : MonoBehaviour
                 applyPhysics = false;
                 return;
             case State.CheckToss:
-                CheckKing(PlayerTurn.AI);
+                if (CheckKing(PlayerTurn.AI))
+                {
+                    ChangeState(State.EndGame);
+                    return;
+                }
                 curKubb++;
                 curKubbTravel = 1;
                 if (curKubb < playerThrowKubbs.Count)
@@ -684,6 +739,16 @@ public class KubbGame : MonoBehaviour
             case State.StandKubb:
 
                 return;
+            case State.EndGame:
+                if (winner == PlayerTurn.Player)
+                {
+                    AIAnim.SetTrigger("Defeat");
+                }
+                else 
+                {
+                    AIAnim.SetTrigger("Cheer");
+                }
+                break;
         }
     }
     void InputCheck()
@@ -942,7 +1007,7 @@ public class KubbGame : MonoBehaviour
             rb.useGravity = false;
             rb.gameObject.SetActive(false);
             rb.transform.position = playerHands[player].position;
-            rb.transform.rotation = playerHands[player].rotation;
+            rb.transform.rotation = Quaternion.identity;
         }
     }
     void CheckKubbs(List<Kubb> KubbToCheck, List<Kubb> ThrowKubb)
@@ -969,14 +1034,17 @@ public class KubbGame : MonoBehaviour
         }
     }
 
-    void CheckKing(PlayerTurn whoWins)
+    bool CheckKing(PlayerTurn whoWins)
     {
+        print("Checking King");
         float angleCheck = Vector3.Angle(kingKubb.rb.transform.up, Vector3.up);
+        print(angleCheck + " : Angle of King to World Up.");
         if (angleCheck > 1)
         {
-            ChangeState(State.EndGame);
             winner = whoWins;
+            return true;
         }
+        return false;
     }
 
     bool CheckOpponentKubb()
