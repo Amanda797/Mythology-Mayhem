@@ -18,9 +18,9 @@ public class ScrollScript : MonoBehaviour
     // --------------------------
     // ***PROPERTIES***
     // --------------------------
-    [SerializeField] Scroll_Controller ScrollController;
     [TextArea(7,10)]
     [SerializeField] string text;
+    [SerializeField] GameObject scrollPanel;
     [SerializeField] GameObject pressEText;
     bool keyTriggered;
     bool activeStatus = false;
@@ -94,11 +94,12 @@ public class ScrollScript : MonoBehaviour
 
     public void OpenScroll()
     {
-        ScrollController.OpenScroll(text);
+        scrollPanel.SetActive(true);
     }//end open scroll
 
-    public void CloseScroll() {
-        ScrollController.CloseScroll();
+    public void CloseScroll()
+    {
+        scrollPanel.SetActive(false);
     }//end close scroll
 
 }
