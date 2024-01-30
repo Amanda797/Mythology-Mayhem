@@ -144,13 +144,9 @@ public class MenuManager : MonoBehaviour
             {
                 menuPanels[pauseBackgroundElement].SetActive(false);
                 menuPanels[pausePanelElement].SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
             } else {            
                 menuPanels[pauseBackgroundElement].SetActive(true);
                 menuPanels[pausePanelElement].SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
             } 
         }
         else {
