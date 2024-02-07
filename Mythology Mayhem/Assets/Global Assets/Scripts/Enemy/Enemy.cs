@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(Animator))]
+
 public class Enemy : MythologyMayhem
 {
     [Header("2D Components")]
@@ -121,8 +124,10 @@ public class Enemy : MythologyMayhem
 
     public IEnumerator SwitchStates(EnemyStates newState, float delay)
     {
+        currentStatePosition = StatePosition.Exit;
         ExitState(currentState);
         yield return new WaitForSeconds(delay);
+        currentStatePosition = StatePosition.Entry;
         currentState = newState;
         EnterState(currentState);
         currentStatePosition = StatePosition.Current;
@@ -130,8 +135,6 @@ public class Enemy : MythologyMayhem
 
     public void EnterState(EnemyStates newState)
     {
-        currentStatePosition = StatePosition.Entry;
-
         switch (newState)
         {
             case EnemyStates.Idle:
@@ -217,41 +220,48 @@ public class Enemy : MythologyMayhem
 
     public bool DetectPlayer()
     {
-        if(enemyDimension == Dimension.TwoD)
+        switch(enemyDimension)
         {
-            if(attackCollider.GetComponent<TriggerDetector2D>().triggered)
-            {
-                if(attackCollider.GetComponent<TriggerDetector2D>().otherCollider2D.CompareTag("Player"))
+            case Dimension.TwoD:
                 {
-                    target = attackCollider.GetComponent<TriggerDetector2D>().otherCollider2D.transform.position;
-                    player = attackCollider.GetComponent<TriggerDetector2D>().otherCollider2D.gameObject;
-                    return true;
-                } else
-                {
-                    return false;
+                    if (attackCollider.GetComponent<TriggerDetector2D>().triggered)
+                    {
+                        foreach (Collider2D go in attackCollider.GetComponent<TriggerDetector2D>().otherColliders2D)
+                        {
+                            if (go.CompareTag("Player"))
+                            {
+                                target = go.transform.position;
+                                player = go.gameObject;
+                                return true;
+                            }
+                        }
+                    }
+                    break;
                 }
-            } else
-            {
-                return false;
-            }
-        } else
-        {
-            if(attackCollider.GetComponent<TriggerDetector3D>().triggered)
-            {
-                if (attackCollider.GetComponent<TriggerDetector3D>().otherCollider3D.CompareTag("Player"))
+            case Dimension.ThreeD:
                 {
-                    target = attackCollider.GetComponent<TriggerDetector3D>().otherCollider3D.transform.position;
-                    player = attackCollider.GetComponent<TriggerDetector3D>().otherCollider3D.gameObject;
-                    return true;
+                    if (attackCollider.GetComponent<TriggerDetector3D>().triggered)
+                    {
+                        foreach (Collider go in attackCollider.GetComponent<TriggerDetector3D>().otherColliders3D)
+                        {
+                            if (go.CompareTag("Player"))
+                            {
+                                target = go.transform.position;
+                                player = go.gameObject;
+                                return true;
+                            }
+                        }
+                    }
+                    break;
                 }
-                else
+            default:
                 {
-                    return false;
+                    break;
                 }
-            } else
-            {
-                return false;
-            }
-        }
-    }
+        }//end switch
+
+        return false;
+
+    }//end detect player
+
 }
