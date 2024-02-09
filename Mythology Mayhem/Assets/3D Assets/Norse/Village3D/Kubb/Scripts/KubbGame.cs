@@ -265,11 +265,13 @@ public class KubbGame : MonoBehaviour
                 if (!AIThrowing)
                 {
                     CreateThrowArc(1, AITarget);
+                    AIThrowKubbs[curKubb].rb.gameObject.transform.position = playerHands[1].position;
                 }
                 if (Time.time - pauseTimeStamp >= pauseTime && !AIAnimPlaying)
                 {
                     AIAnimPlaying = true;
                     AIAnim.SetTrigger("Toss");
+                    AIThrowKubbs[curKubb].rb.gameObject.transform.position = playerHands[1].position;
                 }
                 if (Time.time - pauseTimeStamp >= animPlayTime && !AIThrowing && AIAnimPlaying)
                 {
@@ -374,11 +376,13 @@ public class KubbGame : MonoBehaviour
                 if (!AIThrowing)
                 {
                     CreateThrowArc(1, AITarget);
+                    batons[curBaton].gameObject.transform.position = playerHands[1].position;
                 }
                 if (Time.time - pauseTimeStamp >= pauseTime && !AIAnimPlaying)
                 {
                     AIAnimPlaying = true;
                     AIAnim.SetTrigger("Toss");
+                    batons[curBaton].gameObject.transform.position = playerHands[1].position;
                 }
                 if (Time.time - pauseTimeStamp >= animPlayTime && !AIThrowing && AIAnimPlaying)
                 {
