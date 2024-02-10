@@ -195,7 +195,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.8, y: 2.8}
+    oldSize: {x: 6.826667, y: 2.8}
     newSize: {x: 6.8, y: 2.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -402,6 +402,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   rigidBody2D: {fileID: 3047567049538542250}
   spriteRenderer: {fileID: 8389002920890670440}
   rigidBody3D: {fileID: 0}
@@ -515,7 +519,7 @@ MonoBehaviour:
   patrolDistance: 2
   body: {fileID: 8389002920890670447}
   attackTrigger: Attacking
-  meleeDistance: 15
+  meleeDistance: 5
   alertTimer: 3
   dropsScrolls: 0
   countdown: 4
@@ -550,6 +554,7 @@ MonoBehaviour:
   deathTrigger: Dead
   healTrigger: 
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
@@ -626,6 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider2D: {fileID: 0}
+  otherColliders2D: []
 --- !u!1 &8864436034336363056
 GameObject:
   m_ObjectHideFlags: 0
