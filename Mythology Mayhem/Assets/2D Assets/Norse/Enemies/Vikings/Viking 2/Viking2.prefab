@@ -204,7 +204,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 60
-  m_Sprite: {fileID: 835940547, guid: 13fa7a0eaa1e003428f0cc2f040bdf3c, type: 3}
+  m_Sprite: {fileID: -375931800, guid: b222f00b7e1550d49b8f1bafbea71cb9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -273,17 +273,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   rigidBody2D: {fileID: 9215012346645743400}
   spriteRenderer: {fileID: 9215012346645743395}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   enemyDimension: 0
-  player: {fileID: 0}
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 8
   health: {fileID: 3447044666153701234}
   animator: {fileID: 9215012346645743394}
+  player: {fileID: 0}
   attackRate: 1.5
   attackDamage: 2
   canAttack: 1
@@ -369,6 +370,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
 --- !u!50 &9215012346645743400
@@ -570,6 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 8
+  _health: 0
   components:
   - {fileID: 964127300907280597}
   - {fileID: 9215012346645743407}
@@ -585,6 +588,11 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: IsDead
   healTrigger: 
+  _attacked: 0
+  _defenseUp: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
 --- !u!114 &964127300907280597
 MonoBehaviour:
   m_ObjectHideFlags: 0
