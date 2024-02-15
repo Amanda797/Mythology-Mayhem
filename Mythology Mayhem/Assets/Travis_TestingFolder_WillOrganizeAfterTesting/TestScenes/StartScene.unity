@@ -191,11 +191,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &721076300 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 721076300, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
-  m_PrefabInstance: {fileID: 1386171598}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1386171598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,7 +269,7 @@ PrefabInstance:
     - target: {fileID: 8568198963555671636, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: loadScreenCamera
       value: 
-      objectReference: {fileID: 721076300}
+      objectReference: {fileID: 0}
     - target: {fileID: 8568198963555671637, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -285,7 +280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: overrideLoad
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: overrideStartScene
@@ -293,7 +288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
       propertyPath: highestLevelCompleted
-      value: 15
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214966140412943663, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
+      propertyPath: highestChapterCompleted
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b0f533f07537b04b8e2277bfe245040, type: 3}
