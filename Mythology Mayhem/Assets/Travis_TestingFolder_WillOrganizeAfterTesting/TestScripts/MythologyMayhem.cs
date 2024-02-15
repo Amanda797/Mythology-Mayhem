@@ -32,8 +32,9 @@ public class MythologyMayhem : MonoBehaviour
         VikingShip_2D_CrossOver,
         VikingBoss_3D,
         EgyptianVillage_2D,
-        EpytianDesertDay_2D,
-        EpytianDesertNight_2D,
+        EgyptianVillage_3D,
+        EgyptianDesertDay_2D,
+        EgyptianDesertNight_2D,
         EgyptianOutsidePyramid_2D,
         EgyptianInsidePyramid_2D,
         None
