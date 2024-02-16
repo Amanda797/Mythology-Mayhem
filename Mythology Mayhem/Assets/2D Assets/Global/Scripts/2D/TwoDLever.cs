@@ -9,9 +9,9 @@ public class TwoDLever : MonoBehaviour
     [SerializeField] private Animator doorAnim;
     [SerializeField] private DoorCode door;
 
-    private bool canOpen = false;
+    [SerializeField] private bool canOpen = false;
 
-    private bool entered = false;
+    [SerializeField] private bool entered = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +32,7 @@ public class TwoDLever : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.layer == 3) 
+        if (other.gameObject.tag == "Player") 
         {
             entered = true;
         }
@@ -40,7 +40,7 @@ public class TwoDLever : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if (other.gameObject.layer == 3) 
+        if (other.gameObject.tag == "Player") 
         {
             entered = false;
         }

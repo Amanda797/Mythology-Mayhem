@@ -9,8 +9,9 @@ public class ScrollPopup : MonoBehaviour
     public float activeDistance = 6f;
     public float hoverDistance;
     float hover;
+    public GameplayUILink gameplayUI;
     public GameObject popup;
-    public GameObject textMeshObject;
+    public TMP_Text textMeshObject;
     public GameObject pressText;
     public GameObject supriseObject;
     bool isPopupActive = false;
@@ -23,6 +24,13 @@ public class ScrollPopup : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         hover = hoverDistance;
+
+        gameplayUI = FindObjectOfType<GameplayUILink>();
+
+        popup = gameplayUI.scrollPanel;
+        textMeshObject = gameplayUI.scrollDisplayText;
+        pressText = gameplayUI.pressEText;
+
         StartCoroutine(Hover());
     }
     
@@ -67,7 +75,7 @@ public class ScrollPopup : MonoBehaviour
     }
     public void ShowPopup()
     {
-        textMeshObject.GetComponent<TMP_Text>().text = scrollText;
+        textMeshObject.text = scrollText;
         popup.SetActive(true);
         hover = 0;
         Time.timeScale = 0;
