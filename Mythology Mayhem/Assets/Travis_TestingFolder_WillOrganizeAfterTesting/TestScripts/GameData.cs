@@ -50,7 +50,20 @@ public class GameData : MythologyMayhem
 
                 case Chapter.Norse:
                     print("Start at Egyptian Chapter");
-                    startScene = Level.Lib3D;
+                    switch (highestLevelCompleted)
+                    {
+                        case Level.EgyptianVillage_2D:
+                            print("Start at entrance to 3D Village");
+                            startScene = Level.EgyptianVillage_3D;
+                            spawnerToUse = Level.EgyptianVillage_3D;
+                            return;
+
+                        case Level.None:
+                            print("Start at entrance to 2D Village");
+                            startScene = Level.EgyptianVillage_2D;
+                            spawnerToUse = Level.EgyptianVillage_2D;
+                            return;
+                    }
                     return;
 
                 case Chapter.Greek:
@@ -115,8 +128,8 @@ public class GameData : MythologyMayhem
                             return;
                     }
                     startScene = Level.Lib3D;
+            
                     return;
-
                 case Chapter.None:
                     print("Start at Begininng");
                     startScene = Level.Lib3D;

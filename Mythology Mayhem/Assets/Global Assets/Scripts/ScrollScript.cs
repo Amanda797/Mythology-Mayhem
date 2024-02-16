@@ -20,7 +20,9 @@ public class ScrollScript : MonoBehaviour
     // --------------------------
     [TextArea(7,10)]
     [SerializeField] string text;
+    [SerializeField] GameplayUILink gameplayUI;
     [SerializeField] GameObject scrollPanel;
+    [SerializeField] TMP_Text scrollDisplayText;
     [SerializeField] GameObject pressEText;
     bool keyTriggered;
     bool activeStatus = false;
@@ -37,6 +39,15 @@ public class ScrollScript : MonoBehaviour
     {
         keyTriggered = false;
         keyCooldown = 1f;
+
+        gameplayUI = FindObjectOfType<GameplayUILink>();
+
+        if (gameplayUI != null)
+        {
+            scrollPanel = gameplayUI.scrollPanel;
+            scrollDisplayText = gameplayUI.scrollDisplayText;
+            pressEText = gameplayUI.pressEText;
+        }
 
         CloseScroll();
     }//end start
@@ -88,12 +99,13 @@ public class ScrollScript : MonoBehaviour
         
         // Destroy "Press E" tooltip
         if(pressEText is var result && result != null) {
-            Destroy(result);
+            result.SetActive(false);
         }
     }//end on collision exit 2d
 
     public void OpenScroll()
     {
+        scrollDisplayText.text = text;
         scrollPanel.SetActive(true);
     }//end open scroll
 
