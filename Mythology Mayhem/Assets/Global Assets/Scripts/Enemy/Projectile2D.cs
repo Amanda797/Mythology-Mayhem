@@ -31,8 +31,8 @@ public class Projectile2D : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision){
         if(collision.gameObject.CompareTag("Player")){
+            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(Damage);
             Destroy(gameObject);
-            collision.gameObject.GetComponent<FPSHealth>().TakeDamage(Damage);
         }
     }
 }
