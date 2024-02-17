@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenericEnemy2DWithThrow : MonoBehaviour
 {
     Enemy enemy;
-    public Projectile2D projectile;
+    public GameObject projectile;
     public Transform LaunchOffset;
 
     [Header("Idle & Patrol")]
@@ -145,7 +145,7 @@ public class GenericEnemy2DWithThrow : MonoBehaviour
         if (Vector3.Distance(body.transform.position, enemy.player.transform.position) >= meleeDistance && hasThrowable)
         {
             hasThrowable = false;
-            Instantiate(projectile, LaunchOffset.position, transform.rotation);
+            Instantiate(projectile, LaunchOffset.position, transform.rotation).SetActive(true);
             enemy.animator.SetTrigger(throwAttackTriggers[Random.Range(0,throwAttackTriggers.Length)]);
         }
         else
