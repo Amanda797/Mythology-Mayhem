@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 69
-  m_Sprite: {fileID: 21300000, guid: c25873cff473b3141821134121291bd3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bcc209d62c2320c42bb207ba1c9ff8b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -107,7 +107,7 @@ Animator:
   m_GameObject: {fileID: 353820564531603304}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aa2152be576eb724fbb8999f66747657, type: 2}
+  m_Controller: {fileID: 9100000, guid: a16359ea3f1900e45b33d8aa7ea4bffe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -130,18 +130,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.25, y: -1}
+  m_Offset: {x: 0, y: -0.9}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.82058, y: 8.727273}
+    oldSize: {x: 10.802637, y: 9.599999}
     newSize: {x: 9, y: 9}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 5}
+  m_Size: {x: 4.5, y: 5.5}
   m_EdgeRadius: 0
 --- !u!114 &353820564531603296
 MonoBehaviour:
@@ -167,8 +167,8 @@ MonoBehaviour:
   health: {fileID: 1719424646202573130}
   animator: {fileID: 353820564531603307}
   player: {fileID: 0}
-  attackRate: 1.5
-  attackDamage: 3
+  attackRate: 2
+  attackDamage: 2
   canAttack: 1
   attackCollider: {fileID: 353820565408944823}
   walkSpeed: 5
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 8
+  MaxHealth: 10
   _health: 0
   components:
   - {fileID: 2878400473606784786}
@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 2538384673389800270}
   - component: {fileID: 585373615899030464}
   m_Layer: 6
-  m_Name: Spear
+  m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -739,7 +739,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 69
-  m_Sprite: {fileID: 21300000, guid: c0ae1ae7b1350414fa5178cfc14e315c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7957d6efebce0d9448f97f8bde632e06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -798,9 +798,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.8, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 1
 --- !u!50 &8628505710000789046
 Rigidbody2D:
   serializedVersion: 4
