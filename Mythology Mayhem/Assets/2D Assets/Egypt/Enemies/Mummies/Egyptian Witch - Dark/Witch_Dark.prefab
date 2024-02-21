@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 353820564531603302}
   - component: {fileID: 353820564531603303}
   - component: {fileID: 1719424646202573130}
-  - component: {fileID: 2878400473606784786}
+  - component: {fileID: 2641866244380185052}
   m_Layer: 6
   m_Name: Witch_Dark
   m_TagString: Enemy
@@ -183,8 +183,8 @@ MonoBehaviour:
   IdleDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878400473606784786}
-        m_TargetAssemblyTypeName: GenericEnemy2DWithThrow, Assembly-CSharp
+      - m_Target: {fileID: 2641866244380185052}
+        m_TargetAssemblyTypeName: GenericEnemy2DRanged, Assembly-CSharp
         m_MethodName: Idle
         m_Mode: 1
         m_Arguments:
@@ -198,8 +198,8 @@ MonoBehaviour:
   PatrolDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878400473606784786}
-        m_TargetAssemblyTypeName: GenericEnemy2DWithThrow, Assembly-CSharp
+      - m_Target: {fileID: 2641866244380185052}
+        m_TargetAssemblyTypeName: GenericEnemy2DRanged, Assembly-CSharp
         m_MethodName: MoveToTarget
         m_Mode: 1
         m_Arguments:
@@ -213,8 +213,8 @@ MonoBehaviour:
   AttackDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878400473606784786}
-        m_TargetAssemblyTypeName: GenericEnemy2DWithThrow, Assembly-CSharp
+      - m_Target: {fileID: 2641866244380185052}
+        m_TargetAssemblyTypeName: GenericEnemy2DRanged, Assembly-CSharp
         m_MethodName: ThrowAttack
         m_Mode: 1
         m_Arguments:
@@ -225,8 +225,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2878400473606784786}
-        m_TargetAssemblyTypeName: GenericEnemy2DWithThrow, Assembly-CSharp
+      - m_Target: {fileID: 2641866244380185052}
+        m_TargetAssemblyTypeName: GenericEnemy2DRanged, Assembly-CSharp
         m_MethodName: MeleeAttack
         m_Mode: 1
         m_Arguments:
@@ -456,7 +456,7 @@ MonoBehaviour:
   MaxHealth: 10
   _health: 0
   components:
-  - {fileID: 2878400473606784786}
+  - {fileID: 2641866244380185052}
   - {fileID: 353820564531603302}
   - {fileID: 353820564531603296}
   - {fileID: 353820564531603299}
@@ -474,7 +474,7 @@ MonoBehaviour:
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
---- !u!114 &2878400473606784786
+--- !u!114 &2641866244380185052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 353820564531603304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecb41f99d26b6a479f6ab8f58d369e8, type: 3}
+  m_Script: {fileID: 11500000, guid: b9c724d085360f8428ce05e31d376674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 8907464277944790406}
@@ -497,7 +497,7 @@ MonoBehaviour:
   - IsAttacking
   throwAttackTriggers:
   - IsThrowing
-  meleeDistance: 4
+  meleeDistance: 6
   alertTimer: 3
 --- !u!1 &353820565033420077
 GameObject:
@@ -676,6 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2538384673389800270}
   - component: {fileID: 585373615899030464}
+  - component: {fileID: 5230466598750874292}
   m_Layer: 6
   m_Name: Darkness
   m_TagString: Untagged
@@ -690,14 +691,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6309506852425225425}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8986964247320089405}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &585373615899030464
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -750,6 +751,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5230466598750874292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6309506852425225425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32fe918cf0ced9646a42b6b28e59b3eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationSpeed: 45
 --- !u!1 &8907464277944790406
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +775,7 @@ GameObject:
   - component: {fileID: 8986964247320089405}
   - component: {fileID: 6737733633670952476}
   - component: {fileID: 8628505710000789046}
-  - component: {fileID: 1642511905541276430}
+  - component: {fileID: 433952091542952574}
   m_Layer: 6
   m_Name: Projectile
   m_TagString: Untagged
@@ -822,7 +836,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 2
---- !u!114 &1642511905541276430
+--- !u!114 &433952091542952574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -835,5 +849,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 6
-  Damage: 5
+  Damage: 4
   _destroyTimer: 5
