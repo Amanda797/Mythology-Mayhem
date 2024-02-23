@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider2D: {fileID: 0}
+  otherColliders2D: []
 --- !u!1 &1510674330342541318
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +298,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 68
   m_Sprite: {fileID: 21300000, guid: 785f94742f8ed934fab4ddd6353ac446, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -319,7 +320,7 @@ Animator:
   m_GameObject: {fileID: 1510674330548240980}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cbdaca1d0f19d114da24dd492d17c340, type: 2}
+  m_Controller: {fileID: 9100000, guid: b44dfbd859a349b4da6d41642303a0e5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -656,9 +657,9 @@ MonoBehaviour:
   MaxHealth: 10
   _health: 0
   components:
-  - {fileID: 1510674330548241006}
+  - {fileID: 1510674330548240979}
   - {fileID: 1510674330548240976}
-  - {fileID: 0}
+  - {fileID: 1510674330548241006}
   - {fileID: 1510674330548241005}
   mainObject: {fileID: 1510674330548240980}
   rewardObject: {fileID: 0}
@@ -667,7 +668,7 @@ MonoBehaviour:
   healSound: {fileID: 0}
   anim: {fileID: 1510674330548241004}
   hurtTrigger: Hurt
-  deathTrigger: Dead
+  deathTrigger: IsDead
   healTrigger: 
   _attacked: 0
   _defenseUp: 0
@@ -691,5 +692,5 @@ MonoBehaviour:
   patrolDistance: 4
   body: {fileID: 1510674330548240980}
   attackTrigger: IsAttacking
-  meleeDistance: 10
+  meleeDistance: 5
   alertTimer: 3
