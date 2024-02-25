@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8029769861683299769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalPosition: {x: 0, y: -2.32, z: 0}
+  m_LocalScale: {x: 30.846, y: 15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8029769862219944746}
@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8029769862219944724}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.05, y: -1.2399998, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.1999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -254,7 +254,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 68
   m_Sprite: {fileID: 21300000, guid: d0cd5017af954f04cb1ba4fe1f012563, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -276,7 +276,7 @@ Animator:
   m_GameObject: {fileID: 8029769862219944724}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8dc0c3216b9ca27479fefc17a12f2de0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7316ca430eb5e4046adde6e5705d622e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -299,7 +299,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07164025, y: -2.053607}
+  m_Offset: {x: 0, y: -2.053607}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -310,7 +310,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15.436855, y: 9.5563135}
+  m_Size: {x: 12, y: 9.5563135}
   m_EdgeRadius: 0
 --- !u!114 &8029769862219944750
 MonoBehaviour:
@@ -613,9 +613,9 @@ MonoBehaviour:
   MaxHealth: 10
   _health: 0
   components:
-  - {fileID: 8029769862219944750}
+  - {fileID: 8029769862219944723}
   - {fileID: 8029769862219944720}
-  - {fileID: 0}
+  - {fileID: 8029769862219944750}
   - {fileID: 8029769862219944749}
   mainObject: {fileID: 8029769862219944724}
   rewardObject: {fileID: 0}
@@ -624,7 +624,7 @@ MonoBehaviour:
   healSound: {fileID: 0}
   anim: {fileID: 8029769862219944748}
   hurtTrigger: Hurt
-  deathTrigger: Dead
+  deathTrigger: IsDead
   healTrigger: 
   _attacked: 0
   _defenseUp: 0
@@ -648,7 +648,7 @@ MonoBehaviour:
   patrolDistance: 4
   body: {fileID: 8029769862219944724}
   attackTrigger: IsAttacking
-  meleeDistance: 10
+  meleeDistance: 12
   alertTimer: 3
 --- !u!1 &8029769862546889030
 GameObject:
