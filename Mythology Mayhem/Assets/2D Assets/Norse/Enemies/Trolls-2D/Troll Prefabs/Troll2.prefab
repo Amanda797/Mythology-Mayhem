@@ -214,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider2D: {fileID: 0}
+  otherColliders2D: []
 --- !u!1 &1559847223165549734
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559847223165549734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.15, y: -1.24, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -297,7 +298,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 68
   m_Sprite: {fileID: 21300000, guid: 1786cfc4a18e89945b34ba82833df79f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -319,7 +320,7 @@ Animator:
   m_GameObject: {fileID: 1559847223165549734}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 452531a0f8054564a90aaa2bc365668d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7b35556141f928e4ca2417839a85ac24, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -667,7 +668,7 @@ MonoBehaviour:
   healSound: {fileID: 0}
   anim: {fileID: 1559847223165549726}
   hurtTrigger: Hurt
-  deathTrigger: Dead
+  deathTrigger: IsDead
   healTrigger: 
   _attacked: 0
   _defenseUp: 0
@@ -691,5 +692,5 @@ MonoBehaviour:
   patrolDistance: 4
   body: {fileID: 1559847223165549734}
   attackTrigger: IsAttacking
-  meleeDistance: 10
+  meleeDistance: 6
   alertTimer: 3
