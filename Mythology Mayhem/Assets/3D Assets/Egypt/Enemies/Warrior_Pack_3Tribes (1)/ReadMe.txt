@@ -1,12 +1,3 @@
-These are the frame ranges for each part of the animation:
-IDLE    0-338
-RUN     339-362
-DEATH   363-441
-ATACK   442-514    Archers Attack 442-463
-
-The weapons aren't rigged, they are parented to the hand bones, so you can change them or remove them easily.
-All rigs have the same bone names, so if this is a problem, rename to your liking.
-The textures aren't meant to have extra lighting, but a bit of reflections, or shadows is recommended too.
-
-Contact me:
-marcosfaci@hotmail.com
+version https://git-lfs.github.com/spec/v1
+oid sha256:918aa63d2b472e318ccf5d91fcda102aacfff62e5046c375000ef36735caf638
+size 483

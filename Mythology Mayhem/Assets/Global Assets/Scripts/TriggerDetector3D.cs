@@ -1,32 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TriggerDetector3D : MonoBehaviour
-{
-    public bool triggered;
-    public Collider otherCollider3D;
-    public List<Collider> otherColliders3D;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        triggered = true;
-        otherCollider3D = other;
-        //
-        otherColliders3D.Add(other);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        triggered = true;
-        otherCollider3D = other;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        triggered = false;
-        otherCollider3D = null;
-        //
-        otherColliders3D.Remove(other);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:027459bf6af210ef25f66aad58f1ae25f782c01504632aa7423c3fef1dad12c9
+size 696

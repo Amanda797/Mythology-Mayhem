@@ -1,27 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class ScrollControl : MonoBehaviour
-{
-    [SerializeField] float multiplier = 2f;
-    [SerializeField] Scrollbar scrollbarValue;
-    [SerializeField] Vector2 mouseWheelInput;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        mouseWheelInput = Input.mouseScrollDelta;
-
-        if(mouseWheelInput.y != 0) {
-            scrollbarValue.value += mouseWheelInput.y * multiplier;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:13897c98c41be160d94a808c3acb497447fb6e9551995045db075ce0a73d9612
+size 614

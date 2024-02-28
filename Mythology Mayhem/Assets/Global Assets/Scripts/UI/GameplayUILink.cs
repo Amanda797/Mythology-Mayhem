@@ -1,24 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class GameplayUILink : MonoBehaviour
-{
-
-    public GameObject scrollPanel;
-    public TMP_Text scrollDisplayText;
-    public GameObject pressEText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a302660afcbdf432d5959ef1a5cca135d702a5cc7f308684a74ba2d877f43941
+size 442

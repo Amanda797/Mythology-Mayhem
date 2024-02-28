@@ -1,27 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-
-public class HoverHint : MonoBehaviour
-{
-    [SerializeField] GameObject hintBox;
-    [SerializeField] TextMeshProUGUI textMesh;
-    [TextArea(5,9)]
-    [SerializeField] string hintText;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        hintBox.SetActive(false);
-        textMesh.text = hintText;        
-    }
-
-    private void OnMouseEnter() {
-        hintBox.SetActive(true);
-    }//exit on mouse over
-
-    private void OnMouseExit() {
-        hintBox.SetActive(false);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:699e05d68a3f7311ec96adb877944614a7846ad0b09ce0e91aebe121e90c6af2
+size 609
