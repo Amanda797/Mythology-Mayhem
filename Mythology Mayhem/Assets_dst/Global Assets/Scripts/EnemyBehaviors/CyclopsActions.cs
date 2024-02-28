@@ -1,17 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CyclopsActions : EnemyActions
-{
-    [Header("Special Action")]
-    [SerializeField] GameObject snowballProjectile;
-    [SerializeField] float velocity = 500f;
-
-    public new void SpecialAbility() {
-        //Customizable Special Ability
-        GameObject snowball = Instantiate(snowballProjectile, transform.position, transform.rotation);
-        snowball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(0,velocity,0));
-    }//end special ability void
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:3d8b0e6b256300165fc754580d8bad3ea04b1a4375656b5f99a4c1c664a2dedb
+size 559

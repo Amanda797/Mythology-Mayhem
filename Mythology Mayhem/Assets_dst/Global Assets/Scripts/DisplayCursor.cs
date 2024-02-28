@@ -1,22 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DisplayCursor : MonoBehaviour
-{
-    public Texture2D cursorTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
-
-    void OnMouseEnter()
-    {
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-    }
-
-    void OnMouseExit()
-    {
-        // Pass 'null' to the texture parameter to use the default system cursor.
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
-    }
-    
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7f63c7e9927bdab414f3c3608cea51f15ece1f9194051a890eedba1f830d289c
+size 538

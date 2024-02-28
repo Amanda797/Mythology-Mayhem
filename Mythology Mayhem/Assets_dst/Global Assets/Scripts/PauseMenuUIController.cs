@@ -1,21 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
-
-public class PauseMenuUIController : MonoBehaviour
-{
-    //UI Components
-    [Header("UI Components")]
-    private UIDocument _doc;
-
-
-    //External Components
-    [Header("External Components")]
-    [SerializeField] public PlayerStats_SO ps;
-
-    void OnEnable() {
-        _doc = GetComponent<UIDocument>();
-    }
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:198dc42fca340b5defdfa3cba4eb745b20a3d1aeafd8952c34b2510d31556398
+size 428

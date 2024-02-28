@@ -1,19 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TaflPieceScript : MonoBehaviour
-{
-    public int x;
-    public int y;
-    public TaflPosition.TaflPieces type;
-    public TaflTileScript occupying;
-    public Renderer rend;
-
-    public void CapturePiece(GameObject ghostToSpawn) 
-    {
-        GameObject obj = Instantiate(ghostToSpawn, transform.position, transform.rotation);
-        
-        gameObject.SetActive(false);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:3262b6e09e143a0072d1d379802054d7108a2d09ce31aa1c6dbaf81fcf16e87c
+size 475

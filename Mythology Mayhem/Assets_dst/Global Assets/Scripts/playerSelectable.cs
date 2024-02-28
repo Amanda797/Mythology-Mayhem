@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "playerSelectable", menuName = "playerSelectable", order = 1)]
-public class playerSelectable : ScriptableObject
-{
-    public List<GameObject> playerPrefabs = new List<GameObject>();
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:76e48792afa6644f35252df2c50c43269260c97651b2c359f2ff81ee9f6cd681
+size 292

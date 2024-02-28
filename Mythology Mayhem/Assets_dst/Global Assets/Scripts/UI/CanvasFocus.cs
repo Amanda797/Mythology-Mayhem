@@ -1,21 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CanvasFocus : MonoBehaviour
-{
-    [Tooltip("Objects to disable when special Canvases are at use")]
-    [SerializeField] List<GameObject> focus;
-    bool status;
-
-    void Start() {
-        status = true;
-    }
-
-    public void ToggleFocus() {
-        foreach(GameObject go in focus) {
-            status = !status;
-            go.SetActive(status);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:54ff4742724af3f3a5bef366c2a6c65f2218e579df061f7a5680a425888a857e
+size 460

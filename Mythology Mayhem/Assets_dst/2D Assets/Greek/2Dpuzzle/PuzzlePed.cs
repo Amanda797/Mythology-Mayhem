@@ -1,21 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PuzzlePed : MonoBehaviour
-{
-    public string key;
-    public Transform target;
-    public float snapDistance = 2;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //pieces.AddRange(FindObjectsOfType<PuzzlePiece>());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7c93253b9adebae8029b4d82460bf1521c7e827e8e5d7e29a57de196679132ad
+size 432

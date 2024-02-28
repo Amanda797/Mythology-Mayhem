@@ -1,33 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class owlPoint : MonoBehaviour
-{
-    [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (sr.flipX)
-        {
-            if (player.GetComponent<PlayerStats>().flipped == false)
-            {
-                gameObject.transform.position = gameObject.transform.position * new Vector2(-1, 1);
-            }
-        }
-        else
-        {
-            if (player.GetComponent<PlayerStats>().flipped == true)
-            {
-                gameObject.transform.position = gameObject.transform.position * new Vector2(-1, 1);
-            }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:0d27cc02550b21b3dabcf232cadbd5a4defe5077e7dabbbc694a13af28f7754d
+size 839
