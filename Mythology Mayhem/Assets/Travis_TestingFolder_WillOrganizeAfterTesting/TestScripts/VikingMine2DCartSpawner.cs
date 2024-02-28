@@ -10,19 +10,35 @@ public class VikingMine2DCartSpawner : MonoBehaviour
     public int frontOrderLayer;
     public int backOrderLayer;
 
+    public int currentFront;
+    public int currentBack;
+
     public GameObject coalCartPrefab;
     public GameObject goldCartPrefab;
-    public GameObject gemCartPrefab;
+    public GameObject[] gemCartPrefab;
+
+    public List<CartType> pattern;
 
     public float minTime;
     public float maxTime;
 
     public float currentNextTimeFront;
     public float currentNextTimeBack;
+
+    public enum CartType 
+    {
+        Coal,
+        Gold,
+        Gem,
+        Gem2,
+        Gem3,
+        Gem4
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentFront = 0;
+        currentBack = 0;
     }
 
     // Update is called once per frame
@@ -33,20 +49,34 @@ public class VikingMine2DCartSpawner : MonoBehaviour
             currentNextTimeBack -= Time.deltaTime;
             if (currentNextTimeBack <= 0) 
             {
-                int which = (int)Random.Range(0, 3);
-
-                switch (which) 
+                switch (pattern[currentBack]) 
                 {
-                    case 0:
+                    case CartType.Coal:
                         SpawnCart(coalCartPrefab, backTrackSpawn, false);
                         break;
-                    case 1:
+                    case CartType.Gold:
                         SpawnCart(goldCartPrefab, backTrackSpawn, false);
                         break;
-                    case 2:
-                        SpawnCart(gemCartPrefab, backTrackSpawn, false);
+                    case CartType.Gem:
+                        SpawnCart(gemCartPrefab[0], backTrackSpawn, false);
+                        break;
+                    case CartType.Gem2:
+                        SpawnCart(gemCartPrefab[1], backTrackSpawn, false);
+                        break;
+                    case CartType.Gem3:
+                        SpawnCart(gemCartPrefab[2], backTrackSpawn, false);
+                        break;
+                    case CartType.Gem4:
+                        SpawnCart(gemCartPrefab[3], backTrackSpawn, false);
                         break;
                 }
+
+                currentBack++;
+                if (currentBack >= pattern.Count) 
+                {
+                    currentBack = 0;
+                }
+
                 currentNextTimeBack = Random.Range(minTime, maxTime);
             }
         }
@@ -56,19 +86,32 @@ public class VikingMine2DCartSpawner : MonoBehaviour
             currentNextTimeFront -= Time.deltaTime;
             if (currentNextTimeFront <= 0)
             {
-                int which = (int)Random.Range(0, 3);
-
-                switch (which)
+                switch (pattern[currentFront])
                 {
-                    case 0:
+                    case CartType.Coal:
                         SpawnCart(coalCartPrefab, frontTrackSpawn, true);
                         break;
-                    case 1:
+                    case CartType.Gold:
                         SpawnCart(goldCartPrefab, frontTrackSpawn, true);
                         break;
-                    case 2:
-                        SpawnCart(gemCartPrefab, frontTrackSpawn, true);
+                    case CartType.Gem:
+                        SpawnCart(gemCartPrefab[0], frontTrackSpawn, true);
                         break;
+                    case CartType.Gem2:
+                        SpawnCart(gemCartPrefab[1], frontTrackSpawn, true);
+                        break;
+                    case CartType.Gem3:
+                        SpawnCart(gemCartPrefab[2], frontTrackSpawn, true);
+                        break;
+                    case CartType.Gem4:
+                        SpawnCart(gemCartPrefab[3], frontTrackSpawn, true);
+                        break;
+                }
+
+                currentFront++;
+                if (currentFront >= pattern.Count)
+                {
+                    currentFront = 0;
                 }
 
                 currentNextTimeFront = Random.Range(minTime, maxTime);
