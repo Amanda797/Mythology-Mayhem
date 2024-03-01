@@ -1,18 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TaflBoardPickup : MonoBehaviour
-{
-    public int move;
-    public TaflAnimatedScript taflMain;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player") 
-        {
-            taflMain.SetMove(move);
-            this.gameObject.SetActive(false);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7bb69ddf574f2f2cb765f51744b9675f02f533590f165f8ebf5eb3c8b5f28b3b
+size 389

@@ -1,27 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-
-
-//Make custom button to reset spwan point index
-[CustomEditor(typeof(playerSpwaner))]
-public class playerSpwanerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        playerSpwaner myScript = (playerSpwaner)target;
-        if (GUILayout.Button("Reset Spwan Point Index"))
-        {
-            PlayerPrefs.SetInt("spwanPointIndex", 0);
-        }
-
-        //Make custom button to reset player prefs
-        if (GUILayout.Button("Reset PlayerPrefs"))
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b187f1d8532b09f312c4a8ff4c5e545cadae38adcd7eb8dbc9f9bf4fbe7e1b66
+size 665

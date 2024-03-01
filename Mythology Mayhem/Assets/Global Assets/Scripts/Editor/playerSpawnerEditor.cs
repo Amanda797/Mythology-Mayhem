@@ -1,27 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-
-
-//Make custom button to reset spwan point index
-[CustomEditor(typeof(playerSpawner))]
-public class playerSpawnerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        playerSpawner myScript = (playerSpawner)target;
-        if (GUILayout.Button("Reset Spawn Point Index"))
-        {
-            PlayerPrefs.SetInt("spawnPointIndex", 0);
-        }
-
-        //Make custom button to reset player prefs
-        if (GUILayout.Button("Reset PlayerPrefs"))
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d5c28af69dbe394d70007d53f620a98683a1159c99cddeba2a587d79439590b3
+size 665

@@ -1,15 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ChangeNextSpawn : MonoBehaviour
-{
-    public void NextSpawn(int index)
-    {
-        PlayerPrefs.SetInt("spwanPointIndex", index);
-    }
-    public void NextCharacter(int index)
-    {
-        PlayerPrefs.SetInt("playerIndex", index);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f6b7a8696ce8dbc78a6be35a64748ae7098686fd2982a558ff0aac4d5fae8769
+size 335

@@ -1,9 +1,3 @@
-LeanTween is an efficient tweening engine for Unity3d
-
-Full Documentation:
-	http://dentedpixel.com/LeanTweenDocumentation/classes/LeanTween.html
-	This can also be accessed offline! From the Unity menu Help->LeanTween Documentation
-
-Getting Started
-	
-	There are many examples included! Look in the “LeanTween/LeanTweenExamples" folder to see many of the methods outlined. 
+version https://git-lfs.github.com/spec/v1
+oid sha256:c5efba3b272d90e9432cebc0ef6bd5c28608f961ab4136f6f00b8211b3401173
+size 374

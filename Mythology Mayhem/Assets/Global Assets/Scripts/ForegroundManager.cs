@@ -1,32 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ForegroundManager : MonoBehaviour
-{
-    SpriteRenderer sr;
-    Color original;
-    [SerializeField] float opacity = .706f;
-
-    private void Start()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        original = sr.color;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Player")
-        {
-            sr.color = new Color(original.r, original.g, original.b, opacity);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            sr.color = original;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a015630eb4700df8bc0afeb7a59984e04dd31cfcf80f91636f182c837f3bc27a
+size 696
