@@ -431,8 +431,7 @@ MonoBehaviour:
   _health: 0
   components:
   - {fileID: 7068833882850249636}
-  - {fileID: 0}
-  - {fileID: 2717252509883154319}
+  - {fileID: 8314907227250798082}
   - {fileID: 4214165881775041608}
   - {fileID: 6590066561656640390}
   mainObject: {fileID: 5141193788058967133}
@@ -444,39 +443,11 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Death
   healTrigger: Cast Spell
-  _attacked: 0
-  _defenseUp: 0
+  canDefend: 0
+  attacked: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
---- !u!114 &2717252509883154319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7246037551303941978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178cc08b3fcfad743bfa6a588feb0aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flyBool: Fly
-  body: {fileID: 7246037551303941978}
-  projectileAttackTrigger: Projectile Attack
-  projectileAttackDistance: 12
-  lowProjectileAttackTrigger: Low Projectile Attack
-  lowProjectileAttackDistance: 12
-  blastAttackTrigger: Blast Attack
-  blastAttackDistance: 12
-  biteAttackTrigger: Bite Attack
-  biteAttackDistance: 12
-  lowBiteAttackTrigger: Low Bite Attack
-  lowBiteAttackDistance: 12
-  wingAttackTrigger: Wing Attack
-  wingAttackDistance: 12
-  healTrigger: Cast Spell
-  healTimer: 10
 --- !u!114 &4214165881775041608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,8 +488,8 @@ MonoBehaviour:
   IdleDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2717252509883154319}
-        m_TargetAssemblyTypeName: IceDragon3D, Assembly-CSharp
+      - m_Target: {fileID: 8314907227250798082}
+        m_TargetAssemblyTypeName: Dragon3D, Assembly-CSharp
         m_MethodName: Idle
         m_Mode: 1
         m_Arguments:
@@ -532,8 +503,8 @@ MonoBehaviour:
   PatrolDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2717252509883154319}
-        m_TargetAssemblyTypeName: IceDragon3D, Assembly-CSharp
+      - m_Target: {fileID: 8314907227250798082}
+        m_TargetAssemblyTypeName: Dragon3D, Assembly-CSharp
         m_MethodName: MoveToTarget
         m_Mode: 1
         m_Arguments:
@@ -547,8 +518,8 @@ MonoBehaviour:
   AttackDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2717252509883154319}
-        m_TargetAssemblyTypeName: IceDragon3D, Assembly-CSharp
+      - m_Target: {fileID: 8314907227250798082}
+        m_TargetAssemblyTypeName: Dragon3D, Assembly-CSharp
         m_MethodName: SwitchAttack
         m_Mode: 1
         m_Arguments:
@@ -585,8 +556,8 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7246037551303941978}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_AgentTypeID: -1372625422
+  m_Radius: 2.37
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -595,10 +566,43 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8314907227250798082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246037551303941978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c1e7c7a37368428f4eb5bef190757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flyBool: Fly
+  patrolDistance: 30
+  body: {fileID: 7246037551303941978}
+  blastAttackTrigger: Blast Attack
+  blastDistance: 10
+  lowBiteAttackTrigger: Low Bite
+  lowBiteDistance: 4
+  wingAttackTrigger: Wing Attack
+  wingDistance: 8
+  biteAttackTrigger: Bite Attack
+  biteDistance: 3
+  castSpellTrigger: Cast Spell
+  castSpellDistance: 10
+  lowProjectileAttackTrigger: Low Projectile Attack
+  lowProjectileDistance: 2
+  projectileAttackTrigger: Projectile Attack
+  projectileDistance: 12
+  projectilePrefab: {fileID: 0}
+  throwPoint: {fileID: 0}
+  throwForce: 300
+  alertTimer: 2
 --- !u!4 &8053782415265269216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3636635067704031445, guid: 80a826a8aac47ac42ba6ce5585f294ef, type: 3}

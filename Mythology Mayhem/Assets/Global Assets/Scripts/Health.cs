@@ -19,12 +19,13 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioSource deathSound;
     [SerializeField] private AudioSource healSound;
     [SerializeField] private Animator anim;
-    [SerializeField] private string hurtTrigger;
-    [SerializeField] private string deathTrigger;
-    [SerializeField] private string healTrigger;
+    [SerializeField] private string hurtTrigger = "Hurt";
+    [SerializeField] private string deathTrigger = "Die";
+    [SerializeField] private string healTrigger = "Heal";
 
-    public bool _attacked = false;
-    public bool _defenseUp = false;
+    public bool canDefend = false;
+    public bool attacked = false;
+    private bool _defenseUp = false;
     [HideInInspector]
     public float _defenseTimer = 0f;
 
@@ -37,6 +38,8 @@ public class Health : MonoBehaviour
     void Start()
     {
         Life = MaxHealth;
+        anim = GetComponent<Animator>();
+        mainObject = gameObject.GetComponentInParent<Transform>().gameObject;
     }// end start
 
     public float Life
@@ -60,7 +63,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float d) {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
-        if(!_attacked && !_defenseUp)
+        if(!attacked && !_defenseUp)
         {
             if (gameObject.tag == "Enemy")
             {
@@ -83,9 +86,17 @@ public class Health : MonoBehaviour
 
     IEnumerator Attacked()
     {
-        _attacked = true;
+        attacked = true;
+        if(canDefend)
+        {
+            _defenseUp = true;
+        }
         yield return new WaitForSeconds(_defenseTimer);
-        _attacked = false;
+        attacked = false;
+        if (canDefend)
+        {
+            _defenseUp = false;
+        }
     }
 
     public void Heal(float h) {

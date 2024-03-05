@@ -78,7 +78,7 @@ public class Boar3D : MonoBehaviour
     {
         transform.LookAt(enemy.agent.steeringTarget);
 
-        if (enemy.health._attacked == true)
+        if (enemy.health.attacked == true)
         {
             Defend();
         } else
@@ -125,13 +125,13 @@ public class Boar3D : MonoBehaviour
         {
             enemy.animator.SetBool(defenseBool, false);
             defenseTime = 0;
-            GetComponent<Health>()._defenseUp = false;
+            GetComponent<Health>().canDefend = false;
         }
         else
         {
             enemy.animator.SetBool(defenseBool, true);
             defenseTime += Time.deltaTime;
-            GetComponent<Health>()._defenseUp = true;
+            GetComponent<Health>().canDefend = true;
         }
     }//end defend
 

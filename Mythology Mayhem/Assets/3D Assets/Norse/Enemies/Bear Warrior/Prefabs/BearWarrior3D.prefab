@@ -422,8 +422,8 @@ MonoBehaviour:
   IdleDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4599911511222373183}
-        m_TargetAssemblyTypeName: BearWarrior3D, Assembly-CSharp
+      - m_Target: {fileID: 7777568889169728210}
+        m_TargetAssemblyTypeName: Bear3D, Assembly-CSharp
         m_MethodName: Idle
         m_Mode: 1
         m_Arguments:
@@ -437,8 +437,8 @@ MonoBehaviour:
   PatrolDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4599911511222373183}
-        m_TargetAssemblyTypeName: BearWarrior3D, Assembly-CSharp
+      - m_Target: {fileID: 7777568889169728210}
+        m_TargetAssemblyTypeName: Bear3D, Assembly-CSharp
         m_MethodName: MoveToTarget
         m_Mode: 1
         m_Arguments:
@@ -452,9 +452,21 @@ MonoBehaviour:
   AttackDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4599911511222373183}
-        m_TargetAssemblyTypeName: BearWarrior3D, Assembly-CSharp
+      - m_Target: {fileID: 7777568889169728210}
+        m_TargetAssemblyTypeName: Bear3D, Assembly-CSharp
         m_MethodName: SwitchAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7777568889169728210}
+        m_TargetAssemblyTypeName: Bear3D, Assembly-CSharp
+        m_MethodName: Defend
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -521,7 +533,7 @@ MonoBehaviour:
   components:
   - {fileID: 2072363935955116706}
   - {fileID: 5439981576604036814}
-  - {fileID: 4599911511222373183}
+  - {fileID: 7777568889169728210}
   - {fileID: 2941115004686734234}
   mainObject: {fileID: 8316720008822130727}
   rewardObject: {fileID: 0}
@@ -532,12 +544,12 @@ MonoBehaviour:
   hurtTrigger: Take Damage
   deathTrigger: Die
   healTrigger: Cast Spell
-  _attacked: 0
-  _defenseUp: 0
+  canDefend: 1
+  attacked: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
---- !u!114 &4599911511222373183
+--- !u!114 &7777568889169728210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,22 +558,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 7420105721663516291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e15caa68af99ba43b216e0420cbd152, type: 3}
+  m_Script: {fileID: 11500000, guid: b893e5d542a829b479e3dbb6469c8ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkBool: Walk Forward
   runBool: Run Forward
-  patrolDistance: 20
+  patrolDistance: 30
   body: {fileID: 7420105721663516291}
-  alertTimer: 1
-  slashTrigger: Slash Attack
-  slashDistance: 5
-  chopTrigger: Chop Attack
+  castSpellTrigger: Cast Spell
+  castSpellDistance: 10
+  slashAttackTrigger: Slash Attack
+  slashDistance: 4
+  jumpAttackTrigger: Jump Attack
+  jumpDistance: 8
+  chopAttackTrigger: Chop Attack
   chopDistance: 3
-  clawTrigger: Claw Attack
-  clawDistance: 4
-  breathTrigger: Breath Attack
-  breathDistance: 6
+  clawAttackTrigger: Claw Attack
+  clawDistance: 2
+  projectileAttackTrigger: Projectile Attack
+  projectileDistance: 12
+  projectilePrefab: {fileID: 0}
+  throwPoint: {fileID: 0}
+  throwForce: 300
+  breathAttackTrigger: Breath Attack
+  breathDistance: 5
+  defendAttackBool: Defend
+  alertTimer: 3
 --- !u!4 &7420105721663723169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 401412, guid: eb44fed365851634d87b21aac7940788, type: 3}
