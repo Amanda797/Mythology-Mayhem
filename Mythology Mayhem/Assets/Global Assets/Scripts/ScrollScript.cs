@@ -1,3 +1,117 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:16a3bf1902288eb226e71302679c9746fd5a1f78e85baf764498a7719a2fc4be
-size 3199
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using System.IO;
+using System.Text.RegularExpressions;
+using UnityEngine.UI;
+
+public class ScrollScript : MonoBehaviour
+{
+    // --------------------------
+    // ***SECTIONS***
+    // - PROPERTIES
+    // - METHODS
+    // - TESTS
+    // --------------------------
+
+    // --------------------------
+    // ***PROPERTIES***
+    // --------------------------
+    [TextArea(7,10)]
+    [SerializeField] string text;
+    [SerializeField] GameplayUILink gameplayUI;
+    [SerializeField] GameObject scrollPanel;
+    [SerializeField] TMP_Text scrollDisplayText;
+    [SerializeField] GameObject pressEText;
+    bool keyTriggered;
+    bool activeStatus = false;
+    float keyCooldown;
+
+    [SerializeField] bool requirements;
+
+    // --------------------------
+    // ***METHODS***
+    // --------------------------
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        keyTriggered = false;
+        keyCooldown = 1f;
+
+        gameplayUI = FindObjectOfType<GameplayUILink>();
+
+        if (gameplayUI != null)
+        {
+            scrollPanel = gameplayUI.scrollPanel;
+            scrollDisplayText = gameplayUI.scrollDisplayText;
+            pressEText = gameplayUI.pressEText;
+        }
+
+        CloseScroll();
+    }//end start
+
+    void Update()
+    {
+        Collider2D player = Physics2D.OverlapCircle(transform.position, 5f, 3);   
+
+        // Listen for key press and mark as received
+        if(Input.GetKeyDown(KeyCode.E)) {
+            keyTriggered = true;
+        }
+        // Begin countdown for key activation period
+        if(keyTriggered) {
+            keyCooldown -= 1 * Time.deltaTime;
+        }
+        // Reset key activation and cooldown
+        if(keyCooldown <= 0) {
+            keyTriggered = false;
+            keyCooldown = 1f;
+        }
+    }//end update
+
+    void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.tag == "Player") {        
+            //enable tooltip for scroll interaction
+            if(pressEText != null) {
+                pressEText.SetActive(true);
+            }
+
+            if(keyTriggered && !activeStatus) {
+                gameObject.GetComponent<AudioSource>().Play();
+                OpenScroll();
+                keyTriggered = false;
+                activeStatus = true;
+            } else if(keyTriggered && activeStatus) {
+                gameObject.GetComponent<AudioSource>().Play();
+                CloseScroll();
+                keyTriggered = false;
+                activeStatus = false;
+            }
+        }       
+    }//end on collision stay 2d
+
+    void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.tag == "Player") {
+            CloseScroll();
+        }   
+        
+        // Destroy "Press E" tooltip
+        if(pressEText is var result && result != null) {
+            result.SetActive(false);
+        }
+    }//end on collision exit 2d
+
+    public void OpenScroll()
+    {
+        scrollDisplayText.text = text;
+        scrollPanel.SetActive(true);
+    }//end open scroll
+
+    public void CloseScroll()
+    {
+        scrollPanel.SetActive(false);
+    }//end close scroll
+
+}

@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d76b7bfc956d2971593fc4b288af1e8a38fcbb28009bbea348bc818640a59bf6
-size 187
+Font that was used for the preview:
+https://www.dafont.com/highway-gothic.font
+Texture that was used for the background of the preview:
+https://texturehaven.com/tex/?t=castle_brick_02_red

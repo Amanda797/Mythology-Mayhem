@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:651306628e20f71636cbb5b606a863a139d3ff41d90b8a454fed4a68977a077b
-size 547
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NineMMMarbleScript : MonoBehaviour
+{
+    public int x;
+    public int y;
+    public NineMMPosition.NineMMMarble type;
+    public NineMMSlotScript occupying;
+    public Renderer rend;
+
+    public void CapturePiece(GameObject ghostToSpawn)
+    {
+        /*
+        GameObject obj = Instantiate(ghostToSpawn, transform.position, transform.rotation);
+
+        print("Captured Piece " + name);
+        */
+        gameObject.SetActive(false);
+        
+    }
+}

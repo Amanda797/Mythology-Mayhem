@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:daf7482fa2d53ffe3d10506aadcd34c93a8ee7641c4577271ae163ad3a2e6bde
-size 438
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class KrakenTentacleAnimScript : MonoBehaviour
+{
+
+    public KrakenTentacleScript tentacleScript;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void TriggerDeath() 
+    {
+        tentacleScript.AnimDeath();
+    }
+}

@@ -1,3 +1,33 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c2f1aa7f297f08006f36486ecfe0d80395c5629ea54f4d1af7c1acd579be3d03
-size 627
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class VikingMine2DCart : MonoBehaviour
+{
+
+    public Transform parentTrack;
+    public SpriteRenderer rend;
+
+    public float speed;
+
+    public float deathTimer;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+       
+        transform.localPosition += new Vector3(speed * Time.deltaTime, 0, 0);
+
+        deathTimer -= Time.deltaTime;
+
+        if (deathTimer <= 0) 
+        {
+            Destroy(this.gameObject);
+        }
+    }
+}

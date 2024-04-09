@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a21df9da03a8b91cd73031e51737e743448c461c4ad3d8d2aeea3955ad283ce9
-size 663
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Levitate2D : MonoBehaviour
+{
+    [SerializeField] private float amplitude = 0.5f;
+    [SerializeField] private float frequency = 1f;
+    private Vector2 posOffset = new Vector2();
+    private Vector2 tempPos = new Vector2();
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        posOffset = transform.position;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        tempPos = posOffset;
+        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+        transform.position = tempPos;
+    }
+}

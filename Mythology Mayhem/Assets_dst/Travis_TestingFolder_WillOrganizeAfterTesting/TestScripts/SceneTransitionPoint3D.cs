@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d58700d2936893ee905ea077a9596ada331f5a6588bdce84ac258fd14d3a87ae
-size 806
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SceneTransitionPoint3D : SceneTransitionPoint
+{
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        CheckInput();
+        isActive = CheckConditionsMeet();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerAttach player = other.gameObject.GetComponent<PlayerAttach>();
+            if (player != null)
+            {
+                if (keyPress)
+                {
+                    localGameManager.SceneTransition(sceneToTransition);
+                    keyPress = false;
+                }
+
+            }
+        }
+    }
+}

@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1c00c7a98df7a09958a134d6574594afef19cee27b18e251e7a91b47061848a7
-size 237
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class unParent : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        transform.parent = null;
+    }
+}

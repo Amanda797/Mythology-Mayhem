@@ -1,3 +1,118 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:81184a1d426f1ee7e2352655274ce9533a4295bf2d10c041cce8b1287ea7ead4
-size 4389
+{
+    "name": "GameplayActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "3d63082e-2b67-45df-a192-5a170ca53bb9",
+            "actions": [
+                {
+                    "name": "DismissCompanion",
+                    "type": "Button",
+                    "id": "e8f9334f-d2cd-4dde-ae1f-e454b1b80f56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CallCompanion",
+                    "type": "Button",
+                    "id": "32c280f7-64b7-4f45-a4d6-a4f584930056",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitGame",
+                    "type": "Button",
+                    "id": "f49126e5-8436-4fd6-9c47-5caa37ae1fcc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "LSC",
+                    "id": "8d3c49b4-921c-4a43-94f7-4361768be322",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DismissCompanion",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "b516c5d8-547f-4844-bb9c-ef878e5f2fe8",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DismissCompanion",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "1f0253be-5d81-48bd-bf0b-8eec8f532f10",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DismissCompanion",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "fec45cb6-f12a-4ae0-b14f-4840abfdb566",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CallCompanion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "ShiftEsc",
+                    "id": "a8e040fe-b727-4ff7-83db-02f2ddaec818",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitGame",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "e7e668ef-a2db-4d58-87ca-8e3e62e67596",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitGame",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "fee55a5d-878f-408d-a908-583acb4f85bd",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitGame",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

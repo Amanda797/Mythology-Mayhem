@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0ec6e9c0500fa04c63ea6222ad19e03e8ca306ef6073a467eea46638fb2577ec
-size 316
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemPickup : MonoBehaviour
+{
+    public Item item;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

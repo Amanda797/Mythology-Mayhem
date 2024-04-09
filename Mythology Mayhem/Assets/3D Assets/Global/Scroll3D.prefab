@@ -1,3 +1,127 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:85c2ddad3aa435152aedcb7e067f09d1b70c91c107a47d0af548d1d3b69e1874
-size 4055
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &45914448916499877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 45914448916795781}
+  - component: {fileID: 45914448913371557}
+  - component: {fileID: 45914448914502501}
+  - component: {fileID: 45914450018176643}
+  - component: {fileID: 939048698425388206}
+  m_Layer: 0
+  m_Name: Scroll3D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &45914448916795781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45914448916499877}
+  m_LocalRotation: {x: 0.6953336, y: 0.6953336, z: 0.12849595, w: -0.12849595}
+  m_LocalPosition: {x: 2.740762, y: 3.5000143, z: -10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -20.94, y: 180, z: 90}
+--- !u!33 &45914448913371557
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45914448916499877}
+  m_Mesh: {fileID: 4300082, guid: 723dd0e94d209ce41afcdaeec976c803, type: 3}
+--- !u!23 &45914448914502501
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45914448916499877}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3e6817b88d68f8e499a85ebda78ec95d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &45914450018176643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45914448916499877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e002151d5bb63ca4ab3b08045da58c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 101
+  activeDistance: 6
+  hoverDistance: 0.005
+  popup: {fileID: 0}
+  textMeshObject: {fileID: 0}
+  pressText: {fileID: 0}
+  supriseObject: {fileID: 0}
+  scrollText: "Dear Acolyte,\r\n\nLeft clicking on the mouse button allows you to
+    fight. It is imperative to remember the computer mouse is not vermin, even if
+    it is called \u201Ca mouse.\u201D The rats you fight inside this library are
+    the actual vermin that tend to popup out of no where.\n\nPerception is reality.
+    If you're feeling stuck, arrange a few nearby objects by size to jump up to the
+    tall platform at the end. Use the number 2 key to equip your gem and use right-click
+    to select and grow objects.\n\nTruly Yours,\r\n\r\nHead Librarian"
+--- !u!114 &939048698425388206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45914448916499877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a80ea4f9beb9f46a637275746e5471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.5
+  frequency: 0.8

@@ -1,3 +1,57 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:44c9679ab9b70f6f72a9c305300538726b36400d77fdaee0db6394c7ed0fbb91
-size 1362
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AegirWaveScript : MonoBehaviour
+{
+
+    public float speed;
+
+    public int damage;
+
+    public ParticleSystem waveBuildup;
+    public ParticleSystem waveProjectile;
+    public bool buildupComplete;
+
+    public float despawnTimer;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        waveProjectile.gameObject.SetActive(false);
+        waveBuildup.gameObject.SetActive(true);
+        waveBuildup.Play();
+        buildupComplete = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position += transform.forward * speed * Time.deltaTime;
+
+        if (!waveBuildup.isPlaying && !buildupComplete) 
+        {
+            waveBuildup.gameObject.SetActive(false);
+            waveProjectile.gameObject.SetActive(true);
+            buildupComplete = true;
+        }
+
+        despawnTimer -= Time.deltaTime;
+        if (despawnTimer <= 0) 
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void ColliderTrigger(Collider other) 
+    {
+        if (other.tag == "Ship") 
+        {
+            ShipScript ship = other.gameObject.GetComponent<ShipScript>();
+            if (ship != null) 
+            {
+                ship.anim.SetTrigger("Wave");
+            }
+        }
+    }
+}

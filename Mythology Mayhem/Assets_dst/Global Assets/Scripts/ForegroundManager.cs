@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8e7f13ed1ba07782d48b17e17e22fda981fa70b4e52be7d6b424edae752e394d
-size 362
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ForegroundManager : MonoBehaviour
+{
+    Transform[] fgObjects;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //fgObjects = GameObject.find    
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

@@ -1,3 +1,46 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ad6c3a47d677afd42f8ceca2297c0e73f06e06dea3f57b8026e17be356566e33
-size 1610
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BowArrowSFX : StateMachineBehaviour
+{
+    [SerializeField] AudioRandomizer_SO BowArrow;
+    AudioSource aus;
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if(aus == null) {
+            aus = animator.gameObject.GetComponent<AudioSource>();
+        }
+
+        aus.clip = BowArrow.PlaySiblings();
+        aus.Play();
+
+        //Test commit for new branch
+    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
+
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
+
+    // OnStateMove is called right after Animator.OnAnimatorMove()
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that processes and affects root motion
+    //}
+
+    // OnStateIK is called right after Animator.OnAnimatorIK()
+    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that sets up animation IK (inverse kinematics)
+    //}
+}

@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e085811260f0c449ce1dc909a879ff87b1433de16bc86def19f147d2d32fd317
-size 712
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TriggerDetector2D : MonoBehaviour
+{
+    public bool triggered;
+    public Collider2D otherCollider2D;
+    public List<Collider2D> otherColliders2D;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        triggered = true;
+        otherCollider2D = other;
+        //
+        otherColliders2D.Add(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        triggered = true;
+        otherCollider2D = other;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        triggered = false;
+        otherCollider2D = null;
+        //
+        otherColliders2D.Remove(other);
+    }
+}

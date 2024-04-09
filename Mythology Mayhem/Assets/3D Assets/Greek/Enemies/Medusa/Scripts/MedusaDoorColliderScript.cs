@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:91e395c8b48bdba8eae2cb84d2e912945ceee63df193c587e552ce7d53e7253d
-size 767
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+public class MedusaDoorColliderScript : MonoBehaviour
+{
+    public string nextScene;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player") 
+        {
+            print("Player in Doorway");
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                PlayerPrefs.SetString("spawningScene", nextScene);
+                string loadScene = PlayerPrefs.GetString("spawningScene");
+                SceneManager.LoadScene(loadScene);
+            }
+        }
+    }
+}

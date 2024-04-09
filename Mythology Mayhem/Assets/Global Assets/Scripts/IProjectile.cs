@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c6c28e614b5e98c7dbba93abfd9dd273cbf0bc5bbde9930b8a07400fc6a9a9d9
-size 275
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface IProjectile
+{
+    public float ProjectileDamage { get; set; }
+    public bool Parryable { get; set; }
+    public float DestroyTimer { get; set; }
+
+    public void Parry() { }
+
+}

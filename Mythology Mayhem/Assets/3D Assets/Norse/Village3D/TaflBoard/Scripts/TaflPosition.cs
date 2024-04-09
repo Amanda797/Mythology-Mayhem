@@ -1,3 +1,35 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:74bd37d01473543073c144c99b061411ee4e5861187974fd1454f1ab472c3c9a
-size 543
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class TaflPosition
+{
+    public TaflPieces piece;
+    public int x;
+    public int y;
+
+    public enum TaflPieces
+    {
+        King,
+        AltKing,
+        Pawn,
+        AltPawn,
+        None
+    }
+
+    public enum TaflDirection 
+    { 
+        North,
+        South,
+        East,
+        West
+    }
+
+    public TaflPosition(TaflPieces _piece, int _x, int _y) 
+    {
+        piece = _piece;
+        x = _x;
+        y = _y;
+    }
+}

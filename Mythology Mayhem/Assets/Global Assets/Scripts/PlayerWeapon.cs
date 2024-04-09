@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:192948bd21b6248989512d59a4af37656a62ad9696e598cacd7d1c2423b98166
-size 286
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerWeapon : MythologyMayhem
+{
+    [Tooltip("True if Main Hand Weapon, False if Offhand Weapon/Tool")]
+    public bool MainOrOff;
+
+    public MainHand mainHand;
+    public OffHand offHand;
+}

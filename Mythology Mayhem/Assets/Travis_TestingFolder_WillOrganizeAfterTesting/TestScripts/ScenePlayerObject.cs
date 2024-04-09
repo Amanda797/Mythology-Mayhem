@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d926128a11f9de25e1e2435bf965048ce907a8d615235d77a4f72dfb9fdd839e
-size 553
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class ScenePlayerObject
+{
+    public string _name;
+    public MythologyMayhem.Dimension type;
+    public MythologyMayhem.Level inScene;
+
+    public PlayerAttach player;
+
+    public ScenePlayerObject(PlayerAttach _player, MythologyMayhem.Dimension _type, MythologyMayhem.Level scene)
+    {
+        player = _player;
+        type = _type;
+        inScene = scene;
+
+        _name = type.ToString() + " Character in " + inScene.ToString();
+    }
+}

@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cdec5316cf1135d3c7fe2c051eb05c2d758bf49adb6d10ff528cc7141fdace12
-size 625
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "AudioRandomizer_SO", menuName = "AudioRandomizer_SO", order = 1)]
+
+public class AudioRandomizer_SO : ScriptableObject
+{
+    public List<AudioClip> audioClips = new();
+
+    public AudioClip PlaySiblings() {
+        int randomClip = Random.Range(0, audioClips.Count);
+        return audioClips[randomClip];
+    }
+}
+/* 
+//[System.Serializable]
+//public class AudioClipGroup
+//{
+ //   public AudioClip mainAudioClip;
+  //  public AudioClipGroup parentAudioClip;
+   // public List<AudioClipGroup> childrenAudioClips;
+} */

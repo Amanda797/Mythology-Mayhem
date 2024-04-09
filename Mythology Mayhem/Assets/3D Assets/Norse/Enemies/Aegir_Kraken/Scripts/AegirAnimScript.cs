@@ -1,3 +1,41 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8a18e5a9d24c760087412ae8a66519f916e671c7b60a6e9908239a22bbd4a77c
-size 685
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AegirAnimScript : MonoBehaviour
+{
+    public AegirControlScript aegirControl;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void ActivateJet() 
+    {
+        aegirControl.ActivateJet();
+    }
+
+    public void SmallWaveSpawn() 
+    {
+        aegirControl.SmallWaveSpawn();
+    }
+
+    public void MediumWaveSpawn() 
+    {
+        aegirControl.MediumWaveSpawn();
+    }
+
+    public void LargeWaveSpawn() 
+    {
+        aegirControl.LargeWaveSpawn();
+    }
+}

@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1803cd4256b1c6fc04aa6cb5eb664216e590a17d139aef70813273a4012a6d63
-size 460
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AegirWaveColliderScript : MonoBehaviour
+{
+    public AegirWaveScript aegirWaveScript;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        aegirWaveScript.ColliderTrigger(other);
+    }
+}

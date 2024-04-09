@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:824e043292df3a809f87c789b2ae14e784d033035a10c5597c9d44cd70e37ce2
-size 347
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Kubb
+{
+    public Rigidbody rb;
+    public Type type;
+    public enum Type 
+    { 
+        Baseline,
+        Field
+    }
+
+    public Kubb(Rigidbody rigidbody, Type _type) 
+    {
+        rb = rigidbody;
+        type = _type;
+    }
+}

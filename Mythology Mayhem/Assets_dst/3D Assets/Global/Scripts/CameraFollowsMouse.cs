@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4d7ef3596d37747f25b34c050ba339f936bed323e22b50a3449a9b4150321eb5
-size 523
+using UnityEngine;
+
+public class CameraFollowsMouse : MonoBehaviour
+{
+
+    float rotationX;
+    float rotationY;
+    float sensitivity = 2f;
+
+    // Update is called once per frame
+    void Update()
+    {
+        rotationY += Input.GetAxis("Mouse X") * sensitivity;
+        rotationX += Input.GetAxis("Mouse Y") * -1 * sensitivity;
+
+        rotationX = Mathf.Clamp(rotationX, -30, 30);
+        rotationY = Mathf.Clamp(rotationY, -90, 90);
+
+        transform.localEulerAngles = new Vector3(rotationX, rotationY, 0);
+    }
+}

@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b0b195289d8ee8fd932ce507aa2c695b35a51172251781365f4ea28404a58514
-size 589
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Arrow2D : MonoBehaviour
+{
+    public int damage;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.collider.tag == "Enemy")
+        {
+            if (col.gameObject.GetComponent<Health>())
+                col.gameObject.GetComponent<Health>().TakeDamage(damage);
+        }
+        Destroy(gameObject);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

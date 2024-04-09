@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:727ed2ddc8eaca35411daad7a7c3d91a5cb0b57d6f63ea47f3e6f3ce7750bbe5
-size 452
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class NineMMPosition
+{
+    public NineMMMarble marble;
+    public int x;
+    public int y;
+
+    public enum NineMMMarble
+    {
+        FirstMarble,
+        SecondMarble,
+        None,
+        Invalid
+    }
+
+    public NineMMPosition(NineMMMarble _marble, int _x, int _y)
+    {
+        marble = _marble;
+        x = _x;
+        y = _y;
+    }
+}

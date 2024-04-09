@@ -1,3 +1,45 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:253a3e93c6da03163cb76d3b033e52c3cac487148e26716b30d36b936f2acac2
-size 1087
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class CharacterSelectMovement : MonoBehaviour
+{
+
+    [SerializeField] Animator controller;
+    [SerializeField] string[] animations;
+    [SerializeField]float moveCounter;
+    [SerializeField]int animIndex;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        controller = GetComponent<Animator>();
+        moveCounter = 10f;
+        animIndex = 0;
+
+        controller.SetBool("IsGrounded", true);
+
+        controller.Play(animations[animIndex]);
+    }//end start
+
+    // Update is called once per frame
+    void Update()
+    {
+        moveCounter -= 1f * Time.deltaTime;
+
+        if(moveCounter <= 0) {
+            ChangeAnimation();
+            moveCounter = 10f;
+        }
+    }//end update
+
+    void ChangeAnimation() {
+        if(animIndex < animations.Length - 1) {
+            animIndex++;
+        } else {
+            animIndex = 0;
+        }
+
+        controller.Play(animations[animIndex]);        
+    }//end Change Animation
+
+}// end CharacterSelectMovement
