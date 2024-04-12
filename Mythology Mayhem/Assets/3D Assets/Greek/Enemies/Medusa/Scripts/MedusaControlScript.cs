@@ -166,16 +166,36 @@ public class MedusaControlScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Calls Every Frame if in Free Move Mode
-        RunFreeMoveBlend();
+        if (playerHealth != null)
+        {
+            //Calls Every Frame if in Free Move Mode
+            RunFreeMoveBlend();
 
-        // Run Attack State Logic
-        RunStateMachine();
+            // Run Attack State Logic
+            RunStateMachine();
 
-        totalHealthDisplay.text = health.ToString() + "/" + startingHealth.ToString();
-        healthBar.value = health;
+            totalHealthDisplay.text = health.ToString() + "/" + startingHealth.ToString();
+            healthBar.value = health;
 
-        PointCanvasTowardPlayer(playerHealth.transform);
+            PointCanvasTowardPlayer(playerHealth.transform);
+        }
+        else 
+        {
+            GameObject obj = GameObject.FindGameObjectWithTag("Player");
+            if (obj != null)
+            {
+                print(obj.name);
+                playerHealth = obj.GetComponent<Health>();
+                if (playerHealth == null) 
+                {
+                    print("Cant find Health Script");
+                }
+            }
+            else
+            {
+                print("Cant find Player Object");
+            }
+        }
     }
     void RunStateMachine()
     {
