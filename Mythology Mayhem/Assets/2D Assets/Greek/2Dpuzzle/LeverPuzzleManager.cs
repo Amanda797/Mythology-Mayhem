@@ -4,39 +4,93 @@ using UnityEngine;
 
 public class LeverPuzzleManager : MonoBehaviour
 {
-    public GameObject Lever1;
-    public GameObject Lever2;
-    public GameObject Lever3;
-    public GameObject Lever4;
-    public GameObject Lever5;
-    public GameObject Lever6;
-    public GameObject Lever7;
-    public GameObject Lever8;
-    public GameObject Lever9;
-    public GameObject Lever10;
-    public GameObject Door;
+    public List<LeverPuzzle> levers;
+    public List<bool> combination;
+    public bool match;
+    public DoorCode Door;
     //public GameObject SpawnLocation;
     public GameObject item;
 
-    public bool mirrorCollected = false;
+    public bool mirrorCollected;
+    public bool loading;
+    public bool completed;
     // Start is called before the first frame update
     void Start()
     {
-        Door.GetComponent<DoorCode>().doorOpen = true;
-        Door.GetComponent<DoorCode>().blocked = false;
+
+        loading = true;
+
+        Door.doorOpen = true;
+        Door.blocked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Lever1.GetComponent<LeverPuzzle>().switchOn == false && Lever2.GetComponent<LeverPuzzle>().switchOn == false && Lever3.GetComponent<LeverPuzzle>().switchOn == true && Lever4.GetComponent<LeverPuzzle>().switchOn == false && Lever5.GetComponent<LeverPuzzle>().switchOn == false && Lever6.GetComponent<LeverPuzzle>().switchOn == true && Lever7.GetComponent<LeverPuzzle>().switchOn == false && Lever8.GetComponent<LeverPuzzle>().switchOn == false && Lever9.GetComponent<LeverPuzzle>().switchOn == true && Lever10.GetComponent<LeverPuzzle>().switchOn == false)
+        if (!loading)
         {
-            if(!mirrorCollected)
+            if (!completed)
             {
-                mirrorCollected = true;
-                item.SetActive(true);
+                match = true;
+                for (int i = 0; i < levers.Count; i++)
+                {
+                    if (levers[i].switchOn != combination[i])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match)
+                {
+                    completed = true;
+                    item.SetActive(true);
+                    UpdateAndSave();
+                }
             }
-            
         }
+        else 
+        {
+            if (SaveScene.instance != null) 
+            {
+                if (SaveScene.instance.Loaded) 
+                {
+                    for (int i = 0; i < SaveScene.instance.saveData.TwoDLabyrinthLevers.Count; i++) 
+                    {
+                        levers[i].LoadState(SaveScene.instance.saveData.TwoDLabyrinthLevers[i]);
+                    }
+                    mirrorCollected = SaveScene.instance.saveData.collectedMirror;
+                    completed = SaveScene.instance.saveData.TwoDLabyrinthCompleted;
+                    if (!completed) 
+                    {
+                        item.SetActive(false);
+                    }
+                    if (completed && !mirrorCollected) 
+                    {
+                        item.SetActive(true);
+                    }
+                    if (completed && mirrorCollected) 
+                    {
+                        item.SetActive(false);
+                    }
+                    loading = false;
+                }
+            }
+        }
+    }
+
+    public void CollectMirror() 
+    {
+        mirrorCollected = true;
+        UpdateAndSave();
+    }
+
+    public void UpdateAndSave() 
+    {
+        List<bool> tempLeverList = new List<bool>();
+        for (int i = 0; i < levers.Count; i++)
+        {
+            tempLeverList.Add(levers[i].switchOn);
+        }
+        SaveScene.instance.UpdateLeverPuzzle(tempLeverList, mirrorCollected, completed);
     }
 }

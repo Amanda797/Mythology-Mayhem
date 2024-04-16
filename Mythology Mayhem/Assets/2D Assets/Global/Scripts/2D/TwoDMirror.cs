@@ -11,18 +11,13 @@ public class TwoDMirror : MonoBehaviour
     public bool isInRangeOfEnemy;
 
     public float slowingValue;
-
-    public bool deBugMirrorReset;
-
+    public LeverPuzzleManager leverManager;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        if(deBugMirrorReset == true)
-        {
-            PlayerPrefs.SetInt("mirrorBool", 0);
-        }
+        
     }
                                         
     // Update is called once per frame
@@ -30,13 +25,7 @@ public class TwoDMirror : MonoBehaviour
     {
         if(pickUpAllowed == true && Input.GetKeyDown(KeyCode.E))
         {
-            Destroy(gameObject);
             PickUp();
-        }
-
-        if(PlayerPrefs.GetInt("mirrorBool") == 1)
-        {
-            Destroy(gameObject);
         }
 
     }
@@ -62,8 +51,7 @@ public class TwoDMirror : MonoBehaviour
     private void PickUp()
     {
         pickedUp = true;
-        //SetMinotaurSpeed();
-        PlayerPrefs.SetInt("mirrorBool", 1);
+        leverManager.CollectMirror();
         gameObject.SetActive(false);
     }
 

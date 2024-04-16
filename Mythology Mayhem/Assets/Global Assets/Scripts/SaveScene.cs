@@ -10,110 +10,39 @@ using UnityEngine.SceneManagement;
 public class SaveScene : MonoBehaviour
 {
     public bool LoadScene;
-    public SceneObjects sceneObjects;
-
-    bool saving;
+    [Header("Greek - 2D Labyrinth")]
+    public SaveData saveData;
 
     public static SaveScene instance;
+
+    public bool Loaded;
     // Start is called before the first frame update
     void Awake()
     {
-        if(LoadScene) Load();
-        //Save();
-        //if(LoadScene) Load();
-        
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            
-        }
-        foreach (var item in sceneObjects.spawnedObjs)
-        {
-            // instantiate the object and set the position and the active state
-            item.gameObject = Instantiate(item.prefab, item.position, Quaternion.identity);
-            item.gameObject.name = item.prefab.name;
-            item.gameObject.transform.localScale = item.scale;
-                
-        }
-        
-        saving = true;
-
-        //print("Loaded Game");
-
         
     }
     void Start()
     {
-        
-        // foreach (var item in sceneObjects.spawnedObjs)
-        // {
-        //     // instantiate the object and set the position and the active state
-        //     item.gameObject = Instantiate(item.prefab, item.position, Quaternion.identity);
-                
-        // }
-        // if(LoadScene) Load();
-        
+        instance = this;
+        Loaded = false;
+        Load();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
         if(Input.GetKeyDown(KeyCode.LeftBracket))
         {
             Load();
         }
         if(Input.GetKeyDown(KeyCode.O))
         {
+            
             Save();
         }
-        if(saving)
-        {
-            foreach (var item in sceneObjects.objects)
-        {
-            if(item.gameObject != null)
-            {
-                item.name = item.gameObject.name;
-                item.position = item.gameObject.transform.position;
-                item.scale = item.gameObject.transform.localScale;
-                item.isEnabled = item.gameObject.activeSelf;
-            }
-            else
-            {
-                item.isNull = true;
-            }
-                
-        }
-
-        foreach (var item in sceneObjects.spawnedObjs)
-        {
-            if(item.gameObject != null)
-            {
-                item.name = item.gameObject.name;
-                item.position = item.gameObject.transform.position;
-                item.scale = item.gameObject.transform.localScale;
-                item.isEnabled = item.gameObject.activeSelf;
-            }
-            else
-            {
-                item.isNull = true;
-            }
-                
-        }
-        }
-        
-        
     }
     void OnDestroy()
     {
-        saving = false;
         this.SaveNow();
     }
 
@@ -129,13 +58,13 @@ public class SaveScene : MonoBehaviour
         //write each object in the list if it null or not and the position of the object
         
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        
-        string sceneObjectsString = JsonUtility.ToJson(sceneObjects, true);
+
+        string sceneObjectsString = JsonUtility.ToJson(saveData, true);
         print(sceneObjectsString);
         //PlayerPrefs.SetString(sceneName, sceneObjectsString);
 
         //write the string in a file
-        System.IO.File.WriteAllText(Application.dataPath + "/Global Assets/Resources/_SceneData/" + sceneName + ".json", sceneObjectsString);
+        System.IO.File.WriteAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + sceneName + ".json", sceneObjectsString);
         //refresh the project to see the file
        #if UNITY_EDITOR
           UnityEditor.AssetDatabase.Refresh();
@@ -149,103 +78,39 @@ public class SaveScene : MonoBehaviour
         //read each object in the list if it null or not and the position of the object
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         //string sceneObjectsString = PlayerPrefs.GetString(sceneName);
-        if(!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/_SceneData/" + sceneName + ".json"))
+        if(!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/SceneData/" + sceneName + ".json"))
         {
             print("No save data");
             this.SaveNow();
             return;
         }
-        string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/_SceneData/" + sceneName + ".json");
+        string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + sceneName + ".json");
 
-        sceneObjects = JsonUtility.FromJson<SceneObjects>(sceneObjectsString);
-        //print(sceneObjects.objects[1].transform.position);
-        // print(sceneObjects.objects[1].position);
+        saveData = JsonUtility.FromJson<SaveData>(sceneObjectsString);
+        print(sceneObjectsString);
 
-        foreach (var item in sceneObjects.objects)
-        {            
-            if(item.gameObject != null)
-            {
-                item.gameObject.transform.position = item.position;
-                item.gameObject.transform.localScale = item.scale;
-                item.gameObject.SetActive(item.isEnabled);
-            }
-            else
-            {
-                //Destroy(item.gameObject);
-                // find gameobject by name
-                GameObject obj = GameObject.Find(item.name);
-                if(obj != null)
-                {
-                    item.gameObject = obj;
-                    obj.transform.position = item.position;
-                    obj.transform.localScale = item.scale;
-                    obj.SetActive(item.isEnabled);
-                } else
-                {
-                    sceneObjects.objects.Remove(item);
-                }
-            }
-            
-        }
-        foreach (var item in sceneObjects.spawnedObjs)
+        Loaded = true;
+    }
+
+    public void UpdateLeverPuzzle(List<bool> levers, bool mirror, bool completed) 
+    {
+        saveData.TwoDLabyrinthLevers = new List<bool>();
+        for (int i = 0; i < levers.Count; i++)
         {
-            if(item.gameObject != null)
-            {
-                item.gameObject = Instantiate(item.prefab, item.position, Quaternion.identity);
-                item.gameObject.transform.localScale = item.scale;
-                item.gameObject.SetActive(item.isEnabled);
-            }
-            else
-            {
-                //Destroy(item.gameObject);
-                GameObject obj = GameObject.Find(item.name);
-                if(obj != null)
-                {
-                    item.gameObject = obj;
-                    obj.transform.position = item.position;
-                    obj.transform.localScale = item.scale;
-                    obj.SetActive(item.isEnabled);
-                }
-            }
-            
+            saveData.TwoDLabyrinthLevers.Add(levers[i]);
         }
-    }
-    public static void AddObject(GameObject gameObject, GameObject prefab = null)
-    {
-        instance.sceneObjects.spawnedObjs.Add(new SceneObject(gameObject, gameObject.transform.position, prefab));
+        saveData.collectedMirror = mirror;
+        saveData.TwoDLabyrinthCompleted = completed;
+        Save();
     }
 }
-[System.Serializable]
-public class SceneObjects
-{
-    public List<SceneObject> objects = new List<SceneObject>();
 
-    public List<SceneObject> spawnedObjs = new List<SceneObject>();
-    public SceneObjects(string sceneName, List<SceneObject> objects)
-    {
-        this.objects = objects;
-    }
-}
 [System.Serializable]
-public class SceneObject
+public class SaveData
 {
-    [HideInInspector]
-    public string name;
-    public GameObject gameObject;
-    [HideInInspector]
-    public GameObject prefab;
-    //[HideInInspector]
-    public Vector3 position;
-    //[HideInInspector]
-    public Vector3 scale;
-    [HideInInspector]
-    public bool isNull;
-    //[HideInInspector]
-    public bool isEnabled;
-    public SceneObject(GameObject gameObject, Vector3 position, GameObject prefab = null)
-    {
-        this.gameObject = gameObject;
-        this.position = position;
-        this.prefab = prefab;
-    }
+    [Header("2D Labyrinth")]
+    public bool TwoDLabyrinthCompleted;
+    public bool collectedMirror;
+    public List<bool> TwoDLabyrinthLevers;
 }
+

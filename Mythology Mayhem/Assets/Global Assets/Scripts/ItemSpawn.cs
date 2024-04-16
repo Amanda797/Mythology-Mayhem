@@ -18,7 +18,6 @@ public class ItemSpawn : MonoBehaviour
             {
                 GameObject obj = Instantiate(items[i].item,JsonUtility.FromJson<Vector3>(PlayerPrefs.GetString(items[i].name)),Quaternion.identity);
                 spawnedItems.Add(obj);
-                SaveScene.AddObject(obj,items[i].item);
                 PlayerPrefs.DeleteAll();
             }
         }
@@ -45,7 +44,7 @@ public class ItemSpawn : MonoBehaviour
                     {
                         
                         //spawnedItems.Add(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity));
-                        SaveScene.AddObject(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity),item.item);
+                        //SaveScene.AddObject(Instantiate(item.item,itemSpawnPoint.position,Quaternion.identity),item.item);
                         PlayerPrefs.DeleteAll();
                         
 

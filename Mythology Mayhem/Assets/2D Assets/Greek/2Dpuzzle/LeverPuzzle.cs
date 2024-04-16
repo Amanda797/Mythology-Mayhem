@@ -65,4 +65,18 @@ public class LeverPuzzle : MonoBehaviour
             switchOn = false;
         }
     }
+
+    public void LoadState(bool on) 
+    {
+        if (on)
+        {
+            anim.Play("LeverAnim");
+            switchOn = true;
+        }
+        else 
+        {
+            anim.Play("LeverOff");
+            switchOn = false;
+        }
+    }
 }
