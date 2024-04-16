@@ -8,14 +8,13 @@ public class Snake2D : MonoBehaviour
 
     [Header("Idle & Patrol")]
     [SerializeField] string patrolBool;
-    [Range(0,5)]
     [SerializeField] float speed = .6f;
-    float flipSensitivity = 1f;
-    [SerializeField] float patrolDistance = 4f;
+    [SerializeField] float flipSensitivity = 1f;
+    [SerializeField] float patrolDistance = 5f;
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] string attackBool;
+    [SerializeField] string[] meleeAttackTriggers;
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;
@@ -80,7 +79,8 @@ public class Snake2D : MonoBehaviour
     }//end move to target
 
     public void MeleeAttack()
-    {//Check for Player
+    {
+        //Check for Player
         if (!enemy.DetectPlayer())
         {
             if (alertTime > alertTimer)
@@ -96,12 +96,12 @@ public class Snake2D : MonoBehaviour
         // Continue Attack
         if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
-            enemy.animator.SetBool(attackBool, true);
+            enemy.animator.SetTrigger(meleeAttackTriggers[Random.Range(0,meleeAttackTriggers.Length)]);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
             if (enemy.player.GetComponent<KnockBackFeedback>())
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
-            enemy.animator.SetBool(attackBool, false);
+            enemy.animator.SetTrigger(meleeAttackTriggers[Random.Range(0, meleeAttackTriggers.Length)]);
             StartCoroutine(enemy.AttackRate());
         }
         else
@@ -122,7 +122,4 @@ public class Snake2D : MonoBehaviour
         }
     }//end melee attack
 
-    public void SpecialAttack()
-    {
-    }//end special attack
 }
