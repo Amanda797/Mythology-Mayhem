@@ -34,7 +34,9 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 0
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 4b077b78725a909419a28dd386a59bd1
+    name: EnemySoundsVolume
   m_AudioMixerGroupViews:
   - guids:
     - c33070b3209184549aa7c3da92b9dbce
@@ -63,7 +65,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24400004}
   m_UserColorIndex: 0
-  m_Mute: 1
+  m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
 --- !u!244 &24400004
@@ -90,7 +92,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 8bd5979aceee9e54cbcbbaa6f13f4626
   m_FloatValues:
-    ec9b76d75c3083f4e90b0c720c0d3687: 0.04171297
+    ec9b76d75c3083f4e90b0c720c0d3687: 0
+    4b077b78725a909419a28dd386a59bd1: -12.3
   m_TransitionOverrides: {}
 --- !u!243 &88278788967329736
 AudioMixerGroupController:
