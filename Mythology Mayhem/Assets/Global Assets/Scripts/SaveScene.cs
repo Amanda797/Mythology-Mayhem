@@ -11,7 +11,7 @@ public class SaveScene : MonoBehaviour
 {
     public bool LoadScene;
     [Header("Greek - 2D Labyrinth")]
-    public SaveData saveData;
+    public SaveDataTest saveData;
 
     public static SaveScene instance;
 
@@ -86,7 +86,7 @@ public class SaveScene : MonoBehaviour
         }
         string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + sceneName + ".json");
 
-        saveData = JsonUtility.FromJson<SaveData>(sceneObjectsString);
+        saveData = JsonUtility.FromJson<SaveDataTest>(sceneObjectsString);
         print(sceneObjectsString);
 
         Loaded = true;
@@ -106,7 +106,7 @@ public class SaveScene : MonoBehaviour
 }
 
 [System.Serializable]
-public class SaveData
+public class SaveDataTest
 {
     [Header("2D Labyrinth")]
     public bool TwoDLabyrinthCompleted;

@@ -21,7 +21,17 @@ public class MythologyMayhem : MonoBehaviour
 
     public enum Level
     {
-        Lib3D,
+        MainMenu,
+        CutScene1,
+        CutScene2,
+        GreekLibrary_2D,
+        GreekLibrary_3D,
+        GreekAthens_2D,
+        GreekCavern_2D,
+        GreekLabyrinth_3D,
+        GreekLabyrinth_2D_Levers,
+        GreekLabyrinth_2D_Pedastals,
+        GreekMedusa_3D,
         VikingVillage_2D,
         VikingVillage_3D,
         VikingMine_2D,

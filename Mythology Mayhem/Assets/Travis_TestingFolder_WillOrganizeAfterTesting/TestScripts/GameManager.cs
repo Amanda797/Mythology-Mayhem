@@ -25,43 +25,71 @@ public class GameManager : MythologyMayhem
 
     public float startDelay;
 
+    public bool inMainMenu;
+    public bool cutscenePlaying;
+
+    [Header("Background Music")]
+    public AudioSource bgm;
+
+    public GameObject gameplayUI;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         Application.backgroundLoadingPriority = ThreadPriority.Low;
+        if (SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded)
+        {
+            gameplayUI.SetActive(false);
+            inMainMenu = true;
+            currentScene = Level.MainMenu;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (startDelay > 0)
+        if (Input.GetKeyDown(KeyCode.O)) 
         {
-            startDelay -= Time.deltaTime;
-            if (startDelay <= 0)
-            {
-                startDelay = 0;
-                LoadSystemsStart();
-            }
+            SaveGame();
         }
-        else
+        if (Input.GetKeyDown(KeyCode.LeftBracket)) 
+        {
+            LoadGame();
+        }
+        if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();
         }
     }
-
-    void LoadSystemsStart() 
+    public void LoadSystemsStart(bool newGame) 
     {
-        gameData.SetStartScene();
-
-        playerControllers = new List<ScenePlayerObject>();
-        if (gameData.overrideLoad) 
+        if (newGame)
         {
-            LoadScene(gameData.overrideStartScene);
+            cutscenePlaying = true;
+            inMainMenu = false;
+            bgm.Stop();
+            currentScene = Level.CutScene1;
+            gameData.NewGame();
+
+            LoadScene(Level.CutScene1, true);
         }
         else
         {
-            LoadScene(gameData.startScene);
+            inMainMenu = false;
+            cutscenePlaying = false;
+            gameplayUI.SetActive(true);
+
+            gameData.SetStartScene();
+
+            playerControllers = new List<ScenePlayerObject>();
+            if (gameData.overrideLoad)
+            {
+                LoadScene(gameData.overrideStartScene, true);
+            }
+            else
+            {
+                LoadScene(gameData.startScene, true);
+            }
         }
         DontDestroyOnLoad(this.gameObject);
         startSceneLoaded = false;
@@ -69,7 +97,7 @@ public class GameManager : MythologyMayhem
         checkProx = false;
         checkUnneeded = false;
     }
-
+    
     void LoadSystemsUpdate() 
     {
         if (!startSceneLoaded)
@@ -85,7 +113,10 @@ public class GameManager : MythologyMayhem
                         currentLocalManager = loadedLocalManagers[i];
                     }
                 }
-                SceneManager.UnloadSceneAsync("StartScene");
+                if (SceneManager.GetSceneByName("StartScene").isLoaded)
+                {
+                    SceneManager.UnloadSceneAsync("StartScene");
+                }
             }
         }
         if (!currentSceneLoaded && startSceneLoaded)
@@ -179,9 +210,16 @@ public class GameManager : MythologyMayhem
         return check;
     }
 
-    public void LoadScene(Level scene) 
+    public void LoadScene(Level scene, bool single) 
     {
-        SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
+        if (single)
+        {
+            SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
+        }
     }
     public void LoadScene(string scene) 
     {
@@ -262,5 +300,47 @@ public class GameManager : MythologyMayhem
         checkStart = false;
         checkProx = false;
         checkUnneeded = false;
+    }
+
+    public void CloseApplication()
+    {
+        #if UNITY_EDITOR
+            // Application.Quit() does not work in the editor so
+            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
+    public void SaveGame()
+    {
+        if (gameData.saveData == null)
+        {
+            SaveData newData = new SaveData();
+            newData.settingsData = new SettingsData();
+            gameData.saveData = newData;
+
+            gameData.saveData.UpdateData(gameData);
+        }
+        else
+        {
+            gameData.saveData.UpdateData(gameData);
+        }
+    }
+    public void LoadGame()
+    {
+        if (gameData.saveData == null)
+        {
+            SaveData newData = new SaveData();
+            newData.settingsData = new SettingsData();
+            gameData.saveData = newData;
+
+            gameData.saveData.Load();
+        }
+        else
+        {
+            gameData.saveData.Load();
+        }
     }
 }

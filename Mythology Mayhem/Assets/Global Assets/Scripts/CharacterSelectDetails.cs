@@ -128,13 +128,30 @@ public class CharacterSelectDetails : MonoBehaviour
                 // Save selectedCharacter
                 if(selectedCharacter != -1) {
                     print("Selected Character is: " + characters[selectedCharacter].name);
-                    PlayerPrefs.SetInt("playerIndex", selectedCharacter);
+                        if (GameManager.instance != null) 
+                        {
+                            MythologyMayhem.Character character = MythologyMayhem.Character.Tobias;
+                            switch (selectedCharacter) 
+                            {
+                                case 1:
+                                    character = MythologyMayhem.Character.Gorm;
+                                    break;
+                                case 2:
+                                    character = MythologyMayhem.Character.Amunet;
+                                    break;
+                                case 3:
+                                    character = MythologyMayhem.Character.Micos;
+                                    break;
+                            }
+                            GameManager.instance.gameData.selectedCharacter = character;
+                        }
+                    //PlayerPrefs.SetInt("playerIndex", selectedCharacter);
+                    /*
                     foreach(GameObject go in Object.FindObjectsOfType<GameObject>()) {
                         if(go != this) {
                             Destroy(go);
                         }
                     }
-
                     if(PlayerPrefs.HasKey("sceneIndex"))
                     {
                         sceneIndex = PlayerPrefs.GetInt("sceneIndex");                    
@@ -144,6 +161,7 @@ public class CharacterSelectDetails : MonoBehaviour
                     {
                         SceneManager.LoadScene("Cutscene1", LoadSceneMode.Single);
                     }
+                    */
                 }
                 break;
             }

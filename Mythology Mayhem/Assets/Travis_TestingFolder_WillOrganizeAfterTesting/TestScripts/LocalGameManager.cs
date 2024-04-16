@@ -124,7 +124,7 @@ public class LocalGameManager : MythologyMayhem
 
     public void AddScene(Level scene)
     {
-        mainGameManager.LoadScene(scene);
+        mainGameManager.LoadScene(scene, false);
     }
 
     public void SceneTransition(Level scene)
@@ -189,7 +189,7 @@ public class LocalGameManager : MythologyMayhem
             }
             else if(sceneCheck.name != "Null")
             {
-                mainGameManager.LoadScene(scenesLoadedOnStart[i]);
+                mainGameManager.LoadScene(scenesLoadedOnStart[i], false);
                 check = false;
             }
 
