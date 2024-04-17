@@ -36,6 +36,9 @@ public class LocalGameManager : MythologyMayhem
     public bool canTransition;
     public bool activeByDefault;
 
+    [Header("Audio Settings")]
+    public AudioClip backgroundMusic;
+
     [Header("Level Offset System")]
     public bool useOffset;
     public Vector3 levelOffset;

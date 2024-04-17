@@ -30,10 +30,12 @@ public class GameManager : MythologyMayhem
     public bool inMainMenu;
     public bool cutscenePlaying;
 
-    [Header("Background Music")]
-    public AudioSource bgm;
+    [Header("Sound")]
+    public AudioListener listener;
+    public AudioSource backgroundMusic;
 
     [Header("UI")]
+    public bool UIActive;
     public float closeButtonPressTimer;
     public GameObject PressEObj;
     public TextMeshProUGUI PressEText;
@@ -55,6 +57,10 @@ public class GameManager : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
+        inMainMenu = SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded;
+
+        ListenerTrackPlayer();
+
         if (Input.GetKeyDown(KeyCode.O)) 
         {
             SaveGame();
@@ -84,7 +90,7 @@ public class GameManager : MythologyMayhem
         {
             cutscenePlaying = true;
             inMainMenu = false;
-            bgm.Stop();
+            backgroundMusic.Stop();
             currentScene = Level.CutScene1;
             gameData.NewGame();
 
@@ -377,6 +383,17 @@ public class GameManager : MythologyMayhem
             }
         }
         return null;
+    }
+    void ListenerTrackPlayer() 
+    {
+        if (currentLocalManager != null)
+        {
+            listener.transform.position = currentLocalManager.player.transform.position;
+        }
+        else 
+        {
+            listener.transform.position = Vector3.zero;
+        }
     }
     public void Popup(string message) 
     {

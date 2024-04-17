@@ -17,6 +17,20 @@ public class Enemy : MythologyMayhem
     public Rigidbody rigidBody3D;
     public NavMeshAgent agent;
 
+    [Header("Audio Components")]
+    public AudioSource audioSource;
+    public AudioClip[] idleSounds;
+    public AudioClip[] attackSounds;
+    public AudioClip[] hurtSounds;
+    public AudioClip[] deathSounds;
+    public enum Soundtype
+    {
+        Idle,
+        Attack,
+        Hurt,
+        Death
+    }
+
     [Header("Stats")]
     public Dimension enemyDimension;
     public Health health;
@@ -264,4 +278,31 @@ public class Enemy : MythologyMayhem
 
     }//end detect player
 
+    public void PlaySound(Soundtype soundType)
+    {
+        switch (soundType) 
+        {
+            case Soundtype.Idle:
+                PlaySoundAlgorithm(idleSounds);
+                break;
+            case Soundtype.Attack:
+                PlaySoundAlgorithm(attackSounds);
+                break;
+            case Soundtype.Hurt:
+                PlaySoundAlgorithm(hurtSounds);
+                break;
+            case Soundtype.Death:
+                PlaySoundAlgorithm(deathSounds);
+                break;
+        }
+    }
+
+    void PlaySoundAlgorithm(AudioClip[] clips) 
+    {
+        if (clips.Length >= 1)
+        {
+            int randomSoundIndex = UnityEngine.Random.Range(0, clips.Length);
+            audioSource.PlayOneShot(clips[randomSoundIndex]);
+        }
+    }
 }

@@ -21,7 +21,8 @@ public class PlayerStats : MonoBehaviour
 
     private SpriteRenderer sr;
     public bool flipped = false;
-    private AudioSource aud;    
+    private AudioSource aud;
+    public AudioSource healSource;
 
     private GameObject owl;
     [HideInInspector]public int hitCount;
@@ -96,15 +97,13 @@ public class PlayerStats : MonoBehaviour
     private void Attack()
     {
         anim.SetTrigger("Attack");
-
+        aud.Play();
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(ps.AttackRange, ps.AttackRange+ps.AttackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
             if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
             {
                 hitCount++;
-                //Play Sound
-                aud.Play();
                 enemy.GetComponent<Health>().TakeDamage(ps.AttackDamage);
                 enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
@@ -127,8 +126,12 @@ public class PlayerStats : MonoBehaviour
         }
     }//end take damage
 
-    public void Heal(int heal) 
+    public void Heal(int heal, bool potion) 
     {
+        if (potion) 
+        {
+            healSource.Play();
+        }
         if(ps.CurrHealth < ps.MaxHealth)
         {
             ps.CurrHealth += Mathf.Abs(heal);

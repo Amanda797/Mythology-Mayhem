@@ -162,6 +162,7 @@ Transform:
   - {fileID: 8980665220428813390}
   - {fileID: 8315446004380048396}
   - {fileID: 8315446003300543847}
+  - {fileID: 6238995778452660335}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,7 +196,8 @@ MonoBehaviour:
   startDelay: 50
   inMainMenu: 0
   cutscenePlaying: 0
-  bgm: {fileID: 148288588956424426}
+  listener: {fileID: 7989333660882923309}
+  backgroundMusic: {fileID: 148288588956424426}
   closeButtonPressTimer: 0
   PressEObj: {fileID: 7016001730378490006}
   PressEText: {fileID: 7016001730301504389}
@@ -432,17 +434,17 @@ MonoBehaviour:
   - playerIndex
   loaded: 0
   highestChapterCompleted: 5
-  highestLevelCompleted: 26
+  highestLevelCompleted: 11
   overrideLoad: 0
   overrideStartScene: 1
   startScene: 1
   spawnerToUse: 1
   selectedCharacter: 0
   health: 0
-  masterVolume: -50
+  masterVolume: 0
   musicVolume: 0
   sfxVolume: 0
-  enemyVolume: 0
+  enemyVolume: 20
   saveData:
     highestChapter: 0
     highestLevel: 0
@@ -12259,6 +12261,46 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &8451108749532077064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6238995778452660335}
+  - component: {fileID: 7989333660882923309}
+  m_Layer: 0
+  m_Name: AudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6238995778452660335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451108749532077064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 400325150974498607}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &7989333660882923309
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451108749532077064}
+  m_Enabled: 1
 --- !u!1 &8723804945251903353
 GameObject:
   m_ObjectHideFlags: 0

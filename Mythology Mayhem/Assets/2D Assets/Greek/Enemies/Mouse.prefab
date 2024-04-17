@@ -187,11 +187,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 8389002920890670447}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 701d9aafa0ed4b94f95a8656be33ab58, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.021142721, y: 0.28}
+  m_Offset: {x: -1, y: 0.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -202,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.88, y: 2.9}
+  m_Size: {x: 4.34, y: 2.36}
   m_EdgeRadius: 0
 --- !u!50 &3047567049538542250
 Rigidbody2D:
@@ -220,7 +220,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 701d9aafa0ed4b94f95a8656be33ab58, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -234,8 +234,8 @@ AudioSource:
   m_GameObject: {fileID: 8389002920890670447}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ec023a5304bebcd4eacc5f23e094d371, type: 3}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
+  m_audioClip: {fileID: 8300000, guid: a4b1e56ffabf69e429ad193107393dc6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -243,12 +243,12 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 33
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -281,7 +281,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -410,6 +410,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8389002920890670440}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  audioSource: {fileID: 2916334492789079603}
+  idleSounds:
+  - {fileID: 8300000, guid: b803e6208b6aa6845b6a9a7db50dcd7a, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 581ef8aeeb4161d46ba79d0ed9785b9e, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: a4b1e56ffabf69e429ad193107393dc6, type: 3}
+  - {fileID: 8300000, guid: ec023a5304bebcd4eacc5f23e094d371, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 161ae2ec605d1cb418facf924f7c28fc, type: 3}
   enemyDimension: 0
   health: {fileID: 8516475126756549845}
   animator: {fileID: 8389002920890670442}
@@ -553,6 +563,7 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Dead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0

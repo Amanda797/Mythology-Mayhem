@@ -417,6 +417,17 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8566816731040993080}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  audioSource: {fileID: 2647877704999172001}
+  idleSounds:
+  - {fileID: 8300000, guid: 28fe2970c11bf4d4a9465c34aacc2fd5, type: 3}
+  - {fileID: 8300000, guid: 337ae47a3e342734bbd4529f87274f73, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 60fe2dc87db8ec34984eb48f8c4a841d, type: 3}
+  - {fileID: 8300000, guid: 492eb01a7de44df4ea828a45f502688d, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: e32ccc258eb579440a7d24fbf1c11708, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 78a78deca4e72f3468538e94f8713e8a, type: 3}
   enemyDimension: 0
   health: {fileID: 1537699233321417100}
   animator: {fileID: 8566816731040993082}
@@ -723,6 +734,7 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: IsDead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0

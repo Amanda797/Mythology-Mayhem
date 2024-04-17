@@ -18,9 +18,9 @@ public class HealingPotion : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             if (smallPotion) 
-                other.gameObject.GetComponent<PlayerStats>().Heal(2);
+                other.gameObject.GetComponent<PlayerStats>().Heal(2, true);
             else
-                other.gameObject.GetComponent<PlayerStats>().Heal(4);
+                other.gameObject.GetComponent<PlayerStats>().Heal(4, true);
             
             if(gameObject.GetComponent<AudioSource>())
                 gameObject.GetComponent<AudioSource>().Play();

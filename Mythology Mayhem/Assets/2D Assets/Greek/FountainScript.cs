@@ -9,7 +9,7 @@ public class FountainScript : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             if(other.gameObject.GetComponent<PlayerStats>().ps.CurrHealth < 100) {
-                other.gameObject.GetComponent<PlayerStats>().Heal(100);
+                other.gameObject.GetComponent<PlayerStats>().Heal(100, false);
             }
         }
     }//end on trigger enter 2d
