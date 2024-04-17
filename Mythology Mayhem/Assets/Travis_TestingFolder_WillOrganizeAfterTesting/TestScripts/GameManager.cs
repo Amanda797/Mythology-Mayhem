@@ -40,6 +40,9 @@ public class GameManager : MythologyMayhem
     public GameObject PressEObj;
     public TextMeshProUGUI PressEText;
 
+    [Header("Player Stats")]
+    public PlayerStats_SO stats;
+
     public GameObject gameplayUI;
     // Start is called before the first frame update
     void Awake()
@@ -52,6 +55,7 @@ public class GameManager : MythologyMayhem
             inMainMenu = true;
             currentScene = Level.MainMenu;
         }
+        LoadGame();
     }
 
     // Update is called once per frame
@@ -348,7 +352,7 @@ public class GameManager : MythologyMayhem
         if (gameData.saveData == null)
         {
             SaveData newData = new SaveData();
-            newData.settingsData = new SettingsData();
+            newData.GenerateNewData();
             gameData.saveData = newData;
 
             gameData.saveData.UpdateData(gameData);
@@ -382,6 +386,18 @@ public class GameManager : MythologyMayhem
                 return playerControllers[i];
             }
         }
+        return null;
+    }
+    public LocalGameManager GetLocalGameManager(Level inScene) 
+    {
+        for (int i = 0; i < loadedLocalManagers.Count; i++) 
+        {
+            if (loadedLocalManagers[i].inScene == inScene) 
+            {
+                return loadedLocalManagers[i];
+            }
+        }
+
         return null;
     }
     void ListenerTrackPlayer() 

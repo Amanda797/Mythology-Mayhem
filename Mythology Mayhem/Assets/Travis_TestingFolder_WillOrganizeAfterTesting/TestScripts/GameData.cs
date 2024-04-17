@@ -18,11 +18,26 @@ public class GameData : MythologyMayhem
     [Header("Player Data")]
     public Character selectedCharacter;
     public int health;
+    public int collectedHearts;
+    public bool collectedMirror;
     [Header("Main Menu")]
     public float masterVolume;
     public float musicVolume;
     public float sfxVolume;
     public float enemyVolume;
+    [Header("Level Data")]
+    public bool[] GL2D_Enemies;
+    public bool[] GL3D_Enemies;
+    public bool[] GA2D_Enemies;
+    public bool[] GC2D_Enemies;
+    public bool[] GC2DL_Enemies;
+    public bool[] GC2DS_Enemies;
+    public bool[] GLa3D_Enemies;
+    public bool[] GLa2DL_Enemies;
+    public bool[] GLa2DP_Enemies;
+    public bool[] GM3D_Enemies;
+    public bool[] VV2D_Enemies;
+    public bool[] VV3D_Enemies;
 
     [Header("Save Data")]
     public SaveData saveData;
@@ -200,6 +215,79 @@ public class GameData : MythologyMayhem
         }
     }
 
+    public void SaveEnemyData(Level whichLevel, bool[] enemyData) 
+    {
+        switch (whichLevel) 
+        {
+            case Level.GreekLibrary_2D:
+                GL2D_Enemies = enemyData;
+                break;
+            case Level.GreekLibrary_3D:
+                GL3D_Enemies = enemyData;
+                break;
+            case Level.GreekAthens_2D:
+                GA2D_Enemies = enemyData;
+                break;
+            case Level.GreekCavern_2D:
+                GC2D_Enemies = enemyData;
+                break;
+            case Level.GreekCavern_2D_Levers:
+                GC2DL_Enemies = enemyData;
+                break;
+            case Level.GreekCavern_2D_Statues:
+                GC2DS_Enemies = enemyData;
+                break;
+            case Level.GreekLabyrinth_3D:
+                GLa3D_Enemies = enemyData;
+                break;
+            case Level.GreekLabyrinth_2D_Levers:
+                GLa2DL_Enemies = enemyData;
+                break;
+            case Level.GreekLabyrinth_2D_Pedastals:
+                GLa2DP_Enemies = enemyData;
+                break;
+            case Level.GreekMedusa_3D:
+                GM3D_Enemies = enemyData;
+                break;
+            case Level.VikingVillage_2D:
+                VV2D_Enemies = enemyData;
+                break;
+            case Level.VikingVillage_3D:
+                VV3D_Enemies = enemyData;
+                break;
+        }
+    }
+    public bool[] FetchEnemyData(Level whichLevel)
+    {
+        switch (whichLevel)
+        {
+            case Level.GreekLibrary_2D:
+                return GL2D_Enemies;
+            case Level.GreekLibrary_3D:
+                return GL3D_Enemies;
+            case Level.GreekAthens_2D:
+                return GA2D_Enemies;
+            case Level.GreekCavern_2D:
+                return GC2D_Enemies;
+            case Level.GreekCavern_2D_Levers:
+                return GC2DL_Enemies;
+            case Level.GreekCavern_2D_Statues:
+                return GC2DS_Enemies;
+            case Level.GreekLabyrinth_3D:
+                return GLa3D_Enemies;
+            case Level.GreekLabyrinth_2D_Levers:
+                return GLa2DL_Enemies;
+            case Level.GreekLabyrinth_2D_Pedastals:
+                return GLa2DP_Enemies;
+            case Level.GreekMedusa_3D:
+                return GM3D_Enemies;
+            case Level.VikingVillage_2D:
+                return VV2D_Enemies;
+            case Level.VikingVillage_3D:
+                return VV3D_Enemies;
+        }
+        return null;
+    }
     public void NewGame()
     {
         highestChapterCompleted = Chapter.None;
@@ -210,10 +298,14 @@ public class GameData : MythologyMayhem
         spawnerToUse = Level.GreekLibrary_2D;
 
         health = 100;
+        collectedHearts = 0;
+        collectedMirror = false;
 
         SaveData newData = new SaveData();
         newData.GenerateNewData();
         saveData = newData;
-        saveData.UpdateData(this);
+        saveData.SyncData(this);
+
+        GameManager.instance.SaveGame();
     }
 }

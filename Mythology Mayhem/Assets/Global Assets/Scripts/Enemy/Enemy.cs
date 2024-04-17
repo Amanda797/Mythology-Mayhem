@@ -9,6 +9,8 @@ using UnityEngine.AI;
 
 public class Enemy : MythologyMayhem
 {
+    public Level inScene;
+
     [Header("2D Components")]
     public Rigidbody2D rigidBody2D;
     public SpriteRenderer spriteRenderer;
