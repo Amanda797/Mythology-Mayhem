@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MythologyMayhem
 {
@@ -31,6 +33,11 @@ public class GameManager : MythologyMayhem
     [Header("Background Music")]
     public AudioSource bgm;
 
+    [Header("UI")]
+    public float closeButtonPressTimer;
+    public GameObject PressEObj;
+    public TextMeshProUGUI PressEText;
+
     public GameObject gameplayUI;
     // Start is called before the first frame update
     void Awake()
@@ -59,6 +66,16 @@ public class GameManager : MythologyMayhem
         if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();
+        }
+
+        if (closeButtonPressTimer > 0)
+        {
+            PressEObj.SetActive(true);
+            closeButtonPressTimer -= Time.deltaTime;
+            if (closeButtonPressTimer <= 0)
+            {
+                PressEObj.SetActive(false);
+            }
         }
     }
     public void LoadSystemsStart(bool newGame) 
@@ -272,21 +289,21 @@ public class GameManager : MythologyMayhem
             }
         }
     }
-
-    void AlignCurrentPlayerCharacter(Level scene)
+    void AlignCurrentPlayerCharacter(string spawnPointName) 
     {
         for (int i = 0; i < currentLocalManager.activePlayerSpawner.spawnPoints.Count; i++)
         {
-            if (currentLocalManager.activePlayerSpawner.spawnPoints[i].name == scene.ToString())
+            if (currentLocalManager.activePlayerSpawner.spawnPoints[i].name == spawnPointName)
             {
                 currentPlayer.gameObject.SetActive(false);
                 currentPlayer.transform.position = currentLocalManager.activePlayerSpawner.spawnPoints[i].position;
                 currentPlayer.gameObject.SetActive(true);
+                break;
             }
         }
     }
 
-    public void TransitionScene(Level scene) 
+    public void TransitionScene(Level scene, string spawnpointOverride) 
     {
         Level previousScene = currentScene;
         currentScene = scene;
@@ -295,7 +312,14 @@ public class GameManager : MythologyMayhem
         {
             SetCurrentLocalGameManager(currentScene);
             SetCurrentPlayerCharacter(currentScene);
-            AlignCurrentPlayerCharacter(previousScene);
+            if (spawnpointOverride == "")
+            {
+                AlignCurrentPlayerCharacter(previousScene.ToString());
+            }
+            else 
+            {
+                AlignCurrentPlayerCharacter(spawnpointOverride);
+            }
         }
         checkStart = false;
         checkProx = false;
@@ -342,5 +366,21 @@ public class GameManager : MythologyMayhem
         {
             gameData.saveData.Load();
         }
+    }
+    public ScenePlayerObject GetPlayer(Level inScene) 
+    {
+        for (int i = 0; i < playerControllers.Count; i++) 
+        {
+            if (playerControllers[i].inScene == inScene) 
+            {
+                return playerControllers[i];
+            }
+        }
+        return null;
+    }
+    public void Popup(string message) 
+    {
+        closeButtonPressTimer = 0.5f;
+        PressEText.SetText(message);
     }
 }

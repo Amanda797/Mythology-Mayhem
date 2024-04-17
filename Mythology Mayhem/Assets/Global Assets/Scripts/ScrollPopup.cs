@@ -41,13 +41,9 @@ public class ScrollPopup : MonoBehaviour
 
         if(Vector3.Distance(player.transform.position, transform.position) < activeDistance && Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < 45f)
         {
-            if(!isPopupActive)
+            if (GameManager.instance != null) 
             {
-                pressText.SetActive(true);
-            }
-            else
-            {
-                pressText.SetActive(false);
+                GameManager.instance.Popup("Press E to Read");
             }
             if (Input.GetKeyDown(key))
             {
@@ -67,11 +63,6 @@ public class ScrollPopup : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            pressText.SetActive(false);
-        }
-        
     }
     public void ShowPopup()
     {

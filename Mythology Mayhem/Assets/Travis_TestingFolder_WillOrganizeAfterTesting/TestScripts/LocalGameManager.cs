@@ -127,11 +127,11 @@ public class LocalGameManager : MythologyMayhem
         mainGameManager.LoadScene(scene, false);
     }
 
-    public void SceneTransition(Level scene)
+    public void SceneTransition(Level scene, string spawnPointOverride)
     {
         if (mainGameManager.checkStart && mainGameManager.checkProx)
         {
-            mainGameManager.TransitionScene(scene);
+            mainGameManager.TransitionScene(scene, spawnPointOverride);
         }
     }
 

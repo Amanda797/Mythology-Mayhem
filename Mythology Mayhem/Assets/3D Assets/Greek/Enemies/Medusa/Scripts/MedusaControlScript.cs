@@ -145,7 +145,14 @@ public class MedusaControlScript : MonoBehaviour
     {
         revealExit.SetActive(false);
 
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        if(GameManager.instance != null) 
+        {
+            ScenePlayerObject SPO = GameManager.instance.GetPlayer(MythologyMayhem.Level.GreekMedusa_3D);
+            if (SPO != null) 
+            {
+                playerHealth = SPO.player.gameObject.GetComponent<Health>();
+            }
+        }
 
         CurrentState = AttackStates.Start;
 
@@ -181,19 +188,13 @@ public class MedusaControlScript : MonoBehaviour
         }
         else 
         {
-            GameObject obj = GameObject.FindGameObjectWithTag("Player");
-            if (obj != null)
+            if (GameManager.instance != null)
             {
-                print(obj.name);
-                playerHealth = obj.GetComponent<Health>();
-                if (playerHealth == null) 
+                ScenePlayerObject SPO = GameManager.instance.GetPlayer(MythologyMayhem.Level.GreekMedusa_3D);
+                if (SPO != null)
                 {
-                    print("Cant find Health Script");
+                    playerHealth = SPO.player.gameObject.GetComponent<Health>();
                 }
-            }
-            else
-            {
-                print("Cant find Player Object");
             }
         }
     }

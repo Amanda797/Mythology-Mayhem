@@ -174,7 +174,7 @@ public class GameData : MythologyMayhem
 
                         case Level.GreekLibrary_3D:
                             print("Start at return to 2D Village, ready to move to Mine");
-                            startScene = Level.GreekLibrary_2D;
+                            startScene = Level.GreekAthens_2D;
                             spawnerToUse = Level.GreekLibrary_3D;
                             return;
 

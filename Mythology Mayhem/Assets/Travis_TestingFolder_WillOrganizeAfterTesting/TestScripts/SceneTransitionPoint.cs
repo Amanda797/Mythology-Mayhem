@@ -6,6 +6,7 @@ public class SceneTransitionPoint : MythologyMayhem
 {
     public LocalGameManager localGameManager;
     public Level sceneToTransition;
+    public string spawnpointNameOverride;
     public bool keyPress;
     public bool isActive;
 

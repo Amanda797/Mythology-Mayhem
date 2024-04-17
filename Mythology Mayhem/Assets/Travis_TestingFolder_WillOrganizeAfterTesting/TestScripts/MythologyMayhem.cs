@@ -28,6 +28,8 @@ public class MythologyMayhem : MonoBehaviour
         GreekLibrary_3D,
         GreekAthens_2D,
         GreekCavern_2D,
+        GreekCavern_2D_Levers,
+        GreekCavern_2D_Statues,
         GreekLabyrinth_3D,
         GreekLabyrinth_2D_Levers,
         GreekLabyrinth_2D_Pedastals,

@@ -22,12 +22,18 @@ public class SceneTransitionPoint3D : SceneTransitionPoint
     {
         if (other.gameObject.tag == "Player")
         {
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.Popup("Press E to Enter");
+            }
             PlayerAttach player = other.gameObject.GetComponent<PlayerAttach>();
             if (player != null)
             {
                 if (keyPress)
                 {
-                    localGameManager.SceneTransition(sceneToTransition);
+
+                    localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
+
                     keyPress = false;
                 }
 

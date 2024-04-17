@@ -74,8 +74,8 @@ public class ScrollScript : MonoBehaviour
     void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == "Player") {        
             //enable tooltip for scroll interaction
-            if(pressEText != null) {
-                pressEText.SetActive(true);
+            if(GameManager.instance != null) {
+                GameManager.instance.Popup("Press E to Read");
             }
 
             if(keyTriggered && !activeStatus) {
@@ -97,10 +97,12 @@ public class ScrollScript : MonoBehaviour
             CloseScroll();
         }   
         
+        /*
         // Destroy "Press E" tooltip
         if(pressEText is var result && result != null) {
             result.SetActive(false);
         }
+        */
     }//end on collision exit 2d
 
     public void OpenScroll()
