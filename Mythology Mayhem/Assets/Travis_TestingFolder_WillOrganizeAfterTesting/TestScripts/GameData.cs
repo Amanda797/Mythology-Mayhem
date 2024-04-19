@@ -27,8 +27,11 @@ public class GameData : MythologyMayhem
     public float enemyVolume;
     [Header("Level Data")]
     public bool[] GL2D_Enemies;
+    public SaveDataBool GL2D_Lever;
+    public SaveDataPosition GL2D_Pillar;
     public bool[] GL3D_Enemies;
     public bool[] GA2D_Enemies;
+    public SaveDataBool GA2D_Fountain;
     public bool[] GC2D_Enemies;
     public bool[] GC2DL_Enemies;
     public bool[] GC2DS_Enemies;
@@ -288,6 +291,7 @@ public class GameData : MythologyMayhem
         }
         return null;
     }
+
     public void NewGame()
     {
         highestChapterCompleted = Chapter.None;

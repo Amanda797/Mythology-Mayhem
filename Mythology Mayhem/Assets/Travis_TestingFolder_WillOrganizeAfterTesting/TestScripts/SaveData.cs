@@ -49,6 +49,8 @@ public class SaveData
 
         GreekLibrary_2DData GL2D_Temp = new GreekLibrary_2DData();
         GL2D_Temp.enemyData = data.GL2D_Enemies;
+        GL2D_Temp.leverComplete = data.GL2D_Lever.boolData;
+        GL2D_Temp.pillarLocation = data.GL2D_Pillar.position;
 
         this.GL2D = GL2D_Temp;
 
@@ -59,6 +61,7 @@ public class SaveData
 
         GreekAthens_2DData GA2D_Temp = new GreekAthens_2DData();
         GA2D_Temp.enemyData = data.GA2D_Enemies;
+        GA2D_Temp.fountain = data.GA2D_Fountain.boolData;
 
         this.GA2D = GA2D_Temp;
 
@@ -127,10 +130,13 @@ public class SaveData
         data.enemyVolume = (int)settingsData.enemyVolume;
 
         data.GL2D_Enemies = GL2D.enemyData;
+        data.GL2D_Lever.boolData = GL2D.leverComplete;
+        data.GL2D_Pillar.position = GL2D.pillarLocation;
 
         data.GL3D_Enemies = GL3D.enemyData;
 
         data.GA2D_Enemies = GA2D.enemyData;
+        data.GA2D_Fountain.boolData = GA2D.fountain;
 
         data.GC2D_Enemies = GC2D.enemyData;
 
@@ -329,6 +335,8 @@ public class PlayerData
 public class GreekLibrary_2DData 
 {
     public bool[] enemyData;
+    public bool leverComplete;
+    public Vector3 pillarLocation;
 }
 [System.Serializable]
 public class GreekLibrary_3DData
@@ -339,6 +347,7 @@ public class GreekLibrary_3DData
 public class GreekAthens_2DData
 {
     public bool[] enemyData;
+    public bool fountain;
 }
 [System.Serializable]
 public class GreekCavern_2DData

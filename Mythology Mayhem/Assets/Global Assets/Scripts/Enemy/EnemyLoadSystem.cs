@@ -9,7 +9,6 @@ public class EnemyLoadSystem : MythologyMayhem
     public GameObject[] enemies;
     public int tickClock;
     public int syncDataTickAmount;
-
     private void Start()
     {
         tickClock = syncDataTickAmount;
