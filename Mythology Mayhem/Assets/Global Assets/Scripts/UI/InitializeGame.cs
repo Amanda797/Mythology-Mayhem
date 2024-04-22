@@ -14,6 +14,7 @@ public class InitializeGame : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        /*
         //Set default audio volume
         if(vs == null) {
             AudioListener.volume = volume;
@@ -23,6 +24,7 @@ public class InitializeGame : MonoBehaviour
         if(ps != null) {
             ps.CurrHealth = ps.MaxHealth;
         }
+        */
     }
     
 }

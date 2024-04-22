@@ -198,6 +198,7 @@ MonoBehaviour:
   cutscenePlaying: 0
   listener: {fileID: 7989333660882923309}
   backgroundMusic: {fileID: 148288588956424426}
+  huic: {fileID: 8980665220428813385}
   UIActive: 0
   closeButtonPressTimer: 0
   PressEObj: {fileID: 7016001730378490006}
@@ -436,40 +437,54 @@ MonoBehaviour:
   - playerIndex
   loaded: 0
   highestChapterCompleted: 5
-  highestLevelCompleted: 4
+  highestLevelCompleted: 28
   overrideLoad: 0
-  overrideStartScene: 1
-  startScene: 1
-  spawnerToUse: 1
+  overrideStartScene: 0
+  startScene: 0
+  spawnerToUse: 0
   selectedCharacter: 0
   health: 16
-  collectedHearts: 0
+  heartCollectionTotal: 10
+  collectedHearts: 
   collectedMirror: 0
   masterVolume: 0
   musicVolume: 0
   sfxVolume: 0
   enemyVolume: 20
   GL2D_Enemies: 
+  GL2D_Potions: 
   GL2D_Lever: {fileID: 11400000, guid: 7fbfe3c6546fe2a46b9bb0ce00415aef, type: 2}
   GL2D_Pillar: {fileID: 11400000, guid: 38e0accc0c5f4f9439568bbb26a98170, type: 2}
   GL3D_Enemies: 
+  GL3D_Potions: 
   GA2D_Enemies: 
+  GA2D_Potions: 
+  GA2D_Fountain: {fileID: 11400000, guid: 668ed11b3790e6343a729001a5c07c35, type: 2}
   GC2D_Enemies: 
+  GC2D_Potions: 
   GC2DL_Enemies: 
+  GC2DL_Potions: 
   GC2DS_Enemies: 
+  GC2DS_Potions: 
   GLa3D_Enemies: 
+  GLa3D_Potions: 
   GLa2DL_Enemies: 
+  GLa2DL_Potions: 
   GLa2DP_Enemies: 
+  GLa2DP_Potions: 
   GM3D_Enemies: 
+  GM3D_Potions: 
   VV2D_Enemies: 
+  VV2D_Potions: 
   VV3D_Enemies: 
+  VV3D_Potions: 
   saveData:
     highestChapter: 0
     highestLevel: 0
     playerData:
       selectedCharacter: 0
       health: 0
-      collectedHearts: 0
+      collectedHearts: 
       collectedMirror: 0
     settingsData:
       masterVolume: 0
@@ -478,30 +493,43 @@ MonoBehaviour:
       enemyVolume: 0
     GL2D:
       enemyData: 
+      poitionData: 
       leverComplete: 0
       pillarLocation: {x: 0, y: 0, z: 0}
     GL3D:
       enemyData: 
+      poitionData: 
     GA2D:
       enemyData: 
+      poitionData: 
+      fountain: 0
     GC2D:
       enemyData: 
+      poitionData: 
     GC2DL:
       enemyData: 
+      poitionData: 
     GC2DS:
       enemyData: 
+      poitionData: 
     GLa3D:
       enemyData: 
+      poitionData: 
     GLa2DL:
       enemyData: 
+      poitionData: 
     GLa2DP:
       enemyData: 
+      poitionData: 
     GM3D:
       enemyData: 
+      poitionData: 
     VV2D:
       enemyData: 
+      poitionData: 
     VV3D:
       enemyData: 
+      poitionData: 
 --- !u!1 &1217359056226355658
 GameObject:
   m_ObjectHideFlags: 0

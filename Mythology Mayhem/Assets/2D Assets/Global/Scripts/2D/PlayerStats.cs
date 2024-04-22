@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour
             ps = huic.ps;
             ps.CanAttack = true;
             ps.NextAttackTime = 0;
-            ps.CurrHealth = ps.MaxHealth;
+            //ps.CurrHealth = ps.MaxHealth;
         }
         else{
             print("Can't find huic's player stats so");
@@ -109,7 +109,6 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
-
     public void TakeDamage(float damage) 
     {
         if(ps.CurrHealth >= 0)
@@ -118,7 +117,13 @@ public class PlayerStats : MonoBehaviour
             anim.SetTrigger("Hurt");
             if(huic != null)
                 huic.PlayerCurrHealth = ps.CurrHealth;
-            if(ps.CurrHealth <= 0)
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.gameData.health = ps.CurrHealth;
+            }
+
+            if (ps.CurrHealth <= 0)
             {
                 print("0");
                 Die();
@@ -143,6 +148,11 @@ public class PlayerStats : MonoBehaviour
             ps.CurrHealth = ps.MaxHealth;
             if(huic != null)
                 huic.PlayerCurrHealth = ps.CurrHealth;
+        }
+
+        if (GameManager.instance != null) 
+        {
+            GameManager.instance.gameData.health = ps.CurrHealth;
         }
     }//end heal
 

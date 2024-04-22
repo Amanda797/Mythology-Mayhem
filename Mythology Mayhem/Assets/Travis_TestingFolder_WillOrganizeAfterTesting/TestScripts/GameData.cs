@@ -17,8 +17,9 @@ public class GameData : MythologyMayhem
     public Level spawnerToUse;
     [Header("Player Data")]
     public Character selectedCharacter;
-    public int health;
-    public int collectedHearts;
+    public float health;
+    public int heartCollectionTotal;
+    public bool[] collectedHearts;
     public bool collectedMirror;
     [Header("Main Menu")]
     public float masterVolume;
@@ -27,20 +28,38 @@ public class GameData : MythologyMayhem
     public float enemyVolume;
     [Header("Level Data")]
     public bool[] GL2D_Enemies;
+    public bool[] GL2D_Potions;
     public SaveDataBool GL2D_Lever;
     public SaveDataPosition GL2D_Pillar;
     public bool[] GL3D_Enemies;
+    public bool[] GL3D_Potions;
     public bool[] GA2D_Enemies;
+    public bool[] GA2D_Potions;
     public SaveDataBool GA2D_Fountain;
     public bool[] GC2D_Enemies;
+    public bool[] GC2D_Potions;
     public bool[] GC2DL_Enemies;
+    public bool[] GC2DL_Potions;
     public bool[] GC2DS_Enemies;
+    public bool[] GC2DS_Potions;
     public bool[] GLa3D_Enemies;
+    public bool[] GLa3D_Potions;
     public bool[] GLa2DL_Enemies;
+    public bool[] GLa2DL_Potions;
     public bool[] GLa2DP_Enemies;
+    public bool[] GLa2DP_Potions;
     public bool[] GM3D_Enemies;
+    public bool[] GM3D_Potions;
     public bool[] VV2D_Enemies;
+    public bool[] VV2D_Potions;
     public bool[] VV3D_Enemies;
+    public bool[] VV3D_Potions;
+
+    public enum BoolArrayType 
+    { 
+        Enemy,
+        Potion
+    }
 
     [Header("Save Data")]
     public SaveData saveData;
@@ -217,81 +236,259 @@ public class GameData : MythologyMayhem
             print("Load Override");
         }
     }
-
-    public void SaveEnemyData(Level whichLevel, bool[] enemyData) 
-    {
-        switch (whichLevel) 
-        {
-            case Level.GreekLibrary_2D:
-                GL2D_Enemies = enemyData;
-                break;
-            case Level.GreekLibrary_3D:
-                GL3D_Enemies = enemyData;
-                break;
-            case Level.GreekAthens_2D:
-                GA2D_Enemies = enemyData;
-                break;
-            case Level.GreekCavern_2D:
-                GC2D_Enemies = enemyData;
-                break;
-            case Level.GreekCavern_2D_Levers:
-                GC2DL_Enemies = enemyData;
-                break;
-            case Level.GreekCavern_2D_Statues:
-                GC2DS_Enemies = enemyData;
-                break;
-            case Level.GreekLabyrinth_3D:
-                GLa3D_Enemies = enemyData;
-                break;
-            case Level.GreekLabyrinth_2D_Levers:
-                GLa2DL_Enemies = enemyData;
-                break;
-            case Level.GreekLabyrinth_2D_Pedastals:
-                GLa2DP_Enemies = enemyData;
-                break;
-            case Level.GreekMedusa_3D:
-                GM3D_Enemies = enemyData;
-                break;
-            case Level.VikingVillage_2D:
-                VV2D_Enemies = enemyData;
-                break;
-            case Level.VikingVillage_3D:
-                VV3D_Enemies = enemyData;
-                break;
-        }
-    }
-    public bool[] FetchEnemyData(Level whichLevel)
+    public void SaveBoolArrayData(Level whichLevel, bool[] boolArrayData, BoolArrayType type) 
     {
         switch (whichLevel)
         {
             case Level.GreekLibrary_2D:
-                return GL2D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GL2D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GL2D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekLibrary_3D:
-                return GL3D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GL3D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GL3D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekAthens_2D:
-                return GA2D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GA2D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GA2D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekCavern_2D:
-                return GC2D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GC2D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GC2D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekCavern_2D_Levers:
-                return GC2DL_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GC2DL_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GC2DL_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekCavern_2D_Statues:
-                return GC2DS_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GC2DS_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GC2DS_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekLabyrinth_3D:
-                return GLa3D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GLa3D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GLa3D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekLabyrinth_2D_Levers:
-                return GLa2DL_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GLa2DL_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GLa2DL_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekLabyrinth_2D_Pedastals:
-                return GLa2DP_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GLa2DP_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GLa2DP_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.GreekMedusa_3D:
-                return GM3D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        GM3D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        GM3D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.VikingVillage_2D:
-                return VV2D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        VV2D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        VV2D_Potions = boolArrayData;
+                        break;
+                }
+                break;
             case Level.VikingVillage_3D:
-                return VV3D_Enemies;
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        VV3D_Enemies = boolArrayData;
+                        break;
+                    case BoolArrayType.Potion:
+                        VV3D_Potions = boolArrayData;
+                        break;
+                }
+                break;
+        }
+    }
+    public bool[] FetchBoolArrayData(Level whichLevel, BoolArrayType type)
+    {
+        switch (whichLevel)
+        {
+            case Level.GreekLibrary_2D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GL2D_Enemies;
+                    case BoolArrayType.Potion:
+                        return GL2D_Potions;
+                }
+                break;
+            case Level.GreekLibrary_3D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GL3D_Enemies;
+                    case BoolArrayType.Potion:
+                        return GL3D_Potions;
+                }
+                break;
+            case Level.GreekAthens_2D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GA2D_Enemies;
+                    case BoolArrayType.Potion:
+                        return GA2D_Potions;
+                }
+                break;
+            case Level.GreekCavern_2D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GC2D_Enemies;
+                    case BoolArrayType.Potion:
+                        return GC2D_Potions;
+                }
+                break;
+            case Level.GreekCavern_2D_Levers:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GC2DL_Enemies;
+                    case BoolArrayType.Potion:
+                        return GC2DL_Potions;
+                }
+                break;
+            case Level.GreekCavern_2D_Statues:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GC2DS_Enemies;
+                    case BoolArrayType.Potion:
+                        return GC2DS_Potions;
+                }
+                break;
+            case Level.GreekLabyrinth_3D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GLa3D_Enemies;
+                    case BoolArrayType.Potion:
+                        return GLa3D_Potions;
+                }
+                break;
+            case Level.GreekLabyrinth_2D_Levers:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GLa2DL_Enemies;
+                    case BoolArrayType.Potion:
+                        return GLa2DL_Potions;
+                }
+                break;
+            case Level.GreekLabyrinth_2D_Pedastals:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GLa2DP_Enemies;
+                    case BoolArrayType.Potion:
+                        return GLa2DP_Potions;
+                }
+                break;
+            case Level.GreekMedusa_3D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return GM3D_Enemies;
+                    case BoolArrayType.Potion:
+                        return GM3D_Potions;
+                }
+                break;
+            case Level.VikingVillage_2D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return VV2D_Enemies;
+                    case BoolArrayType.Potion:
+                        return VV2D_Potions;
+                }
+                break;
+            case Level.VikingVillage_3D:
+                switch (type)
+                {
+                    case BoolArrayType.Enemy:
+                        return VV3D_Enemies;
+                    case BoolArrayType.Potion:
+                        return VV3D_Potions;
+                }
+                break;
         }
         return null;
     }
-
     public void NewGame()
     {
         highestChapterCompleted = Chapter.None;
@@ -301,15 +498,22 @@ public class GameData : MythologyMayhem
         startScene = Level.GreekLibrary_2D;
         spawnerToUse = Level.GreekLibrary_2D;
 
-        health = 100;
-        collectedHearts = 0;
+        health = 16;
+        collectedHearts = new bool[heartCollectionTotal];
+        GameManager.instance.UpdateCollectedHearts(0, health);
         collectedMirror = false;
 
         SaveData newData = new SaveData();
         newData.GenerateNewData();
         saveData = newData;
-        saveData.SyncData(this);
+        saveData.UpdateData(this);
+    }
+    public void UpdateLevelComplete(Chapter chapter, Level level) 
+    {
+        highestChapterCompleted = chapter;
+        highestLevelCompleted = level;
 
         GameManager.instance.SaveGame();
     }
+
 }

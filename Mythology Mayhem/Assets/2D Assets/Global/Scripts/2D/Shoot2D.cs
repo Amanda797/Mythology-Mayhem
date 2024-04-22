@@ -36,7 +36,7 @@ public class Shoot2D : MonoBehaviour
             ps = huic.ps;
             ps.CanAttack = true;
             ps.NextAttackTime = 0;
-            ps.CurrHealth = ps.MaxHealth;
+            //ps.CurrHealth = ps.MaxHealth;
         }
         else{
             print("Can't find huic's player stats so");

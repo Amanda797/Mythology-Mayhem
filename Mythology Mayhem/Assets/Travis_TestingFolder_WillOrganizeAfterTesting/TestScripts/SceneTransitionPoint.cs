@@ -11,6 +11,10 @@ public class SceneTransitionPoint : MythologyMayhem
     public bool isActive;
 
     public List<Conditions> conditions;
+
+    public bool countAsLevelComplete;
+    public Chapter completedChapter;
+    public Level completedLevel;
     // Start is called before the first frame update
     void Start()
     {

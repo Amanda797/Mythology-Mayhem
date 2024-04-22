@@ -31,6 +31,13 @@ public class SceneTransitionPoint3D : SceneTransitionPoint
             {
                 if (keyPress)
                 {
+                    if (countAsLevelComplete)
+                    {
+                        if (GameManager.instance != null)
+                        {
+                            GameManager.instance.gameData.UpdateLevelComplete(completedChapter, completedLevel);
+                        }
+                    }
 
                     localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
 

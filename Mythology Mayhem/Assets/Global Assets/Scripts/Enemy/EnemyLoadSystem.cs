@@ -14,7 +14,7 @@ public class EnemyLoadSystem : MythologyMayhem
         tickClock = syncDataTickAmount;
         if (GameManager.instance != null) 
         {
-            bool[] tempEnemyData = GameManager.instance.gameData.FetchEnemyData(currentLevel);
+            bool[] tempEnemyData = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Enemy);
             if (tempEnemyData != null) 
             {
                 SyncToLoad(tempEnemyData);
@@ -51,7 +51,7 @@ public class EnemyLoadSystem : MythologyMayhem
 
         if (GameManager.instance != null) 
         {
-            GameManager.instance.gameData.SaveEnemyData(currentLevel, tempEnemyData);
+            GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempEnemyData, GameData.BoolArrayType.Enemy);
         }
     }
 }

@@ -35,6 +35,7 @@ public class GameManager : MythologyMayhem
     public AudioSource backgroundMusic;
 
     [Header("UI")]
+    public HealthUIController huic;
     public bool UIActive;
     public float closeButtonPressTimer;
     public GameObject PressEObj;
@@ -415,5 +416,14 @@ public class GameManager : MythologyMayhem
     {
         closeButtonPressTimer = 0.5f;
         PressEText.SetText(message);
+    }
+
+    public void UpdateCollectedHearts(int totalCollectedHearts, float curHealth) 
+    {
+        int MaxHealth = 16 + (totalCollectedHearts * 4);
+        stats.MaxHealth = MaxHealth;
+        stats.CurrHealth = curHealth;
+        huic.PlayerMaxHealth = MaxHealth;
+        huic.PlayerCurrHealth = curHealth;
     }
 }

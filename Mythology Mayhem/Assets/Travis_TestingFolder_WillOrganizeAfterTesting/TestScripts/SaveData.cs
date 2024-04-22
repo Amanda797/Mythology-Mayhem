@@ -33,7 +33,7 @@ public class SaveData
 
         PlayerData newPlayerData = new PlayerData();
         newPlayerData.selectedCharacter = (int)data.selectedCharacter;
-        newPlayerData.health = (int)data.health;
+        newPlayerData.health = data.health;
         newPlayerData.collectedHearts = data.collectedHearts;
         newPlayerData.collectedMirror = data.collectedMirror;
 
@@ -49,6 +49,7 @@ public class SaveData
 
         GreekLibrary_2DData GL2D_Temp = new GreekLibrary_2DData();
         GL2D_Temp.enemyData = data.GL2D_Enemies;
+        GL2D_Temp.poitionData = data.GL2D_Potions;
         GL2D_Temp.leverComplete = data.GL2D_Lever.boolData;
         GL2D_Temp.pillarLocation = data.GL2D_Pillar.position;
 
@@ -56,17 +57,20 @@ public class SaveData
 
         GreekLibrary_3DData GL3D_Temp = new GreekLibrary_3DData();
         GL3D_Temp.enemyData = data.GL3D_Enemies;
+        GL3D_Temp.poitionData = data.GL3D_Potions;
 
         this.GL3D = GL3D_Temp;
 
         GreekAthens_2DData GA2D_Temp = new GreekAthens_2DData();
         GA2D_Temp.enemyData = data.GA2D_Enemies;
+        GA2D_Temp.poitionData = data.GA2D_Potions;
         GA2D_Temp.fountain = data.GA2D_Fountain.boolData;
 
         this.GA2D = GA2D_Temp;
 
         GreekCavern_2DData GC2D_Temp = new GreekCavern_2DData();
         GC2D_Temp.enemyData = data.GC2D_Enemies;
+        GC2D_Temp.poitionData = data.GC2D_Potions;
 
         this.GC2D = GC2D_Temp;
 
@@ -77,36 +81,43 @@ public class SaveData
 
         GreekCavern_2D_StatuesData GC2DS_Temp = new GreekCavern_2D_StatuesData();
         GC2DS_Temp.enemyData = data.GC2DS_Enemies;
+        GC2DS_Temp.poitionData = data.GC2DS_Potions;
 
         this.GC2DS = GC2DS_Temp;
 
         GreekLabyrinth_3DData GLa3D_Temp = new GreekLabyrinth_3DData();
         GLa3D_Temp.enemyData = data.GLa3D_Enemies;
+        GLa3D_Temp.poitionData = data.GLa3D_Potions;
 
         this.GLa3D = GLa3D_Temp;
 
         GreekLabyrinth_2D_LeversData GLa2DL_Temp = new GreekLabyrinth_2D_LeversData();
         GLa2DL_Temp.enemyData = data.GLa2DL_Enemies;
+        GLa2DL_Temp.poitionData = data.GLa2DL_Potions;
 
         this.GLa2DL = GLa2DL_Temp;
 
         GreekLabyrinth_2D_PedastalsData GLa2DP_Temp = new GreekLabyrinth_2D_PedastalsData();
         GLa2DP_Temp.enemyData = data.GLa2DP_Enemies;
+        GLa2DP_Temp.poitionData = data.GLa2DP_Potions;
 
         this.GLa2DP = GLa2DP_Temp;
 
         GreekMedusa_3DData GM3D_Temp = new GreekMedusa_3DData();
         GM3D_Temp.enemyData = data.GM3D_Enemies;
+        GM3D_Temp.poitionData = data.GM3D_Potions;
 
         this.GM3D = GM3D_Temp;
 
         VikingVillage_2DData VV2D_Temp = new VikingVillage_2DData();
         VV2D_Temp.enemyData = data.VV2D_Enemies;
+        VV2D_Temp.poitionData = data.VV2D_Potions;
 
         this.VV2D = VV2D_Temp;
 
         VikingVillage_3DData VV3D_Temp = new VikingVillage_3DData();
         VV3D_Temp.enemyData = data.VV3D_Enemies;
+        VV3D_Temp.poitionData = data.VV3D_Potions;
 
         this.VV3D = VV3D_Temp;
 
@@ -120,8 +131,19 @@ public class SaveData
         data.highestLevelCompleted = (MythologyMayhem.Level)highestLevel;
 
         data.selectedCharacter = (MythologyMayhem.Character)playerData.selectedCharacter;
-        data.health = (int)playerData.health;
+        data.health = playerData.health;
+
         data.collectedHearts = playerData.collectedHearts;
+        int totalHearts = 0;
+        for (int i = 0; i < data.collectedHearts.Length; i++) 
+        {
+            if (data.collectedHearts[i]) 
+            {
+                totalHearts++;
+            }
+        }
+        GameManager.instance.UpdateCollectedHearts(totalHearts, data.health);
+
         data.collectedMirror = playerData.collectedMirror;
 
         data.masterVolume = (int)settingsData.masterVolume;
@@ -130,31 +152,43 @@ public class SaveData
         data.enemyVolume = (int)settingsData.enemyVolume;
 
         data.GL2D_Enemies = GL2D.enemyData;
+        data.GL2D_Potions = GL2D.poitionData;
         data.GL2D_Lever.boolData = GL2D.leverComplete;
         data.GL2D_Pillar.position = GL2D.pillarLocation;
 
         data.GL3D_Enemies = GL3D.enemyData;
+        data.GL3D_Potions = GL3D.poitionData;
 
         data.GA2D_Enemies = GA2D.enemyData;
+        data.GA2D_Potions = GA2D.poitionData;
         data.GA2D_Fountain.boolData = GA2D.fountain;
 
         data.GC2D_Enemies = GC2D.enemyData;
+        data.GC2DL_Potions = GC2D.poitionData;
 
         data.GC2DL_Enemies = GC2DL.enemyData;
+        data.GC2DL_Potions = GC2DL.poitionData;
 
         data.GC2DS_Enemies = GC2DS.enemyData;
+        data.GC2DS_Potions = GC2DS.poitionData;
 
         data.GLa3D_Enemies = GLa3D.enemyData;
+        data.GLa3D_Potions = GLa3D.poitionData;
 
         data.GLa2DL_Enemies = GLa2DL.enemyData;
+        data.GLa2DL_Potions = GLa2DL.poitionData;
 
         data.GLa2DP_Enemies = GLa2DP.enemyData;
+        data.GLa2DP_Potions = GLa2DP.poitionData;
 
         data.GM3D_Enemies = GM3D.enemyData;
+        data.GM3D_Potions = GM3D.poitionData;
 
         data.VV2D_Enemies = VV2D.enemyData;
+        data.VV2D_Potions = VV2D.poitionData;
 
         data.VV3D_Enemies = VV3D.enemyData;
+        data.VV3D_Potions = VV3D.poitionData;
     }
 
     void LoadData(SaveData data) 
@@ -275,6 +309,7 @@ public class SaveData
         SettingsData newSettings = new SettingsData();
         this.settingsData = newSettings;
         PlayerData newPlayerData = new PlayerData();
+        newPlayerData.collectedHearts = new bool[GameManager.instance.gameData.heartCollectionTotal];
         this.playerData = newPlayerData;
 
         GreekLibrary_2DData GL2D_Temp = new GreekLibrary_2DData();
@@ -327,14 +362,15 @@ public class SettingsData
 public class PlayerData
 {
     public int selectedCharacter;
-    public int health;
-    public int collectedHearts;
+    public float health;
+    public bool[] collectedHearts;
     public bool collectedMirror;
 }
 [System.Serializable]
 public class GreekLibrary_2DData 
 {
     public bool[] enemyData;
+    public bool[] poitionData;
     public bool leverComplete;
     public Vector3 pillarLocation;
 }
@@ -342,55 +378,66 @@ public class GreekLibrary_2DData
 public class GreekLibrary_3DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekAthens_2DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
     public bool fountain;
 }
 [System.Serializable]
 public class GreekCavern_2DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekCavern_2D_LeversData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekCavern_2D_StatuesData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekLabyrinth_3DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekLabyrinth_2D_LeversData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekLabyrinth_2D_PedastalsData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class GreekMedusa_3DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class VikingVillage_2DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }
 [System.Serializable]
 public class VikingVillage_3DData
 {
     public bool[] enemyData;
+    public bool[] poitionData;
 }

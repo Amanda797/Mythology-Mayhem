@@ -36,6 +36,13 @@ public class SceneTransitionPoint2D : SceneTransitionPoint
                         //PlayerPrefs.SetString("spawningScene", sceneToTransition.ToString());
                         //string loadScene = PlayerPrefs.GetString("spawningScene");
 
+                        if (countAsLevelComplete) 
+                        {
+                            if (GameManager.instance != null) 
+                            {
+                                GameManager.instance.gameData.UpdateLevelComplete(completedChapter, completedLevel);
+                            }
+                        }
                         localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
 
                         keyPress = false;
