@@ -48,70 +48,37 @@ public class playerSpawner : MythologyMayhem
         GameObject spawnPlayerContainer = null;
 
         GameObject obj = null;
-
-        if (localGameManager == null)
+        if (localGameManager.sceneType == Dimension.TwoD)
         {
-            if (type == Dimension.TwoD)
-            {
+            spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
+            print(spawnPlayerContainer);
 
-                spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
+            obj = Instantiate(PlayerPrefabs2D.playerPrefabs[(int)GameManager.instance.gameData.selectedCharacter], spawnPlayerContainer.transform);
 
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
+            obj.transform.position = spawnPoints[spawnPointIndex].position;
+            obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
 
-                spawnPlayerContainer.GetComponentInChildren<CompanionController>()._player = obj;
-
-                obj.transform.position = spawnPoints[spawnPointIndex].position;
-                obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-
-                obj.SetActive(true);
-            }
-            else
-            {
-                spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
-
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
-
-                spawnPlayerContainer.GetComponentInChildren<CompanionController>()._player = obj;
-
-                obj.transform.position = spawnPoints[spawnPointIndex].position;
-                obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-                obj.SetActive(true);
-            }
+            obj.SetActive(true);
         }
         else
         {
+            spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
 
-            if (localGameManager.sceneType == Dimension.TwoD)
+            obj = Instantiate(PlayerPrefabs3D.playerPrefabs[(int)GameManager.instance.gameData.selectedCharacter], spawnPlayerContainer.transform);
+
+            obj.transform.position = spawnPoints[spawnPointIndex].position;
+            obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
+
+            obj.SetActive(true);
+
+            EnemyAI3D[] tempEnemies = FindObjectsOfType<EnemyAI3D>();
+
+            foreach (EnemyAI3D enemy in tempEnemies)
             {
-                spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
-                print(spawnPlayerContainer);
-
-                obj = Instantiate(PlayerPrefabs2D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
-
-                obj.transform.position = spawnPoints[spawnPointIndex].position;
-                obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-
-                obj.SetActive(true);
-            }
-            else
-            {
-                spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
-
-                obj = Instantiate(PlayerPrefabs3D.playerPrefabs[PlayerPrefs.GetInt("playerIndex")], spawnPlayerContainer.transform);
-
-                obj.transform.position = spawnPoints[spawnPointIndex].position;
-                obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-
-                obj.SetActive(true);
-
-                EnemyAI3D[] tempEnemies = FindObjectsOfType<EnemyAI3D>();
-
-                foreach (EnemyAI3D enemy in tempEnemies)
-                {
-                    enemy.player = obj.GetComponent<Collider>();
-                }
+                enemy.player = obj.GetComponent<Collider>();
             }
         }
+        
 
         if (obj != null)
         {

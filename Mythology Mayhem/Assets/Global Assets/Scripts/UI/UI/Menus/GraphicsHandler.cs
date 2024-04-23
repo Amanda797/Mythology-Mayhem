@@ -20,7 +20,7 @@ public class GraphicsHandler : MonoBehaviour
     void Start() {
         resolutions = Screen.resolutions;
         filteredResolutions = new List<Resolution>();
-        resolutionDropdown.ClearOptions();
+        //resolutionDropdown.ClearOptions();
         currentRefreshRate = Screen.currentResolution.refreshRate;
 
         for(int i = 0; i < resolutions.Length; i++) {
@@ -39,9 +39,9 @@ public class GraphicsHandler : MonoBehaviour
             }
         }
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        //resolutionDropdown.AddOptions(options);
+        //resolutionDropdown.value = currentResolutionIndex;
+        //resolutionDropdown.RefreshShownValue();
     }
 
     public void GraphicsDropdown() {

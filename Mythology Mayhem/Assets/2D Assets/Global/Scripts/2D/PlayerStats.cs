@@ -21,7 +21,8 @@ public class PlayerStats : MonoBehaviour
 
     private SpriteRenderer sr;
     public bool flipped = false;
-    private AudioSource aud;    
+    private AudioSource aud;
+    public AudioSource healSource;
 
     private GameObject owl;
     [HideInInspector]public int hitCount;
@@ -38,7 +39,7 @@ public class PlayerStats : MonoBehaviour
             ps = huic.ps;
             ps.CanAttack = true;
             ps.NextAttackTime = 0;
-            ps.CurrHealth = ps.MaxHealth;
+            //ps.CurrHealth = ps.MaxHealth;
         }
         else{
             print("Can't find huic's player stats so");
@@ -96,21 +97,18 @@ public class PlayerStats : MonoBehaviour
     private void Attack()
     {
         anim.SetTrigger("Attack");
-
+        aud.Play();
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(ps.AttackRange, ps.AttackRange+ps.AttackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
             if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
             {
                 hitCount++;
-                //Play Sound
-                aud.Play();
                 enemy.GetComponent<Health>().TakeDamage(ps.AttackDamage);
                 enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             }
         }
     }
-
     public void TakeDamage(float damage) 
     {
         if(ps.CurrHealth >= 0)
@@ -119,7 +117,13 @@ public class PlayerStats : MonoBehaviour
             anim.SetTrigger("Hurt");
             if(huic != null)
                 huic.PlayerCurrHealth = ps.CurrHealth;
-            if(ps.CurrHealth <= 0)
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.gameData.health = ps.CurrHealth;
+            }
+
+            if (ps.CurrHealth <= 0)
             {
                 print("0");
                 Die();
@@ -127,8 +131,12 @@ public class PlayerStats : MonoBehaviour
         }
     }//end take damage
 
-    public void Heal(int heal) 
+    public void Heal(int heal, bool potion) 
     {
+        if (potion) 
+        {
+            healSource.Play();
+        }
         if(ps.CurrHealth < ps.MaxHealth)
         {
             ps.CurrHealth += Mathf.Abs(heal);
@@ -140,6 +148,11 @@ public class PlayerStats : MonoBehaviour
             ps.CurrHealth = ps.MaxHealth;
             if(huic != null)
                 huic.PlayerCurrHealth = ps.CurrHealth;
+        }
+
+        if (GameManager.instance != null) 
+        {
+            GameManager.instance.gameData.health = ps.CurrHealth;
         }
     }//end heal
 

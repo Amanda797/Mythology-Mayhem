@@ -22,19 +22,33 @@ public class SceneTransitionPoint2D : SceneTransitionPoint
     {
         if (other.gameObject.tag == "Player")
         {
-
-            PlayerAttach player = other.gameObject.GetComponent<PlayerAttach>();
-            if (player != null)
+            if (isActive)
             {
-                if (keyPress)
+                if (GameManager.instance != null)
                 {
-                    //PlayerPrefs.SetString("spawningScene", sceneToTransition.ToString());
-                    //string loadScene = PlayerPrefs.GetString("spawningScene");
-
-                    localGameManager.SceneTransition(sceneToTransition);
-                    keyPress = false;
+                    GameManager.instance.Popup("Press E to Enter");
                 }
+                PlayerAttach player = other.gameObject.GetComponent<PlayerAttach>();
+                if (player != null)
+                {
+                    if (keyPress)
+                    {
+                        //PlayerPrefs.SetString("spawningScene", sceneToTransition.ToString());
+                        //string loadScene = PlayerPrefs.GetString("spawningScene");
 
+                        if (countAsLevelComplete) 
+                        {
+                            if (GameManager.instance != null) 
+                            {
+                                GameManager.instance.gameData.UpdateLevelComplete(completedChapter, completedLevel);
+                            }
+                        }
+                        localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
+
+                        keyPress = false;
+                    }
+
+                }
             }
         }
     }

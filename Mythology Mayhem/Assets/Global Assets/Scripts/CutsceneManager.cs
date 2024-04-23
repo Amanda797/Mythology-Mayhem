@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class CutsceneManager : MonoBehaviour
 {
     float cutsceneTimer;
-    [SerializeField] string nextScene;
+    [SerializeField] MythologyMayhem.Level nextScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +19,14 @@ public class CutsceneManager : MonoBehaviour
     {
         // Check for early player skipping
         if(Input.GetMouseButtonDown(0)) {
+            LoadNextScene();
+            /*
             if(nextScene == "Library of Alexandria")
             {
                 PlayerPrefs.SetString("spawningScene", nextScene);
             }
             SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+            */
         } 
         
         // Change scene after video is done playing
@@ -31,11 +34,32 @@ public class CutsceneManager : MonoBehaviour
             cutsceneTimer -= 1 * Time.deltaTime;
         } else
         {
+            LoadNextScene();
+            /*
             if (nextScene == "Library of Alexandria")
             {
                 PlayerPrefs.SetString("spawningScene", nextScene);
             }
             SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+            */
+        }
+    }
+
+    void LoadNextScene() 
+    {
+        if (GameManager.instance != null) 
+        {
+            if (nextScene == MythologyMayhem.Level.GreekLibrary_2D)
+            {
+                GameManager.instance.currentScene = MythologyMayhem.Level.GreekLibrary_2D;
+                GameManager.instance.gameplayUI.SetActive(true);
+                GameManager.instance.cutscenePlaying = false;
+            }
+            else 
+            {
+                GameManager.instance.currentScene = MythologyMayhem.Level.CutScene2;
+            }
+            GameManager.instance.LoadScene(nextScene, true);
         }
     }
 }

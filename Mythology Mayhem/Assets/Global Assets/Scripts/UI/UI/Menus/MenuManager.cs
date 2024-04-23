@@ -12,6 +12,8 @@ public class MenuManager : MonoBehaviour
         [SerializeField] int pausePanelElement = -1;
         int sceneIndex;
 
+    public AudioSource menuEffectSource;
+
     // Retain this game object across scenes.
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("MenuManager");
@@ -81,7 +83,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void ToggleOptions(int options) {
-        this.gameObject.GetComponent<AudioSource>().Play();
+        menuEffectSource.Play();
         // Make sure there is a background present (needs to be active to display children)
         if(pauseBackgroundElement != -1)
             menuPanels[pauseBackgroundElement].SetActive(true);
@@ -100,7 +102,7 @@ public class MenuManager : MonoBehaviour
     }// end toggle options
 
     public void ToggleCredits(int credits) {
-        this.gameObject.GetComponent<AudioSource>().Play();
+        menuEffectSource.Play();
         // Make sure there is a background present (needs to be active to display children)
         if(pauseBackgroundElement != -1)
             menuPanels[pauseBackgroundElement].SetActive(true);
@@ -118,7 +120,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void ToggleHelp(int help) {
-        this.gameObject.GetComponent<AudioSource>().Play();
+        menuEffectSource.Play();
         // Make sure there is a background present (needs to be active to display children)
         if(pauseBackgroundElement != -1)
             menuPanels[pauseBackgroundElement].SetActive(true);
@@ -138,7 +140,7 @@ public class MenuManager : MonoBehaviour
     public void TogglePause() {
         if(pausePanelElement != -1 && pauseBackgroundElement != -1)
         {
-            this.gameObject.GetComponent<AudioSource>().Play();
+            menuEffectSource.Play();
             // Toggle the background and pause panels
             if(menuPanels[pauseBackgroundElement].activeInHierarchy) 
             {

@@ -15,13 +15,12 @@ public class Health : MonoBehaviour
     public GameObject rewardObject; // Reward Object
 
     [Header("Animation")]
-    [SerializeField] private AudioSource hurtSound;
-    [SerializeField] private AudioSource deathSound;
-    [SerializeField] private AudioSource healSound;
     [SerializeField] private Animator anim;
     [SerializeField] private string hurtTrigger;
     [SerializeField] private string deathTrigger;
     [SerializeField] private string healTrigger;
+
+    public Enemy enemy;
 
     public bool _attacked = false;
     public bool _defenseUp = false;
@@ -36,6 +35,7 @@ public class Health : MonoBehaviour
     // --------------------------
     void Start()
     {
+        enemy = this.gameObject.GetComponent<Enemy>();
         Life = MaxHealth;
     }// end start
 
@@ -64,11 +64,10 @@ public class Health : MonoBehaviour
         {
             if (gameObject.tag == "Enemy")
             {
-                if (hurtSound != null)
+                if (enemy != null)
                 {
-                    hurtSound.Play();
+                    enemy.PlaySound(Enemy.Soundtype.Hurt);
                 }
-
                 if (anim != null)
                 {
                     anim.SetTrigger(hurtTrigger);
@@ -89,8 +88,6 @@ public class Health : MonoBehaviour
     }
 
     public void Heal(float h) {
-        if (healSound != null)
-            healSound.Play();
         if (anim != null)
             anim.SetTrigger(healTrigger);
         Life += Mathf.Clamp(h,h,MaxHealth);
@@ -102,8 +99,10 @@ public class Health : MonoBehaviour
             Life = -1000;
 
             //Trigger Death sounds and animations
-            if (deathSound != null)
-                deathSound.Play();
+            if (enemy != null)
+            {
+                enemy.PlaySound(Enemy.Soundtype.Death);
+            }
             if (anim != null && deathTrigger != "")
                 anim.SetTrigger(deathTrigger);
 
@@ -136,8 +135,10 @@ public class Health : MonoBehaviour
         if(GetHealth() <= 0) {
             if(gameObject.tag == "Enemy")
             {
-                if (deathSound != null)
-                    deathSound.Play();
+                if (enemy != null)
+                {
+                    enemy.PlaySound(Enemy.Soundtype.Death);
+                }
                 if (anim != null)
                     anim.SetTrigger(deathTrigger);
                 if(gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
@@ -166,7 +167,6 @@ public class Health : MonoBehaviour
             GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);
             reward.name = rewardObject.name;
         }
-
         mainObject.SetActive(false);
 
         if(mainObject.CompareTag("Companion"))

@@ -1003,80 +1003,11 @@ Transform:
   m_Children:
   - {fileID: 7896041013273049162}
   - {fileID: 1673399750254989506}
-  - {fileID: 1673399749628222167}
   - {fileID: 8280193876125122841}
   - {fileID: 2268690098492859525}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1673399749628222166
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1673399749628222167}
-  - component: {fileID: 1673399749628222165}
-  - component: {fileID: 1673399749628222164}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1673399749628222167
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673399749628222166}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.0141654, y: -4.221431, z: 17.715466}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1673399749191499087}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1673399749628222165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673399749628222166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!114 &1673399749628222164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673399749628222166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!1 &1673399750254989517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,7 +1279,7 @@ RectTransform:
   m_Children:
   - {fileID: 2268690098704710999}
   m_Father: {fileID: 1673399749191499087}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12332,7 +12263,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1673399749191499087}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8280193876125122840
 MonoBehaviour:
@@ -12354,6 +12285,7 @@ MonoBehaviour:
   - {fileID: 6163870905353507312}
   pauseBackgroundElement: 0
   pausePanelElement: 1
+  menuEffectSource: {fileID: 0}
 --- !u!114 &1673399750353813901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12380,7 +12312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157a67f93b7bfe149b8eb990c85aee9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
+  currentVolume: 0
   volumeSlider: {fileID: 4651958444928271164}
+  loaded: 0
 --- !u!82 &8280193876125122844
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12390,7 +12325,7 @@ AudioSource:
   m_GameObject: {fileID: 8280193876125122843}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3688536365896545760, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 8300000, guid: 698d68f2fc09f2a408505c2b2f8fefc4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2

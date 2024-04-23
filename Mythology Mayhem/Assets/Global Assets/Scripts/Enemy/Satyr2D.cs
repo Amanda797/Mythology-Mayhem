@@ -99,6 +99,9 @@ public class Satyr2D : MonoBehaviour
         {
             enemy.animator.SetTrigger(attackTrigger);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
+
+            enemy.PlaySound(Enemy.Soundtype.Attack);
+
             if (enemy.player.GetComponent<KnockBackFeedback>())
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;

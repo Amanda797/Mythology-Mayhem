@@ -36,6 +36,9 @@ public class LocalGameManager : MythologyMayhem
     public bool canTransition;
     public bool activeByDefault;
 
+    [Header("Audio Settings")]
+    public AudioClip backgroundMusic;
+
     [Header("Level Offset System")]
     public bool useOffset;
     public Vector3 levelOffset;
@@ -124,14 +127,14 @@ public class LocalGameManager : MythologyMayhem
 
     public void AddScene(Level scene)
     {
-        mainGameManager.LoadScene(scene);
+        mainGameManager.LoadScene(scene, false);
     }
 
-    public void SceneTransition(Level scene)
+    public void SceneTransition(Level scene, string spawnPointOverride)
     {
         if (mainGameManager.checkStart && mainGameManager.checkProx)
         {
-            mainGameManager.TransitionScene(scene);
+            mainGameManager.TransitionScene(scene, spawnPointOverride);
         }
     }
 
@@ -189,7 +192,7 @@ public class LocalGameManager : MythologyMayhem
             }
             else if(sceneCheck.name != "Null")
             {
-                mainGameManager.LoadScene(scenesLoadedOnStart[i]);
+                mainGameManager.LoadScene(scenesLoadedOnStart[i], false);
                 check = false;
             }
 
