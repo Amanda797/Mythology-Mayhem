@@ -500,7 +500,7 @@ public class GameData : MythologyMayhem
 
         health = 16;
         collectedHearts = new bool[heartCollectionTotal];
-        GameManager.instance.UpdateCollectedHearts(0, health);
+        //GameManager.instance.UpdateCollectedHearts(0, health);
         collectedMirror = false;
 
         SaveData newData = new SaveData();

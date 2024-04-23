@@ -423,6 +423,7 @@ public class GameManager : MythologyMayhem
         int MaxHealth = 16 + (totalCollectedHearts * 4);
         stats.MaxHealth = MaxHealth;
         stats.CurrHealth = curHealth;
+
         huic.PlayerMaxHealth = MaxHealth;
         huic.PlayerCurrHealth = curHealth;
     }
