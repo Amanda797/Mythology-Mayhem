@@ -144,7 +144,6 @@ public class Cyclops2D : MonoBehaviour
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, enemy.player.transform.position, 0, 0);
             GameObject snowball = Instantiate(snowballPrefab, throwPoint.position, throwPoint.rotation);
             snowball.transform.rotation.SetLookRotation(newDirection);
-            snowball.GetComponent<SnowballProjectile>().enemy = enemy;
             snowball.GetComponent<Rigidbody>().AddForce(throwForce * newDirection, ForceMode.Force);
             enemy.CanAttack = false;
             StartCoroutine(enemy.AttackRate());
