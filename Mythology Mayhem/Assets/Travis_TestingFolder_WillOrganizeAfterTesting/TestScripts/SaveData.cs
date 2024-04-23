@@ -142,7 +142,7 @@ public class SaveData
                 totalHearts++;
             }
         }
-        GameManager.instance.UpdateCollectedHearts(totalHearts, data.health);
+        //GameManager.instance.UpdateCollectedHearts(totalHearts, data.health);
 
         data.collectedMirror = playerData.collectedMirror;
 
