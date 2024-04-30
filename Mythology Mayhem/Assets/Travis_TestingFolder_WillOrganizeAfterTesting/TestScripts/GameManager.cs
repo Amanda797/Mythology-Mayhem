@@ -45,6 +45,8 @@ public class GameManager : MythologyMayhem
     public PlayerStats_SO stats;
 
     public GameObject gameplayUI;
+
+    public bool startSceneDebugLoad;
     // Start is called before the first frame update
     void Awake()
     {
@@ -56,12 +58,25 @@ public class GameManager : MythologyMayhem
             inMainMenu = true;
             currentScene = Level.MainMenu;
         }
+        startSceneDebugLoad = false;
         LoadGame();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!startSceneDebugLoad)
+        {
+            bool inStartScene = SceneManager.GetSceneByName("StartScene").isLoaded;
+            if (inStartScene)
+            {
+                if (gameData.overrideLoad)
+                {
+                    startSceneDebugLoad = true;
+                    LoadSystemsStart(false);
+                }
+            }
+        }
         inMainMenu = SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded;
 
         ListenerTrackPlayer();
@@ -99,6 +114,7 @@ public class GameManager : MythologyMayhem
             currentScene = Level.CutScene1;
             gameData.NewGame();
 
+            print("GameManager starting New Game");
             LoadScene(Level.CutScene1, true);
         }
         else
@@ -107,15 +123,19 @@ public class GameManager : MythologyMayhem
             cutscenePlaying = false;
             gameplayUI.SetActive(true);
 
-            gameData.SetStartScene();
-
             playerControllers = new List<ScenePlayerObject>();
-            if (gameData.overrideLoad)
+            if (gameData.overrideLoad && startSceneDebugLoad)
             {
+                print("Game Manager loading override Scene");
+                currentScene = gameData.overrideStartScene;
+                gameData.startScene = currentScene;
+                gameData.spawnerToUse = currentScene;
                 LoadScene(gameData.overrideStartScene, true);
             }
             else
             {
+                print("Game Manager loading from save file");
+                gameData.SetStartScene(false);
                 LoadScene(gameData.startScene, true);
             }
         }
