@@ -74,7 +74,7 @@ public class GameData : MythologyMayhem
     {
         
     }
-    public void SetStartScene() 
+    public void SetStartScene(bool overrideLoad) 
     {
         if (!overrideLoad)
         {
