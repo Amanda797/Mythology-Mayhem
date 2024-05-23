@@ -159,10 +159,16 @@ MonoBehaviour:
   - spawningScene
   - spwanPointIndex
   - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 1063215052591956050}
   spriteRenderer: {fileID: 1063215052591956057}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  audioSource: {fileID: 0}
+  idleSounds: []
+  attackSounds: []
+  hurtSounds: []
+  deathSounds: []
   enemyDimension: 0
   health: {fileID: 2158585433418704505}
   animator: {fileID: 1063215052591956056}
@@ -462,13 +468,11 @@ MonoBehaviour:
   - {fileID: 1063215052591956048}
   mainObject: {fileID: 1063215052591956059}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 1063215052591956052}
-  deathSound: {fileID: 1063215052591956052}
-  healSound: {fileID: 1063215052591956052}
   anim: {fileID: 1063215052591956056}
   hurtTrigger: Hurt
   deathTrigger: IsDead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
@@ -813,7 +817,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.3
 --- !u!114 &877635369733029197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25db621b79afd1a41b5a99809ce3c20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 6
-  Damage: 4
+  _speed: 3
+  _damage: 5
   _destroyTimer: 5
