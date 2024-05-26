@@ -159,10 +159,16 @@ MonoBehaviour:
   - spawningScene
   - spwanPointIndex
   - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 353820564531603297}
   spriteRenderer: {fileID: 353820564531603306}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  audioSource: {fileID: 0}
+  idleSounds: []
+  attackSounds: []
+  hurtSounds: []
+  deathSounds: []
   enemyDimension: 0
   health: {fileID: 1719424646202573130}
   animator: {fileID: 353820564531603307}
@@ -462,13 +468,11 @@ MonoBehaviour:
   - {fileID: 353820564531603299}
   mainObject: {fileID: 353820564531603304}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 353820564531603303}
-  deathSound: {fileID: 353820564531603303}
-  healSound: {fileID: 353820564531603303}
   anim: {fileID: 353820564531603307}
   hurtTrigger: Hurt
   deathTrigger: IsDead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
@@ -659,7 +663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2188140910442648365}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.91, y: -1.83, z: 0}
+  m_LocalPosition: {x: -4.21, y: -1.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -813,7 +817,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.3
 --- !u!114 &433952091542952574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25db621b79afd1a41b5a99809ce3c20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 6
-  Damage: 4
+  _speed: 4
+  _damage: 5
   _destroyTimer: 5
