@@ -5709,9 +5709,13 @@ MonoBehaviour:
   - playerIndex
   localGameManager: {fileID: 17820116}
   sceneToTransition: 5
+  spawnpointNameOverride: 
   keyPress: 0
   isActive: 1
   conditions: []
+  countAsLevelComplete: 0
+  completedChapter: 0
+  completedLevel: 0
 --- !u!65 &1289653159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7783,6 +7787,58 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3399164577248116442, guid: 17664bc27b5894f48857d9bb0b913639, type: 3}
+--- !u!1 &1601773632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601773634}
+  - component: {fileID: 1601773633}
+  m_Layer: 0
+  m_Name: IceCaveMain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1601773633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601773632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24481cb6a30c23e41b59a9158d7ebfab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: -10}
+  moveSpeed: 5
+  startingCount: 10
+  iceCaveParts: []
+  offset: {x: 0, y: 0, z: 200}
+  iceCavePrefabs:
+  - {fileID: 3827707839917761390, guid: 74b2bac176cd9154ba7068342ee92ddf, type: 3}
+  lifetime: 5
+--- !u!4 &1601773634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601773632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1614976115
 PrefabInstance:
   m_ObjectHideFlags: 0
