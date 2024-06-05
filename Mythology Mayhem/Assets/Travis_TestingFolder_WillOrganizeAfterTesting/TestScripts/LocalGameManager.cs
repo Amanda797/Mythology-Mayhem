@@ -16,6 +16,7 @@ public class LocalGameManager : MythologyMayhem
 
     public Transform sceneOrigin;
     public Vector3 sceneOriginOnLoad;
+    public Transform[] boundaries;
 
     public Level inScene;
     [SerializeField] public List<Level> scenesNeeded;
