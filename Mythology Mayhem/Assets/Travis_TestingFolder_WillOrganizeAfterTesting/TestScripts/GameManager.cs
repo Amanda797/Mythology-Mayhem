@@ -300,6 +300,11 @@ public class GameManager : MythologyMayhem
             if (loadedLocalManagers[i].inScene == scene)
             {
                 currentLocalManager = loadedLocalManagers[i];
+                if (currentLocalManager.backgroundMusic != null) 
+                {
+                    backgroundMusic.clip = currentLocalManager.backgroundMusic;
+                    backgroundMusic.Play();
+                }
                 return;
             }
         }
