@@ -5,12 +5,12 @@ using UnityEngine;
 public class IceCaveModularSystem : MonoBehaviour
 {
 
-    public Vector3 moveDirection;
-    public float moveSpeed;
-
+    public Vector3 movement;
+    public bool debugChangeMovement;
+    Vector3 currentMovement;
     public int startingCount;
 
-    public List<Transform> iceCaveParts;
+    public List<IceCaveSectionScript> iceCaveParts;
     public Vector3 offset;
     public GameObject[] iceCavePrefabs;
 
@@ -20,7 +20,9 @@ public class IceCaveModularSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        iceCaveParts = new List<Transform>();
+        ChangeMovementSpeed(movement);
+
+        iceCaveParts = new List<IceCaveSectionScript>();
         for (int i = 0; i < startingCount; i++)
         {
             GenerateNewSection();
@@ -35,29 +37,39 @@ public class IceCaveModularSystem : MonoBehaviour
         if (currentLife <= 0) 
         {
             GenerateNewSection();
-            RemoveOldest();
             currentLife = lifetime;
         }
 
-        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+        if (debugChangeMovement) 
+        {
+            ChangeMovementSpeed(movement);
+            debugChangeMovement = false;
+        }
     }
 
     void GenerateNewSection() 
     {
         int randomIndex = Random.Range(0, iceCavePrefabs.Length);
         GameObject tempPart = Instantiate(iceCavePrefabs[randomIndex], this.transform);
-        Transform tempPartTransform = tempPart.transform;
-        if (iceCaveParts.Count > 0)
+        IceCaveSectionScript tempSectionScript = tempPart.GetComponent<IceCaveSectionScript>();
+        if (tempSectionScript != null)
         {
-            tempPartTransform.localPosition = iceCaveParts[iceCaveParts.Count - 1].localPosition + offset;
+            tempSectionScript.movement = currentMovement;
+
+            if (iceCaveParts.Count > 0)
+            {
+                tempSectionScript.transform.localPosition = iceCaveParts[iceCaveParts.Count - 1].transform.localPosition + offset;
+            }
+            iceCaveParts.Add(tempSectionScript);
         }
-        iceCaveParts.Add(tempPartTransform);
     }
 
-    void RemoveOldest() 
+    public void ChangeMovementSpeed(Vector3 newMovement) 
     {
-        GameObject oldestObj = iceCaveParts[0].gameObject;
-        iceCaveParts.RemoveAt(0);
-        Destroy(oldestObj);
+        foreach (IceCaveSectionScript section in iceCaveParts) 
+        {
+            section.movement = newMovement;
+        }
+        currentMovement = newMovement;
     }
 }
