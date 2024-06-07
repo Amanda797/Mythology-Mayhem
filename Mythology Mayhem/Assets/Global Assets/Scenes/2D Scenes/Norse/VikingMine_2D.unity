@@ -5722,6 +5722,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ebd40b7e8498c342bff81f4b87e0fdf, type: 3}
+--- !u!4 &150946056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3595446262864924336, guid: 9ebd40b7e8498c342bff81f4b87e0fdf, type: 3}
+  m_PrefabInstance: {fileID: 150946055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &152173540
 GameObject:
   m_ObjectHideFlags: 0
@@ -6699,9 +6704,13 @@ MonoBehaviour:
   - playerIndex
   localGameManager: {fileID: 365144435}
   sceneToTransition: 1
+  spawnpointNameOverride: 
   keyPress: 0
   isActive: 0
   conditions: []
+  countAsLevelComplete: 0
+  completedChapter: 0
+  completedLevel: 0
 --- !u!61 &169322764
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13311,9 +13320,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 464414063}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: boundaries.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesNeeded.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: boundaries.Array.data[0]
+      value: 
+      objectReference: {fileID: 150946056}
+    - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: boundaries.Array.data[1]
+      value: 
+      objectReference: {fileID: 1330595067}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesNeeded.Array.data[0]
       value: 3
@@ -19518,7 +19539,7 @@ Transform:
   - {fileID: 427647985}
   - {fileID: 1994359710}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &525101266
 GameObject:
@@ -27116,71 +27137,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &723773420
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 90.14397
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.5634332
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.02538595
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833300, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137120950294833302, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_Name
-      value: GameplayUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8685000302999505537, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8685000302999505537, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7a9380953b1d836489f899006861733a, type: 3}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5f1964b4dd1e16948ae69014829d6927, type: 3}
 --- !u!1 &723945451
 GameObject:
   m_ObjectHideFlags: 0
@@ -52826,6 +52782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e41664f9cbce7174786c60c8cc29cf28, type: 3}
+--- !u!4 &1330595067 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8635587024575624071, guid: e41664f9cbce7174786c60c8cc29cf28, type: 3}
+  m_PrefabInstance: {fileID: 1330595066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1334572733
 GameObject:
   m_ObjectHideFlags: 0
@@ -58169,9 +58130,13 @@ MonoBehaviour:
   - playerIndex
   localGameManager: {fileID: 365144435}
   sceneToTransition: 5
+  spawnpointNameOverride: 
   keyPress: 0
   isActive: 0
   conditions: []
+  countAsLevelComplete: 0
+  completedChapter: 0
+  completedLevel: 0
 --- !u!61 &1457224855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -65220,9 +65185,13 @@ MonoBehaviour:
   - playerIndex
   localGameManager: {fileID: 365144435}
   sceneToTransition: 4
+  spawnpointNameOverride: 
   keyPress: 0
   isActive: 0
   conditions: []
+  countAsLevelComplete: 0
+  completedChapter: 0
+  completedLevel: 0
 --- !u!1 &1585707656
 GameObject:
   m_ObjectHideFlags: 0
@@ -87674,7 +87643,7 @@ Transform:
   - {fileID: 1214602551}
   - {fileID: 5348262731804502263}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2083998543
 GameObject:
