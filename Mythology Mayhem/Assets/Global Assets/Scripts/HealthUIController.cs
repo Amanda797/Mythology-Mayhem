@@ -1,21 +1,22 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 
 public class HealthUIController : MonoBehaviour
 {
     //UI Components
     [Header("UI Components")]
-    private UIDocument _doc;
-    private VisualElement _heartPanel;
-    [SerializeField] private VisualTreeAsset _heartUXML;
-    private VisualElement _heartPrefab;
+    //private UIDocument _doc;
+    //private VisualElement _heartPanel;
+    //[SerializeField] private VisualTreeAsset _heartUXML;
+    [SerializeField] private PlayerHeartState heartState;
+    //private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
 
-    private VisualElement _shipPanel;
-    [SerializeField] private VisualTreeAsset _shipUXML;
-    private VisualElement _shipPrefab;
+    //private VisualElement _shipPanel;
+    //[SerializeField] private VisualTreeAsset _shipUXML;
+    //private VisualElement _shipPrefab;
     [SerializeField] private List<Sprite> _shipModes;
     public bool useShipHealth;
 
@@ -74,7 +75,7 @@ public class HealthUIController : MonoBehaviour
         }
     }
 
-    void OnEnable() {
+    /*void OnEnable() {
         _doc = GetComponent<UIDocument>();
         if (!useShipHealth)
         {
@@ -94,7 +95,7 @@ public class HealthUIController : MonoBehaviour
             _shipPrefab = _shipUXML.CloneTree("Ship");
             _shipPanel.Add(_shipPrefab);
         }
-    }
+    }*/
 
     void Start()
     {
@@ -111,7 +112,8 @@ public class HealthUIController : MonoBehaviour
     }
 
     private void SetHealthBar(float health) {
-        for (int i = 0; i < _heartPanel.childCount; i++)
+        heartState.SetHealthBar(Mathf.CeilToInt(health));
+        /*for (int i = 0; i < _heartPanel.childCount; i++)
         {
             float remainderHealth = Mathf.Clamp(health - (i * 4), 0, 4);
     
@@ -133,15 +135,16 @@ public class HealthUIController : MonoBehaviour
                     _heartPanel.ElementAt(i).Q<VisualElement>("Heart").style.backgroundImage = new StyleBackground(_heartModes[0]);
                     break;
             }
-        }
+        }*/
     }// end set health bar
 
     //Used to update the amount of Heart sprites in the Health Bar automatically.
     public void UpdateHealthBarCount(float maxHealth)
     {
+        heartState.UpdateHealthBarCount(Mathf.CeilToInt(maxHealth));
         //Convert maxHealth "quarter hearts" value into whole hearts value.
         //Ceil to ensure less than a whole heart still spawns heart object
-        maxHealth = Mathf.CeilToInt(maxHealth / 4.0f);
+        /*maxHealth = Mathf.CeilToInt(maxHealth / 4.0f);
         
         int heartCount = _heartPanel.childCount;
     
@@ -164,12 +167,13 @@ public class HealthUIController : MonoBehaviour
                 int lastHeartIndex = _heartPanel.childCount - 1;
                 _heartPanel.Remove(_heartPanel.ElementAt(lastHeartIndex));
             }
-        } 
+        }*/
     }// end update health bar count
 
     private void SetShipHealthBar(float health)
     {
-        for (int i = 0; i < _shipPanel.childCount; i++)
+        heartState.SetShipHealthBar(Mathf.CeilToInt(health));
+        /*for (int i = 0; i < _shipPanel.childCount; i++)
         {
             float remainderHealth = Mathf.Clamp(health - (i * 5), 0, 5);
             switch (remainderHealth)
@@ -193,13 +197,13 @@ public class HealthUIController : MonoBehaviour
                     _shipPanel.ElementAt(i).Q<VisualElement>("Ship").style.backgroundImage = new StyleBackground(_shipModes[0]);
                     break;
             }
-        }
+        }*/
     }
 
     public void UpdateShipHealthBarCount(float maxHealth)
     {
-
-        maxHealth = Mathf.CeilToInt(maxHealth / 5.0f);
+        heartState.UpdateShipHealthBarCount(Mathf.CeilToInt(maxHealth));
+        /*maxHealth = Mathf.CeilToInt(maxHealth / 5.0f);
         print(maxHealth);
         int shipCount = _shipPanel.childCount;
 
@@ -222,7 +226,7 @@ public class HealthUIController : MonoBehaviour
                 int lastShipIndex = _shipPanel.childCount - 1;
                 _shipPanel.Remove(_shipPanel.ElementAt(lastShipIndex));
             }
-        }
+        }*/
     }
 
 }
