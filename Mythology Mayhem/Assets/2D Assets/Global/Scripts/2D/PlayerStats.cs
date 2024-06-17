@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
 
     private SpriteRenderer sr;
     public bool flipped = false;
+    private bool respawning;
     private AudioSource aud;
     public AudioSource healSource;
 
@@ -111,7 +112,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage) 
     {
-        if(ps.CurrHealth >= 0)
+        if(ps.CurrHealth > 0)
         {
             ps.CurrHealth -= Mathf.Abs(damage);
             anim.SetTrigger("Hurt");
@@ -122,13 +123,14 @@ public class PlayerStats : MonoBehaviour
             {
                 GameManager.instance.gameData.health = ps.CurrHealth;
             }
-
+            print("Player Health: " + ps.CurrHealth.ToString() + " UI Health: " + huic.PlayerCurrHealth.ToString() + " GameManager Health: " + GameManager.instance.gameData.health.ToString());
             if (ps.CurrHealth <= 0)
             {
-                print("0");
+                print("Died with <0 health");
                 Die();
             }
         }
+
     }//end take damage
 
     public void Heal(int heal, bool potion) 
@@ -158,22 +160,26 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        print("Dead");
-        anim.SetBool("IsDead", true);
-        GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().simulated = false;
-        GetComponent<KnockBackFeedback>().enabled = false;
-        GetComponent<PlayerController>().enabled = false;
-        //this.enabled = false;
+        if (ps.CurrHealth <= 0)
+        {
+            print("Dead");
+            anim.SetBool("IsDead", true);
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().simulated = false;
+            GetComponent<KnockBackFeedback>().enabled = false;
+            GetComponent<PlayerController>().enabled = false;
+            //this.enabled = false;
 
-        ps.CurrHealth = ps.MaxHealth;
-        if (attachScript != null && attachScript.localGameManager != null)
-        {
-            StartCoroutine(Respawn());
-        }
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //ps.CurrHealth = ps.MaxHealth;
+            if (attachScript != null && attachScript.localGameManager != null)
+            {
+                if (!respawning)
+                    StartCoroutine(Respawn());
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 
@@ -196,6 +202,7 @@ public class PlayerStats : MonoBehaviour
 
     public IEnumerator Respawn() 
     {
+        respawning = true;
         yield return new WaitForSeconds(2f);
         print("Respawn");
         if(attachScript.localGameManager != null) 
@@ -210,6 +217,8 @@ public class PlayerStats : MonoBehaviour
 
         if (huic != null)
             huic.PlayerCurrHealth = ps.CurrHealth;
+        anim.SetBool("IsDead", false);
+        respawning = false;
     }
     
 }
