@@ -20,24 +20,26 @@ public class MedusaExitDoorScript : MonoBehaviour
     {
         if (raiseDoor)
         {
-            if (transform.position.y < yEnd) 
+            if (transform.localPosition.y < yEnd) 
             {
-                transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(transform.localPosition.x, yEnd, transform.localPosition.z), speed * Time.deltaTime);
+                /*transform.position += new Vector3(0, speed * Time.deltaTime, 0);
                 if (transform.position.y >= yEnd) 
                 {
                     transform.position = new Vector3(transform.position.x, yEnd, transform.position.z);
-                }
+                }*/
             }
         }
         else 
         {
-            if (transform.position.y > yStart) 
+            if (transform.localPosition.y > yStart)
             {
-                transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(transform.localPosition.x, yStart, transform.localPosition.z), speed * Time.deltaTime);
+                /*transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
                 if (transform.position.y <= yStart) 
                 {
                     transform.position = new Vector3(transform.position.x, yStart, transform.position.z);
-                }
+                }*/
             }
         }   
     }

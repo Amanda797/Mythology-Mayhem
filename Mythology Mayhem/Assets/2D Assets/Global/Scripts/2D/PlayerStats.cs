@@ -178,7 +178,8 @@ public class PlayerStats : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                GameManager.instance.LoadScene(SceneManager.GetActiveScene().name);
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }

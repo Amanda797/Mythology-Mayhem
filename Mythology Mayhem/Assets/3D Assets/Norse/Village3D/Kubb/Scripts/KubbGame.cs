@@ -184,6 +184,7 @@ public class KubbGame : MonoBehaviour
         switch (curState)
         {
             case State.ReadyUp:
+                kubbCam.enabled = true;
                 curBaton = 0;
                 curBatonTravel = 1;
                 if (Input.GetKeyDown(KeyCode.Space))

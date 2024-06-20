@@ -13,7 +13,22 @@ public class WeaponSwitcher : MythologyMayhem
 
     [Header("Left Hand")]
     public GameObject[] LeftHandWeapons;
-    int currentLeftHandWeapon;    
+    int currentLeftHandWeapon;
+
+    private void Start()
+    {
+        for (int i = 0; i < LeftHandWeapons.Length; i++)
+        {
+            if (i == currentLeftHandWeapon)
+            {
+                LeftHandWeapons[i].SetActive(true);
+            }
+            else
+            {
+                LeftHandWeapons[i].SetActive(false);
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
