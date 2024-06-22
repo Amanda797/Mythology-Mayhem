@@ -99,6 +99,7 @@ public class HealthUIController : MonoBehaviour
 
     void Start()
     {
+        heartState = GetComponentInChildren<PlayerHeartState>();
         if (!useShipHealth)
         {
             UpdateHealthBarCount(PlayerMaxHealth);

@@ -47,7 +47,9 @@ public class CutsceneManager : MonoBehaviour
 
     void LoadNextScene() 
     {
-        if (GameManager.instance != null) 
+        GetComponent<VideoPlayer>().Stop();
+
+        if (GameManager.instance != null)
         {
             if (nextScene == MythologyMayhem.Level.GreekLibrary_2D)
             {
@@ -55,11 +57,12 @@ public class CutsceneManager : MonoBehaviour
                 GameManager.instance.gameplayUI.SetActive(true);
                 GameManager.instance.cutscenePlaying = false;
             }
-            else 
+            else
             {
                 GameManager.instance.currentScene = MythologyMayhem.Level.CutScene2;
             }
             GameManager.instance.LoadScene(nextScene, true);
         }
+        else SceneManager.LoadScene(1);
     }
 }

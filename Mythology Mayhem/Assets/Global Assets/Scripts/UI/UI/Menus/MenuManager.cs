@@ -16,6 +16,8 @@ public class MenuManager : MonoBehaviour
 
     // Retain this game object across scenes.
     private void Awake() {
+        menuEffectSource = GetComponent<AudioSource>();
+
         GameObject[] objs = GameObject.FindGameObjectsWithTag("MenuManager");
 
         if(objs.Length > 1)
