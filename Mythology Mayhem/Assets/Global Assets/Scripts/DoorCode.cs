@@ -55,7 +55,7 @@ public class DoorCode : MonoBehaviour
         if (other.tag == "PushBlock")
         {
             blocked = true;
-            lever.GetComponent<TwoDLever>().SetCanOpen(false);
+            lever.GetComponent<TwoDLever>().canOpen = false;
         }
     }
 
@@ -68,7 +68,7 @@ public class DoorCode : MonoBehaviour
         if (other.tag == "PushBlock")
         {
             blocked = false;
-            lever.GetComponent<TwoDLever>().SetCanOpen(true);
+            lever.GetComponent<TwoDLever>().canOpen = true;
         }
     }
 
@@ -97,6 +97,7 @@ public class DoorCode : MonoBehaviour
     }
     public void OpenDoor()
     {
+        Debug.Log("OpenDoor");
         doorOpen = true;
     }
 }

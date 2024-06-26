@@ -4,52 +4,48 @@ using UnityEngine;
 
 public class SceneTransitionPoint2D : SceneTransitionPoint
 {
-    
-    // Start is called before the first frame update
+    GameManager gameManager;
     void Start()
     {
-
+        // try to find the GameManager object
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        // else display a warning that it is missing
+        else Debug.LogWarning("GameManager Missing or Inactive.");
     }
-
-    // Update is called once per frame
     void Update()
     {
-        CheckInput();
-        isActive = CheckConditionsMeet();
+        // if the player is not near the door, stop
+        if (!canTransition) return;
+
+        // if the E key is pressed
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // if this is the last door in the level, update the game manager
+            if (countAsLevelComplete) gameManager.gameData.UpdateLevelComplete(completedChapter, completedLevel);
+
+            // transition to the next scene/level
+            localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
+        }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             if (isActive)
             {
-                if (GameManager.instance != null)
-                {
-                    GameManager.instance.Popup("Press E to Enter");
-                }
-                PlayerAttach player = other.gameObject.GetComponent<PlayerAttach>();
-                if (player != null)
-                {
-                    if (keyPress)
-                    {
-                        //PlayerPrefs.SetString("spawningScene", sceneToTransition.ToString());
-                        //string loadScene = PlayerPrefs.GetString("spawningScene");
-
-                        if (countAsLevelComplete) 
-                        {
-                            if (GameManager.instance != null) 
-                            {
-                                GameManager.instance.gameData.UpdateLevelComplete(completedChapter, completedLevel);
-                            }
-                        }
-                        localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
-
-                        keyPress = false;
-                    }
-
-                }
+                gameManager.Popup("Press E to Enter", true);
+                canTransition = true;
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            gameManager.Popup("Press E to Enter", false);
+            canTransition = false;
         }
     }
 }

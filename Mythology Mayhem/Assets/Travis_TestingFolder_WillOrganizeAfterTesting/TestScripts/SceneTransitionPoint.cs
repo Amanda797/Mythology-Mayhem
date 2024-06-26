@@ -15,6 +15,7 @@ public class SceneTransitionPoint : MythologyMayhem
     public bool countAsLevelComplete;
     public Chapter completedChapter;
     public Level completedLevel;
+    public bool canTransition = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class SceneTransitionPoint : MythologyMayhem
     }
     public void CheckInput()
     {
+        Debug.Log("CheckInput");
         if (localGameManager.inScene == localGameManager.mainGameManager.currentScene && isActive)
         {
             if (Input.GetKeyDown(KeyCode.E))

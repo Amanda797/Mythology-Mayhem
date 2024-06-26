@@ -94,15 +94,15 @@ public class GameManager : MythologyMayhem
             LoadSystemsUpdate();
         }
 
-        if (closeButtonPressTimer > 0)
-        {
-            PressEObj.SetActive(true);
-            closeButtonPressTimer -= Time.deltaTime;
-            if (closeButtonPressTimer <= 0)
-            {
-                PressEObj.SetActive(false);
-            }
-        }
+        //if (closeButtonPressTimer > 0)
+        //{
+        //    PressEObj.SetActive(true);
+        //    closeButtonPressTimer -= Time.deltaTime;
+        //    if (closeButtonPressTimer <= 0)
+        //    {
+        //        PressEObj.SetActive(false);
+        //    }
+        //}
     }
     public void LoadSystemsStart(bool newGame) 
     {
@@ -437,10 +437,18 @@ public class GameManager : MythologyMayhem
             listener.transform.position = Vector3.zero;
         }
     }
-    public void Popup(string message) 
+    public void Popup(string message, bool isOpen) 
     {
-        closeButtonPressTimer = 0.5f;
-        PressEText.SetText(message);
+        if (isOpen)
+        {
+            PressEObj.SetActive(true);
+            PressEText.SetText(message);
+        }
+        else
+        {
+            PressEObj.SetActive(false);
+            PressEText.SetText("");
+        }
     }
 
     public void UpdateCollectedHearts(int totalCollectedHearts, float curHealth) 
