@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 //using UnityEngine.UIElements;
 
@@ -112,7 +113,14 @@ public class HealthUIController : MonoBehaviour
         }
     }
 
+    public void UpdateHealth()
+    {
+        UpdateHealthBarCount(PlayerMaxHealth);
+        SetHealthBar(PlayerCurrHealth);
+    }
+
     private void SetHealthBar(float health) {
+        Debug.Log("SetHealthBar");
         heartState.SetHealthBar(Mathf.CeilToInt(health));
         /*for (int i = 0; i < _heartPanel.childCount; i++)
         {
