@@ -148,9 +148,11 @@ public class MenuManager : MonoBehaviour
             {
                 menuPanels[pauseBackgroundElement].SetActive(false);
                 menuPanels[pausePanelElement].SetActive(false);
+                Time.timeScale = 1;
             } else {            
                 menuPanels[pauseBackgroundElement].SetActive(true);
                 menuPanels[pausePanelElement].SetActive(true);
+                Time.timeScale = 0;
             } 
         }
         else {
@@ -164,6 +166,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void MainMenu() {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 }
