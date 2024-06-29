@@ -5,6 +5,8 @@ using TMPro;
 
 public class QuizManager : MonoBehaviour
 {
+    public SceneTransitionPoint2D transitionPoint;
+
     [SerializeField] TextMeshProUGUI question;
     [SerializeField] TextMeshProUGUI answer1;
     [SerializeField] TextMeshProUGUI answer2;
@@ -81,7 +83,10 @@ public class QuizManager : MonoBehaviour
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            currentQuestion++;
+            //currentQuestion++;
+
+            // transition to the next scene/level
+            transitionPoint.localGameManager.SceneTransition(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
         } 
         else if(currentQuestion > chosenQuestions.Length) {
             if(won) {
