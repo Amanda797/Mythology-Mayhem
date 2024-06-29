@@ -260,6 +260,7 @@ public class GameManager : MythologyMayhem
 
     public void LoadScene(Level scene, bool single) 
     {
+
         if (single)
         {
             SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Single);
@@ -341,6 +342,8 @@ public class GameManager : MythologyMayhem
 
     public void TransitionScene(Level scene, string spawnpointOverride) 
     {
+        Debug.Log("LoadScene");
+        huic.UpdateHealth();
         Level previousScene = currentScene;
         currentScene = scene;
 
