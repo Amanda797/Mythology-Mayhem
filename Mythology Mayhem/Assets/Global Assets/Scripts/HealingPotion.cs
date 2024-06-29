@@ -5,35 +5,49 @@ using UnityEngine;
 public class HealingPotion : MonoBehaviour
 {
     //[SerializeField] private PlayerStats player;
-    [SerializeField] private bool smallPotion;
+    [SerializeField] bool smallPotion;
+    [SerializeField] int healthAmount = 2;
 
     // Start is called before the first frame update
     void Start()
     {
-        //player = FindObjectOfType<PlayerStats>();
+        if (!smallPotion) healthAmount = 4;
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.layer == 3)
+        if (other.gameObject.GetComponent<PlayerStats>() != null)
         {
-            if (smallPotion) 
-                other.gameObject.GetComponent<PlayerStats>().Heal(2, true);
-            else
-                other.gameObject.GetComponent<PlayerStats>().Heal(4, true);
-            gameObject.SetActive(false);
+            PlayerStats playerStats = other.gameObject.GetComponent<PlayerStats>();
+            PlayerStats_SO ps = playerStats.ps;
+
+            if (ps.CurrHealth < ps.MaxHealth)
+            {
+                playerStats.Heal(healthAmount, true);
+                gameObject.SetActive(false);
+            }
         }  
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3)
+        Debug.Log("Has PlayerStats: " + other.gameObject.GetComponent<FPSHealth>() != null);
+        Debug.Log("Has PlayerStats_SO: " + other.gameObject.GetComponent<FPSHealth>().ps != null);
+
+        if (other.gameObject.GetComponent<FPSHealth>() != null)
         {
-            if (smallPotion) 
-                other.gameObject.GetComponent<FPSHealth>().Heal(2);
-            else
-                other.gameObject.GetComponent<FPSHealth>().Heal(4);
-            gameObject.SetActive(false);
-        }  
+            FPSHealth fPSHealth = other.gameObject.GetComponent<FPSHealth>();
+            PlayerStats_SO ps = fPSHealth.ps;
+
+            Debug.Log("CurrHealth: " + ps.CurrHealth);
+            Debug.Log("MaxHealth: " + ps.MaxHealth);
+            Debug.Log("Can Heal: " + (ps.CurrHealth < ps.MaxHealth));
+
+            if (ps.CurrHealth < ps.MaxHealth)
+            {
+                fPSHealth.Heal(healthAmount);
+                gameObject.SetActive(false);
+            }
+        }
     }
 }
