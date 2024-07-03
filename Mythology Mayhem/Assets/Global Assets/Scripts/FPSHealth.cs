@@ -12,6 +12,8 @@ public class FPSHealth : MonoBehaviour
     [SerializeField] HealthUIController huic;
     [SerializeField] public PlayerStats_SO ps;
 
+    [SerializeField] Vector3 spawnPoint = Vector3.zero;
+
     // --------------------------
     // ***METHODS***
     // --------------------------
@@ -31,12 +33,11 @@ public class FPSHealth : MonoBehaviour
         }
     }//end on awake
 
-    void FixedUpdate() {
-        //Death Check
-        if(GetHealth() <= 0) {
-            SetHealth(0);
-        }
-    }//end fixed update
+
+    private void Start()
+    {
+        spawnPoint = gameObject.transform.position;
+    }
 
     public void SetHealth(float h) {
         huic.PlayerCurrHealth = h;
@@ -57,17 +58,13 @@ public class FPSHealth : MonoBehaviour
         huic.PlayerCurrHealth += h;
     }//end heal
 
-    public void Death() {
-        if(GetHealth() <= 0) {   
-            //this? 
-            //foreach (Behaviour component in components) {
-            //    component.enabled = false;
-            //}
-            //or this??
-            //Destroy(mainObject, 3f);
-            
-            //restart scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }//check that health is really less than 0 when called        
-    }//end death
+    public void Death()
+    {
+        if (GetHealth() <= 0) {
+            GetComponent<PlayerMovement3D>().enabled = false;
+            gameObject.transform.position = spawnPoint;
+            Heal(huic.PlayerMaxHealth);
+            GetComponent<PlayerMovement3D>().enabled = true;
+        }
+    }
 }
