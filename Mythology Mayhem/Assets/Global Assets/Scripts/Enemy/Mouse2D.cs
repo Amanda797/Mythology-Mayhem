@@ -25,19 +25,9 @@ public class Mouse2D : MonoBehaviour
     [SerializeField] float countdown = 4f;
     [SerializeField] GameObject fallingScroll;
 
-    // Start is called before the first frame update
     void Start()
     {
         enemy = gameObject.GetComponent<Enemy>();
-        //playerCollider = enemy.player.GetComponent<BoxCollider2D>();
-    }
-
-    void Update()
-    {
-        if (enemy == null)
-        {
-            enemy = gameObject.GetComponent<Enemy>();
-        }
     }
 
     public void Idle()
@@ -144,7 +134,7 @@ public class Mouse2D : MonoBehaviour
             {
                 countdown = Random.Range(3, countdown);
                 //spawn fallingscroll prefab
-                Instantiate(fallingScroll, transform.position, Quaternion.identity);
+                if (GameManager.instance.currentLocalManager == enemy._localGameManager) Instantiate(fallingScroll, transform.position, Quaternion.identity);
             }
             else
             {

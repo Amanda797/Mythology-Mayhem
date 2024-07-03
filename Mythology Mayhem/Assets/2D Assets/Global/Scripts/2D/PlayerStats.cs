@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
+    GameManager gameManager;
+
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayers;
 
@@ -30,6 +32,8 @@ public class PlayerStats : MonoBehaviour
 
     public PlayerAttach attachScript;
     // Start is called before the first frame update
+
+    Vector2 spawnPoint = Vector2.zero;
     void Awake()
     {        
         sr = GetComponent<SpriteRenderer>();
@@ -46,6 +50,14 @@ public class PlayerStats : MonoBehaviour
             print("Can't find huic's player stats so");
         }
     }//end on awake
+
+    private void Start()
+    {
+        spawnPoint = transform.position;
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing");
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -119,19 +131,14 @@ public class PlayerStats : MonoBehaviour
             if(huic != null)
                 huic.PlayerCurrHealth = ps.CurrHealth;
 
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.gameData.health = ps.CurrHealth;
-            }
-            print("Player Health: " + ps.CurrHealth.ToString() + " UI Health: " + huic.PlayerCurrHealth.ToString() + " GameManager Health: " + GameManager.instance.gameData.health.ToString());
+            gameManager.gameData.health = ps.CurrHealth;
+
             if (ps.CurrHealth <= 0)
             {
-                print("Died with <0 health");
                 Die();
             }
         }
-
-    }//end take damage
+    }
 
     public void Heal(int heal, bool potion) 
     {
@@ -152,73 +159,29 @@ public class PlayerStats : MonoBehaviour
                 huic.PlayerCurrHealth = ps.CurrHealth;
         }
 
-        if (GameManager.instance != null) 
-        {
-            GameManager.instance.gameData.health = ps.CurrHealth;
-        }
-    }//end heal
+        gameManager.gameData.health = ps.CurrHealth;
+    }
 
     private void Die()
     {
         if (ps.CurrHealth <= 0)
         {
-            print("Dead");
             anim.SetBool("IsDead", true);
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().simulated = false;
-            GetComponent<KnockBackFeedback>().enabled = false;
             GetComponent<PlayerController>().enabled = false;
-            //this.enabled = false;
-
-            //ps.CurrHealth = ps.MaxHealth;
-            if (attachScript != null && attachScript.localGameManager != null)
-            {
-                if (!respawning)
-                    StartCoroutine(Respawn());
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            StartCoroutine(Respawn());
         }
     }
-
-   /*  void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, ps.AttackRange/2);
-        Vector3 heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y + ps.AttackHeight/2, attackPoint.position.z);
-        Gizmos.DrawWireSphere(heightPoint, ps.AttackRange/2);
-        heightPoint = new Vector3 (attackPoint.position.x, attackPoint.position.y - ps.AttackHeight/2, attackPoint.position.z);
-        Gizmos.DrawWireSphere(heightPoint, ps.AttackRange/2);
-    } */
-
     public void PlaySwordSwing()
     {
         aud.Play();
     }
-
     public IEnumerator Respawn() 
     {
-        respawning = true;
         yield return new WaitForSeconds(2f);
         print("Respawn");
-        if(attachScript.localGameManager != null) 
-        {
-            transform.position = attachScript.localGameManager.activePlayerSpawner.spawnPoints[0].position;
-        }
-        GetComponent<Collider2D>().enabled = true;
-        GetComponent<Rigidbody2D>().simulated = true;
-        GetComponent<KnockBackFeedback>().enabled = true;
+        transform.position = spawnPoint;
+        Heal((int)huic.PlayerMaxHealth, false);
         GetComponent<PlayerController>().enabled = true;
-        ps.CurrHealth = ps.MaxHealth;
-
-        if (huic != null)
-            huic.PlayerCurrHealth = ps.CurrHealth;
         anim.SetBool("IsDead", false);
-        respawning = false;
-    }
-    
+    }    
 }
