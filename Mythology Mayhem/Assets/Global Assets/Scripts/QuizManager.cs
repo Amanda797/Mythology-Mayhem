@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Reflection;
 
 public class QuizManager : MonoBehaviour
 {
@@ -21,12 +22,21 @@ public class QuizManager : MonoBehaviour
     bool answered;
     bool won;
 
+    public PlayerStats playerStats;
+
     [SerializeField] GameObject[] enemy_go;
     [SerializeField] GameObject quizTrigger;
 
     void Start() {
+
+    }//end start
+
+    public void StartQuiz()
+    {
+        Time.timeScale = 0;
         Object[] al = GameObject.FindObjectsOfType<AudioListener>();
-        foreach(Object _al in al) {
+        foreach (Object _al in al)
+        {
             print("Location: " + _al.ToString());
         }
         chosenQuestions = new Questions[3];
@@ -35,8 +45,17 @@ public class QuizManager : MonoBehaviour
         score = 0;
         answered = false;
 
-        question.text = introduction;
-        answer1.text = "Begin";
+        if (SaveScene.instance.saveData.collectedMirror)
+        {
+            question.text = introduction;
+            answer1.text = "Begin";
+        }
+        else
+        {
+            question.text = "You do not have the mirror.\nReturn when you have it to continue.";
+            answer1.text = "Close";
+            Time.timeScale = 1;
+        }
         answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
         answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
         answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
@@ -44,8 +63,7 @@ public class QuizManager : MonoBehaviour
         won = false;
 
         RandomQuestions();
-    }//end start
-
+    }
     void DisplayQuestion() {
         if(currentQuestion < chosenQuestions.Length) {
             question.text = chosenQuestions[currentQuestion].questionText;
@@ -64,47 +82,59 @@ public class QuizManager : MonoBehaviour
     }//end display question
 
     public void AnswerQuestion(int x) {
-
-        if(currentQuestion == -1) {
+        if (currentQuestion == -1)
+        {
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);
             currentQuestion++;
             DisplayQuestion();
-        } else if(currentQuestion == chosenQuestions.Length - 1 & answered) {
+        }
+        else if(currentQuestion == chosenQuestions.Length - 1 & answered)
+        {
             question.text = "Final Score: " + score;
-            if(score >= 2) {                
+
+            if(score >= 2)
+            {
                 answer1.text = "You won! You may pass...";
                 won = true;
-            } else {
+            }
+            else
+            {
                 answer1.text = "You lost and bear a curse!";
                 won = false;
             }
+
             answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
             answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            //currentQuestion++;
-
-            // transition to the next scene/level
-            transitionPoint.localGameManager.SceneTransition(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
+            currentQuestion++;
         } 
-        else if(currentQuestion > chosenQuestions.Length) {
-            if(won) {
-                foreach(GameObject enemy in enemy_go) {
-                    enemy.GetComponent<BoxCollider2D>().enabled = false;
-                    enemy.GetComponent<Enemy>().CanAttack = false;
-                    enemy.GetComponent<Animator>().SetBool("AttackMode", false);
-                }
-            } else {
-                foreach(GameObject enemy in enemy_go) {
-                    enemy.GetComponent<Enemy>().CanAttack = true;
-                    enemy.GetComponent<Animator>().SetBool("AttackMode", true);
+        else if(currentQuestion > chosenQuestions.Length)
+        {
+            if (won)
+            {
+                Time.timeScale = 1;
+                LoadMedussa();
+                return;
+            }
+
+            else // enemies attack the player
+            {
+                foreach (GameObject enemy in enemy_go)
+                {
+                    if (enemy.gameObject.name == "OldLadyFate") enemy.GetComponent<Animator>().Play("OldLadyFate_AttackAnim");
+                    if (enemy.gameObject.name == "YoungLadyFate") enemy.GetComponent<Animator>().Play("YoungFateAttack");
+                    if (enemy.gameObject.name == "MiddleLadyFate") enemy.GetComponent<Animator>().Play("MiddleFateAttack");
+
                 }
             }
 
-            quizTrigger.GetComponent<QuizTrigger>().shrinking = true;
-
-            Destroy(this.gameObject);
+            //quizTrigger.GetComponent<QuizTrigger>().shrinking = true;
+            playerStats.TakeDamage(10);
+            LoadMedussa();
+            Time.timeScale = 1;
+            this.gameObject.SetActive(false);
         }
         else {
             if(!answered) {
@@ -167,6 +197,11 @@ public class QuizManager : MonoBehaviour
             while(!satisfied);
         }
     }//end random questions
-    
+
+    void LoadMedussa()
+    {
+        Debug.Log("LoadMedussa");
+        transitionPoint.localGameManager.mainGameManager.TransitionScene(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
+    }
 }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuizTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject _quizManager;
+    [SerializeField] QuizManager _quizManager;
     bool triggered = false;
     public bool shrinking;
     public bool growing;
@@ -18,14 +18,15 @@ public class QuizTrigger : MonoBehaviour
     GameObject player;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(!triggered && other.tag == "Player") {
+        if(other.tag == "Player") {
             player = other.gameObject;
             orgLens = player.gameObject.GetComponent<PlayerAttach>().vCam.m_Lens.OrthographicSize;
+            _quizManager.playerStats = player.gameObject.GetComponent<PlayerStats>();
+            _quizManager.gameObject.SetActive(true);
+            _quizManager.StartQuiz();
 
-            _quizManager.SetActive(true);
-
-            triggered = true;
-            growing = true;
+            //triggered = true;
+            //growing = true;
         }
     } // end on trigger enter 2d
 
