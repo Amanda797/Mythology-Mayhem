@@ -34,7 +34,6 @@ public class Attack3D : MythologyMayhem
             Vector3 attackPointPos = attackPoint.transform.TransformPoint(offset);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPointPos, range);
 
-            // Collider[] hitEnemies = Physics.OverlapSphere(transform.position + offset, range);
             foreach (Collider enemy in hitEnemies)
             {
                 if (objectType == ObjectType.Player)
@@ -42,6 +41,7 @@ public class Attack3D : MythologyMayhem
                     if (enemy.gameObject.tag == "Enemy")
                     {
                         Health health = enemy.GetComponent<Health>();
+
                         if (health != null)
                         {
                             if (health.GetHealth() > 0)
@@ -52,9 +52,11 @@ public class Attack3D : MythologyMayhem
                             {
                                 health.Death();
                             }
-                            isAttacking = false;
-                            hitCount++;
                         }
+                        else Debug.LogWarning("enemy health is null");
+
+                        isAttacking = false;
+                        hitCount++;
                     }
                     else if (enemy.gameObject.tag == "Medusa")
                     {

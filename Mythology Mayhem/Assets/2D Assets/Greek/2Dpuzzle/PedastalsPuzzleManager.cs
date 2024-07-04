@@ -24,14 +24,15 @@ public class PedastalsPuzzleManager : MonoBehaviour
     void Awake()
     {
         PedastalsPuzzleManager[] puzzleManagers = FindObjectsOfType<PedastalsPuzzleManager>();
-        if(puzzleManagers.Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);
-        }
+        //Debug.Log(puzzleManagers.Length);
+        //if(puzzleManagers.Length > 1)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+        //else
+        //{
+        //    DontDestroyOnLoad(this.gameObject);
+        //}
     }
 
     // Update is called once per frame

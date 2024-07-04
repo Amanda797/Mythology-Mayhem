@@ -89,14 +89,10 @@ public class Enemy : MythologyMayhem
 
     void Update()
     {
-        //set reference to player if in a scene using the StartScene feature
+        ////set reference to player if in a scene using the StartScene feature
 
-        if(_localGameManager != null && player == null)
-        {
-            if(_localGameManager.player != null){
-                player = _localGameManager.player.gameObject;
-            }
-        }
+        if (_localGameManager != null) if (player == null) if(_localGameManager.player != null)  player = _localGameManager.player.gameObject;
+
         //Check for Death
 
         if (health.GetHealth() <= 0 && currentState != EnemyStates.Dead)
