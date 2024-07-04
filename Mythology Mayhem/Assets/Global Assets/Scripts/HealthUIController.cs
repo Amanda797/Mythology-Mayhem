@@ -120,7 +120,6 @@ public class HealthUIController : MonoBehaviour
     }
 
     private void SetHealthBar(float health) {
-        Debug.Log("SetHealthBar");
         heartState.SetHealthBar(Mathf.CeilToInt(health));
         /*for (int i = 0; i < _heartPanel.childCount; i++)
         {
