@@ -18,7 +18,10 @@ public class enemySimpleAI : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;   // Find the player object
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (obj.scene.name == gameObject.scene.name) player = obj.transform;
+        }
     }
 
     void Update()
