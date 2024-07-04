@@ -31,17 +31,10 @@ public class HealingPotion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Has PlayerStats: " + other.gameObject.GetComponent<FPSHealth>() != null);
-        Debug.Log("Has PlayerStats_SO: " + other.gameObject.GetComponent<FPSHealth>().ps != null);
-
         if (other.gameObject.GetComponent<FPSHealth>() != null)
         {
             FPSHealth fPSHealth = other.gameObject.GetComponent<FPSHealth>();
             PlayerStats_SO ps = fPSHealth.ps;
-
-            Debug.Log("CurrHealth: " + ps.CurrHealth);
-            Debug.Log("MaxHealth: " + ps.MaxHealth);
-            Debug.Log("Can Heal: " + (ps.CurrHealth < ps.MaxHealth));
 
             if (ps.CurrHealth < ps.MaxHealth)
             {

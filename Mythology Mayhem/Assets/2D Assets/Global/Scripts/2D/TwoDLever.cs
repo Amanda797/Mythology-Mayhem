@@ -25,9 +25,11 @@ public class TwoDLever : MythologyMayhem
         // try to find the GameManager object
         if (GameManager.instance != null) gameManager = GameManager.instance;
         // else display a warning that it is missing
-        else Debug.LogWarning("GameManager Missing or Inactive.");
+        else Debug.LogWarning("GameManager Missing.");
 
-        LoadState(boolData.boolData);
+        if (boolData != null) LoadState(boolData.boolData);
+        else Debug.LogWarning("boolData Missing.");
+
     }
 
     // Update is called once per frame

@@ -24,7 +24,6 @@ public class Health : MonoBehaviour
 
     public bool _attacked = false;
     public bool _defenseUp = false;
-    [HideInInspector]
     public float _defenseTimer = 0f;
 
     public float respawnTimer = 50f;
@@ -60,28 +59,27 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float d) {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
-        if(!_attacked && !_defenseUp)
+        if (!_attacked && !_defenseUp)
         {
             if (gameObject.tag == "Enemy")
             {
-                if (enemy != null)
-                {
-                    enemy.PlaySound(Enemy.Soundtype.Hurt);
-                }
-                if (anim != null)
-                {
-                    anim.SetTrigger(hurtTrigger);
-                }
+                if (enemy != null) enemy.PlaySound(Enemy.Soundtype.Hurt);
+                else Debug.LogWarning("enemy is null");
+
+                if (anim != null) anim.SetTrigger(hurtTrigger);
+                else Debug.LogWarning("anim is null");
 
                 StartCoroutine(Attacked());
             }
 
             Life -= d;
+            Debug.Log("Life: " + Life);
         }        
     }//end take damage
 
     IEnumerator Attacked()
     {
+        Debug.Log("Attacked");
         _attacked = true;
         yield return new WaitForSeconds(_defenseTimer);
         _attacked = false;
@@ -94,6 +92,7 @@ public class Health : MonoBehaviour
     }//end heal
 
     public void Death() {
+        Debug.Log("Death");
         if(GetHealth() <= 0 && Life != -1000) {
             //Lock Death() from being called again
             Life = -1000;
