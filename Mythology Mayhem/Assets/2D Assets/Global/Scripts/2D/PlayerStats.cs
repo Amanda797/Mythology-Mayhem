@@ -178,7 +178,6 @@ public class PlayerStats : MonoBehaviour
     public IEnumerator Respawn() 
     {
         yield return new WaitForSeconds(2f);
-        print("Respawn");
         transform.position = spawnPoint;
         Heal((int)huic.PlayerMaxHealth, false);
         GetComponent<PlayerController>().enabled = true;

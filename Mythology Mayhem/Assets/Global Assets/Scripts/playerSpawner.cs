@@ -51,7 +51,6 @@ public class playerSpawner : MythologyMayhem
         if (localGameManager.sceneType == Dimension.TwoD)
         {
             spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
-            print(spawnPlayerContainer);
 
             obj = Instantiate(PlayerPrefabs2D.playerPrefabs[(int)GameManager.instance.gameData.selectedCharacter], spawnPlayerContainer.transform);
 
