@@ -76,7 +76,6 @@ public class Boar3D : MonoBehaviour
 
     public void DetermineAction()
     {
-        Debug.Log("DetermineAction");
         transform.LookAt(enemy.agent.steeringTarget);
 
         if (enemy.health._attacked == true)

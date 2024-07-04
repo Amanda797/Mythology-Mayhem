@@ -87,7 +87,6 @@ public class SaveScene : MonoBehaviour
         string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + sceneName + ".json");
 
         saveData = JsonUtility.FromJson<SaveDataTest>(sceneObjectsString);
-        print(sceneObjectsString);
 
         Loaded = true;
     }

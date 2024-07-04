@@ -73,13 +73,11 @@ public class Health : MonoBehaviour
             }
 
             Life -= d;
-            Debug.Log("Life: " + Life);
         }        
     }//end take damage
 
     IEnumerator Attacked()
     {
-        Debug.Log("Attacked");
         _attacked = true;
         yield return new WaitForSeconds(_defenseTimer);
         _attacked = false;
@@ -92,7 +90,6 @@ public class Health : MonoBehaviour
     }//end heal
 
     public void Death() {
-        Debug.Log("Death");
         if(GetHealth() <= 0 && Life != -1000) {
             //Lock Death() from being called again
             Life = -1000;

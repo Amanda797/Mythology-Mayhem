@@ -97,12 +97,12 @@ public class Enemy : MythologyMayhem
 
         if (health.GetHealth() <= 0 && currentState != EnemyStates.Dead)
         {
-            StartCoroutine(SwitchStates(EnemyStates.Dead,0));
+            StartCoroutine(SwitchStates(EnemyStates.Dead, 0));
         }
-
+        else if (health.GetHealth() <= 0) return;
         // If not transitioning states, invoke state action
 
-        if(currentStatePosition == StatePosition.Current)
+        if (currentStatePosition == StatePosition.Current)
         {
             switch (currentState)
             {
