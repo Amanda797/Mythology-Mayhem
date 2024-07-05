@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class WeaponSwitcher : MythologyMayhem
 {
+    GameManager gameManager;
     public MainHand currentMain;
     public OffHand currentOffHand;
 
@@ -13,8 +15,16 @@ public class WeaponSwitcher : MythologyMayhem
 
     [Header("Left Hand")]
     public GameObject[] LeftHandWeapons;
-    int currentLeftHandWeapon;    
+    int currentLeftHandWeapon;
 
+    private void Start()
+    {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing.");
+
+        if (gameManager.gameData.collectedMirror) LeftHandWeapons[1].SetActive(true);
+        else LeftHandWeapons[1].SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -22,24 +32,14 @@ public class WeaponSwitcher : MythologyMayhem
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
             //Iterate Next Weapon
-            if(currentRightHandWeapon + 1 >= RightHandWeapons.Length)
-            {
-                currentRightHandWeapon = 0;
-            } else
-            {
-                currentRightHandWeapon++;
-            }
+            if(currentRightHandWeapon + 1 >= RightHandWeapons.Length) currentRightHandWeapon = 0;
+            else currentRightHandWeapon++;
 
             //Activate Next Weapon, Deactivate Other Weapons
             for(int i = 0; i < RightHandWeapons.Length; i++)
             {
-                if(i == currentRightHandWeapon)
-                {
-                    RightHandWeapons[i].SetActive(true);
-                } else
-                {
-                    RightHandWeapons[i].SetActive(false);
-                }
+                if(i == currentRightHandWeapon) RightHandWeapons[i].SetActive(true);
+                else RightHandWeapons[i].SetActive(false);
             }
 
             //Set Current Main
@@ -67,26 +67,19 @@ public class WeaponSwitcher : MythologyMayhem
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             //Iterate Next Weapon
-            if (currentLeftHandWeapon + 1 >= LeftHandWeapons.Length)
+            if (currentLeftHandWeapon + 1 >= LeftHandWeapons.Length) currentLeftHandWeapon = 0;
+            else currentLeftHandWeapon++;
+
+            if (LeftHandWeapons[currentLeftHandWeapon].name == "GreekMirror3D")
             {
-                currentLeftHandWeapon = 0;
-            }
-            else
-            {
-                currentLeftHandWeapon++;
+                if (!gameManager.gameData.collectedMirror) currentLeftHandWeapon++;
             }
 
             //Activate Next Weapon, Deactivate Other Weapons
             for (int i = 0; i < LeftHandWeapons.Length; i++)
             {
-                if (i == currentLeftHandWeapon)
-                {
-                    LeftHandWeapons[i].SetActive(true);
-                }
-                else
-                {
-                    LeftHandWeapons[i].SetActive(false);
-                }
+                if (i == currentLeftHandWeapon) LeftHandWeapons[i].SetActive(true);
+                else LeftHandWeapons[i].SetActive(false);
             }
 
             //Set Current Main
@@ -116,6 +109,5 @@ public class WeaponSwitcher : MythologyMayhem
             //        break;
             //}
         }
-
     }
 }

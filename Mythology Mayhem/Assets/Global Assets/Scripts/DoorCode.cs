@@ -17,7 +17,7 @@ public class DoorCode : MonoBehaviour
         if(nextLevel == "Athens" && gameObject.scene.ToString() == "2Dlabyrinth_Pedastals")
         {
             PedastalsPuzzleManager puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
-            puzzleManager.door = this.gameObject;
+            //puzzleManager.door = this.gameObject;
             
             if (puzzleManager.fishDone && puzzleManager.appleDone && puzzleManager.torchDone && puzzleManager.airDone)
             {

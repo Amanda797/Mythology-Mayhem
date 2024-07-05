@@ -45,7 +45,7 @@ public class QuizManager : MonoBehaviour
         score = 0;
         answered = false;
 
-        if (SaveScene.instance.saveData.collectedMirror)
+        if (GameManager.instance.gameData.collectedMirror)
         {
             question.text = introduction;
             answer1.text = "Begin";
