@@ -1,9 +1,8 @@
- using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TwoDMirror : MonoBehaviour
 {
+    GameManager gameManager;
     public bool pickUpAllowed = false;
     public bool pickedUp = false;
 
@@ -11,47 +10,47 @@ public class TwoDMirror : MonoBehaviour
     public bool isInRangeOfEnemy;
 
     public float slowingValue;
-    public LeverPuzzleManager leverManager;
-    
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing.");
     }
-                                        
-    // Update is called once per frame
     void Update()
     {
-        if(pickUpAllowed == true && Input.GetKeyDown(KeyCode.E))
+        if (!pickUpAllowed) return;
+
+        if(Input.GetKeyDown(KeyCode.E))
         {
             PickUp();
         }
 
     }
-
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
+            gameManager.Popup("Press E to Pick up", true);
+
             pickUpAllowed = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) 
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
+            gameManager.Popup("Press E to Pick up", false);
+
             pickUpAllowed = false;
         }
     }
 
-
-
     private void PickUp()
     {
         pickedUp = true;
-        leverManager.CollectMirror();
+        gameManager.gameData.collectedMirror = true;
+        gameManager.SaveGame();
         gameObject.SetActive(false);
     }
 
@@ -62,7 +61,6 @@ public class TwoDMirror : MonoBehaviour
         foreach(MouseAI enemy in enemies)
         {
             enemy.SetMovementSpeed(slowingValue);
-
         }
     }
 

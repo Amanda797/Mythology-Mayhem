@@ -30,6 +30,7 @@ public class SceneTransitionPoint3D : SceneTransitionPoint
 
             // transition to the next scene/level
             localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
+            canTransition = false;
         }
     }
 

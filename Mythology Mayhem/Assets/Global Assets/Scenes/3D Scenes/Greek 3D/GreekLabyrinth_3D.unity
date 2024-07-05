@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 2
 --- !u!1001 &91527475
@@ -219,6 +219,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.0087
       objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1895071795}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: doorGem
       value: Gem-Green-Teardrop
@@ -583,6 +587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964521, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: nextSceneName
+      value: GreekAthens_2D
+      objectReference: {fileID: 0}
     - target: {fileID: 2337726971492964526, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
       propertyPath: m_Name
       value: PedstalPuzzleManager
@@ -594,6 +602,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
   m_PrefabInstance: {fileID: 390860008}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &390860010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2337726971492964521, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+  m_PrefabInstance: {fileID: 390860008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bde20483c447504c97c47820597f936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &429499509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6091051967339103169, guid: 6aaa337f6bc304744a9fb58532ee3540, type: 3}
@@ -80612,7 +80631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 0
 --- !u!1 &884387364
@@ -80645,6 +80664,7 @@ Transform:
   m_Children:
   - {fileID: 1894980627}
   - {fileID: 1608591799}
+  - {fileID: 1908879761}
   m_Father: {fileID: 2071059264}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81043,6 +81063,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.0074954703
       objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1908879762}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: doorGem
       value: Gem-Orange-Diamond
@@ -81488,6 +81512,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1608955287}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -82922,6 +82950,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1608955287}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -82953,7 +82985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 1
 --- !u!65 &1834357950
@@ -83607,6 +83639,73 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1908879760
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 884387365}
+    m_Modifications:
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 102.04293
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9016573
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37227058
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347365411, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_Name
+      value: Gem-Orange-Diamond
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+--- !u!4 &1908879761 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+  m_PrefabInstance: {fileID: 1908879760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1908879762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2304417138347365411, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+  m_PrefabInstance: {fileID: 1908879760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1980298106
 GameObject:
   m_ObjectHideFlags: 0
@@ -84180,7 +84279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 3
 --- !u!4 &2112257695 stripped

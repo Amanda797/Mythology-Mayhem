@@ -65,6 +65,11 @@ public class GameManager : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            int index = loadedLocalManagers.IndexOf(currentLocalManager);
+            TransitionScene(loadedLocalManagers[index + 1].inScene, "");
+        }
         if (!startSceneDebugLoad)
         {
             bool inStartScene = SceneManager.GetSceneByName("StartScene").isLoaded;
@@ -301,12 +306,12 @@ public class GameManager : MythologyMayhem
             if (loadedLocalManagers[i].inScene == scene)
             {
                 currentLocalManager = loadedLocalManagers[i];
-                if (currentLocalManager.backgroundMusic != null) 
+                if (currentLocalManager.backgroundMusic != null)
                 {
                     backgroundMusic.clip = currentLocalManager.backgroundMusic;
                     backgroundMusic.Play();
                 }
-                return;
+                //return;
             }
         }
     }
@@ -335,14 +340,13 @@ public class GameManager : MythologyMayhem
                 currentPlayer.gameObject.SetActive(false);
                 currentPlayer.transform.position = currentLocalManager.activePlayerSpawner.spawnPoints[i].position;
                 currentPlayer.gameObject.SetActive(true);
-                break;
+                //break;
             }
         }
     }
 
-    public void TransitionScene(Level scene, string spawnpointOverride) 
+    public void TransitionScene(Level scene, string spawnpointOverride)
     {
-        Debug.Log("LoadScene");
         huic.UpdateHealth();
         Level previousScene = currentScene;
         currentScene = scene;
