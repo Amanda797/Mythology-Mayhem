@@ -57,7 +57,8 @@ public class Health : MonoBehaviour
         SetHealth(_respawnHealth);
     }//end respawn
 
-    public void TakeDamage(float d) {
+    public void TakeDamage(float d)
+    {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
         if (!_attacked && !_defenseUp)
         {
@@ -73,6 +74,7 @@ public class Health : MonoBehaviour
             }
 
             Life -= d;
+            if (Life <= 0) Death();
         }        
     }//end take damage
 
@@ -163,6 +165,7 @@ public class Health : MonoBehaviour
             GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);
             reward.name = rewardObject.name;
         }
+
         mainObject.SetActive(false);
 
         if(mainObject.CompareTag("Companion"))
