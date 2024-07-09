@@ -58,7 +58,8 @@ public class LocalGameManager : MythologyMayhem
     {
         if (!mainGameManager)
         {
-            mainGameManager = FindObjectOfType<GameManager>();
+            mainGameManager = GameManager.instance;
+
             if (!mainGameManager)
             {
                 print("Could Not Find GameManager for Local in " + SceneManager.GetActiveScene().ToString());

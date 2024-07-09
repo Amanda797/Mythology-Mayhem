@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -22,8 +21,6 @@ public class ScrollPopup : MonoBehaviour
 
 
     bool activeStatus = false;
-    bool scrollOpen = false;
-    bool scrollClosed = true;
     GameObject player = null;
 
     void Start()

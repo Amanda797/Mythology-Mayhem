@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuizTrigger : MonoBehaviour
 {
     [SerializeField] QuizManager _quizManager;
-    bool triggered = false;
+    //bool triggered = false;
     public bool shrinking;
     public bool growing;
     float orgLens;
