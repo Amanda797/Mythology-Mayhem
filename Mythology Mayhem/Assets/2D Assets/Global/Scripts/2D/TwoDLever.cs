@@ -13,8 +13,6 @@ public class TwoDLever : MythologyMayhem
 
     public bool canOpen = false;
 
-    [SerializeField] private bool entered = false;
-
     [SerializeField] private SceneTransitionPoint doorTransition;
 
     public SaveDataBool boolData;

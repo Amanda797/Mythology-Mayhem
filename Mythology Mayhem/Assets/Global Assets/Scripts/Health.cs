@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MythologyMayhem;
 
 public class Health : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Health : MonoBehaviour
 
     public float respawnTimer = 50f;
     public bool canRespawn = false;
+
+    public EnemyLoadSystem loadSystem;
 
     // --------------------------
     // ***METHODS***
@@ -95,7 +98,7 @@ public class Health : MonoBehaviour
         if(GetHealth() <= 0 && Life != -1000) {
             //Lock Death() from being called again
             Life = -1000;
-
+            if (loadSystem != null) loadSystem.SyncToSave(this.gameObject.transform.parent.gameObject);
             //Trigger Death sounds and animations
             if (enemy != null)
             {
@@ -130,28 +133,21 @@ public class Health : MonoBehaviour
     }//end death
 
     public void Death(float time) {
-        if(GetHealth() <= 0) {
+        if(GetHealth() <= 0)
+        {
             if(gameObject.tag == "Enemy")
             {
-                if (enemy != null)
-                {
-                    enemy.PlaySound(Enemy.Soundtype.Death);
-                }
-                if (anim != null)
-                    anim.SetTrigger(deathTrigger);
-                if(gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
-                {
-                    gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                } else
-                {
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                }
+                if (enemy != null) enemy.PlaySound(Enemy.Soundtype.Death);
+                if (anim != null) anim.SetTrigger(deathTrigger);
+                if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD) gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                else gameObject.GetComponent<Rigidbody>().isKinematic = true;
             }
 
-            foreach (Behaviour component in components)
-            {
-                component.enabled = false;
-            }
+            //foreach (Behaviour component in components)
+            //{
+            //    component.enabled = false;
+            //}
+
             StartCoroutine(DeathTimer(time));
         }//check that health is really less than 0 when called        
     }//end death

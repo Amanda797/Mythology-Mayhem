@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FallingScrollBehavior : MonoBehaviour
 {
-    [SerializeField] float countdown = 3;
     [SerializeField] int damage = 2;
 
     private void OnTriggerEnter2D(Collider2D other) 

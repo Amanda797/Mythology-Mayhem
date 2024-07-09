@@ -7,7 +7,7 @@ public class ThreeDLever : MonoBehaviour
 {
     GameManager gameManager;
 
-    [SerializeField] private string nextLevel = "Library 3D";
+    //[SerializeField] private string nextLevel = "Library 3D";
     [SerializeField] private BoxCollider DoorTrigger;
     bool canOpen = false;
 

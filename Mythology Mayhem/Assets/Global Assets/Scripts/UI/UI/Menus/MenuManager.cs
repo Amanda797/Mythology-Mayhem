@@ -167,6 +167,7 @@ public class MenuManager : MonoBehaviour
 
     public void MainMenu() {
         Time.timeScale = 1;
+        GameManager.instance.playerControllers.Clear();
         SceneManager.LoadScene(0);
     }
 }
