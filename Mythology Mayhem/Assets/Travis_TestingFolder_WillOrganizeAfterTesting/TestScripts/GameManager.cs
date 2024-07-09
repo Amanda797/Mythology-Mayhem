@@ -50,7 +50,12 @@ public class GameManager : MythologyMayhem
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        if (instance != null) Destroy(this.gameObject);
+        else instance = this;
+
+
+
+
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         if (SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded)
         {
@@ -59,7 +64,6 @@ public class GameManager : MythologyMayhem
             currentScene = Level.MainMenu;
         }
         startSceneDebugLoad = false;
-        LoadGame();
     }
 
     // Update is called once per frame
@@ -92,22 +96,12 @@ public class GameManager : MythologyMayhem
         }
         if (Input.GetKeyDown(KeyCode.LeftBracket)) 
         {
-            LoadGame();
+            //LoadGame();
         }
         if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();
         }
-
-        //if (closeButtonPressTimer > 0)
-        //{
-        //    PressEObj.SetActive(true);
-        //    closeButtonPressTimer -= Time.deltaTime;
-        //    if (closeButtonPressTimer <= 0)
-        //    {
-        //        PressEObj.SetActive(false);
-        //    }
-        //}
     }
     public void LoadSystemsStart(bool newGame) 
     {
@@ -118,7 +112,6 @@ public class GameManager : MythologyMayhem
             backgroundMusic.Stop();
             currentScene = Level.CutScene1;
             gameData.NewGame();
-
             print("GameManager starting New Game");
             LoadScene(Level.CutScene1, true);
         }
@@ -140,6 +133,7 @@ public class GameManager : MythologyMayhem
             else
             {
                 print("Game Manager loading from save file");
+                LoadGame();
                 gameData.SetStartScene(false);
                 LoadScene(gameData.startScene, true);
             }
@@ -318,6 +312,9 @@ public class GameManager : MythologyMayhem
 
     void SetCurrentPlayerCharacter(Level scene)
     {
+        if (scene == Level.MainMenu) return;
+        if (scene.ToString() == "TitleSequence") return;
+
         for (int i = 0; i < playerControllers.Count; i++)
         {
             if (playerControllers[i].inScene == scene)

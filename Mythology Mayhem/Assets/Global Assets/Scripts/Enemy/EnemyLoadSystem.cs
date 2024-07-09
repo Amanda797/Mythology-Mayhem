@@ -2,31 +2,28 @@ using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MythologyMayhem;
 
 public class EnemyLoadSystem : MythologyMayhem
 {
     public Level currentLevel;
 
     public GameObject[] enemies;
-    public int tickClock;
-    public int syncDataTickAmount;
     bool[] tempEnemyData;
     private void Start()
     {
-        tickClock = syncDataTickAmount;
-        if (GameManager.instance != null) 
+        if (GameManager.instance != null)
         {
             tempEnemyData = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Enemy);
-            Debug.Log(tempEnemyData.Length);
-            if (tempEnemyData.Length != 0) 
-            {
-                SyncToLoad(tempEnemyData);
-            }
+
+            if (tempEnemyData.Length != 0) SyncToLoad(tempEnemyData);
             else
             {
                 tempEnemyData = new bool[enemies.Length];
+
                 for (int i = 0; i < tempEnemyData.Length; i++)
                 {
+                    enemies[i].SetActive(true);
                     tempEnemyData[i] = true;
                 }
             }
@@ -37,26 +34,17 @@ public class EnemyLoadSystem : MythologyMayhem
             enemies[i].GetComponentInChildren<Health>().loadSystem = this;
         }
     }
-    //public void Update()
-    //{
-    //    tickClock--;
-    //    if (tickClock <= 0) 
-    //    {
-    //        SyncToSave();
-    //        tickClock = syncDataTickAmount;
-    //    }
-    //}
-    public void SyncToLoad(bool[] enemyData) 
+    public void SyncToLoad(bool[] enemyData)
     {
         Debug.Log("enemyData: " + enemyData.Length);
 
-            for (int i = 0; i < enemyData.Length; i++)
-            {
-                enemies[i].SetActive(enemyData[i]);
-                enemies[i].GetComponent<Health>().loadSystem = this;
-            }
+        for (int i = 0; i < enemyData.Length; i++)
+        {
+            enemies[i].GetComponentInChildren<Health>().loadSystem = this;
+            enemies[i].SetActive(enemyData[i]);
+        }
     }
-    public void SyncToSave(GameObject enemy) 
+    public void SyncToSave(GameObject enemy)
     {
         Debug.Log("SyncToSave");
 
@@ -74,7 +62,5 @@ public class EnemyLoadSystem : MythologyMayhem
                 return;
             }
         }
-
-        //GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempEnemyData, GameData.BoolArrayType.Enemy);
     }
 }

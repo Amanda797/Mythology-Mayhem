@@ -50,8 +50,8 @@ public class SaveData
         GreekLibrary_2DData GL2D_Temp = new GreekLibrary_2DData();
         GL2D_Temp.enemyData = data.GL2D_Enemies;
         GL2D_Temp.poitionData = data.GL2D_Potions;
-        GL2D_Temp.leverComplete = data.GL2D_Lever.boolData;
-        GL2D_Temp.pillarLocation = data.GL2D_Pillar.position;
+        //GL2D_Temp.leverComplete = data.GL2D_Lever.boolData;
+        //GL2D_Temp.pillarLocation = data.GL2D_Pillar.position;
 
         this.GL2D = GL2D_Temp;
 
@@ -64,7 +64,7 @@ public class SaveData
         GreekAthens_2DData GA2D_Temp = new GreekAthens_2DData();
         GA2D_Temp.enemyData = data.GA2D_Enemies;
         GA2D_Temp.poitionData = data.GA2D_Potions;
-        GA2D_Temp.fountain = data.GA2D_Fountain.boolData;
+        //GA2D_Temp.fountain = data.GA2D_Fountain.boolData;
 
         this.GA2D = GA2D_Temp;
 
@@ -153,8 +153,8 @@ public class SaveData
 
         data.GL2D_Enemies = GL2D.enemyData;
         data.GL2D_Potions = GL2D.poitionData;
-        data.GL2D_Lever.boolData = GL2D.leverComplete;
-        data.GL2D_Pillar.position = GL2D.pillarLocation;
+        //data.GL2D_Lever.boolData = GL2D.leverComplete;
+        //data.GL2D_Pillar.position = GL2D.pillarLocation;
 
         data.GL3D_Enemies = GL3D.enemyData;
         data.GL3D_Potions = GL3D.poitionData;
@@ -278,25 +278,28 @@ public class SaveData
         }
     }
 
-    void Save()
+    public void Save()
     {
+        Debug.Log("Save File");
         string sceneObjectsString = JsonUtility.ToJson(this, true);
 
         System.IO.File.WriteAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json", sceneObjectsString);
 
-        #if UNITY_EDITOR
-            UnityEditor.AssetDatabase.Refresh();
-        #endif
+        //#if UNITY_EDITOR
+        //    UnityEditor.AssetDatabase.Refresh();
+        //#endif
+    }
 
-
+    public void Delete()
+    {
+        Debug.Log("Delete Saved File");
+        if (!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json")) return;
+        System.IO.File.Delete(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json");
     }
     public void Load()
     {
-        if (!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json"))
-        {
-            //this.Save();
-            return;
-        }
+        if (!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json")) return;
+
         string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json");
 
         SaveData loadedData = JsonUtility.FromJson<SaveData>(sceneObjectsString);
@@ -308,12 +311,12 @@ public class SaveData
     {
         SettingsData newSettings = new SettingsData();
         this.settingsData = newSettings;
+
         PlayerData newPlayerData = new PlayerData();
         newPlayerData.collectedHearts = new bool[GameManager.instance.gameData.heartCollectionTotal];
         this.playerData = newPlayerData;
 
-        GreekLibrary_2DData GL2D_Temp = new GreekLibrary_2DData();
-        this.GL2D = GL2D_Temp;
+        this.GL2D = new GreekLibrary_2DData();
 
         GreekLibrary_3DData GL3D_Temp = new GreekLibrary_3DData();
         this.GL3D = GL3D_Temp;
