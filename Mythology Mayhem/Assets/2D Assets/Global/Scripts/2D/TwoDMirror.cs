@@ -49,8 +49,8 @@ public class TwoDMirror : MonoBehaviour
     private void PickUp()
     {
         pickedUp = true;
-        gameManager.gameData.collectedMirror = true;
-        gameManager.SaveGame();
+        gameManager.gameData.saveData.playerData.collectedMirror = true;
+        gameManager.gameData.saveData.Save();
         gameObject.SetActive(false);
     }
 

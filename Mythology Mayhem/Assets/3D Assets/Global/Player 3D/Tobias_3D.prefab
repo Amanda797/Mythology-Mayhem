@@ -433,6 +433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   huic: {fileID: 0}
   ps: {fileID: 0}
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1522799808658085856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,13 +452,11 @@ MonoBehaviour:
   - {fileID: 1234530420529872034}
   mainObject: {fileID: 1234530420529872037}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  healSound: {fileID: 0}
   anim: {fileID: 0}
   hurtTrigger: Hurt
   deathTrigger: Death
   healTrigger: Heal
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
@@ -1389,7 +1388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1513060137413971418, guid: 81e01337a7a3b774199a11c17a1e7f33, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284636183875901280, guid: 81e01337a7a3b774199a11c17a1e7f33, type: 3}
       propertyPath: m_RootOrder

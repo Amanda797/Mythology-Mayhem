@@ -1215,8 +1215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 719968872}
-  inRange: 0
   switchOn: 0
+  arrayPos: 0
 --- !u!1 &800369391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,8 +1500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1087078354}
-  inRange: 0
   switchOn: 0
+  arrayPos: 9
 --- !u!95 &1087078354 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -1819,8 +1819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1254682753}
-  inRange: 0
   switchOn: 0
+  arrayPos: 8
 --- !u!95 &1254682753 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -1844,8 +1844,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1295793906}
-  inRange: 0
   switchOn: 0
+  arrayPos: 7
 --- !u!95 &1295793906 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2175,8 +2175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1426302700}
-  inRange: 0
   switchOn: 0
+  arrayPos: 2
 --- !u!95 &1426302700 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2483,8 +2483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1643751810}
-  inRange: 0
   switchOn: 0
+  arrayPos: 6
 --- !u!95 &1643751810 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2621,8 +2621,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1696576948}
-  inRange: 0
   switchOn: 0
+  arrayPos: 4
 --- !u!95 &1696576948 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2887,24 +2887,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fcbfe5ed8a87846a830abb3c76df79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levers:
-  - {fileID: 719968878}
-  - {fileID: 1933163909}
-  - {fileID: 1426302699}
-  - {fileID: 2031968971}
-  - {fileID: 1696576947}
-  - {fileID: 2060959655}
-  - {fileID: 1643751809}
-  - {fileID: 1295793905}
-  - {fileID: 1254682752}
-  - {fileID: 1087078353}
-  combination: 00000100000100000100
-  match: 0
   Door: {fileID: 1208276690}
-  item: {fileID: 1338900934}
-  mirrorCollected: 0
-  loading: 0
-  completed: 0
+  itemToDisplay: {fileID: 1338900934}
+  currentLeverAnswer: 00000000000000000000
+  correctLeverAnswer: 01000100010001000100
+  puzzle: 0
 --- !u!4 &1872502283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7692487075164556629, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2928,8 +2915,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1933163910}
-  inRange: 0
   switchOn: 0
+  arrayPos: 1
 --- !u!95 &1933163910 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -3033,8 +3020,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2031968972}
-  inRange: 0
   switchOn: 0
+  arrayPos: 3
 --- !u!95 &2031968972 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -3133,8 +3120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2060959656}
-  inRange: 0
   switchOn: 0
+  arrayPos: 5
 --- !u!95 &2060959656 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
