@@ -1,96 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEngine;
 
 public class LeverPuzzleManager : MonoBehaviour
 {
-    public List<LeverPuzzle> levers;
-    public List<bool> combination;
-    public bool match;
+    SaveData saveData;
     public DoorCode Door;
-    //public GameObject SpawnLocation;
-    public GameObject item;
-
-    public bool mirrorCollected;
-    public bool loading;
-    public bool completed;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject itemToDisplay;
+    public bool[] currentLeverAnswer = new bool[10];
+    public bool[] correctLeverAnswer = new bool[] { true, false, true, false, true, false, true, false, true, false };
+    public enum Puzzle
     {
+        mirror,
+        owl
+    }
 
-        loading = true;
-
+    public Puzzle puzzle = Puzzle.mirror;
+    // Start is called before the first frame update
+    void Awake()
+    {
         Door.doorOpen = true;
         Door.blocked = false;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (!loading)
+        saveData = GameManager.instance.gameData.saveData;
+    }
+
+    public void CheckPuzzel(int pos, bool isOn)
+    {
+        currentLeverAnswer[pos] = isOn;
+
+        if (currentLeverAnswer.SequenceEqual(correctLeverAnswer))
         {
-            if (!completed)
+            switch (puzzle)
             {
-                match = true;
-                for (int i = 0; i < levers.Count; i++)
-                {
-                    if (levers[i].switchOn != combination[i])
-                    {
-                        match = false;
-                        break;
-                    }
-                }
-                if (match)
-                {
-                    completed = true;
-                    item.SetActive(true);
-                    UpdateAndSave();
-                }
-            }
-        }
-        else 
-        {
-            if (SaveScene.instance != null) 
-            {
-                if (SaveScene.instance.Loaded) 
-                {
-                    for (int i = 0; i < SaveScene.instance.saveData.TwoDLabyrinthLevers.Count; i++) 
-                    {
-                        //levers[i].LoadState(SaveScene.instance.saveData.TwoDLabyrinthLevers[i]);
-                    }
-                    mirrorCollected = SaveScene.instance.saveData.collectedMirror;
-                    completed = SaveScene.instance.saveData.TwoDLabyrinthCompleted;
-                    if (!completed) 
-                    {
-                        item.SetActive(false);
-                    }
-                    if (completed && !mirrorCollected) 
-                    {
-                        item.SetActive(true);
-                    }
-                    if (completed && mirrorCollected) 
-                    {
-                        item.SetActive(false);
-                    }
-                    loading = false;
-                }
+                case Puzzle.mirror:
+                    CollectMirror();
+                    break;
+
+                case Puzzle.owl:
+                    CollectOwl();
+                    break;
             }
         }
     }
-
-    public void CollectMirror() 
+    public void CollectMirror()
     {
-        mirrorCollected = true;
-        UpdateAndSave();
-    }
-
-    public void UpdateAndSave() 
-    {
-        List<bool> tempLeverList = new List<bool>();
-        for (int i = 0; i < levers.Count; i++)
+        if (!saveData.playerData.collectedMirror)
         {
-            tempLeverList.Add(levers[i].switchOn);
+            itemToDisplay.SetActive(true);
+            //saveData.playerData.collectedMirror = true;
+            //saveData.Save();
         }
-        SaveScene.instance.UpdateLeverPuzzle(tempLeverList, mirrorCollected, completed);
+    }
+    public void CollectOwl()
+    {
+        if (!saveData.playerData.collectedOwl)
+        {
+            saveData.playerData.collectedOwl = true;
+            saveData.Save();
+            foreach (CompanionController cc in FindObjectsOfType<CompanionController>()) cc.owl.SetActive(true);
+        }
     }
 }

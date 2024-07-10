@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class LeverPuzzle : MonoBehaviour
 {
     GameManager gameManager;
-    CavernLeverPuzzleManager cavernLeverPuzzleManager;
+    [SerializeField] LeverPuzzleManager leverPuzzleManager;
     public Animator anim;
     public bool switchOn = false;
     bool canOpen = false;
@@ -32,7 +32,7 @@ public class LeverPuzzle : MonoBehaviour
         if (!switchOn) anim.Play("LeverAnim");
         else anim.Play("LeverOff");
 
-        cavernLeverPuzzleManager = GetComponentInParent<CavernLeverPuzzleManager>();
+        leverPuzzleManager = GetComponentInParent<LeverPuzzleManager>();
 
     }
 
@@ -70,6 +70,6 @@ public class LeverPuzzle : MonoBehaviour
         switchOn = !switchOn;
         canOpen = false;
 
-        cavernLeverPuzzleManager.CheckPuzzel(arrayPos, switchOn);
+        leverPuzzleManager.CheckPuzzel(arrayPos, switchOn);
     }
 }

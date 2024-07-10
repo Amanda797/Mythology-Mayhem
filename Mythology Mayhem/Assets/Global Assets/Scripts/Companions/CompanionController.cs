@@ -80,23 +80,29 @@ public class CompanionController : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
-        if (_player == null) if (localGameManager.player != null)
+        if (_player == null && localGameManager.player != null)
             {
                 _player = localGameManager.player.gameObject;
-                wolf = companions[0].gameObject;
-                owl = companions[1].gameObject;
-                if (GameManager.instance.gameData.saveData.playerData.collectedOwl)
+                if (companions.Length > 0)
                 {
-                    owl.GetComponent<Companion>()._player = _player;
-                    owl.SetActive(true);
+                    foreach (var companion in companions)
+                    {
+                        if (companion.name.Contains("Owl")) owl = companion.gameObject;
+                        if (companion.name.Contains("Wolf")) wolf = companion.gameObject;
+                    }
+                    if (owl != null)
+                    {
+                        owl.SetActive(true);
+                        owl.GetComponent<Companion>()._player = _player;
+                        if (!GameManager.instance.gameData.saveData.playerData.collectedOwl) owl.SetActive(false);
+                    }
+                    if (wolf != null)
+                    {
+                        wolf.SetActive(true);
+                        wolf.GetComponent<Companion>()._player = _player;
+                        if (!GameManager.instance.gameData.saveData.playerData.collectedWolf) wolf.SetActive(false);
+                    }
                 }
-                else owl.SetActive(false);
-                if (GameManager.instance.gameData.saveData.playerData.collectedWolf)
-                {
-                    wolf.GetComponent<Companion>()._player = _player;
-                    wolf.SetActive(true);
-                }
-                else wolf.SetActive(false);
             }
 
 

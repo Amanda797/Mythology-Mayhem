@@ -72,7 +72,12 @@ public class WeaponSwitcher : MythologyMayhem
 
             if (LeftHandWeapons[currentLeftHandWeapon].name == "GreekMirror3D")
             {
-                if (!gameManager.gameData.collectedMirror) currentLeftHandWeapon++;
+                if (!gameManager.gameData.saveData.playerData.collectedMirror) currentLeftHandWeapon++;
+            }
+
+            if (LeftHandWeapons[currentLeftHandWeapon].name == "TobiasBow")
+            {
+                if (!gameManager.gameData.saveData.playerData.collectedBow) currentLeftHandWeapon++;
             }
 
             //Activate Next Weapon, Deactivate Other Weapons

@@ -52,7 +52,7 @@ public class Companion : MythologyMayhem
         {
             //2D
             //Follow Player            
-            if(rb2D != null)
+            if(rb2D != null && _player != null)
             {
                 Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, gameObject.transform.position.y);
                 rb2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, 2f));

@@ -67,8 +67,8 @@ public class TwoDBow : MonoBehaviour
     {
         pickedUp = true;
 
-        gameManager.gameData.collectedBow = true;
-        gameManager.SaveGame();
+        gameManager.gameData.saveData.playerData.collectedBow = true;
+        gameManager.gameData.saveData.Save();
         if (puzzleManager != null)
         {
             puzzleManager.bowCollected = true;
