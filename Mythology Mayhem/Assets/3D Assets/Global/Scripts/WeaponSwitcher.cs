@@ -21,9 +21,6 @@ public class WeaponSwitcher : MythologyMayhem
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing.");
-
-        if (gameManager.gameData.collectedMirror) LeftHandWeapons[1].SetActive(true);
-        else LeftHandWeapons[1].SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -35,8 +32,12 @@ public class WeaponSwitcher : MythologyMayhem
             if(currentRightHandWeapon + 1 >= RightHandWeapons.Length) currentRightHandWeapon = 0;
             else currentRightHandWeapon++;
 
+            if (RightHandWeapons[currentRightHandWeapon].name == "TobiasBow")
+            {
+                if (!gameManager.gameData.saveData.playerData.collectedBow) currentRightHandWeapon++;
+            }
             //Activate Next Weapon, Deactivate Other Weapons
-            for(int i = 0; i < RightHandWeapons.Length; i++)
+            for (int i = 0; i < RightHandWeapons.Length; i++)
             {
                 if(i == currentRightHandWeapon) RightHandWeapons[i].SetActive(true);
                 else RightHandWeapons[i].SetActive(false);
@@ -73,11 +74,6 @@ public class WeaponSwitcher : MythologyMayhem
             if (LeftHandWeapons[currentLeftHandWeapon].name == "GreekMirror3D")
             {
                 if (!gameManager.gameData.saveData.playerData.collectedMirror) currentLeftHandWeapon++;
-            }
-
-            if (LeftHandWeapons[currentLeftHandWeapon].name == "TobiasBow")
-            {
-                if (!gameManager.gameData.saveData.playerData.collectedBow) currentLeftHandWeapon++;
             }
 
             //Activate Next Weapon, Deactivate Other Weapons
