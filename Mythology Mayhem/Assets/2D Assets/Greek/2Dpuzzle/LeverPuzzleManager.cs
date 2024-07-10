@@ -56,7 +56,7 @@ public class LeverPuzzleManager : MonoBehaviour
                 {
                     for (int i = 0; i < SaveScene.instance.saveData.TwoDLabyrinthLevers.Count; i++) 
                     {
-                        levers[i].LoadState(SaveScene.instance.saveData.TwoDLabyrinthLevers[i]);
+                        //levers[i].LoadState(SaveScene.instance.saveData.TwoDLabyrinthLevers[i]);
                     }
                     mirrorCollected = SaveScene.instance.saveData.collectedMirror;
                     completed = SaveScene.instance.saveData.TwoDLabyrinthCompleted;

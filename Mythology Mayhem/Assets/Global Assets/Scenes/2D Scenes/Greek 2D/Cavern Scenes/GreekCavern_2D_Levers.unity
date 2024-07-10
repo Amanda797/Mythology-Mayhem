@@ -364,7 +364,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2422463305620349422, guid: 3e44bb5b23e1902418a7f223e43b90ae, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2422463305620349422, guid: 3e44bb5b23e1902418a7f223e43b90ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -507,7 +507,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012203874}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &162702750
 PrefabInstance:
@@ -1283,8 +1283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  inRange: 0
   switchOn: 0
+  arrayPos: 0
 --- !u!1 &719968869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7692487075164556626, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -1308,8 +1308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 719968872}
-  inRange: 0
   switchOn: 0
+  arrayPos: 0
 --- !u!1 &838166613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,7 +1339,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012203874}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888253143
 GameObject:
@@ -1423,7 +1423,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012203874}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &894277773 stripped
 GameObject:
@@ -1509,7 +1509,6 @@ Transform:
   - {fileID: 694201513}
   - {fileID: 1825499677}
   - {fileID: 417137842}
-  - {fileID: 2143040802}
   - {fileID: 838166614}
   - {fileID: 888253145}
   - {fileID: 96075812}
@@ -1736,6 +1735,10 @@ MonoBehaviour:
   keyPress: 0
   isActive: 1
   conditions: []
+  countAsLevelComplete: 0
+  completedChapter: 0
+  completedLevel: 0
+  canTransition: 0
 --- !u!1001 &1087078346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1829,8 +1832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1087078354}
-  inRange: 0
   switchOn: 0
+  arrayPos: 9
 --- !u!95 &1087078354 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2139,7 +2142,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012203874}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208276689 stripped
 GameObject:
@@ -2210,8 +2213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1254682753}
-  inRange: 0
   switchOn: 0
+  arrayPos: 8
 --- !u!95 &1254682753 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2235,8 +2238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1295793906}
-  inRange: 0
   switchOn: 0
+  arrayPos: 7
 --- !u!95 &1295793906 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2481,8 +2484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1426302700}
-  inRange: 0
   switchOn: 0
+  arrayPos: 2
 --- !u!95 &1426302700 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2866,8 +2869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1643751810}
-  inRange: 0
   switchOn: 0
+  arrayPos: 6
 --- !u!95 &1643751810 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -2966,8 +2969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1696576948}
-  inRange: 0
   switchOn: 0
+  arrayPos: 4
 --- !u!95 &1696576948 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -3161,6 +3164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825499677}
+  - component: {fileID: 1825499678}
   m_Layer: 0
   m_Name: Levers
   m_TagString: Untagged
@@ -3193,6 +3197,35 @@ Transform:
   m_Father: {fileID: 1012203874}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1825499678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825499676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0ff8c67d41fb4cbc90348ebd72f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lever1: {fileID: 719968869}
+  Lever2: {fileID: 1933163903}
+  Lever3: {fileID: 351487603}
+  Lever4: {fileID: 430584745}
+  Lever5: {fileID: 894277773}
+  Lever6: {fileID: 940307670}
+  Lever7: {fileID: 998689357}
+  Lever8: {fileID: 1295793899}
+  Lever9: {fileID: 1254682746}
+  Lever10: {fileID: 19941324}
+  Door: {fileID: 1208276689}
+  owl: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
+  owlSpawnPos: {fileID: 838166614}
+  owlSpawned: 0
+  resetOwl: 0
+  currentLeverAnswer: 00000000000000000000
+  correctLeverAnswer: 01000100010001000100
 --- !u!4 &1872502283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7692487075164556629, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -3300,8 +3333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1933163910}
-  inRange: 0
   switchOn: 0
+  arrayPos: 1
 --- !u!95 &1933163910 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -3557,7 +3590,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012203874}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2031968964
 PrefabInstance:
@@ -3652,8 +3685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2031968972}
-  inRange: 0
   switchOn: 0
+  arrayPos: 3
 --- !u!95 &2031968972 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -3752,8 +3785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2060959656}
-  inRange: 0
   switchOn: 0
+  arrayPos: 5
 --- !u!95 &2060959656 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692487075164556624, guid: 3be78a4060179e342817f52d0af16709, type: 3}
@@ -4021,65 +4054,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3be78a4060179e342817f52d0af16709, type: 3}
---- !u!1 &2143040800
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2143040802}
-  - component: {fileID: 2143040803}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2143040802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143040800}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -58.16922, y: -0.49089622, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1012203874}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2143040803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143040800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee0ff8c67d41fb4cbc90348ebd72f2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Lever1: {fileID: 719968869}
-  Lever2: {fileID: 1933163903}
-  Lever3: {fileID: 351487603}
-  Lever4: {fileID: 430584745}
-  Lever5: {fileID: 894277773}
-  Lever6: {fileID: 940307670}
-  Lever7: {fileID: 998689357}
-  Lever8: {fileID: 1295793899}
-  Lever9: {fileID: 1254682746}
-  Lever10: {fileID: 19941324}
-  Door: {fileID: 1208276689}
-  owl: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
-  owlSpawnPos: {fileID: 838166614}
-  owlSpawned: 0
-  resetOwl: 0
 --- !u!4 &2044239481668315044
 Transform:
   m_ObjectHideFlags: 0

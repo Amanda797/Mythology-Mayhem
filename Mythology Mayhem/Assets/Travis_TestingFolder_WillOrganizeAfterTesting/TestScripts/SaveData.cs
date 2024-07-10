@@ -368,6 +368,9 @@ public class PlayerData
     public float health;
     public bool[] collectedHearts;
     public bool collectedMirror;
+    public bool collectedBow;
+    public bool collectedOwl;
+    public bool collectedWolf;
 }
 [System.Serializable]
 public class GreekLibrary_2DData 

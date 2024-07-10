@@ -11,7 +11,6 @@ public class LocalGameManager : MythologyMayhem
     public Dimension sceneType;
     public PlayerMovement3D player3D;
     public PlayerController player2D;
-
     public PlayerAttach player;
 
     public Transform sceneOrigin;
