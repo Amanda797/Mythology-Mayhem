@@ -5,28 +5,26 @@ using UnityEngine.InputSystem;
 
 public class CompanionController : MythologyMayhem
 {
+    public LocalGameManager localGameManager;
     public GameplayActions gameActions;
-    [SerializeField] public Companion[] companions;
-    [HideInInspector] public GameObject _player;
+    public Companion[] companions;
+    public GameObject _player;
+    public GameObject owl, wolf;
     int currentCompanion = -1; //-1 equals no companion active
     bool callLock = false;
 
     private void Awake()
     {
         gameActions = new GameplayActions();
-    }
+        Debug.Log("Awake");
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _player = gameObject.GetComponentInParent<Transform>().gameObject;
-
-        foreach(Companion pet in companions)
+        foreach (LocalGameManager lgm in GameObject.FindObjectsOfType<LocalGameManager>())
         {
-            pet._player = _player;
-            pet.transform.position = _player.transform.position;
-            pet.gameObject.SetActive(false);
-        }       
+            if (lgm.inScene.ToString() == gameObject.scene.name)
+            {
+                localGameManager = lgm;
+            }
+        }
     }
 
     private void OnEnable()
@@ -82,6 +80,26 @@ public class CompanionController : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
+        if (_player == null) if (localGameManager.player != null)
+            {
+                _player = localGameManager.player.gameObject;
+                wolf = companions[0].gameObject;
+                owl = companions[1].gameObject;
+                if (GameManager.instance.gameData.saveData.playerData.collectedOwl)
+                {
+                    owl.GetComponent<Companion>()._player = _player;
+                    owl.SetActive(true);
+                }
+                else owl.SetActive(false);
+                if (GameManager.instance.gameData.saveData.playerData.collectedWolf)
+                {
+                    wolf.GetComponent<Companion>()._player = _player;
+                    wolf.SetActive(true);
+                }
+                else wolf.SetActive(false);
+            }
+
+
         if(!callLock)
         {
             if (gameActions.Player.DismissCompanion.IsPressed())

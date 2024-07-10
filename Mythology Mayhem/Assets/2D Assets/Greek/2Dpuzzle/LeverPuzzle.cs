@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LeverPuzzle : MonoBehaviour
 {
     GameManager gameManager;
+    CavernLeverPuzzleManager cavernLeverPuzzleManager;
     public Animator anim;
-
-    public bool inRange = false;
     public bool switchOn = false;
     bool canOpen = false;
+    [SerializeField] int arrayPos = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +24,16 @@ public class LeverPuzzle : MonoBehaviour
         if (GameManager.instance != null) 
         {
             gameManager = GameManager.instance;
-            LoadState(GameManager.instance.gameData.GL2D_Lever);
+
+            //CHECK IF THE PLAYER ALREADY HAS THE OWL. IF SO SET ALL LEVERS TO THE CORRECT POSITION.
         }
         else Debug.LogWarning("GameManager Missing.");
+
+        if (!switchOn) anim.Play("LeverAnim");
+        else anim.Play("LeverOff");
+
+        cavernLeverPuzzleManager = GetComponentInParent<CavernLeverPuzzleManager>();
+
     }
 
     // Update is called once per frame
@@ -40,7 +48,6 @@ public class LeverPuzzle : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             gameManager.Popup("Press E to Pull Lever", true);
-
             canOpen = true;
         }
     }
@@ -50,22 +57,19 @@ public class LeverPuzzle : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             gameManager.Popup("Press E to Pull Lever", false);
-
             canOpen = false;
         }
     }
 
     private void TwoDSwitchOnOff()
     {
-        if (!switchOn) anim.Play("LeverAnim");
+        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeverAnim")) return;
+        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeverOff")) return;
+        if (switchOn) anim.Play("LeverAnim");
         else anim.Play("LeverOff");
         switchOn = !switchOn;
-    }
+        canOpen = false;
 
-    public void LoadState(bool on) 
-    {
-        if (on) anim.Play("LeverAnim");
-        else anim.Play("LeverOff");
-        switchOn = on;
+        cavernLeverPuzzleManager.CheckPuzzel(arrayPos, switchOn);
     }
 }
