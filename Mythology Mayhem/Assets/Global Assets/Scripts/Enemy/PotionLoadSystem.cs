@@ -1,57 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MythologyMayhem;
 
 public class PotionLoadSystem : MythologyMayhem
 {
     public Level currentLevel;
 
     public GameObject[] potions;
-    public int tickClock;
-    public int syncDataTickAmount;
+    bool[] tempPotionData;
     private void Start()
     {
-        tickClock = syncDataTickAmount;
         if (GameManager.instance != null)
         {
-            bool[] tempEnemyData = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Potion);
-            if (tempEnemyData != null)
-            {
-                SyncToLoad(tempEnemyData);
-            }
-        }
-    }
-    public void Update()
-    {
-        tickClock--;
-        if (tickClock <= 0)
-        {
-            SyncToSave();
-            tickClock = syncDataTickAmount;
-        }
-    }
-    public void SyncToLoad(bool[] enemyData)
-    {
-        for (int i = 0; i < enemyData.Length; i++)
-        {
-            if (potions.Length > i)
-            {
-                potions[i].SetActive(enemyData[i]);
-            }
-        }
-    }
-    public void SyncToSave()
-    {
-        bool[] tempPotionData = new bool[potions.Length];
+            tempPotionData = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Potion);
 
+            if (tempPotionData.Length != 0) SyncToLoad(tempPotionData);
+            else
+            {
+                tempPotionData = new bool[potions.Length];
+
+                for (int i = 0; i < tempPotionData.Length; i++)
+                {
+                    potions[i].SetActive(true);
+                    tempPotionData[i] = true;
+                }
+            }
+        }
+    }
+    public void SyncToLoad(bool[] potionData)
+    {
+        for (int i = 0; i < potionData.Length; i++)
+        {
+            potions[i].SetActive(potionData[i]);
+        }
+    }
+    public void SyncToSave(GameObject potion)
+    {
         for (int i = 0; i < potions.Length; i++)
         {
-            tempPotionData[i] = potions[i].activeInHierarchy;
-        }
+            if (potions[i] == potion)
+            {
+                tempPotionData[i] = false;
 
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempPotionData, GameData.BoolArrayType.Potion);
+                GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempPotionData, GameData.BoolArrayType.Potion);
+                return;
+            }
         }
     }
 }
