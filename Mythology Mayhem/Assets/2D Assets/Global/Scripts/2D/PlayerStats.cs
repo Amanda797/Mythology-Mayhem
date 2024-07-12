@@ -182,5 +182,11 @@ public class PlayerStats : MonoBehaviour
         Heal((int)huic.PlayerMaxHealth, false);
         GetComponent<PlayerController>().enabled = true;
         anim.SetBool("IsDead", false);
-    }    
+    }   
+    
+    public void CollectHeart(int amount)
+    {
+        huic.PlayerMaxHealth += amount;
+        huic.UpdateHealth();
+    }
 }
