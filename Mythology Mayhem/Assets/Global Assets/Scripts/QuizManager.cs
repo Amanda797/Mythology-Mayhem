@@ -35,10 +35,7 @@ public class QuizManager : MonoBehaviour
     {
         Time.timeScale = 0;
         Object[] al = GameObject.FindObjectsOfType<AudioListener>();
-        foreach (Object _al in al)
-        {
-            print("Location: " + _al.ToString());
-        }
+
         chosenQuestions = new Questions[3];
 
         currentQuestion = -1;
@@ -200,7 +197,6 @@ public class QuizManager : MonoBehaviour
 
     void LoadMedussa()
     {
-        Debug.Log("LoadMedussa");
         transitionPoint.localGameManager.mainGameManager.TransitionScene(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
     }
 }

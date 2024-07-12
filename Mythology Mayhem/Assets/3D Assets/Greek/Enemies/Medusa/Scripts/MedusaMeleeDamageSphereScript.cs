@@ -28,10 +28,8 @@ public class MedusaMeleeDamageSphereScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        print(other.gameObject.name);
         if (other.tag == "Player")
         {
-            print("Hit Player");
             FPSHealth playerHealth = other.gameObject.GetComponent<FPSHealth>();
             if (playerHealth != null)
             {

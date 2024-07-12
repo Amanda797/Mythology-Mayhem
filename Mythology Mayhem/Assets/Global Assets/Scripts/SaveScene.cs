@@ -60,7 +60,7 @@ public class SaveScene : MonoBehaviour
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
         string sceneObjectsString = JsonUtility.ToJson(saveData, true);
-        print(sceneObjectsString);
+
         //PlayerPrefs.SetString(sceneName, sceneObjectsString);
 
         //write the string in a file

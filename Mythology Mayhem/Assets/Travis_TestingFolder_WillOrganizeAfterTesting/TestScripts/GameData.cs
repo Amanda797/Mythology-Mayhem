@@ -158,7 +158,7 @@ public class GameData : MythologyMayhem
                             spawnerToUse = Level.VikingVillage_2D;
                             return;
 
-                        case Level.None:
+                        case Level.GreekMedusa_3D:
                             print("Start at entrance to 2D Village");
                             startScene = Level.VikingVillage_2D;
                             spawnerToUse = Level.VikingVillage_2D;

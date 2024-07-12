@@ -16,8 +16,12 @@ public class CompanionController : MythologyMayhem
     private void Awake()
     {
         gameActions = new GameplayActions();
-        Debug.Log("Awake");
 
+
+    }
+
+    private void Start()
+    {
         foreach (LocalGameManager lgm in GameObject.FindObjectsOfType<LocalGameManager>())
         {
             if (lgm.inScene.ToString() == gameObject.scene.name)

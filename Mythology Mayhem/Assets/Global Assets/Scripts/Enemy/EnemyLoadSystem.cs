@@ -36,8 +36,6 @@ public class EnemyLoadSystem : MythologyMayhem
     }
     public void SyncToLoad(bool[] enemyData)
     {
-        Debug.Log("enemyData: " + enemyData.Length);
-
         for (int i = 0; i < enemyData.Length; i++)
         {
             enemies[i].GetComponentInChildren<Health>().loadSystem = this;
@@ -46,8 +44,6 @@ public class EnemyLoadSystem : MythologyMayhem
     }
     public void SyncToSave(GameObject enemy)
     {
-        Debug.Log("SyncToSave");
-
         for (int i = 0; i < enemies.Length; i++)
         {
             if (enemies[i] == enemy)
@@ -55,10 +51,6 @@ public class EnemyLoadSystem : MythologyMayhem
                 tempEnemyData[i] = false;
 
                 GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempEnemyData, GameData.BoolArrayType.Enemy);
-
-                bool[] asd = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Enemy);
-                Debug.Log("asd: " + asd.Length);
-                foreach (bool s in asd) Debug.Log(s);
                 return;
             }
         }
