@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class GameManager : MythologyMayhem
 {
@@ -40,6 +41,7 @@ public class GameManager : MythologyMayhem
     public float closeButtonPressTimer;
     public GameObject PressEObj;
     public TextMeshProUGUI PressEText;
+    public GameObject eventSystem;
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
@@ -52,6 +54,8 @@ public class GameManager : MythologyMayhem
     {
         if (instance != null) Destroy(this.gameObject);
         else instance = this;
+
+        if( FindObjectOfType<EventSystem>() == null) eventSystem.SetActive(true);
 
 
 
