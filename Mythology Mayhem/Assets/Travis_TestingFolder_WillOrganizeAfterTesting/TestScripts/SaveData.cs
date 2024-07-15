@@ -283,7 +283,7 @@ public class SaveData
         Debug.Log("Save File");
         string sceneObjectsString = JsonUtility.ToJson(this, true);
 
-        System.IO.File.WriteAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json", sceneObjectsString);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "SaveData.json", sceneObjectsString);
 
         //#if UNITY_EDITOR
         //    UnityEditor.AssetDatabase.Refresh();
@@ -293,14 +293,14 @@ public class SaveData
     public void Delete()
     {
         Debug.Log("Delete Saved File");
-        if (!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json")) return;
-        System.IO.File.Delete(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json");
+        if (!System.IO.File.Exists(Application.persistentDataPath + "SaveData.json")) return;
+        System.IO.File.Delete(Application.persistentDataPath + "SaveData.json");
     }
     public void Load()
     {
-        if (!System.IO.File.Exists(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json")) return;
+        if (!System.IO.File.Exists(Application.persistentDataPath + "SaveData.json")) return;
 
-        string sceneObjectsString = System.IO.File.ReadAllText(Application.dataPath + "/Global Assets/Resources/SceneData/" + "TestSaveSystem" + ".json");
+        string sceneObjectsString = System.IO.File.ReadAllText(Application.persistentDataPath + "SaveData.json");
 
         SaveData loadedData = JsonUtility.FromJson<SaveData>(sceneObjectsString);
         LoadData(loadedData);

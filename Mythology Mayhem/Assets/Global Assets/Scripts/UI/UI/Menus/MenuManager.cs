@@ -172,6 +172,8 @@ public class MenuManager : MonoBehaviour
     public void MainMenu() {
         Time.timeScale = 1;
         GameManager.instance.playerControllers.Clear();
+        GameManager.instance.loadedLocalManagers.Clear();
+        GameManager.instance.inMainMenu = true;
         SceneManager.LoadScene(0);
     }
 }
