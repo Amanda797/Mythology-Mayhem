@@ -18,13 +18,13 @@ public class LocalGameManager : MythologyMayhem
     public Transform[] boundaries;
 
     public Level inScene;
-    [SerializeField] public List<Level> scenesNeeded;
-    [SerializeField] public List<Level> scenesLoadedOnStart;
-    [SerializeField] public List<ProximityLoad> scenesLoadedOnProximity;
-    [SerializeField] public List<SceneTransitionPoint> transitionPoints;
+    public List<Level> scenesNeeded;
+    public List<Level> scenesLoadedOnStart;
+    public List<ProximityLoad> scenesLoadedOnProximity;
+    public List<SceneTransitionPoint> transitionPoints;
     public bool loadNextOnStart;
 
-    [SerializeField] public playerSpawner activePlayerSpawner;
+    public playerSpawner activePlayerSpawner;
     public GameObject playerSpawnerPrefab;
     public GameObject spawnPointPrefab;
     public GameObject sceneTransitionPoint2D;
