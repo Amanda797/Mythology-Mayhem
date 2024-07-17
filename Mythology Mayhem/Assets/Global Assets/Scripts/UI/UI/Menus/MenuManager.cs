@@ -8,7 +8,8 @@ public class MenuManager : MonoBehaviour
         string website = "https://www.google.com/search?q=mythology-mayhem";
 
         [SerializeField] GameObject[] menuPanels;
-        [SerializeField] int pauseBackgroundElement = -1;
+    [SerializeField] GameObject scrollPnl;
+    [SerializeField] int pauseBackgroundElement = -1;
         [SerializeField] int pausePanelElement = -1;
         int sceneIndex;
 
@@ -175,5 +176,12 @@ public class MenuManager : MonoBehaviour
         GameManager.instance.loadedLocalManagers.Clear();
         GameManager.instance.inMainMenu = true;
         SceneManager.LoadScene(0);
+    }
+
+    public void CloseScroll()
+    {
+        Time.timeScale = 1;
+        scrollPnl.SetActive(false);
+
     }
 }
