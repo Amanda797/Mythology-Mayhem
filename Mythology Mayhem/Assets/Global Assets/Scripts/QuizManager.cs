@@ -6,60 +6,55 @@ using System.Reflection;
 
 public class QuizManager : MonoBehaviour
 {
+    GameManager gameManager;
     public SceneTransitionPoint2D transitionPoint;
 
-    [SerializeField] TextMeshProUGUI question;
-    [SerializeField] TextMeshProUGUI answer1;
-    [SerializeField] TextMeshProUGUI answer2;
-    [SerializeField] TextMeshProUGUI answer3;
-    [SerializeField] TextMeshProUGUI answer4;
+    [SerializeField] TMP_Text question;
+    [SerializeField] TMP_Text answer1;
+    [SerializeField] TMP_Text answer2;
+    [SerializeField] TMP_Text answer3;
+    [SerializeField] TMP_Text answer4;
+    [SerializeField] GameObject answer1Obj;
+    [SerializeField] GameObject answer2Obj;
+    [SerializeField] GameObject answer3Obj;
+    [SerializeField] GameObject answer4Obj;
     [SerializeField] Questions[] _AllQuestions;
-    Questions[] chosenQuestions;
+    Questions[] chosenQuestions = new Questions[3];
     [TextArea(3,7)]
     [SerializeField] string introduction;
-    int currentQuestion;
-    int score;
-    bool answered;
-    bool won;
-
+    int currentQuestion = -1;
+    int score = 0;
+    bool answered = false;
+    bool won = false;
+    bool hasMirror = false;
     public PlayerStats playerStats;
 
     [SerializeField] GameObject[] enemy_go;
     [SerializeField] GameObject quizTrigger;
 
-    void Start() {
-
-    }//end start
-
     public void StartQuiz()
     {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
+
+        answer2Obj.SetActive(false);
+        answer3Obj.SetActive(false);
+        answer4Obj.SetActive(false);
+
         Time.timeScale = 0;
-        Object[] al = GameObject.FindObjectsOfType<AudioListener>();
-
-        chosenQuestions = new Questions[3];
-
-        currentQuestion = -1;
-        score = 0;
-        answered = false;
-
-        if (GameManager.instance.gameData.collectedMirror)
+        hasMirror = gameManager.gameData.saveData.playerData.collectedMirror;
+        Debug.Log("hasMirror: " + hasMirror);
+        if (hasMirror)
         {
             question.text = introduction;
             answer1.text = "Begin";
+            RandomQuestions();
         }
         else
         {
             question.text = "You do not have the mirror.\nReturn when you have it to continue.";
             answer1.text = "Close";
-            Time.timeScale = 1;
         }
-        answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-        answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-        answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
-
-        won = false;
-
-        RandomQuestions();
     }
     void DisplayQuestion() {
         if(currentQuestion < chosenQuestions.Length) {
@@ -69,9 +64,9 @@ public class QuizManager : MonoBehaviour
             answer3.text = chosenQuestions[currentQuestion].answers[2];
             answer4.text = chosenQuestions[currentQuestion].answers[3];
 
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);  
+            answer2Obj.SetActive(true);
+            answer3Obj.SetActive(true);
+            answer4Obj.SetActive(true);
         } else {
             answered = true;
         }
@@ -79,11 +74,17 @@ public class QuizManager : MonoBehaviour
     }//end display question
 
     public void AnswerQuestion(int x) {
+        if (!hasMirror)
+        {
+            Time.timeScale = 1;
+            this.gameObject.SetActive(false);
+            return;
+        }
         if (currentQuestion == -1)
         {
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);
+            answer2Obj.SetActive(true);
+            answer3Obj.SetActive(true);
+            answer4Obj.SetActive(true);
             currentQuestion++;
             DisplayQuestion();
         }
@@ -102,9 +103,9 @@ public class QuizManager : MonoBehaviour
                 won = false;
             }
 
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer2Obj.SetActive(false);
+            answer3Obj.SetActive(false);
+            answer4Obj.SetActive(false);
             currentQuestion++;
         } 
         else if(currentQuestion > chosenQuestions.Length)
@@ -150,9 +151,9 @@ public class QuizManager : MonoBehaviour
                 }
 
                 answer1.text = "Continue";
-                answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-                answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-                answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+                answer2Obj.SetActive(false);
+                answer3Obj.SetActive(false);
+                answer4Obj.SetActive(false);
                 answered = true;
             }
             else {
@@ -172,9 +173,9 @@ public class QuizManager : MonoBehaviour
             currentQuestion++;
             DisplayQuestion(); 
         } else {
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer2Obj.SetActive(false);
+            answer3Obj.SetActive(false);
+            answer4Obj.SetActive(false);
         }
     }//end delay movement
 
@@ -193,7 +194,7 @@ public class QuizManager : MonoBehaviour
             }
             while(!satisfied);
         }
-    }//end random questions
+    }
 
     void LoadMedussa()
     {
