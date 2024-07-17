@@ -9,7 +9,8 @@ public class PlayerAttack : MythologyMayhem
     public AnimationClip attackAnim;
     public Attack3D attack3D;
     public float mainHandDamage = 10f;
-
+    bool canAttack = true;
+    [SerializeField] float attackSpeed = .5f;
     public SwordEffectScript effectsScript;
     // Start is called before the first frame update
     void Start()
@@ -23,11 +24,12 @@ public class PlayerAttack : MythologyMayhem
         //Run Tobias Cooldown
         TobiasDamageCooldown();
 
-        if (!playerMovement.frozen)
+        if (!playerMovement.frozen && canAttack)
         {
-            if (Input.GetMouseButtonDown(0) && attack3D.GetIsAttacking() == false)
+            if (Input.GetMouseButtonDown(0) && !attack3D.GetIsAttacking())
             {
-                anim.Play(attackAnim.name);
+                Debug.Log(canAttack);
+                canAttack = false;
 
                 //Store Original Damage
                 float baseDamage = attack3D.damage;
@@ -49,9 +51,18 @@ public class PlayerAttack : MythologyMayhem
         }
         
     }
+    IEnumerator ToggleCanAttack()
+    {
+        anim.Play(attackAnim.name);
+        yield return new WaitForSeconds(attackSpeed);
+        canAttack = true;
+        AttackEnd();
+    }
     public void Attack()
     {
         attack3D.Attack();
+        
+        StartCoroutine(ToggleCanAttack());
     }
     public void AttackEnd()
     {
