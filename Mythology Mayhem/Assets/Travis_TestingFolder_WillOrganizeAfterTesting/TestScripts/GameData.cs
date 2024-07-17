@@ -17,7 +17,8 @@ public class GameData : MythologyMayhem
     public Level spawnerToUse;
     [Header("Player Data")]
     public Character selectedCharacter;
-    public float health;
+    public float curHealth;
+    public float maxHealth;
     public int heartCollectionTotal;
     public bool[] collectedHearts;
     public bool collectedMirror;
@@ -489,15 +490,17 @@ public class GameData : MythologyMayhem
         overrideLoad = false;
         startScene = Level.GreekLibrary_2D;
         spawnerToUse = Level.GreekLibrary_2D;
+        
+        maxHealth = 16;
+        curHealth = 16;
 
-        health = 16;
         collectedHearts = new bool[heartCollectionTotal];
         //GameManager.instance.UpdateCollectedHearts(0, health);
         collectedMirror = false;
 
-        SaveData newData = new SaveData();
-        saveData = newData;
-        newData.GenerateNewData();
+        //SaveData newData = new SaveData();
+        saveData = new SaveData();
+        saveData.GenerateNewData();
         saveData.UpdateData(this);
     }
     public void UpdateLevelComplete(Chapter chapter, Level level) 

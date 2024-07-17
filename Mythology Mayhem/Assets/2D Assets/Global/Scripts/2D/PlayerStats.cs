@@ -40,15 +40,14 @@ public class PlayerStats : MonoBehaviour
         aud = GetComponent<AudioSource>();
         huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
 
+        huic.UpdateHealth();
         if (huic != null) { 
             ps = huic.ps;
             ps.CanAttack = true;
             ps.NextAttackTime = 0;
             //ps.CurrHealth = ps.MaxHealth;
         }
-        else{
-            print("Can't find huic's player stats so");
-        }
+        else Debug.LogWarning("Can't find huic's player stats so");
     }//end on awake
 
     private void Start()
@@ -56,7 +55,6 @@ public class PlayerStats : MonoBehaviour
         spawnPoint = transform.position;
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing");
-
     }
 
     // Update is called once per frame
@@ -124,16 +122,15 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage) 
     {
-        if(ps.CurrHealth > 0)
+        if(gameManager.gameData.saveData.playerData.curHealth > 0)
         {
-            ps.CurrHealth -= Mathf.Abs(damage);
+            gameManager.gameData.saveData.playerData.curHealth = Mathf.Clamp(gameManager.gameData.saveData.playerData.curHealth -= damage, 0, gameManager.gameData.saveData.playerData.maxHealth);
             anim.SetTrigger("Hurt");
-            if(huic != null)
-                huic.PlayerCurrHealth = ps.CurrHealth;
 
-            gameManager.gameData.health = ps.CurrHealth;
+            Debug.Log(huic != null);
+            huic.UpdateHealth();
 
-            if (ps.CurrHealth <= 0)
+            if (gameManager.gameData.saveData.playerData.curHealth <= 0)
             {
                 Die();
             }
@@ -146,25 +143,14 @@ public class PlayerStats : MonoBehaviour
         {
             healSource.Play();
         }
-        if(ps.CurrHealth < ps.MaxHealth)
-        {
-            ps.CurrHealth += Mathf.Abs(heal);
-            if(huic != null)
-                huic.PlayerCurrHealth = ps.CurrHealth;
-        }
-        else if(ps.CurrHealth >= ps.MaxHealth)
-        {
-            ps.CurrHealth = ps.MaxHealth;
-            if(huic != null)
-                huic.PlayerCurrHealth = ps.CurrHealth;
-        }
 
-        gameManager.gameData.health = ps.CurrHealth;
+        gameManager.gameData.saveData.playerData.curHealth = Mathf.Clamp(gameManager.gameData.saveData.playerData.curHealth += heal, 0, gameManager.gameData.saveData.playerData.maxHealth);
+        huic.UpdateHealth();
     }
 
     private void Die()
     {
-        if (ps.CurrHealth <= 0)
+        if (gameManager.gameData.saveData.playerData.curHealth <= 0)
         {
             anim.SetBool("IsDead", true);
             GetComponent<PlayerController>().enabled = false;
@@ -179,14 +165,15 @@ public class PlayerStats : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         transform.position = spawnPoint;
-        Heal((int)huic.PlayerMaxHealth, false);
+        Heal((int)GameManager.instance.gameData.saveData.playerData.maxHealth, false);
         GetComponent<PlayerController>().enabled = true;
         anim.SetBool("IsDead", false);
     }   
     
     public void CollectHeart(int amount)
     {
-        huic.PlayerMaxHealth += amount;
+        GameManager.instance.gameData.saveData.playerData.maxHealth += amount;
+        GameManager.instance.gameData.saveData.playerData.curHealth = GameManager.instance.gameData.saveData.playerData.maxHealth;
         huic.UpdateHealth();
     }
 }

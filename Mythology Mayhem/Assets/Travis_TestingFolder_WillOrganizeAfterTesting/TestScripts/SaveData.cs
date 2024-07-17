@@ -33,7 +33,8 @@ public class SaveData
 
         PlayerData newPlayerData = new PlayerData();
         newPlayerData.selectedCharacter = (int)data.selectedCharacter;
-        newPlayerData.health = data.health;
+        newPlayerData.curHealth = data.curHealth;
+        newPlayerData.maxHealth = data.maxHealth;
         newPlayerData.collectedHearts = data.collectedHearts;
         newPlayerData.collectedMirror = data.collectedMirror;
 
@@ -131,7 +132,8 @@ public class SaveData
         data.highestLevelCompleted = (MythologyMayhem.Level)highestLevel;
 
         data.selectedCharacter = (MythologyMayhem.Character)playerData.selectedCharacter;
-        data.health = playerData.health;
+        data.curHealth = playerData.curHealth;
+        data.maxHealth = playerData.maxHealth;
 
         data.collectedHearts = playerData.collectedHearts;
         int totalHearts = 0;
@@ -365,7 +367,8 @@ public class SettingsData
 public class PlayerData
 {
     public int selectedCharacter;
-    public float health;
+    public float curHealth;
+    public float maxHealth;
     public bool[] collectedHearts;
     public bool collectedMirror;
     public bool collectedBow;
