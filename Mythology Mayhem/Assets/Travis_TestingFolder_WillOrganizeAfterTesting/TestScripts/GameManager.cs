@@ -78,6 +78,11 @@ public class GameManager : MythologyMayhem
             int index = loadedLocalManagers.IndexOf(currentLocalManager);
             TransitionScene(loadedLocalManagers[index + 1].inScene, "");
         }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            int index = loadedLocalManagers.IndexOf(currentLocalManager);
+            TransitionScene(Level.VikingVillage_2D, "");
+        }
         if (!startSceneDebugLoad)
         {
             bool inStartScene = SceneManager.GetSceneByName("StartScene").isLoaded;
@@ -385,9 +390,8 @@ public class GameManager : MythologyMayhem
     {
         if (gameData.saveData == null)
         {
-            SaveData newData = new SaveData();
-            newData.GenerateNewData();
-            gameData.saveData = newData;
+            gameData.saveData = new SaveData();
+            gameData.saveData.GenerateNewData();
 
             gameData.saveData.UpdateData(gameData);
         }
@@ -465,7 +469,7 @@ public class GameManager : MythologyMayhem
         stats.MaxHealth = MaxHealth;
         stats.CurrHealth = curHealth;
 
-        huic.PlayerMaxHealth = MaxHealth;
-        huic.PlayerCurrHealth = curHealth;
+        gameData.saveData.playerData.maxHealth = MaxHealth;
+        gameData.saveData.playerData.curHealth = curHealth;
     }
 }

@@ -1,29 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealingPotion : MonoBehaviour
 {
-    //[SerializeField] private PlayerStats player;
     [SerializeField] bool smallPotion;
     [SerializeField] int healthAmount = 2;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (!smallPotion) healthAmount = 4;
     }
-
     private void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.GetComponent<PlayerStats>() != null)
         {
-            PlayerStats playerStats = other.gameObject.GetComponent<PlayerStats>();
-            PlayerStats_SO ps = playerStats.ps;
-
-            if (ps.CurrHealth < ps.MaxHealth)
+            if (GameManager.instance.gameData.saveData.playerData.curHealth < GameManager.instance.gameData.saveData.playerData.maxHealth)
             {
-                playerStats.Heal(healthAmount, true);
+                other.gameObject.GetComponent<PlayerStats>().Heal(healthAmount, true);
                 gameObject.SetActive(false);
             }
         }  
@@ -33,12 +28,9 @@ public class HealingPotion : MonoBehaviour
     {
         if (other.gameObject.GetComponent<FPSHealth>() != null)
         {
-            FPSHealth fPSHealth = other.gameObject.GetComponent<FPSHealth>();
-            PlayerStats_SO ps = fPSHealth.ps;
-
-            if (ps.CurrHealth < ps.MaxHealth)
+            if (GameManager.instance.gameData.saveData.playerData.curHealth < GameManager.instance.gameData.saveData.playerData.maxHealth)
             {
-                fPSHealth.Heal(healthAmount);
+                other.gameObject.GetComponent<FPSHealth>().Heal(healthAmount, true);
                 gameObject.SetActive(false);
             }
         }

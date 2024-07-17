@@ -7,8 +7,8 @@ public class PlayerHeartState : MonoBehaviour
 {
     //Fields
 
-    [SerializeField] private int _playerMaxHealth;
-    [SerializeField] private int _playerCurrHealth;
+    //[SerializeField] private int _playerMaxHealth;
+    //[SerializeField] private int _playerCurrHealth;
 
     [SerializeField] Image heartPrefab;
     [SerializeField] Transform heartsContainer;
@@ -26,40 +26,40 @@ public class PlayerHeartState : MonoBehaviour
 
     //Properties
 
-    public int PlayerCurrHealth{
-        get {
-           return _playerCurrHealth; 
-        }
-        set {
-            _playerCurrHealth = Mathf.Clamp(value, 0, PlayerMaxHealth);
-            SetHealthBar(PlayerCurrHealth);
-        }
-    }
+    //public int PlayerCurrHealth{
+    //    get {
+    //       return _playerCurrHealth; 
+    //    }
+    //    set {
+    //        _playerCurrHealth = Mathf.Clamp(value, 0, PlayerMaxHealth);
+    //        SetHealthBar(PlayerCurrHealth);
+    //    }
+    //}
 
-    public int PlayerMaxHealth{
-        get {
-            return _playerMaxHealth;
-        }
-        set {
-            _playerMaxHealth = Mathf.Max(0, value);
-            UpdateHealthBarCount(PlayerMaxHealth);
-        }
-    }
+    //public int PlayerMaxHealth{
+    //    get {
+    //        return _playerMaxHealth;
+    //    }
+    //    set {
+    //        _playerMaxHealth = Mathf.Max(0, value);
+    //        UpdateHealthBarCount(PlayerMaxHealth);
+    //    }
+    //}
 
     //Methods
 
-    void Awake() {
-        //ps = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        ps = FindObjectOfType<PlayerStats>();
+    //void Awake() {
+    //    //ps = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+    //    ps = FindObjectOfType<PlayerStats>();
 
-        PlayerCurrHealth = PlayerMaxHealth;
-        PlayerMaxHealth = PlayerMaxHealth;
-    }//end awake
+    //    PlayerCurrHealth = PlayerMaxHealth;
+    //    PlayerMaxHealth = PlayerMaxHealth;
+    //}//end awake
 
-    void OnValidate() {
-        PlayerCurrHealth = PlayerCurrHealth;
-        PlayerMaxHealth = PlayerMaxHealth;
-    }
+    //void OnValidate() {
+    //    PlayerCurrHealth = PlayerCurrHealth;
+    //    PlayerMaxHealth = PlayerMaxHealth;
+    //}
 
     public void SetHealthBar(int health) {
         for (int i = 0; i < hearts.Count; i++)
@@ -134,7 +134,7 @@ public class PlayerHeartState : MonoBehaviour
             {
                 hearts.Add(Instantiate(heartPrefab.gameObject, heartsContainer).GetComponent<Image>());
             }
-            SetHealthBar(PlayerMaxHealth); //Since we added hearts, update heart graphics so the new hearts respect current health value.
+            SetHealthBar(Mathf.CeilToInt(GameManager.instance.gameData.saveData.playerData.maxHealth)); //Since we added hearts, update heart graphics so the new hearts respect current health value.
         }
         else if(maxHealth < heartCount)
         {
@@ -164,7 +164,7 @@ public class PlayerHeartState : MonoBehaviour
             {
                 hearts.Add(Instantiate(heartPrefab.gameObject, heartsContainer).GetComponent<Image>());
             }
-            SetHealthBar(PlayerMaxHealth); //Since we added hearts, update heart graphics so the new hearts respect current health value.
+            SetHealthBar(Mathf.CeilToInt(GameManager.instance.gameData.saveData.playerData.maxHealth)); //Since we added hearts, update heart graphics so the new hearts respect current health value.
         }
         else if (maxHealth < heartCount)
         {
