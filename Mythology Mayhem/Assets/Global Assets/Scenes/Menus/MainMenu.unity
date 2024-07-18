@@ -6569,6 +6569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueButton: {fileID: 997050439}
+  pauseMenu: {fileID: 0}
 --- !u!1 &1617937231
 GameObject:
   m_ObjectHideFlags: 0
@@ -9227,8 +9228,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ToggleOptions
-        m_Mode: 3
+        m_MethodName: ToggleCredits
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9643,7 +9644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f0dd68a7311264793b00f22bea299f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartState: {fileID: 0}
+  heartState: {fileID: 6977167204413748565}
   _heartModes:
   - {fileID: 21300000, guid: cef072df35a8041449c480ffe2f70c5f, type: 3}
   - {fileID: 21300000, guid: eb210f6803b2b10489e9bc3355a60e4b, type: 3}
@@ -9881,7 +9882,7 @@ RectTransform:
   m_Children:
   - {fileID: 1313853120153216293}
   m_Father: {fileID: 1909143444432971069}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10243,11 +10244,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6398990558195649095}
   - {fileID: 2051471343069178705}
+  - {fileID: 6398990558195649095}
   - {fileID: 886332710907315103}
   m_Father: {fileID: 1909143444432971069}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10362,10 +10363,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1313853120348224759}
   - {fileID: 6977167205116289080}
   - {fileID: 1909143443353176240}
   - {fileID: 9200457774544558443}
-  - {fileID: 1313853120348224759}
   m_Father: {fileID: 1137120950566015484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10562,7 +10563,7 @@ RectTransform:
   - {fileID: 2051471343762469057}
   - {fileID: 2134568424}
   m_Father: {fileID: 1909143443353176240}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15849,7 +15850,7 @@ MonoBehaviour:
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ToggleHelp
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17387,7 +17388,7 @@ MonoBehaviour:
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ToggleOptions
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18628,7 +18629,7 @@ MonoBehaviour:
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ToggleOptions
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19053,7 +19054,7 @@ MonoBehaviour:
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ToggleCredits
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19796,7 +19797,7 @@ RectTransform:
   m_Children:
   - {fileID: 6398990556543910713}
   m_Father: {fileID: 1909143443353176240}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -21272,7 +21273,7 @@ MonoBehaviour:
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ToggleHelp
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -21452,8 +21453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380e7593220db8b4e8ac4d308d5a5a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMaxHealth: 0
-  _playerCurrHealth: 0
   heartPrefab: {fileID: 4293092738049461462, guid: 4fd136590d5b7db48b7ed0ff60635915, type: 3}
   heartsContainer: {fileID: 6977167204413748566}
   hearts: []
@@ -21580,7 +21579,7 @@ RectTransform:
   m_Children:
   - {fileID: 6977167204413748566}
   m_Father: {fileID: 1909143444432971069}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -21745,18 +21744,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SaveManager, Assembly-CSharp
-        m_MethodName: Save
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 9200457774544558442}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: MainMenu
@@ -22333,6 +22320,7 @@ MonoBehaviour:
   PressEObj: {fileID: 1313853120153216292}
   PressEText: {fileID: 1313853121152986679}
   eventSystem: {fileID: 1423091924}
+  pauseMenu: {fileID: 6398990558195649094}
   stats: {fileID: 11400000, guid: 3ce03f4a16bd351458bc7c47b3a5ebf1, type: 2}
   gameplayUI: {fileID: 1137120950566015486}
   startSceneDebugLoad: 0
@@ -22440,16 +22428,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c604f53883063534fa82cdc3da57d4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuPanels:
-  - {fileID: 6398990558195649094}
-  - {fileID: 7170446980740982424}
-  - {fileID: 5604919276132966461}
-  - {fileID: 754151132996012142}
-  - {fileID: 6398990556572027266}
+  pauseParent: {fileID: 6398990558195649094}
   scrollPnl: {fileID: 2051471343069178704}
-  pauseBackgroundElement: 0
-  pausePanelElement: 1
-  menuEffectSource: {fileID: 0}
+  pausePnl: {fileID: 7170446980740982424}
+  optionsPnl: {fileID: 5604919276132966461}
+  creditsPnl: {fileID: 754151132996012142}
+  helpPnl: {fileID: 6398990556572027266}
+  menuEffectSource: {fileID: 9200457774544558446}
 --- !u!4 &9200457774544558443
 Transform:
   m_ObjectHideFlags: 0
@@ -22457,13 +22442,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9200457774544558441}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1547.2139, y: 1440.2189, z: 0.061876297}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1909143444432971069}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &9200457774544558446
 AudioSource:
@@ -22585,7 +22570,8 @@ MonoBehaviour:
   startScene: 0
   spawnerToUse: 0
   selectedCharacter: 0
-  health: 16
+  curHealth: 0
+  maxHealth: 0
   heartCollectionTotal: 10
   collectedHearts: 
   collectedMirror: 0
@@ -22624,7 +22610,8 @@ MonoBehaviour:
     highestLevel: 0
     playerData:
       selectedCharacter: 0
-      health: 0
+      curHealth: 0
+      maxHealth: 0
       collectedHearts: 
       collectedMirror: 0
       collectedBow: 0

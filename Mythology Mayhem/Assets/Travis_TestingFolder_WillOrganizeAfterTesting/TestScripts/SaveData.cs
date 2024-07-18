@@ -371,7 +371,9 @@ public class PlayerData
     public float maxHealth;
     public bool[] collectedHearts;
     public bool collectedMirror;
+    public bool collectedCompass;
     public bool collectedBow;
+    public bool collectedHammer;
     public bool collectedOwl;
     public bool collectedWolf;
 }

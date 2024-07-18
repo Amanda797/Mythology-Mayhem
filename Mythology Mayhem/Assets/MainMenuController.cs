@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
 {
     GameManager gameManager;
     [SerializeField] Button continueButton;
+    [SerializeField] GameObject pauseMenu;
 
     private void Start()
     {

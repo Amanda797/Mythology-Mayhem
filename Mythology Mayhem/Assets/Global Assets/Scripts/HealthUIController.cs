@@ -12,7 +12,7 @@ public class HealthUIController : MonoBehaviour
     //private UIDocument _doc;
     //private VisualElement _heartPanel;
     //[SerializeField] private VisualTreeAsset _heartUXML;
-    [SerializeField] private PlayerHeartState heartState;
+    public PlayerHeartState heartState;
     //private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
 
@@ -57,7 +57,6 @@ public class HealthUIController : MonoBehaviour
 
     void Start()
     {
-        heartState = GetComponentInChildren<PlayerHeartState>();
         if (!useShipHealth)
         {
             UpdateHealth();
@@ -71,6 +70,7 @@ public class HealthUIController : MonoBehaviour
 
     public void UpdateHealth()
     {
+        if (!heartState.gameObject.activeSelf) heartState.gameObject.SetActive(true);
         UpdateHealthBarCount(GameManager.instance.gameData.saveData.playerData.maxHealth);
         SetHealthBar(GameManager.instance.gameData.saveData.playerData.curHealth);
     }

@@ -42,6 +42,7 @@ public class GameManager : MythologyMayhem
     public GameObject PressEObj;
     public TextMeshProUGUI PressEText;
     public GameObject eventSystem;
+    public GameObject pauseMenu;
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
@@ -152,6 +153,7 @@ public class GameManager : MythologyMayhem
         checkStart = false;
         checkProx = false;
         checkUnneeded = false;
+        pauseMenu.SetActive(false);
     }
     
     void LoadSystemsUpdate() 
