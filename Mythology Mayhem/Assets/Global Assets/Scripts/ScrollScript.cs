@@ -51,9 +51,11 @@ public class ScrollScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E))
         {
             Time.timeScale = 0;
+            Cursor.visible = true;
             audioSource.Play();
             scrollDisplayText.text = text;
             scrollPanel.SetActive(true);
+            gameManager.Popup("Press E to Read", false);
         }
     }
 

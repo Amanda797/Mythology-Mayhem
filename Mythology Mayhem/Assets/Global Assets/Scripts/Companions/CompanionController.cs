@@ -11,13 +11,12 @@ public class CompanionController : MythologyMayhem
     public GameObject _player;
     public GameObject owl, wolf;
     int currentCompanion = -1; //-1 equals no companion active
+    [SerializeField] int callDelay = 1;
     bool callLock = false;
 
     private void Awake()
     {
         gameActions = new GameplayActions();
-
-
     }
 
     private void Start()
@@ -42,31 +41,31 @@ public class CompanionController : MythologyMayhem
 
     public void CallCompanion()
     {
+        Debug.Log("CallCompanion");
         if(companions.Length >= 1)
         {
             //Disable current companion if set
-            if (currentCompanion != -1)
-            {
-                companions[currentCompanion].gameObject.SetActive(false);
-            }
+            if (currentCompanion != -1) companions[currentCompanion].gameObject.SetActive(false);
 
-            //Iterate Companions
-            if (currentCompanion + 1 == companions.Length)
-            {
-                currentCompanion = 0;
-            }
-            else
-            {
-                currentCompanion++;
-            }
+            if (currentCompanion + 1 >= companions.Length) currentCompanion = 0;
+            else currentCompanion++;
 
-            //Activate next companion
-            companions[currentCompanion].gameObject.SetActive(true);
+            if (companions[currentCompanion].gameObject == owl)
+            {
+                if (GameManager.instance.gameData.saveData.playerData.collectedOwl) companions[currentCompanion].gameObject.SetActive(true);
+                else companions[currentCompanion].gameObject.SetActive(false);
+            }
+            else if (companions[currentCompanion].gameObject == wolf)
+            {
+                if (GameManager.instance.gameData.saveData.playerData.collectedWolf) companions[currentCompanion].gameObject.SetActive(true);
+                else companions[currentCompanion].gameObject.SetActive(false);
+            }
         }
     }
 
     public void DismissCompanion()
     {
+        Debug.Log("DismissCompanion");
         if (companions.Length >= 1)
         {
             companions[currentCompanion].gameObject.SetActive(false);
@@ -76,8 +75,7 @@ public class CompanionController : MythologyMayhem
 
     IEnumerator CallLock(float time)
     {
-        callLock = true;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(callDelay);
         callLock = false;
     }
 
@@ -114,14 +112,14 @@ public class CompanionController : MythologyMayhem
         {
             if (gameActions.Player.DismissCompanion.IsPressed())
             {
-                Debug.Log("Dismiss Companion");
+                callLock = true;
                 DismissCompanion();
 
                 StartCoroutine(CallLock(2f));
             }
             else if (gameActions.Player.CallCompanion.IsPressed())
             {
-                Debug.Log("Call Companion");
+                callLock = true;
                 CallCompanion();
 
                 StartCoroutine(CallLock(2f));
