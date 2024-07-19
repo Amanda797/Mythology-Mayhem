@@ -121,18 +121,27 @@ public class Boar3D : MonoBehaviour
 
     public void Defend()
     {
-        if (defenseTime >= defenseTimer)
-        {
-            enemy.animator.SetBool(defenseBool, false);
-            defenseTime = 0;
-            GetComponent<Health>()._defenseUp = false;
-        }
-        else
-        {
-            enemy.animator.SetBool(defenseBool, true);
-            defenseTime += Time.deltaTime;
-            GetComponent<Health>()._defenseUp = true;
-        }
-    }//end defend
-
+        //if (defenseTime >= defenseTimer)
+        //{
+        //    enemy.animator.SetBool(defenseBool, false);
+        //    defenseTime = 0;
+        //    enemy.health._defenseUp = false;
+        //    enemy.health._attacked = true;
+        //}
+        //else
+        //{
+        //    enemy.animator.SetBool(defenseBool, true);
+        //    defenseTime += Time.deltaTime;
+        //    enemy.health._defenseUp = true;
+        //}
+        if (!enemy.health._defenseUp) StartCoroutine(ToggleDefend());
+    }
+    IEnumerator ToggleDefend()
+    {
+        enemy.animator.SetBool(defenseBool, true);
+        enemy.health._defenseUp = true;
+        yield return new WaitForSeconds(defenseTimer);
+        enemy.animator.SetBool(defenseBool, false);
+        enemy.health._defenseUp = false;
+    }
 }

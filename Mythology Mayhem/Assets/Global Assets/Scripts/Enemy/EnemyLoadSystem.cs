@@ -1,57 +1,58 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MythologyMayhem;
 
 public class EnemyLoadSystem : MythologyMayhem
 {
     public Level currentLevel;
 
     public GameObject[] enemies;
-    public int tickClock;
-    public int syncDataTickAmount;
+    bool[] tempEnemyData;
     private void Start()
     {
-        tickClock = syncDataTickAmount;
-        if (GameManager.instance != null) 
+        if (GameManager.instance != null)
         {
-            bool[] tempEnemyData = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Enemy);
-            if (tempEnemyData != null) 
+            tempEnemyData = GameManager.instance.gameData.FetchBoolArrayData(currentLevel, GameData.BoolArrayType.Enemy);
+
+            if (tempEnemyData.Length != 0) SyncToLoad(tempEnemyData);
+            else
             {
-                SyncToLoad(tempEnemyData);
+                tempEnemyData = new bool[enemies.Length];
+
+                for (int i = 0; i < tempEnemyData.Length; i++)
+                {
+                    enemies[i].SetActive(true);
+                    tempEnemyData[i] = true;
+                }
             }
         }
-    }
-    public void Update()
-    {
-        tickClock--;
-        if (tickClock <= 0) 
-        {
-            SyncToSave();
-            tickClock = syncDataTickAmount;
-        }
-    }
-    public void SyncToLoad(bool[] enemyData) 
-    {
-        for (int i = 0; i < enemyData.Length; i++) 
-        {
-            if (enemies.Length > i) 
-            {
-                enemies[i].SetActive(enemyData[i]);
-            }
-        }
-    }
-    public void SyncToSave() 
-    {
-        bool[] tempEnemyData = new bool[enemies.Length];
 
         for (int i = 0; i < enemies.Length; i++)
         {
-            tempEnemyData[i] = enemies[i].activeInHierarchy;
+            enemies[i].GetComponentInChildren<Health>().loadSystem = this;
         }
-
-        if (GameManager.instance != null) 
+    }
+    public void SyncToLoad(bool[] enemyData)
+    {
+        for (int i = 0; i < enemyData.Length; i++)
         {
-            GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempEnemyData, GameData.BoolArrayType.Enemy);
+            enemies[i].GetComponentInChildren<Health>().loadSystem = this;
+            enemies[i].SetActive(enemyData[i]);
+        }
+    }
+    public void SyncToSave(GameObject enemy)
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] == enemy)
+            {
+                tempEnemyData[i] = false;
+
+                GameManager.instance.gameData.SaveBoolArrayData(currentLevel, tempEnemyData, GameData.BoolArrayType.Enemy);
+                return;
+            }
         }
     }
 }

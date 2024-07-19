@@ -2,48 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Reflection;
 
 public class QuizManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI question;
-    [SerializeField] TextMeshProUGUI answer1;
-    [SerializeField] TextMeshProUGUI answer2;
-    [SerializeField] TextMeshProUGUI answer3;
-    [SerializeField] TextMeshProUGUI answer4;
+    GameManager gameManager;
+    public SceneTransitionPoint2D transitionPoint;
+
+    [SerializeField] TMP_Text question;
+    [SerializeField] TMP_Text answer1;
+    [SerializeField] TMP_Text answer2;
+    [SerializeField] TMP_Text answer3;
+    [SerializeField] TMP_Text answer4;
+    [SerializeField] GameObject answer1Obj;
+    [SerializeField] GameObject answer2Obj;
+    [SerializeField] GameObject answer3Obj;
+    [SerializeField] GameObject answer4Obj;
     [SerializeField] Questions[] _AllQuestions;
-    Questions[] chosenQuestions;
+    Questions[] chosenQuestions = new Questions[3];
     [TextArea(3,7)]
     [SerializeField] string introduction;
-    int currentQuestion;
-    int score;
-    bool answered;
-    bool won;
+    int currentQuestion = -1;
+    int score = 0;
+    bool answered = false;
+    bool won = false;
+    bool hasMirror = false;
+    public PlayerStats playerStats;
 
     [SerializeField] GameObject[] enemy_go;
     [SerializeField] GameObject quizTrigger;
 
-    void Start() {
-        Object[] al = GameObject.FindObjectsOfType<AudioListener>();
-        foreach(Object _al in al) {
-            print("Location: " + _al.ToString());
+    public void StartQuiz()
+    {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
+
+        answer2Obj.SetActive(false);
+        answer3Obj.SetActive(false);
+        answer4Obj.SetActive(false);
+
+        Time.timeScale = 0;
+        hasMirror = gameManager.gameData.saveData.playerData.collectedMirror;
+        Debug.Log("hasMirror: " + hasMirror);
+        if (hasMirror)
+        {
+            question.text = introduction;
+            answer1.text = "Begin";
+            RandomQuestions();
         }
-        chosenQuestions = new Questions[3];
-
-        currentQuestion = -1;
-        score = 0;
-        answered = false;
-
-        question.text = introduction;
-        answer1.text = "Begin";
-        answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-        answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-        answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
-
-        won = false;
-
-        RandomQuestions();
-    }//end start
-
+        else
+        {
+            question.text = "You do not have the mirror.\nReturn when you have it to continue.";
+            answer1.text = "Close";
+        }
+    }
     void DisplayQuestion() {
         if(currentQuestion < chosenQuestions.Length) {
             question.text = chosenQuestions[currentQuestion].questionText;
@@ -52,9 +64,9 @@ public class QuizManager : MonoBehaviour
             answer3.text = chosenQuestions[currentQuestion].answers[2];
             answer4.text = chosenQuestions[currentQuestion].answers[3];
 
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);  
+            answer2Obj.SetActive(true);
+            answer3Obj.SetActive(true);
+            answer4Obj.SetActive(true);
         } else {
             answered = true;
         }
@@ -62,44 +74,65 @@ public class QuizManager : MonoBehaviour
     }//end display question
 
     public void AnswerQuestion(int x) {
-
-        if(currentQuestion == -1) {
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(true);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(true);
+        if (!hasMirror)
+        {
+            Time.timeScale = 1;
+            this.gameObject.SetActive(false);
+            return;
+        }
+        if (currentQuestion == -1)
+        {
+            answer2Obj.SetActive(true);
+            answer3Obj.SetActive(true);
+            answer4Obj.SetActive(true);
             currentQuestion++;
             DisplayQuestion();
-        } else if(currentQuestion == chosenQuestions.Length - 1 & answered) {
+        }
+        else if(currentQuestion == chosenQuestions.Length - 1 & answered)
+        {
             question.text = "Final Score: " + score;
-            if(score >= 2) {                
+
+            if(score >= 2)
+            {
                 answer1.text = "You won! You may pass...";
                 won = true;
-            } else {
+            }
+            else
+            {
                 answer1.text = "You lost and bear a curse!";
                 won = false;
             }
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+
+            answer2Obj.SetActive(false);
+            answer3Obj.SetActive(false);
+            answer4Obj.SetActive(false);
             currentQuestion++;
         } 
-        else if(currentQuestion > chosenQuestions.Length) {
-            if(won) {
-                foreach(GameObject enemy in enemy_go) {
-                    enemy.GetComponent<BoxCollider2D>().enabled = false;
-                    enemy.GetComponent<Enemy>().CanAttack = false;
-                    enemy.GetComponent<Animator>().SetBool("AttackMode", false);
-                }
-            } else {
-                foreach(GameObject enemy in enemy_go) {
-                    enemy.GetComponent<Enemy>().CanAttack = true;
-                    enemy.GetComponent<Animator>().SetBool("AttackMode", true);
+        else if(currentQuestion > chosenQuestions.Length)
+        {
+            if (won)
+            {
+                Time.timeScale = 1;
+                LoadMedussa();
+                return;
+            }
+
+            else // enemies attack the player
+            {
+                foreach (GameObject enemy in enemy_go)
+                {
+                    if (enemy.gameObject.name == "OldLadyFate") enemy.GetComponent<Animator>().Play("OldLadyFate_AttackAnim");
+                    if (enemy.gameObject.name == "YoungLadyFate") enemy.GetComponent<Animator>().Play("YoungFateAttack");
+                    if (enemy.gameObject.name == "MiddleLadyFate") enemy.GetComponent<Animator>().Play("MiddleFateAttack");
+
                 }
             }
 
-            quizTrigger.GetComponent<QuizTrigger>().shrinking = true;
-
-            Destroy(this.gameObject);
+            //quizTrigger.GetComponent<QuizTrigger>().shrinking = true;
+            playerStats.TakeDamage(10);
+            LoadMedussa();
+            Time.timeScale = 1;
+            this.gameObject.SetActive(false);
         }
         else {
             if(!answered) {
@@ -118,9 +151,9 @@ public class QuizManager : MonoBehaviour
                 }
 
                 answer1.text = "Continue";
-                answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-                answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-                answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+                answer2Obj.SetActive(false);
+                answer3Obj.SetActive(false);
+                answer4Obj.SetActive(false);
                 answered = true;
             }
             else {
@@ -140,9 +173,9 @@ public class QuizManager : MonoBehaviour
             currentQuestion++;
             DisplayQuestion(); 
         } else {
-            answer2.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer3.gameObject.transform.parent.transform.gameObject.SetActive(false);
-            answer4.gameObject.transform.parent.transform.gameObject.SetActive(false);
+            answer2Obj.SetActive(false);
+            answer3Obj.SetActive(false);
+            answer4Obj.SetActive(false);
         }
     }//end delay movement
 
@@ -161,7 +194,11 @@ public class QuizManager : MonoBehaviour
             }
             while(!satisfied);
         }
-    }//end random questions
-    
+    }
+
+    void LoadMedussa()
+    {
+        transitionPoint.localGameManager.mainGameManager.TransitionScene(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
+    }
 }
 

@@ -1,39 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealingPotion : MonoBehaviour
 {
-    //[SerializeField] private PlayerStats player;
-    [SerializeField] private bool smallPotion;
+    [SerializeField] bool smallPotion;
+    [SerializeField] int healthAmount = 2;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        //player = FindObjectOfType<PlayerStats>();
+        if (!smallPotion) healthAmount = 4;
     }
-
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.layer == 3)
+        if (other.gameObject.GetComponent<PlayerStats>() != null)
         {
-            if (smallPotion) 
-                other.gameObject.GetComponent<PlayerStats>().Heal(2, true);
-            else
-                other.gameObject.GetComponent<PlayerStats>().Heal(4, true);
-            gameObject.SetActive(false);
+            if (GameManager.instance.gameData.saveData.playerData.curHealth < GameManager.instance.gameData.saveData.playerData.maxHealth)
+            {
+                other.gameObject.GetComponent<PlayerStats>().Heal(healthAmount, true);
+                gameObject.SetActive(false);
+            }
         }  
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3)
+        if (other.gameObject.GetComponent<FPSHealth>() != null)
         {
-            if (smallPotion) 
-                other.gameObject.GetComponent<FPSHealth>().Heal(2);
-            else
-                other.gameObject.GetComponent<FPSHealth>().Heal(4);
-            gameObject.SetActive(false);
-        }  
+            if (GameManager.instance.gameData.saveData.playerData.curHealth < GameManager.instance.gameData.saveData.playerData.maxHealth)
+            {
+                other.gameObject.GetComponent<FPSHealth>().Heal(healthAmount, true);
+                gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class CompanionController : MythologyMayhem
 {
+    public LocalGameManager localGameManager;
     public GameplayActions gameActions;
-    [SerializeField] public Companion[] companions;
-    [HideInInspector] public GameObject _player;
+    public Companion[] companions;
+    public GameObject _player;
+    public GameObject owl, wolf;
     int currentCompanion = -1; //-1 equals no companion active
+    [SerializeField] int callDelay = 1;
     bool callLock = false;
 
     private void Awake()
@@ -16,17 +19,15 @@ public class CompanionController : MythologyMayhem
         gameActions = new GameplayActions();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _player = gameObject.GetComponentInParent<Transform>().gameObject;
-
-        foreach(Companion pet in companions)
+        foreach (LocalGameManager lgm in GameObject.FindObjectsOfType<LocalGameManager>())
         {
-            pet._player = _player;
-            pet.transform.position = _player.transform.position;
-            pet.gameObject.SetActive(false);
-        }       
+            if (lgm.inScene.ToString() == gameObject.scene.name)
+            {
+                localGameManager = lgm;
+            }
+        }
     }
 
     private void OnEnable()
@@ -40,31 +41,31 @@ public class CompanionController : MythologyMayhem
 
     public void CallCompanion()
     {
+        Debug.Log("CallCompanion");
         if(companions.Length >= 1)
         {
             //Disable current companion if set
-            if (currentCompanion != -1)
-            {
-                companions[currentCompanion].gameObject.SetActive(false);
-            }
+            if (currentCompanion != -1) companions[currentCompanion].gameObject.SetActive(false);
 
-            //Iterate Companions
-            if (currentCompanion + 1 == companions.Length)
-            {
-                currentCompanion = 0;
-            }
-            else
-            {
-                currentCompanion++;
-            }
+            if (currentCompanion + 1 >= companions.Length) currentCompanion = 0;
+            else currentCompanion++;
 
-            //Activate next companion
-            companions[currentCompanion].gameObject.SetActive(true);
+            if (companions[currentCompanion].gameObject == owl)
+            {
+                if (GameManager.instance.gameData.saveData.playerData.collectedOwl) companions[currentCompanion].gameObject.SetActive(true);
+                else companions[currentCompanion].gameObject.SetActive(false);
+            }
+            else if (companions[currentCompanion].gameObject == wolf)
+            {
+                if (GameManager.instance.gameData.saveData.playerData.collectedWolf) companions[currentCompanion].gameObject.SetActive(true);
+                else companions[currentCompanion].gameObject.SetActive(false);
+            }
         }
     }
 
     public void DismissCompanion()
     {
+        Debug.Log("DismissCompanion");
         if (companions.Length >= 1)
         {
             companions[currentCompanion].gameObject.SetActive(false);
@@ -74,26 +75,51 @@ public class CompanionController : MythologyMayhem
 
     IEnumerator CallLock(float time)
     {
-        callLock = true;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(callDelay);
         callLock = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_player == null && localGameManager.player != null)
+            {
+                _player = localGameManager.player.gameObject;
+                if (companions.Length > 0)
+                {
+                    foreach (var companion in companions)
+                    {
+                        if (companion.name.Contains("Owl")) owl = companion.gameObject;
+                        if (companion.name.Contains("Wolf")) wolf = companion.gameObject;
+                    }
+                    if (owl != null)
+                    {
+                        owl.SetActive(true);
+                        owl.GetComponent<Companion>()._player = _player;
+                        if (!GameManager.instance.gameData.saveData.playerData.collectedOwl) owl.SetActive(false);
+                    }
+                    if (wolf != null)
+                    {
+                        wolf.SetActive(true);
+                        wolf.GetComponent<Companion>()._player = _player;
+                        if (!GameManager.instance.gameData.saveData.playerData.collectedWolf) wolf.SetActive(false);
+                    }
+                }
+            }
+
+
         if(!callLock)
         {
             if (gameActions.Player.DismissCompanion.IsPressed())
             {
-                Debug.Log("Dismiss Companion");
+                callLock = true;
                 DismissCompanion();
 
                 StartCoroutine(CallLock(2f));
             }
             else if (gameActions.Player.CallCompanion.IsPressed())
             {
-                Debug.Log("Call Companion");
+                callLock = true;
                 CallCompanion();
 
                 StartCoroutine(CallLock(2f));

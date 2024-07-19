@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 5b8a1e6edf07b5d4297d2a17b1b71962, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 485d3f3d3aca6b04486ae238017c1cf6, type: 2}
 --- !u!1 &90544474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 2
 --- !u!1001 &91527475
@@ -219,6 +219,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.0087
       objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1895071795}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: doorGem
       value: Gem-Green-Teardrop
@@ -583,6 +587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2337726971492964521, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+      propertyPath: nextSceneName
+      value: GreekAthens_2D
+      objectReference: {fileID: 0}
     - target: {fileID: 2337726971492964526, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
       propertyPath: m_Name
       value: PedstalPuzzleManager
@@ -594,6 +602,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2337726971492964520, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
   m_PrefabInstance: {fileID: 390860008}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &390860010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2337726971492964521, guid: e716eaa1c95e0be409efd4a6b452b865, type: 3}
+  m_PrefabInstance: {fileID: 390860008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bde20483c447504c97c47820597f936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &429499509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6091051967339103169, guid: 6aaa337f6bc304744a9fb58532ee3540, type: 3}
@@ -638,9 +657,55 @@ Transform:
   - {fileID: 830208419}
   - {fileID: 1980298110}
   - {fileID: 734616742}
+  - {fileID: 460883785}
   m_Father: {fileID: 2071059264}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &460883784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 460883785}
+  - component: {fileID: 460883786}
+  m_Layer: 0
+  m_Name: StairCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &460883785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460883784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32.4, y: 29.8, z: -89.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 452387114}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &460883786
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460883784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.635376, y: 2.46447, z: 6.814808}
+  m_Center: {x: 0.58148193, y: -0.73223495, z: 0.66762733}
 --- !u!4 &499433757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1756698599364924302, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
@@ -1031,6 +1096,7 @@ MonoBehaviour:
   countAsLevelComplete: 0
   completedChapter: 0
   completedLevel: 0
+  canTransition: 0
 --- !u!1 &599319387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
@@ -2419,12 +2485,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2432,11 +2510,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2460,7 +2538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2469,7 +2547,31 @@ PrefabInstance:
     - target: {fileID: 3300000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4493585093827132993, guid: ab7c8984975cba44585dedc0a4232f31, type: 3}
+      objectReference: {fileID: -834929261871316720, guid: e4a5494150b2c21458447ac2cb67119a, type: 3}
+    - target: {fileID: 883910150, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.10407295
+      objectReference: {fileID: 0}
+    - target: {fileID: 883910150, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.13747048
+      objectReference: {fileID: 0}
+    - target: {fileID: 883910150, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.1130812
+      objectReference: {fileID: 0}
+    - target: {fileID: 883910150, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.002217992
+      objectReference: {fileID: 0}
+    - target: {fileID: 883910150, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_Center.y
+      value: -0.015270052
+      objectReference: {fileID: 0}
+    - target: {fileID: 883910150, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
+      propertyPath: m_Center.z
+      value: -0.0047082487
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f5076e303d06e049bcc839eb0c2be9b, type: 3}
 --- !u!33 &872873984
@@ -80573,6 +80675,7 @@ MonoBehaviour:
   countAsLevelComplete: 0
   completedChapter: 0
   completedLevel: 0
+  canTransition: 0
 --- !u!95 &883272020
 Animator:
   serializedVersion: 4
@@ -80610,7 +80713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 0
 --- !u!1 &884387364
@@ -80643,6 +80746,7 @@ Transform:
   m_Children:
   - {fileID: 1894980627}
   - {fileID: 1608591799}
+  - {fileID: 1908879761}
   m_Father: {fileID: 2071059264}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81041,6 +81145,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.0074954703
       objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1908879762}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: doorGem
       value: Gem-Orange-Diamond
@@ -81486,6 +81594,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1608955287}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -82920,6 +83032,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1608955287}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -82951,7 +83067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 1
 --- !u!65 &1834357950
@@ -83025,16 +83141,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842489199}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b16713260ef1044685cca530e9261cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadScene: 0
   saveData:
     TwoDLabyrinthCompleted: 0
     collectedMirror: 0
     TwoDLabyrinthLevers: 
+  LoadScene: 0
   Loaded: 0
 --- !u!4 &1842489201
 Transform:
@@ -83605,6 +83721,73 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1908879760
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 884387365}
+    m_Modifications:
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 102.04293
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9016573
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37227058
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304417138347365411, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+      propertyPath: m_Name
+      value: Gem-Orange-Diamond
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+--- !u!4 &1908879761 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2304417138347329539, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+  m_PrefabInstance: {fileID: 1908879760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1908879762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2304417138347365411, guid: 9f6aebf51e8a29447b577f7960fce7f7, type: 3}
+  m_PrefabInstance: {fileID: 1908879760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1980298106
 GameObject:
   m_ObjectHideFlags: 0
@@ -84136,6 +84319,7 @@ MonoBehaviour:
   countAsLevelComplete: 0
   completedChapter: 0
   completedLevel: 0
+  canTransition: 0
 --- !u!64 &2089879807
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -84177,7 +84361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a0b9f29e6de7458640938d5f8f998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleManager: {fileID: 0}
+  puzzleManager: {fileID: 390860010}
   itemTransfer: {fileID: 11400000, guid: c461bab2e01acd24c861bc7f2fa95800, type: 2}
   item: 3
 --- !u!4 &2112257695 stripped

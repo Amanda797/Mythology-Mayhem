@@ -17,10 +17,12 @@ public class GameData : MythologyMayhem
     public Level spawnerToUse;
     [Header("Player Data")]
     public Character selectedCharacter;
-    public float health;
+    public float curHealth;
+    public float maxHealth;
     public int heartCollectionTotal;
     public bool[] collectedHearts;
     public bool collectedMirror;
+    public bool collectedBow;
     [Header("Main Menu")]
     public float masterVolume;
     public float musicVolume;
@@ -29,8 +31,8 @@ public class GameData : MythologyMayhem
     [Header("Level Data")]
     public bool[] GL2D_Enemies;
     public bool[] GL2D_Potions;
-    public SaveDataBool GL2D_Lever;
-    public SaveDataPosition GL2D_Pillar;
+    //public SaveDataBool GL2D_Lever;
+    //public SaveDataPosition GL2D_Pillar;
     public bool[] GL3D_Enemies;
     public bool[] GL3D_Potions;
     public bool[] GA2D_Enemies;
@@ -63,17 +65,6 @@ public class GameData : MythologyMayhem
 
     [Header("Save Data")]
     public SaveData saveData;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SetStartScene(bool overrideLoad) 
     {
         if (!overrideLoad)
@@ -168,7 +159,7 @@ public class GameData : MythologyMayhem
                             spawnerToUse = Level.VikingVillage_2D;
                             return;
 
-                        case Level.None:
+                        case Level.GreekMedusa_3D:
                             print("Start at entrance to 2D Village");
                             startScene = Level.VikingVillage_2D;
                             spawnerToUse = Level.VikingVillage_2D;
@@ -244,7 +235,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GL2D_Enemies = boolArrayData;
+                        saveData.GL2D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GL2D_Potions = boolArrayData;
@@ -255,7 +246,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GL3D_Enemies = boolArrayData;
+                        saveData.GL3D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GL3D_Potions = boolArrayData;
@@ -266,7 +257,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GA2D_Enemies = boolArrayData;
+                        saveData.GA2D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GA2D_Potions = boolArrayData;
@@ -277,7 +268,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GC2D_Enemies = boolArrayData;
+                        saveData.GA2D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GC2D_Potions = boolArrayData;
@@ -288,7 +279,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GC2DL_Enemies = boolArrayData;
+                        saveData.GC2DL.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GC2DL_Potions = boolArrayData;
@@ -299,7 +290,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GC2DS_Enemies = boolArrayData;
+                        saveData.GC2DS.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GC2DS_Potions = boolArrayData;
@@ -310,7 +301,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GLa3D_Enemies = boolArrayData;
+                        saveData.GLa3D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GLa3D_Potions = boolArrayData;
@@ -321,7 +312,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GLa2DL_Enemies = boolArrayData;
+                        saveData.GLa2DL.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GLa2DL_Potions = boolArrayData;
@@ -332,7 +323,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GLa2DP_Enemies = boolArrayData;
+                        saveData.GLa2DP.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GLa2DP_Potions = boolArrayData;
@@ -343,7 +334,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        GM3D_Enemies = boolArrayData;
+                        saveData.GM3D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         GM3D_Potions = boolArrayData;
@@ -354,7 +345,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        VV2D_Enemies = boolArrayData;
+                        saveData.VV2D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         VV2D_Potions = boolArrayData;
@@ -365,7 +356,7 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        VV3D_Enemies = boolArrayData;
+                        saveData.VV3D.enemyData = boolArrayData;
                         break;
                     case BoolArrayType.Potion:
                         VV3D_Potions = boolArrayData;
@@ -373,6 +364,7 @@ public class GameData : MythologyMayhem
                 }
                 break;
         }
+        saveData.Save();
     }
     public bool[] FetchBoolArrayData(Level whichLevel, BoolArrayType type)
     {
@@ -382,108 +374,108 @@ public class GameData : MythologyMayhem
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GL2D_Enemies;
+                        return saveData.GL2D.enemyData;
                     case BoolArrayType.Potion:
-                        return GL2D_Potions;
+                        return saveData.GL2D.poitionData;
                 }
                 break;
             case Level.GreekLibrary_3D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GL3D_Enemies;
+                        return saveData.GL3D.enemyData;
                     case BoolArrayType.Potion:
-                        return GL3D_Potions;
+                        return saveData.GL3D.poitionData;
                 }
                 break;
             case Level.GreekAthens_2D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GA2D_Enemies;
+                        return saveData.GA2D.enemyData;
                     case BoolArrayType.Potion:
-                        return GA2D_Potions;
+                        return saveData.GA2D.poitionData;
                 }
                 break;
             case Level.GreekCavern_2D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GC2D_Enemies;
+                        return saveData.GC2D.enemyData;
                     case BoolArrayType.Potion:
-                        return GC2D_Potions;
+                        return saveData.GC2D.poitionData;
                 }
                 break;
             case Level.GreekCavern_2D_Levers:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GC2DL_Enemies;
+                        return saveData.GC2DL.enemyData;
                     case BoolArrayType.Potion:
-                        return GC2DL_Potions;
+                        return saveData.GC2DL.poitionData;
                 }
                 break;
             case Level.GreekCavern_2D_Statues:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GC2DS_Enemies;
+                        return saveData.GC2DS.enemyData;
                     case BoolArrayType.Potion:
-                        return GC2DS_Potions;
+                        return saveData.GC2DS.poitionData;
                 }
                 break;
             case Level.GreekLabyrinth_3D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GLa3D_Enemies;
+                        return saveData.GLa3D.enemyData;
                     case BoolArrayType.Potion:
-                        return GLa3D_Potions;
+                        return saveData.GLa3D.poitionData;
                 }
                 break;
             case Level.GreekLabyrinth_2D_Levers:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GLa2DL_Enemies;
+                        return saveData.GLa2DL.enemyData;
                     case BoolArrayType.Potion:
-                        return GLa2DL_Potions;
+                        return saveData.GLa2DL.poitionData;
                 }
                 break;
             case Level.GreekLabyrinth_2D_Pedastals:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GLa2DP_Enemies;
+                        return saveData.GLa2DP.enemyData;
                     case BoolArrayType.Potion:
-                        return GLa2DP_Potions;
+                        return saveData.GLa2DP.poitionData;
                 }
                 break;
             case Level.GreekMedusa_3D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return GM3D_Enemies;
+                        return saveData.GM3D.enemyData;
                     case BoolArrayType.Potion:
-                        return GM3D_Potions;
+                        return saveData.GM3D.poitionData;
                 }
                 break;
             case Level.VikingVillage_2D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return VV2D_Enemies;
+                        return saveData.VV2D.enemyData;
                     case BoolArrayType.Potion:
-                        return VV2D_Potions;
+                        return saveData.VV2D.poitionData;
                 }
                 break;
             case Level.VikingVillage_3D:
                 switch (type)
                 {
                     case BoolArrayType.Enemy:
-                        return VV3D_Enemies;
+                        return saveData.VV3D.enemyData;
                     case BoolArrayType.Potion:
-                        return VV3D_Potions;
+                        return saveData.VV3D.poitionData;
                 }
                 break;
         }
@@ -491,21 +483,24 @@ public class GameData : MythologyMayhem
     }
     public void NewGame()
     {
+        saveData.Delete();
         highestChapterCompleted = Chapter.None;
         highestLevelCompleted = Level.None;
 
         overrideLoad = false;
         startScene = Level.GreekLibrary_2D;
         spawnerToUse = Level.GreekLibrary_2D;
+        
+        maxHealth = 16;
+        curHealth = 16;
 
-        health = 16;
         collectedHearts = new bool[heartCollectionTotal];
         //GameManager.instance.UpdateCollectedHearts(0, health);
         collectedMirror = false;
 
-        SaveData newData = new SaveData();
-        newData.GenerateNewData();
-        saveData = newData;
+        //SaveData newData = new SaveData();
+        saveData = new SaveData();
+        saveData.GenerateNewData();
         saveData.UpdateData(this);
     }
     public void UpdateLevelComplete(Chapter chapter, Level level) 

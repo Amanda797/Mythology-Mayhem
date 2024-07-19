@@ -4,75 +4,82 @@ using UnityEngine;
 
 public class StatueWeapon : MonoBehaviour
 {
-    public StatuePuzzle statueManager;
-    public int weaponElement;
-    private SpriteRenderer weaponSprite;
-    
+    GameManager gameManager;
+    [SerializeField] StatuePuzzle statueManager;
+    [SerializeField] GameObject player;
+    [SerializeField] bool isPlaced = false;
+    [SerializeField] bool canPickUp = false;
+    public bool inHand = false;
+    [SerializeField] bool nearStatue = false;
+    [SerializeField] bool nearWeapon = false;
+    public enum Weapon
+    {
+        Shield,
+        Bow,
+        Hammer,
+        Sword,
+        Spear,
+        Null
+    }
+    public Weapon weapon = Weapon.Bow;
 
-    private Transform player;
-
-    public float interactDistance;
-    private bool pickedUp = false; 
-
-    public bool deBugStatueWeaponReset = false;
-
-    // Start is called before the first frame update
     void Start()
     {
-        weaponSprite = GetComponent<SpriteRenderer>();
-        var playerObjects = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (var playerObject in playerObjects)
-        {
-            if (playerObject.GetComponent<Rigidbody2D>())
-            {
-                player = playerObject.transform;
-                break;
-            }
-        }
-
-        if(deBugStatueWeaponReset)
-        {
-            PlayerPrefs.SetInt("carriedWeapon", 0);
-        }
-
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing.");
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, player.position) < interactDistance && !pickedUp)
-        {
-            Debug.Log("Player in Range");
-
-            if(Input.GetKeyDown(KeyCode.E)) //&& PlayerPrefs.GetInt("carriedWeapon") == 0)
-            {
-                PlayerPrefs.SetInt("carriedWeapon", weaponElement + 1);
-            }
-        }
+        if (inHand && !nearStatue) if (Input.GetKeyUp(KeyCode.E)) DropWeapon();
+        if (canPickUp && !isPlaced) if (Input.GetKeyUp(KeyCode.E)) PickUPWeapon();
+    }
+    void PickUPWeapon()
+    {
+        transform.parent = player.transform;
+        statueManager.currentWeapon = weapon;
+        statueManager.currentWeaponObject = this.gameObject;
+        inHand = true;
     }
 
-    void LateUpdate()
+    void DropWeapon()
     {
-        for (int i = 0; i < statueManager.statues.Count; i++)
+        if (nearWeapon) return;
+        transform.parent = null;
+        statueManager.currentWeapon = Weapon.Null;
+        statueManager.currentWeaponObject = null;
+        inHand = false;
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
         {
-            string statueWeaponCheck = "statueWeapon" + i;
-            pickedUp = PlayerPrefs.GetInt("carriedWeapon") == weaponElement + 1 || PlayerPrefs.GetInt(statueWeaponCheck) == weaponElement + 1;
-            if(pickedUp)
-            {
-                break;
-            }
-        }
+            player = other.gameObject;
+            string popupMessage = "";
 
-        if(pickedUp)
-        {
-            transform.GetComponent<SpriteRenderer>().enabled = false;
-            transform.GetComponent<Collider2D>().enabled = false;
+            // if the player is not holding a weapon
+            if (statueManager.currentWeapon == Weapon.Null)
+            {
+                popupMessage = "Pickup " + weapon.ToString();
+                canPickUp = true;
+            }
+            else
+            {
+                popupMessage = "Place or Drop " + statueManager.currentWeapon.ToString() + " first.";
+                canPickUp = false;
+            }
+            gameManager.Popup(popupMessage, true);
         }
-        else
+        else if (other.gameObject.tag == "StatueBody") nearStatue = true;
+        else if (other.gameObject.tag == "StatueWeapon") nearWeapon = true;
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
         {
-            transform.GetComponent<SpriteRenderer>().enabled = true;
-            transform.GetComponent<Collider2D>().enabled = true;
+            gameManager.Popup("", false);
+            canPickUp = false;
         }
+        else if (other.gameObject.tag == "StatueBody") nearStatue = false;
+        else if (other.gameObject.tag == "StatueWeapon") nearWeapon = false;
     }
 }

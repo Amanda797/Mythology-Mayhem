@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MythologyMayhem;
 
 public class Health : MonoBehaviour
 {
@@ -24,11 +25,12 @@ public class Health : MonoBehaviour
 
     public bool _attacked = false;
     public bool _defenseUp = false;
-    [HideInInspector]
     public float _defenseTimer = 0f;
 
     public float respawnTimer = 50f;
     public bool canRespawn = false;
+
+    public EnemyLoadSystem loadSystem;
 
     // --------------------------
     // ***METHODS***
@@ -58,25 +60,24 @@ public class Health : MonoBehaviour
         SetHealth(_respawnHealth);
     }//end respawn
 
-    public void TakeDamage(float d) {
+    public void TakeDamage(float d)
+    {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
-        if(!_attacked && !_defenseUp)
+        if (!_attacked && !_defenseUp)
         {
             if (gameObject.tag == "Enemy")
             {
-                if (enemy != null)
-                {
-                    enemy.PlaySound(Enemy.Soundtype.Hurt);
-                }
-                if (anim != null)
-                {
-                    anim.SetTrigger(hurtTrigger);
-                }
+                if (enemy != null) enemy.PlaySound(Enemy.Soundtype.Hurt);
+                else Debug.LogWarning("enemy is null");
+
+                if (anim != null) anim.SetTrigger(hurtTrigger);
+                else Debug.LogWarning("anim is null");
 
                 StartCoroutine(Attacked());
             }
 
             Life -= d;
+            if (Life <= 0) Death();
         }        
     }//end take damage
 
@@ -97,7 +98,7 @@ public class Health : MonoBehaviour
         if(GetHealth() <= 0 && Life != -1000) {
             //Lock Death() from being called again
             Life = -1000;
-
+            if (loadSystem != null) loadSystem.SyncToSave(this.gameObject.transform.parent.gameObject);
             //Trigger Death sounds and animations
             if (enemy != null)
             {
@@ -132,28 +133,21 @@ public class Health : MonoBehaviour
     }//end death
 
     public void Death(float time) {
-        if(GetHealth() <= 0) {
+        if(GetHealth() <= 0)
+        {
             if(gameObject.tag == "Enemy")
             {
-                if (enemy != null)
-                {
-                    enemy.PlaySound(Enemy.Soundtype.Death);
-                }
-                if (anim != null)
-                    anim.SetTrigger(deathTrigger);
-                if(gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
-                {
-                    gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                } else
-                {
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                }
+                if (enemy != null) enemy.PlaySound(Enemy.Soundtype.Death);
+                if (anim != null) anim.SetTrigger(deathTrigger);
+                if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD) gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                else gameObject.GetComponent<Rigidbody>().isKinematic = true;
             }
 
-            foreach (Behaviour component in components)
-            {
-                component.enabled = false;
-            }
+            //foreach (Behaviour component in components)
+            //{
+            //    component.enabled = false;
+            //}
+
             StartCoroutine(DeathTimer(time));
         }//check that health is really less than 0 when called        
     }//end death
@@ -167,6 +161,7 @@ public class Health : MonoBehaviour
             GameObject reward = Instantiate(rewardObject, transform.position + Vector3.up*3, transform.rotation);
             reward.name = rewardObject.name;
         }
+
         mainObject.SetActive(false);
 
         if(mainObject.CompareTag("Companion"))

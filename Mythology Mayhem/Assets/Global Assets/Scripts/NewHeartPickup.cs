@@ -27,15 +27,16 @@ public class NewHeartPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
        if(!collected && other.tag == "Player") {
-            other.GetComponent<PlayerStats>().huic.PlayerMaxHealth = other.GetComponent<PlayerStats>().huic.PlayerCurrHealth + 4;
+            other.GetComponent<PlayerStats>().CollectHeart(4);
             collected = true;
             gameObject.SetActive(false);
        }
     }//end on trigger enter 2d
 
     private void OnTriggerEnter(Collider other) {
-       if(!collected && other.tag == "Player") {
-            other.GetComponent<PlayerStats>().huic.PlayerMaxHealth = other.GetComponent<PlayerStats>().huic.PlayerCurrHealth + 4;
+       if(!collected && other.tag == "Player")
+        {
+            other.GetComponent<PlayerStats>().CollectHeart(4);
             collected = true;
             gameObject.SetActive(false);
        }

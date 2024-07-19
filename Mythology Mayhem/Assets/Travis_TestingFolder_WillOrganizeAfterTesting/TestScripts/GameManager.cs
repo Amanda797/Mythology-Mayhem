@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class GameManager : MythologyMayhem
 {
@@ -40,6 +41,8 @@ public class GameManager : MythologyMayhem
     public float closeButtonPressTimer;
     public GameObject PressEObj;
     public TextMeshProUGUI PressEText;
+    public GameObject eventSystem;
+    public GameObject pauseMenu;
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
@@ -50,7 +53,14 @@ public class GameManager : MythologyMayhem
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        if (instance != null) Destroy(this.gameObject);
+        else instance = this;
+
+        if( FindObjectOfType<EventSystem>() == null) eventSystem.SetActive(true);
+
+
+
+
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         if (SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded)
         {
@@ -59,12 +69,21 @@ public class GameManager : MythologyMayhem
             currentScene = Level.MainMenu;
         }
         startSceneDebugLoad = false;
-        LoadGame();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            int index = loadedLocalManagers.IndexOf(currentLocalManager);
+            TransitionScene(loadedLocalManagers[index + 1].inScene, "");
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            int index = loadedLocalManagers.IndexOf(currentLocalManager);
+            TransitionScene(Level.VikingVillage_2D, "");
+        }
         if (!startSceneDebugLoad)
         {
             bool inStartScene = SceneManager.GetSceneByName("StartScene").isLoaded;
@@ -87,21 +106,11 @@ public class GameManager : MythologyMayhem
         }
         if (Input.GetKeyDown(KeyCode.LeftBracket)) 
         {
-            LoadGame();
+            //LoadGame();
         }
         if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();
-        }
-
-        if (closeButtonPressTimer > 0)
-        {
-            PressEObj.SetActive(true);
-            closeButtonPressTimer -= Time.deltaTime;
-            if (closeButtonPressTimer <= 0)
-            {
-                PressEObj.SetActive(false);
-            }
         }
     }
     public void LoadSystemsStart(bool newGame) 
@@ -113,7 +122,6 @@ public class GameManager : MythologyMayhem
             backgroundMusic.Stop();
             currentScene = Level.CutScene1;
             gameData.NewGame();
-
             print("GameManager starting New Game");
             LoadScene(Level.CutScene1, true);
         }
@@ -135,6 +143,7 @@ public class GameManager : MythologyMayhem
             else
             {
                 print("Game Manager loading from save file");
+                LoadGame();
                 gameData.SetStartScene(false);
                 LoadScene(gameData.startScene, true);
             }
@@ -144,6 +153,7 @@ public class GameManager : MythologyMayhem
         checkStart = false;
         checkProx = false;
         checkUnneeded = false;
+        pauseMenu.SetActive(false);
     }
     
     void LoadSystemsUpdate() 
@@ -260,6 +270,7 @@ public class GameManager : MythologyMayhem
 
     public void LoadScene(Level scene, bool single) 
     {
+
         if (single)
         {
             SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Single);
@@ -300,18 +311,21 @@ public class GameManager : MythologyMayhem
             if (loadedLocalManagers[i].inScene == scene)
             {
                 currentLocalManager = loadedLocalManagers[i];
-                if (currentLocalManager.backgroundMusic != null) 
+                if (currentLocalManager.backgroundMusic != null)
                 {
                     backgroundMusic.clip = currentLocalManager.backgroundMusic;
                     backgroundMusic.Play();
                 }
-                return;
+                //return;
             }
         }
     }
 
     void SetCurrentPlayerCharacter(Level scene)
     {
+        if (scene == Level.MainMenu) return;
+        if (scene.ToString() == "TitleSequence") return;
+
         for (int i = 0; i < playerControllers.Count; i++)
         {
             if (playerControllers[i].inScene == scene)
@@ -334,13 +348,14 @@ public class GameManager : MythologyMayhem
                 currentPlayer.gameObject.SetActive(false);
                 currentPlayer.transform.position = currentLocalManager.activePlayerSpawner.spawnPoints[i].position;
                 currentPlayer.gameObject.SetActive(true);
-                break;
+                //break;
             }
         }
     }
 
-    public void TransitionScene(Level scene, string spawnpointOverride) 
+    public void TransitionScene(Level scene, string spawnpointOverride)
     {
+        huic.UpdateHealth();
         Level previousScene = currentScene;
         currentScene = scene;
 
@@ -377,9 +392,8 @@ public class GameManager : MythologyMayhem
     {
         if (gameData.saveData == null)
         {
-            SaveData newData = new SaveData();
-            newData.GenerateNewData();
-            gameData.saveData = newData;
+            gameData.saveData = new SaveData();
+            gameData.saveData.GenerateNewData();
 
             gameData.saveData.UpdateData(gameData);
         }
@@ -437,10 +451,18 @@ public class GameManager : MythologyMayhem
             listener.transform.position = Vector3.zero;
         }
     }
-    public void Popup(string message) 
+    public void Popup(string message, bool isOpen) 
     {
-        closeButtonPressTimer = 0.5f;
-        PressEText.SetText(message);
+        if (isOpen)
+        {
+            PressEObj.SetActive(true);
+            PressEText.SetText(message);
+        }
+        else
+        {
+            PressEObj.SetActive(false);
+            PressEText.SetText("");
+        }
     }
 
     public void UpdateCollectedHearts(int totalCollectedHearts, float curHealth) 
@@ -449,7 +471,7 @@ public class GameManager : MythologyMayhem
         stats.MaxHealth = MaxHealth;
         stats.CurrHealth = curHealth;
 
-        huic.PlayerMaxHealth = MaxHealth;
-        huic.PlayerCurrHealth = curHealth;
+        gameData.saveData.playerData.maxHealth = MaxHealth;
+        gameData.saveData.playerData.curHealth = curHealth;
     }
 }

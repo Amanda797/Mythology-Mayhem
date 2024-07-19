@@ -51,7 +51,7 @@ public class ThreeDMirror : MythologyMayhem
 
         if (Physics.Raycast(mirrorRay, out RaycastHit hit))
         {
-            if (hit.transform.gameObject.tag.Equals("Medusa"))
+            if (hit.transform.gameObject.tag == "Medusa")
             {
                 print("Hit: " + hit.transform.name);
                 FreezeMedusa(hit.transform.gameObject);

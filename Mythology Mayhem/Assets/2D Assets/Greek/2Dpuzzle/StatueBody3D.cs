@@ -98,7 +98,7 @@ public class StatueBody3D : MonoBehaviour
         }
 
         statueManager.CheckHeadPuzzleStatus();
-        statueBody2D.ChangeHeads();
+        //statueBody2D.ChangeHeads();
     }
 
     void ChangeHeadsMeshFilter()

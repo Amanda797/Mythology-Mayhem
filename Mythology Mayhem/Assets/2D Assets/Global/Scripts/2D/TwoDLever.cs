@@ -5,32 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class TwoDLever : MythologyMayhem
 {
+    GameManager gameManager;
+
     [SerializeField] private Animator leverAnim;
     [SerializeField] private Animator doorAnim;
     [SerializeField] private DoorCode door;
 
-    [SerializeField] private bool canOpen = false;
-
-    [SerializeField] private bool entered = false;
+    public bool canOpen = false;
 
     [SerializeField] private SceneTransitionPoint doorTransition;
+
     public SaveDataBool boolData;
     
     // Start is called before the first frame update
     void Start()
     {
-        LoadState(boolData.boolData);
+        // try to find the GameManager object
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        // else display a warning that it is missing
+        else Debug.LogWarning("GameManager Missing.");
+
+        if (boolData != null) LoadState(boolData.boolData);
+        else Debug.LogWarning("boolData Missing.");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (entered && canOpen)
+        if (!canOpen) return;
+
+        if (Input.GetKeyDown(KeyCode.E)) 
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                leverAnim.SetTrigger("Pulled");
-            }
+            canOpen = false;
+            leverAnim.SetTrigger("Pulled");
         }
     }
 
@@ -38,20 +46,9 @@ public class TwoDLever : MythologyMayhem
     {
         if (other.gameObject.tag == "Player") 
         {
-            entered = true;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            if (entered && canOpen)
-            {
-                if (GameManager.instance != null)
-                {
-                    GameManager.instance.Popup("Press E to Pull Lever");
-                }
-            }
+            gameManager.Popup("Press E to Pull Lever", true);
+
+            canOpen = true;
         }
     }
 
@@ -59,9 +56,10 @@ public class TwoDLever : MythologyMayhem
     {
         if (other.gameObject.tag == "Player") 
         {
-            entered = false;
-        }
-        
+            gameManager.Popup("Press E to Pull Lever", false);
+
+            canOpen = false;
+        }        
     }
     private void Opendoor()
     {
@@ -73,30 +71,23 @@ public class TwoDLever : MythologyMayhem
                 if (doorTransition.conditions[0].condition == Conditions.Condition.Toggle)
                 {
                     doorTransition.conditions[0].currentToggle = true;
+                    doorTransition.isActive = doorTransition.CheckConditionsMeet();
                 }
             }  
         }
+
         doorAnim.SetTrigger("Open");
-        door.OpenDoor();
+        //door.OpenDoor();
 
         if (boolData != null) 
         {
             boolData.boolData = true;
         }
     }
-    public void SetCanOpen(bool open)
-    {
-        canOpen = open;
-    }
-
     public void LoadState(bool on) 
     {
         if (on) 
         {
-            canOpen = true;
-            entered = true;
-            leverAnim.SetTrigger("Pulled");
-
             if (doorTransition != null)
             {
                 if (doorTransition.conditions.Count > 0)
@@ -104,6 +95,7 @@ public class TwoDLever : MythologyMayhem
                     if (doorTransition.conditions[0].condition == Conditions.Condition.Toggle)
                     {
                         doorTransition.conditions[0].currentToggle = true;
+                        doorTransition.isActive = doorTransition.CheckConditionsMeet();
                     }
                 }
             }

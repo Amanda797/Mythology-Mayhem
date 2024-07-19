@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static StatueWeapon;
 
 public class StatuePuzzle : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class StatuePuzzle : MonoBehaviour
 
     public UnityEvent puzzleCompleteEvent;
 
-    public List<Statue> statues = new List<Statue>();
+    public List<StatueBody2D> statues = new List<StatueBody2D>();
 
     public List<Sprite> heads = new List<Sprite>();
 
@@ -26,37 +27,17 @@ public class StatuePuzzle : MonoBehaviour
 
     public bool deBugResetPuzzle;
 
+    public Weapon currentWeapon = Weapon.Null;
+    public GameObject currentWeaponObject = null;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-       if(deBugResetPuzzle)
-            PuzzleReset();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log("This puzzle completion is: " + HeadPuzzleComplete());
-        }
-    }
-    
-    void PuzzleReset()
-    {
-        for (int i = 0; i < statues.Count; i++)
-        {
-            string statueWeaponCheck = "statueWeapon" + i;
-            PlayerPrefs.SetInt(statueWeaponCheck, 0);
-        }
-    }
 
     public void CheckWeaponPuzzleStatus()
     {
-        if(WeaponPuzzleComplete())
+        Debug.Log("CheckWeaponPuzzleStatus: " + WeaponPuzzleComplete());
+        if (WeaponPuzzleComplete())
         {
-            Instantiate(healthPickUp, healthSpawnPos.position, Quaternion.identity);
+            //Instantiate(healthPickUp, healthSpawnPos.position, Quaternion.identity);
+            healthPickUp.SetActive(true);
             DisableAllStatueParts();
             puzzleCompleteEvent.Invoke();
         }
@@ -78,46 +59,40 @@ public class StatuePuzzle : MonoBehaviour
         }
     }
 
-    public bool HeadPuzzleComplete()
-    {
+    //public bool HeadPuzzleComplete()
+    //{
 
-        bool complete = true;
+    //    bool complete = true;
 
-        foreach (Statue statue in statues)
-        {
-            if(statue.currentHead == statue.correctHead)
-            {
-                Debug.Log("Correct Head");
-                continue;
+    //    foreach (Statue statue in statues)
+    //    {
+    //        if(statue.currentHead == statue.correctHead)
+    //        {
+    //            Debug.Log("Correct Head");
+    //            continue;
 
-            }
-            Debug.Log("Incorrect Head");
-            complete = false;
-            break;
-        }
-        return complete;
+    //        }
+    //        Debug.Log("Incorrect Head");
+    //        complete = false;
+    //        break;
+    //    }
+    //    return complete;
 
-    }
+    //}
 
     public bool WeaponPuzzleComplete()
     {
-        bool complete = true;
+        bool complete = false;
 
-        foreach (Statue statue in statues)
+        foreach (StatueBody2D statue in statues)
         {
-            if(statue.currentWeapon == statue.correctWeapon)
+            if (statue.hasCorrectWeapon) complete = true;
+            else
             {
-                Debug.Log("Correct Weapon");
-                continue;
-
+                complete = false;
+                break;
             }
-            Debug.Log("Incorrect Weapon");
-            complete = false;
-            break;
         }
         return complete;
     }
-
-
-
 }

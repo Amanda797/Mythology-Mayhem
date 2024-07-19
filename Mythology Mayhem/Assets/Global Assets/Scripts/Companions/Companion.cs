@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class Companion : MythologyMayhem
 {
-    [HideInInspector] public Health _health;
-    [HideInInspector] public GameObject _player;
+    public Health _health;
+    public GameObject _player;
     [SerializeField] Animator anim;
+    [SerializeField] Rigidbody2D rb2D;
     [SerializeField] float attackDamage;
     [SerializeField] float attackRate;
     float speed = 5f;
@@ -20,6 +21,7 @@ public class Companion : MythologyMayhem
     [SerializeField] string attackTrigger;
     float lastXPosition;
     Vector3 lastPosition;
+    [SerializeField] LocalGameManager localGameManager;
 
     public enum CompanionState { Following, Attacking };
     public CompanionState currentState = CompanionState.Following;
@@ -40,6 +42,8 @@ public class Companion : MythologyMayhem
             _health = gameObject.AddComponent<Health>();
             _health.Life = 10f;
         }
+
+        if (GetComponent<Rigidbody2D>()) rb2D = GetComponent<Rigidbody2D>();
     }//end start
 
     private void Update()
@@ -48,10 +52,10 @@ public class Companion : MythologyMayhem
         {
             //2D
             //Follow Player            
-            if(GetComponent<Rigidbody2D>())
+            if(rb2D != null && _player != null)
             {
                 Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, gameObject.transform.position.y);
-                GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, 2f));
+                rb2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, 2f));
 
                 if (lastXPosition != gameObject.transform.position.x && walkingBool != "")
                 {

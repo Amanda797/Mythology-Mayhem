@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Animator))]
@@ -78,37 +79,30 @@ public class Enemy : MythologyMayhem
         currentStatePosition = StatePosition.Entry;
         StartCoroutine(SwitchStates(currentState,0));
 
-        /*
-        GameObject tempLocalManager = GameObject.FindGameObjectWithTag("LocalGameManager");
+        _localGameManager = transform.root.GetComponent<LocalGameManager>();
 
-        if (tempLocalManager != null)
+        foreach (LocalGameManager lgm in GameObject.FindObjectsOfType<LocalGameManager>())
         {
-            _localGameManager =  tempLocalManager.GetComponent<LocalGameManager>();
+            if (lgm.inScene.ToString() == gameObject.scene.name) _localGameManager = lgm;
         }
-        */
-        
-    }//end Start
+    }
 
     void Update()
-    { 
-        //set reference to player if in a scene using the StartScene feature
+    {
+        ////set reference to player if in a scene using the StartScene feature
 
-        if(_localGameManager != null && player == null)
-        {
-            if(_localGameManager.player != null){
-                player = _localGameManager.player.gameObject;
-            }
-        }
+        if (_localGameManager != null) if (player == null) if(_localGameManager.player != null)  player = _localGameManager.player.gameObject;
+
         //Check for Death
 
         if (health.GetHealth() <= 0 && currentState != EnemyStates.Dead)
         {
-            StartCoroutine(SwitchStates(EnemyStates.Dead,0));
+            StartCoroutine(SwitchStates(EnemyStates.Dead, 0));
         }
-
+        else if (health.GetHealth() <= 0) return;
         // If not transitioning states, invoke state action
 
-        if(currentStatePosition == StatePosition.Current)
+        if (currentStatePosition == StatePosition.Current)
         {
             switch (currentState)
             {

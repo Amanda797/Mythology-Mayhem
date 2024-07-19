@@ -610,9 +610,10 @@ MonoBehaviour:
   keyPress: 0
   isActive: 1
   conditions: []
-  countAsLevelComplete: 0
+  countAsLevelComplete: 1
   completedChapter: 0
-  completedLevel: 0
+  completedLevel: 12
+  canTransition: 0
 --- !u!65 &355690596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1956,7 +1957,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 638215218298924514}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90416e82e8926b541b5a3e7d0fc7866e, type: 3}
   m_Name: 
@@ -2508,6 +2509,14 @@ PrefabInstance:
     - target: {fileID: 295562528625047553, guid: 19f7a4d83ba2d2840aee5c505e84e548, type: 3}
       propertyPath: m_Name
       value: MedusaLevelDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 638215220110596291, guid: 19f7a4d83ba2d2840aee5c505e84e548, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 638215220110596291, guid: 19f7a4d83ba2d2840aee5c505e84e548, type: 3}
+      propertyPath: placeHolder
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1103905419537736379, guid: 19f7a4d83ba2d2840aee5c505e84e548, type: 3}
       propertyPath: m_RootOrder

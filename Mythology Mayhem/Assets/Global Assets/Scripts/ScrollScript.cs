@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.IO;
-using System.Text.RegularExpressions;
-using UnityEngine.UI;
 
 public class ScrollScript : MonoBehaviour
 {
@@ -18,102 +14,66 @@ public class ScrollScript : MonoBehaviour
     // --------------------------
     // ***PROPERTIES***
     // --------------------------
-    [TextArea(7,10)]
+
+    [TextArea(7, 10)]
     [SerializeField] string text;
-    [SerializeField] GameplayUILink gameplayUI;
-    [SerializeField] GameObject scrollPanel;
-    [SerializeField] TMP_Text scrollDisplayText;
-    [SerializeField] GameObject pressEText;
-    bool keyTriggered;
+    GameplayUILink gameplayUI;
+    GameObject scrollPanel;
+    TMP_Text scrollDisplayText;
+    AudioSource audioSource;
+    GameManager gameManager;
+
     bool activeStatus = false;
-    float keyCooldown;
+    bool scrollOpen = false;
+    bool scrollClosed = true;
 
-    [SerializeField] bool requirements;
-
-    // --------------------------
-    // ***METHODS***
-    // --------------------------
-
-    // Start is called before the first frame update
     void Start()
     {
-        keyTriggered = false;
-        keyCooldown = 1f;
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
 
-        gameplayUI = FindObjectOfType<GameplayUILink>();
-
-        if (gameplayUI != null)
+        if (FindObjectOfType<GameplayUILink>() != null)
         {
+            gameplayUI = FindObjectOfType<GameplayUILink>();
             scrollPanel = gameplayUI.scrollPanel;
             scrollDisplayText = gameplayUI.scrollDisplayText;
-            pressEText = gameplayUI.pressEText;
         }
+        else Debug.LogWarning("GameplayUILink Missing or Inactive.");
 
-        CloseScroll();
-    }//end start
+        if (GetComponent<AudioSource>() != null) audioSource = GetComponent<AudioSource>();
+        else Debug.LogWarning("AudioSource Missing or Inactive.");
+    }
 
     void Update()
     {
-        Collider2D player = Physics2D.OverlapCircle(transform.position, 5f, 3);   
+        if (!activeStatus) return;
 
-        // Listen for key press and mark as received
-        if(Input.GetKeyDown(KeyCode.E)) {
-            keyTriggered = true;
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            audioSource.Play();
+            scrollDisplayText.text = text;
+            scrollPanel.SetActive(true);
+            gameManager.Popup("Press E to Read", false);
         }
-        // Begin countdown for key activation period
-        if(keyTriggered) {
-            keyCooldown -= 1 * Time.deltaTime;
-        }
-        // Reset key activation and cooldown
-        if(keyCooldown <= 0) {
-            keyTriggered = false;
-            keyCooldown = 1f;
-        }
-    }//end update
+    }
 
-    void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag == "Player") {        
-            //enable tooltip for scroll interaction
-            if(GameManager.instance != null) {
-                GameManager.instance.Popup("Press E to Read");
-            }
-
-            if(keyTriggered && !activeStatus) {
-                gameObject.GetComponent<AudioSource>().Play();
-                OpenScroll();
-                keyTriggered = false;
-                activeStatus = true;
-            } else if(keyTriggered && activeStatus) {
-                gameObject.GetComponent<AudioSource>().Play();
-                CloseScroll();
-                keyTriggered = false;
-                activeStatus = false;
-            }
-        }       
-    }//end on collision stay 2d
-
-    void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag == "Player") {
-            CloseScroll();
-        }   
-        
-        /*
-        // Destroy "Press E" tooltip
-        if(pressEText is var result && result != null) {
-            result.SetActive(false);
-        }
-        */
-    }//end on collision exit 2d
-
-    public void OpenScroll()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        scrollDisplayText.text = text;
-        scrollPanel.SetActive(true);
-    }//end open scroll
+        if (other.gameObject.tag == "Player")
+        {
+            gameManager.Popup("Press E to Read", true);
+            activeStatus = true;
+        }
+    }
 
-    public void CloseScroll()
+    void OnTriggerExit2D(Collider2D other)
     {
-        scrollPanel.SetActive(false);
-    }//end close scroll
-
+        if (other.gameObject.tag == "Player")
+        {
+            gameManager.Popup("Press E to Read", false);
+            activeStatus = false;
+        }
+    }
 }

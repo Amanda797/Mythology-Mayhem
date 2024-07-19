@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PedastalsPuzzleManager : MonoBehaviour
 {
+    GameManager gameManager;
     public  bool fish;
     public  bool apple;
     public  bool torch;
@@ -14,38 +15,37 @@ public class PedastalsPuzzleManager : MonoBehaviour
     public bool torchDone;
     public bool airDone;
 
-    public GameObject door;
-    
-    //public GameObject SpawnLocation
+    public SceneTransitionPoint2D door;
+    public string nextSceneName = "GreekAthens_2D";
     public GameObject itemBow;
     public bool bowCollected;
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Start()
     {
-        PedastalsPuzzleManager[] puzzleManagers = FindObjectsOfType<PedastalsPuzzleManager>();
-        if(puzzleManagers.Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);
-        }
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing.");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     public void UpdateDoor()
     {
-        if(fishDone && appleDone && torchDone && airDone)
+        if (door == null)
         {
-            door.GetComponent<DoorCode>().doorOpen = true;
-            door.GetComponent<DoorCode>().blocked = false;
+            foreach (SceneTransitionPoint2D d in FindObjectsOfType<SceneTransitionPoint2D>())
+            {
+                if (d.gameObject.scene.name == gameManager.currentScene.ToString())
+                {
+                    if (d.sceneToTransition.ToString() == nextSceneName)
+                    {
+                        door = d;
+                        door.enabled = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (fishDone && appleDone && torchDone && airDone)
+        {
+            door.enabled = true;
             
             if(itemBow.GetComponent<TwoDBow>().pickedUp == false)
             {

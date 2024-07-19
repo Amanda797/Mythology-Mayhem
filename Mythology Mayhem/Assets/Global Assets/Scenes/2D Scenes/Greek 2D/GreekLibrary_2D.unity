@@ -530,7 +530,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &76960573
 MonoBehaviour:
@@ -546,11 +546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Dear Acolyte,<br><br> Press E and up to climb ladders if you want to avoid
     mice and falling scrolls<br><br> Head Librarian
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!212 &76960574
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -885,7 +880,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137319838}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -1539,19 +1534,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692487075164556631, guid: 3be78a4060179e342817f52d0af16709, type: 3}
       propertyPath: m_Size.x
-      value: 3
+      value: 1.734314
       objectReference: {fileID: 0}
     - target: {fileID: 7692487075164556631, guid: 3be78a4060179e342817f52d0af16709, type: 3}
       propertyPath: m_Size.y
-      value: 11.43
+      value: 10.381451
       objectReference: {fileID: 0}
     - target: {fileID: 7692487075164556631, guid: 3be78a4060179e342817f52d0af16709, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692487075164556631, guid: 3be78a4060179e342817f52d0af16709, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0154418945
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692487075164556631, guid: 3be78a4060179e342817f52d0af16709, type: 3}
       propertyPath: m_Offset.y
-      value: -4.11
+      value: -3.5857258
       objectReference: {fileID: 0}
     - target: {fileID: 7692487075164556631, guid: 3be78a4060179e342817f52d0af16709, type: 3}
       propertyPath: m_IsTrigger
@@ -2021,7 +2020,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &329324494
 MonoBehaviour:
@@ -2041,11 +2040,6 @@ MonoBehaviour:
     the computer mouse is not vermin, even if it is called \u201Ca mouse.\u201D The
     rats you fight inside this library are the actual vermin.<br><br>  Truly Yours,<br><br> 
     Head Librarian"
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!212 &329324495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3579,11 +3573,6 @@ MonoBehaviour:
     when it comes to learning the filing system at the library. Come see me about
     this as it will be instrumental in your organization of our nearly 400,000 scrolls.<br><br> 
     - Head Librarian Aristarchus
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!61 &522090953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3608,7 +3597,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!82 &522090954
 AudioSource:
@@ -3990,11 +3979,6 @@ MonoBehaviour:
     the scrolls in the library. This method has been working tremendously to keep
     the rodents at bay, and I suggest looking into it if you have any problems with
     them in the future,<br><br>  - Petsis, Sub-Librarian "
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!212 &673080616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4071,7 +4055,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!82 &673080618
 AudioSource:
@@ -4355,6 +4339,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1575714034}
+  - {fileID: 2065485420}
   m_Father: {fileID: 1812523066}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5378,7 +5363,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &1046704610
 MonoBehaviour:
@@ -5396,11 +5381,6 @@ MonoBehaviour:
     the wisest course of action is to push the object to get it out of your way by
     pressing the E button. Then see if you can use a lever.<br><br>Sincerely,<br><br> 
     Head Librarian
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!212 &1046704611
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7054,11 +7034,6 @@ MonoBehaviour:
     agree, Moslem Caliph Omar ordered that all the documents inside be used as tinder
     for the bathhouses and destroyed. It is said that it took nearly six months to
     burn everything. Truly terrible.<br><br>  - A distraught citizen of Alexandria"
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!212 &1389410026
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7135,7 +7110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!82 &1389410028
 AudioSource:
@@ -9396,11 +9371,6 @@ MonoBehaviour:
     Bablyonian, Persian, Assyrian, Indian, Jewish, Zoroastrian, Buddhist, and of
     course Afro-Asian. I wish you success in this endeavor, as it affects the entire
     library.<br><br>  - Didymus \u201CBronze-Guts\u201D Chalcenterus"
-  gameplayUI: {fileID: 0}
-  scrollPanel: {fileID: 0}
-  scrollDisplayText: {fileID: 0}
-  pressEText: {fileID: 0}
-  requirements: 0
 --- !u!212 &1975728559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9477,7 +9447,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!82 &1975728561
 AudioSource:
@@ -9930,6 +9900,64 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 450319774758561872, guid: ff60b42d34c683144a089d9ea68d7602, type: 3}
   m_PrefabInstance: {fileID: 2057221954}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2065485419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2065485420}
+  - component: {fileID: 2065485421}
+  m_Layer: 0
+  m_Name: ScrollCollider
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2065485420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065485419}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.93, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 722544658}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2065485421
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065485419}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -50.858597, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 55.63504, y: 1}
+  m_EdgeRadius: 0.2
 --- !u!1 &2099338767
 GameObject:
   m_ObjectHideFlags: 0
@@ -10273,6 +10301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1558304037}
     m_Modifications:
+    - target: {fileID: 2874544876076593518, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2874544876076593519, guid: 49fd3c7eccb05494791cd356283d5a16, type: 3}
       propertyPath: lever
       value: 
@@ -10490,6 +10522,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1605919219, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9863434
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605919219, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: m_Size.y
+      value: 3.011757
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605919219, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0047317147
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605919219, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.30912155
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701154651, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.3
+      objectReference: {fileID: 0}
     - target: {fileID: 110003485652841188, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
       propertyPath: m_Name
       value: LocalGameManager
@@ -10503,6 +10555,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 845776723167920750, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: scenesNeeded.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 845776723167920750, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
       propertyPath: boundaries.Array.data[0]
       value: 
       objectReference: {fileID: 1760632825}
@@ -10510,6 +10566,18 @@ PrefabInstance:
       propertyPath: boundaries.Array.data[1]
       value: 
       objectReference: {fileID: 1342085816}
+    - target: {fileID: 845776723167920750, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: scenesNeeded.Array.data[3]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 845776723167920750, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: scenesLoadedOnStart.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 845776723167920750, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
+      propertyPath: scenesLoadedOnStart.Array.data[2]
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4798801261946796659, guid: 3de92ed405112454787ed3da28a4c50b, type: 3}
       propertyPath: m_RootOrder
       value: 0

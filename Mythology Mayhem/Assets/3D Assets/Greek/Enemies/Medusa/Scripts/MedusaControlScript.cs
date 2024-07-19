@@ -651,7 +651,7 @@ public class MedusaControlScript : MonoBehaviour
                     }
                     medusaAgent.isStopped = true;
                     Destroy(this.gameObject.transform.parent.gameObject, deathDelay);
-                    doorScript.RaiseDoor(true);
+                    doorScript.gameObject.transform.LeanMoveLocalY(0, 5);
                     return;
                     //}
                 }

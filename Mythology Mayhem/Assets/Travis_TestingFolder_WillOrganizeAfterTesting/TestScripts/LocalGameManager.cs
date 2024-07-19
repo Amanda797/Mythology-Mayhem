@@ -11,7 +11,6 @@ public class LocalGameManager : MythologyMayhem
     public Dimension sceneType;
     public PlayerMovement3D player3D;
     public PlayerController player2D;
-
     public PlayerAttach player;
 
     public Transform sceneOrigin;
@@ -19,13 +18,13 @@ public class LocalGameManager : MythologyMayhem
     public Transform[] boundaries;
 
     public Level inScene;
-    [SerializeField] public List<Level> scenesNeeded;
-    [SerializeField] public List<Level> scenesLoadedOnStart;
-    [SerializeField] public List<ProximityLoad> scenesLoadedOnProximity;
-    [SerializeField] public List<SceneTransitionPoint> transitionPoints;
+    public List<Level> scenesNeeded;
+    public List<Level> scenesLoadedOnStart;
+    public List<ProximityLoad> scenesLoadedOnProximity;
+    public List<SceneTransitionPoint> transitionPoints;
     public bool loadNextOnStart;
 
-    [SerializeField] public playerSpawner activePlayerSpawner;
+    public playerSpawner activePlayerSpawner;
     public GameObject playerSpawnerPrefab;
     public GameObject spawnPointPrefab;
     public GameObject sceneTransitionPoint2D;
@@ -58,7 +57,8 @@ public class LocalGameManager : MythologyMayhem
     {
         if (!mainGameManager)
         {
-            mainGameManager = FindObjectOfType<GameManager>();
+            mainGameManager = GameManager.instance;
+
             if (!mainGameManager)
             {
                 print("Could Not Find GameManager for Local in " + SceneManager.GetActiveScene().ToString());

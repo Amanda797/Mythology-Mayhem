@@ -5,48 +5,59 @@ using UnityEngine.SceneManagement;
 
 public class ThreeDLever : MonoBehaviour
 {
-    [SerializeField] private string nextLevel = "Library 3D";
-    [SerializeField] private BoxCollider trigger;
-    public bool entered = false;
+    GameManager gameManager;
+
+    //[SerializeField] private string nextLevel = "Library 3D";
+    [SerializeField] private BoxCollider DoorTrigger;
+    bool canOpen = false;
 
     ChangeNextSpawn CNS;
     
     // Start is called before the first frame update
     void Start()
     {
-        CNS = GetComponent<ChangeNextSpawn>();
+        // try to find the GameManager object
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        // else display a warning that it is missing
+        else Debug.LogWarning("GameManager Missing or Inactive.");
+
+        //CNS = GetComponent<ChangeNextSpawn>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (entered)
+        if (!canOpen) return;
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                CNS.NextSpawn(2);
-                LoadNextScene();
-            }
+            if (!DoorTrigger.enabled) DoorTrigger.enabled = true;
+            //CNS.NextSpawn(2);
+            //LoadNextScene();
         }
     }
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            entered = true;
-        }    
+            gameManager.Popup("Press E to Pull Lever", true);
+
+            canOpen = true;
+        }
     }
 
     private void OnTriggerExit(Collider other) 
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            entered = false;
-        }    
+            gameManager.Popup("Press E to Pull Lever", false);
+
+            canOpen = false;
+        }
     }
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(nextLevel);
-    }
+    //public void LoadNextScene()
+    //{
+    //    SceneManager.LoadScene(nextLevel);
+    //}
 }
