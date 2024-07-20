@@ -122,15 +122,15 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage) 
     {
-        if(gameManager.gameData.saveData.playerData.curHealth > 0)
+        if(gameManager.gameData.curHealth > 0)
         {
-            gameManager.gameData.saveData.playerData.curHealth = Mathf.Clamp(gameManager.gameData.saveData.playerData.curHealth -= damage, 0, gameManager.gameData.saveData.playerData.maxHealth);
+            gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth -= damage, 0, gameManager.gameData.maxHealth);
             anim.SetTrigger("Hurt");
 
             Debug.Log(huic != null);
             huic.UpdateHealth();
 
-            if (gameManager.gameData.saveData.playerData.curHealth <= 0)
+            if (gameManager.gameData.curHealth <= 0)
             {
                 Die();
             }
@@ -144,7 +144,7 @@ public class PlayerStats : MonoBehaviour
             healSource.Play();
         }
 
-        gameManager.gameData.saveData.playerData.curHealth = Mathf.Clamp(gameManager.gameData.saveData.playerData.curHealth += heal, 0, gameManager.gameData.saveData.playerData.maxHealth);
+        gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth += heal, 0, gameManager.gameData.maxHealth);
         huic.UpdateHealth();
     }
 
@@ -165,15 +165,15 @@ public class PlayerStats : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         transform.position = spawnPoint;
-        Heal((int)GameManager.instance.gameData.saveData.playerData.maxHealth, false);
+        Heal((int)gameManager.gameData.maxHealth, false);
         GetComponent<PlayerController>().enabled = true;
         anim.SetBool("IsDead", false);
     }   
     
     public void CollectHeart(int amount)
     {
-        GameManager.instance.gameData.saveData.playerData.maxHealth += amount;
-        GameManager.instance.gameData.saveData.playerData.curHealth = GameManager.instance.gameData.saveData.playerData.maxHealth;
+        gameManager.gameData.maxHealth += amount;
+        gameManager.gameData.curHealth += amount;
         huic.UpdateHealth();
     }
 }

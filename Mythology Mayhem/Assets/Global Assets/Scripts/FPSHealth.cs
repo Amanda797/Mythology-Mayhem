@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class FPSHealth : MonoBehaviour
 { // --------------------------
-    // ***PROPERTIES***
-    // --------------------------
-
+  // ***PROPERTIES***
+  // --------------------------
+    GameManager gameManager;
     [Header("Player Stats")]
     [SerializeField] HealthUIController huic;
     [SerializeField] public PlayerStats_SO ps;
@@ -36,6 +36,8 @@ public class FPSHealth : MonoBehaviour
     private void Start()
     {
         spawnPoint = gameObject.transform.position;
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing");
     }
 
     public void SetHealth(float h) {
@@ -60,7 +62,7 @@ public class FPSHealth : MonoBehaviour
             healSource.Play();
         }
 
-        GameManager.instance.gameData.saveData.playerData.curHealth = Mathf.Clamp(GameManager.instance.gameData.saveData.playerData.curHealth += h, 0 , GameManager.instance.gameData.saveData.playerData.maxHealth);
+        gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth += h, 0 , gameManager.gameData.maxHealth);
 
         huic.UpdateHealth();
     }
@@ -70,7 +72,7 @@ public class FPSHealth : MonoBehaviour
         if (GetHealth() <= 0) {
             GetComponent<PlayerMovement3D>().enabled = false;
             gameObject.transform.position = spawnPoint;
-            Heal(GameManager.instance.gameData.saveData.playerData.maxHealth, false);
+            Heal(gameManager.gameData.maxHealth, false);
             GetComponent<PlayerMovement3D>().enabled = true;
         }
     }
