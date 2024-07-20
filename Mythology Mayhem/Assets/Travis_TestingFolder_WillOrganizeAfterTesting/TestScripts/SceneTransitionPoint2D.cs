@@ -5,25 +5,20 @@ using UnityEngine;
 public class SceneTransitionPoint2D : SceneTransitionPoint
 {
     GameManager gameManager;
+    public TwoDLever lever;
     void Start()
     {
-        // try to find the GameManager object
         if (GameManager.instance != null) gameManager = GameManager.instance;
-        // else display a warning that it is missing
         else Debug.LogWarning("GameManager Missing or Inactive.");
     }
     void Update()
     {
-        // if the player is not near the door, stop
         if (!canTransition) return;
 
-        // if the E key is pressed
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // if this is the last door in the level, update the game manager
             if (countAsLevelComplete) gameManager.gameData.UpdateLevelComplete(completedChapter, completedLevel);
 
-            // transition to the next scene/level
             localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
         }
     }
@@ -46,6 +41,10 @@ public class SceneTransitionPoint2D : SceneTransitionPoint
         {
             gameManager.Popup("Press E to Enter", false);
             canTransition = false;
+        }
+        if (collision.gameObject.tag == "PushBlock")
+        {
+            lever.isBlocked = false;
         }
     }
 }
