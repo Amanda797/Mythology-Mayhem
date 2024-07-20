@@ -471,7 +471,8 @@ public class GameManager : MythologyMayhem
         stats.MaxHealth = MaxHealth;
         stats.CurrHealth = curHealth;
 
-        gameData.saveData.playerData.maxHealth = MaxHealth;
-        gameData.saveData.playerData.curHealth = curHealth;
+        gameData.maxHealth = MaxHealth;
+        gameData.curHealth = curHealth;
+        huic.UpdateHealth();
     }
 }

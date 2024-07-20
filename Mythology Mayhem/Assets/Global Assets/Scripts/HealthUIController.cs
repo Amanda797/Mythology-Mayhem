@@ -7,18 +7,11 @@ using UnityEngine.Playables;
 
 public class HealthUIController : MonoBehaviour
 {
+    GameManager gameManager;
     //UI Components
     [Header("UI Components")]
-    //private UIDocument _doc;
-    //private VisualElement _heartPanel;
-    //[SerializeField] private VisualTreeAsset _heartUXML;
     public PlayerHeartState heartState;
-    //private VisualElement _heartPrefab;
     [SerializeField] private List<Sprite> _heartModes;
-
-    //private VisualElement _shipPanel;
-    //[SerializeField] private VisualTreeAsset _shipUXML;
-    //private VisualElement _shipPrefab;
     [SerializeField] private List<Sprite> _shipModes;
     public bool useShipHealth;
 
@@ -57,10 +50,10 @@ public class HealthUIController : MonoBehaviour
 
     void Start()
     {
-        if (!useShipHealth)
-        {
-            UpdateHealth();
-        }
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing.");
+
+        if (!useShipHealth) UpdateHealth();
         else
         {
             UpdateShipHealthBarCount(ShipMaxHealth);
@@ -70,19 +63,24 @@ public class HealthUIController : MonoBehaviour
 
     public void UpdateHealth()
     {
+        Debug.Log("UpdateHealth");
         if (!heartState.gameObject.activeSelf) heartState.gameObject.SetActive(true);
-        UpdateHealthBarCount(GameManager.instance.gameData.saveData.playerData.maxHealth);
-        SetHealthBar(GameManager.instance.gameData.saveData.playerData.curHealth);
+
+        UpdateHealthBarCount(gameManager.gameData.maxHealth);
+        SetHealthBar(gameManager.gameData.curHealth);
+        gameManager.SaveGame();
     }
 
     private void SetHealthBar(float health)
     {
         heartState.SetHealthBar(Mathf.CeilToInt(health));
+        ps.CurrHealth = health;
     }
 
     public void UpdateHealthBarCount(float maxHealth)
     {
         heartState.UpdateHealthBarCount(Mathf.CeilToInt(maxHealth));
+        ps.MaxHealth = maxHealth;
     }
 
     private void SetShipHealthBar(float health)
