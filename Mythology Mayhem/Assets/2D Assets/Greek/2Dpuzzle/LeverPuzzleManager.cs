@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeverPuzzleManager : MonoBehaviour
 {
-    SaveData saveData;
+    GameManager gameManager;
     public DoorCode Door;
     public GameObject itemToDisplay;
     public bool[] currentLeverAnswer = new bool[10];
@@ -24,7 +24,8 @@ public class LeverPuzzleManager : MonoBehaviour
     }
     private void Start()
     {
-        saveData = GameManager.instance.gameData.saveData;
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
     }
 
     public void CheckPuzzel(int pos, bool isOn)
@@ -47,19 +48,17 @@ public class LeverPuzzleManager : MonoBehaviour
     }
     public void CollectMirror()
     {
-        if (!saveData.playerData.collectedMirror)
+        if (!gameManager.gameData.collectedMirror)
         {
             itemToDisplay.SetActive(true);
-            //saveData.playerData.collectedMirror = true;
-            //saveData.Save();
         }
     }
     public void CollectOwl()
     {
-        if (!saveData.playerData.collectedOwl)
+        if (!gameManager.gameData.collectedOwl)
         {
-            saveData.playerData.collectedOwl = true;
-            saveData.Save();
+            gameManager.gameData.collectedOwl = true;
+            gameManager.SaveGame();
             foreach (CompanionController cc in FindObjectsOfType<CompanionController>()) cc.owl.SetActive(true);
         }
     }

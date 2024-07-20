@@ -26,7 +26,6 @@ public class QuizManager : MonoBehaviour
     int score = 0;
     bool answered = false;
     bool won = false;
-    bool hasMirror = false;
     public PlayerStats playerStats;
 
     [SerializeField] GameObject[] enemy_go;
@@ -41,10 +40,7 @@ public class QuizManager : MonoBehaviour
         answer3Obj.SetActive(false);
         answer4Obj.SetActive(false);
 
-        Time.timeScale = 0;
-        hasMirror = gameManager.gameData.saveData.playerData.collectedMirror;
-        Debug.Log("hasMirror: " + hasMirror);
-        if (hasMirror)
+        if (gameManager.gameData.collectedMirror)
         {
             question.text = introduction;
             answer1.text = "Begin";
@@ -55,6 +51,10 @@ public class QuizManager : MonoBehaviour
             question.text = "You do not have the mirror.\nReturn when you have it to continue.";
             answer1.text = "Close";
         }
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 0;
     }
     void DisplayQuestion() {
         if(currentQuestion < chosenQuestions.Length) {
@@ -74,9 +74,11 @@ public class QuizManager : MonoBehaviour
     }//end display question
 
     public void AnswerQuestion(int x) {
-        if (!hasMirror)
+        if (!gameManager.gameData.collectedMirror)
         {
             Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             this.gameObject.SetActive(false);
             return;
         }
@@ -110,14 +112,7 @@ public class QuizManager : MonoBehaviour
         } 
         else if(currentQuestion > chosenQuestions.Length)
         {
-            if (won)
-            {
-                Time.timeScale = 1;
-                LoadMedussa();
-                return;
-            }
-
-            else // enemies attack the player
+            if (!won)
             {
                 foreach (GameObject enemy in enemy_go)
                 {
@@ -126,13 +121,11 @@ public class QuizManager : MonoBehaviour
                     if (enemy.gameObject.name == "MiddleLadyFate") enemy.GetComponent<Animator>().Play("MiddleFateAttack");
 
                 }
+                playerStats.TakeDamage(10);
             }
 
-            //quizTrigger.GetComponent<QuizTrigger>().shrinking = true;
-            playerStats.TakeDamage(10);
-            LoadMedussa();
-            Time.timeScale = 1;
             this.gameObject.SetActive(false);
+            LoadMedussa();
         }
         else {
             if(!answered) {
@@ -198,6 +191,9 @@ public class QuizManager : MonoBehaviour
 
     void LoadMedussa()
     {
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         transitionPoint.localGameManager.mainGameManager.TransitionScene(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
     }
 }

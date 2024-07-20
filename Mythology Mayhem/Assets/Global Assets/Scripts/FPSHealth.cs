@@ -41,19 +41,18 @@ public class FPSHealth : MonoBehaviour
     }
 
     public void SetHealth(float h) {
-        GameManager.instance.gameData.saveData.playerData.curHealth = h;
+        gameManager.gameData.curHealth = h;
     }// end set health
 
     public float GetHealth() {
-        return GameManager.instance.gameData.saveData.playerData.curHealth;
+        return gameManager.gameData.curHealth;
     }//end get health
 
     public void TakeDamage(float d) {
-        GameManager.instance.gameData.saveData.playerData.curHealth -= d;
+        gameManager.gameData.curHealth -= d;
         huic.UpdateHealth();
-        if (GameManager.instance.gameData.saveData.playerData.curHealth <= 0) {
-            Death();
-        }
+
+        if (gameManager.gameData.curHealth <= 0) Death();
     }//end take damage
 
     public void Heal(float h, bool potion) {
