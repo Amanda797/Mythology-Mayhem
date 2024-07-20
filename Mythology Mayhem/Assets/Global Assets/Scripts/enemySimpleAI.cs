@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class enemySimpleAI : MonoBehaviour
 {
+    Health health;
+    Animator animator;
+    AudioSource audioSource;
+    [SerializeField] AudioClip attackSFX, hurtSFX, dieSFX;
     public float attackDamage = 2f;
     public float speed = 3f;   // Movement speed of the enemy
     public float attackRange = 2f;   // Distance from which the enemy can attack the player
     public float attackDelay = 1f;   // Delay between enemy attacks
-    public Animator animator;   // Reference to the animator component
     private Transform player;   // Reference to the player's transform
     private bool isAttacking;   // Flag to determine if the enemy is currently attacking
     private float lastAttackTime;   // Time when the enemy last attacked
@@ -14,8 +17,13 @@ public class enemySimpleAI : MonoBehaviour
     private float HurtTimeDelay;
     public float hurtDelay = 1f;
     bool isDead = false;
-    public Health health;
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+        audioSource = GetComponent<AudioSource>();
+    }
     void Start()
     {
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
@@ -91,6 +99,8 @@ public class enemySimpleAI : MonoBehaviour
         // Play attack animation or perform attack action
         player.GetComponent<FPSHealth>().TakeDamage(attackDamage);
         animator.SetTrigger("Attack");
+        audioSource.clip = attackSFX;
+        audioSource.Play();
     }
     public void Hurt()
     {
@@ -102,12 +112,16 @@ public class enemySimpleAI : MonoBehaviour
         direction.y = 0;
         transform.rotation = Quaternion.LookRotation(direction);
         transform.position = Vector3.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+        audioSource.clip = hurtSFX;
+        audioSource.Play();
     }
     public void Die()
     {
         isDead = true;
         animator.SetFloat("Speed", 0f);
         health.Death();
+        audioSource.clip = dieSFX;
+        audioSource.Play();
     }
 }
 
