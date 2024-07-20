@@ -63,7 +63,6 @@ public class HealthUIController : MonoBehaviour
 
     public void UpdateHealth()
     {
-        Debug.Log("UpdateHealth");
         if (!heartState.gameObject.activeSelf) heartState.gameObject.SetActive(true);
 
         UpdateHealthBarCount(gameManager.gameData.maxHealth);

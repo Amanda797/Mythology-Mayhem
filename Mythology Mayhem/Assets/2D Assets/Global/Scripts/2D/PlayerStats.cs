@@ -150,7 +150,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        if (gameManager.gameData.saveData.playerData.curHealth <= 0)
+        if (gameManager.gameData.curHealth <= 0)
         {
             anim.SetBool("IsDead", true);
             GetComponent<PlayerController>().enabled = false;

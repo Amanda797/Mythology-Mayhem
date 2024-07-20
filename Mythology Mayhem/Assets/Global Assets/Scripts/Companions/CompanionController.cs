@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CompanionController : MythologyMayhem
 {
+    GameManager gameManager;
     public LocalGameManager localGameManager;
     public GameplayActions gameActions;
     public Companion[] companions;
@@ -21,6 +22,9 @@ public class CompanionController : MythologyMayhem
 
     private void Start()
     {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing.");
+
         foreach (LocalGameManager lgm in GameObject.FindObjectsOfType<LocalGameManager>())
         {
             if (lgm.inScene.ToString() == gameObject.scene.name)
@@ -52,12 +56,12 @@ public class CompanionController : MythologyMayhem
 
             if (companions[currentCompanion].gameObject == owl)
             {
-                if (GameManager.instance.gameData.saveData.playerData.collectedOwl) companions[currentCompanion].gameObject.SetActive(true);
+                if (gameManager.gameData.collectedOwl) companions[currentCompanion].gameObject.SetActive(true);
                 else companions[currentCompanion].gameObject.SetActive(false);
             }
             else if (companions[currentCompanion].gameObject == wolf)
             {
-                if (GameManager.instance.gameData.saveData.playerData.collectedWolf) companions[currentCompanion].gameObject.SetActive(true);
+                if (gameManager.gameData.collectedWolf) companions[currentCompanion].gameObject.SetActive(true);
                 else companions[currentCompanion].gameObject.SetActive(false);
             }
         }
@@ -96,13 +100,13 @@ public class CompanionController : MythologyMayhem
                     {
                         owl.SetActive(true);
                         owl.GetComponent<Companion>()._player = _player;
-                        if (!GameManager.instance.gameData.saveData.playerData.collectedOwl) owl.SetActive(false);
+                        if (!gameManager.gameData.collectedOwl) owl.SetActive(false);
                     }
                     if (wolf != null)
                     {
                         wolf.SetActive(true);
                         wolf.GetComponent<Companion>()._player = _player;
-                        if (!GameManager.instance.gameData.saveData.playerData.collectedWolf) wolf.SetActive(false);
+                        if (!gameManager.gameData.collectedWolf) wolf.SetActive(false);
                     }
                 }
             }

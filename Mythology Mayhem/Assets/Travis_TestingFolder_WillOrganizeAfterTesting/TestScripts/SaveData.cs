@@ -37,6 +37,11 @@ public class SaveData
         newPlayerData.maxHealth = data.maxHealth;
         newPlayerData.collectedHearts = data.collectedHearts;
         newPlayerData.collectedMirror = data.collectedMirror;
+        newPlayerData.collectedCompass = data.collectedCompass;
+        newPlayerData.collectedBow = data.collectedBow;
+        newPlayerData.collectedHammer = data.collectedHammer;
+        newPlayerData.collectedOwl = data.collectedOwl;
+        newPlayerData.collectedWolf = data.collectedWolf;
 
         this.playerData = newPlayerData;
 
@@ -147,6 +152,12 @@ public class SaveData
         //GameManager.instance.UpdateCollectedHearts(totalHearts, data.health);
 
         data.collectedMirror = playerData.collectedMirror;
+        data.collectedMirror = playerData.collectedMirror;
+        data.collectedCompass = playerData.collectedCompass;
+        data.collectedBow = playerData.collectedBow;
+        data.collectedHammer = playerData.collectedHammer;
+        data.collectedOwl = playerData.collectedOwl;
+        data.collectedWolf = playerData.collectedWolf;
 
         data.masterVolume = (int)settingsData.masterVolume;
         data.musicVolume = (int)settingsData.musicVolume;
@@ -314,9 +325,7 @@ public class SaveData
         SettingsData newSettings = new SettingsData();
         this.settingsData = newSettings;
 
-        PlayerData newPlayerData = new PlayerData();
-        newPlayerData.collectedHearts = new bool[GameManager.instance.gameData.heartCollectionTotal];
-        this.playerData = newPlayerData;
+        this.playerData = new PlayerData();
 
         this.GL2D = new GreekLibrary_2DData();
 
