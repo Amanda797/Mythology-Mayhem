@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
                     pushBlock.transform.localPosition = new Vector3(4,-.2f,0); //offset new position
                     walkSpeed = 100;
                     anim.SetBool("IsPush", true);
+                    pushBlock.GetComponent<AudioSource>().Play();
                 }
                 else
                 {
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour
                     walkSpeed = 200;
                     anim.SetBool("IsPush", false);
                     pushing = false;
+                    pushBlock.GetComponent<AudioSource>().Stop();
                 }
             }
         }

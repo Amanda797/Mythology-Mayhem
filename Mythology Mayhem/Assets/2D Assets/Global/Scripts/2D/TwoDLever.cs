@@ -7,7 +7,7 @@ public class TwoDLever : MythologyMayhem
 {
     GameManager gameManager;
     Animator leverAnim;
-
+    AudioSource audioSource;
     [SerializeField] private Animator doorAnim;
     [SerializeField] private SceneTransitionPoint doorTransition;
 
@@ -19,6 +19,7 @@ public class TwoDLever : MythologyMayhem
     private void Awake()
     {
         leverAnim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -37,6 +38,7 @@ public class TwoDLever : MythologyMayhem
         {
             canOpen = false;
             leverAnim.SetTrigger("Pulled");
+            audioSource.Play();
         }
     }
 
