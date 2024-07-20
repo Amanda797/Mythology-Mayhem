@@ -6,31 +6,29 @@ using UnityEngine.SceneManagement;
 public class TwoDLever : MythologyMayhem
 {
     GameManager gameManager;
+    Animator leverAnim;
 
-    [SerializeField] private Animator leverAnim;
     [SerializeField] private Animator doorAnim;
-    [SerializeField] private DoorCode door;
-
-    public bool canOpen = false;
-
     [SerializeField] private SceneTransitionPoint doorTransition;
 
     public SaveDataBool boolData;
-    
-    // Start is called before the first frame update
+    bool canOpen = false;
+    public bool isBlocked;
+
+
+    private void Awake()
+    {
+        leverAnim = GetComponent<Animator>();
+    }
     void Start()
     {
-        // try to find the GameManager object
         if (GameManager.instance != null) gameManager = GameManager.instance;
-        // else display a warning that it is missing
         else Debug.LogWarning("GameManager Missing.");
 
         if (boolData != null) LoadState(boolData.boolData);
         else Debug.LogWarning("boolData Missing.");
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!canOpen) return;
@@ -46,9 +44,12 @@ public class TwoDLever : MythologyMayhem
     {
         if (other.gameObject.tag == "Player") 
         {
-            gameManager.Popup("Press E to Pull Lever", true);
+            if (!isBlocked)
+            {
+                gameManager.Popup("Press E to Pull Lever", true);
 
-            canOpen = true;
+                canOpen = true;
+            }
         }
     }
 
@@ -77,7 +78,6 @@ public class TwoDLever : MythologyMayhem
         }
 
         doorAnim.SetTrigger("Open");
-        //door.OpenDoor();
 
         if (boolData != null) 
         {

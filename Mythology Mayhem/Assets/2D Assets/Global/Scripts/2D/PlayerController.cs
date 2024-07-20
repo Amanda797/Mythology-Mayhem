@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    GameManager gameManager;
     #region Variables
     [Header("Player Movement")]
     [SerializeField] private float walkSpeed = 200f;
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
     #region Unity Methods
     void Start()
     {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -53,25 +57,24 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && !climbing)
             {
+                gameManager.Popup("", false);
                 anim.SetBool("IsClimb", true);
                 climbing = true;
                 rb2d.gravityScale = 0;
                 rb2d.velocity = new Vector2(0,0);
-                Debug.Log("Start Climbing");
             }
             else if (Input.GetKeyDown(KeyCode.E) && climbing)
             {
                 anim.SetBool("IsClimb", false);
                 climbing = false;
                 rb2d.gravityScale = 1;
-                Debug.Log("Stop Climbing");
             }
         }
         if(canPush || pushing)
         {
             if (Input.GetKeyDown(KeyCode.E) && grounded) 
             {
-                Debug.Log("Test");
+                gameManager.Popup("", false);
                 if (!pushing)
                 {
                     pushing = true;
@@ -139,19 +142,28 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Ladder")
         {
+            gameManager.Popup("Press E to Climb", true);
             ladderEntered = true;
-        }    
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Ladder")
         {
-            anim.SetBool("IsClimb", false);
+            gameManager.Popup("", false);
             ladderEntered = false;
-            rb2d.gravityScale = 1;
+
             if (climbing)
-            climbing = false;
+            {
+                climbing = false;
+                anim.SetBool("IsClimb", false);
+                rb2d.gravityScale = 1;
+            }
+        }
+        if (other.tag == "PushBlock")
+        {
+            gameManager.Popup("", false);
         }
     }
 
@@ -159,9 +171,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.collider.tag == "PushBlock")
         {
+            gameManager.Popup("Press E to Move", true);
             canPush = true;
-            if(!pushing)
-            pushBlock = other.gameObject;
+            if (!pushing) pushBlock = other.gameObject;
         }
         if (other.collider.tag == "Ground")
         {
@@ -173,9 +185,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.collider.tag == "PushBlock")
         {
+            gameManager.Popup("", false);
             canPush = false;
-            if (!pushing) 
-                pushBlock = null;
+            if (!pushing) pushBlock = null;
         }
         if (other.collider.tag == "Ground")
         {
