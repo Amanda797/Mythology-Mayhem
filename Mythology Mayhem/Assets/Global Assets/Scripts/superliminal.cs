@@ -20,11 +20,11 @@ public class superliminal : MonoBehaviour
     //public KeyCode key;
     public bool isReady;
 
-    void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    //void Start()
+    //{
+    //    Cursor.visible = false;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //}
  
     void Update()
     {
