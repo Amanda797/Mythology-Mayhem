@@ -45,6 +45,7 @@ public class superliminal : MonoBehaviour
 
                 if(Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, Mathf.Infinity, targetMask))
                 {
+                    if (target.GetComponent<AudioSource>() != null) target.GetComponent<AudioSource>().Play();
                     // Set our target variable to be the Transform object we hit with our raycast
                     target = hit.transform;
                     targetObject = hit.transform.gameObject;

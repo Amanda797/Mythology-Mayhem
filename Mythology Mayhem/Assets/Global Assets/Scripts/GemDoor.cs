@@ -75,6 +75,7 @@ public class GemDoor : MonoBehaviour
     {
         if(gem == doorGem)
         {
+            GetComponent<AudioSource>().Play();
             anim.SetBool("Open", true);
             superliminal.Reset();
             this.gem = gemT.gameObject;
