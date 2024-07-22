@@ -9,7 +9,7 @@ public class PlayerHeartState : MonoBehaviour
 
     //[SerializeField] private int _playerMaxHealth;
     //[SerializeField] private int _playerCurrHealth;
-
+    GameManager gameManager;
     [SerializeField] Image heartPrefab;
     [SerializeField] Transform heartsContainer;
     [SerializeField] List<Image> hearts = new List<Image>();
@@ -61,6 +61,11 @@ public class PlayerHeartState : MonoBehaviour
     //    PlayerMaxHealth = PlayerMaxHealth;
     //}
 
+    private void Start()
+    {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing");
+    }
     public void SetHealthBar(int health) {
         for (int i = 0; i < hearts.Count; i++)
         {
@@ -134,7 +139,7 @@ public class PlayerHeartState : MonoBehaviour
             {
                 hearts.Add(Instantiate(heartPrefab.gameObject, heartsContainer).GetComponent<Image>());
             }
-            SetHealthBar(Mathf.CeilToInt(GameManager.instance.gameData.saveData.playerData.maxHealth)); //Since we added hearts, update heart graphics so the new hearts respect current health value.
+            SetHealthBar(Mathf.CeilToInt(gameManager.gameData.maxHealth)); //Since we added hearts, update heart graphics so the new hearts respect current health value.
         }
         else if(maxHealth < heartCount)
         {
@@ -164,7 +169,7 @@ public class PlayerHeartState : MonoBehaviour
             {
                 hearts.Add(Instantiate(heartPrefab.gameObject, heartsContainer).GetComponent<Image>());
             }
-            SetHealthBar(Mathf.CeilToInt(GameManager.instance.gameData.saveData.playerData.maxHealth)); //Since we added hearts, update heart graphics so the new hearts respect current health value.
+            SetHealthBar(Mathf.CeilToInt(gameManager.gameData.maxHealth)); //Since we added hearts, update heart graphics so the new hearts respect current health value.
         }
         else if (maxHealth < heartCount)
         {

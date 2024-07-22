@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CavernLeverPuzzleManager : MonoBehaviour
 {
-
+    GameManager gameManager;
     public GameObject Door;
 
     public bool[] currentLeverAnswer = new bool[10];
@@ -16,17 +16,21 @@ public class CavernLeverPuzzleManager : MonoBehaviour
         Door.GetComponent<DoorCode>().doorOpen = true;
         Door.GetComponent<DoorCode>().blocked = false;
     }
-
+    private void Start()
+    {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
+    }
     public void CheckPuzzel(int pos, bool isOn)
     {
         currentLeverAnswer[pos] = isOn;
 
         if (currentLeverAnswer.SequenceEqual(correctLeverAnswer))
         {
-            if (!GameManager.instance.gameData.saveData.playerData.collectedOwl)
+            if (!gameManager.gameData.collectedOwl)
             {
-                GameManager.instance.gameData.saveData.playerData.collectedOwl = true;
-                GameManager.instance.gameData.saveData.Save();
+                gameManager.gameData.collectedOwl = true;
+                gameManager.SaveGame();
                 foreach (CompanionController cc in FindObjectsOfType<CompanionController>()) cc.owl.SetActive(true);
             }
         }

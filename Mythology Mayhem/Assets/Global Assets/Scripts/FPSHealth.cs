@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class FPSHealth : MonoBehaviour
 { // --------------------------
-    // ***PROPERTIES***
-    // --------------------------
-
+  // ***PROPERTIES***
+  // --------------------------
+    GameManager gameManager;
     [Header("Player Stats")]
     [SerializeField] HealthUIController huic;
     [SerializeField] public PlayerStats_SO ps;
@@ -36,22 +36,23 @@ public class FPSHealth : MonoBehaviour
     private void Start()
     {
         spawnPoint = gameObject.transform.position;
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing");
     }
 
     public void SetHealth(float h) {
-        GameManager.instance.gameData.saveData.playerData.curHealth = h;
+        gameManager.gameData.curHealth = h;
     }// end set health
 
     public float GetHealth() {
-        return GameManager.instance.gameData.saveData.playerData.curHealth;
+        return gameManager.gameData.curHealth;
     }//end get health
 
     public void TakeDamage(float d) {
-        GameManager.instance.gameData.saveData.playerData.curHealth -= d;
+        gameManager.gameData.curHealth -= d;
         huic.UpdateHealth();
-        if (GameManager.instance.gameData.saveData.playerData.curHealth <= 0) {
-            Death();
-        }
+
+        if (gameManager.gameData.curHealth <= 0) Death();
     }//end take damage
 
     public void Heal(float h, bool potion) {
@@ -60,7 +61,7 @@ public class FPSHealth : MonoBehaviour
             healSource.Play();
         }
 
-        GameManager.instance.gameData.saveData.playerData.curHealth = Mathf.Clamp(GameManager.instance.gameData.saveData.playerData.curHealth += h, 0 , GameManager.instance.gameData.saveData.playerData.maxHealth);
+        gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth += h, 0 , gameManager.gameData.maxHealth);
 
         huic.UpdateHealth();
     }
@@ -70,7 +71,7 @@ public class FPSHealth : MonoBehaviour
         if (GetHealth() <= 0) {
             GetComponent<PlayerMovement3D>().enabled = false;
             gameObject.transform.position = spawnPoint;
-            Heal(GameManager.instance.gameData.saveData.playerData.maxHealth, false);
+            Heal(gameManager.gameData.maxHealth, false);
             GetComponent<PlayerMovement3D>().enabled = true;
         }
     }

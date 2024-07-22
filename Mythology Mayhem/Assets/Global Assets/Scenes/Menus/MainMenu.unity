@@ -4566,6 +4566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2565397708880754528, guid: 06ebe0d2deb26244fa57f426523502ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2565397708880754530, guid: 06ebe0d2deb26244fa57f426523502ac, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -9731,7 +9735,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9c6d5d3716c0bd745a1416cdc2b323e4, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9786,7 +9790,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -429}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1313853120348224746
 Canvas:
@@ -9867,7 +9871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1313853120348224759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9933,7 +9937,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -4}
-  m_SizeDelta: {x: 1000, y: 100}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313853121152986679
 MonoBehaviour:
@@ -9955,7 +9959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E to activate
+  m_text: Press E to Read
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9982,17 +9986,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 18.3
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -22317,8 +22321,8 @@ MonoBehaviour:
   huic: {fileID: 1137120950566015483}
   UIActive: 0
   closeButtonPressTimer: 0
-  PressEObj: {fileID: 1313853120153216292}
-  PressEText: {fileID: 1313853121152986679}
+  PressEObj: {fileID: 886332710907315096}
+  PressEText: {fileID: 886332710726878054}
   eventSystem: {fileID: 1423091924}
   pauseMenu: {fileID: 6398990558195649094}
   stats: {fileID: 11400000, guid: 3ce03f4a16bd351458bc7c47b3a5ebf1, type: 2}
@@ -22575,7 +22579,11 @@ MonoBehaviour:
   heartCollectionTotal: 10
   collectedHearts: 
   collectedMirror: 0
+  collectedCompass: 0
   collectedBow: 0
+  collectedHammer: 0
+  collectedOwl: 0
+  collectedWolf: 0
   masterVolume: 0
   musicVolume: 0
   sfxVolume: 0
@@ -22614,7 +22622,9 @@ MonoBehaviour:
       maxHealth: 0
       collectedHearts: 
       collectedMirror: 0
+      collectedCompass: 0
       collectedBow: 0
+      collectedHammer: 0
       collectedOwl: 0
       collectedWolf: 0
     settingsData:

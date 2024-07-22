@@ -65,7 +65,7 @@ public class WeaponSwitcher : MythologyMayhem
         }
         else if (RightHandWeapons[currentRightHandWeapon].name == "TobiasBow")
         {
-            if (GameManager.instance.gameData.saveData.playerData.collectedBow)
+            if (gameManager.gameData.collectedBow)
             {
                 RightHandWeapons[currentRightHandWeapon].gameObject.SetActive(true);
 
@@ -75,7 +75,7 @@ public class WeaponSwitcher : MythologyMayhem
         }
         else if (RightHandWeapons[currentRightHandWeapon].name == "Thorshammer")
         {
-            if (GameManager.instance.gameData.saveData.playerData.collectedHammer)
+            if (gameManager.gameData.collectedHammer)
             {
                 RightHandWeapons[currentRightHandWeapon].gameObject.SetActive(true);
 
@@ -102,7 +102,7 @@ public class WeaponSwitcher : MythologyMayhem
         }
         else if (LeftHandWeapons[currentLeftHandWeapon].name == "GreekMirror3D")
         {
-            if (GameManager.instance.gameData.saveData.playerData.collectedMirror)
+            if (gameManager.gameData.collectedMirror)
             {
                 LeftHandWeapons[currentLeftHandWeapon].gameObject.SetActive(true);
 
@@ -112,7 +112,7 @@ public class WeaponSwitcher : MythologyMayhem
         }
         else if (LeftHandWeapons[currentLeftHandWeapon].name.Contains("Compass"))
         {
-            if (GameManager.instance.gameData.saveData.playerData.collectedCompass)
+            if (gameManager.gameData.collectedCompass)
             {
                 LeftHandWeapons[currentLeftHandWeapon].gameObject.SetActive(true);
 

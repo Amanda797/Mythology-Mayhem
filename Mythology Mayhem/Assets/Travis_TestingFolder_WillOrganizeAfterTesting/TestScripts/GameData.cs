@@ -22,7 +22,11 @@ public class GameData : MythologyMayhem
     public int heartCollectionTotal;
     public bool[] collectedHearts;
     public bool collectedMirror;
+    public bool collectedCompass;
     public bool collectedBow;
+    public bool collectedHammer;
+    public bool collectedOwl;
+    public bool collectedWolf;
     [Header("Main Menu")]
     public float masterVolume;
     public float musicVolume;

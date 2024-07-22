@@ -139,6 +139,10 @@ PrefabInstance:
       value: Health Potion
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.56
       objectReference: {fileID: 0}
@@ -468,7 +472,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4251938, y: 27.195179}
+  m_Size: {x: 1, y: 27.195179}
   m_EdgeRadius: 0
 --- !u!1 &93845059
 GameObject:
@@ -649,7 +653,6 @@ GameObject:
   - component: {fileID: 114642442}
   - component: {fileID: 114642445}
   - component: {fileID: 114642444}
-  - component: {fileID: 114642443}
   m_Layer: 0
   m_Name: GreekCavern_2D
   m_TagString: Untagged
@@ -672,19 +675,6 @@ Transform:
   m_Father: {fileID: 1646405822}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &114642443
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114642441}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &114642444
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -745,6 +735,10 @@ PrefabInstance:
     - target: {fileID: 5151540226435099969, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_Name
       value: Health Potion (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099982, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_RootOrder
@@ -1019,6 +1013,18 @@ PrefabInstance:
     - target: {fileID: 6334924973164320035, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: m_Name
       value: Scroll (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: text
@@ -2486,6 +2492,10 @@ PrefabInstance:
       value: Health Potion (4)
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.56
       objectReference: {fileID: 0}
@@ -2881,6 +2891,18 @@ PrefabInstance:
     - target: {fileID: 6334924973164320035, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: m_Name
       value: Scroll (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: textUI
@@ -3569,8 +3591,6 @@ GameObject:
   m_Component:
   - component: {fileID: 463573657}
   - component: {fileID: 463573656}
-  - component: {fileID: 463573658}
-  - component: {fileID: 463573659}
   m_Layer: 0
   m_Name: 2Dlabyrinthentrance
   m_TagString: Untagged
@@ -3645,50 +3665,6 @@ Transform:
   m_Father: {fileID: 1370442287}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &463573658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463573655}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d77282dc506b0441b541c45dddcef22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextLevel: Labyrinth 3D
-  lever: {fileID: 0}
-  nextSpawnIndex: 0
-  entered: 0
-  blocked: 0
-  doorOpen: 0
---- !u!61 &463573659
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463573655}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.39248133, y: -8.308201}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 5.894602, z: 0, w: 7.746047}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 21, y: 15.011719}
-    newSize: {x: 21, y: 15.337071}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.354014, y: 31.61787}
-  m_EdgeRadius: 0
 --- !u!1 &468236960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,6 +4000,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 11635e8a8642868439aa37bc9c9c7bb0, type: 3}
+    - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: activePlayerSpawner
       value: 
       objectReference: {fileID: 2029514919}
@@ -4297,6 +4277,18 @@ PrefabInstance:
     - target: {fileID: 6334924973164320035, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: m_Name
       value: Scroll (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: text
@@ -4795,7 +4787,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.13169134}
+  m_Offset: {x: 0.10785542, y: 0.13169134}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4806,7 +4798,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2633827}
+  m_Size: {x: 0.24598078, y: 1.2633827}
   m_EdgeRadius: 0
 --- !u!212 &686922028
 SpriteRenderer:
@@ -5680,6 +5672,8 @@ MonoBehaviour:
   countAsLevelComplete: 0
   completedChapter: 0
   completedLevel: 0
+  canTransition: 0
+  lever: {fileID: 0}
 --- !u!1 &756927205
 GameObject:
   m_ObjectHideFlags: 0
@@ -6232,6 +6226,10 @@ PrefabInstance:
     - target: {fileID: 5151540226435099969, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_Name
       value: Health Potion (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -8470,6 +8468,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scroll (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: text
       value: "Dear Scholar,\r\nWhy are there owl feathers all over my desk with a
@@ -8522,6 +8532,10 @@ PrefabInstance:
     - target: {fileID: 5151540226435099969, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_Name
       value: Health Potion (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -9717,6 +9731,8 @@ MonoBehaviour:
   countAsLevelComplete: 0
   completedChapter: 0
   completedLevel: 0
+  canTransition: 0
+  lever: {fileID: 0}
 --- !u!1 &1291485396
 GameObject:
   m_ObjectHideFlags: 0
@@ -10149,7 +10165,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4251938, y: 27.195179}
+  m_Size: {x: 1, y: 27.195179}
   m_EdgeRadius: 0
 --- !u!1 &1370378736
 GameObject:
@@ -11328,6 +11344,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scroll (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: text
       value: "Crios,\r\nI went to a party last night, which was why I was not at
@@ -11454,8 +11482,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1470623952}
   - component: {fileID: 1470623951}
-  - component: {fileID: 1470623954}
-  - component: {fileID: 1470623953}
   m_Layer: 0
   m_Name: Medusa Cave Entrance
   m_TagString: Untagged
@@ -11531,50 +11557,6 @@ Transform:
   m_Father: {fileID: 1370442287}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1470623953
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470623950}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.13114762, y: -2.9326982}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 15.36}
-    newSize: {x: 21, y: 15.001465}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.5953975, y: 21.2254}
-  m_EdgeRadius: 0
---- !u!114 &1470623954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470623950}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d77282dc506b0441b541c45dddcef22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextLevel: 2D cavern
-  lever: {fileID: 0}
-  nextSpawnIndex: 0
-  entered: 0
-  blocked: 0
-  doorOpen: 0
 --- !u!1 &1471491041
 GameObject:
   m_ObjectHideFlags: 0
@@ -11804,6 +11786,10 @@ PrefabInstance:
     - target: {fileID: 5151540226435099969, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_Name
       value: Health Potion (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099982, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_RootOrder
@@ -12500,7 +12486,6 @@ GameObject:
   - component: {fileID: 1707614766}
   - component: {fileID: 1707614769}
   - component: {fileID: 1707614768}
-  - component: {fileID: 1707614767}
   m_Layer: 0
   m_Name: GreekLibrary_2D
   m_TagString: Untagged
@@ -12523,19 +12508,6 @@ Transform:
   m_Father: {fileID: 2029514920}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1707614767
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707614765}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1707614768
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12978,6 +12950,10 @@ PrefabInstance:
     - target: {fileID: 5151540226435099969, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_Name
       value: Health Potion (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099982, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_RootOrder
@@ -13831,7 +13807,6 @@ GameObject:
   - component: {fileID: 1967253469}
   - component: {fileID: 1967253472}
   - component: {fileID: 1967253471}
-  - component: {fileID: 1967253470}
   m_Layer: 0
   m_Name: GreekLabyrinth_3D
   m_TagString: Untagged
@@ -13854,19 +13829,6 @@ Transform:
   m_Father: {fileID: 423664735}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1967253470
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967253468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1967253471
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14265,6 +14227,10 @@ PrefabInstance:
     - target: {fileID: 5151540226435099969, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_Name
       value: Health Potion (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5151540226435099981, guid: a0cc2657a98d5964c85b297382877ac8, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -15515,6 +15481,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scroll
       objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334924973164320037, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6334924973164320039, guid: ac0f2f30c5e60f24c9348602b7851bff, type: 3}
       propertyPath: textUI
       value: 
@@ -15601,6 +15579,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8459894976310929799, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459894976310929801, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
+      propertyPath: m_Size.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459894976310929802, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459894976310929802, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459894976310929802, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84400b3fdabb6af418c500d2d7448bdd, type: 3}
+    - target: {fileID: 8459894976310929802, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459894976310929802, guid: 42f6a694c53eee44e8c3eb5b3215cb4f, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
