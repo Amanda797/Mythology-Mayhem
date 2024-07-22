@@ -93,6 +93,12 @@ public class PlayerController : MonoBehaviour
                     pushBlock.GetComponent<AudioSource>().Stop();
                 }
             }
+
+            if (pushBlock != null && pushing)
+            {
+                if (Input.GetAxis("Horizontal") == 0) pushBlock.GetComponent<AudioSource>().Stop();
+                else if (!pushBlock.GetComponent<AudioSource>().isPlaying) pushBlock.GetComponent<AudioSource>().Play();
+            }
         }
 
         FlipPlayerSpriteWithMoveDirection();

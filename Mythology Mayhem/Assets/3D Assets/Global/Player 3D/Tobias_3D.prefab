@@ -487,10 +487,14 @@ MonoBehaviour:
   - {fileID: 4070622007176919935}
   - {fileID: 770104369566018811}
   - {fileID: 7999964727446946277}
+  currentRightHandWeapon: 0
   LeftHandWeapons:
   - {fileID: 7685039813801856306}
   - {fileID: 1503170332708481224}
   - {fileID: 2826656461728640699}
+  currentLeftHandWeapon: 0
+  weaponSwitchCooldown: 0.5
+  canSwitch: 0
 --- !u!114 &4643650408523221103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1762,6 +1766,10 @@ PrefabInstance:
     - target: {fileID: 6623275997944953365, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634773385005766957, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7634773385005766957, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
       propertyPath: m_PlayOnAwake
