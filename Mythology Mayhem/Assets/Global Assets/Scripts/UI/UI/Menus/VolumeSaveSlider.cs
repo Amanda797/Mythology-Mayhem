@@ -43,7 +43,7 @@ public class VolumeSaveSlider : MonoBehaviour
         //float volumeValue = PlayerPrefs.GetFloat("Volume");
         currentVolume = GameManager.instance.gameData.masterVolume;
         audioMixer.SetFloat("MasterVolume", currentVolume);
-        volumeSlider.value = currentVolume;
+        //volumeSlider.value = currentVolume;
         loaded = true;
     }
 

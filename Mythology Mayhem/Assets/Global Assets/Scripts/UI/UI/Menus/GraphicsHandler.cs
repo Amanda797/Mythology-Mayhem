@@ -22,16 +22,16 @@ public class GraphicsHandler : MonoBehaviour
         filteredResolutions = new List<Resolution>();
         //resolutionDropdown.ClearOptions();
         currentRefreshRate = Screen.currentResolution.refreshRate;
-
         for(int i = 0; i < resolutions.Length; i++) {
             if(resolutions[i].refreshRate == currentRefreshRate) {
                 filteredResolutions.Add(resolutions[i]);
+                print(resolutions[i]);
             }
         }
 
         List<string> options = new List<string>();
         for(int i = 0; i < filteredResolutions.Count; i++) {
-            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRate + " Hz";
+            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height;// + " " + filteredResolutions[i].refreshRate + " Hz";
             options.Add(resolutionOption);
 
             if(filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height) {
@@ -39,7 +39,7 @@ public class GraphicsHandler : MonoBehaviour
             }
         }
 
-        //resolutionDropdown.AddOptions(options);
+        resolutionDropdown.AddOptions(options);
         //resolutionDropdown.value = currentResolutionIndex;
         //resolutionDropdown.RefreshShownValue();
     }
@@ -65,7 +65,8 @@ public class GraphicsHandler : MonoBehaviour
     public void FullScreenToggle() {
         if(Screen.fullScreenMode == FullScreenMode.Windowed) {
             Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-            fsm = FullScreenMode.FullScreenWindow;  
+            fsm = FullScreenMode.FullScreenWindow;
+            SetResolution(filteredResolutions.Count - 1);
         } else {
             Screen.fullScreenMode = FullScreenMode.Windowed;            
             fsm = FullScreenMode.Windowed;
