@@ -9,34 +9,28 @@ using UnityEngine.SceneManagement;
 public class LeverPuzzle : MonoBehaviour
 {
     GameManager gameManager;
-    [SerializeField] LeverPuzzleManager leverPuzzleManager;
-    public Animator anim;
-    public bool switchOn = false;
+    AudioSource audioSource;
+    LeverPuzzleManager leverPuzzleManager;
+    Animator anim;
+    bool switchOn = false;
     bool canOpen = false;
     [SerializeField] int arrayPos = 0;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        leverPuzzleManager = GetComponentInParent<LeverPuzzleManager>();
+    }
     void Start()
     {
-        if (GetComponent<Animator>() != null) anim = GetComponent<Animator>();
-        else Debug.LogWarning("Animator Missing.");
-
-        if (GameManager.instance != null) 
-        {
-            gameManager = GameManager.instance;
-
-            //CHECK IF THE PLAYER ALREADY HAS THE OWL. IF SO SET ALL LEVERS TO THE CORRECT POSITION.
-        }
+        if (GameManager.instance != null)  gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing.");
 
         if (!switchOn) anim.Play("LeverAnim");
         else anim.Play("LeverOff");
-
-        leverPuzzleManager = GetComponentInParent<LeverPuzzleManager>();
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!canOpen) return;
@@ -63,13 +57,11 @@ public class LeverPuzzle : MonoBehaviour
 
     private void TwoDSwitchOnOff()
     {
-        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeverAnim")) return;
-        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("LeverOff")) return;
         if (switchOn) anim.Play("LeverAnim");
         else anim.Play("LeverOff");
         switchOn = !switchOn;
         canOpen = false;
-
+        audioSource.Play();
         leverPuzzleManager.CheckPuzzel(arrayPos, switchOn);
     }
 }

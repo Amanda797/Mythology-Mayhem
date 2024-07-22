@@ -16,7 +16,7 @@ public class MouseLook : MonoBehaviour
         {
             playerBody = transform.parent;
         }
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
     // Update is called once per frame

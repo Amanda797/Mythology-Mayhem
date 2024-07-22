@@ -30,8 +30,8 @@ public class SimpleCharacterMotor : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        Cursor.lockState = cursorLockMode;
-        Cursor.visible = cursorVisible;
+        //Cursor.lockState = cursorLockMode;
+        //Cursor.visible = cursorVisible;
         targetRotation = targetPivotRotation = Quaternion.identity;
     }
 

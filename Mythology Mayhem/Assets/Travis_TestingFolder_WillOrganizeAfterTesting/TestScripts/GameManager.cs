@@ -154,6 +154,8 @@ public class GameManager : MythologyMayhem
         checkProx = false;
         checkUnneeded = false;
         pauseMenu.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     
     void LoadSystemsUpdate() 

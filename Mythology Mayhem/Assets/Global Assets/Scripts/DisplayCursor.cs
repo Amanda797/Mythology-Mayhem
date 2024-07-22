@@ -8,20 +8,20 @@ public class DisplayCursor : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
-    private void Start()
-    {
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
-    }
+    //private void Start()
+    //{
+    //    Cursor.SetCursor(null, Vector2.zero, cursorMode);
+    //}
 
-    void OnMouseEnter()
-    {
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-    }
+    //void OnMouseEnter()
+    //{
+    //    Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+    //}
 
-    void OnMouseExit()
-    {
-        // Pass 'null' to the texture parameter to use the default system cursor.
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
-    }
+    //void OnMouseExit()
+    //{
+    //    // Pass 'null' to the texture parameter to use the default system cursor.
+    //    Cursor.SetCursor(null, Vector2.zero, cursorMode);
+    //}
     
 }

@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing or Inactive.");
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
 
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -92,6 +92,12 @@ public class PlayerController : MonoBehaviour
                     pushing = false;
                     pushBlock.GetComponent<AudioSource>().Stop();
                 }
+            }
+
+            if (pushBlock != null && pushing)
+            {
+                if (Input.GetAxis("Horizontal") == 0) pushBlock.GetComponent<AudioSource>().Stop();
+                else if (!pushBlock.GetComponent<AudioSource>().isPlaying) pushBlock.GetComponent<AudioSource>().Play();
             }
         }
 

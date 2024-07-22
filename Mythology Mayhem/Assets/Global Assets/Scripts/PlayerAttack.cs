@@ -28,7 +28,6 @@ public class PlayerAttack : MythologyMayhem
         {
             if (Input.GetMouseButtonDown(0) && !attack3D.GetIsAttacking())
             {
-                Debug.Log(canAttack);
                 canAttack = false;
 
                 //Store Original Damage
