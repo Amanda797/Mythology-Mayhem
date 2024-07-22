@@ -46,7 +46,7 @@ public class GameManager : MythologyMayhem
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
-
+    [SerializeField] Light uniDirLight;
     public GameObject gameplayUI;
 
     public bool startSceneDebugLoad;
@@ -111,6 +111,16 @@ public class GameManager : MythologyMayhem
         if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();
+        }
+        if (currentScene == Level.GreekLabyrinth_3D && uniDirLight.enabled)
+        {
+            FindObjectOfType<TorchSFXManager>().ToggleAudioSources(true);
+            uniDirLight.enabled = false;
+        }
+        else if (currentScene != Level.GreekLabyrinth_3D && !uniDirLight.enabled)
+        {
+            FindObjectOfType<TorchSFXManager>().ToggleAudioSources(false);
+            uniDirLight.enabled = true;
         }
     }
     public void LoadSystemsStart(bool newGame) 
