@@ -245,10 +245,16 @@ MonoBehaviour:
   - spawningScene
   - spwanPointIndex
   - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 3371725774677677157}
   spriteRenderer: {fileID: 3371725774677677144}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  audioSource: {fileID: 0}
+  idleSounds: []
+  attackSounds: []
+  hurtSounds: []
+  deathSounds: []
   enemyDimension: 0
   health: {fileID: 636311232826927295}
   animator: {fileID: 3371725774677677145}
@@ -428,7 +434,7 @@ AudioSource:
   m_GameObject: {fileID: 3371725774677677153}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9066bd2ef26f93b48b5d0335693e4014, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.75
@@ -536,18 +542,17 @@ MonoBehaviour:
   - {fileID: 3371725774677677147}
   mainObject: {fileID: 3371725774677677153}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 3371725774677677159}
-  deathSound: {fileID: 3371725774677677159}
-  healSound: {fileID: 0}
   anim: {fileID: 3371725774677677145}
   hurtTrigger: Hurt
   deathTrigger: IsDead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
 --- !u!114 &8564268730215925655
 MonoBehaviour:
   m_ObjectHideFlags: 0

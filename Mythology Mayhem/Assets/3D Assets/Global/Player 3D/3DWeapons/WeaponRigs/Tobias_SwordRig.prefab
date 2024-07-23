@@ -197,11 +197,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d116589757e65143b6416356f2df849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   playerMovement: {fileID: 0}
   anim: {fileID: 4501211041554567092}
   attackAnim: {fileID: 7400000, guid: 87428fbdc6f8ff34f920a32f1beea96f, type: 2}
   attack3D: {fileID: 0}
   mainHandDamage: 10
+  attackSpeed: 0.5
   effectsScript: {fileID: 8068644842755436185}
 --- !u!114 &555885204615349065
 MonoBehaviour:
@@ -215,6 +220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d1be064a999e047bc40a27b99b607b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
   MainOrOff: 1
   mainHand: 1
   offHand: 0
@@ -227,10 +236,10 @@ AudioSource:
   m_GameObject: {fileID: 5810007187750215855}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3688536365896545760, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 8300000, guid: 90083c9cbd50a1245ad0cd2911b3db01, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -73,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider2D: {fileID: 0}
+  otherColliders2D: []
 --- !u!1 &2578502097357954850
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,10 +225,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 2578502097357954854}
   spriteRenderer: {fileID: 2578502097357954859}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  audioSource: {fileID: 0}
+  idleSounds: []
+  attackSounds: []
+  hurtSounds: []
+  deathSounds: []
   enemyDimension: 0
   health: {fileID: 6231685702661598096}
   animator: {fileID: 2578502097357954858}
@@ -405,7 +416,7 @@ AudioSource:
   m_GameObject: {fileID: 2578502097357954850}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 8300000, guid: 749754cf52894dc4e9bea9ee16e69dff, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.75
@@ -507,8 +518,6 @@ MonoBehaviour:
   patrolBool: IsPatrolling
   speed: 0.6
   body: {fileID: 2578502097357954850}
-  attack: {fileID: 2578502095996227105}
-  playerCollider: {fileID: 0}
   attackBool: IsAttacking
   attackLock: AttackMode
   meleeDistance: 3
@@ -534,14 +543,14 @@ MonoBehaviour:
   - {fileID: 2578502097357954856}
   mainObject: {fileID: 2578502097357954850}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 2578502097357954852}
-  deathSound: {fileID: 2578502097357954852}
-  healSound: {fileID: 0}
   anim: {fileID: 2578502097357954858}
   hurtTrigger: 
   deathTrigger: 
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
