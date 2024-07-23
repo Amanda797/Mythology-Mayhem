@@ -34,6 +34,7 @@ public class GameManager : MythologyMayhem
     [Header("Sound")]
     public AudioListener listener;
     public AudioSource backgroundMusic;
+    public AudioSource ambianceAudioSource;
 
     [Header("UI")]
     public HealthUIController huic;
@@ -337,6 +338,15 @@ public class GameManager : MythologyMayhem
                         backgroundMusic.Play();
                     }
                 }
+
+                if (currentLocalManager.ambianceClip != null)
+                {
+                    if (ambianceAudioSource.clip != currentLocalManager.ambianceClip)
+                    {
+                        ambianceAudioSource.clip = currentLocalManager.ambianceClip;
+                        ambianceAudioSource.Play();
+                    }
+                }
                 //return;
             }
         }
@@ -353,6 +363,8 @@ public class GameManager : MythologyMayhem
             {
                 currentPlayer = playerControllers[i].player;
                 playerControllers[i].player.gameObject.SetActive(true);
+                if (currentPlayer.gameObject.GetComponent<PlayerMovement3D>() != null) currentPlayer.gameObject.GetComponent<PlayerMovement3D>().canPlayFootstepClip = true;
+                else if (currentPlayer.gameObject.GetComponent<PlayerController>() != null) currentPlayer.gameObject.GetComponent<PlayerController>().canPlayFootstepClip = true;
             }
             else 
             {

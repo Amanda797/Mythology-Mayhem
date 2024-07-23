@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
+
 
 public class PlayerController : MonoBehaviour
 {
     GameManager gameManager;
+    public LocalGameManager localGameManager;
     #region Variables
     [Header("Player Movement")]
     [SerializeField] private float walkSpeed = 200f;
@@ -29,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     public float XMovement { get => xMovement; set => xMovement = value; }
     public AudioSource FootstepsSFX { get => footstepsSFX; set => footstepsSFX = value; }
+
+    public bool canPlayFootstepClip = true;
     #endregion Variables
 
 
@@ -45,7 +50,6 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         anim.SetBool("IsGrounded", true);
-
     }
 
     // Update is called once per frame
@@ -70,16 +74,16 @@ public class PlayerController : MonoBehaviour
                 rb2d.gravityScale = 1;
             }
         }
-        if(canPush || pushing)
+        if (canPush || pushing)
         {
-            if (Input.GetKeyDown(KeyCode.E) && grounded) 
+            if (Input.GetKeyDown(KeyCode.E) && grounded)
             {
                 gameManager.Popup("", false);
                 if (!pushing)
                 {
                     pushing = true;
                     pushBlock.transform.SetParent(gameObject.transform);
-                    pushBlock.transform.localPosition = new Vector3(4,-.2f,0); //offset new position
+                    pushBlock.transform.localPosition = new Vector3(4, -.2f, 0); //offset new position
                     walkSpeed = 100;
                     anim.SetBool("IsPush", true);
                     pushBlock.GetComponent<AudioSource>().Play();
@@ -99,6 +103,8 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetAxis("Horizontal") == 0) pushBlock.GetComponent<AudioSource>().Stop();
                 else if (!pushBlock.GetComponent<AudioSource>().isPlaying) pushBlock.GetComponent<AudioSource>().Play();
             }
+
+
         }
 
         FlipPlayerSpriteWithMoveDirection();
@@ -250,12 +256,37 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("IsWalking", GetInput());
             anim.SetBool("IsRunning", isRunning);
+            // if the player is moving left or right
+            if (canPlayFootstepClip && grounded)
+            {
+                Debug.Log("canPlayFootstepClip");
+                canPlayFootstepClip = false;
+                // randomly select a audio clip from the footstep clips array on the local game manager
+                AudioClip clip = localGameManager.footstepClips[Random.Range(0, localGameManager.footstepClips.Length)];
+                localGameManager.footstepAudioSource.clip = clip;
+                localGameManager.footstepAudioSource.Play();
+                StartCoroutine(ToggleFootStep());
+                // play footstep audio 
+            }
         }
         else
         {
             anim.SetBool("IsWalking", false);
             anim.SetBool("IsRunning", false);
         }
+    }
+
+    IEnumerator ToggleFootStep()
+    {
+        Debug.Log("ToggleFootStep");
+        float waitTime;
+
+        if(isRunning) waitTime = .25f;
+        else if (pushing) waitTime = .75f;
+        else waitTime = .5f;
+
+        yield return new WaitForSeconds(waitTime);
+        canPlayFootstepClip = !canPlayFootstepClip;
     }
     #endregion Self-defined Methods
 }

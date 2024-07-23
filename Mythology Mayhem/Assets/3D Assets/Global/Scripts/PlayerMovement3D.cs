@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement3D : MythologyMayhem
 {
     //selected character
     public Character character;
-
+    public LocalGameManager localGameManager;
     [SerializeField] private CharacterController controller;
     [SerializeField] private float speed = 12f;
     [SerializeField] private float jumpHeight = 3f;
@@ -38,6 +39,7 @@ public class PlayerMovement3D : MythologyMayhem
     [Header("Medusa")]
     public bool frozen;
     public float frozenTimer;
+    public bool canPlayFootstepClip = true;
 
     void Start()
     {
@@ -77,6 +79,18 @@ public class PlayerMovement3D : MythologyMayhem
 
             controller.Move(move * speed * Time.deltaTime);
 
+            // if the player is moving left or right
+            if (input != Vector2.zero && canPlayFootstepClip && isGrounded)
+            {
+                Debug.Log("canPlayFootstepClip");
+                canPlayFootstepClip = false;
+                // randomly select a audio clip from the footstep clips array on the local game manager
+                AudioClip clip = localGameManager.footstepClips[Random.Range(0, localGameManager.footstepClips.Length)];
+                localGameManager.footstepAudioSource.clip = clip;
+                localGameManager.footstepAudioSource.Play();
+                StartCoroutine(ToggleFootStep());
+                // play footstep audio 
+            }
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -232,5 +246,13 @@ public class PlayerMovement3D : MythologyMayhem
             //and reset for next jump cycle
             doubleJumped = false;
         }
+    }
+    IEnumerator ToggleFootStep()
+    {
+        Debug.Log("ToggleFootStep");
+        float waitTime = .5f;
+
+        yield return new WaitForSeconds(waitTime);
+        canPlayFootstepClip = !canPlayFootstepClip;
     }
 }
