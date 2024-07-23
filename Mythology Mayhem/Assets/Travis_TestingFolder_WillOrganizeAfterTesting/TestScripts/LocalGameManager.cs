@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
@@ -39,6 +40,8 @@ public class LocalGameManager : MythologyMayhem
     [Header("Audio Settings")]
     public AudioClip backgroundMusic;
     public AudioClip ambianceClip;
+    public AudioClip[] footstepClips;
+    public AudioSource footstepAudioSource;
 
     [Header("Level Offset System")]
     public bool useOffset;
@@ -53,7 +56,10 @@ public class LocalGameManager : MythologyMayhem
     public Vector3 followOffset;
     public float orthoSize;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        footstepAudioSource = GetComponent<AudioSource>();
+    }
     void Start()
     {
         if (!mainGameManager)

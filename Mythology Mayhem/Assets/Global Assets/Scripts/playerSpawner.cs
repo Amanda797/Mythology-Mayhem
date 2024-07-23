@@ -56,7 +56,7 @@ public class playerSpawner : MythologyMayhem
 
             obj.transform.position = spawnPoints[spawnPointIndex].position;
             obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-
+            obj.GetComponent<PlayerController>().localGameManager = localGameManager;
             obj.SetActive(true);
         }
         else
@@ -67,7 +67,7 @@ public class playerSpawner : MythologyMayhem
 
             obj.transform.position = spawnPoints[spawnPointIndex].position;
             obj.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-
+            obj.GetComponent<PlayerMovement3D>().localGameManager = localGameManager;
             obj.SetActive(true);
 
             EnemyAI3D[] tempEnemies = FindObjectsOfType<EnemyAI3D>();
