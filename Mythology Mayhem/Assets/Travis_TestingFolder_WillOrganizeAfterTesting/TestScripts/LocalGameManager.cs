@@ -38,6 +38,7 @@ public class LocalGameManager : MythologyMayhem
 
     [Header("Audio Settings")]
     public AudioClip backgroundMusic;
+    public AudioClip ambianceClip;
 
     [Header("Level Offset System")]
     public bool useOffset;

@@ -34,6 +34,7 @@ public class GameManager : MythologyMayhem
     [Header("Sound")]
     public AudioListener listener;
     public AudioSource backgroundMusic;
+    public AudioSource ambianceMusic;
 
     [Header("UI")]
     public HealthUIController huic;
@@ -335,6 +336,15 @@ public class GameManager : MythologyMayhem
                     {
                         backgroundMusic.clip = currentLocalManager.backgroundMusic;
                         backgroundMusic.Play();
+                    }
+                }
+
+                if (currentLocalManager.ambianceClip != null)
+                {
+                    if (ambianceMusic.clip != currentLocalManager.ambianceClip)
+                    {
+                        ambianceMusic.clip = currentLocalManager.ambianceClip;
+                        ambianceMusic.Play();
                     }
                 }
                 //return;
