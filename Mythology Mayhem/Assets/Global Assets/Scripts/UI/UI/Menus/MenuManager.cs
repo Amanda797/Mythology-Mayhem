@@ -143,12 +143,14 @@ public class MenuManager : MonoBehaviour
         if (pauseParent.activeSelf)
         {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0;
         }
         else if (scrollPnl.activeSelf) Cursor.visible = true;
         else
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
         }
     }
@@ -172,5 +174,6 @@ public class MenuManager : MonoBehaviour
         scrollPnl.SetActive(false);
 
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

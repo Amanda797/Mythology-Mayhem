@@ -121,6 +121,8 @@ public class ScrollPopup : MonoBehaviour
         textMeshObject.text = scrollText;
         popup.SetActive(true);
         hover = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0;
     }
 
@@ -128,6 +130,8 @@ public class ScrollPopup : MonoBehaviour
     {
         popup.SetActive(false);
         hover = hoverDistance;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
     }
 

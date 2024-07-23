@@ -50,8 +50,9 @@ public class ScrollScript : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.E))
         {
-            Time.timeScale = 0;
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
             audioSource.Play();
             scrollDisplayText.text = text;
             scrollPanel.SetActive(true);
