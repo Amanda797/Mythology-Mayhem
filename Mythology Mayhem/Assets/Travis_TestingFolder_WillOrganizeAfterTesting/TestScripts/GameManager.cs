@@ -117,6 +117,10 @@ public class GameManager : MythologyMayhem
         {
             FindObjectOfType<TorchSFXManager>().ToggleAudioSources(true);
             uniDirLight.enabled = false;
+
+            Camera camera = currentPlayer.gameObject.GetComponentInChildren<Camera>();
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = Color.black;
         }
         else if (currentScene != Level.GreekLabyrinth_3D && !uniDirLight.enabled)
         {
