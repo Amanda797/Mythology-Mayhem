@@ -5,7 +5,7 @@ using UnityEngine;
 public class LeverPuzzleManager : MonoBehaviour
 {
     GameManager gameManager;
-    public DoorCode Door;
+    AudioSource audioSource;
     public GameObject itemToDisplay;
     public bool[] currentLeverAnswer = new bool[10];
     public bool[] correctLeverAnswer = new bool[] { true, false, true, false, true, false, true, false, true, false };
@@ -19,8 +19,7 @@ public class LeverPuzzleManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Door.doorOpen = true;
-        Door.blocked = false;
+        audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -34,6 +33,7 @@ public class LeverPuzzleManager : MonoBehaviour
 
         if (currentLeverAnswer.SequenceEqual(correctLeverAnswer))
         {
+            audioSource.Play();
             switch (puzzle)
             {
                 case Puzzle.mirror:
