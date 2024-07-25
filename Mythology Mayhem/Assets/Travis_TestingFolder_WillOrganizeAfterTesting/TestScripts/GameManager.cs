@@ -243,8 +243,9 @@ public class GameManager : MythologyMayhem
             {
                 checkUnneeded = UnloadUnneededScenes();
             }
-
         }
+
+        //if(!currentPlayer.gameObject.activeSelf) currentPlayer.gameObject.SetActive(true);
     }
 
     public void AddLoadedPlayer(PlayerAttach player) 

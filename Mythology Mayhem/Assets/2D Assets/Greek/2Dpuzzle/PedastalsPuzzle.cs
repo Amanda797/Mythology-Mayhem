@@ -3,12 +3,18 @@ using UnityEngine;
 public class PedastalsPuzzle : MonoBehaviour
 {
     GameManager gameManager;
+    AudioSource audioSource;
     public PedastalsPuzzleManager puzzleManager;
     public ElementalPuzzleItem.Item item;
 
 
     public SpriteRenderer elementalIcon;
     public bool hasItem = false;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
@@ -40,14 +46,12 @@ public class PedastalsPuzzle : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!hasItem) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(item);
             switch (item)
             {
                 case ElementalPuzzleItem.Item.Apple:
@@ -55,6 +59,7 @@ public class PedastalsPuzzle : MonoBehaviour
                     {
                         elementalIcon.color = Color.white;
                         puzzleManager.appleDone = true;
+                        audioSource.Play();
                     }
                     break;
                 case ElementalPuzzleItem.Item.Torch:
@@ -62,6 +67,7 @@ public class PedastalsPuzzle : MonoBehaviour
                     {
                         elementalIcon.color = Color.white;
                         puzzleManager.torchDone = true;
+                        audioSource.Play();
                     }
                     break;
                 case ElementalPuzzleItem.Item.Fish:
@@ -69,6 +75,7 @@ public class PedastalsPuzzle : MonoBehaviour
                     {
                         elementalIcon.color = Color.white;
                         puzzleManager.fishDone = true;
+                        audioSource.Play();
                     }
                     break;
                 case ElementalPuzzleItem.Item.Air:
@@ -76,6 +83,7 @@ public class PedastalsPuzzle : MonoBehaviour
                     {
                         elementalIcon.color = Color.white;
                         puzzleManager.airDone = true;
+                        audioSource.Play();
                     }
                     break;
                 default:
@@ -93,7 +101,7 @@ public class PedastalsPuzzle : MonoBehaviour
                 case ElementalPuzzleItem.Item.Apple:
                     if (puzzleManager.apple)
                     {
-                        gameManager.Popup("Press E to Place Item", true);
+                        gameManager.Popup("Press E to Place Apple", true);
                         hasItem = true;
                     }
                     else gameManager.Popup("Item Missing\nReturn to the Labyrinth", true);
@@ -101,7 +109,7 @@ public class PedastalsPuzzle : MonoBehaviour
                 case ElementalPuzzleItem.Item.Torch:
                     if (puzzleManager.torch)
                     {
-                        gameManager.Popup("Press E to Place Item", true);
+                        gameManager.Popup("Press E to Place Torch", true);
                         hasItem = true;
                     }
                     else gameManager.Popup("Item Missing\nReturn to the Labyrinth", true);
@@ -109,7 +117,7 @@ public class PedastalsPuzzle : MonoBehaviour
                 case ElementalPuzzleItem.Item.Fish:
                     if (puzzleManager.fish)
                     {
-                        gameManager.Popup("Press E to Place Item", true);
+                        gameManager.Popup("Press E to Place Fish", true);
                         hasItem = true;
                     }
                     else gameManager.Popup("Item Missing\nReturn to the Labyrinth", true);
@@ -117,7 +125,7 @@ public class PedastalsPuzzle : MonoBehaviour
                 case ElementalPuzzleItem.Item.Air:
                     if (puzzleManager.air)
                     {
-                        gameManager.Popup("Press E to Place Item", true);
+                        gameManager.Popup("Press E to Place Air", true);
                         hasItem = true;
                     }
                     else gameManager.Popup("Item Missing\nReturn to the Labyrinth", true);
@@ -132,7 +140,7 @@ public class PedastalsPuzzle : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            gameManager.Popup("Press E to Pick up", false);
+            gameManager.Popup("", false);
 
             hasItem = false;
         }

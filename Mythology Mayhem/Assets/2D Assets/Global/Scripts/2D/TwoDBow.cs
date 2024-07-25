@@ -5,6 +5,7 @@ using UnityEngine;
 public class TwoDBow : MonoBehaviour
 {
     GameManager gameManager;
+    [SerializeField] AudioClip clip;
     public bool pickUpAllowed = false;
     public bool pickedUp = false;
 
@@ -23,16 +24,6 @@ public class TwoDBow : MonoBehaviour
             puzzleManager.itemBow = this.gameObject;
         }
         else Debug.LogWarning("PedastalsPuzzleManager Missing.");
-
-        if (puzzleManager.fishDone && puzzleManager.appleDone && puzzleManager.torchDone && puzzleManager.airDone && !puzzleManager.bowCollected)
-        {
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-
     }
 
     // Update is called once per frame
@@ -66,13 +57,11 @@ public class TwoDBow : MonoBehaviour
     private void PickUp()
     {
         pickedUp = true;
-
+        AudioSource source = gameManager.GetComponent<AudioSource>();
+        source.clip = clip;
+        source.Play();
         gameManager.gameData.collectedBow = true;
         gameManager.SaveGame();
-        if (puzzleManager != null)
-        {
-            puzzleManager.bowCollected = true;
-        }
         gameObject.SetActive(false);
     }
 

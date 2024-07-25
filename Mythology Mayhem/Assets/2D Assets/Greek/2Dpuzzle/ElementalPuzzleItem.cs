@@ -5,7 +5,7 @@ using UnityEngine;
 public class ElementalPuzzleItem : MonoBehaviour
 {
     GameManager gameManager;
-    AudioSource audioSource;
+    [SerializeField] AudioClip clip;
     public PedastalsPuzzleManager puzzleManager;
     public enum Item
     {
@@ -16,10 +16,6 @@ public class ElementalPuzzleItem : MonoBehaviour
     public Item item;
     bool canPickup;
 
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
     void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
@@ -78,7 +74,9 @@ public class ElementalPuzzleItem : MonoBehaviour
                 puzzleManager.air = true;
                 break;
         }
-        audioSource.Play();
+        AudioSource source = gameManager.GetComponent<AudioSource>();
+        source.clip = clip;
+        source.Play();
 
         StartCoroutine(Destroy());
     }

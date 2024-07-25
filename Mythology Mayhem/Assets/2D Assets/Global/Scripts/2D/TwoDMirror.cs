@@ -3,6 +3,7 @@ using UnityEngine;
 public class TwoDMirror : MonoBehaviour
 {
     GameManager gameManager;
+    [SerializeField] AudioClip clip;
     public bool pickUpAllowed = false;
     public bool pickedUp = false;
 
@@ -48,6 +49,9 @@ public class TwoDMirror : MonoBehaviour
 
     private void PickUp()
     {
+        AudioSource source = gameManager.GetComponent<AudioSource>();
+        source.clip = clip;
+        source.Play();
         pickedUp = true;
         gameManager.gameData.collectedMirror = true;
         gameManager.SaveGame();
