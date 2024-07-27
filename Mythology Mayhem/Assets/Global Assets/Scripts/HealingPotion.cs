@@ -31,4 +31,19 @@ public class HealingPotion : MonoBehaviour
             }
         }  
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<FPSHealth>() != null)
+        {
+            if (gameManager.gameData.curHealth < gameManager.gameData.maxHealth)
+            {
+                AudioSource source = gameManager.GetComponent<AudioSource>();
+                source.clip = clip;
+                source.Play();
+                other.gameObject.GetComponent<FPSHealth>().Heal(healthAmount, true);
+                gameObject.SetActive(false);
+            }
+        }
+    }
 }

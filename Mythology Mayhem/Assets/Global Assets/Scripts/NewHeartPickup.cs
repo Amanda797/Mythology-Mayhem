@@ -37,5 +37,20 @@ public class NewHeartPickup : MonoBehaviour
             collected = true;
             gameObject.SetActive(false);
        }
-    }//end on trigger enter 2d
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!collected && other.tag == "Player")
+        {
+            AudioSource source = gameManager.GetComponent<AudioSource>();
+            source.clip = clip;
+            source.Play();
+            gameManager.gameData.maxHealth += 4;
+            gameManager.gameData.curHealth += 4;
+            gameManager.huic.UpdateHealth();
+            collected = true;
+            gameObject.SetActive(false);
+        }
+    }
 }
