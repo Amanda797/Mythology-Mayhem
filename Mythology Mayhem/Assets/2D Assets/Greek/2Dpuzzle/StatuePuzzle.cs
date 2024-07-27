@@ -6,6 +6,7 @@ using static StatueWeapon;
 
 public class StatuePuzzle : MonoBehaviour
 {
+    AudioSource audioSource;
     [System.Serializable]
     public class Statue 
     {
@@ -30,13 +31,17 @@ public class StatuePuzzle : MonoBehaviour
     public Weapon currentWeapon = Weapon.Null;
     public GameObject currentWeaponObject = null;
 
-
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void CheckWeaponPuzzleStatus()
     {
         Debug.Log("CheckWeaponPuzzleStatus: " + WeaponPuzzleComplete());
         if (WeaponPuzzleComplete())
         {
             //Instantiate(healthPickUp, healthSpawnPos.position, Quaternion.identity);
+            audioSource.Play();
             healthPickUp.SetActive(true);
             DisableAllStatueParts();
             puzzleCompleteEvent.Invoke();

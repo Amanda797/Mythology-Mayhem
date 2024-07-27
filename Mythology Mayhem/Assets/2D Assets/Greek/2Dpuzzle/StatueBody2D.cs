@@ -6,6 +6,8 @@ using static StatueWeapon;
 public class StatueBody2D : MonoBehaviour
 {
     GameManager gameManager;
+    [SerializeField] AudioClip[] clip;
+
     public SpriteRenderer bodySpriteRenderer;
     public SpriteRenderer headSpriteRenderer;
     public SpriteRenderer weaponSpriteRenderer;
@@ -24,14 +26,13 @@ public class StatueBody2D : MonoBehaviour
     public Weapon currentWeapon = Weapon.Null;
     public Weapon correctWeapon = Weapon.Null;
     GameObject currentWeaponObject;
-    // Start is called before the first frame update
+
     void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing.");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (canPickup && currentWeapon != Weapon.Null) if (Input.GetKeyUp(KeyCode.E)) PickUpWeapon();
@@ -86,14 +87,22 @@ public class StatueBody2D : MonoBehaviour
 
     void PlaceWeapon()
     {
+        AudioSource source = gameManager.GetComponent<AudioSource>();
+        source.clip = clip[Random.Range(0, clip.Length)];
+        source.Play();
+
         GameObject weapon = statueManager.currentWeaponObject;
         weapon.transform.parent = this.gameObject.transform;
         weapon.transform.position = weaponSpriteRenderer.transform.position;
+        weapon.GetComponent<StatueWeapon>().inHand = false;
+        weapon.GetComponent<StatueWeapon>().isPlaced = true;
+        weapon.GetComponent<StatueWeapon>().statue = this;
+        currentWeaponObject = weapon;
+
         currentWeapon = statueManager.currentWeapon;
         statueManager.currentWeapon = Weapon.Null;
-        statueManager.currentWeaponObject.GetComponent<StatueWeapon>().inHand = false;
-        currentWeaponObject = statueManager.currentWeaponObject;
         statueManager.currentWeaponObject = null;
+
         if (currentWeapon == correctWeapon)
         {
             hasCorrectWeapon = true;
@@ -104,19 +113,15 @@ public class StatueBody2D : MonoBehaviour
             statueManager.CheckWeaponPuzzleStatus();
         }
 
-        // TODO: need to do something with the weapon object after placing it.
     }
 
     void PickUpWeapon()
     {
         Debug.Log("PickUpWeapon");
-        GameObject weapon = currentWeaponObject;
-        weapon.transform.parent = player.transform;
-        weapon.transform.position = player.transform.position;
-        statueManager.currentWeapon = currentWeapon;
+        currentWeaponObject.transform.parent = null;
+        currentWeaponObject.GetComponent<StatueWeapon>().PickUPWeapon();
+        currentWeaponObject = null;
         currentWeapon = Weapon.Null;
-        statueManager.currentWeaponObject = currentWeaponObject;
-        statueManager.currentWeaponObject.GetComponent<StatueWeapon>().inHand = true;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
