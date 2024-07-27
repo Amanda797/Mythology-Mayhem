@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class HealingPotion : MonoBehaviour
 {
     GameManager gameManager;
+    [SerializeField] AudioClip clip;
     [SerializeField] bool smallPotion;
     [SerializeField] int healthAmount = 2;
+
 
     private void Start()
     {
@@ -21,21 +23,12 @@ public class HealingPotion : MonoBehaviour
         {
             if (gameManager.gameData.curHealth < gameManager.gameData.maxHealth)
             {
+                AudioSource source = gameManager.GetComponent<AudioSource>();
+                source.clip = clip;
+                source.Play();
                 other.gameObject.GetComponent<PlayerStats>().Heal(healthAmount, true);
                 gameObject.SetActive(false);
             }
         }  
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<FPSHealth>() != null)
-        {
-            if (gameManager.gameData.curHealth < gameManager.gameData.maxHealth)
-            {
-                other.gameObject.GetComponent<FPSHealth>().Heal(healthAmount, true);
-                gameObject.SetActive(false);
-            }
-        }
     }
 }

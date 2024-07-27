@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     GameManager gameManager;
+    public AudioSource jumpAS;
     public LocalGameManager localGameManager;
     #region Variables
     [Header("Player Movement")]
@@ -42,9 +43,6 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing or Inactive.");
-
-        //Cursor.visible = true;
-        //Cursor.lockState = CursorLockMode.None;
 
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -129,6 +127,7 @@ public class PlayerController : MonoBehaviour
             {
                 rb2d.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
                 anim.SetTrigger("Jump");
+                jumpAS.Play();
             }
         }
     }

@@ -5,9 +5,12 @@ using UnityEngine;
 public class StatueWeapon : MonoBehaviour
 {
     GameManager gameManager;
+    [SerializeField] AudioClip[] clip;
+
     [SerializeField] StatuePuzzle statueManager;
+    public StatueBody2D statue;
     [SerializeField] GameObject player;
-    [SerializeField] bool isPlaced = false;
+    public bool isPlaced = false;
     [SerializeField] bool canPickUp = false;
     public bool inHand = false;
     [SerializeField] bool nearStatue = false;
@@ -31,19 +34,31 @@ public class StatueWeapon : MonoBehaviour
     void Update()
     {
         if (inHand && !nearStatue) if (Input.GetKeyUp(KeyCode.E)) DropWeapon();
-        if (canPickUp && !isPlaced) if (Input.GetKeyUp(KeyCode.E)) PickUPWeapon();
+        if (canPickUp) if (Input.GetKeyUp(KeyCode.E)) PickUPWeapon();
     }
-    void PickUPWeapon()
+    public void PickUPWeapon()
     {
+        AudioSource source = gameManager.GetComponent<AudioSource>();
+        source.clip = clip[Random.Range(0, clip.Length)];
+        source.Play();
         transform.parent = player.transform;
         statueManager.currentWeapon = weapon;
         statueManager.currentWeaponObject = this.gameObject;
         inHand = true;
+        if (statue != null)
+        {
+            isPlaced = false;
+            statue.currentWeapon = Weapon.Null;
+            statue = null;
+        }
     }
 
     void DropWeapon()
     {
         if (nearWeapon) return;
+        AudioSource source = gameManager.GetComponent<AudioSource>();
+        source.clip = clip[Random.Range(0, clip.Length)];
+        source.Play();
         transform.parent = null;
         statueManager.currentWeapon = Weapon.Null;
         statueManager.currentWeaponObject = null;

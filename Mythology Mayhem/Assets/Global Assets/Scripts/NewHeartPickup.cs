@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NewHeartPickup : MonoBehaviour
 {
+    GameManager gameManager;
+    [SerializeField] AudioClip clip;
     bool collected = false;
 
     [SerializeField] private float amplitude = 0.5f;
@@ -11,10 +13,11 @@ public class NewHeartPickup : MonoBehaviour
     private Vector2 posOffset = new Vector2();
     private Vector2 tempPos = new Vector2();
 
-    // Start is called before the first frame update
     void Start()
     {
         posOffset = transform.position;
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing");
     }
 
     // Update is called once per frame
@@ -27,18 +30,12 @@ public class NewHeartPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
        if(!collected && other.tag == "Player") {
+            AudioSource source = gameManager.GetComponent<AudioSource>();
+            source.clip = clip;
+            source.Play();
             other.GetComponent<PlayerStats>().CollectHeart(4);
             collected = true;
             gameObject.SetActive(false);
        }
     }//end on trigger enter 2d
-
-    private void OnTriggerEnter(Collider other) {
-       if(!collected && other.tag == "Player")
-        {
-            other.GetComponent<PlayerStats>().CollectHeart(4);
-            collected = true;
-            gameObject.SetActive(false);
-       }
-    }//end on trigger enter 3d
 }

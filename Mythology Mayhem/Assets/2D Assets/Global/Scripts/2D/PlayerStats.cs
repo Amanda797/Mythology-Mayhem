@@ -1,11 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
     GameManager gameManager;
+    public AudioSource swordAttackAS;
+    public AudioSource bowAttackAS;
+    public AudioSource hurtAS;
+    public AudioSource dieAS;
+    public AudioSource respawnAS;
 
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayers;
@@ -24,8 +27,6 @@ public class PlayerStats : MonoBehaviour
     private SpriteRenderer sr;
     public bool flipped = false;
     private bool respawning;
-    private AudioSource aud;
-    public AudioSource healSource;
 
     private GameObject owl;
     [HideInInspector]public int hitCount;
@@ -37,7 +38,6 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {        
         sr = GetComponent<SpriteRenderer>();
-        aud = GetComponent<AudioSource>();
         huic = GameObject.FindGameObjectWithTag("huic").GetComponent<HealthUIController>();
 
         huic.UpdateHealth();
@@ -107,8 +107,9 @@ public class PlayerStats : MonoBehaviour
 
     private void Attack()
     {
+        if (anim.GetBool("IsDead")) return;
         anim.SetTrigger("Attack");
-        aud.Play();
+        swordAttackAS.Play();
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(ps.AttackRange, ps.AttackRange+ps.AttackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
@@ -122,6 +123,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage) 
     {
+        if (anim.GetBool("IsDead")) return;
         if(gameManager.gameData.curHealth > 0)
         {
             gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth -= damage, 0, gameManager.gameData.maxHealth);
@@ -134,16 +136,12 @@ public class PlayerStats : MonoBehaviour
             {
                 Die();
             }
+            else hurtAS.Play();
         }
     }
 
     public void Heal(int heal, bool potion) 
     {
-        if (potion) 
-        {
-            healSource.Play();
-        }
-
         gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth += heal, 0, gameManager.gameData.maxHealth);
         huic.UpdateHealth();
     }
@@ -153,13 +151,10 @@ public class PlayerStats : MonoBehaviour
         if (gameManager.gameData.curHealth <= 0)
         {
             anim.SetBool("IsDead", true);
+            dieAS.Play();
             GetComponent<PlayerController>().enabled = false;
             StartCoroutine(Respawn());
         }
-    }
-    public void PlaySwordSwing()
-    {
-        aud.Play();
     }
     public IEnumerator Respawn() 
     {
@@ -168,6 +163,7 @@ public class PlayerStats : MonoBehaviour
         Heal((int)gameManager.gameData.maxHealth, false);
         GetComponent<PlayerController>().enabled = true;
         anim.SetBool("IsDead", false);
+        respawnAS.Play();
     }   
     
     public void CollectHeart(int amount)
