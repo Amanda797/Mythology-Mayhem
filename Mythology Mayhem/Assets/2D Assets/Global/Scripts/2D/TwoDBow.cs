@@ -22,6 +22,7 @@ public class TwoDBow : MonoBehaviour
         {
             puzzleManager = FindObjectOfType<PedastalsPuzzleManager>();
             puzzleManager.itemBow = this.gameObject;
+            gameObject.SetActive(false);
         }
         else Debug.LogWarning("PedastalsPuzzleManager Missing.");
     }

@@ -427,6 +427,8 @@ MonoBehaviour:
   countAsLevelComplete: 1
   completedChapter: 5
   completedLevel: 4
+  canTransition: 0
+  lever: {fileID: 0}
 --- !u!1 &1274977769
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +706,8 @@ MonoBehaviour:
   countAsLevelComplete: 1
   completedChapter: 5
   completedLevel: 3
+  canTransition: 0
+  lever: {fileID: 0}
 --- !u!1 &1701154649
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +817,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 48309436, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 48309438, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 617144638856596412, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -931,7 +943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5444431951995405099, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_Name
-      value: LocalGameManager
+      value: LocalGameManager Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7538481586903290538, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_LocalPosition.x
