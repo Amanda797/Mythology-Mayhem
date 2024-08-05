@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -129,13 +130,9 @@ public class PlayerStats : MonoBehaviour
             gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth -= damage, 0, gameManager.gameData.maxHealth);
             anim.SetTrigger("Hurt");
 
-            Debug.Log(huic != null);
             huic.UpdateHealth();
 
-            if (gameManager.gameData.curHealth <= 0)
-            {
-                Die();
-            }
+            if (gameManager.gameData.curHealth <= 0) Die();
             else hurtAS.Play();
         }
     }
@@ -148,8 +145,9 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        if (gameManager.gameData.curHealth <= 0)
+        if (!anim.GetBool("IsDead"))
         {
+            Debug.Log("Die");
             anim.SetBool("IsDead", true);
             dieAS.Play();
             GetComponent<PlayerController>().enabled = false;
@@ -159,10 +157,12 @@ public class PlayerStats : MonoBehaviour
     public IEnumerator Respawn() 
     {
         yield return new WaitForSeconds(2f);
+        anim.SetBool("IsDead", false);
         transform.position = spawnPoint;
         Heal((int)gameManager.gameData.maxHealth, false);
         GetComponent<PlayerController>().enabled = true;
         anim.SetBool("IsDead", false);
+        anim.Play("Greek-Boy-Idle", 0);
         respawnAS.Play();
     }   
     
