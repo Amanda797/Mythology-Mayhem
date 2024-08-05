@@ -23,9 +23,8 @@ public class ScrollScript : MonoBehaviour
     AudioSource audioSource;
     GameManager gameManager;
 
+    bool canRead = false;
     bool activeStatus = false;
-    bool scrollOpen = false;
-    bool scrollClosed = true;
 
     void Start()
     {
@@ -46,7 +45,8 @@ public class ScrollScript : MonoBehaviour
 
     void Update()
     {
-        if (!activeStatus) return;
+        if (!canRead) return;
+        if (Time.timeScale == 0) return;
 
         if (Input.GetKeyUp(KeyCode.E))
         {
@@ -65,7 +65,7 @@ public class ScrollScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             gameManager.Popup("Press E to Read", true);
-            activeStatus = true;
+            canRead = true;
         }
     }
 
@@ -74,7 +74,7 @@ public class ScrollScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             gameManager.Popup("Press E to Read", false);
-            activeStatus = false;
+            canRead = false;
         }
     }
 }
