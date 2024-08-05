@@ -258,6 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5126853399990283196}
+  - component: {fileID: 874163207}
   m_Layer: 0
   m_Name: Bone.001
   m_TagString: Untagged
@@ -281,6 +282,26 @@ Transform:
   m_Father: {fileID: 7682054570149464451}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &874163207
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207897516596631906}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8cbfe607442dfcd4785f419ea0dae800, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3774336707593388953
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +327,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3774336707593388953}
-  m_LocalRotation: {x: 0.00000005961128, y: 0.000000040355307, z: -0.000000008743758, w: 1}
+  m_LocalRotation: {x: 0.000000060000204, y: 0.0000000406186, z: -0.0000000088008045, w: 1}
   m_LocalPosition: {x: 0.04057343, y: -0.0000000032604275, z: -0.057712406}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
   m_ConstrainProportionsScale: 0
@@ -389,7 +410,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4309457965003432813}
-  m_LocalRotation: {x: 0.000037865226, y: 0.000576356, z: -0.06545328, w: 0.9978555}
+  m_LocalRotation: {x: 0.00058125437, y: 0.000008968811, z: 0.98862535, w: 0.15039827}
   m_LocalPosition: {x: -0.000000007450581, y: -0.0000000037252903, z: -0.0000000037252903}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
@@ -398,7 +419,7 @@ Transform:
   - {fileID: 2459716613470774778}
   m_Father: {fileID: 5126853399990283196}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.009, y: 0.066, z: 162.7}
 --- !u!33 &1094106939616232468
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -626,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae79286ef20937a4e99af4de01cc4172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 874163207}
   DoorTrigger: {fileID: 0}
 --- !u!82 &1528826993
 AudioSource:
