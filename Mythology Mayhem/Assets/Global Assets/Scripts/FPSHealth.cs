@@ -13,7 +13,10 @@ public class FPSHealth : MonoBehaviour
     [SerializeField] public PlayerStats_SO ps;
 
     [SerializeField] Vector3 spawnPoint = Vector3.zero;
+    bool isDead;
     public AudioSource healSource;
+    public AudioSource hurtAS;
+    public AudioSource dieAS;
 
     // --------------------------
     // ***METHODS***
@@ -27,10 +30,9 @@ public class FPSHealth : MonoBehaviour
             ps = huic.ps;
             ps.CanAttack = true;
             ps.NextAttackTime = 0;
-            //ps.CurrHealth = ps.MaxHealth;
         }
         else Debug.LogWarning("Can't find huic's player stats so");
-    }//end on awake
+    }
 
 
     private void Start()
@@ -42,25 +44,21 @@ public class FPSHealth : MonoBehaviour
 
     public void SetHealth(float h) {
         gameManager.gameData.curHealth = h;
-    }// end set health
+    }
 
-    public float GetHealth() {
-        return gameManager.gameData.curHealth;
-    }//end get health
-
-    public void TakeDamage(float d) {
-        gameManager.gameData.curHealth -= d;
-        huic.UpdateHealth();
-
-        if (gameManager.gameData.curHealth <= 0) Death();
-    }//end take damage
-
-    public void Heal(float h, bool potion) {
-        if (potion)
+    public void TakeDamage(float damage) {
+        if (gameManager.gameData.curHealth > 0)
         {
-            healSource.Play();
-        }
+            gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth -= damage, 0, gameManager.gameData.maxHealth);
+            huic.UpdateHealth();
 
+            if (gameManager.gameData.curHealth <= 0) Death();
+            else hurtAS.Play();
+        }
+    }
+
+    public void Heal(float h, bool potion)
+    {
         gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth += h, 0 , gameManager.gameData.maxHealth);
 
         huic.UpdateHealth();
@@ -68,11 +66,20 @@ public class FPSHealth : MonoBehaviour
 
     public void Death()
     {
-        if (GetHealth() <= 0) {
+        if (!isDead)
+        {
+            isDead = true;
+            dieAS.Play();
             GetComponent<PlayerMovement3D>().enabled = false;
-            gameObject.transform.position = spawnPoint;
-            Heal(gameManager.gameData.maxHealth, false);
-            GetComponent<PlayerMovement3D>().enabled = true;
+            StartCoroutine(Respawn());
         }
+    }
+    public IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(1f);
+        isDead = false;
+        gameObject.transform.position = spawnPoint;
+        Heal(gameManager.gameData.maxHealth, false);
+        GetComponent<PlayerMovement3D>().enabled = true;
     }
 }

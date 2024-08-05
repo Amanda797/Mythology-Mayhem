@@ -36,6 +36,7 @@ public class Mouse2D : MonoBehaviour
         if (enemy.DetectPlayer())
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
+            return;
         }
 
         // Continue Idle
@@ -56,6 +57,7 @@ public class Mouse2D : MonoBehaviour
         if (enemy.DetectPlayer() && enemy.currentStatePosition == Enemy.StatePosition.Current)
         {
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack,0));
+            return;
         }
         else
         // Continue M2T
@@ -82,6 +84,7 @@ public class Mouse2D : MonoBehaviour
 
     public void MeleeAttack()
     {
+        Debug.Log("MeleeAttack: " + enemy.DetectPlayer());
         //Check for Player
         if (!enemy.DetectPlayer())
         {
