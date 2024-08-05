@@ -7,12 +7,15 @@ public class ThreeDLever : MonoBehaviour
 {
     GameManager gameManager;
     AudioSource audioSource;
+    [SerializeField] Animator animator;
     [SerializeField] private BoxCollider DoorTrigger;
     bool canOpen = false;
+    bool isDown = false;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        animator.SetBool("isDown", false);
     }
     void Start()
     {
@@ -26,11 +29,9 @@ public class ThreeDLever : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!DoorTrigger.enabled)
-            {
-                audioSource.Play();
-                DoorTrigger.enabled = true;
-            }
+            animator.SetBool("isDown", !animator.GetBool("isDown"));
+            audioSource.Play();
+            DoorTrigger.enabled = animator.GetBool("isDown");
         }
     }
 
