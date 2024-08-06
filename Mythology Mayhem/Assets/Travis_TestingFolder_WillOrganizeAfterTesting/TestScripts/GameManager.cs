@@ -44,6 +44,7 @@ public class GameManager : MythologyMayhem
     public TextMeshProUGUI PressEText;
     public GameObject eventSystem;
     public GameObject pauseMenu;
+    public MenuManager pauseMenuManager;
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
