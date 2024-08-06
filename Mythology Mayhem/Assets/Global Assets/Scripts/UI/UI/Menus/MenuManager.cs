@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject optionsPnl;
     [SerializeField] GameObject creditsPnl;
     [SerializeField] GameObject helpPnl;
+    [SerializeField] Animator animator;
+    public TMP_Text scrollDisplayText;
     int sceneIndex;
 
     public AudioSource menuEffectSource;
@@ -33,11 +36,8 @@ public class MenuManager : MonoBehaviour
     }//end awake
 
     void Update() {
-        //Open/Close Pause Menu
-        if(Input.GetKeyDown(KeyCode.P)) {
-            TogglePause();
-        }
-    }//end update
+        if(Input.GetKeyDown(KeyCode.P)) TogglePause(false);
+    }
 
     // Starts the game, triggered by Start Game Button's OnClick function
     public void StartGame()
@@ -85,73 +85,53 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void ToggleOptions() {
-        menuEffectSource.Play();
+    public void ToggleOptions()
+    {
+        if (!optionsPnl.activeSelf) StartCoroutine(ChangeMenu("Options"));
+        else StartCoroutine(ChangeMenu("Pause Menu"));
+    }
 
-        //toggle between options and pause view
-        if (!optionsPnl.activeSelf)
+    public void ToggleCredits()
+    {
+        if (!creditsPnl.activeSelf) StartCoroutine(ChangeMenu("Credits"));
+        else StartCoroutine(ChangeMenu("Pause Menu"));
+    }
+
+    public void ToggleHelp()
+    {
+        if (!helpPnl.activeSelf) StartCoroutine(ChangeMenu("Help"));
+        else StartCoroutine(ChangeMenu("Pause Menu"));
+    }
+
+    public void TogglePause(bool isScroll)
+    {
+        // if the pasue menu is not active
+        if (pauseParent.activeSelf == false)
         {
+            pauseParent.SetActive(true);
             pausePnl.SetActive(false);
-            optionsPnl.SetActive(true);
-        }
-        else
-        {
-            pausePnl.SetActive(true);
             optionsPnl.SetActive(false);
-        }
-    }
-
-    public void ToggleCredits() {
-        menuEffectSource.Play();
-
-        //toggle between options and pause view
-        if (!creditsPnl.activeSelf)
-        {
-            pausePnl.SetActive(false);
-            creditsPnl.SetActive(true);
-        }
-        else
-        {
-            pausePnl.SetActive(true);
             creditsPnl.SetActive(false);
-        }
-    }
-
-    public void ToggleHelp() {
-        menuEffectSource.Play();
-
-        //toggle between options and pause view
-        if (!helpPnl.activeSelf)
-        {
-            pausePnl.SetActive(false);
-            helpPnl.SetActive(true);
-        }
-        else
-        {
-            pausePnl.SetActive(true);
             helpPnl.SetActive(false);
-        }
-    }
-
-    public void TogglePause() {
-        pauseParent.SetActive(!pauseParent.activeSelf);
-        optionsPnl.SetActive(!pauseParent.activeSelf);
-        creditsPnl.SetActive(!pauseParent.activeSelf);
-        helpPnl.SetActive(!pauseParent.activeSelf);
-        pausePnl.SetActive(pauseParent.activeSelf);
-
-        if (pauseParent.activeSelf)
-        {
+            scrollPnl.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0;
+            menuEffectSource.Play();
+            animator.Play("scroll", 0);
+            if (!isScroll) StartCoroutine(OpenPauseMenu());
+            else StartCoroutine(OpenScroll());
         }
-        else if (scrollPnl.activeSelf) Cursor.visible = true;
         else
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1;
+            pausePnl.SetActive(false);
+            optionsPnl.SetActive(false);
+            creditsPnl.SetActive(false);
+            helpPnl.SetActive(false);
+            scrollPnl.SetActive(false);
+            menuEffectSource.Play();
+            animator.Play("Scroll_Close", 0);
+            StartCoroutine(ClosePauseMenu());
         }
     }
 
@@ -159,21 +139,89 @@ public class MenuManager : MonoBehaviour
         print(website);
     }
 
-    public void MainMenu() {
-        Time.timeScale = 1;
-        GameManager.instance.playerControllers.Clear();
-        GameManager.instance.loadedLocalManagers.Clear();
-        GameManager.instance.inMainMenu = true;
-        GameManager.instance.huic.heartState.gameObject.SetActive(false);
-        SceneManager.LoadScene(0);
+    public void MainMenu()
+    {
+        StartCoroutine(ChangeMenu("Main Menu"));
+    }
+
+    IEnumerator OpenScroll()
+    {
+        yield return new WaitForSecondsRealtime(1);
+
+        scrollPnl.SetActive(true);
     }
 
     public void CloseScroll()
     {
-        Time.timeScale = 1;
         scrollPnl.SetActive(false);
+        TogglePause(true);
+    }
+
+    IEnumerator OpenPauseMenu()
+    {
+        yield return new WaitForSecondsRealtime(1);
+
+        pausePnl.SetActive(true);
+    }
+    IEnumerator ClosePauseMenu()
+    {
+        yield return new WaitForSecondsRealtime(1);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        pauseParent.SetActive(false);
+    }
+    IEnumerator ChangeMenu(string name)
+    {
+        menuEffectSource.Play();
+        animator.Play("Scroll_Close", 0);
+        optionsPnl.SetActive(false);
+        creditsPnl.SetActive(false);
+        helpPnl.SetActive(false);
+        pausePnl.SetActive(false);
+        yield return new WaitForSecondsRealtime(1);
+        switch (name)
+        {
+            case "Help":
+                menuEffectSource.Play();
+                animator.Play("scroll");
+                yield return new WaitForSecondsRealtime(1);
+                helpPnl.SetActive(true);
+                break;
+
+            case "Options":
+                menuEffectSource.Play();
+                animator.Play("scroll");
+                yield return new WaitForSecondsRealtime(1);
+                optionsPnl.SetActive(true);
+                break;
+
+            case "Credits":
+                menuEffectSource.Play();
+                animator.Play("scroll");
+                yield return new WaitForSecondsRealtime(1);
+                creditsPnl.SetActive(true);
+                break;
+
+            case "Main Menu":
+                Time.timeScale = 1;
+                GameManager.instance.playerControllers.Clear();
+                GameManager.instance.loadedLocalManagers.Clear();
+                GameManager.instance.inMainMenu = true;
+                GameManager.instance.huic.heartState.gameObject.SetActive(false);
+                SceneManager.LoadScene(1);
+                break;
+
+            case "Pause Menu":
+                menuEffectSource.Play();
+                animator.Play("scroll");
+                yield return new WaitForSecondsRealtime(1);
+                pausePnl.SetActive(true);
+                break;
+
+            default:
+                break;
+        }
     }
 }

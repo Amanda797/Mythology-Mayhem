@@ -13,9 +13,6 @@ public class ScrollPopup : MonoBehaviour
     float hover;
 
 
-    public GameplayUILink gameplayUI;
-    public GameObject popup;
-    public TMP_Text textMeshObject;
     public GameObject supriseObject;
     public bool isPopupActive = false;
     public bool surpriseSpawned = false;
@@ -27,14 +24,6 @@ public class ScrollPopup : MonoBehaviour
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing or Inactive.");
-
-        if (FindObjectOfType<GameplayUILink>() != null)
-        {
-            gameplayUI = FindObjectOfType<GameplayUILink>();
-            popup = gameplayUI.scrollPanel;
-            textMeshObject = gameplayUI.scrollDisplayText;
-        }
-        else Debug.LogWarning("GameplayUILink Missing or Inactive.");
 
         if (GetComponent<AudioSource>() != null) audioSource = GetComponent<AudioSource>();
         else Debug.LogWarning("AudioSource Missing or Inactive.");
@@ -50,8 +39,8 @@ public class ScrollPopup : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            textMeshObject.text = scrollText;
-            popup.SetActive(true);
+            gameManager.pauseMenuManager.scrollDisplayText.text = scrollText;
+            gameManager.pauseMenuManager.TogglePause(true);
             hover = 0;
             audioSource.Play();
             Cursor.visible = true;
