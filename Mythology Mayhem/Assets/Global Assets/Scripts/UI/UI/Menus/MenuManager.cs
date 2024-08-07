@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// This script manages the Pause Menu
 public class MenuManager : MonoBehaviour
 {
-    string website = "https://www.google.com/search?q=mythology-mayhem";
-
     [SerializeField] GameObject pauseParent;
     [SerializeField] GameObject scrollPnl;
     [SerializeField] GameObject pausePnl;
@@ -16,73 +14,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject helpPnl;
     [SerializeField] Animator animator;
     public TMP_Text scrollDisplayText;
-    int sceneIndex;
-
     public AudioSource menuEffectSource;
 
-    // Retain this game object across scenes.
-    private void Awake() {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("MenuManager");
-
-        if(objs.Length > 1)
-        {
-            for(int i = 0; i < objs.Length - 1; i++) {
-                Destroy(objs[i].gameObject);
-            }
-        }     
-
-        VolumeSaveSlider vss = GetComponent<VolumeSaveSlider>();
-        vss.LoadVolume();
-    }//end awake
-
-    void Update() {
+    void Update()
+    {
+        //TODO: prevent while in main menu and cutscenes.
         if(Input.GetKeyDown(KeyCode.P)) TogglePause(false);
-    }
-
-    // Starts the game, triggered by Start Game Button's OnClick function
-    public void StartGame()
-    {
-        //Reset Player Prefs
-        int spwanPointIndex = 0;
-        int playerIndex = 0;
-
-        PlayerPrefs.SetInt("spawnPointIndex", 0);
-        spwanPointIndex = PlayerPrefs.GetInt("spawnPointIndex");
-
-        PlayerPrefs.SetInt("playerIndex", 0);
-        playerIndex = PlayerPrefs.GetInt("playerIndex");
-
-        //Load First Scene
-
-        //PlayerPrefs.SetInt("sceneIndex", 1);
-        //sceneIndex = PlayerPrefs.GetInt("sceneIndex");
-
-        PlayerPrefs.SetString("spawningScene", "Cutscene1");
-        string loadScene = PlayerPrefs.GetString("spawningScene");
-        SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
-    }
-
-    public void ContinueGame() {
-        if(PlayerPrefs.HasKey("spawningScene"))
-        {
-            string loadScene = PlayerPrefs.GetString("spawningScene");
-            SceneManager.LoadScene(loadScene, LoadSceneMode.Single);
-        }
-        else
-        {
-            StartGame();
-        }
-
-        SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
-    }//end continue game
-
-    public void CharacterSelect()
-    {
-        SceneManager.LoadScene("CharacterSelection");
-    }
-
-    public void QuitGame() {
-        Application.Quit();
     }
 
     public void ToggleOptions()
@@ -105,7 +42,6 @@ public class MenuManager : MonoBehaviour
 
     public void TogglePause(bool isScroll)
     {
-        // if the pasue menu is not active
         if (pauseParent.activeSelf == false)
         {
             pauseParent.SetActive(true);
@@ -133,10 +69,6 @@ public class MenuManager : MonoBehaviour
             animator.Play("Scroll_Close", 0);
             StartCoroutine(ClosePauseMenu());
         }
-    }
-
-    public void OpenWebsite() {
-        print(website);
     }
 
     public void MainMenu()

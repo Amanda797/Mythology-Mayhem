@@ -1,16 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 
 public class GameManager : MythologyMayhem
 {
     [Header("Game Data")]
     public static GameManager instance;
     public GameData gameData;
+    public OptionsData optionsData;
 
     [Header("Load Scene System")]
     public Level currentScene;
@@ -35,6 +35,7 @@ public class GameManager : MythologyMayhem
     public AudioListener listener;
     public AudioSource backgroundMusic;
     public AudioSource ambianceAudioSource;
+    [SerializeField] AudioMixer audioMixer;
 
     [Header("UI")]
     public HealthUIController huic;
@@ -513,5 +514,33 @@ public class GameManager : MythologyMayhem
         gameData.maxHealth = MaxHealth;
         gameData.curHealth = curHealth;
         huic.UpdateHealth();
+    }
+
+    public void SaveOptionsData()
+    {
+        Debug.Log("Save Options");
+        string sceneObjectsString = JsonUtility.ToJson(optionsData, true);
+
+        System.IO.File.WriteAllText(Application.persistentDataPath + "OptionsData.json", sceneObjectsString);
+    }
+    public void LoadOptionsData()
+    {
+        Debug.Log("Load Options");
+        if (!System.IO.File.Exists(Application.persistentDataPath + "OptionsData.json"))
+        {
+            SaveOptionsData();
+            return;
+        }
+
+        string sceneObjectsString = System.IO.File.ReadAllText(Application.persistentDataPath + "OptionsData.json");
+        optionsData = JsonUtility.FromJson<OptionsData>(sceneObjectsString);
+
+        audioMixer.SetFloat("MasterVolume", optionsData.masterVolume);
+        audioMixer.SetFloat("AmbianceVolume", optionsData.ambianceVolume);
+        audioMixer.SetFloat("EnemyVolume", optionsData.enemyVolume);
+        audioMixer.SetFloat("FootstepVolume", optionsData.footstepVolume);
+        audioMixer.SetFloat("MusicVolume", optionsData.musicVolume);
+        audioMixer.SetFloat("SoundEffectVolume", optionsData.sfxVolume);
+
     }
 }
