@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class InitializeGame : MonoBehaviour
 {
-    [Tooltip("Number between 0 and 10")]
-    [SerializeField] float volume;
-
-    [Tooltip("Drag the correct Player Stats scriptable object")]
     [SerializeField] PlayerStats_SO ps;
     [SerializeField] VolumeSaveSlider vs;
 

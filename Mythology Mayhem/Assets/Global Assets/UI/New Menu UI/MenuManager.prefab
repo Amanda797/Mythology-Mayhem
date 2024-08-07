@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2565397708880754530}
   - component: {fileID: 2565397708880754461}
-  - component: {fileID: 2565397708880754462}
   - component: {fileID: 2677300172889998580}
+  - component: {fileID: 1617647377}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: MenuManager
@@ -48,22 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsDropdown: {fileID: 0}
   resolutionDropdown: {fileID: 0}
---- !u!114 &2565397708880754462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2565397708880754528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 157a67f93b7bfe149b8eb990c85aee9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
-  currentVolume: 0
-  volumeSlider: {fileID: 0}
-  loaded: 0
 --- !u!82 &2677300172889998580
 AudioSource:
   m_ObjectHideFlags: 0
@@ -74,7 +58,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3688536365896545760, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 698d68f2fc09f2a408505c2b2f8fefc4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bce165f0b96e1124f9232dfd34572ce9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -160,3 +144,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1617647377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565397708880754528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6947084d08b93419ac94bee446e4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  characterSelection: {fileID: 0}
+  options: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  graphicsDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  resolutionDropdown: {fileID: 0}
+  credits: {fileID: 0}
+  continueButton: {fileID: 0}
+  audioSource: {fileID: 2677300172889998580}
