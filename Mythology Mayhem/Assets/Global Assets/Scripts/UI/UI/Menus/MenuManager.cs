@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject optionsPnl;
     [SerializeField] GameObject creditsPnl;
     [SerializeField] GameObject helpPnl;
+    [SerializeField] GameObject gameplayUI;
     [SerializeField] Animator animator;
     public TMP_Text scrollDisplayText;
     public AudioSource menuEffectSource;
@@ -143,6 +144,7 @@ public class MenuManager : MonoBehaviour
                 GameManager.instance.inMainMenu = true;
                 GameManager.instance.huic.heartState.gameObject.SetActive(false);
                 SceneManager.LoadScene(1);
+                gameplayUI.SetActive(false);
                 break;
 
             case "Pause Menu":
