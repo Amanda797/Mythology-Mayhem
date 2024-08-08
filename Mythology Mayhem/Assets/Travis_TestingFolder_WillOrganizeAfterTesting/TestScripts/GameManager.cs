@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Audio;
+using System.IO;
 
 public class GameManager : MythologyMayhem
 {
@@ -11,6 +12,7 @@ public class GameManager : MythologyMayhem
     public static GameManager instance;
     public GameData gameData;
     public OptionsData optionsData;
+    string saveFilePath;
 
     [Header("Load Scene System")]
     public Level currentScene;
@@ -35,6 +37,7 @@ public class GameManager : MythologyMayhem
     public AudioListener listener;
     public AudioSource backgroundMusic;
     public AudioSource ambianceAudioSource;
+    public AudioSource sfxAudioSource;
     [SerializeField] AudioMixer audioMixer;
 
     [Header("UI")]
@@ -61,9 +64,6 @@ public class GameManager : MythologyMayhem
 
         if( FindObjectOfType<EventSystem>() == null) eventSystem.SetActive(true);
 
-
-
-
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         if (SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded)
         {
@@ -72,8 +72,25 @@ public class GameManager : MythologyMayhem
             currentScene = Level.MainMenu;
         }
         startSceneDebugLoad = false;
-    }
 
+        sfxAudioSource = GetComponent<AudioSource>();
+    }
+    void Start()
+    {
+        optionsData = new OptionsData();
+        optionsData.masterVolume = 0;
+        optionsData.ambianceVolume = 0;
+        optionsData.enemyVolume = 0;
+        optionsData.footstepVolume = 0;
+        optionsData.musicVolume = 0;
+        optionsData.sfxVolume = 0;
+        optionsData.graphics = 0;
+        optionsData.fullscreen = true;
+        optionsData.resolution = 0;
+
+        saveFilePath = Application.persistentDataPath + "/OptionsData.json";
+        LoadOptionsData();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -144,8 +161,9 @@ public class GameManager : MythologyMayhem
         }
         else
         {
-            inMainMenu = false;
             cutscenePlaying = false;
+            inMainMenu = false;
+            backgroundMusic.Stop();
             gameplayUI.SetActive(true);
 
             playerControllers = new List<ScenePlayerObject>();
@@ -518,29 +536,35 @@ public class GameManager : MythologyMayhem
 
     public void SaveOptionsData()
     {
-        Debug.Log("Save Options");
-        string sceneObjectsString = JsonUtility.ToJson(optionsData, true);
+        string saveOptionsData = JsonUtility.ToJson(optionsData);
+        File.WriteAllText(saveFilePath, saveOptionsData);
 
-        System.IO.File.WriteAllText(Application.persistentDataPath + "OptionsData.json", sceneObjectsString);
+        Debug.Log("Save file created at: " + saveFilePath);
     }
     public void LoadOptionsData()
     {
-        Debug.Log("Load Options");
-        if (!System.IO.File.Exists(Application.persistentDataPath + "OptionsData.json"))
+        if (File.Exists(saveFilePath))
         {
-            SaveOptionsData();
-            return;
+            string loadOptionsData = File.ReadAllText(saveFilePath);
+            optionsData = JsonUtility.FromJson<OptionsData>(loadOptionsData);
+
+            audioMixer.SetFloat("MasterVolume", optionsData.masterVolume);
+            audioMixer.SetFloat("MusicVolume", optionsData.musicVolume);
+            audioMixer.SetFloat("AmbianceVolume", optionsData.ambianceVolume);
+            audioMixer.SetFloat("SoundEffectVolume", optionsData.sfxVolume);
+            audioMixer.SetFloat("EnemyVolume", optionsData.enemyVolume);
+            audioMixer.SetFloat("FootstepVolume", optionsData.footstepVolume);
+            Debug.Log("Load game complete!");
         }
-
-        string sceneObjectsString = System.IO.File.ReadAllText(Application.persistentDataPath + "OptionsData.json");
-        optionsData = JsonUtility.FromJson<OptionsData>(sceneObjectsString);
-
-        audioMixer.SetFloat("MasterVolume", optionsData.masterVolume);
-        audioMixer.SetFloat("AmbianceVolume", optionsData.ambianceVolume);
-        audioMixer.SetFloat("EnemyVolume", optionsData.enemyVolume);
-        audioMixer.SetFloat("FootstepVolume", optionsData.footstepVolume);
-        audioMixer.SetFloat("MusicVolume", optionsData.musicVolume);
-        audioMixer.SetFloat("SoundEffectVolume", optionsData.sfxVolume);
-
+        else
+        {
+            audioMixer.SetFloat("MasterVolume", 0);
+            audioMixer.SetFloat("MusicVolume", 0);
+            audioMixer.SetFloat("AmbianceVolume", 0);
+            audioMixer.SetFloat("SoundEffectVolume", 0);
+            audioMixer.SetFloat("EnemyVolume", 0);
+            audioMixer.SetFloat("FootstepVolume", 0);
+            Debug.Log("There is no save files to load!");
+        }
     }
 }

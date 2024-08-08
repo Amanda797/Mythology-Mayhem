@@ -132,7 +132,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.208219, y: 3.6}
+    oldSize: {x: 4.2, y: 3.6}
     newSize: {x: 6.8, y: 2.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -157,19 +157,19 @@ MonoBehaviour:
   - spawningScene
   - spwanPointIndex
   - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 4499961040525648673}
   spriteRenderer: {fileID: 6941042192989938915}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
   audioSource: {fileID: 4341705790796040120}
-  idleSounds: []
   attackSounds:
-  - {fileID: 8300000, guid: e9a433db9c3be1340b84d54faf528ef5, type: 3}
+  - {fileID: 8300000, guid: 436749afba9c22c43a65d6c9db75cf45, type: 3}
+  - {fileID: 8300000, guid: 9bea593e88d7c9c41a1804cdb92cce12, type: 3}
   hurtSounds:
-  - {fileID: 8300000, guid: dc1e828fcee8e284aafc3b0d7727e7d6, type: 3}
-  - {fileID: 8300000, guid: 9066d693970b32344806d00d0687affe, type: 3}
+  - {fileID: 8300000, guid: bce0c6cf32c19914fb7f1b31ce93362f, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: 97c585614942da04c96c7323ec88300b, type: 3}
+  - {fileID: 8300000, guid: 68548d14f04e12140b16501afcd6f5ec, type: 3}
   enemyDimension: 0
   health: {fileID: 5938821028154963895}
   animator: {fileID: 6941042192989938913}
@@ -467,6 +467,7 @@ MonoBehaviour:
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
 --- !u!114 &2276455077882768558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +600,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8015559850610420667}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 
@@ -643,7 +644,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483098970078423554}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 

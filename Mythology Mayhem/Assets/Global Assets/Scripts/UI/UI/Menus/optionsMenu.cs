@@ -18,7 +18,14 @@ public class optionsMenu : MonoBehaviour
     [SerializeField] Toggle fullscreenToggle;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] AudioMixer audioMixer;
+    [SerializeField] AudioMixerGroup sfx, combat, footstep;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip[] sfxClips, combatClips, footstepClips;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
@@ -39,53 +46,54 @@ public class optionsMenu : MonoBehaviour
     {
         gameManager.optionsData.masterVolume = sliderValue;
         audioMixer.SetFloat("MasterVolume", sliderValue);
-        gameManager.SaveOptionsData();
     }
     public void MusicVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.musicVolume = sliderValue;
         audioMixer.SetFloat("MusicVolume", sliderValue);
-        gameManager.SaveOptionsData();
     }
     public void AmbianceVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.ambianceVolume = sliderValue;
         audioMixer.SetFloat("AmbianceVolume", sliderValue);
-        gameManager.SaveOptionsData();
     }
     public void SFXVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.sfxVolume = sliderValue;
         audioMixer.SetFloat("SoundEffectVolume", sliderValue);
-        gameManager.SaveOptionsData();
+        audioSource.clip = sfxClips[UnityEngine.Random.Range(0, sfxClips.Length)];
+        audioSource.volume = gameManager.sfxAudioSource.volume;
+        audioSource.outputAudioMixerGroup = sfx;
+        audioSource.Play();
     }
     public void CombatVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.enemyVolume = sliderValue;
         audioMixer.SetFloat("EnemyVolume", sliderValue);
-        gameManager.SaveOptionsData();
+        audioSource.clip = combatClips[UnityEngine.Random.Range(0, combatClips.Length)];
+        audioSource.volume = 1f;
+        audioSource.outputAudioMixerGroup = combat;
+        audioSource.Play();
     }
     public void FootstepsVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.footstepVolume = sliderValue;
         audioMixer.SetFloat("FootstepVolume", sliderValue);
-        gameManager.SaveOptionsData();
+        audioSource.clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
+        audioSource.volume = .5f;
+        audioSource.outputAudioMixerGroup = footstep;
+        audioSource.Play();
     }
     public void GraphicsChanged(int value)
     {
         gameManager.optionsData.graphics = graphicsDropdown.value;
-        gameManager.SaveOptionsData();
     }
     public void FullScreenChanged(bool value)
     {
         gameManager.optionsData.fullscreen = fullscreenToggle.isOn;
-        gameManager.SaveOptionsData();
     }
     public void ResolutionChanged(int value)
     {
         gameManager.optionsData.resolution = resolutionDropdown.value;
-        gameManager.SaveOptionsData();
     }
-
-
 }
