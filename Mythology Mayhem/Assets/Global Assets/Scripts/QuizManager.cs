@@ -7,6 +7,9 @@ using System.Reflection;
 public class QuizManager : MonoBehaviour
 {
     GameManager gameManager;
+    AudioSource audioSource;
+    [SerializeField] AudioClip buttonClip, correctClip, incorrectClip, winClip, loseClip;
+
     public SceneTransitionPoint2D transitionPoint;
 
     [SerializeField] TMP_Text question;
@@ -31,6 +34,10 @@ public class QuizManager : MonoBehaviour
     [SerializeField] GameObject[] enemy_go;
     [SerializeField] GameObject quizTrigger;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void StartQuiz()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
@@ -73,13 +80,16 @@ public class QuizManager : MonoBehaviour
                 
     }//end display question
 
-    public void AnswerQuestion(int x) {
+    public void AnswerQuestion(int x)
+    {
         if (!gameManager.gameData.collectedMirror)
         {
             Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             this.gameObject.SetActive(false);
+            audioSource.clip = buttonClip;
+            audioSource.Play();
             return;
         }
         if (currentQuestion == -1)
@@ -88,6 +98,8 @@ public class QuizManager : MonoBehaviour
             answer3Obj.SetActive(true);
             answer4Obj.SetActive(true);
             currentQuestion++;
+            audioSource.clip = buttonClip;
+            audioSource.Play();
             DisplayQuestion();
         }
         else if(currentQuestion == chosenQuestions.Length - 1 & answered)
@@ -98,11 +110,15 @@ public class QuizManager : MonoBehaviour
             {
                 answer1.text = "You won! You may pass...";
                 won = true;
+                audioSource.clip = winClip;
+                audioSource.Play();
             }
             else
             {
                 answer1.text = "You lost and bear a curse!";
                 won = false;
+                audioSource.clip = loseClip;
+                audioSource.Play();
             }
 
             answer2Obj.SetActive(false);
@@ -136,11 +152,18 @@ public class QuizManager : MonoBehaviour
                     }
                 }
 
-                if(solution) {
+                if(solution)
+                {
                     score++;
                     question.text = "Correct Answer!!";
-                } else {
+                    audioSource.clip = correctClip;
+                    audioSource.Play();
+                }
+                else
+                {
                     question.text = "Wrong Answer...";
+                    audioSource.clip = incorrectClip;
+                    audioSource.Play();
                 }
 
                 answer1.text = "Continue";

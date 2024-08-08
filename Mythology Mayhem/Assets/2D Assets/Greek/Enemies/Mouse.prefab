@@ -195,7 +195,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.826667, y: 2.8}
+    oldSize: {x: 6.8, y: 2.8}
     newSize: {x: 6.8, y: 2.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -406,20 +406,29 @@ MonoBehaviour:
   - spawningScene
   - spwanPointIndex
   - playerIndex
+  inScene: 3
   rigidBody2D: {fileID: 3047567049538542250}
   spriteRenderer: {fileID: 8389002920890670440}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
-  audioSource: {fileID: 2916334492789079603}
-  idleSounds:
-  - {fileID: 8300000, guid: b803e6208b6aa6845b6a9a7db50dcd7a, type: 3}
   attackSounds:
-  - {fileID: 8300000, guid: 581ef8aeeb4161d46ba79d0ed9785b9e, type: 3}
+  - {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  - {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  - {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  - {fileID: 8300000, guid: 0eeaddeb773b5ea4c8b7ba83d3810647, type: 3}
+  - {fileID: 8300000, guid: 9a26770f3d172a94ca0720db6110aec2, type: 3}
   hurtSounds:
-  - {fileID: 8300000, guid: a4b1e56ffabf69e429ad193107393dc6, type: 3}
-  - {fileID: 8300000, guid: ec023a5304bebcd4eacc5f23e094d371, type: 3}
+  - {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  - {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  - {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  - {fileID: 8300000, guid: 0eeaddeb773b5ea4c8b7ba83d3810647, type: 3}
+  - {fileID: 8300000, guid: 9a26770f3d172a94ca0720db6110aec2, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: 161ae2ec605d1cb418facf924f7c28fc, type: 3}
+  - {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  - {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  - {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  - {fileID: 8300000, guid: 0eeaddeb773b5ea4c8b7ba83d3810647, type: 3}
+  - {fileID: 8300000, guid: 9a26770f3d172a94ca0720db6110aec2, type: 3}
   enemyDimension: 0
   health: {fileID: 8516475126756549845}
   animator: {fileID: 8389002920890670442}
@@ -552,13 +561,9 @@ MonoBehaviour:
   - {fileID: 4016066765672382690}
   - {fileID: 5035569384875239389}
   - {fileID: 5442366955441259943}
-  - {fileID: 8389002920890670442}
   - {fileID: 1221228166332000560}
   mainObject: {fileID: 450319774758561872}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 2916334492789079603}
-  deathSound: {fileID: 2916334492789079603}
-  healSound: {fileID: 0}
   anim: {fileID: 8389002920890670442}
   hurtTrigger: Hurt
   deathTrigger: Dead
@@ -569,6 +574,7 @@ MonoBehaviour:
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
 --- !u!1 &8389002921095470412
 GameObject:
   m_ObjectHideFlags: 0

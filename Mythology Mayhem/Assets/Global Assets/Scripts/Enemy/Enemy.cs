@@ -21,8 +21,7 @@ public class Enemy : MythologyMayhem
     public NavMeshAgent agent;
 
     [Header("Audio Components")]
-    public AudioSource audioSource;
-    public AudioClip[] idleSounds;
+    AudioSource audioSource;
     public AudioClip[] attackSounds;
     public AudioClip[] hurtSounds;
     public AudioClip[] deathSounds;
@@ -71,6 +70,10 @@ public class Enemy : MythologyMayhem
     public enum StatePosition { Exit, Current, Entry }; //0 = exit, 1 = current, 2 = entry
     public StatePosition currentStatePosition;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Start()
     {
         health = gameObject.GetComponent<Health>();
@@ -278,9 +281,6 @@ public class Enemy : MythologyMayhem
     {
         switch (soundType) 
         {
-            case Soundtype.Idle:
-                PlaySoundAlgorithm(idleSounds);
-                break;
             case Soundtype.Attack:
                 PlaySoundAlgorithm(attackSounds);
                 break;

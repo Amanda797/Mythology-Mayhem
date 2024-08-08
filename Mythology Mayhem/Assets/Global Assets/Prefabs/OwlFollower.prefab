@@ -259,6 +259,7 @@ MonoBehaviour:
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
 --- !u!114 &670675367800281230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,12 +278,20 @@ MonoBehaviour:
   - playerIndex
   _health: {fileID: 0}
   _player: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: 2dc489f150fc43f49a62cef5b9d06114, type: 3}
+  - {fileID: 8300000, guid: cae85abe82bb838429d1e968d03ac3ea, type: 3}
+  - {fileID: 8300000, guid: 32d52989fb120a04ca8127f6f21ac046, type: 3}
+  - {fileID: 8300000, guid: 8c67114438feafe47b6d3936684a47d5, type: 3}
+  - {fileID: 8300000, guid: 00fa7cec556dc154eafcc67325c21262, type: 3}
   anim: {fileID: 6478159597610387669}
+  rb2D: {fileID: 0}
   attackDamage: 3
   attackRate: 2
   _td: {fileID: 7612252755361395717}
   walkingBool: 
   attackTrigger: Attack
+  localGameManager: {fileID: 0}
   currentState: 0
 --- !u!114 &375496325583729420
 MonoBehaviour:
@@ -338,9 +347,9 @@ AudioSource:
   m_GameObject: {fileID: 6478159597610388266}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

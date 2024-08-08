@@ -120,7 +120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3371725774677677153}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -106.7974, y: 21.4, z: 0}
   m_LocalScale: {x: -0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
@@ -220,7 +220,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.023438, y: 15.000001}
+    oldSize: {x: 9, y: 15.009772}
     newSize: {x: 6.8, y: 2.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -250,11 +250,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3371725774677677144}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
-  audioSource: {fileID: 0}
-  idleSounds: []
-  attackSounds: []
-  hurtSounds: []
-  deathSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 5a52fba20a874bb42afbfc139342b9c6, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: 06f57138a07a317478820f26b82e1a23, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 2b18699897e72274e96b38c1109cc0e6, type: 3}
   enemyDimension: 0
   health: {fileID: 636311232826927295}
   animator: {fileID: 3371725774677677145}

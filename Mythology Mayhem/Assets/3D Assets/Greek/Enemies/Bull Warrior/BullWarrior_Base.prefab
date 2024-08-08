@@ -834,18 +834,17 @@ MonoBehaviour:
   - {fileID: 56486665465499233}
   mainObject: {fileID: 4650337064500238795}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 4650337064362938155}
-  deathSound: {fileID: 4650337064362938155}
-  healSound: {fileID: 0}
   anim: {fileID: 4650337064372337810}
   hurtTrigger: Hit
   deathTrigger: Die
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
 --- !u!114 &4650337063267741634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,7 +866,7 @@ AudioSource:
   m_GameObject: {fileID: 4650337064362938166}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 8300000, guid: 749754cf52894dc4e9bea9ee16e69dff, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -988,10 +987,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
   rigidBody3D: {fileID: 4650337063267741633}
   agent: {fileID: 4650337063267741647}
+  attackSounds:
+  - {fileID: 8300000, guid: da5dd162f6189f04c91b294c384b1912, type: 3}
+  - {fileID: 8300000, guid: 043dc51f66802474d9891ed6d96bdc21, type: 3}
+  - {fileID: 8300000, guid: c17666c6c6809c141a21917b55c53489, type: 3}
+  - {fileID: 8300000, guid: 82a23151283d6094c8f03c8ee8a1883c, type: 3}
+  - {fileID: 8300000, guid: 602388f62620f4a449a215f7a8f2bcf1, type: 3}
+  - {fileID: 8300000, guid: 79699a936b3f3864f957ce0ff17c3d20, type: 3}
+  - {fileID: 8300000, guid: 84e1bc4692081994a8bb773189d31fef, type: 3}
+  - {fileID: 8300000, guid: 970bf4b5f7f57ef4da3b597e7188ea04, type: 3}
+  - {fileID: 8300000, guid: 07d653a5d1829ab4a951c006a901af85, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: da5dd162f6189f04c91b294c384b1912, type: 3}
+  - {fileID: 8300000, guid: 043dc51f66802474d9891ed6d96bdc21, type: 3}
+  - {fileID: 8300000, guid: c17666c6c6809c141a21917b55c53489, type: 3}
+  - {fileID: 8300000, guid: 82a23151283d6094c8f03c8ee8a1883c, type: 3}
+  - {fileID: 8300000, guid: 602388f62620f4a449a215f7a8f2bcf1, type: 3}
+  - {fileID: 8300000, guid: 79699a936b3f3864f957ce0ff17c3d20, type: 3}
+  - {fileID: 8300000, guid: 84e1bc4692081994a8bb773189d31fef, type: 3}
+  - {fileID: 8300000, guid: 970bf4b5f7f57ef4da3b597e7188ea04, type: 3}
+  - {fileID: 8300000, guid: 07d653a5d1829ab4a951c006a901af85, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: da5dd162f6189f04c91b294c384b1912, type: 3}
+  - {fileID: 8300000, guid: 043dc51f66802474d9891ed6d96bdc21, type: 3}
+  - {fileID: 8300000, guid: c17666c6c6809c141a21917b55c53489, type: 3}
+  - {fileID: 8300000, guid: 82a23151283d6094c8f03c8ee8a1883c, type: 3}
+  - {fileID: 8300000, guid: 602388f62620f4a449a215f7a8f2bcf1, type: 3}
+  - {fileID: 8300000, guid: 79699a936b3f3864f957ce0ff17c3d20, type: 3}
+  - {fileID: 8300000, guid: 84e1bc4692081994a8bb773189d31fef, type: 3}
+  - {fileID: 8300000, guid: 970bf4b5f7f57ef4da3b597e7188ea04, type: 3}
+  - {fileID: 8300000, guid: 07d653a5d1829ab4a951c006a901af85, type: 3}
   enemyDimension: 1
   health: {fileID: 4650337063267741632}
   animator: {fileID: 4650337064372337810}
@@ -6760,3 +6794,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider3D: {fileID: 0}
+  otherColliders3D: []

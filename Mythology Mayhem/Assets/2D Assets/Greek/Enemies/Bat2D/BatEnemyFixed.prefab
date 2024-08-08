@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2121983304384078778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 73.28948, y: 14.46567, z: 2.2841833}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -0.6, y: 0.6670161, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2121983305367499950}
@@ -217,10 +217,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 1771615849059406565}
   spriteRenderer: {fileID: 5095419021229708583}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  attackSounds:
+  - {fileID: 8300000, guid: a76182f760a99d844b21deeee95a6f2b, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: a76182f760a99d844b21deeee95a6f2b, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: a76182f760a99d844b21deeee95a6f2b, type: 3}
   enemyDimension: 0
   health: {fileID: 5418738702931030166}
   animator: {fileID: 5095419021229708581}
@@ -400,7 +411,7 @@ AudioSource:
   m_GameObject: {fileID: 5095419021229708576}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4717e15cbb125ad49aeed7dbe06d94c4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -528,17 +539,17 @@ MonoBehaviour:
   - {fileID: 2463334459721048447}
   mainObject: {fileID: 2121983304384078778}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 1920169423724099196}
-  deathSound: {fileID: 1920169423724099196}
-  healSound: {fileID: 0}
   anim: {fileID: 5095419021229708581}
   hurtTrigger: Hurt
   deathTrigger: Dead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
 --- !u!1 &5095419021441979651
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider2D: {fileID: 0}
+  otherColliders2D: []
 --- !u!1 &5321535897693837951
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +663,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5321535897693837951}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 
@@ -695,7 +707,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6007551293315488710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 

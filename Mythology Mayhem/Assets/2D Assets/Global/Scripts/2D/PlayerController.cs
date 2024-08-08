@@ -258,7 +258,6 @@ public class PlayerController : MonoBehaviour
             // if the player is moving left or right
             if (canPlayFootstepClip && grounded)
             {
-                Debug.Log("canPlayFootstepClip");
                 canPlayFootstepClip = false;
                 // randomly select a audio clip from the footstep clips array on the local game manager
                 AudioClip clip = localGameManager.footstepClips[Random.Range(0, localGameManager.footstepClips.Length)];
@@ -277,7 +276,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ToggleFootStep()
     {
-        Debug.Log("ToggleFootStep");
         float waitTime;
 
         if(isRunning) waitTime = .25f;

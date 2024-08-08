@@ -12,6 +12,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] GameObject credits;
     [SerializeField] Button continueButton;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip menuMusic;
 
     private void Start()
     {
@@ -20,7 +21,9 @@ public class MainMenuController : MonoBehaviour
 
         // if there is no save file, disable the continue button.
         if (!System.IO.File.Exists(Application.persistentDataPath + "SaveData.json")) continueButton.enabled = false;
-        gameManager.LoadOptionsData();
+
+        gameManager.backgroundMusic.clip = menuMusic;
+        gameManager.backgroundMusic.Play();
     }
     public void NewGame()
     {
@@ -44,8 +47,6 @@ public class MainMenuController : MonoBehaviour
     public void Options()
     {
         audioSource.Play();
-
-        if(options.activeSelf) gameManager.SaveOptionsData();
         options.SetActive(!options.activeSelf);
     }
 
