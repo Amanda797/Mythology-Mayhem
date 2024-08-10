@@ -25,7 +25,6 @@ public class GraphicsHandler : MonoBehaviour
         for(int i = 0; i < resolutions.Length; i++) {
             if(resolutions[i].refreshRate == currentRefreshRate) {
                 filteredResolutions.Add(resolutions[i]);
-                print(resolutions[i]);
             }
         }
 

@@ -44,6 +44,7 @@ public class ScrollScript : MonoBehaviour
             Time.timeScale = 0;
             audioSource.Play();
             gameManager.pauseMenuManager.scrollDisplayText.text = text;
+            gameManager.pauseMenuManager.scrollDisplayText.rectTransform.anchoredPosition = Vector2.zero;
             gameManager.pauseMenuManager.TogglePause(true);
             gameManager.Popup("Press E to Read", false);
         }
