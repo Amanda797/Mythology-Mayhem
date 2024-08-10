@@ -31,6 +31,7 @@ public class Health : MonoBehaviour
     public bool canRespawn = false;
 
     public EnemyLoadSystem loadSystem;
+    bool isDead = false;
 
     // --------------------------
     // ***METHODS***
@@ -77,6 +78,7 @@ public class Health : MonoBehaviour
             }
 
             Life -= d;
+
             if (Life <= 0) Death();
         }        
     }//end take damage
@@ -88,24 +90,24 @@ public class Health : MonoBehaviour
         _attacked = false;
     }
 
-    public void Heal(float h) {
-        if (anim != null)
-            anim.SetTrigger(healTrigger);
-        Life += Mathf.Clamp(h,h,MaxHealth);
-    }//end heal
+    public void Heal(float h)
+    {
+        if (anim != null) anim.SetTrigger(healTrigger);
 
-    public void Death() {
-        if(GetHealth() <= 0 && Life != -1000) {
-            //Lock Death() from being called again
-            Life = -1000;
+        Life += Mathf.Clamp(h,h,MaxHealth);
+    }
+
+    public void Death()
+    {
+        if (!isDead)
+        {
+            isDead = true;
+
             if (loadSystem != null) loadSystem.SyncToSave(this.gameObject.transform.parent.gameObject);
-            //Trigger Death sounds and animations
-            if (enemy != null)
-            {
-                enemy.PlaySound(Enemy.Soundtype.Death);
-            }
-            if (anim != null && deathTrigger != "")
-                anim.SetTrigger(deathTrigger);
+
+            if (enemy != null) enemy.PlaySound(Enemy.Soundtype.Death);
+
+            if (anim != null && deathTrigger != "") anim.SetTrigger(deathTrigger);
 
             if (gameObject.tag == "Enemy")
             {
@@ -113,7 +115,7 @@ public class Health : MonoBehaviour
                 if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
                 {
                     gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 }
                 else if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.ThreeD)
                 {
@@ -129,31 +131,11 @@ public class Health : MonoBehaviour
                 component.enabled = false;
             }
             StartCoroutine(DeathTimer(4f));
-        }//check that health is really less than 0 when called        
-    }//end death
+        }
+    }
 
-    public void Death(float time) {
-        if(GetHealth() <= 0)
-        {
-            if(gameObject.tag == "Enemy")
-            {
-                if (enemy != null) enemy.PlaySound(Enemy.Soundtype.Death);
-                if (anim != null) anim.SetTrigger(deathTrigger);
-                if (gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD) gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                else gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            }
-
-            //foreach (Behaviour component in components)
-            //{
-            //    component.enabled = false;
-            //}
-
-            StartCoroutine(DeathTimer(time));
-        }//check that health is really less than 0 when called        
-    }//end death
-
-    public IEnumerator DeathTimer(float time) {
-
+    public IEnumerator DeathTimer(float time)
+    {
         yield return new WaitForSeconds(time);
 
         if(rewardObject != null)
@@ -169,7 +151,7 @@ public class Health : MonoBehaviour
             StartCoroutine(CompanionRespawn(respawnTimer));
         }
     }//end death timer
-     //
+
      public IEnumerator CompanionRespawn(float time)
     {
         canRespawn = false;
