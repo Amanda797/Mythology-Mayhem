@@ -1,16 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
+using System.IO;
 
 public class GameManager : MythologyMayhem
 {
     [Header("Game Data")]
     public static GameManager instance;
     public GameData gameData;
+    public OptionsData optionsData;
+    string saveFilePath;
 
     [Header("Load Scene System")]
     public Level currentScene;
@@ -35,6 +37,8 @@ public class GameManager : MythologyMayhem
     public AudioListener listener;
     public AudioSource backgroundMusic;
     public AudioSource ambianceAudioSource;
+    public AudioSource sfxAudioSource;
+    [SerializeField] AudioMixer audioMixer;
 
     [Header("UI")]
     public HealthUIController huic;
@@ -44,6 +48,7 @@ public class GameManager : MythologyMayhem
     public TextMeshProUGUI PressEText;
     public GameObject eventSystem;
     public GameObject pauseMenu;
+    public MenuManager pauseMenuManager;
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
@@ -59,9 +64,6 @@ public class GameManager : MythologyMayhem
 
         if( FindObjectOfType<EventSystem>() == null) eventSystem.SetActive(true);
 
-
-
-
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         if (SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded)
         {
@@ -70,8 +72,25 @@ public class GameManager : MythologyMayhem
             currentScene = Level.MainMenu;
         }
         startSceneDebugLoad = false;
-    }
 
+        sfxAudioSource = GetComponent<AudioSource>();
+    }
+    void Start()
+    {
+        optionsData = new OptionsData();
+        optionsData.masterVolume = 0;
+        optionsData.ambianceVolume = 0;
+        optionsData.enemyVolume = 0;
+        optionsData.footstepVolume = 0;
+        optionsData.musicVolume = 0;
+        optionsData.sfxVolume = 0;
+        optionsData.graphics = 0;
+        optionsData.fullscreen = true;
+        optionsData.resolution = 0;
+
+        saveFilePath = Application.persistentDataPath + "/OptionsData.json";
+        LoadOptionsData();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -113,19 +132,25 @@ public class GameManager : MythologyMayhem
         {
             LoadSystemsUpdate();
         }
-        if (currentScene == Level.GreekLabyrinth_3D && uniDirLight.enabled)
+        if (currentScene == Level.GreekLabyrinth_3D || currentScene == Level.GreekLabyrinth_2D_Levers || currentScene == Level.GreekLabyrinth_2D_Pedastals)
         {
-            FindObjectOfType<TorchSFXManager>().ToggleAudioSources(true);
-            uniDirLight.enabled = false;
+            if (uniDirLight.enabled)
+            {
+                FindObjectOfType<TorchSFXManager>().ToggleAudioSources(true);
+                uniDirLight.enabled = false;
 
-            Camera camera = currentPlayer.gameObject.GetComponentInChildren<Camera>();
-            camera.clearFlags = CameraClearFlags.SolidColor;
-            camera.backgroundColor = Color.black;
+                Camera camera = currentPlayer.gameObject.GetComponentInChildren<Camera>();
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = Color.black;
+            }
         }
-        else if (currentScene != Level.GreekLabyrinth_3D && !uniDirLight.enabled)
+        else if (currentScene == Level.GreekLabyrinth_3D || currentScene == Level.GreekLabyrinth_2D_Levers || currentScene == Level.GreekLabyrinth_2D_Pedastals)
         {
-            FindObjectOfType<TorchSFXManager>().ToggleAudioSources(false);
-            uniDirLight.enabled = true;
+            if (!uniDirLight.enabled)
+            {
+                FindObjectOfType<TorchSFXManager>().ToggleAudioSources(false);
+                uniDirLight.enabled = true;
+            }
         }
     }
     public void LoadSystemsStart(bool newGame) 
@@ -142,8 +167,9 @@ public class GameManager : MythologyMayhem
         }
         else
         {
-            inMainMenu = false;
             cutscenePlaying = false;
+            inMainMenu = false;
+            backgroundMusic.Stop();
             gameplayUI.SetActive(true);
 
             playerControllers = new List<ScenePlayerObject>();
@@ -512,5 +538,39 @@ public class GameManager : MythologyMayhem
         gameData.maxHealth = MaxHealth;
         gameData.curHealth = curHealth;
         huic.UpdateHealth();
+    }
+
+    public void SaveOptionsData()
+    {
+        string saveOptionsData = JsonUtility.ToJson(optionsData);
+        File.WriteAllText(saveFilePath, saveOptionsData);
+
+        Debug.Log("Save file created at: " + saveFilePath);
+    }
+    public void LoadOptionsData()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            string loadOptionsData = File.ReadAllText(saveFilePath);
+            optionsData = JsonUtility.FromJson<OptionsData>(loadOptionsData);
+
+            audioMixer.SetFloat("MasterVolume", optionsData.masterVolume);
+            audioMixer.SetFloat("MusicVolume", optionsData.musicVolume);
+            audioMixer.SetFloat("AmbianceVolume", optionsData.ambianceVolume);
+            audioMixer.SetFloat("SoundEffectVolume", optionsData.sfxVolume);
+            audioMixer.SetFloat("EnemyVolume", optionsData.enemyVolume);
+            audioMixer.SetFloat("FootstepVolume", optionsData.footstepVolume);
+            Debug.Log("Load game complete!");
+        }
+        else
+        {
+            audioMixer.SetFloat("MasterVolume", 0);
+            audioMixer.SetFloat("MusicVolume", 0);
+            audioMixer.SetFloat("AmbianceVolume", 0);
+            audioMixer.SetFloat("SoundEffectVolume", 0);
+            audioMixer.SetFloat("EnemyVolume", 0);
+            audioMixer.SetFloat("FootstepVolume", 0);
+            Debug.Log("There is no save files to load!");
+        }
     }
 }

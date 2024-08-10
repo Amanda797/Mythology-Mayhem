@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 528059659217594486}
   m_LocalRotation: {x: 0, y: 0.99996835, z: 0, w: 0.007958659}
   m_LocalPosition: {x: 82.405525, y: 0.100037895, z: 59.549675}
-  m_LocalScale: {x: 9.238336, y: 9.238337, z: 9.238336}
+  m_LocalScale: {x: 9.238337, y: 9.238337, z: 9.238337}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 522928927293708708}
@@ -113,10 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1f3f5c683f8bf4eb0d1a3a532b3ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSFX: {fileID: 0}
-  hurtSFX: {fileID: 0}
-  dieSFX: {fileID: 0}
-  attackDamage: 4
+  attackSFX: {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  hurtSFX: {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  dieSFX: {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  attackDamage: 2
   speed: 5
   attackRange: 10
   attackDelay: 2
@@ -254,11 +254,24 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rigidBody3D: {fileID: 8236001976462873012}
   agent: {fileID: 0}
-  audioSource: {fileID: 0}
-  idleSounds: []
-  attackSounds: []
-  hurtSounds: []
-  deathSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  - {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  - {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  - {fileID: 8300000, guid: 0eeaddeb773b5ea4c8b7ba83d3810647, type: 3}
+  - {fileID: 8300000, guid: 9a26770f3d172a94ca0720db6110aec2, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  - {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  - {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  - {fileID: 8300000, guid: 0eeaddeb773b5ea4c8b7ba83d3810647, type: 3}
+  - {fileID: 8300000, guid: 9a26770f3d172a94ca0720db6110aec2, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d0cc4655cce02724aa43d3553fafb95a, type: 3}
+  - {fileID: 8300000, guid: 139633db30bb5a74a97509cec0773d9f, type: 3}
+  - {fileID: 8300000, guid: cf455e3ee72d16f44b284ee4b9e68a6d, type: 3}
+  - {fileID: 8300000, guid: 0eeaddeb773b5ea4c8b7ba83d3810647, type: 3}
+  - {fileID: 8300000, guid: 9a26770f3d172a94ca0720db6110aec2, type: 3}
   enemyDimension: 1
   health: {fileID: 527290172820061807}
   animator: {fileID: 433305614770297106}

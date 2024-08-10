@@ -9,6 +9,8 @@ public class MedusaControlScript : MonoBehaviour
     public AttackStates CurrentState;
 
     public GameObject revealExit;
+    AudioSource audioSource;
+    public AudioClip projectileClip, stabClip, beamClip;
 
     //Public for testing, revert later
     public float health;
@@ -139,6 +141,11 @@ public class MedusaControlScript : MonoBehaviour
         FrozenSelf3,
         EndStage3,
         Final
+    }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
     // Start is called before the first frame update
     void Start()
@@ -402,8 +409,15 @@ public class MedusaControlScript : MonoBehaviour
             CurrentState = nextState;
         }
     }
-    public void RunAttemptToFreeze(AttackStates failState, AttackStates successState, bool playerSuccess) 
+    public void RunAttemptToFreeze(AttackStates failState, AttackStates successState, bool playerSuccess)
     {
+        if (audioSource.clip != beamClip)
+        {
+            audioSource.clip = beamClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
         float timeSinceFreezeStart = Time.time - freezeAttemptStart;
         if (timeSinceFreezeStart < freezeAttemptTotal && !playerSuccess)
         {
@@ -449,6 +463,8 @@ public class MedusaControlScript : MonoBehaviour
                 SetAggroState(AggroStates.Normal);
                 health += healthIncreaseFromFreezingPlayer;
                 CurrentState = failState;
+                audioSource.loop = true;
+                audioSource.Play();
             }
             else
             {
@@ -486,6 +502,8 @@ public class MedusaControlScript : MonoBehaviour
             eyeBeamLight.SetActive(false);
             SetAggroState(AggroStates.Stone);
             CurrentState = nextState;
+            audioSource.loop = false;
+            audioSource.Stop();
         }
     }
         public int ChooseDestination()
@@ -511,6 +529,8 @@ public class MedusaControlScript : MonoBehaviour
 
                 case AttackType.Stab:
                     anim.SetTrigger("Stab");
+                    audioSource.clip = stabClip;
+                    audioSource.Play();
                     Stab();
                     break;
             }
@@ -539,6 +559,8 @@ public class MedusaControlScript : MonoBehaviour
 
                 case AttackType.Projectile:
                     anim.SetTrigger("Projectile");
+                    audioSource.clip = projectileClip;
+                    audioSource.Play();
                     Projectile();
                     break;
             }
@@ -709,7 +731,7 @@ public class MedusaControlScript : MonoBehaviour
     }
     void Projectile()
     {
-        //Code for Spell Mechanics
+        //TODO: Code for Spell Mechanics
     }
     void Stab()
     {

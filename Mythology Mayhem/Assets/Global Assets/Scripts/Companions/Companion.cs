@@ -10,6 +10,8 @@ public class Companion : MythologyMayhem
 {
     public Health _health;
     public GameObject _player;
+    AudioSource audioSource;
+    public AudioClip[] audioClips;
     [SerializeField] Animator anim;
     [SerializeField] Rigidbody2D rb2D;
     [SerializeField] float attackDamage;
@@ -26,6 +28,10 @@ public class Companion : MythologyMayhem
     public enum CompanionState { Following, Attacking };
     public CompanionState currentState = CompanionState.Following;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
         //Ignore Player and Companion Collisions
@@ -126,6 +132,9 @@ public class Companion : MythologyMayhem
                         //Attack
                         anim.SetTrigger(attackTrigger);
                         _td.otherCollider2D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+
+                        audioSource.clip = audioClips[UnityEngine.Random.Range(0, audioClips.Length)];
+                        audioSource.Play();
                     
                         StartCoroutine(AttackRate());
                     }
