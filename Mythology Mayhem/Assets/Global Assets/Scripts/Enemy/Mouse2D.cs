@@ -15,7 +15,7 @@ public class Mouse2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] string attackTrigger;
+    [SerializeField] string attackTrigger = "Attack";
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;

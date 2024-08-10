@@ -15,7 +15,7 @@ public class Bat2D : MonoBehaviour {
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] string meleeAttackTrigger;
+    [SerializeField] string attackTrigger;
     [SerializeField] float meleeDistance = .5f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;
@@ -97,7 +97,7 @@ public class Bat2D : MonoBehaviour {
         // Continue Attack
         if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
-            enemy.animator.SetTrigger(meleeAttackTrigger);
+            enemy.animator.SetTrigger(attackTrigger);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
 
             enemy.PlaySound(Enemy.Soundtype.Attack);
@@ -105,7 +105,6 @@ public class Bat2D : MonoBehaviour {
             if (enemy.player.GetComponent<KnockBackFeedback>())
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
-            enemy.animator.SetTrigger(meleeAttackTrigger);
             StartCoroutine(enemy.AttackRate());
         }
         else

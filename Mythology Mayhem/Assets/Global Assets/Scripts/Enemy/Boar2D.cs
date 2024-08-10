@@ -15,7 +15,7 @@ public class Boar2D : MonoBehaviour
 
     [Header("Melee Attack")]
     [SerializeField] GameObject body;
-    [SerializeField] string attackBool;
+    [SerializeField] string attackTrigger = "Attack";
     [SerializeField] float meleeDistance = 10f;
     [SerializeField] float alertTimer = 3f;
     float alertTime = 0f;
@@ -65,7 +65,8 @@ public class Boar2D : MonoBehaviour
             StartCoroutine(enemy.SwitchStates(Enemy.EnemyStates.Attack, 0));
         }
         else
-        // Continue M2T
+            // Continue M2T
+
         if (Vector3.Distance(enemy.gameObject.transform.position, enemy.target) < patrolDistance)
         {
             //Close enough to Idle
@@ -107,7 +108,7 @@ public class Boar2D : MonoBehaviour
         // Continue Attack
         if (Vector3.Distance(body.transform.position, enemy.player.transform.position) < meleeDistance && enemy.CanAttack)
         {
-            enemy.animator.SetBool(attackBool, true);
+            enemy.animator.SetTrigger(attackTrigger);
             enemy.player.GetComponent<PlayerStats>().TakeDamage(enemy.attackDamage);
 
             enemy.PlaySound(Enemy.Soundtype.Attack);
@@ -115,7 +116,6 @@ public class Boar2D : MonoBehaviour
             if (enemy.player.GetComponent<KnockBackFeedback>())
                 enemy.player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
             enemy.CanAttack = false;
-            enemy.animator.SetBool(attackBool, false);
             StartCoroutine(enemy.AttackRate());
         } 
         else

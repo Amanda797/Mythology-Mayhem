@@ -132,19 +132,25 @@ public class GameManager : MythologyMayhem
         {
             LoadSystemsUpdate();
         }
-        if (currentScene == Level.GreekLabyrinth_3D && uniDirLight.enabled)
+        if (currentScene == Level.GreekLabyrinth_3D || currentScene == Level.GreekLabyrinth_2D_Levers || currentScene == Level.GreekLabyrinth_2D_Pedastals)
         {
-            FindObjectOfType<TorchSFXManager>().ToggleAudioSources(true);
-            uniDirLight.enabled = false;
+            if (uniDirLight.enabled)
+            {
+                FindObjectOfType<TorchSFXManager>().ToggleAudioSources(true);
+                uniDirLight.enabled = false;
 
-            Camera camera = currentPlayer.gameObject.GetComponentInChildren<Camera>();
-            camera.clearFlags = CameraClearFlags.SolidColor;
-            camera.backgroundColor = Color.black;
+                Camera camera = currentPlayer.gameObject.GetComponentInChildren<Camera>();
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = Color.black;
+            }
         }
-        else if (currentScene != Level.GreekLabyrinth_3D && !uniDirLight.enabled)
+        else if (currentScene == Level.GreekLabyrinth_3D || currentScene == Level.GreekLabyrinth_2D_Levers || currentScene == Level.GreekLabyrinth_2D_Pedastals)
         {
-            FindObjectOfType<TorchSFXManager>().ToggleAudioSources(false);
-            uniDirLight.enabled = true;
+            if (!uniDirLight.enabled)
+            {
+                FindObjectOfType<TorchSFXManager>().ToggleAudioSources(false);
+                uniDirLight.enabled = true;
+            }
         }
     }
     public void LoadSystemsStart(bool newGame) 
