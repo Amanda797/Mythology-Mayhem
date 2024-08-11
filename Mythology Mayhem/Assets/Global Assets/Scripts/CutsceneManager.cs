@@ -7,26 +7,28 @@ using UnityEngine.Video;
 public class CutsceneManager : MonoBehaviour
 {
     float cutsceneTimer;
+    bool skipped = false;
     [SerializeField] MythologyMayhem.Level nextScene;
     // Start is called before the first frame update
     void Start()
     {
         cutsceneTimer = (float) GetComponent<VideoPlayer>().clip.length + 2f;
+        VideoPlayer video = GetComponent<VideoPlayer>();
+        if (video)
+        {
+            video.SetDirectAudioVolume(0, GameManager.instance.optionsData.masterVolume);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // Check for early player skipping
-        if(Input.GetMouseButtonDown(0)) {
-            LoadNextScene();
-            /*
-            if(nextScene == "Library of Alexandria")
-            {
-                PlayerPrefs.SetString("spawningScene", nextScene);
-            }
-            SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
-            */
+        if(Input.GetMouseButtonDown(0))
+        {
+            if (!skipped)
+                LoadNextScene();
+            skipped = true;
         } 
         
         // Change scene after video is done playing

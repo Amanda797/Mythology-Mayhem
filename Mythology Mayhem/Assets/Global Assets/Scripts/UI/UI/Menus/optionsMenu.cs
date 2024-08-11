@@ -1,4 +1,5 @@
 using TMPro;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -21,6 +22,8 @@ public class optionsMenu : MonoBehaviour
     [SerializeField] AudioMixerGroup sfx, combat, footstep;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip[] sfxClips, combatClips, footstepClips;
+
+    float soundStart;
 
     private void Awake()
     {
@@ -45,44 +48,44 @@ public class optionsMenu : MonoBehaviour
     public void MasterVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.masterVolume = sliderValue;
-        audioMixer.SetFloat("MasterVolume", sliderValue);
+        audioMixer.SetFloat("MasterVolume", LinearToDecibel(sliderValue));
     }
     public void MusicVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.musicVolume = sliderValue;
-        audioMixer.SetFloat("MusicVolume", sliderValue);
+        audioMixer.SetFloat("MusicVolume", LinearToDecibel(sliderValue));
     }
     public void AmbianceVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.ambianceVolume = sliderValue;
-        audioMixer.SetFloat("AmbianceVolume", sliderValue);
+        audioMixer.SetFloat("AmbianceVolume", LinearToDecibel(sliderValue));
     }
     public void SFXVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.sfxVolume = sliderValue;
-        audioMixer.SetFloat("SoundEffectVolume", sliderValue);
+        audioMixer.SetFloat("SoundEffectVolume", LinearToDecibel(sliderValue));
         audioSource.clip = sfxClips[UnityEngine.Random.Range(0, sfxClips.Length)];
-        audioSource.volume = gameManager.sfxAudioSource.volume;
+        audioSource.volume = 1f;
         audioSource.outputAudioMixerGroup = sfx;
-        audioSource.Play();
+        StartCoroutine(PlayDelayed(0.2f));
     }
     public void CombatVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.enemyVolume = sliderValue;
-        audioMixer.SetFloat("EnemyVolume", sliderValue);
+        audioMixer.SetFloat("EnemyVolume", LinearToDecibel(sliderValue));
         audioSource.clip = combatClips[UnityEngine.Random.Range(0, combatClips.Length)];
         audioSource.volume = 1f;
         audioSource.outputAudioMixerGroup = combat;
-        audioSource.Play();
+        StartCoroutine(PlayDelayed(0.2f));
     }
     public void FootstepsVolumeChanged(float sliderValue)
     {
         gameManager.optionsData.footstepVolume = sliderValue;
-        audioMixer.SetFloat("FootstepVolume", sliderValue);
+        audioMixer.SetFloat("FootstepVolume", LinearToDecibel(sliderValue));
         audioSource.clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
         audioSource.volume = .5f;
         audioSource.outputAudioMixerGroup = footstep;
-        audioSource.Play();
+        StartCoroutine(PlayDelayed(0.2f));
     }
     public void GraphicsChanged(int value)
     {
@@ -95,5 +98,34 @@ public class optionsMenu : MonoBehaviour
     public void ResolutionChanged(int value)
     {
         gameManager.optionsData.resolution = resolutionDropdown.value;
+    }
+
+    private float LinearToDecibel(float linear)
+    {
+        float dB;
+
+        if (linear != 0)
+            dB = 20.0f * Mathf.Log10(linear);
+        else
+            dB = -144.0f;
+
+        return dB;
+    }
+
+    private float DecibelToLinear(float dB)
+    {
+        float linear = Mathf.Pow(10.0f, dB / 20.0f);
+
+        return linear;
+    }
+
+    private IEnumerator PlayDelayed(float input)
+    {
+        float SFX = gameManager.optionsData.sfxVolume;
+        float footsteps = gameManager.optionsData.footstepVolume;
+        float combat = gameManager.optionsData.enemyVolume;
+        yield return new WaitForSeconds(input);
+        if (SFX == gameManager.optionsData.sfxVolume && footsteps == gameManager.optionsData.footstepVolume && combat == gameManager.optionsData.enemyVolume)
+            audioSource.Play();
     }
 }
