@@ -42,6 +42,8 @@ public class LocalGameManager : MythologyMayhem
     public AudioClip ambianceClip;
     public AudioClip[] footstepClips;
     public AudioSource footstepAudioSource;
+    [SerializeField] TorchSFXManager torchManager;
+    bool torchesOn = false;
 
     [Header("Level Offset System")]
     public bool useOffset;
@@ -84,6 +86,27 @@ public class LocalGameManager : MythologyMayhem
         if (useOffset && mainGameManager.currentScene == inScene)
         {
             levelOffset += UpdateOffsets();
+        }
+
+        if (torchManager != null)
+        {
+            if (mainGameManager.currentScene == inScene && !torchesOn)
+            {
+                torchesOn = true;
+                torchManager.ToggleAudioSources(true);
+                mainGameManager.uniDirLight.enabled = false;
+
+                Camera camera = player.gameObject.GetComponentInChildren<Camera>();
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = Color.black;
+            }
+            if (mainGameManager.currentScene != inScene && torchesOn)
+            {
+                torchesOn = false;
+                torchManager.ToggleAudioSources(false);
+
+                mainGameManager.uniDirLight.enabled = true;
+            }
         }
     }
 
