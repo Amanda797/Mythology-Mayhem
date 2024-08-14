@@ -10,7 +10,12 @@ public class TorchSFXManager : MonoBehaviour
     {
         foreach (AudioSource source in torchAudioSources)
         {
-            if(activate) source.Play();
+            if (activate)
+            {
+                source.volume = .1f;
+                source.Play();
+            }
+
             else source.Stop();
         }
     }
