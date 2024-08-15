@@ -28,24 +28,28 @@ public class PlayerAttack : MythologyMayhem
         {
             if (Input.GetMouseButtonDown(0) && !attack3D.GetIsAttacking())
             {
-                canAttack = false;
-
-                //Store Original Damage
-                float baseDamage = attack3D.damage;
-
-                //Tobias and cooldown complete
-                if (playerMovement.character == Character.Tobias && playerMovement.tobiasCurrentCooldown <= 0)
+                if (Time.timeScale == 1)
                 {
-                    //Add extra damage, start vfxs, and set cooldown to max
-                    attack3D.damage += playerMovement.extraDamage;
-                    effectsScript.vfxAnimator.SetTrigger("StartEffect");
-                    playerMovement.tobiasCurrentCooldown = playerMovement.tobiasCooldown;
-                }
-                //Run Attack()
-                Attack();
+                    canAttack = false;
 
-                //Restore Original in case Changed (Outside if in case other damage changes are added later
-                attack3D.damage = baseDamage;
+                    //Store Original Damage
+                    float baseDamage = attack3D.damage;
+
+                    //Tobias and cooldown complete
+                    if (playerMovement.character == Character.Tobias && playerMovement.tobiasCurrentCooldown <= 0)
+                    {
+                        //Add extra damage, start vfxs, and set cooldown to max
+                        attack3D.damage += playerMovement.extraDamage;
+                        effectsScript.vfxAnimator.SetTrigger("StartEffect");
+                        playerMovement.tobiasCurrentCooldown = playerMovement.tobiasCooldown;
+                    }
+                    //Run Attack()
+                    Attack();
+
+                    //Restore Original in case Changed (Outside if in case other damage changes are added later
+                    attack3D.damage = baseDamage;
+                }
+
             }
         }
         
