@@ -65,8 +65,11 @@ public class PlayerStats : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Attack();
-                ps.NextAttackTime = Time.time + 1f/ps.AttackRate;
+                if(Time.timeScale == 1)
+                {
+                    Attack();
+                    ps.NextAttackTime = Time.time + 1f / ps.AttackRate;
+                }
             }
         }
 
