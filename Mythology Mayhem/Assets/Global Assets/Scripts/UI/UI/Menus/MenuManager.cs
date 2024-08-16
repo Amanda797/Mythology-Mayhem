@@ -61,11 +61,6 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            pausePnl.SetActive(false);
-            optionsPnl.SetActive(false);
-            creditsPnl.SetActive(false);
-            helpPnl.SetActive(false);
-            scrollPnl.SetActive(false);
             menuEffectSource.Play();
             animator.Play("Scroll_Close", 0);
             StartCoroutine(ClosePauseMenu());
@@ -79,27 +74,29 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator OpenScroll()
     {
-        yield return new WaitForSecondsRealtime(1);
-
         scrollPnl.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
     }
 
     public void CloseScroll()
     {
-        scrollPnl.SetActive(false);
         TogglePause(true);
     }
 
     IEnumerator OpenPauseMenu()
     {
-        yield return new WaitForSecondsRealtime(1);
-
         pausePnl.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
     }
+
     IEnumerator ClosePauseMenu()
     {
         yield return new WaitForSecondsRealtime(1);
-
+        pausePnl.SetActive(false);
+        optionsPnl.SetActive(false);
+        creditsPnl.SetActive(false);
+        helpPnl.SetActive(false);
+        scrollPnl.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
@@ -109,32 +106,32 @@ public class MenuManager : MonoBehaviour
     {
         menuEffectSource.Play();
         animator.Play("Scroll_Close", 0);
+        yield return new WaitForSecondsRealtime(1);
         optionsPnl.SetActive(false);
         creditsPnl.SetActive(false);
         helpPnl.SetActive(false);
         pausePnl.SetActive(false);
-        yield return new WaitForSecondsRealtime(1);
         switch (name)
         {
             case "Help":
                 menuEffectSource.Play();
                 animator.Play("scroll");
-                yield return new WaitForSecondsRealtime(1);
                 helpPnl.SetActive(true);
+                yield return new WaitForSecondsRealtime(1);
                 break;
 
             case "Options":
                 menuEffectSource.Play();
                 animator.Play("scroll");
-                yield return new WaitForSecondsRealtime(1);
                 optionsPnl.SetActive(true);
+                yield return new WaitForSecondsRealtime(1);
                 break;
 
             case "Credits":
                 menuEffectSource.Play();
                 animator.Play("scroll");
-                yield return new WaitForSecondsRealtime(1);
                 creditsPnl.SetActive(true);
+                yield return new WaitForSecondsRealtime(1);
                 break;
 
             case "Main Menu":
@@ -150,8 +147,8 @@ public class MenuManager : MonoBehaviour
             case "Pause Menu":
                 menuEffectSource.Play();
                 animator.Play("scroll");
-                yield return new WaitForSecondsRealtime(1);
                 pausePnl.SetActive(true);
+                yield return new WaitForSecondsRealtime(1);
                 break;
 
             default:

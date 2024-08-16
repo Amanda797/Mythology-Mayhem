@@ -124,8 +124,11 @@ public class optionsMenu : MonoBehaviour
         float SFX = gameManager.optionsData.sfxVolume;
         float footsteps = gameManager.optionsData.footstepVolume;
         float combat = gameManager.optionsData.enemyVolume;
-        yield return new WaitForSeconds(input);
+        yield return new WaitForSecondsRealtime(input);
+        print(footsteps.ToString() + " " + gameManager.optionsData.footstepVolume.ToString());
         if (SFX == gameManager.optionsData.sfxVolume && footsteps == gameManager.optionsData.footstepVolume && combat == gameManager.optionsData.enemyVolume)
+        {
             audioSource.Play();
+        }
     }
 }
