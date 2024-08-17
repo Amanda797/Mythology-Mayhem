@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8459894976310929796}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 84.66, y: 4.12, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e27d5aa1270e945b0df3d6be1889c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  healClip: {fileID: 8300000, guid: 2070a738889160f45a9102b83fc946d7, type: 3}
 --- !u!61 &8459894976310929801
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,14 +139,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.3168626, y: 4.3}
+    oldSize: {x: 4.31, y: 4.3}
     newSize: {x: 4.31, y: 4.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 15, y: 4}
   m_EdgeRadius: 0
 --- !u!82 &8459894976310929802
 AudioSource:
@@ -156,11 +158,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3688536365896545760, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f3e67da027bf43848aabb38f4107d310, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 84400b3fdabb6af418c500d2d7448bdd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

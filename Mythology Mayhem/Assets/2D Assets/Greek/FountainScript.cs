@@ -7,8 +7,10 @@ public class FountainScript : MonoBehaviour
 {
     GameManager gameManager;
     AudioSource audioSource;
+    [SerializeField] AudioSource source;
     PlayerStats playerStats;
     bool canHeal = false;
+    [SerializeField] AudioClip healClip;
 
     private void Awake()
     {
@@ -18,6 +20,8 @@ public class FountainScript : MonoBehaviour
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing.");
+
+        source = gameManager.GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -38,7 +42,7 @@ public class FountainScript : MonoBehaviour
                 }
                 else gameManager.Popup("Full Health", true);
             }
-            else if (distance > 6 && canHeal)
+            else if (distance > 6)
             {
                 gameManager.Popup("", false);
                 canHeal = false;
@@ -49,6 +53,9 @@ public class FountainScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             canHeal = false;
+            
+            source.clip = healClip;
+            source.Play();
             gameManager.Popup("", false);
             playerStats.Heal(100, false);
         }
