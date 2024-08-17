@@ -20,6 +20,8 @@ public class SceneTransitionPoint2D : SceneTransitionPoint
             if (countAsLevelComplete) gameManager.gameData.UpdateLevelComplete(completedChapter, completedLevel);
 
             localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
+            gameManager.Popup("Press E to Enter", false);
+            canTransition = false;
         }
     }
 
