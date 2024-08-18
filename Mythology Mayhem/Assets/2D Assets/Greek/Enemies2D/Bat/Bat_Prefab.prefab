@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2121983304384078781
 Transform:
   m_ObjectHideFlags: 0
@@ -82,7 +82,6 @@ GameObject:
   - component: {fileID: 1771615849059406565}
   - component: {fileID: 389216523961157805}
   - component: {fileID: 1920169423724099196}
-  - component: {fileID: 7669933034497791015}
   - component: {fileID: 5418738702931030166}
   m_Layer: 6
   m_Name: Bat
@@ -98,7 +97,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5095419021229708576}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.10051727, y: -0.83708954, z: 0.120135784}
   m_LocalScale: {x: -0.6, y: 0.6670161, z: 1}
   m_ConstrainProportionsScale: 0
@@ -127,7 +126,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d1b31634346bd4746aa9be8b74af87eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,7 +149,7 @@ SpriteRenderer:
   m_SortingOrder: 45
   m_Sprite: {fileID: 21300000, guid: ce97fa9152a0f5d418c4994401ff8b40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 20.48, y: 20.48}
@@ -192,10 +191,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 7.2295494, y: 0.63698095}
   m_SpriteTilingProperty:
     border: {x: 0, y: 8.79, z: 14.849999, w: 7.5299997}
-    pivot: {x: 0.13330181, y: 0.5283286}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 20.48, y: 20.48}
     newSize: {x: 20.48, y: 20.48}
     adaptiveTilingThreshold: 0.5
@@ -203,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.8, y: 6.98}
+  m_Size: {x: 5.24625, y: 4.296309}
   m_EdgeRadius: 0
 --- !u!114 &7669933034497791012
 MonoBehaviour:
@@ -242,6 +241,13 @@ MonoBehaviour:
   attackCollider: {fileID: 5095419021441979651}
   walkSpeed: 5
   runSpeed: 10
+  patrolDistance: 2
+  speed: 2
+  patrolBool: IsPatrolling
+  isFlying: 1
+  attackTriggers: []
+  attackTrigger: Attack
+  meleeDistance: 4
   waypoints:
   - {fileID: 4826867422043470243}
   - {fileID: 3834386799553522079}
@@ -249,66 +255,22 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
   idleTimer: 0
+  hasIdleDelegate: 0
+  hasPatrolDelegate: 0
+  hasAttackDelegate: 0
+  hasDeadDelegate: 0
   IdleDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7669933034497791015}
-        m_TargetAssemblyTypeName: Bat2D, Assembly-CSharp
-        m_MethodName: Idle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7669933034497791015}
-        m_TargetAssemblyTypeName: Bat2D, Assembly-CSharp
-        m_MethodName: MoveToTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   AttackDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7669933034497791015}
-        m_TargetAssemblyTypeName: Bat2D, Assembly-CSharp
-        m_MethodName: MeleeAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5418738702931030166}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
@@ -332,7 +294,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!114 &389216523961157805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +313,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7669933034497791015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -378,7 +340,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7669933034497791015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -498,26 +460,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7669933034497791015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5095419021229708576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f075ae793a7ece346a423cdc2fff94f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolBool: IsPatrolling
-  speed: 2
-  flipSensitivity: 13
-  patrolDistance: 5
-  body: {fileID: 5095419021229708576}
-  attackTrigger: Attack
-  meleeDistance: 8
-  alertTimer: 3
 --- !u!114 &5418738702931030166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,11 +474,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 7
   _health: 0
-  components:
-  - {fileID: 7669933034497791015}
-  - {fileID: 389216523961157805}
-  - {fileID: 7669933034497791012}
-  - {fileID: 2463334459721048447}
   mainObject: {fileID: 2121983304384078778}
   rewardObject: {fileID: 0}
   anim: {fileID: 5095419021229708581}
@@ -550,6 +487,7 @@ MonoBehaviour:
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
+  isDead: 0
 --- !u!1 &5095419021441979651
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +601,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5321535897693837951}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 
@@ -707,7 +645,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6007551293315488710}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
   m_Name: 

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Animator))]
@@ -46,6 +47,16 @@ public class Enemy : MythologyMayhem
     [Header("Movement")]
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
+    [SerializeField] float patrolDistance = 2f;
+    float flipSensitivity = 1f;
+    [SerializeField] float speed = 2f;
+    [SerializeField] string patrolBool = "IsPatrolling";
+    [SerializeField] bool isFlying = false;
+
+    [Header("Attack")]
+    [SerializeField] private string[] attackTriggers;
+    [SerializeField] string attackTrigger = "Attack";
+    [SerializeField] float meleeDistance = 4f;
 
     [Header("Waypoints")]
     [SerializeField] private Transform[] waypoints;
@@ -54,11 +65,13 @@ public class Enemy : MythologyMayhem
     public float idleTimerMax = 3f;
     public float idleTimer;
 
-    public bool CanAttack {
-        get {return canAttack;} 
-        set {canAttack = value;}
+    public bool CanAttack
+    {
+        get { return canAttack; }
+        set { canAttack = value; }
     }
 
+    public bool hasIdleDelegate, hasPatrolDelegate, hasAttackDelegate, hasDeadDelegate;
     public UnityEvent IdleDelegate;
     public UnityEvent PatrolDelegate;
     public UnityEvent AttackDelegate;
@@ -80,7 +93,7 @@ public class Enemy : MythologyMayhem
 
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
-        StartCoroutine(SwitchStates(currentState,0));
+        StartCoroutine(SwitchStates(currentState, 0));
 
         _localGameManager = transform.root.GetComponent<LocalGameManager>();
 
@@ -94,45 +107,131 @@ public class Enemy : MythologyMayhem
     {
         ////set reference to player if in a scene using the StartScene feature
 
-        if (_localGameManager != null) if (player == null) if(_localGameManager.player != null)  player = _localGameManager.player.gameObject;
+        if (_localGameManager != null) if (player == null) if (_localGameManager.player != null) player = _localGameManager.player.gameObject;
 
         //Check for Death
 
-        if (health.GetHealth() <= 0 && currentState != EnemyStates.Dead)
-        {
-            StartCoroutine(SwitchStates(EnemyStates.Dead, 0));
-        }
+        if (health.isDead && currentState != EnemyStates.Dead) StartCoroutine(SwitchStates(EnemyStates.Dead, 0));
         else if (health.GetHealth() <= 0) return;
         // If not transitioning states, invoke state action
-
         if (currentStatePosition == StatePosition.Current)
         {
             switch (currentState)
             {
                 case EnemyStates.Idle:
                     {
-                        IdleDelegate.Invoke();
+                        if (DetectPlayer()) StartCoroutine(SwitchStates(EnemyStates.Attack, 0));
+                        else if (enemyDimension == Dimension.TwoD) // if 2D
+                        {
+                            if (idleTimer <= 0)
+                            {
+                                animator.SetBool(patrolBool, true);
+                                StartCoroutine(SwitchStates(EnemyStates.Patrol, 0));
+                            }
+                            else
+                            {
+                                animator.SetBool(patrolBool, false);
+                                idleTimer -= Time.deltaTime;
+                            }
+                        }
+                        else // if 3D
+                        {
+                            if (idleTimer <= 0) StartCoroutine(SwitchStates(EnemyStates.Patrol, 0));
+                            else idleTimer -= Time.deltaTime;
+                        }
+
+                        if (hasIdleDelegate) IdleDelegate.Invoke();
+
                         break;
                     }
                 case EnemyStates.Patrol:
                     {
-                        PatrolDelegate.Invoke();
+                        if (DetectPlayer()) StartCoroutine(SwitchStates(EnemyStates.Attack, 0));
+                        else if (enemyDimension == Dimension.TwoD) // if 2D
+                        {
+                            if (Vector3.Distance(transform.position, target) < patrolDistance) StartCoroutine(SwitchStates(EnemyStates.Idle, 0));
+                            else MoveTo2DTarget(false);
+                        }
+                        else // if 3D
+                        {
+                            if (Vector3.Distance(transform.position, target) < agent.stoppingDistance) StartCoroutine(SwitchStates(EnemyStates.Idle, 0));
+                            else transform.forward = agent.velocity;
+                        }
+
+                        if (hasPatrolDelegate) PatrolDelegate.Invoke();
+
                         break;
                     }
                 case EnemyStates.Attack:
                     {
-                        AttackDelegate.Invoke();
+                        if (!DetectPlayer()) StartCoroutine(SwitchStates(EnemyStates.Idle, 0));
+                        else if (enemyDimension == Dimension.TwoD) // if 2D
+                        {
+                            if (Vector3.Distance(transform.position, target) < meleeDistance && CanAttack)
+                            {
+                                CanAttack = false;
+
+                                player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
+
+                                animator.SetTrigger(attackTrigger);
+
+                                PlaySound(Soundtype.Attack);
+
+                                if (player.GetComponent<KnockBackFeedback>()) player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);                                
+
+                                StartCoroutine(AttackRate());
+                            }
+                            else if (Vector3.Distance(transform.position, target) > meleeDistance)
+                            {
+                                MoveTo2DTarget(true);
+                            }
+                        }
+                        else // if 3D
+                        {
+                            if (Vector3.Distance(transform.position, target) < agent.stoppingDistance && CanAttack)
+                            {
+                                CanAttack = false;
+
+                                player.GetComponent<FPSHealth>().TakeDamage(attackDamage);
+
+                                animator.SetTrigger(attackTriggers[UnityEngine.Random.Range(0, attackTriggers.Length)]);
+
+                                PlaySound(Soundtype.Attack);
+
+                                if (player.GetComponent<KnockBackFeedback>()) player.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);                                
+
+                                StartCoroutine(AttackRate());
+                            }
+                            else if (Vector3.Distance(transform.position, player.transform.position) > agent.stoppingDistance)
+                            {
+                                transform.forward = agent.velocity;
+
+                                agent.speed = runSpeed;
+                                animator.SetFloat("Speed", runSpeed);
+                                agent.SetDestination(target);
+                            }
+                        }                                                    
+                        if (hasAttackDelegate) AttackDelegate.Invoke();
                         break;
                     }
                 case EnemyStates.Dead:
                     {
-                        DeadDelegate.Invoke();
+                        health.Death();
+
+                        if (enemyDimension == Dimension.TwoD) GetComponent<BoxCollider2D>().enabled = false;
+                        else GetComponent<BoxCollider>().enabled = false;
+
                         currentStatePosition = StatePosition.Exit;
+
+                        if (enemyDimension == Dimension.ThreeD) animator.SetFloat("Speed", 0);
+
+                        if (hasDeadDelegate) DeadDelegate.Invoke();
+
                         break;
                     }
                 default: { break; }
             }
-        }        
+        }
     }//end update
 
     public IEnumerator SwitchStates(EnemyStates newState, float delay)
@@ -144,7 +243,7 @@ public class Enemy : MythologyMayhem
         currentState = newState;
         EnterState(currentState);
         currentStatePosition = StatePosition.Current;
-    }//switch states
+    }
 
     public void EnterState(EnemyStates newState)
     {
@@ -152,44 +251,70 @@ public class Enemy : MythologyMayhem
         {
             case EnemyStates.Idle:
                 {
+                    Debug.Log("Idle");
+                    if (enemyDimension == Dimension.TwoD) animator.SetBool(patrolBool, false);
+                    else animator.SetFloat("Speed", 0);
+
                     idleTimer = idleTimerMax;
                     break;
                 }
             case EnemyStates.Patrol:
                 {
-                    //Update waypoint
-                    if(waypoints.Length > 0)
+                    Debug.Log("Patrol");
+                    if (enemyDimension == Dimension.TwoD) // if is 2D
                     {
-                        if(waypointIndex >= waypoints.Length - 1)
-                        {
-                            waypointIndex = 0;
-                        } else
-                        {
-                            waypointIndex++;
-                        }
-
-                        //Update target
                         target = waypoints[waypointIndex].position;
-                    }                    
 
-                    //Update Nav mesh agent
-                    if(agent != null)
+                        if (waypoints.Length > 0)
+                        {
+                            if (waypointIndex >= waypoints.Length - 1) waypointIndex = 0;
+                            else waypointIndex++;
+                        }
+                        animator.SetBool(patrolBool, true);
+                    }
+                    else // if is 3D
                     {
+                        target = waypoints[waypointIndex].position;
+
+                        if (waypoints.Length > 0)
+                        {
+                            if (waypointIndex >= waypoints.Length - 1) waypointIndex = 0;
+                            else waypointIndex++;                            
+                        }
+                        else
+                        {
+                            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * patrolDistance;
+                            randomDirection += transform.position;
+                            NavMeshHit hit;
+                            NavMesh.SamplePosition(randomDirection, out hit, patrolDistance, 1);
+                            target = hit.position;
+                        }
                         agent.speed = walkSpeed;
+                        animator.SetFloat("Speed", walkSpeed);
+                        agent.SetDestination(target);
                     }
                     break;
                 }
             case EnemyStates.Attack:
                 {
-                    //Update Nav mesh agent
-                    if (agent != null)
+                    Debug.Log("Attack");
+                    if (enemyDimension == Dimension.ThreeD)
                     {
-                        agent.speed = runSpeed;
+                        animator.SetFloat("Speed", 0);
+                        agent.speed = 0;
                     }
+
+                    canAttack = true;
                     break;
                 }
             case EnemyStates.Dead:
                 {
+                    Debug.Log("Dead");
+                    if (enemyDimension == Dimension.ThreeD)
+                    {
+                        animator.SetFloat("Speed", 0);
+                        agent.speed = 0;
+                    }
                     break;
                 }
             default: { break; }
@@ -226,60 +351,49 @@ public class Enemy : MythologyMayhem
 
     public IEnumerator AttackRate()
     {
-        canAttack = false;
         yield return new WaitForSeconds(attackRate);
+
         canAttack = true;
     }
 
     public bool DetectPlayer()
     {
-        switch(enemyDimension)
+        if (enemyDimension == Dimension.TwoD) // if 2D
         {
-            case Dimension.TwoD:
+            if (attackCollider.GetComponent<TriggerDetector2D>().triggered)
+            {
+                foreach (Collider2D go in attackCollider.GetComponent<TriggerDetector2D>().otherColliders2D)
                 {
-                    if (attackCollider.GetComponent<TriggerDetector2D>().triggered)
+                    if (go.CompareTag("Player"))
                     {
-                        foreach (Collider2D go in attackCollider.GetComponent<TriggerDetector2D>().otherColliders2D)
-                        {
-                            if (go.CompareTag("Player"))
-                            {
-                                target = go.transform.position;
-                                player = go.gameObject;
-                                return true;
-                            }
-                        }
+                        target = go.transform.position;
+                        player = go.gameObject;
+                        return true;
                     }
-                    break;
                 }
-            case Dimension.ThreeD:
+            }
+        }
+        else // if 3D
+        {
+            if (attackCollider.GetComponent<TriggerDetector3D>().triggered)
+            {
+                foreach (Collider go in attackCollider.GetComponent<TriggerDetector3D>().otherColliders3D)
                 {
-                    if (attackCollider.GetComponent<TriggerDetector3D>().triggered)
+                    if (go.CompareTag("Player"))
                     {
-                        foreach (Collider go in attackCollider.GetComponent<TriggerDetector3D>().otherColliders3D)
-                        {
-                            if (go.CompareTag("Player"))
-                            {
-                                target = go.transform.position;
-                                player = go.gameObject;
-                                return true;
-                            }
-                        }
+                        target = go.transform.position;
+                        player = go.gameObject;
+                        return true;
                     }
-                    break;
                 }
-            default:
-                {
-                    break;
-                }
-        }//end switch
-
+            }
+        }
         return false;
-
-    }//end detect player
+    }
 
     public void PlaySound(Soundtype soundType)
     {
-        switch (soundType) 
+        switch (soundType)
         {
             case Soundtype.Attack:
                 PlaySoundAlgorithm(attackSounds);
@@ -293,12 +407,54 @@ public class Enemy : MythologyMayhem
         }
     }
 
-    void PlaySoundAlgorithm(AudioClip[] clips) 
+    void PlaySoundAlgorithm(AudioClip[] clips)
     {
         if (clips.Length >= 1)
         {
             int randomSoundIndex = UnityEngine.Random.Range(0, clips.Length);
             audioSource.PlayOneShot(clips[randomSoundIndex]);
         }
+    }
+
+    void MoveTo2DTarget(bool isAttacking)
+    {
+        float currentSpeed = 0f;
+        if (isAttacking) currentSpeed = speed * 1.5f;
+        else currentSpeed = speed;
+
+        if (target.x + flipSensitivity > transform.position.x && transform.rotation.y != 180)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        else if (target.x + flipSensitivity < transform.position.x && transform.rotation.y != 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+
+        Vector2 xOnlyTargetPosition;
+
+        if (isFlying) xOnlyTargetPosition = target;
+        else xOnlyTargetPosition = new Vector2(target.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, xOnlyTargetPosition, currentSpeed * Time.deltaTime);
+    }
+
+    void MoveTo3DTarget(bool isAttacking)
+    {
+        if (isAttacking)
+        {
+            agent.speed = runSpeed;
+            animator.SetFloat("Speed", runSpeed);
+        }
+        else
+        {
+            agent.speed = walkSpeed;
+            animator.SetFloat("Speed", walkSpeed);
+        }
+
+        agent.SetDestination(target);
+
+        Vector3 direction = target - transform.position;
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 }

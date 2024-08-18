@@ -148,7 +148,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650337064362938130}
-  m_LocalRotation: {x: 0.5004227, y: -0.499577, z: -0.50042266, w: 0.4995769}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7077051, w: 0.70650804}
   m_LocalPosition: {x: -0.000000004884356, y: 0.4083513, z: 0.007449541}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -158,7 +158,7 @@ Transform:
   - {fileID: 4650337064362447696}
   m_Father: {fileID: 4650337064362447702}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 2.1850286, y: -55.910076, z: -89.008446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.097}
 --- !u!1 &4650337064362938132
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,14 +245,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650337064362938136}
-  m_LocalRotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.17639811, y: -0.0000000182051, z: 0.007449579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4650337064362447702}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -92.12568, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4650337064362938138
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,14 +276,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650337064362938138}
-  m_LocalRotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.17639816, y: -0.00000001820511, z: 0.0074496362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4650337064362447702}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: -37.40486, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4650337064362938140
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,9 +711,7 @@ GameObject:
   - component: {fileID: 4650337063267741635}
   - component: {fileID: 4650337063267741647}
   - component: {fileID: 4650337063267741632}
-  - component: {fileID: 4650337063267741634}
   - component: {fileID: 4650337064362938155}
-  - component: {fileID: 3016996517889674253}
   - component: {fileID: 56486665465499233}
   m_Layer: 6
   m_Name: Bull Warrior-Grey
@@ -777,7 +775,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &4650337063267741635
 BoxCollider:
@@ -803,12 +801,12 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 2
   m_Speed: 3.5
-  m_Acceleration: 4
+  m_Acceleration: 60
   avoidancePriority: 50
-  m_AngularSpeed: 5
-  m_StoppingDistance: 2
+  m_AngularSpeed: 120
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -828,10 +826,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 20
   _health: 0
-  components:
-  - {fileID: 4650337063267741647}
-  - {fileID: 3016996517889674253}
-  - {fileID: 56486665465499233}
   mainObject: {fileID: 4650337064500238795}
   rewardObject: {fileID: 0}
   anim: {fileID: 4650337064372337810}
@@ -845,18 +839,6 @@ MonoBehaviour:
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
---- !u!114 &4650337063267741634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650337064362938166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca6be24f95668e499d5d66215137cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &4650337064362938155
 AudioSource:
   m_ObjectHideFlags: 0
@@ -953,28 +935,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3016996517889674253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650337064362938166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bccd837baaf75af42b274149dc854ebf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkBool: Walk
-  runBool: Run
-  body: {fileID: 4650337064362938166}
-  attackTriggers:
-  - Attack 01
-  - Attack 02
-  - Attack 03
-  meleeDistance: 15
-  defenseBool: Defend
-  defenseTimer: 1
 --- !u!114 &56486665465499233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,8 +994,17 @@ MonoBehaviour:
   attackDamage: 4
   canAttack: 1
   attackCollider: {fileID: 8466665588375313902}
-  walkSpeed: 20
-  runSpeed: 40
+  walkSpeed: 10
+  runSpeed: 20
+  patrolDistance: 2
+  speed: 2
+  patrolBool: IsPatrolling
+  attackTriggers:
+  - Attack 01
+  - Attack 02
+  - Attack 03
+  attackTrigger: Attack
+  meleeDistance: 1
   waypoints:
   - {fileID: 4650337064051069754}
   - {fileID: 4650337063406346973}
@@ -1044,66 +1013,22 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 5
   idleTimer: 0
+  hasIdleDelegate: 0
+  hasPatrolDelegate: 0
+  hasAttackDelegate: 0
+  hasDeadDelegate: 0
   IdleDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3016996517889674253}
-        m_TargetAssemblyTypeName: Boar3D, Assembly-CSharp
-        m_MethodName: Idle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3016996517889674253}
-        m_TargetAssemblyTypeName: Boar3D, Assembly-CSharp
-        m_MethodName: MoveToTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   AttackDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3016996517889674253}
-        m_TargetAssemblyTypeName: Boar3D, Assembly-CSharp
-        m_MethodName: DetermineAction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4650337063267741632}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
@@ -1130,14 +1055,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650337064362938168}
-  m_LocalRotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.119191736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4650337064362447702}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4650337064362938170
 GameObject:
   m_ObjectHideFlags: 0
