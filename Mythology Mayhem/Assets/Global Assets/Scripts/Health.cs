@@ -9,9 +9,7 @@ public class Health : MonoBehaviour
     // ***PROPERTIES***
     // --------------------------
     [SerializeField] private float MaxHealth;
-    [SerializeField]
-    private float _health;
-    [SerializeField] private Behaviour[] components;
+    [SerializeField] private float _health;
     [SerializeField] private GameObject mainObject; // Parent Self
     public GameObject rewardObject; // Reward Object
 
@@ -31,7 +29,7 @@ public class Health : MonoBehaviour
     public bool canRespawn = false;
 
     public EnemyLoadSystem loadSystem;
-    bool isDead = false;
+    public bool isDead = false;
 
     // --------------------------
     // ***METHODS***
@@ -64,7 +62,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float d)
     {
         //Defense Bool. If not _attacked, take damage. If _attacked, do not take damage. Use for timed, temporary defenses in specific enemies (See Boar3D)
-        if (!_attacked && !_defenseUp)
+        if (!_attacked && !_defenseUp && !isDead)
         {
             if (gameObject.tag == "Enemy")
             {
@@ -116,6 +114,7 @@ public class Health : MonoBehaviour
                 {
                     gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                     gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                    Destroy(gameObject.GetComponent<BoxCollider2D>());
                 }
                 else if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.ThreeD)
                 {
@@ -126,10 +125,6 @@ public class Health : MonoBehaviour
                 }
             }
 
-            foreach (Behaviour component in components)
-            {
-                component.enabled = false;
-            }
             StartCoroutine(DeathTimer(4f));
         }
     }
@@ -144,11 +139,11 @@ public class Health : MonoBehaviour
             reward.name = rewardObject.name;
         }
 
-        mainObject.SetActive(false);
-
-        if(mainObject.CompareTag("Companion"))
+        if(mainObject.CompareTag("Companion")) StartCoroutine(CompanionRespawn(respawnTimer));
+        else
         {
-            StartCoroutine(CompanionRespawn(respawnTimer));
+            enemy._localGameManager.enemies.Remove(mainObject);
+            Destroy(mainObject);
         }
     }//end death timer
 

@@ -37,6 +37,8 @@ public class LocalGameManager : MythologyMayhem
     public bool canTransition;
     public bool activeByDefault;
 
+    public List<GameObject> enemies = new List<GameObject>();
+
     [Header("Audio Settings")]
     public AudioClip backgroundMusic;
     public AudioClip ambianceClip;
@@ -106,6 +108,24 @@ public class LocalGameManager : MythologyMayhem
                 torchManager.ToggleAudioSources(false);
 
                 mainGameManager.uniDirLight.enabled = true;
+            }
+        }
+
+        if (enemies.Count > 0)
+        {
+            if (mainGameManager.currentScene == inScene)
+            {
+                foreach (var enemy in enemies)
+                {
+                    if (!enemy.activeSelf) enemy.SetActive(true);
+                }
+            }
+            else if (mainGameManager.currentScene != inScene)
+            {
+                foreach (var enemy in enemies)
+                {
+                    if (enemy.activeSelf) enemy.SetActive(false);
+                }
             }
         }
     }

@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 6650816817116026426}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ac22a82d4d17ac640ae390c3afb841bd, type: 2}
+  m_Controller: {fileID: 9100000, guid: e0cab37b395632141baf2aff1c89c67c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -245,7 +245,7 @@ Animator:
   m_GameObject: {fileID: 8125699907782810778}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ac22a82d4d17ac640ae390c3afb841bd, type: 2}
+  m_Controller: {fileID: 9100000, guid: e0cab37b395632141baf2aff1c89c67c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -436,6 +436,11 @@ MonoBehaviour:
   attackCollider: {fileID: 8566816731239632668}
   walkSpeed: 5
   runSpeed: 10
+  patrolDistance: 2
+  speed: 2
+  patrolBool: IsPatrolling
+  attackTrigger: Attack
+  meleeDistance: 4
   waypoints:
   - {fileID: 8262302870376178620}
   - {fileID: 388321725943493504}
@@ -443,51 +448,19 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
   idleTimer: 0
+  hasIdleDelegate: 0
+  hasPatrolDelegate: 0
+  hasAttackDelegate: 1
+  hasDeadDelegate: 0
   IdleDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3341197332674699827}
-        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
-        m_MethodName: Idle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3341197332674699827}
-        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
-        m_MethodName: MoveToTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   AttackDelegate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3341197332674699827}
-        m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
-        m_MethodName: MeleeAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3341197332674699827}
         m_TargetAssemblyTypeName: Boar2D, Assembly-CSharp
         m_MethodName: ChargingCloud
@@ -502,19 +475,7 @@ MonoBehaviour:
         m_CallState: 2
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1537699233321417100}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
@@ -538,7 +499,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!114 &3833448020936151730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,11 +679,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 6
   _health: 0
-  components:
-  - {fileID: 3341197332674699827}
-  - {fileID: 3833448020936151730}
-  - {fileID: 6495582106981125691}
-  - {fileID: 1331490250871995232}
   mainObject: {fileID: 8566816731040993087}
   rewardObject: {fileID: 0}
   anim: {fileID: 8566816731040993082}
@@ -748,13 +704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57f936d449154e49a6bb7b6baffc269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolBool: IsPatrolling
-  speed: 1
-  patrolDistance: 0
-  body: {fileID: 8566816731040993087}
-  attackTrigger: Attack
-  meleeDistance: 5
-  alertTimer: 3
   boarCloudAnimation: {fileID: 8125699907782810778}
 --- !u!1 &8566816731239632668
 GameObject:
