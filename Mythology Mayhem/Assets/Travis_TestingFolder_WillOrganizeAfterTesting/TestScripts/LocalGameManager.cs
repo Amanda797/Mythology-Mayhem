@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using static Enemy;
 
 [System.Serializable]
 public class LocalGameManager : MythologyMayhem
@@ -110,21 +111,19 @@ public class LocalGameManager : MythologyMayhem
                 mainGameManager.uniDirLight.enabled = true;
             }
         }
+    }
 
+    public void ToggleEnemies(bool isActive)
+    {
         if (enemies.Count > 0)
         {
-            if (mainGameManager.currentScene == inScene)
+            foreach (var enemy in enemies)
             {
-                foreach (var enemy in enemies)
+                enemy.SetActive(isActive);
+                if (enemy.activeSelf)
                 {
-                    if (!enemy.activeSelf) enemy.SetActive(true);
-                }
-            }
-            else if (mainGameManager.currentScene != inScene)
-            {
-                foreach (var enemy in enemies)
-                {
-                    if (enemy.activeSelf) enemy.SetActive(false);
+                    if (enemy.GetComponent<Enemy>() != null) enemy.GetComponent<Enemy>().Reset();
+                    else enemy.GetComponentInChildren<Enemy>(true).Reset();
                 }
             }
         }
