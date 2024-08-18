@@ -340,6 +340,7 @@ public class GameManager : MythologyMayhem
             if (loadedLocalManagers[i].inScene == scene)
             {
                 currentLocalManager = loadedLocalManagers[i];
+                currentLocalManager.ToggleEnemies(true);
 
                 if (currentLocalManager.backgroundMusic != null)
                 {
@@ -358,8 +359,8 @@ public class GameManager : MythologyMayhem
                         ambianceAudioSource.Play();
                     }
                 }
-                //return;
             }
+            else loadedLocalManagers[i].ToggleEnemies(false);
         }
     }
 

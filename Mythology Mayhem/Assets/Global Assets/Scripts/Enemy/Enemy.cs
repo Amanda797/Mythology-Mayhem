@@ -89,6 +89,7 @@ public class Enemy : MythologyMayhem
     }
     void Start()
     {
+        Debug.Log("Start");
         health = gameObject.GetComponent<Health>();
 
         currentState = EnemyStates.Idle;
@@ -101,6 +102,13 @@ public class Enemy : MythologyMayhem
         {
             if (lgm.inScene.ToString() == gameObject.scene.name) _localGameManager = lgm;
         }
+    }
+
+    public void Reset()
+    {
+        currentState = EnemyStates.Idle;
+        currentStatePosition = StatePosition.Entry;
+        StartCoroutine(SwitchStates(currentState, 0));
     }
 
     void Update()
