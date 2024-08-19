@@ -48,6 +48,7 @@ public class MainMenuController : MonoBehaviour
     {
         audioSource.Play();
         options.SetActive(!options.activeSelf);
+        options.GetComponent<optionsMenu>().UpdateAudioSliders();
     }
 
     public void Credits()

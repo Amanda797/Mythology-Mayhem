@@ -33,10 +33,16 @@ public class optionsMenu : MonoBehaviour
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing or Inactive.");
+    }
 
+    public void UpdateAudioSliders()
+    {
+        Debug.Log("UpdateAudioSliders");
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
         masterVolumeSlider.value = gameManager.optionsData.masterVolume;
         musicVolumeSlider.value = gameManager.optionsData.musicVolume;
-        ambianceVolumeSlider.value = gameManager.optionsData.sfxVolume;
+        ambianceVolumeSlider.value = gameManager.optionsData.ambianceVolume;
         sfxVolumeSlider.value = gameManager.optionsData.sfxVolume;
         combatVolumeSlider.value = gameManager.optionsData.enemyVolume;
         footstepVolumeSlider.value = gameManager.optionsData.footstepVolume;
@@ -47,23 +53,31 @@ public class optionsMenu : MonoBehaviour
 
     public void MasterVolumeChanged(float sliderValue)
     {
-        gameManager.optionsData.masterVolume = sliderValue;
-        audioMixer.SetFloat("MasterVolume", LinearToDecibel(sliderValue));
+        float value = Mathf.Round(sliderValue * 10f) / 10f;
+        masterVolumeSlider.value = value;
+        gameManager.optionsData.masterVolume = value;
+        audioMixer.SetFloat("MasterVolume", LinearToDecibel(value));
     }
     public void MusicVolumeChanged(float sliderValue)
     {
-        gameManager.optionsData.musicVolume = sliderValue;
-        audioMixer.SetFloat("MusicVolume", LinearToDecibel(sliderValue));
+        float value = Mathf.Round(sliderValue * 10f) / 10f;
+        musicVolumeSlider.value = value;
+        gameManager.optionsData.musicVolume = value;
+        audioMixer.SetFloat("MusicVolume", LinearToDecibel(value));
     }
     public void AmbianceVolumeChanged(float sliderValue)
     {
-        gameManager.optionsData.ambianceVolume = sliderValue;
-        audioMixer.SetFloat("AmbianceVolume", LinearToDecibel(sliderValue));
+        float value = Mathf.Round(sliderValue * 10f) / 10f;
+        ambianceVolumeSlider.value = value;
+        gameManager.optionsData.ambianceVolume = value;
+        audioMixer.SetFloat("AmbianceVolume", LinearToDecibel(value));
     }
     public void SFXVolumeChanged(float sliderValue)
     {
-        gameManager.optionsData.sfxVolume = sliderValue;
-        audioMixer.SetFloat("SoundEffectVolume", LinearToDecibel(sliderValue));
+        float value = Mathf.Round(sliderValue * 10f) / 10f;
+        sfxVolumeSlider.value = value;
+        gameManager.optionsData.sfxVolume = value;
+        audioMixer.SetFloat("SoundEffectVolume", LinearToDecibel(value));
         audioSource.clip = sfxClips[UnityEngine.Random.Range(0, sfxClips.Length)];
         audioSource.volume = 1f;
         audioSource.outputAudioMixerGroup = sfx;
@@ -71,8 +85,10 @@ public class optionsMenu : MonoBehaviour
     }
     public void CombatVolumeChanged(float sliderValue)
     {
-        gameManager.optionsData.enemyVolume = sliderValue;
-        audioMixer.SetFloat("EnemyVolume", LinearToDecibel(sliderValue));
+        float value = Mathf.Round(sliderValue * 10f) / 10f;
+        combatVolumeSlider.value = value;
+        gameManager.optionsData.enemyVolume = value;
+        audioMixer.SetFloat("EnemyVolume", LinearToDecibel(value));
         audioSource.clip = combatClips[UnityEngine.Random.Range(0, combatClips.Length)];
         audioSource.volume = 1f;
         audioSource.outputAudioMixerGroup = combat;
@@ -80,8 +96,10 @@ public class optionsMenu : MonoBehaviour
     }
     public void FootstepsVolumeChanged(float sliderValue)
     {
-        gameManager.optionsData.footstepVolume = sliderValue;
-        audioMixer.SetFloat("FootstepVolume", LinearToDecibel(sliderValue));
+        float value = Mathf.Round(sliderValue * 10f) / 10f;
+        footstepVolumeSlider.value = value;
+        gameManager.optionsData.footstepVolume = value;
+        audioMixer.SetFloat("FootstepVolume", LinearToDecibel(value));
         audioSource.clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
         audioSource.volume = .5f;
         audioSource.outputAudioMixerGroup = footstep;
@@ -125,7 +143,7 @@ public class optionsMenu : MonoBehaviour
         float footsteps = gameManager.optionsData.footstepVolume;
         float combat = gameManager.optionsData.enemyVolume;
         yield return new WaitForSecondsRealtime(input);
-        print(footsteps.ToString() + " " + gameManager.optionsData.footstepVolume.ToString());
+
         if (SFX == gameManager.optionsData.sfxVolume && footsteps == gameManager.optionsData.footstepVolume && combat == gameManager.optionsData.enemyVolume)
         {
             audioSource.Play();

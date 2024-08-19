@@ -124,6 +124,7 @@ public class MenuManager : MonoBehaviour
                 menuEffectSource.Play();
                 animator.Play("scroll");
                 optionsPnl.SetActive(true);
+                optionsPnl.GetComponent<optionsMenu>().UpdateAudioSliders();
                 yield return new WaitForSecondsRealtime(1);
                 break;
 
