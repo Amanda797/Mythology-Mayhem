@@ -94,16 +94,27 @@ public class GameManager : MythologyMayhem
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        // debug commands. should only run in editor
         if (Input.GetKeyDown(KeyCode.F1))
         {
             int index = loadedLocalManagers.IndexOf(currentLocalManager);
             TransitionScene(loadedLocalManagers[index + 1].inScene, "");
         }
-        if (Input.GetKeyDown(KeyCode.F2))
+        else if (Input.GetKeyDown(KeyCode.F2))
         {
             int index = loadedLocalManagers.IndexOf(currentLocalManager);
             TransitionScene(Level.VikingVillage_2D, "");
         }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            SaveGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            //LoadGame();
+        }
+#endif
         if (!startSceneDebugLoad)
         {
             bool inStartScene = SceneManager.GetSceneByName("StartScene").isLoaded;
@@ -120,14 +131,6 @@ public class GameManager : MythologyMayhem
 
         ListenerTrackPlayer();
 
-        if (Input.GetKeyDown(KeyCode.O)) 
-        {
-            SaveGame();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftBracket)) 
-        {
-            //LoadGame();
-        }
         if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();

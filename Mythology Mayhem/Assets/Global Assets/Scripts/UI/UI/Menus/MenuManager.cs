@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 // This script manages the Pause Menu
 public class MenuManager : MonoBehaviour
 {
+    GameManager gameManager;
     [SerializeField] GameObject pauseParent;
     [SerializeField] GameObject scrollPnl;
     [SerializeField] GameObject pausePnl;
@@ -17,10 +18,15 @@ public class MenuManager : MonoBehaviour
     public TMP_Text scrollDisplayText;
     public AudioSource menuEffectSource;
 
+    private void Start()
+    {
+        if (GameManager.instance != null) gameManager = GameManager.instance;
+        else Debug.LogWarning("GameManager Missing or Inactive.");
+    }
     void Update()
     {
-        //TODO: prevent while in main menu and cutscenes.
-        if(Input.GetKeyDown(KeyCode.P)) TogglePause(false);
+        if (gameManager.inMainMenu || gameManager.cutscenePlaying) return;
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) TogglePause(false);
     }
 
     public void ToggleOptions()
