@@ -35,18 +35,28 @@ public class ScrollScript : MonoBehaviour
     void Update()
     {
         if (!canRead) return;
-        if (Time.timeScale == 0) return;
 
         if (Input.GetKeyUp(KeyCode.E))
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-            Time.timeScale = 0;
+            if (Time.timeScale == 1)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                Time.timeScale = 0;
+                gameManager.pauseMenuManager.scrollDisplayText.text = text;
+                gameManager.pauseMenuManager.scrollDisplayText.rectTransform.anchoredPosition = Vector2.zero;
+                gameManager.pauseMenuManager.TogglePause(true);
+                gameManager.Popup("Press E to Read", false);
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
+                gameManager.pauseMenuManager.TogglePause(false);
+                gameManager.Popup("Press E to Read", true);
+            }
             audioSource.Play();
-            gameManager.pauseMenuManager.scrollDisplayText.text = text;
-            gameManager.pauseMenuManager.scrollDisplayText.rectTransform.anchoredPosition = Vector2.zero;
-            gameManager.pauseMenuManager.TogglePause(true);
-            gameManager.Popup("Press E to Read", false);
         }
     }
 
