@@ -385,7 +385,7 @@ public class MedusaControlScript : MonoBehaviour
         if (angle <= angleOfAccuracy && angle >= -angleOfAccuracy && (Time.time - lastRangedTime) >= rangeCooldown && currentRangedAttackCount < totalAttacks)
         {
             Vector3 target = playerHealth.transform.position;
-            target.y = 0;
+            //target.y = 0;
             //Activate Ranged Attacks and start cooldown timer;
             MedusaRangedAttack(AttackType.CastSpell, target);
             currentRangedAttackCount++;
