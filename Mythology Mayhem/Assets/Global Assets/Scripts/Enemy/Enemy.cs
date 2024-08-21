@@ -120,7 +120,7 @@ public class Enemy : MythologyMayhem
         //Check for Death
 
         if (health.isDead && currentState != EnemyStates.Dead) StartCoroutine(SwitchStates(EnemyStates.Dead, 0));
-        else if (health.GetHealth() <= 0) return;
+        else if (health.isDead) return;
         // If not transitioning states, invoke state action
         if (currentStatePosition == StatePosition.Current)
         {
@@ -366,6 +366,7 @@ public class Enemy : MythologyMayhem
 
     public bool DetectPlayer()
     {
+        if (health.isDead) return false;
         if (enemyDimension == Dimension.TwoD) // if 2D
         {
             if (attackCollider.GetComponent<TriggerDetector2D>().triggered)

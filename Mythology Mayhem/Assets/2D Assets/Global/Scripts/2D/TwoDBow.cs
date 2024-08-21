@@ -5,6 +5,8 @@ using UnityEngine;
 public class TwoDBow : MonoBehaviour
 {
     GameManager gameManager;
+    [TextArea(7, 10)]
+    [SerializeField] string text;
     [SerializeField] AudioClip clip;
     public bool pickUpAllowed = false;
     public bool pickedUp = false;
@@ -64,6 +66,16 @@ public class TwoDBow : MonoBehaviour
         gameManager.gameData.collectedBow = true;
         gameManager.SaveGame();
         gameObject.SetActive(false);
+        if (Time.timeScale == 1)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
+            gameManager.pauseMenuManager.scrollDisplayText.text = text;
+            gameManager.pauseMenuManager.scrollDisplayText.rectTransform.anchoredPosition = Vector2.zero;
+            gameManager.pauseMenuManager.TogglePause(true);
+            gameManager.Popup("Press E to Read", false);
+        }
     }
 
 }
