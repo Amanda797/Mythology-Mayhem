@@ -15,7 +15,8 @@ public class Shoot2D : MonoBehaviour
     public GameObject ArrowPrefab;
     public Transform ArrowSpawn;
 
-    private float m_timestamp = 0f;
+    float m_timestamp = 0;
+    [SerializeField] float attackRate = 1f;
     public float AS = 0f;
     public float AL = 0f;
     public float AL2 = 0f;
@@ -65,12 +66,16 @@ public class Shoot2D : MonoBehaviour
         anim.SetBool("CanShootUpward", canShootUp);
         anim.SetBool("CanShootDownward", canShootDown);
 
-        if (Time.time >= m_timestamp && Input.GetKeyDown(KeyCode.Mouse0))
+        if (m_timestamp >= attackRate)
         {
-            Shoot();
-            m_timestamp += Time.deltaTime;
-            audioSource.Play();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                m_timestamp = 0;
+                Shoot();
+                audioSource.Play();
+            }
         }
+        else m_timestamp += Time.deltaTime;
     }
 
     public void Shoot()

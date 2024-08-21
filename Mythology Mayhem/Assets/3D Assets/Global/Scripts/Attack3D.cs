@@ -33,7 +33,7 @@ public class Attack3D : MythologyMayhem
                     if (enemy.gameObject.tag == "Enemy")
                     {
                         Health health = enemy.GetComponent<Health>();
-                        if (health != null) health.TakeDamage(damage);
+                        if (!health.isDead) health.TakeDamage(damage);
                     }
                     else if (enemy.gameObject.tag == "Medusa")
                     {

@@ -11,8 +11,7 @@ public class Arrow2D : MonoBehaviour
         if (col.collider.tag == "Player") return;
         if (col.collider.tag == "Enemy")
         {
-            if (col.gameObject.GetComponent<Health>())
-                col.gameObject.GetComponent<Health>().TakeDamage(damage);
+            if (!col.gameObject.GetComponent<Health>().isDead) col.gameObject.GetComponent<Health>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }

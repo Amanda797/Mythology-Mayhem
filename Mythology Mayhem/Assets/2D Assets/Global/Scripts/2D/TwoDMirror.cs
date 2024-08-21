@@ -3,6 +3,8 @@ using UnityEngine;
 public class TwoDMirror : MonoBehaviour
 {
     GameManager gameManager;
+    [TextArea(7, 10)]
+    [SerializeField] string text;
     [SerializeField] AudioClip clip;
     public bool pickUpAllowed = false;
     public bool pickedUp = false;
@@ -56,6 +58,13 @@ public class TwoDMirror : MonoBehaviour
         gameManager.gameData.collectedMirror = true;
         gameManager.SaveGame();
         gameObject.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 0;
+        gameManager.pauseMenuManager.scrollDisplayText.text = text;
+        gameManager.pauseMenuManager.scrollDisplayText.rectTransform.anchoredPosition = Vector2.zero;
+        gameManager.pauseMenuManager.TogglePause(true);
+        gameManager.Popup("Press E to Read", false);
     }
 
     private void SetMinotaurSpeed()

@@ -121,8 +121,11 @@ public class PlayerStats : MonoBehaviour
             if(enemy.GetComponent<Enemy>() && enemy.GetComponent<KnockBackFeedback>())
             {
                 hitCount++;
-                enemy.GetComponent<Health>().TakeDamage(ps.AttackDamage);
-                enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+                if (!enemy.GetComponent<Health>().isDead)
+                {
+                    enemy.GetComponent<Health>().TakeDamage(ps.AttackDamage);
+                    enemy.GetComponent<KnockBackFeedback>().PlayerFeedback(gameObject);
+                }
             }
         }
     }
