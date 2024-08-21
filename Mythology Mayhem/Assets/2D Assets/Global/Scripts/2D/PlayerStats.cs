@@ -112,6 +112,7 @@ public class PlayerStats : MonoBehaviour
     private void Attack()
     {
         if (anim.GetBool("IsDead")) return;
+        anim.SetBool("UseSword", true);
         anim.SetTrigger("Attack");
         swordAttackAS.Play();
         Collider2D[] hitEnemies = Physics2D.OverlapCapsuleAll(attackPoint.position, new Vector2(ps.AttackRange, ps.AttackRange+ps.AttackHeight), CapsuleDirection2D.Vertical, 0f, enemyLayers);
