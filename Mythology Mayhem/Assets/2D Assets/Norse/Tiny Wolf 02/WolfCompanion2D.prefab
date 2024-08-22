@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3717922323452686143}
   - component: {fileID: 3717922323452686142}
   - component: {fileID: 2354587457656375571}
-  - component: {fileID: 5076986892122192179}
+  - component: {fileID: 1255635979178365130}
   m_Layer: 14
   m_Name: WolfCompanion2D
   m_TagString: Companion
@@ -32,8 +32,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3717922323452686129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 389.85, y: 9.525446, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3717922323516070633}
@@ -125,18 +125,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.1270572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 3.2}
+    oldSize: {x: 4, y: 3.203125}
     newSize: {x: 4, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.86, y: 3.1}
+  m_Size: {x: 2.86, y: 2.8458855}
   m_EdgeRadius: 0
 --- !u!50 &3717922323452686136
 Rigidbody2D:
@@ -177,7 +177,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5076986892122192179}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -192,7 +192,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5076986892122192179}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -314,25 +314,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 14
   _health: 0
-  components:
-  - {fileID: 3717922323452686143}
-  - {fileID: 3717922323452686138}
-  - {fileID: 3717922323452686130}
   mainObject: {fileID: 3717922323452686129}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 3717922323452686142}
-  deathSound: {fileID: 3717922323452686142}
-  healSound: {fileID: 3717922323452686142}
   anim: {fileID: 3717922323452686130}
   hurtTrigger: Hurt
   deathTrigger: Death
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
---- !u!114 &5076986892122192179
+  loadSystem: {fileID: 0}
+  isDead: 0
+--- !u!114 &1255635979178365130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,7 +337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3717922323452686129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a36bdad13ac73f40b139c7df2f894c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 341873fe596ddff42b7fdbccbd1289f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefKeys:
@@ -350,12 +346,12 @@ MonoBehaviour:
   - playerIndex
   _health: {fileID: 0}
   _player: {fileID: 0}
-  anim: {fileID: 3717922323452686130}
+  audioClips: []
   attackDamage: 4
   attackRate: 3
-  _td: {fileID: 2603804679694211911}
   walkingBool: Walking
   attackTrigger: Biting
+  localGameManager: {fileID: 0}
   currentState: 0
 --- !u!1 &3717922323516070638
 GameObject:

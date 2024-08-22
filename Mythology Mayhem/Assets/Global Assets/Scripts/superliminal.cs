@@ -19,17 +19,18 @@ public class superliminal : MonoBehaviour
     public int mousebutton;
     //public KeyCode key;
     public bool isReady;
+    public bool isUsing;
 
     //void Start()
     //{
     //    Cursor.visible = false;
     //    Cursor.lockState = CursorLockMode.Locked;
     //}
- 
+
     void Update()
     {
         HandleInput();
-        ResizeTarget();
+        if (isUsing) ResizeTarget();
     }
     
     void HandleInput()
@@ -37,9 +38,7 @@ public class superliminal : MonoBehaviour
         // Check for left mouse click
         if (Input.GetMouseButtonDown(mousebutton) && isReady)
         {
-            Debug.Log("isReady");
-            // If we do not currently have a target
-            Debug.Log("target == null: " + target == null);
+            isUsing = true;
             if (target == null)
             {
                 // Fire a raycast with the layer mask that only hits potential targets
@@ -100,6 +99,7 @@ public class superliminal : MonoBehaviour
  
                 // Set our target variable to null
                 target = null;
+                isUsing = false;
             }
         }
     }
@@ -117,7 +117,6 @@ public class superliminal : MonoBehaviour
                     target = hit.transform;
                     targetObject = hit.transform.gameObject;
                     //targetObject.layer = 11;
-                    Debug.Log(targetObject.GetComponent<AudioSource>() != null);
                     if (targetObject.GetComponent<AudioSource>() != null) targetObject.GetComponent<AudioSource>().Play();
                     // Disable physics for the object
                     target.GetComponent<Rigidbody>().isKinematic = true;

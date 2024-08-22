@@ -89,7 +89,6 @@ public class Enemy : MythologyMayhem
     }
     void Start()
     {
-        Debug.Log("Start");
         health = gameObject.GetComponent<Health>();
 
         currentState = EnemyStates.Idle;
