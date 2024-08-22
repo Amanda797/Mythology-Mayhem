@@ -10,16 +10,21 @@ public class TriggerDetector2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        triggered = true;
-        otherCollider2D = other;
-        if (other.gameObject.CompareTag("Player")) otherColliders2D.Add(other);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            triggered = true;
+            otherCollider2D = other;
+            otherColliders2D.Add(other);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        triggered = false;
-        otherCollider2D = null;
-
-        if (other.gameObject.CompareTag("Player")) otherColliders2D.Remove(other);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            triggered = false;
+            otherCollider2D = null;
+            otherColliders2D.Remove(other);
+        }
     }
 }

@@ -10,23 +10,21 @@ public class TriggerDetector3D : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        triggered = true;
-        otherCollider3D = other;
-        //
-        otherColliders3D.Add(other);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        triggered = true;
-        otherCollider3D = other;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            triggered = true;
+            otherCollider3D = other;
+            otherColliders3D.Add(other);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        triggered = false;
-        otherCollider3D = null;
-        //
-        otherColliders3D.Remove(other);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            triggered = false;
+            otherCollider3D = null;
+            otherColliders3D.Remove(other);
+        }
     }
 }
