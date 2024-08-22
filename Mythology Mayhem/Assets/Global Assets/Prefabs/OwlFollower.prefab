@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6478159596622223805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.23, y: 1.12, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 2.5, y: -2.8}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17.65, y: 3.65}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &7612252755361395717
 MonoBehaviour:
@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 6478159597610387671}
   - component: {fileID: 6478159597610387669}
   - component: {fileID: 6478159597610387664}
-  - component: {fileID: 6478159597610387667}
+  - component: {fileID: 4597745212096490005}
+  - component: {fileID: 6870588242137181203}
   - component: {fileID: 1864963962703074244}
-  - component: {fileID: 670675367800281230}
   - component: {fileID: 375496325583729420}
   - component: {fileID: 3417643351675073991}
   m_Layer: 14
@@ -112,8 +112,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6478159597610388266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.95, y: 1.0285425, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6478159596622223804}
@@ -213,8 +213,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &6478159597610387667
-CircleCollider2D:
+--- !u!61 &4597745212096490005
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -223,13 +223,23 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.0718764, y: 1.1946826}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.28, y: 5.0015626}
+    newSize: {x: 5.28, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 20
---- !u!114 &1864963962703074244
+  m_Size: {x: 2.8477643, y: 2.0087252}
+  m_EdgeRadius: 0
+--- !u!114 &6870588242137181203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,38 +248,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6478159597610388266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 12
-  _health: 0
-  components:
-  - {fileID: 6478159597610387667}
-  - {fileID: 670675367800281230}
-  - {fileID: 375496325583729420}
-  mainObject: {fileID: 6478159597610388266}
-  rewardObject: {fileID: 0}
-  anim: {fileID: 6478159597610387669}
-  hurtTrigger: Hurt
-  deathTrigger: Death
-  healTrigger: 
-  enemy: {fileID: 0}
-  _attacked: 0
-  _defenseUp: 0
-  _defenseTimer: 0
-  respawnTimer: 50
-  canRespawn: 0
-  loadSystem: {fileID: 0}
---- !u!114 &670675367800281230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6478159597610388266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be876c646a6472a4da6718ed91352dcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 341873fe596ddff42b7fdbccbd1289f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefKeys:
@@ -284,15 +263,40 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 32d52989fb120a04ca8127f6f21ac046, type: 3}
   - {fileID: 8300000, guid: 8c67114438feafe47b6d3936684a47d5, type: 3}
   - {fileID: 8300000, guid: 00fa7cec556dc154eafcc67325c21262, type: 3}
-  anim: {fileID: 6478159597610387669}
-  rb2D: {fileID: 0}
   attackDamage: 3
   attackRate: 2
-  _td: {fileID: 7612252755361395717}
   walkingBool: 
   attackTrigger: Attack
   localGameManager: {fileID: 0}
   currentState: 0
+--- !u!114 &1864963962703074244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6478159597610388266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 12
+  _health: 0
+  mainObject: {fileID: 6478159597610388266}
+  rewardObject: {fileID: 0}
+  anim: {fileID: 6478159597610387669}
+  hurtTrigger: Hurt
+  deathTrigger: Death
+  healTrigger: 
+  enemy: {fileID: 0}
+  _attacked: 0
+  _defenseUp: 0
+  _defenseTimer: 0
+  respawnTimer: 50
+  canRespawn: 0
+  loadSystem: {fileID: 0}
+  isDead: 0
 --- !u!114 &375496325583729420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +315,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670675367800281230}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -326,7 +330,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670675367800281230}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
