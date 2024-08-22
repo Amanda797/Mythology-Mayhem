@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 389216523961157805}
   - component: {fileID: 1920169423724099196}
   - component: {fileID: 5418738702931030166}
+  - component: {fileID: 3941495246191960113}
   m_Layer: 6
   m_Name: Bat
   m_TagString: Enemy
@@ -258,7 +259,7 @@ MonoBehaviour:
   hasIdleDelegate: 0
   hasPatrolDelegate: 0
   hasAttackDelegate: 0
-  hasDeadDelegate: 0
+  hasDeadDelegate: 1
   IdleDelegate:
     m_PersistentCalls:
       m_Calls: []
@@ -270,7 +271,19 @@ MonoBehaviour:
       m_Calls: []
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3941495246191960113}
+        m_TargetAssemblyTypeName: Bat2D, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
@@ -480,7 +493,7 @@ MonoBehaviour:
   hurtTrigger: Hurt
   deathTrigger: Dead
   healTrigger: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 7669933034497791012}
   _attacked: 0
   _defenseUp: 0
   _defenseTimer: 0
@@ -488,6 +501,20 @@ MonoBehaviour:
   canRespawn: 0
   loadSystem: {fileID: 0}
   isDead: 0
+--- !u!114 &3941495246191960113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095419021229708576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f075ae793a7ece346a423cdc2fff94f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  gravityScale: 1
 --- !u!1 &5095419021441979651
 GameObject:
   m_ObjectHideFlags: 0

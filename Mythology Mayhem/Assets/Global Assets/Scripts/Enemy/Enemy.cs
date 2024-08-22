@@ -233,7 +233,7 @@ public class Enemy : MythologyMayhem
 
                         if (enemyDimension == Dimension.ThreeD) animator.SetFloat("Speed", 0);
 
-                        if (hasDeadDelegate) DeadDelegate.Invoke();
+                      
 
                         break;
                     }
@@ -259,7 +259,6 @@ public class Enemy : MythologyMayhem
         {
             case EnemyStates.Idle:
                 {
-                    Debug.Log("Idle");
                     if (enemyDimension == Dimension.TwoD) animator.SetBool(patrolBool, false);
                     else animator.SetFloat("Speed", 0);
 
@@ -268,7 +267,6 @@ public class Enemy : MythologyMayhem
                 }
             case EnemyStates.Patrol:
                 {
-                    Debug.Log("Patrol");
                     if (enemyDimension == Dimension.TwoD) // if is 2D
                     {
                         target = waypoints[waypointIndex].position;
@@ -305,7 +303,6 @@ public class Enemy : MythologyMayhem
                 }
             case EnemyStates.Attack:
                 {
-                    Debug.Log("Attack");
                     if (enemyDimension == Dimension.ThreeD)
                     {
                         animator.SetFloat("Speed", 0);
@@ -317,7 +314,6 @@ public class Enemy : MythologyMayhem
                 }
             case EnemyStates.Dead:
                 {
-                    Debug.Log("Dead");
                     if (enemyDimension == Dimension.ThreeD)
                     {
                         animator.SetFloat("Speed", 0);
