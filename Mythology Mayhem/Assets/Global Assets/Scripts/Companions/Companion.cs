@@ -8,22 +8,24 @@ using UnityEngine.SceneManagement;
 
 public class Companion : MythologyMayhem
 {
+    AudioSource audioSource;
+    Rigidbody2D rb2D;
+    NavMeshAgent agent;
+    Animator anim;
+    TriggerDetector triggerDetector;
+
     public Health _health;
     public GameObject _player;
-    AudioSource audioSource;
     public AudioClip[] audioClips;
-    [SerializeField] Animator anim;
-    [SerializeField] Rigidbody2D rb2D;
     [SerializeField] float attackDamage;
     [SerializeField] float attackRate;
     float speed = 5f;
     bool canAttack = true;
-    [SerializeField] TriggerDetector _td;
     [SerializeField] string walkingBool;
     [SerializeField] string attackTrigger;
     float lastXPosition;
     Vector3 lastPosition;
-    [SerializeField] LocalGameManager localGameManager;
+    public LocalGameManager localGameManager;
 
     public enum CompanionState { Following, Attacking };
     public CompanionState currentState = CompanionState.Following;
@@ -31,140 +33,100 @@ public class Companion : MythologyMayhem
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        _health = gameObject.GetComponent<Health>();
+        anim = gameObject.GetComponent<Animator>();
+        triggerDetector = gameObject.GetComponentInChildren<TriggerDetector>();
+
+        if (GetComponent<Rigidbody2D>()) rb2D = GetComponent<Rigidbody2D>();
+        if (GetComponent<NavMeshAgent>()) agent = GetComponent<NavMeshAgent>(); 
     }
     private void Start()
     {
-        //Ignore Player and Companion Collisions
-        Physics2D.IgnoreLayerCollision(3, 14);
-
-        //Save Health Component Reference
-        try
-        {
-            _health = gameObject.GetComponent<Health>();
-        }
-        catch(NullReferenceException nre)
-        {
-            print(nre.Source + ": " + nre.Message);
-            _health = gameObject.AddComponent<Health>();
-            _health.Life = 10f;
-        }
-
-        if (GetComponent<Rigidbody2D>()) rb2D = GetComponent<Rigidbody2D>();
-    }//end start
+        // Ignore Player and Companion Collisions
+        if (rb2D != null) Physics2D.IgnoreLayerCollision(3, 14);
+        if (agent != null) Physics.IgnoreLayerCollision(3, 14);
+    }
 
     private void Update()
     {
         if(currentState == CompanionState.Following)
         {
             //2D
-            //Follow Player            
             if(rb2D != null && _player != null)
             {
-                Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, gameObject.transform.position.y);
-                rb2D.MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, 2f));
-
-                if (lastXPosition != gameObject.transform.position.x && walkingBool != "")
-                {
-                    anim.SetBool(walkingBool, true);
-                }
-                else if (walkingBool != "")
-                {
-                    anim.SetBool(walkingBool, false);
-                }
-
-                lastXPosition = gameObject.transform.position.x;
+                Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, transform.position.y);
+                rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
 
                 //Flip Companion based on Player Sprite Renderer
-                if (_player.GetComponentInChildren<SpriteRenderer>().flipX)
-                {
-                    gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                } else
-                {
-                    gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                }
+                if (_player.GetComponentInChildren<SpriteRenderer>().flipX) transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                else transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
             
             //3D
-            if(GetComponent<NavMeshAgent>())
+            else if(agent != null && _player != null)
             {
                 //TODO: Add an Offset
-                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 6f, gameObject.transform.position.y, _player.transform.position.z - 6f);
-                GetComponent<NavMeshAgent>().SetDestination(xzOnlyTargetPosition);
-
-                if (lastPosition != gameObject.transform.position && walkingBool != "")
-                {
-                    anim.SetBool(walkingBool, true);
-                }
-                else if (walkingBool != "")
-                {
-                    anim.SetBool(walkingBool, false);
-                }
-
-                lastPosition = gameObject.transform.position;
+                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 6f, transform.position.y, _player.transform.position.z - 6f);
+                agent.SetDestination(xzOnlyTargetPosition);
             }
+
+            if (lastPosition != transform.position && walkingBool != "")
+            {
+                anim.SetBool(walkingBool, true);
+            }
+            else if (walkingBool != "")
+            {
+                anim.SetBool(walkingBool, false);
+            }
+
+            lastPosition = transform.position;
 
             //Switch State Condition
-            if(_td.triggered)
-            {
-                if(gameObject.GetComponent<SpriteRenderer>() && _td.otherCollider2D.tag == "Enemy")
-                {
-                    currentState = CompanionState.Attacking;
-                } else if (gameObject.GetComponent<NavMeshAgent>() && _td.otherCollider3D.tag == "Enemy")
-                {
-                    currentState = CompanionState.Attacking;
-                }
-            }
-            
+            if (triggerDetector.triggered) if(triggerDetector.otherCollider2D.tag == "Enemy") currentState = CompanionState.Attacking;
         }
         else //currentState == CompanionState.Attacking
         {
+            if (!canAttack) return;
             //Attack Enemy
-            if (_td.triggered)
+            if (triggerDetector.triggered)
             {
                 //2D
-                if(_td.otherCollider2D != null)
+                if(triggerDetector.otherCollider2D != null)
                 {
-                    Vector2 xOnlyTargetPosition = new Vector2(_td.otherCollider2D.transform.position.x - 2f, gameObject.transform.position.y);
-                    GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(gameObject.transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
+                    Vector2 xOnlyTargetPosition = new Vector2(triggerDetector.otherCollider2D.transform.position.x - 2f, transform.position.y);
+                    rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, speed * Time.deltaTime));
 
-                    if (canAttack && Vector3.Distance(gameObject.transform.position, _td.otherCollider2D.transform.position) <= 4f)
+                    if (Vector3.Distance(transform.position, triggerDetector.otherCollider2D.transform.position) <= 4f)
                     {
                         //Attack
                         anim.SetTrigger(attackTrigger);
-                        _td.otherCollider2D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+                        triggerDetector.otherCollider2D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
 
                         audioSource.clip = audioClips[UnityEngine.Random.Range(0, audioClips.Length)];
                         audioSource.Play();
                     
                         StartCoroutine(AttackRate());
                     }
-                }
-                
+                }                
 
                 //3D
-                if (_td.otherCollider3D != null && Vector3.Distance(gameObject.transform.position, _td.otherCollider3D.transform.position) > 4f)
+                else if (triggerDetector.otherCollider3D != null && Vector3.Distance(transform.position, triggerDetector.otherCollider3D.transform.position) > 4f)
                 {
                     //Catch Up
-                    gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, _td.otherCollider3D.transform.position, 4f);
+                    transform.position = Vector3.Lerp(transform.position, triggerDetector.otherCollider3D.transform.position, 4f);
                 }
-                else if (canAttack && _td.otherCollider3D != null && Vector3.Distance(gameObject.transform.position, _td.otherCollider3D.transform.position) <= 4f)
+                else if (triggerDetector.otherCollider3D != null && Vector3.Distance(transform.position, triggerDetector.otherCollider3D.transform.position) <= 4f)
                 {
                     //Attack
-                    _td.otherCollider3D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+                    triggerDetector.otherCollider3D.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
                     StartCoroutine(AttackRate());
                 }
             }
 
             //Switch State Condition
-            if (!_td.triggered)
-            {
-                if (_td.otherCollider2D == null && _td.otherCollider3D == null)
-                {
-                    currentState = CompanionState.Following;
-                }
-            }
+            else if (triggerDetector.otherCollider2D == null && triggerDetector.otherCollider3D == null) currentState = CompanionState.Following;
         }
-    }//end update
+    }
 
     public IEnumerator AttackRate()
     {
@@ -173,4 +135,4 @@ public class Companion : MythologyMayhem
         canAttack = true;
     }
 
-}//end companion script
+}
