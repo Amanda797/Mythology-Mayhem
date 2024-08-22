@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static MythologyMayhem;
+using static UnityEditorInternal.VersionControl.ListControl;
 
 public class Health : MonoBehaviour
 {
@@ -99,6 +100,7 @@ public class Health : MonoBehaviour
     {
         if (!isDead)
         {
+            Debug.Log("Death1");
             isDead = true;
 
             if (loadSystem != null) loadSystem.SyncToSave(this.gameObject.transform.parent.gameObject);
@@ -112,20 +114,23 @@ public class Health : MonoBehaviour
                 //Make rigidbody static
                 if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.TwoD)
                 {
-                    gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    Destroy(gameObject.GetComponent<BoxCollider2D>());
+                    Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+                    rb.bodyType = RigidbodyType2D.Kinematic;
+                    rb.velocity = new Vector2(0, 0);
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 }
                 else if (gameObject.GetComponent<Enemy>() && gameObject.GetComponent<Enemy>().enemyDimension == MythologyMayhem.Dimension.ThreeD)
                 {
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    gameObject.GetComponent<Rigidbody>().velocity = new Vector2(0, 0);
-                    Destroy(gameObject.GetComponent<BoxCollider>());
-                    gameObject.tag = "Untagged";
+                    Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+                    rb.isKinematic = true;
+                    rb.velocity = new Vector2(0, 0);
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
                 }
+
+                if (enemy.hasDeadDelegate) enemy.DeadDelegate.Invoke();
             }
 
-            StartCoroutine(DeathTimer(4f));
+            StartCoroutine(DeathTimer(2f));
         }
     }
 
