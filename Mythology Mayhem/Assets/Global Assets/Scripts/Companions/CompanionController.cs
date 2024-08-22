@@ -39,6 +39,9 @@ public class CompanionController : MythologyMayhem
         if (_player == null) return;
         if (gameManager.gameData.collectedOwl && !companions.Contains(owl.GetComponent<Companion>())) companions.Add(owl.GetComponent<Companion>());
         if (gameManager.gameData.collectedWolf && !companions.Contains(wolf.GetComponent<Companion>())) companions.Add(wolf.GetComponent<Companion>());
+        if (!gameManager.gameData.collectedOwl && owl.activeSelf) owl.SetActive(false);
+        if (!gameManager.gameData.collectedWolf && wolf.activeSelf) owl.SetActive(false);
+        if (!gameManager.gameData.collectedWolf && !companions.Contains(wolf.GetComponent<Companion>())) companions.Add(wolf.GetComponent<Companion>());
         if (companions.Count <= 0) return;
 
         //if (gameManager.gameData.collectedOwl && !owl.activeSelf)

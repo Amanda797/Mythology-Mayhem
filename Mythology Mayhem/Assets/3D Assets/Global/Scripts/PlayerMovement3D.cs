@@ -82,7 +82,6 @@ public class PlayerMovement3D : MythologyMayhem
             // if the player is moving left or right
             if (input != Vector2.zero && canPlayFootstepClip && isGrounded)
             {
-                Debug.Log("canPlayFootstepClip");
                 canPlayFootstepClip = false;
                 // randomly select a audio clip from the footstep clips array on the local game manager
                 AudioClip clip = localGameManager.footstepClips[Random.Range(0, localGameManager.footstepClips.Length)];
@@ -249,7 +248,6 @@ public class PlayerMovement3D : MythologyMayhem
     }
     IEnumerator ToggleFootStep()
     {
-        Debug.Log("ToggleFootStep");
         float waitTime = .5f;
 
         yield return new WaitForSeconds(waitTime);

@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 0.5, z: 2}
+  m_Center: {x: 0, y: 0.1894636, z: 0}
 --- !u!114 &68946917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +61,94 @@ MonoBehaviour:
   triggered: 0
   otherCollider3D: {fileID: 0}
   otherColliders3D: []
+--- !u!1 &1343614664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343614665}
+  - component: {fileID: 1343614666}
+  m_Layer: 6
+  m_Name: waypoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1343614665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343614664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.26, y: 0, z: 0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 531386714663718112}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1343614666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343614664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1483046409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483046410}
+  - component: {fileID: 1483046411}
+  m_Layer: 6
+  m_Name: waypoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1483046410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483046409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.16, y: 0, z: -0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 531386714663718112}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1483046411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483046409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &528059659217594486
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &531386714663718112
 Transform:
   m_ObjectHideFlags: 0
@@ -98,6 +186,8 @@ Transform:
   m_Children:
   - {fileID: 522928927293708708}
   - {fileID: 68946916}
+  - {fileID: 1483046410}
+  - {fileID: 1343614665}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 179.088, z: 0}
@@ -132,8 +222,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42390507, y: 0.3562488, z: 0.6863565}
-  m_Center: {x: -0.0047085825, y: 0.19825047, z: 0.09093516}
+  m_Size: {x: 0.46028194, y: 0.35928038, z: 0.7583508}
+  m_Center: {x: 0.0030293, y: 0.18640737, z: 0.109160714}
 --- !u!114 &527290172820061807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +241,7 @@ MonoBehaviour:
   mainObject: {fileID: 528059659217594486}
   rewardObject: {fileID: 0}
   anim: {fileID: 433305614770297106}
-  hurtTrigger: Idle Reaction
+  hurtTrigger: Hurt
   deathTrigger: Die
   healTrigger: Heal
   enemy: {fileID: 0}
@@ -161,6 +251,7 @@ MonoBehaviour:
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
+  isDead: 0
 --- !u!82 &6525686864370160606
 AudioSource:
   m_ObjectHideFlags: 0
@@ -271,7 +362,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &5097839313747600501
 MonoBehaviour:
@@ -316,18 +407,23 @@ MonoBehaviour:
   health: {fileID: 527290172820061807}
   animator: {fileID: 433305614770297106}
   player: {fileID: 0}
-  attackRate: 0
-  attackDamage: 0
+  attackRate: 1
+  attackDamage: 1
   canAttack: 1
   attackCollider: {fileID: 68946915}
   walkSpeed: 5
   runSpeed: 10
-  patrolDistance: 2
+  patrolDistance: 50
   speed: 2
   patrolBool: IsPatrolling
+  isFlying: 0
+  attackTriggers:
+  - Attack
   attackTrigger: Attack
   meleeDistance: 1
-  waypoints: []
+  waypoints:
+  - {fileID: 1483046410}
+  - {fileID: 1343614665}
   waypointIndex: 0
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
@@ -362,14 +458,14 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 7
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 0.42
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

@@ -54,7 +54,7 @@ public class Companion : MythologyMayhem
             //2D
             if(rb2D != null && _player != null)
             {
-                Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 4f, transform.position.y);
+                Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 2f, transform.position.y);
                 rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
 
                 //Flip Companion based on Player Sprite Renderer
@@ -66,7 +66,7 @@ public class Companion : MythologyMayhem
             else if(agent != null && _player != null)
             {
                 //TODO: Add an Offset
-                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 6f, transform.position.y, _player.transform.position.z - 6f);
+                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 2f, transform.position.y, _player.transform.position.z - 2f);
                 agent.SetDestination(xzOnlyTargetPosition);
             }
 

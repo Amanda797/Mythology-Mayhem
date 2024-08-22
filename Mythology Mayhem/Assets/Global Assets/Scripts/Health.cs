@@ -77,7 +77,7 @@ public class Health : MonoBehaviour
             }
 
             Life -= d;
-            Debug.Log(Life);
+
             if (Life <= 0) Death();
         }        
     }//end take damage

@@ -19,7 +19,6 @@ public class CameraFollow2D : MonoBehaviour
 
         start = transform.position;
         height = target.transform.position.y + 12;
-        Debug.Log(start.y);
     }
 
     private void OnEnable()
