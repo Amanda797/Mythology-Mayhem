@@ -14,8 +14,7 @@ public class Arrow : MonoBehaviour
     {
         if(col.collider.tag == "Enemy")
         {
-            if(col.gameObject.GetComponent<Health>())
-                col.gameObject.GetComponent<Health>().TakeDamage(damage);
+            if(col.gameObject.GetComponent<Health>()) col.gameObject.GetComponent<Health>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }

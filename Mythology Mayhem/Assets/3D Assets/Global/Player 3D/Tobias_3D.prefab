@@ -454,8 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 10
   _health: 0
-  components:
-  - {fileID: 1234530420529872034}
   mainObject: {fileID: 1234530420529872037}
   rewardObject: {fileID: 0}
   anim: {fileID: 0}
@@ -469,6 +467,7 @@ MonoBehaviour:
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
+  isDead: 0
 --- !u!114 &7297297311931586162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1633,6 +1632,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.9539795
       objectReference: {fileID: 0}
+    - target: {fileID: 3603609689600663437, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
+      propertyPath: AS
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603609689600663437, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
+      propertyPath: attackRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603609689600663437, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 4206780197762189518}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
 --- !u!4 &770104369565855963 stripped
@@ -2123,6 +2134,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b86ee051675f8f1449a3773eb2ce36a5, type: 3}
+--- !u!82 &4206780197762189518 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6595408597349991433, guid: b86ee051675f8f1449a3773eb2ce36a5, type: 3}
+  m_PrefabInstance: {fileID: 7054578074424822983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8262495580804862536 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1390665147969838735, guid: b86ee051675f8f1449a3773eb2ce36a5, type: 3}

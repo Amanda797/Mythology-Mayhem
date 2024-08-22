@@ -4,35 +4,44 @@ using UnityEngine;
 
 public class Shoot3D : MonoBehaviour
 {
+    GameManager gameManager;
     public GameObject ArrowPrefab;
     public Transform ArrowSpawn;
-    public float TBS = 0f;
-    private float m_timeStamp = 0f;
-    public AudioSource source;
+    float m_timestamp = 0f;
+    [SerializeField] float attackRate = 3f;
+    public AudioSource audioSource;
     public float AS = 0f;
     public float AL = 0f;
+    bool canShoot = true;
 
-    void OnAwake()
+    private void Start()
     {
-        
+        gameManager = GameManager.instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if((Time.time >= m_timeStamp) && (Input.GetKeyDown(KeyCode.Mouse0)))
+        if (!gameManager.gameData.collectedBow) return;
+        if (Time.timeScale != 1) return;
+        if (!canShoot) return;
+
+        if (m_timestamp >= attackRate)
         {
-            Shoot();
-            m_timeStamp = Time.time + TBS;
-            source.Play();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                m_timestamp = 0;
+                Shoot();
+                audioSource.Play();
+            }
         }
+        else m_timestamp += Time.deltaTime;
     }
 
     public void Shoot()
     {
-        var arrow = (GameObject)Instantiate(ArrowPrefab, ArrowSpawn.position, ArrowSpawn.rotation);
-
-        arrow.GetComponent<Rigidbody>().velocity = arrow.transform.forward * AS;
+        GameObject arrow = Instantiate(ArrowPrefab, ArrowSpawn.position, ArrowSpawn.rotation);
+        Rigidbody rb = arrow.GetComponentInChildren<Rigidbody>();
+        rb.velocity = arrow.transform.forward * AS;
 
         Destroy(arrow, AL);
     }
