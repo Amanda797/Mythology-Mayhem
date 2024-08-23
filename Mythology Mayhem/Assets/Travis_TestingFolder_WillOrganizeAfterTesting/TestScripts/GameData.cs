@@ -21,6 +21,7 @@ public class GameData : MythologyMayhem
     public float maxHealth;
     public int heartCollectionTotal;
     public bool[] collectedHearts;
+    public bool collectedCrystal;
     public bool collectedMirror;
     public bool collectedCompass;
     public bool collectedBow;
