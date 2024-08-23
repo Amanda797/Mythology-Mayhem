@@ -13,9 +13,9 @@ public class CompanionController : MythologyMayhem
 
 
     public List<Companion> companions = new List<Companion>();
-    public GameObject owl, wolf, currentCompanion;
+    public GameObject owl, wolf, currentCompanion, nextcompanion;
     [SerializeField] int currentCompanionIndex = 0;
-    [SerializeField] int cooldown = 1;
+    [SerializeField] float cooldown = .5f;
     [SerializeField] bool canCall = true;
 
     private void Start()
@@ -49,19 +49,19 @@ public class CompanionController : MythologyMayhem
             return;
         }
 
-        var nextcompanion = companions[currentCompanionIndex];
+        nextcompanion = companions[currentCompanionIndex].gameObject;
 
-        if (currentCompanion == nextcompanion.gameObject) return;
+        if (currentCompanion == nextcompanion) return;
 
-        if (nextcompanion.gameObject.name.Contains("Owl"))
+        if (nextcompanion.name.Contains("Owl"))
         {
             if (gameManager.gameData.collectedOwl)
             {
                 // switch to owl
                 if (currentCompanion != null) currentCompanion.gameObject.SetActive(false);
-                nextcompanion.gameObject.SetActive(true);
+                nextcompanion.SetActive(true);
                 nextcompanion.GetComponent<Companion>()._player = localGameManager.player.gameObject;
-                currentCompanion = nextcompanion.gameObject;
+                currentCompanion = nextcompanion;
                 StartCoroutine(Cooldown());
             }
             else CallCompanion();
@@ -72,9 +72,9 @@ public class CompanionController : MythologyMayhem
             {
                 // switch to wolf
                 if (currentCompanion != null) currentCompanion.gameObject.SetActive(false);
-                nextcompanion.gameObject.SetActive(true);
+                nextcompanion.SetActive(true);
                 nextcompanion.GetComponent<Companion>()._player = localGameManager.player.gameObject;
-                currentCompanion = nextcompanion.gameObject;
+                currentCompanion = nextcompanion;
                 StartCoroutine(Cooldown());
             }
             else CallCompanion();
