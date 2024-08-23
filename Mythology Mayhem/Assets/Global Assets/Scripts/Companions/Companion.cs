@@ -36,7 +36,6 @@ public class Companion : MythologyMayhem
         _health = gameObject.GetComponent<Health>();
         anim = gameObject.GetComponent<Animator>();
         triggerDetector = gameObject.GetComponentInChildren<TriggerDetector>();
-        _player = localGameManager.player.gameObject;
         if (GetComponent<Rigidbody2D>()) rb2D = GetComponent<Rigidbody2D>();
         if (GetComponent<NavMeshAgent>()) agent = GetComponent<NavMeshAgent>(); 
     }
@@ -49,17 +48,24 @@ public class Companion : MythologyMayhem
 
     private void Update()
     {
-        if(currentState == CompanionState.Following)
+        if (currentState == CompanionState.Following)
         {
             //2D
             if(rb2D != null && _player != null)
             {
-                Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 2f, transform.position.y);
-                rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
-
                 //Flip Companion based on Player Sprite Renderer
-                if (_player.GetComponentInChildren<SpriteRenderer>().flipX) transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                else transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                if (_player.GetComponentInChildren<SpriteRenderer>().flipX)
+                {
+                    Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x + 3f, transform.position.y);
+                    rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
+                else
+                {
+                    Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 3f, transform.position.y);
+                    rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
             }
             
             //3D
