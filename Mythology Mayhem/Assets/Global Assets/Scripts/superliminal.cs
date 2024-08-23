@@ -30,7 +30,7 @@ public class superliminal : MonoBehaviour
     void Update()
     {
         HandleInput();
-        if (isUsing) ResizeTarget();
+        ResizeTarget();
     }
     
     void HandleInput()
