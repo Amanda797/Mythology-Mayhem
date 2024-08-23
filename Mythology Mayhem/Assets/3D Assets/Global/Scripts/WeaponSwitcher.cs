@@ -7,7 +7,9 @@ public class WeaponSwitcher : MythologyMayhem
 {
     GameManager gameManager;
     public MainHand currentMain;
+    public GameObject currentMainObject;
     public OffHand currentOffHand;
+    public GameObject currentOffHandObject;
 
     [Header("Right Hand")]
     public GameObject[] RightHandWeapons;
@@ -18,110 +20,142 @@ public class WeaponSwitcher : MythologyMayhem
     public int currentLeftHandWeapon;
 
     public float weaponSwitchCooldown = .5f;
-    public bool canSwitch = false;
+    public bool canSwitchMainHand = true;
+    public bool canSwitchOffHand = true;
+
     private void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing.");
-        StartCoroutine(ToggleCooldown());
+        currentMainObject = RightHandWeapons[currentRightHandWeapon];
+        currentOffHandObject = LeftHandWeapons[currentLeftHandWeapon];
     }
     // Update is called once per frame
     void Update()
     {
-        if (!canSwitch) return;
-
-        //Main Hand
-        if (Input.GetKeyUp(KeyCode.Alpha1)) 
+        if (canSwitchMainHand)
         {
-            canSwitch = false;
+            if (Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                canSwitchMainHand = false;
 
-            SwitchMainWeapon();
+                SwitchMainWeapon();
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (canSwitchOffHand)
         {
-            canSwitch = false;
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                canSwitchOffHand = false;
 
-            SwitchOffhandWeapon();
+                SwitchOffhandWeapon();
+            }
         }
     }
-    IEnumerator ToggleCooldown()
+    IEnumerator MainHandCooldown()
     {
         yield return new WaitForSeconds(weaponSwitchCooldown);
-        canSwitch = true;
+        canSwitchMainHand = true;
+    }
+    IEnumerator OffHandCooldown()
+    {
+        yield return new WaitForSeconds(weaponSwitchCooldown);
+        canSwitchOffHand = true;
     }
 
     void SwitchMainWeapon()
     {
-        RightHandWeapons[currentRightHandWeapon].SetActive(false);
+        currentRightHandWeapon++;
+        if (currentRightHandWeapon >= RightHandWeapons.Length) currentRightHandWeapon = 0;
 
-        if (currentRightHandWeapon + 1 >= RightHandWeapons.Length) currentRightHandWeapon = 0;
-        else currentRightHandWeapon++;
+        var nextWeapon = RightHandWeapons[currentRightHandWeapon];
 
-        if (RightHandWeapons[currentRightHandWeapon].name.Contains("Sword"))
+        if (currentMainObject == nextWeapon) return;
+
+        if (nextWeapon.name.Contains("Sword"))
         {
-            RightHandWeapons[currentRightHandWeapon].gameObject.SetActive(true);
-            StartCoroutine(ToggleCooldown());
+            // switch to sword
+            currentMainObject.gameObject.SetActive(false);
+            nextWeapon.gameObject.SetActive(true);
+            currentMainObject = nextWeapon;
+            currentMain = nextWeapon.GetComponent<PlayerWeapon>().mainHand;
+            StartCoroutine(MainHandCooldown());
         }
-        else if (RightHandWeapons[currentRightHandWeapon].name == "TobiasBow")
+        else if (nextWeapon.name.Contains("Bow"))
         {
             if (gameManager.gameData.collectedBow)
             {
-                RightHandWeapons[currentRightHandWeapon].gameObject.SetActive(true);
-
-                StartCoroutine(ToggleCooldown());
+                // switch to bow
+                currentMainObject.gameObject.SetActive(false);
+                nextWeapon.gameObject.SetActive(true);
+                currentMainObject = nextWeapon;
+                currentMain = nextWeapon.GetComponent<PlayerWeapon>().mainHand;
+                StartCoroutine(MainHandCooldown());
             }
             else SwitchMainWeapon();
         }
-        else if (RightHandWeapons[currentRightHandWeapon].name == "Thorshammer")
+        else if (RightHandWeapons[currentRightHandWeapon].name.Contains("hammer"))
         {
             if (gameManager.gameData.collectedHammer)
             {
-                RightHandWeapons[currentRightHandWeapon].gameObject.SetActive(true);
-
-                StartCoroutine(ToggleCooldown());
+                // switch to hammer
+                currentMainObject.gameObject.SetActive(false);
+                nextWeapon.gameObject.SetActive(true);
+                currentMainObject = nextWeapon;
+                currentMain = nextWeapon.GetComponent<PlayerWeapon>().mainHand;
+                StartCoroutine(MainHandCooldown());
             }
             else SwitchMainWeapon();
         }
-
-        currentMain = RightHandWeapons[currentRightHandWeapon].GetComponent<PlayerWeapon>().mainHand;
-        StartCoroutine(ToggleCooldown());
     }
 
     void SwitchOffhandWeapon()
     {
-        LeftHandWeapons[currentLeftHandWeapon].SetActive(false);
+        currentLeftHandWeapon++;
+        if (currentLeftHandWeapon >= LeftHandWeapons.Length) currentLeftHandWeapon = 0;
 
-        if (currentLeftHandWeapon + 1 >= LeftHandWeapons.Length) currentLeftHandWeapon = 0;
-        else currentLeftHandWeapon++;
+        var nextWeapon = LeftHandWeapons[currentLeftHandWeapon];
 
-        if (LeftHandWeapons[currentLeftHandWeapon].name == "Crystal")
+        if (currentOffHandObject == nextWeapon) return;
+
+        if (nextWeapon.name.Contains("Crystal"))
         {
-            LeftHandWeapons[currentLeftHandWeapon].gameObject.SetActive(true);
-            StartCoroutine(ToggleCooldown());
+            if (gameManager.gameData.collectedCrystal)
+            {
+                // switch to crystal
+                currentOffHandObject.gameObject.SetActive(false);
+                nextWeapon.gameObject.SetActive(true);
+                currentOffHandObject = nextWeapon;
+                currentOffHand = nextWeapon.GetComponent<PlayerWeapon>().offHand;
+                StartCoroutine(OffHandCooldown());
+            }
         }
-        else if (LeftHandWeapons[currentLeftHandWeapon].name == "GreekMirror3D")
+        else if (nextWeapon.name.Contains("Mirror"))
         {
             if (gameManager.gameData.collectedMirror)
             {
-                LeftHandWeapons[currentLeftHandWeapon].gameObject.SetActive(true);
-
-                StartCoroutine(ToggleCooldown());
+                // switch to mirror
+                currentOffHandObject.gameObject.SetActive(false);
+                nextWeapon.gameObject.SetActive(true);
+                currentOffHandObject = nextWeapon;
+                currentOffHand = nextWeapon.GetComponent<PlayerWeapon>().offHand;
+                StartCoroutine(OffHandCooldown());
             }
             else SwitchMainWeapon();
         }
-        else if (LeftHandWeapons[currentLeftHandWeapon].name.Contains("Compass"))
+        else if (nextWeapon.name.Contains("Compass"))
         {
             if (gameManager.gameData.collectedCompass)
             {
-                LeftHandWeapons[currentLeftHandWeapon].gameObject.SetActive(true);
-
-                StartCoroutine(ToggleCooldown());
+                // switch to compass
+                currentOffHandObject.gameObject.SetActive(false);
+                nextWeapon.gameObject.SetActive(true);
+                currentOffHandObject = nextWeapon;
+                currentOffHand = nextWeapon.GetComponent<PlayerWeapon>().offHand;
+                StartCoroutine(OffHandCooldown());
             }
             else SwitchMainWeapon();
         }
-
-        currentOffHand = LeftHandWeapons[currentLeftHandWeapon].GetComponent<PlayerWeapon>().offHand;
-        StartCoroutine(ToggleCooldown());
     }
 }
