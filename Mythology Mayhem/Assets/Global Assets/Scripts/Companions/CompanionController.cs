@@ -41,7 +41,13 @@ public class CompanionController : MythologyMayhem
     public void CallCompanion()
     {
         currentCompanionIndex++;
-        if (currentCompanionIndex >= companions.Count) currentCompanionIndex = 0;
+        if (currentCompanionIndex > companions.Count) currentCompanionIndex = 0;
+        else if (currentCompanionIndex == companions.Count)
+        {
+            currentCompanion.SetActive(false);
+            StartCoroutine(Cooldown());
+            return;
+        }
 
         var nextcompanion = companions[currentCompanionIndex];
 

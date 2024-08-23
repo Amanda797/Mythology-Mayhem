@@ -9,6 +9,8 @@ public class LeverPuzzleManager : MonoBehaviour
     public GameObject itemToDisplay;
     public bool[] currentLeverAnswer = new bool[10];
     public bool[] correctLeverAnswer = new bool[] { true, false, true, false, true, false, true, false, true, false };
+    [TextArea(7, 10)]
+    [SerializeField] string owlText;
     public enum Puzzle
     {
         mirror,
@@ -59,7 +61,13 @@ public class LeverPuzzleManager : MonoBehaviour
         {
             gameManager.gameData.collectedOwl = true;
             gameManager.SaveGame();
-            foreach (CompanionController cc in FindObjectsOfType<CompanionController>()) cc.owl.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
+            gameManager.pauseMenuManager.scrollDisplayText.text = owlText;
+            gameManager.pauseMenuManager.scrollDisplayText.rectTransform.anchoredPosition = Vector2.zero;
+            gameManager.pauseMenuManager.TogglePause(true);
+            gameManager.Popup("Press E to Read", false);
         }
     }
 }

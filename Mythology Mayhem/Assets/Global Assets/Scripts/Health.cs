@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static MythologyMayhem;
-using static UnityEditorInternal.VersionControl.ListControl;
 
 public class Health : MonoBehaviour
 {

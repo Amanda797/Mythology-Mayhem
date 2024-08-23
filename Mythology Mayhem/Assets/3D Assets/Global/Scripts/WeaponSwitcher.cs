@@ -67,7 +67,13 @@ public class WeaponSwitcher : MythologyMayhem
     void SwitchMainWeapon()
     {
         currentRightHandWeapon++;
-        if (currentRightHandWeapon >= RightHandWeapons.Length) currentRightHandWeapon = 0;
+        if (currentRightHandWeapon > RightHandWeapons.Length) currentRightHandWeapon = 0;
+        else if (currentRightHandWeapon == RightHandWeapons.Length){
+            currentMainObject.gameObject.SetActive(false);
+            currentMain = MainHand.None;
+            StartCoroutine(MainHandCooldown());
+            return;
+        }
 
         var nextWeapon = RightHandWeapons[currentRightHandWeapon];
 
@@ -79,7 +85,8 @@ public class WeaponSwitcher : MythologyMayhem
             currentMainObject.gameObject.SetActive(false);
             nextWeapon.gameObject.SetActive(true);
             currentMainObject = nextWeapon;
-            currentMain = nextWeapon.GetComponent<PlayerWeapon>().mainHand;
+            if(currentMainObject.GetComponent<PlayerAttack>() != null) currentMainObject.GetComponent<PlayerAttack>().canAttack = true;
+            currentMain = MainHand.MainWeapon;
             StartCoroutine(MainHandCooldown());
         }
         else if (nextWeapon.name.Contains("Bow"))
@@ -90,7 +97,8 @@ public class WeaponSwitcher : MythologyMayhem
                 currentMainObject.gameObject.SetActive(false);
                 nextWeapon.gameObject.SetActive(true);
                 currentMainObject = nextWeapon;
-                currentMain = nextWeapon.GetComponent<PlayerWeapon>().mainHand;
+                if (currentMainObject.GetComponent<Shoot3D>() != null) currentMainObject.GetComponent<Shoot3D>().canShoot = true;
+                currentMain = MainHand.Bow;
                 StartCoroutine(MainHandCooldown());
             }
             else SwitchMainWeapon();
@@ -103,7 +111,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentMainObject.gameObject.SetActive(false);
                 nextWeapon.gameObject.SetActive(true);
                 currentMainObject = nextWeapon;
-                currentMain = nextWeapon.GetComponent<PlayerWeapon>().mainHand;
+                currentMain = MainHand.ThorsHammer;
                 StartCoroutine(MainHandCooldown());
             }
             else SwitchMainWeapon();
@@ -113,7 +121,14 @@ public class WeaponSwitcher : MythologyMayhem
     void SwitchOffhandWeapon()
     {
         currentLeftHandWeapon++;
-        if (currentLeftHandWeapon >= LeftHandWeapons.Length) currentLeftHandWeapon = 0;
+        if (currentLeftHandWeapon > LeftHandWeapons.Length) currentLeftHandWeapon = 0;
+        else if (currentLeftHandWeapon == LeftHandWeapons.Length)
+        {
+            currentOffHandObject.gameObject.SetActive(false);
+            currentOffHand = OffHand.None;
+            StartCoroutine(OffHandCooldown());
+            return;
+        }
 
         var nextWeapon = LeftHandWeapons[currentLeftHandWeapon];
 
@@ -127,7 +142,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentOffHandObject.gameObject.SetActive(false);
                 nextWeapon.gameObject.SetActive(true);
                 currentOffHandObject = nextWeapon;
-                currentOffHand = nextWeapon.GetComponent<PlayerWeapon>().offHand;
+                currentOffHand = OffHand.Crystal;
                 StartCoroutine(OffHandCooldown());
             }
         }
@@ -139,7 +154,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentOffHandObject.gameObject.SetActive(false);
                 nextWeapon.gameObject.SetActive(true);
                 currentOffHandObject = nextWeapon;
-                currentOffHand = nextWeapon.GetComponent<PlayerWeapon>().offHand;
+                currentOffHand = OffHand.Mirror;
                 StartCoroutine(OffHandCooldown());
             }
             else SwitchMainWeapon();
@@ -152,7 +167,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentOffHandObject.gameObject.SetActive(false);
                 nextWeapon.gameObject.SetActive(true);
                 currentOffHandObject = nextWeapon;
-                currentOffHand = nextWeapon.GetComponent<PlayerWeapon>().offHand;
+                currentOffHand = OffHand.Compass;
                 StartCoroutine(OffHandCooldown());
             }
             else SwitchMainWeapon();

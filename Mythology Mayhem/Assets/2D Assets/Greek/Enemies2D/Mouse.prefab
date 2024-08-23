@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1547413830857976226
 Transform:
   m_ObjectHideFlags: 0
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4016066765672382690}
   - component: {fileID: 5035569384875239389}
   - component: {fileID: 8516475126756549845}
+  - component: {fileID: 1651723425}
   m_Layer: 6
   m_Name: MouseEnemy
   m_TagString: Enemy
@@ -454,6 +455,7 @@ MonoBehaviour:
   patrolDistance: 2
   speed: 2
   patrolBool: IsPatrolling
+  isFlying: 0
   attackTriggers: []
   attackTrigger: Attack
   meleeDistance: 4
@@ -473,7 +475,19 @@ MonoBehaviour:
       m_Calls: []
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1651723425}
+        m_TargetAssemblyTypeName: Mouse2D, Assembly-CSharp
+        m_MethodName: DropScrolls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   AttackDelegate:
     m_PersistentCalls:
       m_Calls: []
@@ -496,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 4
-  _health: 0
+  _health: 4
   mainObject: {fileID: 450319774758561872}
   rewardObject: {fileID: 0}
   anim: {fileID: 8389002920890670442}
@@ -510,6 +524,22 @@ MonoBehaviour:
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
+  isDead: 0
+--- !u!114 &1651723425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8389002920890670447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afebbb67bd5a8a54bbb72ced2b30df33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 4
+  canDrop: 1
+  fallingScroll: {fileID: 4034391330369518814, guid: 8931aa4494dad7d40809ec48fd5c45b0, type: 3}
 --- !u!1 &8389002921095470412
 GameObject:
   m_ObjectHideFlags: 0
