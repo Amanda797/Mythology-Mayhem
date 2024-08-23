@@ -51,6 +51,7 @@ public class playerSpawner : MythologyMayhem
         if (localGameManager.sceneType == Dimension.TwoD)
         {
             spawnPlayerContainer = Instantiate(playerContainer2D, this.gameObject.transform);
+            spawnPlayerContainer.GetComponentInChildren<CompanionController>().localGameManager = localGameManager;
 
             obj = Instantiate(PlayerPrefabs2D.playerPrefabs[(int)GameManager.instance.gameData.selectedCharacter], spawnPlayerContainer.transform);
 
@@ -62,6 +63,7 @@ public class playerSpawner : MythologyMayhem
         else
         {
             spawnPlayerContainer = Instantiate(playerContainer3D, this.gameObject.transform);
+            spawnPlayerContainer.GetComponentInChildren<CompanionController>().localGameManager = localGameManager;
 
             obj = Instantiate(PlayerPrefabs3D.playerPrefabs[(int)GameManager.instance.gameData.selectedCharacter], spawnPlayerContainer.transform);
 

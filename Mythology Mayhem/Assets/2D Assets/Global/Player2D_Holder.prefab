@@ -115,11 +115,14 @@ MonoBehaviour:
   - spwanPointIndex
   - playerIndex
   localGameManager: {fileID: 0}
-  companions: []
-  _player: {fileID: 0}
+  companions:
+  - {fileID: 4837440706735287853}
+  - {fileID: 1176888064810243354}
   owl: {fileID: 1651437035203621411}
   wolf: {fileID: 7049917184519999958}
-  callDelay: 1
+  currentCompanion: {fileID: 0}
+  currentCompanionIndex: 0
+  cooldown: 1
 --- !u!1001 &5695961640863185161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,8 +182,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: OwlCompanion2D
       objectReference: {fileID: 0}
+    - target: {fileID: 6478159597610388266, guid: a12d6a78a50660148b663febb14441ae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a12d6a78a50660148b663febb14441ae, type: 3}
+--- !u!114 &1176888064810243354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6870588242137181203, guid: a12d6a78a50660148b663febb14441ae, type: 3}
+  m_PrefabInstance: {fileID: 5695961640863185161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651437035203621411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341873fe596ddff42b7fdbccbd1289f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1651437035203621343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6478159597610387670, guid: a12d6a78a50660148b663febb14441ae, type: 3}
@@ -252,6 +270,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d2e9b5d88df24e8dcdef64260ddb8, type: 3}
+--- !u!114 &4837440706735287853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1255635979178365130, guid: 4f8d2e9b5d88df24e8dcdef64260ddb8, type: 3}
+  m_PrefabInstance: {fileID: 5930925099360780007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7049917184519999958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341873fe596ddff42b7fdbccbd1289f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7049917184519999958 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3717922323452686129, guid: 4f8d2e9b5d88df24e8dcdef64260ddb8, type: 3}

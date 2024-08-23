@@ -36,7 +36,7 @@ public class Companion : MythologyMayhem
         _health = gameObject.GetComponent<Health>();
         anim = gameObject.GetComponent<Animator>();
         triggerDetector = gameObject.GetComponentInChildren<TriggerDetector>();
-
+        _player = localGameManager.player.gameObject;
         if (GetComponent<Rigidbody2D>()) rb2D = GetComponent<Rigidbody2D>();
         if (GetComponent<NavMeshAgent>()) agent = GetComponent<NavMeshAgent>(); 
     }

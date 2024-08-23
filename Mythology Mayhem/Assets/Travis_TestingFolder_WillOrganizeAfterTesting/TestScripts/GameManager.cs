@@ -129,7 +129,7 @@ public class GameManager : MythologyMayhem
         }
         inMainMenu = SceneManager.GetSceneByName(Level.MainMenu.ToString()).isLoaded;
 
-        ListenerTrackPlayer();
+        //ListenerTrackPlayer();
 
         if (!inMainMenu && !cutscenePlaying)
         {
