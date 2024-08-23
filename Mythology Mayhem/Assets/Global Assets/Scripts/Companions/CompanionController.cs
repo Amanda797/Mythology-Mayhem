@@ -54,6 +54,7 @@ public class CompanionController : MythologyMayhem
                 // switch to owl
                 if (currentCompanion != null) currentCompanion.gameObject.SetActive(false);
                 nextcompanion.gameObject.SetActive(true);
+                nextcompanion.GetComponent<Companion>()._player = localGameManager.player.gameObject;
                 currentCompanion = nextcompanion.gameObject;
                 StartCoroutine(Cooldown());
             }
@@ -66,6 +67,7 @@ public class CompanionController : MythologyMayhem
                 // switch to wolf
                 if (currentCompanion != null) currentCompanion.gameObject.SetActive(false);
                 nextcompanion.gameObject.SetActive(true);
+                nextcompanion.GetComponent<Companion>()._player = localGameManager.player.gameObject;
                 currentCompanion = nextcompanion.gameObject;
                 StartCoroutine(Cooldown());
             }
