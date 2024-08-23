@@ -145,6 +145,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentOffHand = OffHand.Crystal;
                 StartCoroutine(OffHandCooldown());
             }
+            else SwitchOffhandWeapon();
         }
         else if (nextWeapon.name.Contains("Mirror"))
         {
@@ -157,7 +158,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentOffHand = OffHand.Mirror;
                 StartCoroutine(OffHandCooldown());
             }
-            else SwitchMainWeapon();
+            else SwitchOffhandWeapon();
         }
         else if (nextWeapon.name.Contains("Compass"))
         {
@@ -170,7 +171,7 @@ public class WeaponSwitcher : MythologyMayhem
                 currentOffHand = OffHand.Compass;
                 StartCoroutine(OffHandCooldown());
             }
-            else SwitchMainWeapon();
+            else SwitchOffhandWeapon();
         }
     }
 }
