@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,141 +9,72 @@ public class CompanionController : MythologyMayhem
 {
     GameManager gameManager;
     public LocalGameManager localGameManager;
-    public GameplayActions gameActions;
+
+
+
     public List<Companion> companions = new List<Companion>();
-    public GameObject _player;
-    public GameObject owl, wolf;
-    [SerializeField] int currentCompanion = -1; //-1 equals no companion active
-    [SerializeField] int callDelay = 1;
-    bool callLock = false;
+    public GameObject owl, wolf, currentCompanion;
+    [SerializeField] int currentCompanionIndex = 0;
+    [SerializeField] int cooldown = 1;
+    [SerializeField] bool canCall = true;
 
     private void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing.");
-
-        foreach (LocalGameManager lgm in GameObject.FindObjectsOfType<LocalGameManager>())
-        {
-            if (lgm.inScene.ToString() == gameObject.scene.name)
-            {
-                localGameManager = lgm;
-            }
-        }
-        if (!gameManager.gameData.collectedOwl && owl.activeSelf) owl.SetActive(false);
-        if (!gameManager.gameData.collectedWolf && wolf.activeSelf) owl.SetActive(false);
     }
 
     void Update()
     {
         if (gameManager.currentLocalManager != localGameManager) return;
-        if (_player == null && localGameManager.player != null) _player = localGameManager.player.gameObject;
-        if (_player == null) return;
-        if (gameManager.gameData.collectedOwl && !companions.Contains(owl.GetComponent<Companion>())) companions.Add(owl.GetComponent<Companion>());
-        if (gameManager.gameData.collectedWolf && !companions.Contains(wolf.GetComponent<Companion>())) companions.Add(wolf.GetComponent<Companion>());
-        if (!gameManager.gameData.collectedOwl && owl.activeSelf) owl.SetActive(false);
-        if (!gameManager.gameData.collectedWolf && wolf.activeSelf) owl.SetActive(false);
-        if (!gameManager.gameData.collectedWolf && !companions.Contains(wolf.GetComponent<Companion>())) companions.Add(wolf.GetComponent<Companion>());
-        if (companions.Count <= 0) return;
+        if (!gameManager.gameData.collectedWolf && !gameManager.gameData.collectedOwl) return;
 
-        //if (gameManager.gameData.collectedOwl && !owl.activeSelf)
-        //{
-        //    if (currentCompanion != -1)
-        //    {
-        //        if (companions[currentCompanion].gameObject == owl)
-        //        {
-        //            if (!owl.GetComponent<Companion>()._health.isDead)
-        //            {
-        //                owl.SetActive(true);
-        //                owl.GetComponent<Companion>()._player = _player;
-        //                owl.GetComponent<Companion>().localGameManager = localGameManager;
-        //                owl.GetComponent<Companion>()._health = owl.GetComponent<Health>();
-        //            }
-        //        }
-        //    }
-        //}
-        //else if (!gameManager.gameData.collectedOwl && owl.activeSelf) owl.SetActive(false);
+        if (!canCall) return;
 
-        //if (gameManager.gameData.collectedWolf && !wolf.activeSelf)
-        //{
-        //    if (currentCompanion != -1)
-        //    {
-        //        if (companions[currentCompanion].gameObject == wolf)
-        //        {
-        //            if (!wolf.GetComponent<Companion>()._health.isDead)
-        //            {
-        //                wolf.SetActive(true);
-        //                wolf.GetComponent<Companion>()._player = _player;
-        //                wolf.GetComponent<Companion>().localGameManager = localGameManager;
-        //                wolf.GetComponent<Companion>()._health = wolf.GetComponent<Health>();
-        //            }
-        //        }
-        //    }
-        //}
-        //else if (!gameManager.gameData.collectedWolf && wolf.activeSelf) wolf.SetActive(false);
-
-        if(!callLock)
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                callLock = true;
+            canCall = false;
 
-                if (currentCompanion != -1)
-                {
-                    if (companions[currentCompanion].gameObject.activeSelf) DismissCompanion();
-                    else CallCompanion();
-                }
-                else CallCompanion();
-
-
-                StartCoroutine(CallLock(2f));
-            }
-        }        
+            CallCompanion();
+        }
     }
     public void CallCompanion()
     {
-        Debug.Log("CallCompanion");
-        if (currentCompanion != -1) companions[currentCompanion].gameObject.SetActive(false);
+        currentCompanionIndex++;
+        if (currentCompanionIndex >= companions.Count) currentCompanionIndex = 0;
 
-        if (currentCompanion + 1 >= companions.Count) currentCompanion = 0;
-        else currentCompanion++;
+        var nextcompanion = companions[currentCompanionIndex];
 
-        if (companions[currentCompanion].gameObject == owl)
+        if (currentCompanion == nextcompanion.gameObject) return;
+
+        if (nextcompanion.gameObject.name.Contains("Owl"))
         {
             if (gameManager.gameData.collectedOwl)
             {
-                owl.SetActive(true);
-                owl.GetComponent<Companion>()._player = _player;
-                owl.GetComponent<Companion>().localGameManager = localGameManager;
-                owl.GetComponent<Companion>()._health = owl.GetComponent<Health>();
-
-                if (owl.GetComponent<Companion>()._health.isDead) owl.SetActive(false);
+                // switch to owl
+                if (currentCompanion != null) currentCompanion.gameObject.SetActive(false);
+                nextcompanion.gameObject.SetActive(true);
+                currentCompanion = nextcompanion.gameObject;
+                StartCoroutine(Cooldown());
             }
-            else owl.SetActive(false);
+            else CallCompanion();
         }
-        else if (companions[currentCompanion].gameObject == wolf)
+        else if (nextcompanion.gameObject.name.Contains("Wolf"))
         {
             if (gameManager.gameData.collectedWolf)
             {
-                wolf.SetActive(true);
-                wolf.GetComponent<Companion>()._player = _player;
-                wolf.GetComponent<Companion>().localGameManager = localGameManager;
-                wolf.GetComponent<Companion>()._health = wolf.GetComponent<Health>();
-
-                if (wolf.GetComponent<Companion>()._health.isDead) wolf.SetActive(false);
+                // switch to wolf
+                if (currentCompanion != null) currentCompanion.gameObject.SetActive(false);
+                nextcompanion.gameObject.SetActive(true);
+                currentCompanion = nextcompanion.gameObject;
+                StartCoroutine(Cooldown());
             }
-            else wolf.SetActive(false);
+            else CallCompanion();
         }
     }
-
-    public void DismissCompanion()
+    IEnumerator Cooldown()
     {
-        Debug.Log("DismissCompanion");
-        companions[currentCompanion].gameObject.SetActive(false);
-    }
-
-    IEnumerator CallLock(float time)
-    {
-        yield return new WaitForSeconds(callDelay);
-        callLock = false;
+        yield return new WaitForSeconds(cooldown);
+        canCall = true;
     }
 }
