@@ -7,20 +7,20 @@ using UnityEngine;
 public class Mouse2D : MonoBehaviour
 {
     [Header("Drop Scrolls")]
-    [SerializeField] bool dropsScrolls;
-    [SerializeField] float countdown = 4f;
+    [SerializeField] float cooldown = 4f;
+    [SerializeField] bool canDrop = true;
     [SerializeField] GameObject fallingScroll;
 
     public void DropScrolls()
     {
-        if (dropsScrolls)
-        {
-            if (countdown < 0)
-            {
-                countdown = Random.Range(3, countdown);
-                Instantiate(fallingScroll, transform.position, Quaternion.identity);
-            }
-            else countdown -= 1 * Time.deltaTime;
-        }
+        if (!canDrop) return;
+        canDrop = false;
+        Instantiate(fallingScroll, transform.position, Quaternion.identity);
+        StartCoroutine(Cooldown());
+    }
+    public IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(cooldown);
+        canDrop = true;
     }
 }

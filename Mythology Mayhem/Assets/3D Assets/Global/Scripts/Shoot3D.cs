@@ -12,7 +12,7 @@ public class Shoot3D : MonoBehaviour
     public AudioSource audioSource;
     public float AS = 0f;
     public float AL = 0f;
-    bool canShoot = true;
+    public bool canShoot = true;
 
     private void Start()
     {
