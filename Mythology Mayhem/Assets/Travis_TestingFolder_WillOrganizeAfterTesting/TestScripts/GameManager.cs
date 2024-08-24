@@ -27,6 +27,7 @@ public class GameManager : MythologyMayhem
     public bool checkStart;
     public bool checkProx;
     public bool checkUnneeded;
+    public bool isPlayerAlive;
 
     public float startDelay;
 

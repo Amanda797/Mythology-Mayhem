@@ -38,7 +38,7 @@ public class Attack3D : MythologyMayhem
                     else if (enemy.gameObject.tag == "Medusa")
                     {
                         MedusaControlScript mcs = enemy.gameObject.GetComponent<MedusaControlScript>();
-                        if (mcs != null) mcs.MedusaDamage(damage);
+                        if (mcs != null) mcs.MedusaDamage(damage * 2);
                     }
                     else if (enemy.gameObject.tag == "Tentacle") 
                     {

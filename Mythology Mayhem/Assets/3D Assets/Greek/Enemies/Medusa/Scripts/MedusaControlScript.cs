@@ -67,8 +67,10 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] float freezeReflectTime;
     [SerializeField] float freezePlayerTime;
     [SerializeField] float healthIncreaseFromFreezingPlayer;
+    private Vector3 startPosition;
     private int timesAttacked;
     private int maxAttacks;
+    private bool queueReset;
 
     [Header("Lists")]
     [SerializeField] Transform MainPlatform;
@@ -84,6 +86,7 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] Slider healthBar;
 
     [SerializeField] GameObject spellPrefab;
+    [SerializeField] GameObject castPrefab;
     [SerializeField] Transform spellSpawnPoint;
 
     [SerializeField] LineRenderer leftEyeLine;
@@ -150,12 +153,20 @@ public class MedusaControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.position;
+        ResetState();
+    }
+
+    private void ResetState()
+    {
+        queueReset = false;
+        transform.position = startPosition;
         revealExit.SetActive(false);
 
-        if(GameManager.instance != null) 
+        if (GameManager.instance != null)
         {
             ScenePlayerObject SPO = GameManager.instance.GetPlayer(MythologyMayhem.Level.GreekMedusa_3D);
-            if (SPO != null) 
+            if (SPO != null)
             {
                 playerHealth = SPO.player.gameObject.GetComponent<Health>();
             }
@@ -177,6 +188,7 @@ public class MedusaControlScript : MonoBehaviour
         medusaAgent.speed = baseSpeed;
         mainMaterial.SetTexture("_MainTex", normalTex);
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -204,6 +216,10 @@ public class MedusaControlScript : MonoBehaviour
                 }
             }
         }
+        if (!GameManager.instance.isPlayerAlive)
+            queueReset = true;
+        else if (queueReset == true)
+            ResetState();
     }
     void RunStateMachine()
     {
@@ -554,7 +570,8 @@ public class MedusaControlScript : MonoBehaviour
             {
                 case AttackType.CastSpell:
                     anim.SetTrigger("CastSpell");
-                    CastSpell(target);
+                    StartCoroutine(RunSpell(target));
+                    //CastSpell(target);
                     break;
 
                 case AttackType.Projectile:
@@ -723,6 +740,34 @@ public class MedusaControlScript : MonoBehaviour
         GameObject obj = Instantiate(spellPrefab, spellSpawnPoint.position, spellSpawnPoint.rotation);
         obj.transform.LookAt(direction);
 
+    }
+
+    IEnumerator RunSpell(Vector3 target)
+    {
+        GameObject obj = Instantiate(castPrefab, transform.position, Quaternion.identity);
+        float start = Time.time;
+        obj.transform.localScale = Vector3.one * 5;
+        while (Time.time < start + 1)
+        {
+            obj.transform.localScale = Vector3.one * 5 * Mathf.Pow(1 + start - Time.time, 0.5f);
+            obj.transform.position = Vector3.Lerp(transform.position, spellSpawnPoint.position, Mathf.Pow(Time.time - start, 0.5f));
+            yield return null;
+        }
+        target = playerHealth.transform.position;
+        CastSpell(target);
+        yield return new WaitForSeconds(0.3f);
+        Vector3 spread = Vector3.Cross(target - spellSpawnPoint.position, Vector3.up).normalized * 10;
+        if (CurrentState != AttackStates.RangedAttack1)
+        {
+            CastSpell(target + spread);
+            CastSpell(target - spread);
+        }
+        yield return new WaitForSeconds(0.3f);
+        if (CurrentState == AttackStates.RangedAttack3)
+        {
+            CastSpell(target + spread * 2);
+            CastSpell(target - spread * 2);
+        }
     }
     void HairShake()
     {

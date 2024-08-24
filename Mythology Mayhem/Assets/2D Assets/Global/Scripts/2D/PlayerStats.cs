@@ -54,6 +54,7 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         spawnPoint = transform.position;
+        GameManager.instance.isPlayerAlive = true;
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing");
     }
@@ -158,6 +159,7 @@ public class PlayerStats : MonoBehaviour
             anim.SetBool("IsDead", true);
             dieAS.Play();
             GetComponent<PlayerController>().enabled = false;
+            GameManager.instance.isPlayerAlive = false;
             StartCoroutine(Respawn());
         }
     }
@@ -171,6 +173,7 @@ public class PlayerStats : MonoBehaviour
         anim.SetBool("IsDead", false);
         anim.Play("Greek-Boy-Idle", 0);
         respawnAS.Play();
+        GameManager.instance.isPlayerAlive = true;
     }   
     
     public void CollectHeart(int amount)
