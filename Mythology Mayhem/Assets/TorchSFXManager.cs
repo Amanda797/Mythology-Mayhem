@@ -6,13 +6,14 @@ public class TorchSFXManager : MonoBehaviour
 {
     [SerializeField] AudioSource[] torchAudioSources;
 
-    public void ToggleAudioSources(bool activate)
+    public void ToggleAudioSources(bool activate, bool is3D)
     {
         foreach (AudioSource source in torchAudioSources)
         {
             if (activate)
             {
-                source.volume = .1f;
+                if (is3D) source.volume = 1f;
+                else source.volume = .1f;
                 source.Play();
             }
 
