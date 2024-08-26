@@ -13,6 +13,7 @@ public class PlayerMovement3D : MythologyMayhem
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDist = .4f;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] bool isRunning = false;
 
     public PlayerAttack playerAttack;
 
@@ -77,7 +78,11 @@ public class PlayerMovement3D : MythologyMayhem
                 move = move.normalized;
             }
 
-            controller.Move(move * speed * Time.deltaTime);
+            float moveSpeed;
+            if (isRunning) moveSpeed = speed * 1.5f;
+            else moveSpeed = speed;
+
+            controller.Move(move * moveSpeed * Time.deltaTime);
 
             // if the player is moving left or right
             if (input != Vector2.zero && canPlayFootstepClip && isGrounded)
@@ -100,6 +105,9 @@ public class PlayerMovement3D : MythologyMayhem
                 }
 
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded) isRunning = true;
+            else if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
 
             switch (character)
             {
