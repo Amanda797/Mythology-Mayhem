@@ -52,7 +52,10 @@ public class Shoot2D : MonoBehaviour
             anim.SetBool("CanShoot", canShoot);
             anim.SetBool("UseSword", !canShoot);
 
-            ps.CanAttack = !canShoot;
+            foreach (LocalGameManager lgm in gameManager.loadedLocalManagers)
+            {
+                if(lgm.sceneType == MythologyMayhem.Dimension.TwoD) lgm.player.gameObject.GetComponent<PlayerStats>().ps.CanAttack = !canShoot;
+            }
         }
 
         if (!canShoot) return;
