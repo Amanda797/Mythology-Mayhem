@@ -153,14 +153,15 @@ public class MedusaControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
+        startPosition = transform.parent.position;
         ResetState();
     }
 
     private void ResetState()
     {
+        print("Reset Medusa");
         queueReset = false;
-        transform.position = startPosition;
+        transform.parent.position = startPosition;
         revealExit.SetActive(false);
 
         if (GameManager.instance != null)
@@ -187,6 +188,7 @@ public class MedusaControlScript : MonoBehaviour
 
         medusaAgent.speed = baseSpeed;
         mainMaterial.SetTexture("_MainTex", normalTex);
+        StopAllCoroutines();
     }
 
     // Update is called once per frame
@@ -351,11 +353,21 @@ public class MedusaControlScript : MonoBehaviour
         }
         medusaAgent.stoppingDistance = 8;
         //Look to Line up with Nav Agent (incase not aligned from targeting phase)
-        float step = targetingSpeed * Time.deltaTime;
-        Vector3 direction = (medusaAgent.transform.forward).normalized;
-        direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * targetingSpeed);
+        //if (medusaAgent.remainingDistance < medusaAgent.stoppingDistance + .5f)
+        //{
+            medusaAgent.updateRotation = false;
+            Vector3 target = playerHealth.transform.position - transform.position;
+            target.y = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target), Time.deltaTime * targetingSpeed);
+        /*}
+        else
+        {
+            medusaAgent.updateRotation = true;
+            Vector3 direction = (medusaAgent.transform.forward).normalized;
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * medusaAgent.);
+        }*/
 
         //Set Current Player location as Destination
         medusaAgent.SetDestination(playerHealth.gameObject.transform.position);
@@ -374,6 +386,10 @@ public class MedusaControlScript : MonoBehaviour
     }
     public void RunMoveToPlatform(AttackStates nextState) 
     {
+        medusaAgent.updateRotation = true;
+        Vector3 direction = (medusaAgent.transform.forward).normalized;
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction);
         if (medusaAgent.remainingDistance < (medusaAgent.stoppingDistance + .5f))
         {
             //Stop NavAgent and set State
@@ -772,7 +788,7 @@ public class MedusaControlScript : MonoBehaviour
     void HairShake()
     {
         //Code for Spell Mechanics
-        damageSphere.SetActive(true);
+        StartCoroutine(MeleeHitbox(0.6f));
     }
     void Projectile()
     {
@@ -781,8 +797,15 @@ public class MedusaControlScript : MonoBehaviour
     void Stab()
     {
         //Code for Spell Mechanics
+        StartCoroutine(MeleeHitbox(0.6f));
+    }
+
+    IEnumerator MeleeHitbox(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         damageSphere.SetActive(true);
     }
+
     void PointCanvasTowardPlayer(Transform target)
     {
         if (healthBarCanvasPivot != null)
