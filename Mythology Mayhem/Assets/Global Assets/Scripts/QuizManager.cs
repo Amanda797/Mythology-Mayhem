@@ -8,7 +8,8 @@ public class QuizManager : MonoBehaviour
 {
     GameManager gameManager;
     AudioSource audioSource;
-    [SerializeField] AudioClip buttonClip, correctClip, incorrectClip, winClip, loseClip;
+    [SerializeField] Animator animator;
+    [SerializeField] AudioClip buttonClip, correctClip, incorrectClip, winClip, loseClip, scrollOpen;
 
     public SceneTransitionPoint2D transitionPoint;
 
@@ -37,6 +38,7 @@ public class QuizManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
     public void StartQuiz()
     {
@@ -59,9 +61,9 @@ public class QuizManager : MonoBehaviour
             answer1.text = "Close";
         }
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        Time.timeScale = 0;
+        animator.Play("scroll", 0);
+        audioSource.Play();
+        StartCoroutine(OpenUI());
     }
     void DisplayQuestion() {
         if(currentQuestion < chosenQuestions.Length) {
@@ -74,9 +76,8 @@ public class QuizManager : MonoBehaviour
             answer2Obj.SetActive(true);
             answer3Obj.SetActive(true);
             answer4Obj.SetActive(true);
-        } else {
-            answered = true;
         }
+        else answered = true;
                 
     }//end display question
 
@@ -84,13 +85,12 @@ public class QuizManager : MonoBehaviour
     {
         if (!gameManager.gameData.collectedMirror)
         {
-            Time.timeScale = 1;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
             AudioSource source = gameManager.GetComponent<AudioSource>();
             source.clip = buttonClip;
             source.Play();
-            this.gameObject.SetActive(false);
+            animator.Play("Scroll_Close", 0);
+            audioSource.Play();
+            StartCoroutine(CloseUI());
             return;
         }
         if (currentQuestion == -1)
@@ -132,7 +132,7 @@ public class QuizManager : MonoBehaviour
             currentQuestion++;
             return;
         } 
-        else if(currentQuestion > chosenQuestions.Length)
+        else if(currentQuestion >= chosenQuestions.Length)
         {
             if (!won)
             {
@@ -146,8 +146,12 @@ public class QuizManager : MonoBehaviour
                 playerStats.TakeDamage(10);
             }
 
-            this.gameObject.SetActive(false);
-            LoadMedussa();
+            Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            animator.Play("Scroll_Close", 0);
+            audioSource.Play();
+            StartCoroutine(LoadMedussa());
             return;
         }
         else {
@@ -221,12 +225,27 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    void LoadMedussa()
+    IEnumerator LoadMedussa()
     {
-        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(1);
+        this.gameObject.SetActive(false);
+        transitionPoint.localGameManager.mainGameManager.TransitionScene(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
+    }
+
+    IEnumerator CloseUI()
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        transitionPoint.localGameManager.mainGameManager.TransitionScene(transitionPoint.sceneToTransition, transitionPoint.spawnpointNameOverride);
+        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(1);
+        this.gameObject.SetActive(false);
+    }
+    IEnumerator OpenUI()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 0;
     }
 }
 

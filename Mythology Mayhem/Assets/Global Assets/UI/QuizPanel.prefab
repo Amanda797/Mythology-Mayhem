@@ -145,7 +145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 314fccee51c63054d8a0ceead64ad09f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 314fccee51c63054d8a0ceead64ad09f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 7179005885807186913}
   - component: {fileID: 7179005885807186918}
   - component: {fileID: 7179005885807186919}
+  - component: {fileID: 2045604703}
   m_Layer: 5
   m_Name: QuizPanel
   m_TagString: Scroll
@@ -403,9 +404,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7179005885807186917}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7179005886554050244}
@@ -446,7 +447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d6c55bd42d157344b9cea7bf74ac165b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a9ab9986bf1b8a4eaccd3dc86afef07, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -468,11 +469,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa618ee8fd803dc48a4809b1e58c2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonClip: {fileID: 8300000, guid: bce165f0b96e1124f9232dfd34572ce9, type: 3}
+  correctClip: {fileID: 8300000, guid: 6e840ad3c8103794cb8e6c425d757c10, type: 3}
+  incorrectClip: {fileID: 8300000, guid: 70b1b2ce5f14d7d41b2913a5c0b43c45, type: 3}
+  winClip: {fileID: 8300000, guid: 7e6c9707ef6dac64ba9ac5fc724fb3c4, type: 3}
+  loseClip: {fileID: 8300000, guid: d01d8e066c613e84dad633808f580db7, type: 3}
+  transitionPoint: {fileID: 0}
   question: {fileID: 7179005886467933783}
   answer1: {fileID: 7179005887090334113}
   answer2: {fileID: 7179005886073219133}
   answer3: {fileID: 7179005886312570149}
   answer4: {fileID: 7179005885865097821}
+  answer1Obj: {fileID: 7179005885677499901}
+  answer2Obj: {fileID: 7179005886907749195}
+  answer3Obj: {fileID: 7179005886531261783}
+  answer4Obj: {fileID: 7179005885754969496}
   _AllQuestions:
   - questionText: What was the counterpart of the Fates?
     answers:
@@ -548,7 +559,12 @@ MonoBehaviour:
 
 
     - Fates'
-  enemy_go: {fileID: 6564074549887879283, guid: ec09887cdb657824a9821a6f4f6245d8, type: 3}
+  playerStats: {fileID: 0}
+  enemy_go:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  quizTrigger: {fileID: 0}
 --- !u!114 &7179005885807186919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,6 +580,102 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!82 &2045604703
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7179005885807186917}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -3688536365896545760, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7179005885865097795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 314fccee51c63054d8a0ceead64ad09f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1452,7 +1564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 314fccee51c63054d8a0ceead64ad09f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
