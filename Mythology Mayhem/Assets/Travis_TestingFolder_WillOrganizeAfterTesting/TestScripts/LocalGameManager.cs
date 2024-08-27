@@ -122,11 +122,11 @@ public class LocalGameManager : MythologyMayhem
         {
             foreach (var enemy in enemies)
             {
-                enemy.SetActive(isActive);
+                if(enemy != null) enemy.SetActive(isActive);
                 if (enemy.activeSelf)
                 {
                     if (enemy.GetComponent<Enemy>() != null) enemy.GetComponent<Enemy>().Reset();
-                    else enemy.GetComponentInChildren<Enemy>(true).Reset();
+                    else if (enemy.GetComponentInChildren<Enemy>() != null) enemy.GetComponentInChildren<Enemy>(true).Reset();
                 }
             }
         }

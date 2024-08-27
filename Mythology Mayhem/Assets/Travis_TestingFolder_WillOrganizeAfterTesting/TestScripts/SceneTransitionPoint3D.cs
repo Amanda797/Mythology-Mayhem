@@ -29,6 +29,7 @@ public class SceneTransitionPoint3D : SceneTransitionPoint
             if (countAsLevelComplete) gameManager.gameData.UpdateLevelComplete(completedChapter, completedLevel);
 
             // transition to the next scene/level
+            if (sceneToTransition == Level.VikingVillage_2D) GameManager.instance.pauseMenuManager.ToggleGameOver(false);
             localGameManager.SceneTransition(sceneToTransition, spawnpointNameOverride);
             gameManager.Popup("Press E to Enter", false);
             canTransition = false;

@@ -72,7 +72,7 @@ public class FPSHealth : MonoBehaviour
             dieAS.Play();
             GetComponent<PlayerMovement3D>().enabled = false;
             GameManager.instance.isPlayerAlive = false;
-            GameManager.instance.pauseMenuManager.ToggleGameOver();
+            GameManager.instance.pauseMenuManager.ToggleGameOver(true);
             StartCoroutine(Respawn());
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // This script manages the Pause Menu
 public class MenuManager : MonoBehaviour
@@ -16,7 +17,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject gameplayUI;
     [SerializeField] GameObject gameOverPnl;
     [SerializeField] Animator animator;
-    public TMP_Text scrollDisplayText;
+    [SerializeField] GameObject retryBtn;
+    public TMP_Text scrollDisplayText, gameOverText;
     public AudioSource menuEffectSource;
 
     private void Start()
@@ -81,7 +83,7 @@ public class MenuManager : MonoBehaviour
             StartCoroutine(ClosePauseMenu());
         }
     }
-    public void ToggleGameOver()
+    public void ToggleGameOver(bool isDead)
     {
         if (pauseParent.activeSelf == false)
         {
@@ -91,6 +93,21 @@ public class MenuManager : MonoBehaviour
             creditsPnl.SetActive(false);
             helpPnl.SetActive(false);
             scrollPnl.SetActive(false);
+
+
+            if (isDead)
+            {
+                gameOverText.text = "You have been defeated!\nWould you like to try again?";
+                retryBtn.GetComponent<Button>().enabled = true;
+            }
+            else
+            {
+                gameManager.gameData.saveData.Delete();
+                gameOverText.text = "Thank you for playing!";
+                retryBtn.GetComponent<Button>().enabled = false;
+            }
+
+
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0;

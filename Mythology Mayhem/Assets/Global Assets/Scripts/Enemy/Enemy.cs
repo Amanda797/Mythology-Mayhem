@@ -1,10 +1,7 @@
 using System.Collections;
 using UnityEngine.Events;
 using UnityEngine;
-using System;
 using UnityEngine.AI;
-using System.Collections.Generic;
-using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Animator))]

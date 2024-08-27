@@ -160,7 +160,7 @@ public class PlayerStats : MonoBehaviour
             dieAS.Play();
             GetComponent<PlayerController>().enabled = false;
             GameManager.instance.isPlayerAlive = false;
-            GameManager.instance.pauseMenuManager.ToggleGameOver();
+            GameManager.instance.pauseMenuManager.ToggleGameOver(true);
             StartCoroutine(Respawn());
         }
     }
