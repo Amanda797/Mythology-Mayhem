@@ -96,7 +96,9 @@ public class LocalGameManager : MythologyMayhem
             if (mainGameManager.currentScene == inScene && !torchesOn)
             {
                 torchesOn = true;
-                torchManager.ToggleAudioSources(true);
+                if (sceneType == Dimension.TwoD) torchManager.ToggleAudioSources(true, false);
+                else torchManager.ToggleAudioSources(true, true);
+
                 mainGameManager.uniDirLight.enabled = false;
 
                 Camera camera = player.gameObject.GetComponentInChildren<Camera>();
@@ -106,7 +108,8 @@ public class LocalGameManager : MythologyMayhem
             if (mainGameManager.currentScene != inScene && torchesOn)
             {
                 torchesOn = false;
-                torchManager.ToggleAudioSources(false);
+                if (sceneType == Dimension.TwoD) torchManager.ToggleAudioSources(false, false);
+                else torchManager.ToggleAudioSources(false, true);
 
                 mainGameManager.uniDirLight.enabled = true;
             }

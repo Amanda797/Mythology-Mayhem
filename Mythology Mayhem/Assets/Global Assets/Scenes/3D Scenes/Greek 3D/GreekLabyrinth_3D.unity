@@ -603,7 +603,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -789,7 +789,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -970,7 +970,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -1520,7 +1520,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -1887,7 +1887,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -2365,8 +2365,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.4375, y: 1, z: 5.0360174}
+  m_Center: {x: -0.07261658, y: 0, z: 2.0180087}
 --- !u!23 &572721311
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2374,7 +2374,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572721308}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2767,7 +2767,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -3225,6 +3225,10 @@ PrefabInstance:
       propertyPath: ambianceClip
       value: 
       objectReference: {fileID: 8300000, guid: 944f4dfb569203449b3a93f8870a40f5, type: 3}
+    - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: torchManager
+      value: 
+      objectReference: {fileID: 1378580824}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: canTransition
       value: 1
@@ -68273,8 +68277,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 2.4306755}
+  m_Center: {x: 0, y: 0, z: 0.001203537}
 --- !u!23 &877538628
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68282,7 +68286,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877538625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -68543,7 +68547,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -68844,7 +68848,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004265583}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -68942,7 +68946,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -69158,7 +69162,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -69432,7 +69436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100198100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70208,7 +70212,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -70862,6 +70866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1378580823}
+  - component: {fileID: 1378580824}
   m_Layer: 0
   m_Name: Torches
   m_TagString: Untagged
@@ -70902,6 +70907,37 @@ Transform:
   m_Father: {fileID: 875774892}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378580824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378580822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba84a552f2136d4e88a3d8549f88ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torchAudioSources:
+  - {fileID: 1446802499}
+  - {fileID: 1427658963}
+  - {fileID: 2122346939}
+  - {fileID: 1859377047}
+  - {fileID: 1053429986}
+  - {fileID: 444204261}
+  - {fileID: 495308424}
+  - {fileID: 934672664}
+  - {fileID: 1473149777}
+  - {fileID: 1064767974}
+  - {fileID: 671105871}
+  - {fileID: 1346771877}
+  - {fileID: 1610015979}
+  - {fileID: 1440237344}
+  - {fileID: 165555228}
+  - {fileID: 245375985}
+  - {fileID: 2056127811}
+  - {fileID: 236603409}
 --- !u!1001 &1401053216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71116,7 +71152,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -71297,7 +71333,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -71478,7 +71514,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -71721,7 +71757,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -71989,7 +72025,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -72138,7 +72174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1737679569
 Transform:
   m_ObjectHideFlags: 0
@@ -72536,7 +72572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1844095752
 Transform:
   m_ObjectHideFlags: 0
@@ -72801,7 +72837,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -73860,7 +73896,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -74252,8 +74288,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 3.054762}
+  m_Center: {x: 0, y: 0, z: -0.060713768}
 --- !u!23 &2077108117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -74261,7 +74297,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077108114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -74466,7 +74502,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117795532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 120.14, y: 0.69, z: -27.859999}
+  m_LocalPosition: {x: 120.786, y: 0.69, z: -27.859999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -74530,7 +74566,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.5
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0

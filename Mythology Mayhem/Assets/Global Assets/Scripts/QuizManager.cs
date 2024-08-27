@@ -87,9 +87,10 @@ public class QuizManager : MonoBehaviour
             Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            AudioSource source = gameManager.GetComponent<AudioSource>();
+            source.clip = buttonClip;
+            source.Play();
             this.gameObject.SetActive(false);
-            audioSource.clip = buttonClip;
-            audioSource.Play();
             return;
         }
         if (currentQuestion == -1)
@@ -98,9 +99,11 @@ public class QuizManager : MonoBehaviour
             answer3Obj.SetActive(true);
             answer4Obj.SetActive(true);
             currentQuestion++;
-            audioSource.clip = buttonClip;
-            audioSource.Play();
+            AudioSource source = gameManager.GetComponent<AudioSource>();
+            source.clip = buttonClip;
+            source.Play();
             DisplayQuestion();
+            return;
         }
         else if(currentQuestion == chosenQuestions.Length - 1 & answered)
         {
@@ -110,21 +113,24 @@ public class QuizManager : MonoBehaviour
             {
                 answer1.text = "You won! You may pass...";
                 won = true;
-                audioSource.clip = winClip;
-                audioSource.Play();
+                AudioSource source = gameManager.GetComponent<AudioSource>();
+                source.clip = winClip;
+                source.Play();
             }
             else
             {
                 answer1.text = "You lost and bear a curse!";
                 won = false;
-                audioSource.clip = loseClip;
-                audioSource.Play();
+                AudioSource source = gameManager.GetComponent<AudioSource>();
+                source.clip = loseClip;
+                source.Play();
             }
 
             answer2Obj.SetActive(false);
             answer3Obj.SetActive(false);
             answer4Obj.SetActive(false);
             currentQuestion++;
+            return;
         } 
         else if(currentQuestion > chosenQuestions.Length)
         {
@@ -142,6 +148,7 @@ public class QuizManager : MonoBehaviour
 
             this.gameObject.SetActive(false);
             LoadMedussa();
+            return;
         }
         else {
             if(!answered) {
@@ -156,14 +163,16 @@ public class QuizManager : MonoBehaviour
                 {
                     score++;
                     question.text = "Correct Answer!!";
-                    audioSource.clip = correctClip;
-                    audioSource.Play();
+                    AudioSource source = gameManager.GetComponent<AudioSource>();
+                    source.clip = correctClip;
+                    source.Play();
                 }
                 else
                 {
                     question.text = "Wrong Answer...";
-                    audioSource.clip = incorrectClip;
-                    audioSource.Play();
+                    AudioSource source = gameManager.GetComponent<AudioSource>();
+                    source.clip = incorrectClip;
+                    source.Play();
                 }
 
                 answer1.text = "Continue";
