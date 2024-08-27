@@ -172,6 +172,7 @@ public class Enemy : MythologyMayhem
                 case EnemyStates.Attack:
                     {
                         if (!DetectPlayer()) StartCoroutine(SwitchStates(EnemyStates.Idle, 0));
+                        if (!GameManager.instance.isPlayerAlive) StartCoroutine(SwitchStates(EnemyStates.Idle, 0));
                         else if (enemyDimension == Dimension.TwoD) // if 2D
                         {
                             if (Vector3.Distance(transform.position, target) < meleeDistance && CanAttack)

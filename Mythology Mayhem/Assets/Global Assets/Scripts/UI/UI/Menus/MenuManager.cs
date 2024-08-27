@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject creditsPnl;
     [SerializeField] GameObject helpPnl;
     [SerializeField] GameObject gameplayUI;
+    [SerializeField] GameObject gameOverPnl;
     [SerializeField] Animator animator;
     public TMP_Text scrollDisplayText;
     public AudioSource menuEffectSource;
@@ -47,6 +48,13 @@ public class MenuManager : MonoBehaviour
         else StartCoroutine(ChangeMenu("Pause Menu"));
     }
 
+    public void Retry()
+    {
+        menuEffectSource.Play();
+        animator.Play("Scroll_Close", 0);
+        StartCoroutine(Respawn());
+    }
+
     public void TogglePause(bool isScroll)
     {
         if (pauseParent.activeSelf == false)
@@ -57,6 +65,7 @@ public class MenuManager : MonoBehaviour
             creditsPnl.SetActive(false);
             helpPnl.SetActive(false);
             scrollPnl.SetActive(false);
+            gameOverPnl.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0;
@@ -72,15 +81,55 @@ public class MenuManager : MonoBehaviour
             StartCoroutine(ClosePauseMenu());
         }
     }
+    public void ToggleGameOver()
+    {
+        if (pauseParent.activeSelf == false)
+        {
+            pauseParent.SetActive(true);
+            pausePnl.SetActive(false);
+            optionsPnl.SetActive(false);
+            creditsPnl.SetActive(false);
+            helpPnl.SetActive(false);
+            scrollPnl.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
+            menuEffectSource.Play();
+            animator.Play("scroll", 0);
+            StartCoroutine(OpenGameOver());
+        }
+    }
 
     public void MainMenu()
     {
         StartCoroutine(ChangeMenu("Main Menu"));
     }
 
+    IEnumerator Respawn()
+    {       
+        yield return new WaitForSecondsRealtime(1);
+        pausePnl.SetActive(false);
+        optionsPnl.SetActive(false);
+        creditsPnl.SetActive(false);
+        helpPnl.SetActive(false);
+        scrollPnl.SetActive(false);
+        gameOverPnl.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        pauseParent.SetActive(false);
+        //if (gameManager.currentPlayer.GetComponent<PlayerStats>() != null) gameManager.currentPlayer.GetComponent<PlayerStats>().Respawn();
+        //else if (gameManager.currentPlayer.GetComponent<FPSHealth>() != null) gameManager.currentPlayer.GetComponent<FPSHealth>().Respawn();
+    }
+
     IEnumerator OpenScroll()
     {
         scrollPnl.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
+    }
+    IEnumerator OpenGameOver()
+    {
+        gameOverPnl.SetActive(true);
         yield return new WaitForSecondsRealtime(1);
     }
 
@@ -103,6 +152,7 @@ public class MenuManager : MonoBehaviour
         creditsPnl.SetActive(false);
         helpPnl.SetActive(false);
         scrollPnl.SetActive(false);
+        gameOverPnl.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
@@ -117,6 +167,7 @@ public class MenuManager : MonoBehaviour
         creditsPnl.SetActive(false);
         helpPnl.SetActive(false);
         pausePnl.SetActive(false);
+        gameOverPnl.SetActive(false);
         switch (name)
         {
             case "Help":

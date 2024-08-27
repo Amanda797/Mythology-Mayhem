@@ -72,12 +72,13 @@ public class FPSHealth : MonoBehaviour
             dieAS.Play();
             GetComponent<PlayerMovement3D>().enabled = false;
             GameManager.instance.isPlayerAlive = false;
+            GameManager.instance.pauseMenuManager.ToggleGameOver();
             StartCoroutine(Respawn());
         }
     }
     public IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         isDead = false;
         gameObject.transform.position = spawnPoint;
         Heal(gameManager.gameData.maxHealth, false);

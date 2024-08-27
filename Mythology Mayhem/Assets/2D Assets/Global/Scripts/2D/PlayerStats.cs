@@ -160,12 +160,13 @@ public class PlayerStats : MonoBehaviour
             dieAS.Play();
             GetComponent<PlayerController>().enabled = false;
             GameManager.instance.isPlayerAlive = false;
+            GameManager.instance.pauseMenuManager.ToggleGameOver();
             StartCoroutine(Respawn());
         }
     }
     public IEnumerator Respawn() 
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         anim.SetBool("IsDead", false);
         transform.position = spawnPoint;
         Heal((int)gameManager.gameData.maxHealth, false);
