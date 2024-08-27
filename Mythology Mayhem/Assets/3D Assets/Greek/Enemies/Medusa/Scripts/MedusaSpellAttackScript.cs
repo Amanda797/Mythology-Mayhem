@@ -28,6 +28,8 @@ public class MedusaSpellAttackScript : MonoBehaviour
     public bool stopMovement;
     public bool damageStopped;
 
+    private bool queueClear;
+
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -79,18 +81,23 @@ public class MedusaSpellAttackScript : MonoBehaviour
         {
             lightSource.intensity -= Time.deltaTime * 25;
         }
+
+        if (!GameManager.instance.isPlayerAlive)
+            queueClear = true;
+        else if (queueClear)
+            Destroy(gameObject);
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground")// || other.gameObject.tag == "Player")
         {
             if (rb != null)
             {
                 rb.velocity = Vector3.zero;
                 stopMovement = true;
                 vfx.Stop();
-                vfx.gameObject.SetActive(false);
+                //vfx.gameObject.SetActive(false);
                 damageSphere.transform.localScale = new Vector3(startScale, startScale, startScale);
                 damageSphere.SetActive(true);
                 timeWhenHit = Time.time;

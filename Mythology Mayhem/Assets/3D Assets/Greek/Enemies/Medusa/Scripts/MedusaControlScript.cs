@@ -67,8 +67,10 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] float freezeReflectTime;
     [SerializeField] float freezePlayerTime;
     [SerializeField] float healthIncreaseFromFreezingPlayer;
+    private Vector3 startPosition;
     private int timesAttacked;
     private int maxAttacks;
+    private bool queueReset;
 
     [Header("Lists")]
     [SerializeField] Transform MainPlatform;
@@ -84,6 +86,7 @@ public class MedusaControlScript : MonoBehaviour
     [SerializeField] Slider healthBar;
 
     [SerializeField] GameObject spellPrefab;
+    [SerializeField] GameObject castPrefab;
     [SerializeField] Transform spellSpawnPoint;
 
     [SerializeField] LineRenderer leftEyeLine;
@@ -150,12 +153,21 @@ public class MedusaControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.parent.position;
+        ResetState();
+    }
+
+    private void ResetState()
+    {
+        print("Reset Medusa");
+        queueReset = false;
+        transform.parent.position = startPosition;
         revealExit.SetActive(false);
 
-        if(GameManager.instance != null) 
+        if (GameManager.instance != null)
         {
             ScenePlayerObject SPO = GameManager.instance.GetPlayer(MythologyMayhem.Level.GreekMedusa_3D);
-            if (SPO != null) 
+            if (SPO != null)
             {
                 playerHealth = SPO.player.gameObject.GetComponent<Health>();
             }
@@ -176,7 +188,9 @@ public class MedusaControlScript : MonoBehaviour
 
         medusaAgent.speed = baseSpeed;
         mainMaterial.SetTexture("_MainTex", normalTex);
+        StopAllCoroutines();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -204,6 +218,10 @@ public class MedusaControlScript : MonoBehaviour
                 }
             }
         }
+        if (!GameManager.instance.isPlayerAlive)
+            queueReset = true;
+        else if (queueReset == true)
+            ResetState();
     }
     void RunStateMachine()
     {
@@ -335,11 +353,21 @@ public class MedusaControlScript : MonoBehaviour
         }
         medusaAgent.stoppingDistance = 8;
         //Look to Line up with Nav Agent (incase not aligned from targeting phase)
-        float step = targetingSpeed * Time.deltaTime;
-        Vector3 direction = (medusaAgent.transform.forward).normalized;
-        direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * targetingSpeed);
+        //if (medusaAgent.remainingDistance < medusaAgent.stoppingDistance + .5f)
+        //{
+            medusaAgent.updateRotation = false;
+            Vector3 target = playerHealth.transform.position - transform.position;
+            target.y = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target), Time.deltaTime * targetingSpeed);
+        /*}
+        else
+        {
+            medusaAgent.updateRotation = true;
+            Vector3 direction = (medusaAgent.transform.forward).normalized;
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * medusaAgent.);
+        }*/
 
         //Set Current Player location as Destination
         medusaAgent.SetDestination(playerHealth.gameObject.transform.position);
@@ -358,6 +386,10 @@ public class MedusaControlScript : MonoBehaviour
     }
     public void RunMoveToPlatform(AttackStates nextState) 
     {
+        medusaAgent.updateRotation = true;
+        Vector3 direction = (medusaAgent.transform.forward).normalized;
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction);
         if (medusaAgent.remainingDistance < (medusaAgent.stoppingDistance + .5f))
         {
             //Stop NavAgent and set State
@@ -554,7 +586,8 @@ public class MedusaControlScript : MonoBehaviour
             {
                 case AttackType.CastSpell:
                     anim.SetTrigger("CastSpell");
-                    CastSpell(target);
+                    StartCoroutine(RunSpell(target));
+                    //CastSpell(target);
                     break;
 
                 case AttackType.Projectile:
@@ -724,10 +757,38 @@ public class MedusaControlScript : MonoBehaviour
         obj.transform.LookAt(direction);
 
     }
+
+    IEnumerator RunSpell(Vector3 target)
+    {
+        GameObject obj = Instantiate(castPrefab, transform.position, Quaternion.identity);
+        float start = Time.time;
+        obj.transform.localScale = Vector3.one * 5;
+        while (Time.time < start + 1)
+        {
+            obj.transform.localScale = Vector3.one * 5 * Mathf.Pow(1 + start - Time.time, 0.5f);
+            obj.transform.position = Vector3.Lerp(transform.position, spellSpawnPoint.position, Mathf.Pow(Time.time - start, 0.5f));
+            yield return null;
+        }
+        target = playerHealth.transform.position;
+        CastSpell(target);
+        yield return new WaitForSeconds(0.3f);
+        Vector3 spread = Vector3.Cross(target - spellSpawnPoint.position, Vector3.up).normalized * 10;
+        if (CurrentState != AttackStates.RangedAttack1)
+        {
+            CastSpell(target + spread);
+            CastSpell(target - spread);
+        }
+        yield return new WaitForSeconds(0.3f);
+        if (CurrentState == AttackStates.RangedAttack3)
+        {
+            CastSpell(target + spread * 2);
+            CastSpell(target - spread * 2);
+        }
+    }
     void HairShake()
     {
         //Code for Spell Mechanics
-        damageSphere.SetActive(true);
+        StartCoroutine(MeleeHitbox(0.6f));
     }
     void Projectile()
     {
@@ -736,8 +797,15 @@ public class MedusaControlScript : MonoBehaviour
     void Stab()
     {
         //Code for Spell Mechanics
+        StartCoroutine(MeleeHitbox(0.6f));
+    }
+
+    IEnumerator MeleeHitbox(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         damageSphere.SetActive(true);
     }
+
     void PointCanvasTowardPlayer(Transform target)
     {
         if (healthBarCanvasPivot != null)

@@ -71,15 +71,17 @@ public class FPSHealth : MonoBehaviour
             isDead = true;
             dieAS.Play();
             GetComponent<PlayerMovement3D>().enabled = false;
+            GameManager.instance.isPlayerAlive = false;
             StartCoroutine(Respawn());
         }
     }
     public IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         isDead = false;
         gameObject.transform.position = spawnPoint;
         Heal(gameManager.gameData.maxHealth, false);
         GetComponent<PlayerMovement3D>().enabled = true;
+        GameManager.instance.isPlayerAlive = true;
     }
 }
