@@ -29,15 +29,19 @@ public class MedusaSpellAttackScript : MonoBehaviour
     public bool damageStopped;
 
     private bool queueClear;
+    private bool hit;
 
     Rigidbody rb;
+    Collider hitbox;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        hitbox = gameObject.GetComponent<Collider>();
         damageSphere.SetActive(false);
         fullScale = false;
         damageStopped = false;
+        hit = false;
     }
 
     // Update is called once per frame
@@ -97,10 +101,20 @@ public class MedusaSpellAttackScript : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 stopMovement = true;
                 vfx.Stop();
+                hitbox.enabled = false;
                 //vfx.gameObject.SetActive(false);
                 damageSphere.transform.localScale = new Vector3(startScale, startScale, startScale);
                 damageSphere.SetActive(true);
                 timeWhenHit = Time.time;
+            }
+        }
+        if (other.tag == "Player" && hit == false)
+        {
+            FPSHealth playerHealth = other.gameObject.GetComponent<FPSHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(4);
+                hit = true;
             }
         }
     }

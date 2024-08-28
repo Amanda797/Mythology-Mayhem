@@ -67,7 +67,7 @@ public class WeaponSwitcher : MythologyMayhem
     void SwitchMainWeapon()
     {
         currentRightHandWeapon++;
-        if (currentRightHandWeapon > RightHandWeapons.Length) currentRightHandWeapon = 0;
+        if (currentRightHandWeapon >= RightHandWeapons.Length) currentRightHandWeapon = 0;
         else if (currentRightHandWeapon == RightHandWeapons.Length){
             currentMainObject.gameObject.SetActive(false);
             currentMain = MainHand.None;
@@ -121,7 +121,7 @@ public class WeaponSwitcher : MythologyMayhem
     void SwitchOffhandWeapon()
     {
         currentLeftHandWeapon++;
-        if (currentLeftHandWeapon > LeftHandWeapons.Length) currentLeftHandWeapon = 0;
+        if (currentLeftHandWeapon >= LeftHandWeapons.Length) currentLeftHandWeapon = 0;
         else if (currentLeftHandWeapon == LeftHandWeapons.Length)
         {
             currentOffHandObject.gameObject.SetActive(false);
