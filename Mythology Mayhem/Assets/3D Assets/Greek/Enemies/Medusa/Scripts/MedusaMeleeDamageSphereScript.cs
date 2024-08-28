@@ -6,12 +6,12 @@ public class MedusaMeleeDamageSphereScript : MonoBehaviour
 {
 
     public float damage;
-    float x = 1;
+    float x = 0.2f;
     
     // Start is called before the first frame update
     void OnEnable()
     {
-        x = 1;
+        x = 0.2f;
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class MedusaMeleeDamageSphereScript : MonoBehaviour
         x -= Time.deltaTime;
         if (x <= 0) 
         {
-            x = 1;
+            x = 0.2f;
             gameObject.SetActive(false);
         }
     }
@@ -37,6 +37,5 @@ public class MedusaMeleeDamageSphereScript : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-  
     }
 }

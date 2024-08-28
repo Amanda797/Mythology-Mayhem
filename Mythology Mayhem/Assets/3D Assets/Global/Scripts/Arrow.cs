@@ -16,6 +16,11 @@ public class Arrow : MonoBehaviour
         {
             if(col.gameObject.GetComponent<Health>()) col.gameObject.GetComponent<Health>().TakeDamage(damage);
         }
+        else if (col.gameObject.tag == "Medusa")
+        {
+            MedusaControlScript mcs = col.gameObject.GetComponent<MedusaControlScript>();
+            if (mcs != null) mcs.MedusaDamage(damage);
+        }
         Destroy(gameObject);
     }
     // Update is called once per frame

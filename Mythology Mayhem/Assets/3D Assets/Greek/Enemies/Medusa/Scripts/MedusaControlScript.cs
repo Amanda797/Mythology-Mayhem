@@ -353,14 +353,14 @@ public class MedusaControlScript : MonoBehaviour
         }
         medusaAgent.stoppingDistance = 8;
         //Look to Line up with Nav Agent (incase not aligned from targeting phase)
-        //if (medusaAgent.remainingDistance < medusaAgent.stoppingDistance + .5f)
-        //{
+        if (lastMeleeTime + 1.5f < Time.time)
+        {
             medusaAgent.updateRotation = false;
             Vector3 target = playerHealth.transform.position - transform.position;
             target.y = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target), Time.deltaTime * targetingSpeed);
-        /*}
-        else
+        }
+        /*else
         {
             medusaAgent.updateRotation = true;
             Vector3 direction = (medusaAgent.transform.forward).normalized;
@@ -788,7 +788,7 @@ public class MedusaControlScript : MonoBehaviour
     void HairShake()
     {
         //Code for Spell Mechanics
-        StartCoroutine(MeleeHitbox(0.6f));
+        StartCoroutine(MeleeHitbox(0.5f));
     }
     void Projectile()
     {
@@ -797,7 +797,7 @@ public class MedusaControlScript : MonoBehaviour
     void Stab()
     {
         //Code for Spell Mechanics
-        StartCoroutine(MeleeHitbox(0.6f));
+        StartCoroutine(MeleeHitbox(0.5f));
     }
 
     IEnumerator MeleeHitbox(float delay)
