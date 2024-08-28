@@ -10,5 +10,4 @@ public class OptionsData
     public float sfxVolume = 0f;
     public int graphics = 0;
     public bool fullscreen = true;
-    public Resolution resolution;
 }
