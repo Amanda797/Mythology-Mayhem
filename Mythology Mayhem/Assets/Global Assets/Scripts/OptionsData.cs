@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class OptionsData
 {
     public float masterVolume = 0f;
@@ -8,5 +10,5 @@ public class OptionsData
     public float sfxVolume = 0f;
     public int graphics = 0;
     public bool fullscreen = true;
-    public int resolution = 0;
+    public Resolution resolution;
 }

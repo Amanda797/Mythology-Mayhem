@@ -1,9 +1,7 @@
 using TMPro;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class optionsMenu : MonoBehaviour
@@ -22,17 +20,28 @@ public class optionsMenu : MonoBehaviour
     [SerializeField] AudioMixerGroup sfx, combat, footstep;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip[] sfxClips, combatClips, footstepClips;
-
+    [SerializeField] Resolution[] resolutions;
     float soundStart;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        resolutions = Screen.resolutions;
     }
     void Start()
     {
         if (GameManager.instance != null) gameManager = GameManager.instance;
         else Debug.LogWarning("GameManager Missing or Inactive.");
+
+        graphicsDropdown.value = QualitySettings.GetQualityLevel();
+        fullscreenToggle.isOn = Screen.fullScreen;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (Screen.currentResolution.ToString() == resolutions[i].ToString())
+            {
+                resolutionDropdown.value = i;
+            }
+        }
     }
 
     public void UpdateAudioSliders()
@@ -48,7 +57,6 @@ public class optionsMenu : MonoBehaviour
         footstepVolumeSlider.value = gameManager.optionsData.footstepVolume;
         graphicsDropdown.value = gameManager.optionsData.graphics;
         fullscreenToggle.isOn = gameManager.optionsData.fullscreen;
-        resolutionDropdown.value = gameManager.optionsData.resolution;
     }
 
     public void MasterVolumeChanged(float sliderValue)
@@ -108,14 +116,19 @@ public class optionsMenu : MonoBehaviour
     public void GraphicsChanged(int value)
     {
         gameManager.optionsData.graphics = graphicsDropdown.value;
+        QualitySettings.SetQualityLevel(value);
     }
     public void FullScreenChanged(bool value)
     {
         gameManager.optionsData.fullscreen = fullscreenToggle.isOn;
+        Screen.fullScreen = value;
     }
     public void ResolutionChanged(int value)
     {
-        gameManager.optionsData.resolution = resolutionDropdown.value;
+        gameManager.optionsData.resolution = resolutions[value];
+
+        Resolution resolution = resolutions[value];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
     }
 
     private float LinearToDecibel(float linear)

@@ -21,6 +21,7 @@ public class MainMenuController : MonoBehaviour
 
         // if there is no save file, disable the continue button.
         if (!System.IO.File.Exists(Application.persistentDataPath + "SaveData.json")) continueButton.enabled = false;
+        if (gameManager.isGameWon) continueButton.enabled = false;
 
         gameManager.backgroundMusic.clip = menuMusic;
         gameManager.backgroundMusic.Play();
@@ -29,6 +30,7 @@ public class MainMenuController : MonoBehaviour
     {
         audioSource.Play();
         gameManager.LoadSystemsStart(true);
+        gameManager.isGameWon = false;
     }
 
     public void Continue()
