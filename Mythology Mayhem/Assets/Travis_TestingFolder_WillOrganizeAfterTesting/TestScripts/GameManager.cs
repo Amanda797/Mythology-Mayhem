@@ -215,9 +215,9 @@ public class GameManager : MythologyMayhem
         }
         if (currentLocalManager != null)
         {
-            LoadOptionsData();
             if (currentLocalManager.inScene != currentScene)
             {
+                LoadOptionsData();
                 SetCurrentLocalGameManager(currentScene);
             }
             else if (!backgroundMusic.isPlaying)

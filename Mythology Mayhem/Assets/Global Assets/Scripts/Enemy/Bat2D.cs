@@ -11,6 +11,7 @@ public class Bat2D : MonoBehaviour
     {
         Debug.Log("Death2");
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        Physics2D.IgnoreCollision(gameObject.GetComponent<Enemy>().player.GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>(), true);
         rb = gameObject.GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = gravityScale;

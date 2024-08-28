@@ -42,7 +42,7 @@ public class CompanionController : MythologyMayhem
     {
         currentCompanionIndex++;
         if (currentCompanionIndex > companions.Count) currentCompanionIndex = 0;
-        else if (currentCompanionIndex == companions.Count)
+        if (currentCompanionIndex == companions.Count)
         {
             currentCompanion.SetActive(false);
             StartCoroutine(Cooldown());
@@ -51,7 +51,7 @@ public class CompanionController : MythologyMayhem
 
         nextcompanion = companions[currentCompanionIndex].gameObject;
 
-        if (currentCompanion == nextcompanion) return;
+        //if (currentCompanion == nextcompanion) return;
 
         if (nextcompanion.name.Contains("Owl"))
         {
@@ -79,6 +79,7 @@ public class CompanionController : MythologyMayhem
             }
             else CallCompanion();
         }
+        else StartCoroutine(Cooldown());
     }
     IEnumerator Cooldown()
     {
