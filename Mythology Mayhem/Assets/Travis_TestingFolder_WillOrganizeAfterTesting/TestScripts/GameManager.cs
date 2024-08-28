@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Audio;
 using System.IO;
+using static UnityStandardAssets.ImageEffects.BloomOptimized;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MythologyMayhem
 {
@@ -13,6 +15,7 @@ public class GameManager : MythologyMayhem
     public GameData gameData;
     public OptionsData optionsData;
     string saveFilePath;
+    public bool isGameWon = false;
 
     [Header("Load Scene System")]
     public Level currentScene;
@@ -87,7 +90,6 @@ public class GameManager : MythologyMayhem
         optionsData.sfxVolume = 0;
         optionsData.graphics = 0;
         optionsData.fullscreen = true;
-        optionsData.resolution = 0;
 
         saveFilePath = Application.persistentDataPath + "/OptionsData.json";
         LoadOptionsData();
@@ -213,6 +215,7 @@ public class GameManager : MythologyMayhem
         }
         if (currentLocalManager != null)
         {
+            LoadOptionsData();
             if (currentLocalManager.inScene != currentScene)
             {
                 SetCurrentLocalGameManager(currentScene);
@@ -545,7 +548,10 @@ public class GameManager : MythologyMayhem
             audioMixer.SetFloat("SoundEffectVolume", optionsData.sfxVolume);
             audioMixer.SetFloat("EnemyVolume", optionsData.enemyVolume);
             audioMixer.SetFloat("FootstepVolume", optionsData.footstepVolume);
-            Debug.Log("Load game complete!");
+            QualitySettings.SetQualityLevel(optionsData.graphics);
+            Screen.fullScreen = optionsData.fullscreen;
+            Screen.SetResolution(optionsData.resolution.width, optionsData.resolution.height, Screen.fullScreenMode);
+            Debug.Log("Load options complete!");
         }
         else
         {
@@ -555,6 +561,9 @@ public class GameManager : MythologyMayhem
             audioMixer.SetFloat("SoundEffectVolume", 0);
             audioMixer.SetFloat("EnemyVolume", 0);
             audioMixer.SetFloat("FootstepVolume", 0);
+            QualitySettings.SetQualityLevel(2);
+            Screen.fullScreen = true;
+            Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, Screen.fullScreenMode);
             Debug.Log("There is no save files to load!");
         }
     }

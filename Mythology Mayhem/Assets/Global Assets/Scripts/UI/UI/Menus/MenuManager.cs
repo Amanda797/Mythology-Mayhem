@@ -102,7 +102,7 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                gameManager.gameData.saveData.Delete();
+                gameManager.isGameWon = true;
                 gameOverText.text = "Thank you for playing!";
                 retryBtn.GetComponent<Button>().enabled = false;
             }
