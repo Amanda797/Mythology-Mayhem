@@ -56,13 +56,13 @@ public class Companion : MythologyMayhem
                 //Flip Companion based on Player Sprite Renderer
                 if (_player.GetComponentInChildren<SpriteRenderer>().flipX)
                 {
-                    Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x + 3f, transform.position.y);
+                    Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x + 3f, _player.transform.position.y +1);
                     rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 }
                 else
                 {
-                    Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 3f, transform.position.y);
+                    Vector2 xOnlyTargetPosition = new Vector2(_player.transform.position.x - 3f, _player.transform.position.y + 1);
                     rb2D.MovePosition(Vector2.Lerp(transform.position, xOnlyTargetPosition, 2f));
                     transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
@@ -72,7 +72,7 @@ public class Companion : MythologyMayhem
             else if(agent != null && _player != null)
             {
                 //TODO: Add an Offset
-                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 2f, transform.position.y, _player.transform.position.z - 2f);
+                Vector3 xzOnlyTargetPosition = new Vector3(_player.transform.position.x - 2f, _player.transform.position.y + 1, _player.transform.position.z - 2f);
                 agent.SetDestination(xzOnlyTargetPosition);
             }
 
@@ -130,7 +130,7 @@ public class Companion : MythologyMayhem
             }
 
             //Switch State Condition
-            else if (triggerDetector.otherCollider2D == null && triggerDetector.otherCollider3D == null) currentState = CompanionState.Following;
+            else currentState = CompanionState.Following;
         }
     }
 
