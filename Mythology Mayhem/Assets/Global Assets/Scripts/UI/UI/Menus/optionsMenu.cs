@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class optionsMenu : MonoBehaviour
 {
@@ -21,12 +22,14 @@ public class optionsMenu : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip[] sfxClips, combatClips, footstepClips;
     [SerializeField] Resolution[] resolutions;
+    float currentRefreshRate;
     float soundStart;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         resolutions = Screen.resolutions;
+        currentRefreshRate = Screen.currentResolution.refreshRate;
     }
     void Start()
     {
@@ -35,13 +38,24 @@ public class optionsMenu : MonoBehaviour
 
         graphicsDropdown.value = QualitySettings.GetQualityLevel();
         fullscreenToggle.isOn = Screen.fullScreen;
+        resolutionDropdown.ClearOptions();
+
+        List<string> options = new List<string>();        
+
         for (int i = 0; i < resolutions.Length; i++)
         {
-            if (Screen.currentResolution.ToString() == resolutions[i].ToString())
+            if (resolutions[i].refreshRate == currentRefreshRate)
             {
-                resolutionDropdown.value = i;
+                string resolutionOption = resolutions[i].width + "x" + resolutions[i].height;
+                options.Add(resolutionOption);
+                if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+                {
+                    resolutionDropdown.value = i;
+                }
             }
         }
+
+        resolutionDropdown.AddOptions(options);
     }
 
     public void UpdateAudioSliders()
@@ -115,18 +129,16 @@ public class optionsMenu : MonoBehaviour
     }
     public void GraphicsChanged(int value)
     {
-        gameManager.optionsData.graphics = graphicsDropdown.value;
-        QualitySettings.SetQualityLevel(value);
+        gameManager.optionsData.graphics = value + 1;
+        QualitySettings.SetQualityLevel(value+1);
     }
     public void FullScreenChanged(bool value)
     {
-        gameManager.optionsData.fullscreen = fullscreenToggle.isOn;
+        gameManager.optionsData.fullscreen = value;
         Screen.fullScreen = value;
     }
     public void ResolutionChanged(int value)
     {
-        gameManager.optionsData.resolution = resolutions[value];
-
         Resolution resolution = resolutions[value];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
     }

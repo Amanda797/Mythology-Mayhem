@@ -82,13 +82,13 @@ public class GameManager : MythologyMayhem
     void Start()
     {
         optionsData = new OptionsData();
-        optionsData.masterVolume = 0;
-        optionsData.ambianceVolume = 0;
-        optionsData.enemyVolume = 0;
-        optionsData.footstepVolume = 0;
-        optionsData.musicVolume = 0;
-        optionsData.sfxVolume = 0;
-        optionsData.graphics = 0;
+        optionsData.masterVolume = 1;
+        optionsData.ambianceVolume = 0.5f;
+        optionsData.enemyVolume = 0.5f;
+        optionsData.footstepVolume = 0.5f;
+        optionsData.musicVolume = 0.5f;
+        optionsData.sfxVolume = 0.5f;
+        optionsData.graphics = 3;
         optionsData.fullscreen = true;
 
         saveFilePath = Application.persistentDataPath + "/OptionsData.json";
@@ -550,7 +550,7 @@ public class GameManager : MythologyMayhem
             audioMixer.SetFloat("FootstepVolume", optionsData.footstepVolume);
             QualitySettings.SetQualityLevel(optionsData.graphics);
             Screen.fullScreen = optionsData.fullscreen;
-            Screen.SetResolution(optionsData.resolution.width, optionsData.resolution.height, Screen.fullScreenMode);
+            //Screen.SetResolution(optionsData.resolution.width, optionsData.resolution.height, Screen.fullScreenMode);
             Debug.Log("Load options complete!");
         }
         else
