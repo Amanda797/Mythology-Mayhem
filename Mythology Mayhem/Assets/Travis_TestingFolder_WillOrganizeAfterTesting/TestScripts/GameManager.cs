@@ -90,6 +90,7 @@ public class GameManager : MythologyMayhem
         optionsData.sfxVolume = 0.5f;
         optionsData.graphics = 3;
         optionsData.fullscreen = true;
+        optionsData.resolution = 0;
 
         saveFilePath = Application.persistentDataPath + "/OptionsData.json";
         LoadOptionsData();
@@ -563,7 +564,7 @@ public class GameManager : MythologyMayhem
             audioMixer.SetFloat("FootstepVolume", 0);
             QualitySettings.SetQualityLevel(2);
             Screen.fullScreen = true;
-            Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, Screen.fullScreenMode);
+            //Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, Screen.fullScreenMode);
             Debug.Log("There is no save files to load!");
         }
     }
