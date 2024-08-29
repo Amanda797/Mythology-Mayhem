@@ -28,7 +28,11 @@ public class optionsMenu : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        resolutions = Screen.resolutions;
+        resolutions = new Resolution[Screen.resolutions.Length];
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            resolutions[i] = Screen.resolutions[resolutions.Length - i - 1];
+        }
         currentRefreshRate = Screen.currentResolution.refreshRate;
     }
     void Start()
