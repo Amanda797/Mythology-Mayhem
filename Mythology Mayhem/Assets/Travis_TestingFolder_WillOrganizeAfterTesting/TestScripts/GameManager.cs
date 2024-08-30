@@ -53,6 +53,7 @@ public class GameManager : MythologyMayhem
     public GameObject eventSystem;
     public GameObject pauseMenu;
     public MenuManager pauseMenuManager;
+    public GameObject rectile;
 
     [Header("Player Stats")]
     public PlayerStats_SO stats;
@@ -138,6 +139,12 @@ public class GameManager : MythologyMayhem
         if (!inMainMenu && !cutscenePlaying)
         {
             LoadSystemsUpdate();
+        }
+
+        if (currentLocalManager != null)
+        {
+            if (currentLocalManager.sceneType == Dimension.TwoD && rectile.activeSelf) rectile.SetActive(false);
+            else if (currentLocalManager.sceneType == Dimension.ThreeD && !rectile.activeSelf) rectile.SetActive(true);
         }
     }
     public void LoadSystemsStart(bool newGame) 
