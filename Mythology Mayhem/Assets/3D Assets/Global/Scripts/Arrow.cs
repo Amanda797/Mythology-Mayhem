@@ -5,11 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public float damage;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     void OnCollisionEnter(Collision col)
     {
         if(col.collider.tag == "Enemy")
@@ -22,10 +18,5 @@ public class Arrow : MonoBehaviour
             if (mcs != null) mcs.MedusaDamage(damage);
         }
         Destroy(gameObject);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

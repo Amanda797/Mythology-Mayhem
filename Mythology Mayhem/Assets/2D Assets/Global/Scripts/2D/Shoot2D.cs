@@ -85,6 +85,7 @@ public class Shoot2D : MonoBehaviour
     {
         GameObject arrow = Instantiate(ArrowPrefab, ArrowSpawn.position, ArrowSpawn.rotation);
         Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
+        arrow.GetComponent<Arrow2D>().damage = ps.AttackDamage / 2;
 
         if (aim == 0)
         {

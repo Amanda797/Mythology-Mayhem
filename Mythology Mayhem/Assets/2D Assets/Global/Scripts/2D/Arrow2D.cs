@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow2D : MonoBehaviour
 {
-    public int damage;
+    public float damage;
 
     void OnCollisionEnter2D(Collision2D col)
     {

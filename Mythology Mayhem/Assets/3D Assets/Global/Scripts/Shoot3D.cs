@@ -39,8 +39,16 @@ public class Shoot3D : MonoBehaviour
 
     public void Shoot()
     {
+        float x = Screen.width / 2f;
+        float y = Screen.height / 2f;
+
+        var ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
+
+        ArrowSpawn.LookAt(ray.GetPoint(10), ArrowSpawn.up);
         GameObject arrow = Instantiate(ArrowPrefab, ArrowSpawn.position, ArrowSpawn.rotation);
         Rigidbody rb = arrow.GetComponentInChildren<Rigidbody>();
+
+        //rb.velocity = ray.direction * AS;
         rb.velocity = arrow.transform.forward * AS;
 
         Destroy(arrow, AL);
