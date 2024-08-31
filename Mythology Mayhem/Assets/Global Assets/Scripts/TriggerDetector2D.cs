@@ -10,7 +10,7 @@ public class TriggerDetector2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
         {
             triggered = true;
             otherCollider2D = other;
@@ -20,7 +20,7 @@ public class TriggerDetector2D : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
         {
             triggered = false;
             otherCollider2D = null;

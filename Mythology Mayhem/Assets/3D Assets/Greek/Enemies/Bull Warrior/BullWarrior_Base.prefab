@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650337063406346970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.06, y: 0.42000002, z: -9.05}
+  m_LocalPosition: {x: -5.06, y: 0.42000002, z: -11.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650337064051069755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.06, y: 0.42, z: -2.23}
+  m_LocalPosition: {x: -5.06, y: 0.42, z: 6.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -824,8 +824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
-  _health: 0
+  MaxHealth: 50
+  _health: 50
   mainObject: {fileID: 4650337064500238795}
   rewardObject: {fileID: 0}
   anim: {fileID: 4650337064372337810}
@@ -839,6 +839,7 @@ MonoBehaviour:
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
+  isDead: 0
 --- !u!82 &4650337064362938155
 AudioSource:
   m_ObjectHideFlags: 0
@@ -999,6 +1000,7 @@ MonoBehaviour:
   patrolDistance: 2
   speed: 2
   patrolBool: IsPatrolling
+  isFlying: 0
   attackTriggers:
   - Attack 01
   - Attack 02
@@ -6641,7 +6643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4650337064500238794
 Transform:
   m_ObjectHideFlags: 0
