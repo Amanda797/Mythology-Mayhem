@@ -9609,6 +9609,7 @@ Transform:
   - {fileID: 1469788838}
   - {fileID: 1776075354}
   - {fileID: 1689360478}
+  - {fileID: 5110794456287925240}
   - {fileID: 1176444100}
   - {fileID: 305374166}
   - {fileID: 62927267}
@@ -9622,7 +9623,6 @@ Transform:
   - {fileID: 1658194957}
   - {fileID: 944315734}
   - {fileID: 1755721297}
-  - {fileID: 5110794456287925240}
   - {fileID: 1778835103}
   - {fileID: 807226116}
   - {fileID: 1219690897}
@@ -10146,6 +10146,7 @@ MonoBehaviour:
   completedChapter: 0
   completedLevel: 0
   canTransition: 0
+  isGameOver: 0
 --- !u!1001 &874163204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21156,6 +21157,7 @@ MonoBehaviour:
   completedChapter: 0
   completedLevel: 0
   canTransition: 0
+  isGameOver: 0
 --- !u!4 &1776075354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2296763110278919138, guid: 4ca41c6ac32a6a343bec49f412ac1c00, type: 3}
@@ -24316,6 +24318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2033554617}
     m_Modifications:
+    - target: {fileID: 527290172820061807, guid: 62d8d210e18aeaf4a8c17cc2b4aef496, type: 3}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 528059659217594486, guid: 62d8d210e18aeaf4a8c17cc2b4aef496, type: 3}
       propertyPath: m_Name
       value: Rat Grey
@@ -25762,7 +25768,7 @@ Transform:
   m_Children:
   - {fileID: 8258641743506753693}
   m_Father: {fileID: 806968803}
-  m_RootOrder: 18
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 67.7}
 --- !u!1 &5245042009710583968 stripped
 GameObject:
