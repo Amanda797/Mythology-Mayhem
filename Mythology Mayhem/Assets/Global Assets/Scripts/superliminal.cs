@@ -20,151 +20,57 @@ public class superliminal : MonoBehaviour
     //public KeyCode key;
     public bool isReady;
     public bool isUsing;
-
-    //void Start()
-    //{
-    //    Cursor.visible = false;
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //}
+    public float distance = 15;
 
     void Update()
     {
-        HandleInput();
         ResizeTarget();
-    }
-    
-    void HandleInput()
-    {
-        // Check for left mouse click
-        if (Input.GetMouseButtonDown(mousebutton) && isReady)
-        {
-            isUsing = true;
-            if (target == null)
-            {
-                // Fire a raycast with the layer mask that only hits potential targets
-                RaycastHit hit;
-
-                if(Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, Mathf.Infinity, targetMask))
-                {
-                    // Set our target variable to be the Transform object we hit with our raycast
-                    target = hit.transform;
-                    targetObject = hit.transform.gameObject;
-                    //targetObject.layer = 11;
-                    Debug.Log(targetObject.GetComponent<AudioSource>() != null);
-                    if (targetObject.GetComponent<AudioSource>() != null) targetObject.GetComponent<AudioSource>().Play();
-
-                    // Disable physics for the object
-                    target.GetComponent<Rigidbody>().isKinematic = true;
-                    target.GetComponent<Collider>().isTrigger = true;
-                    //target.GetComponent<Rigidbody>().useGravity = false;
- 
-                    // Calculate the distance between the camera and the object
-                    originalDistance = Vector3.Distance(transform.position, target.position);
- 
-                    // Save the original scale of the object into our originalScale Vector3 variabble
-                    originalScale = target.localScale.x;
- 
-                    // Set our target scale to be the same as the original for the time being
-                    targetScale = target.localScale;
-                }
-                // if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, targetMask))
-                // {
-                //     // Set our target variable to be the Transform object we hit with our raycast
-                //     target = hit.transform;
- 
-                //     // Disable physics for the object
-                //     target.GetComponent<Rigidbody>().isKinematic = true;
-                //     //target.GetComponent<Rigidbody>().useGravity = false;
- 
-                //     // Calculate the distance between the camera and the object
-                //     originalDistance = Vector3.Distance(transform.position, target.position);
- 
-                //     // Save the original scale of the object into our originalScale Vector3 variabble
-                //     originalScale = target.localScale.x;
- 
-                //     // Set our target scale to be the same as the original for the time being
-                //     targetScale = target.localScale;
-                // }
-            }
-            // If we DO have a target
-            else
-            {
-                // Reactivate physics for the target object
-                target.GetComponent<Rigidbody>().isKinematic = false;
-                target.GetComponent<Collider>().isTrigger = false;
-                //targetObject.layer = 10;
-                targetObject = null;
-                offsetFactor = 0f;
-                //target.GetComponent<Rigidbody>().useGravity = true;
- 
-                // Set our target variable to null
-                target = null;
-                isUsing = false;
-            }
-        }
     }
 
     public void CheckForObjects()
     {
         if (target == null)
-            {
-                // Fire a raycast with the layer mask that only hits potential targets
-                RaycastHit hit;
+        {
+            // Fire a raycast with the layer mask that only hits potential targets
+            RaycastHit hit;
 
-                if(Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, Mathf.Infinity, targetMask))
-                {
-                    // Set our target variable to be the Transform object we hit with our raycast
-                    target = hit.transform;
-                    targetObject = hit.transform.gameObject;
-                    //targetObject.layer = 11;
-                    if (targetObject.GetComponent<AudioSource>() != null) targetObject.GetComponent<AudioSource>().Play();
-                    // Disable physics for the object
-                    target.GetComponent<Rigidbody>().isKinematic = true;
-                    target.GetComponent<Collider>().isTrigger = true;
-                    //target.GetComponent<Rigidbody>().useGravity = false;
- 
-                    // Calculate the distance between the camera and the object
-                    originalDistance = Vector3.Distance(transform.position, target.position);
- 
-                    // Save the original scale of the object into our originalScale Vector3 variabble
-                    originalScale = target.localScale.x;
- 
-                    // Set our target scale to be the same as the original for the time being
-                    targetScale = target.localScale;
-                }
-                // if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, targetMask))
-                // {
-                //     // Set our target variable to be the Transform object we hit with our raycast
-                //     target = hit.transform;
- 
-                //     // Disable physics for the object
-                //     target.GetComponent<Rigidbody>().isKinematic = true;
-                //     //target.GetComponent<Rigidbody>().useGravity = false;
- 
-                //     // Calculate the distance between the camera and the object
-                //     originalDistance = Vector3.Distance(transform.position, target.position);
- 
-                //     // Save the original scale of the object into our originalScale Vector3 variabble
-                //     originalScale = target.localScale.x;
- 
-                //     // Set our target scale to be the same as the original for the time being
-                //     targetScale = target.localScale;
-                // }
-            }
-            // If we DO have a target
-            else
+            if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, Mathf.Infinity, targetMask))
             {
-                // Reactivate physics for the target object
-                target.GetComponent<Rigidbody>().isKinematic = false;
-                target.GetComponent<Collider>().isTrigger = false;
-                //targetObject.layer = 10;
-                targetObject = null;
-                offsetFactor = 0f;
-                //target.GetComponent<Rigidbody>().useGravity = true;
- 
-                // Set our target variable to null
-                target = null;
+                if (Vector3.Distance(transform.position, hit.transform.position) > distance) return;
+                // Set our target variable to be the Transform object we hit with our raycast
+                target = hit.transform;
+                targetObject = hit.transform.gameObject;
+                //targetObject.layer = 11;
+                if (targetObject.GetComponent<AudioSource>() != null) targetObject.GetComponent<AudioSource>().Play();
+                // Disable physics for the object
+                target.GetComponent<Rigidbody>().isKinematic = true;
+                target.GetComponent<Collider>().isTrigger = true;
+                //target.GetComponent<Rigidbody>().useGravity = false;
+
+                // Calculate the distance between the camera and the object
+                originalDistance = Vector3.Distance(transform.position, target.position);
+
+                // Save the original scale of the object into our originalScale Vector3 variabble
+                originalScale = target.localScale.x;
+
+                // Set our target scale to be the same as the original for the time being
+                targetScale = target.localScale;
             }
+        }
+        // If we DO have a target
+        else
+        {
+            // Reactivate physics for the target object
+            target.GetComponent<Rigidbody>().isKinematic = false;
+            target.GetComponent<Collider>().isTrigger = false;
+            //targetObject.layer = 10;
+            targetObject = null;
+            offsetFactor = 0f;
+            //target.GetComponent<Rigidbody>().useGravity = true;
+
+            // Set our target variable to null
+            target = null;
+        }
     }
  
     void ResizeTarget()
