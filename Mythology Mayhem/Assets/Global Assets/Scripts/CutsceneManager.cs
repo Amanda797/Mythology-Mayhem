@@ -24,7 +24,7 @@ public class CutsceneManager : MonoBehaviour
     void Update()
     {
         // Check for early player skipping
-        if(Input.GetMouseButtonDown(0))
+        //if(Input.GetMouseButtonDown(0))
         {
             if (!skipped)
                 LoadNextScene();
