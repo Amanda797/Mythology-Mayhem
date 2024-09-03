@@ -22,6 +22,10 @@ public class superliminal : MonoBehaviour
     public bool isUsing;
     public float distance = 15;
 
+    private void Start()
+    {
+        distance = 15;
+    }
     void Update()
     {
         ResizeTarget();
