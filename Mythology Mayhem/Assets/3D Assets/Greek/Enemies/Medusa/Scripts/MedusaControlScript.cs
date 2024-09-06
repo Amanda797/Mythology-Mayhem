@@ -10,7 +10,7 @@ public class MedusaControlScript : MonoBehaviour
 
     public GameObject revealExit;
     AudioSource audioSource;
-    public AudioClip projectileClip, stabClip, beamClip;
+    public AudioClip projectileClip, stabClip, beamClip, doorClip;
 
     //Public for testing, revert later
     public float health;
@@ -707,6 +707,10 @@ public class MedusaControlScript : MonoBehaviour
                     medusaAgent.isStopped = true;
                     Destroy(this.gameObject.transform.parent.gameObject, deathDelay);
                     doorScript.gameObject.transform.LeanMoveLocalY(0, 5);
+                    audioSource.clip = doorClip;
+                    audioSource.loop = true;
+                    audioSource.Play();
+                    StartCoroutine(StopDoorClip());
                     return;
                     //}
                 }
@@ -721,6 +725,13 @@ public class MedusaControlScript : MonoBehaviour
             }
             //}
         }
+    }
+
+    IEnumerator StopDoorClip()
+    {
+        yield return new WaitForSeconds(5);
+        audioSource.loop = false;
+        audioSource.Stop();
     }
     //Called in Update to Animate FreeMovement Based on Speed and Direction
     void RunFreeMoveBlend()
