@@ -33,13 +33,13 @@ public class Vikings2D : MonoBehaviour
         attack = enemy.attackCollider.GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
-    {
-        if(playerCollider == null)
-        {
-            playerCollider = enemy.player.GetComponent<BoxCollider2D>();
-        }
-    }
+    //private void Update()
+    //{
+    //    if(playerCollider == null)
+    //    {
+    //        playerCollider = enemy.player.GetComponent<BoxCollider2D>();
+    //    }
+    //}
 
     public void Idle()
     {
