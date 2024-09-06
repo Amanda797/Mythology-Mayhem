@@ -188,6 +188,7 @@ public class Enemy : MythologyMayhem
                             }
                             else if (Vector3.Distance(transform.position, target) > meleeDistance)
                             {
+                                animator.SetBool(patrolBool, true);
                                 MoveTo2DTarget(true);
                             }
                         }
