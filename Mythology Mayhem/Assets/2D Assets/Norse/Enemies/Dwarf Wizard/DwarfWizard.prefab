@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5247813068572901436
 Transform:
   m_ObjectHideFlags: 0
@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5247813069255107741}
+  - component: {fileID: 5682108101651547595}
   m_Layer: 6
   m_Name: Waypoint1
   m_TagString: Untagged
@@ -57,13 +58,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5247813069255107742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.69, y: 0, z: 0}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5247813069279827367}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5682108101651547595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247813069255107742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5247813069279827352
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5247813069641233814}
+  - component: {fileID: 8984225367925407276}
   m_Layer: 6
   m_Name: Waypoint2
   m_TagString: Untagged
@@ -121,13 +135,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5247813069641233815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.1, y: 0, z: 0}
+  m_LocalPosition: {x: 15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5247813069279827367}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8984225367925407276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247813069641233815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e511c23e1f4229c46868d843b297c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5247813070128208682
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 5247813070128208682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4582079794926504062}
@@ -209,10 +235,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 164
+  m_SortingOrder: 69
   m_Sprite: {fileID: 21300000, guid: ef2b3fa775f75db45ad1eb8b231477bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 4, y: 3.6}
@@ -254,7 +280,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.11, y: 0.09}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -265,7 +291,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.62, y: 2.2}
+  m_Size: {x: 1.98, y: 2.5}
   m_EdgeRadius: 0
 --- !u!50 &5247813070128208689
 Rigidbody2D:
@@ -287,7 +313,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!114 &5247813070128208690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,24 +347,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acc41064def43a4ca5f42fe715c3225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefKeys:
+  - spawningScene
+  - spwanPointIndex
+  - playerIndex
+  inScene: 0
   rigidBody2D: {fileID: 5247813070128208689}
   spriteRenderer: {fileID: 5247813070128208680}
-  triggerDetector2D: {fileID: 1461081431806033223}
   rigidBody3D: {fileID: 0}
   agent: {fileID: 0}
+  attackSounds: []
+  hurtSounds: []
+  deathSounds: []
   enemyDimension: 0
-  player: {fileID: 0}
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 8
   health: {fileID: 5247813070128208692}
   animator: {fileID: 5247813070128208681}
+  player: {fileID: 0}
   attackRate: 10
   attackDamage: 5
   canAttack: 1
   attackCollider: {fileID: 7262524867252174471}
   walkSpeed: 5
   runSpeed: 10
+  patrolDistance: 2
+  speed: 2
+  patrolBool: IsPatrolling
+  isFlying: 0
+  attackTriggers: []
+  attackTrigger: Attack
+  meleeDistance: 4
   waypoints:
   - {fileID: 5247813069255107741}
   - {fileID: 5247813069641233814}
@@ -346,66 +383,22 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   idleTimerMax: 3
   idleTimer: 0
+  hasIdleDelegate: 0
+  hasPatrolDelegate: 0
+  hasAttackDelegate: 0
+  hasDeadDelegate: 0
   IdleDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5247813070128208693}
-        m_TargetAssemblyTypeName: DwarfWizard2D, Assembly-CSharp
-        m_MethodName: Idle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   PatrolDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5247813070128208693}
-        m_TargetAssemblyTypeName: DwarfWizard2D, Assembly-CSharp
-        m_MethodName: MoveToTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   AttackDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5247813070128208693}
-        m_TargetAssemblyTypeName: DwarfWizard2D, Assembly-CSharp
-        m_MethodName: SummonFamiliar
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   DeadDelegate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5247813070128208692}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Death
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _localGameManager: {fileID: 0}
   currentState: 0
   currentStatePosition: 0
@@ -423,24 +416,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 8
   _health: 0
-  components:
-  - {fileID: 5247813070128208693}
-  - {fileID: 5247813070128208691}
-  - {fileID: 5247813070128208690}
-  - {fileID: 5247813070128208688}
   mainObject: {fileID: 5247813068572901437}
   rewardObject: {fileID: 0}
-  hurtSound: {fileID: 5247813070128208694}
-  deathSound: {fileID: 5247813070128208694}
-  healSound: {fileID: 0}
   anim: {fileID: 5247813070128208681}
   hurtTrigger: Hurt
-  deathTrigger: Death
+  deathTrigger: IsDead
   healTrigger: 
+  enemy: {fileID: 0}
   _attacked: 0
+  _defenseUp: 0
   _defenseTimer: 0
   respawnTimer: 50
   canRespawn: 0
+  loadSystem: {fileID: 0}
+  isDead: 0
 --- !u!114 &5247813070128208693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +437,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5247813070128208682}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8db7fddd7b2f4744a5a57ca2945ca3f, type: 3}
   m_Name: 
@@ -458,8 +447,6 @@ MonoBehaviour:
   flipSensitivity: 1
   patrolDistance: 5
   body: {fileID: 5247813070128208682}
-  attack: {fileID: 5021136424473678323}
-  playerCollider: {fileID: 0}
   meleeAttackTriggers:
   - CastSpell
   familiars:
@@ -475,9 +462,9 @@ AudioSource:
   m_GameObject: {fileID: 5247813070128208682}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2710764706830326124, guid: 87ec3207ab7ff7e44955a12dd2ec2100, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -608,7 +595,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.24}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -619,7 +606,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.23, y: 2.25}
+  m_Size: {x: 20, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &1461081431806033223
 MonoBehaviour:
@@ -635,3 +622,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   otherCollider2D: {fileID: 0}
+  otherColliders2D: []
