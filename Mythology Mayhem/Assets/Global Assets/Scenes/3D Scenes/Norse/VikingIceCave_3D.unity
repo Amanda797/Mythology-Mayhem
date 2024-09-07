@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1476319828}
     m_Modifications:
+    - target: {fileID: 48309436, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2055447761, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -180,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: inScene
-      value: 6
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: sceneType
@@ -212,11 +216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesNeeded.Array.data[0]
-      value: 6
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesNeeded.Array.data[1]
-      value: 5
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesNeeded.Array.data[2]
@@ -228,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesLoadedOnStart.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: transitionPoints.Array.data[0]
@@ -240,11 +244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesLoadedOnStart.Array.data[0]
-      value: 5
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4734550838967186337, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: scenesLoadedOnStart.Array.data[1]
-      value: 7
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5444431951995405099, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_Name
@@ -3792,7 +3796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &803478410
 Transform:
   m_ObjectHideFlags: 0
@@ -5874,7 +5878,7 @@ MonoBehaviour:
   - spwanPointIndex
   - playerIndex
   localGameManager: {fileID: 17820116}
-  sceneToTransition: 5
+  sceneToTransition: 17
   spawnpointNameOverride: 
   keyPress: 0
   isActive: 1
@@ -5882,6 +5886,8 @@ MonoBehaviour:
   countAsLevelComplete: 0
   completedChapter: 0
   completedLevel: 0
+  canTransition: 0
+  isGameOver: 0
 --- !u!65 &1289653159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7983,6 +7989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0, z: -50}
+  debugChangeMovement: 0
   startingCount: 10
   iceCaveParts: []
   offset: {x: 0, y: 0, z: 295}
