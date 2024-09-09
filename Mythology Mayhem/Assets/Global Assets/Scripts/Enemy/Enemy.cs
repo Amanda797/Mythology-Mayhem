@@ -102,6 +102,11 @@ public class Enemy : MythologyMayhem
 
     public void Reset()
     {
+        if (health.isDead)
+        {
+            Destroy(gameObject);
+            return;
+        }
         currentState = EnemyStates.Idle;
         currentStatePosition = StatePosition.Entry;
         StartCoroutine(SwitchStates(currentState, 0));
