@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public bool climbing = false;
     public bool ladderEntered = false;
     public bool grounded = false;
+    GameObject ladder = null;
     
     [SerializeField] private GameObject pushBlock;
     public bool pushing = false;
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
                 climbing = true;
                 rb2d.gravityScale = 0;
                 rb2d.velocity = new Vector2(0,0);
+                transform.position = new Vector3(ladder.transform.position.x, transform.position.y, transform.position.z);
             }
             else if (Input.GetKeyDown(KeyCode.E) && climbing)
             {
@@ -157,6 +159,7 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.Popup("Press E to Climb", true);
             ladderEntered = true;
+            ladder = other.gameObject;
         }
     }
 
@@ -166,6 +169,7 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.Popup("", false);
             ladderEntered = false;
+            ladder = null;
 
             if (climbing)
             {
@@ -216,7 +220,8 @@ public class PlayerController : MonoBehaviour
     {
         XMovement = Input.GetAxis("Horizontal");
         yMovement = Input.GetAxis("Vertical");
-        isRunning = Input.GetKey(KeyCode.LeftShift);
+        if (Input.GetKeyDown(KeyCode.LeftShift) && grounded) isRunning = true;
+        if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
 
         return XMovement != 0;
     }
