@@ -2356,6 +2356,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298352417}
     m_Modifications:
+    - target: {fileID: 1357778305398809367, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1428595430133209179, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 40.4
@@ -2374,7 +2378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5518047496158701024, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: patrolDistance
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5938821028154963895, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: _health
@@ -2398,7 +2402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938914, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938914, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2430,11 +2434,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938916, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_Name
-      value: BirdEnemy.1
+      value: Bird
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938916, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839351165060283341, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
@@ -2546,6 +2554,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 29.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4161483577171295857, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472969, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2560,7 +2572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472969, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472969, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2592,11 +2604,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472975, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_Name
-      value: Satyr3Enemy
+      value: Satyr3
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472975, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623464735424998989, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6804006675513583052, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: _health
@@ -2608,7 +2624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7388126929586045899, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: patrolDistance
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
@@ -3090,10 +3106,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298352417}
     m_Modifications:
-    - target: {fileID: 1428595430133209179, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 40.4
-      objectReference: {fileID: 0}
     - target: {fileID: 2559135161097222505, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: OnDone.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3102,22 +3114,6 @@ PrefabInstance:
       propertyPath: OnBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2276455077882768558, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
-    - target: {fileID: 5518047496158701024, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
-      propertyPath: isFlying
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518047496158701024, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
-      propertyPath: patrolDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938821028154963895, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
-      propertyPath: _health
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938821028154963895, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
-      propertyPath: MaxHealth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938914, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3132,7 +3128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938914, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938914, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3164,7 +3160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938916, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_Name
-      value: BirdEnemy
+      value: Bird
       objectReference: {fileID: 0}
     - target: {fileID: 6941042192989938916, guid: 1a1b101f12842274c8e90a2b3de84a37, type: 3}
       propertyPath: m_IsActive
@@ -3734,6 +3730,10 @@ PrefabInstance:
     - target: {fileID: 48309436, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 48309438, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 617144638856596412, guid: 7a794babc7ff30a4b9108c104e65f406, type: 3}
       propertyPath: m_RootOrder
@@ -6200,7 +6200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070434, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070434, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6232,7 +6232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070436, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_Name
-      value: Satyr2Enemy
+      value: Satyr2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683287879388070436, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
@@ -8647,7 +8651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495582106981125691, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: patrolDistance
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136796821232943582, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8262302870376178620, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8699,11 +8707,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8566816731040993087, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_Name
-      value: BoarEnemy (2)
+      value: Boar
       objectReference: {fileID: 0}
     - target: {fileID: 8566816731040993087, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758382262883434593, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
@@ -10231,7 +10243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2520561668344339310, guid: 8be635b70b1643749b7f2d6789392417, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.426819
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2520561668344339310, guid: 8be635b70b1643749b7f2d6789392417, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11517,11 +11529,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1978398794028298461, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: patrolDistance
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745242359145045339, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870617, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_Name
-      value: Satyr1Enemy
+      value: Satyr1
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870617, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_IsActive
@@ -11541,7 +11557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870623, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870623, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11574,6 +11590,10 @@ PrefabInstance:
     - target: {fileID: 4914489558530116966, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914489558530116967, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
@@ -13692,7 +13712,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495582106981125691, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: patrolDistance
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136796821232943582, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8262302870376178620, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13744,11 +13768,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8566816731040993087, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_Name
-      value: BoarEnemy (1)
+      value: Boar
       objectReference: {fileID: 0}
     - target: {fileID: 8566816731040993087, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758382262883434593, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
@@ -13764,14 +13792,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298352417}
     m_Modifications:
-    - target: {fileID: 1537699233321417100, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
-      propertyPath: _health
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537699233321417100, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
-      propertyPath: MaxHealth
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8566816731040993081, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -13818,7 +13838,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8566816731040993087, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
       propertyPath: m_Name
-      value: BoarEnemy
+      value: Boar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566816731040993087, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d7d3f8e2ff76934fa8033428451f99d, type: 3}
@@ -13836,7 +13860,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4013600998276870617, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_Name
-      value: Satyr1Enemy
+      value: Satyr1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013600998276870617, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870623, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_RootOrder
@@ -13852,7 +13880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870623, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4013600998276870623, guid: 4452b11c753efbe4881319ef50b040b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13896,6 +13924,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298352417}
     m_Modifications:
+    - target: {fileID: 1810569640330559130, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073030587784200992, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
+      propertyPath: patrolDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070434, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -13910,7 +13946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070434, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070434, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13942,7 +13978,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7683287879388070436, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
       propertyPath: m_Name
-      value: Satyr2Enemy
+      value: Satyr2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683287879388070436, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992322931916648102, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bae2cdda98e70f42b6c9697f2d5116c, type: 3}
@@ -13958,10 +14002,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298352417}
     m_Modifications:
-    - target: {fileID: 4161483577171295856, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 31.22
-      objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472969, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -13976,7 +14016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472969, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.404319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472969, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14008,22 +14048,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472975, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_Name
-      value: Satyr3Enemy
+      value: Satyr3
       objectReference: {fileID: 0}
     - target: {fileID: 5350388109061472975, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804006675513583052, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
-      propertyPath: _health
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804006675513583052, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
-      propertyPath: MaxHealth
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7388126929586045899, guid: a90954cee8be16843b46c8fab1a5a5f3, type: 3}
-      propertyPath: patrolDistance
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

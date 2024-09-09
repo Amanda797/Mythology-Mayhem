@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1547413830857976226
 Transform:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026236907467002761}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.32, y: -1, z: 0}
+  m_LocalPosition: {x: 15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -452,7 +452,7 @@ MonoBehaviour:
   attackCollider: {fileID: 8389002921095470412}
   walkSpeed: 5
   runSpeed: 7
-  patrolDistance: 2
+  patrolDistance: 1
   speed: 2
   patrolBool: IsPatrolling
   isFlying: 0
@@ -509,8 +509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 4
-  _health: 4
+  MaxHealth: 3
+  _health: 3
   mainObject: {fileID: 450319774758561872}
   rewardObject: {fileID: 0}
   anim: {fileID: 8389002920890670442}
@@ -567,7 +567,7 @@ Transform:
   m_GameObject: {fileID: 8389002921095470412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8389002920890670441}
@@ -597,7 +597,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.6}
+  m_Size: {x: 20, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &5081717967724157105
 MonoBehaviour:
@@ -639,7 +639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8864436034336363056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.97, y: -1, z: 0}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

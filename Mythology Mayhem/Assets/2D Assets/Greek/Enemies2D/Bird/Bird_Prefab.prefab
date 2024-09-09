@@ -178,10 +178,10 @@ MonoBehaviour:
   attackCollider: {fileID: 6941042193202341063}
   walkSpeed: 5
   runSpeed: 10
-  patrolDistance: 2
+  patrolDistance: 1
   speed: 1.2
   patrolBool: IsPatrolling
-  isFlying: 0
+  isFlying: 1
   attackTriggers: []
   attackTrigger: Attack
   meleeDistance: 4
@@ -409,8 +409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b603f1d5a91b4abd338d187ac05e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 4
-  _health: 0
+  MaxHealth: 3
+  _health: 3
   mainObject: {fileID: 6941042192989938916}
   rewardObject: {fileID: 0}
   anim: {fileID: 6941042192989938913}
@@ -452,7 +452,7 @@ Transform:
   m_GameObject: {fileID: 6941042193202341063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6941042192989938914}
@@ -471,7 +471,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.35816717}
+  m_Offset: {x: 0, y: -4.31}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -482,7 +482,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3919129, y: 1.3163347}
+  m_Size: {x: 40, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &726869620920881028
 MonoBehaviour:
@@ -524,8 +524,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8015559850610420667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4350494, y: 1.4992143, z: 1}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6941042192989938914}
@@ -568,8 +568,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483098970078423554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
-  m_LocalScale: {x: 1.4350494, y: 1.4992143, z: 1}
+  m_LocalPosition: {x: 15, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6941042192989938914}
