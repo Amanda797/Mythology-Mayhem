@@ -183,4 +183,17 @@ public class PlayerStats : MonoBehaviour
         gameManager.gameData.curHealth += amount;
         huic.UpdateHealth();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() == null) return;
+
+        Vector3 dir = collision.gameObject.transform.position - transform.position;
+        dir = dir.normalized;
+        Vector3 opositeDir = transform.position - collision.gameObject.transform.position;
+        if (dir.y <= -0.75)
+        {
+            GetComponent<Rigidbody2D>().AddForce(opositeDir * 2.5f, ForceMode2D.Impulse);
+        }
+    }
 }
