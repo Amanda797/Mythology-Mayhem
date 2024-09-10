@@ -10,7 +10,7 @@ public class MedusaControlScript : MonoBehaviour
 
     public GameObject revealExit;
     AudioSource audioSource;
-    public AudioClip projectileClip, stabClip, beamClip, doorClip;
+    public AudioClip projectileClip, stabClip, beamClip, doorClip, hurtClip, deathClip;
 
     //Public for testing, revert later
     public float health;
@@ -622,6 +622,12 @@ public class MedusaControlScript : MonoBehaviour
         if (!invunerable)
         {
             health -= _amount;
+            if (health > 0)
+            {
+                anim.SetTrigger("Damage");
+                audioSource.clip = hurtClip;
+                audioSource.Play();
+            }
             if (CurrentState == AttackStates.PlayerChase1)
             {
                 if (health <= 800)
@@ -702,6 +708,8 @@ public class MedusaControlScript : MonoBehaviour
                     if (anim != null)
                     {
                         anim.SetTrigger("Death");
+                        audioSource.clip = deathClip;
+                        audioSource.Play();
                         //Code for Death (other than Destroy, as that has been called)
                     }
                     medusaAgent.isStopped = true;
