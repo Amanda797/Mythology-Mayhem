@@ -193,7 +193,7 @@ public class PlayerStats : MonoBehaviour
         Vector3 opositeDir = transform.position - collision.gameObject.transform.position;
         if (dir.y <= -0.75)
         {
-            GetComponent<Rigidbody2D>().AddForce(opositeDir * 2.5f, ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(opositeDir * 1.5f, ForceMode2D.Impulse);
         }
     }
 }
