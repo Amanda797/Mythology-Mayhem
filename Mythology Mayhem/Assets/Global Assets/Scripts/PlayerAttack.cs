@@ -12,6 +12,7 @@ public class PlayerAttack : MythologyMayhem
     public bool canAttack = true;
     [SerializeField] float attackSpeed = .5f;
     public SwordEffectScript effectsScript;
+    [SerializeField] FPSHealth health;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerAttack : MythologyMayhem
             {
                 if (Time.timeScale == 1)
                 {
+                    if (health.isHurt) return;
                     canAttack = false;
 
                     //Store Original Damage

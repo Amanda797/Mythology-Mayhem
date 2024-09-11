@@ -189,6 +189,8 @@ MonoBehaviour:
   scale: {x: 7, y: 15, z: 7}
   mousebutton: 1
   isReady: 0
+  isUsing: 0
+  distance: 15
 --- !u!114 &311222009652212946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +410,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1536
+  isRunning: 0
   playerAttack: {fileID: 8743100506945809633}
   extraDamage: 25
   tobiasCurrentCooldown: 0
@@ -437,9 +440,12 @@ MonoBehaviour:
   huic: {fileID: 0}
   ps: {fileID: 0}
   spawnPoint: {x: 0, y: 0, z: 0}
+  isHurt: 0
   healSource: {fileID: 0}
   hurtAS: {fileID: 8241122709545594116}
   dieAS: {fileID: 5122009719367896557}
+  meleeAnim: {fileID: 6245094650606425188}
+  rangedAnim: {fileID: 0}
 --- !u!114 &1522799808658085856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,14 +462,14 @@ MonoBehaviour:
   _health: 0
   mainObject: {fileID: 1234530420529872037}
   rewardObject: {fileID: 0}
-  anim: {fileID: 0}
+  anim: {fileID: 6245094650606425188}
   hurtTrigger: Hurt
   deathTrigger: Death
   healTrigger: Heal
   enemy: {fileID: 0}
   _attacked: 0
   _defenseUp: 0
-  _defenseTimer: 0
+  _defenseTimer: 0.35
   respawnTimer: 50
   canRespawn: 0
   loadSystem: {fileID: 0}
@@ -485,7 +491,9 @@ MonoBehaviour:
   - spwanPointIndex
   - playerIndex
   currentMain: 1
+  currentMainObject: {fileID: 0}
   currentOffHand: 1
+  currentOffHandObject: {fileID: 0}
   RightHandWeapons:
   - {fileID: 4070622007176919935}
   - {fileID: 770104369566018811}
@@ -497,7 +505,8 @@ MonoBehaviour:
   - {fileID: 2826656461728640699}
   currentLeftHandWeapon: 0
   weaponSwitchCooldown: 0.5
-  canSwitch: 0
+  canSwitchMainHand: 1
+  canSwitchOffHand: 1
 --- !u!114 &4643650408523221103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,6 +1646,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3603609689600663437, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1522799809287942295}
+    - target: {fileID: 3603609689600663437, guid: c1322267e5c70f24ab3fe915e46360dc, type: 3}
       propertyPath: attackRate
       value: 1
       objectReference: {fileID: 0}
@@ -2152,6 +2165,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1234530419785843940}
     m_Modifications:
     - target: {fileID: 1263594435446404913, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1522799809287942295}
+    - target: {fileID: 1263594435446404913, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
       propertyPath: attack3D
       value: 
       objectReference: {fileID: 7553290536123217674}
@@ -2225,6 +2242,11 @@ Transform:
 --- !u!1 &4070622007176919935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5810007187750215855, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
+  m_PrefabInstance: {fileID: 7556068099762133968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6245094650606425188 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4501211041554567092, guid: 1a2037ee13f1c724397a0c5c485911bc, type: 3}
   m_PrefabInstance: {fileID: 7556068099762133968}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8743100506945809633 stripped
