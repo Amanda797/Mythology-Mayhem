@@ -14,9 +14,11 @@ public class FPSHealth : MonoBehaviour
 
     [SerializeField] Vector3 spawnPoint = Vector3.zero;
     bool isDead;
+    public bool isHurt;
     public AudioSource healSource;
     public AudioSource hurtAS;
     public AudioSource dieAS;
+    [SerializeField] Animator meleeAnim, rangedAnim;
 
     // --------------------------
     // ***METHODS***
@@ -53,8 +55,22 @@ public class FPSHealth : MonoBehaviour
             huic.UpdateHealth();
 
             if (gameManager.gameData.curHealth <= 0) Death();
-            else hurtAS.Play();
+            else
+            {
+                if (meleeAnim != null && meleeAnim.gameObject.activeSelf) meleeAnim.SetTrigger("Hurt");
+                else if (rangedAnim != null && rangedAnim.gameObject.activeSelf) rangedAnim.SetTrigger("Hurt");
+
+                hurtAS.Play();
+
+                StartCoroutine(ToggleIsHurt());
+            }
         }
+    }
+    public IEnumerator ToggleIsHurt()
+    {
+        isHurt = true;
+        yield return new WaitForSeconds(.65f);
+        isHurt = false;
     }
 
     public void Heal(float h, bool potion)

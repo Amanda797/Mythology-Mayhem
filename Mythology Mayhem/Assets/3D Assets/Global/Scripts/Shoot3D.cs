@@ -13,6 +13,7 @@ public class Shoot3D : MonoBehaviour
     public float AS = 0f;
     public float AL = 0f;
     public bool canShoot = true;
+    [SerializeField] FPSHealth health;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class Shoot3D : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                if (health.isHurt) return;
                 m_timestamp = 0;
                 Shoot();
                 audioSource.Play();

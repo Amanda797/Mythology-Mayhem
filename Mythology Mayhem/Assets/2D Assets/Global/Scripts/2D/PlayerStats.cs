@@ -27,6 +27,7 @@ public class PlayerStats : MonoBehaviour
 
     private SpriteRenderer sr;
     public bool flipped = false;
+    public bool isHurt = false;
     private bool respawning;
 
     private GameObject owl;
@@ -68,8 +69,11 @@ public class PlayerStats : MonoBehaviour
             {
                 if(Time.timeScale == 1)
                 {
-                    Attack();
-                    ps.NextAttackTime = Time.time + 1f / ps.AttackRate;
+                    if (!isHurt)
+                    {
+                        Attack();
+                        ps.NextAttackTime = Time.time + 1f / ps.AttackRate;
+                    }
                 }
             }
         }
@@ -137,12 +141,19 @@ public class PlayerStats : MonoBehaviour
         {
             gameManager.gameData.curHealth = Mathf.Clamp(gameManager.gameData.curHealth -= damage, 0, gameManager.gameData.maxHealth);
             anim.SetTrigger("Hurt");
+            StartCoroutine(ToggleIsHurt());
 
             huic.UpdateHealth();
 
             if (gameManager.gameData.curHealth <= 0) Die();
             else hurtAS.Play();
         }
+    }
+    public IEnumerator ToggleIsHurt()
+    {
+        isHurt = true;
+        yield return new WaitForSeconds(.433f);
+        isHurt = false;
     }
 
     public void Heal(int heal, bool potion) 
