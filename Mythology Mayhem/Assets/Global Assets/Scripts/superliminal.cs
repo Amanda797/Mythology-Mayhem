@@ -29,6 +29,8 @@ public class superliminal : MonoBehaviour
     void Update()
     {
         ResizeTarget();
+        if (!GameManager.instance.isPlayerAlive && target)
+            Reset();
     }
 
     public void CheckForObjects()

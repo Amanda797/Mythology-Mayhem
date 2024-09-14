@@ -420,6 +420,10 @@ PrefabInstance:
       value: Gem-Green-Teardrop
       objectReference: {fileID: 0}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: distance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: gemScale
       value: 16
       objectReference: {fileID: 0}
@@ -70029,6 +70033,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1608955287}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: distance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -71964,6 +71972,7 @@ GameObject:
   - component: {fileID: 2014171497}
   - component: {fileID: 2014171498}
   - component: {fileID: 2014171499}
+  - component: {fileID: 2014171501}
   - component: {fileID: 2014171500}
   m_Layer: 10
   m_Name: Gem-Blue-Triangle
@@ -72322,6 +72331,10 @@ PrefabInstance:
       propertyPath: gem
       value: 
       objectReference: {fileID: 1608955287}
+    - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
+      propertyPath: distance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2300131514293983079, guid: e5f81f7eeb83527419833600e2bf4abd, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -73284,6 +73297,7 @@ GameObject:
   - component: {fileID: 1834357951}
   - component: {fileID: 1834357950}
   - component: {fileID: 1834357952}
+  - component: {fileID: 1895071797}
   - component: {fileID: 1895071796}
   m_Layer: 10
   m_Name: Gem-Green-Teardrop
@@ -73388,6 +73402,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1895071797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895071795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64c1f4e8013a404e874a8a099030773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1911384316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73843,6 +73869,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2014171501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608955287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64c1f4e8013a404e874a8a099030773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2056127809
 GameObject:
   m_ObjectHideFlags: 0
@@ -74732,6 +74770,7 @@ GameObject:
   - component: {fileID: 7171993727106290969}
   - component: {fileID: 1582534574849049579}
   - component: {fileID: 7786734308189249359}
+  - component: {fileID: 7786734308189249361}
   - component: {fileID: 7786734308189249360}
   m_Layer: 10
   m_Name: Gem-Orange-Diamond
@@ -75189,3 +75228,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7786734308189249361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304417139668510131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64c1f4e8013a404e874a8a099030773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
