@@ -58,9 +58,13 @@ public class GemDoor : MonoBehaviour
 
         foreach(GameObject gem in gems)
         {
+            float scale = gem.transform.localScale.x / (gem.transform.position - Camera.main.transform.position).magnitude / gemScale;
+            if (gem.name == doorGem && gem.name == "Gem-Blue-Triangle")
+                print(gem.transform.localScale.x / (gem.transform.position - Camera.main.transform.position).magnitude);
+                //print(Vector3.Dot(Camera.main.transform.forward, (gemPlacement.position - Camera.main.transform.position).normalized)); 0.995f
             //print("Right Disatnce: " + ObjClose(gem, distance));
             //print("Right Scale: "+ObjScale(gem, gemScale));
-            if(ObjScale(gem,gemScale) && ObjClose(gem, distance))
+            if(Vector3.Dot(Camera.main.transform.forward, (gemPlacement.position - Camera.main.transform.position).normalized) > 0.995f && scale > 0.15f && scale < 0.45f)
             {
                 //print("Gem is close enough");
                 //gem.transform.localScale = new Vector3(gemScale, gemScale, gemScale);
@@ -83,6 +87,7 @@ public class GemDoor : MonoBehaviour
             gemT.GetComponent<Rigidbody>().isKinematic = true;
             col.enabled = false;
             doorOpen = true;
+            gemT.localScale = Vector3.one * gemScale;
         }
     }
 }
